@@ -17,3 +17,4 @@ General features in no particular order.
 * No pointers.
 * Managed memory.
 
+First versions will be tree-walking (very slow) interpreter. Later versions will use the LLVM infrastructure for native compilation and linking. Final version will be written in Simple.
