@@ -6,10 +6,15 @@ OBJS	=	scanner.o \
 
 SRCS	=	$(OBJS:.o=.c)
 
-DEBUG	=	-g
-CARGS	=	-Wall -Wextra -I. -I../common
-LIBS	=	-lm
+CARGS	=	-Wall -Wextra
+INCS	=	-I. -I../common
 CC		=	gcc
+
+ifeq ($(RELEASE), 1)
+	CARGS += -O3
+else
+	CARGS += -g
+endif
 
 .PHONY: clean all
 
@@ -19,10 +24,10 @@ $(TARGET): $(OBJS) keywords.h
 	$(AR) -crs $(TARGET) $(OBJS)
 
 .c.o:
-	$(CC) $(HSRC) $(CARGS) $(DEBUG) -c $< -o $@
+	$(CC) $(INCS) $(CARGS) -c $< -o $@
 
 mk_keywords: mk_keywords.c
-	$(CC) $(HSRC) $(CARGS) $(DEBUG) $< -o $@
+	$(CC) $(INCS) $(CARGS) $< -o $@
 
 keywords.h: kw.txt mk_keywords
 	./mk_keywords

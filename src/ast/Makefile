@@ -1,15 +1,12 @@
 
-TARGET	=	../../lib/libcommon.a
+TARGET	=	../../lib/libast.a
 
-OBJS	=	errors.o \
-			memory.o \
-			strings.o \
-			trace.o
+OBJS	=	ast.o
 
 SRCS	=	$(OBJS:.o=.c)
 
 CARGS	=	-Wall -Wextra
-INCS	=	-I. -I../scanner
+INCS	=	-I. -I../common -I../scanner -I../ast -I../parser
 CC		=	gcc
 
 ifeq ($(RELEASE), 1)
@@ -26,7 +23,7 @@ $(TARGET): $(OBJS)
 	$(AR) -crs $(TARGET) $(OBJS)
 
 .c.o:
-	$(CC) $(INCS) $(CARGS) -c $< -o $@
+	$(CC) $(CARGS) $(INCS) -c $< -o $@
 
 clean:
 	-rm -f $(OBJS) $(TARGET)

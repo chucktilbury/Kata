@@ -1,15 +1,13 @@
 
-TARGET	=	../../lib/libcommon.a
+TARGET	=	../../lib/libparser.a
 
-OBJS	=	errors.o \
-			memory.o \
-			strings.o \
-			trace.o
+OBJS	=	parser.o
 
 SRCS	=	$(OBJS:.o=.c)
 
 CARGS	=	-Wall -Wextra
-INCS	=	-I. -I../scanner
+INCS	=	-I. -I../common -I../scanner -I../ast -I../parser
+LIBS	=	-lm
 CC		=	gcc
 
 ifeq ($(RELEASE), 1)
@@ -26,7 +24,7 @@ $(TARGET): $(OBJS)
 	$(AR) -crs $(TARGET) $(OBJS)
 
 .c.o:
-	$(CC) $(INCS) $(CARGS) -c $< -o $@
+	$(CC) $(CARGS) $(INCS) -c $< -o $@
 
 clean:
-	-rm -f $(OBJS) $(TARGET)
+	-rm -f $(OBJS) $(TARGET) keywords.h mk_keywords

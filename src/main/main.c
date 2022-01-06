@@ -8,7 +8,7 @@
 int main(int argc, char** argv) {
 
     int finished = 0;
-    char* fname;
+    char* fname = NULL;
 
     if(argc >= 2)
         fname = argv[1];

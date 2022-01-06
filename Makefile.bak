@@ -2,11 +2,8 @@
 all:
 	make -C src debug
 
-debug:
-	make-C src debug
-
 release:
-	make -C src release
+	make -C src
 
 clean:
 	make -C src clean
