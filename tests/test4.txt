@@ -1,0 +1,9 @@
+'this is a strin' qwer
+! asd =
+[90]-+ ## this is a comment ##{};:=
+! == not
+!=
+# another comment
+asd (sdf, sdf, sdf) # another comment
+sdf 3456
+0x123 "this is a string"
