@@ -7,6 +7,8 @@
 
 int main(int argc, char** argv) {
 
+    LEVEL(10);
+    MSG("entered main");
     int finished = 0;
     char* fname = NULL;
 

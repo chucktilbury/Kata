@@ -7,4 +7,6 @@ void fatal(const char* fmt, ...);
 size_t num_errors();
 size_t num_warnings();
 
+#include "trace.h"
+
 #endif

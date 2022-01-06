@@ -69,17 +69,19 @@ int get_char() {
 int next_char() {
 
     if(scanner != NULL) {
+        if(current_char == '\n') {
+            scanner->line_no++;
+            scanner->col_no = 1;
+        }
+
         int ch = fgetc(scanner->fp);
         switch(ch) {
             case '\n':
-                scanner->line_no++;
-                scanner->col_no = 1;
             case ' ':
             case '\t':
             case '\r':
             case '\f':
             case '\v':
-                //current_char = WHITESPACE;
                 current_char = ch;
                 break;
 
