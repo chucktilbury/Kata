@@ -3,7 +3,7 @@ TARGET	=	../../bin/simple
 
 OBJS	=	main.o
 
-LDEPS	=	../../lib/libutil.a \
+LDEPS	=	../../lib/libcommon.a \
 			../../lib/libscanner.a
 
 SRCS	=	$(OBJS:.o=.c)

@@ -1,10 +1,10 @@
 
 all:
-	make -C util
+	make -C common
 	make -C scanner
 	make -C main
 
 clean:
-	make -C util clean
+	make -C common clean
 	make -C scanner clean
 	make -C main clean

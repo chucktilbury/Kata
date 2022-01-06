@@ -7,7 +7,7 @@ OBJS	=	scanner.o \
 SRCS	=	$(OBJS:.o=.c)
 
 DEBUG	=	-g
-CARGS	=	-Wall -Wextra -I. -I../util
+CARGS	=	-Wall -Wextra -I. -I../common
 LIBS	=	-lm
 CC		=	gcc
 

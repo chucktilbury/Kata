@@ -1,5 +1,5 @@
 
-TARGET	=	../../lib/libutil.a
+TARGET	=	../../lib/libcommon.a
 
 OBJS	=	errors.o \
 			memory.o \
