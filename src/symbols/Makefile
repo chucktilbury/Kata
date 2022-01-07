@@ -1,18 +1,19 @@
 
-TARGET	=	../../lib/libast.a
+TARGET	=	../../lib/libsymbols.a
 
-OBJS	=	ast.o
+OBJS	=	symbols.o
 
 SRCS	=	$(OBJS:.o=.c)
 
 CARGS	=	-Wall -Wextra
-INCS	=	-I. -I../common -I../scanner -I../ast -I../parser
+INCS	=	-I. -I../common -I../scanner -I../parser
+LIBS	=	-lm
 CC		=	gcc
 
 ifeq ($(RELEASE), 1)
 	CARGS += -O3
 else
-	CARGS += -g
+	CARGS += -g -DTRACE
 endif
 
 .PHONY: clean all

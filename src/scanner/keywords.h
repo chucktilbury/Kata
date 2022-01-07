@@ -22,7 +22,7 @@ struct _keyword {
     {"gt", GREATER_TOK},
     {"gte", GTE_TOK},
     {"if", IF_TOK},
-    {"include", INCLUDE_TOK},
+    {"import", IMPORT_TOK},
     {"int", INT_TOK},
     {"list", LIST_TOK},
     {"lt", LESS_TOK},

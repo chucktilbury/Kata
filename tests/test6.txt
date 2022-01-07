@@ -1,0 +1,4 @@
+namespace first
+namespace second
+namespace third
+namespace forth

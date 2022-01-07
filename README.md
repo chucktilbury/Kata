@@ -6,15 +6,23 @@ This is a very simple object-oriented programming language which is written in C
 The language is a synthesis or Python and C. It has the object model of Python but shares a lot of syntax with both C and C++.
 
 General features in no particular order.
-* Curly braces to delimit blocks.
+* Curly braces to delimit blocks. Semicolons are not required.
 * Simplified type system, but is strongly typed with casting.
 * Function overloads by parameter type.
 * Void type is used.
-* Single inheritince only.
+* Classes with single inheritance only.
 * No struct keyword.
 * Supports dictionaries and lists natively.
 * String is a data type.
-* No pointers.
 * Managed memory.
+* Exceptions.
+* Support for external libraries.
 
-First versions will be tree-walking (very slow) interpreter. Later versions will use the LLVM infrastructure for native compilation and linking. Final version will be written in Simple.
+Features that are specifically not supported.
+
+* Pointers.
+* Multiple inheritance.
+* Monkey patching.
+* Code that is not declared as part of a class.
+
+This single-pass compiler accepts Simple source code and outputs C source code. The output should be compilable by any modern ANSI C compiler. The output is not really intended to be human readable, but the #line directives are used to aid debugging. 

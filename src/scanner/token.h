@@ -20,7 +20,7 @@ typedef enum {
     // keyword tokens
     CLASS_TOK,      // class
     NAMESPACE_TOK,  // namespace
-    INCLUDE_TOK,    // include
+    IMPORT_TOK,     // import
     PUBLIC_TOK,     // public
     PRIVATE_TOK,    // private
     PROTECTED_TOK,  // protected, protect

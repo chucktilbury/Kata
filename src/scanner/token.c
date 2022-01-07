@@ -10,57 +10,6 @@
 
 // generated file
 #include "keywords.h"
-/*
- * Be aware that this data structure is in sorted order.
- *
-static struct _keyword {
-    const char* str;
-    token_type type;
-} _keyword_list[] = {
-    {"and", AND_TOK},
-    {"bool", BOOL_TOK},
-    {"boolean", BOOL_TOK},
-    {"break", BREAK_TOK},
-    {"case", CASE_TOK},
-    {"class", CLASS_TOK},
-    {"continue", CONTINUE_TOK},
-    {"default", DEFAULT_TOK},
-    {"dict", DICT_TOK},
-    {"dictionary", DICT_TOK},
-    {"do", DO_TOK},
-    {"else", ELSE_TOK},
-    {"eq", EQUALITY_TOK},
-    {"except", EXCEPT_TOK},
-    {"float", FLOAT_TOK},
-    {"for", FOR_TOK},
-    {"gte", GTE_TOK},
-    {"gt", GREATER_TOK},
-    {"if", IF_TOK},
-    {"include", INCLUDE_TOK},
-    {"int", INT_TOK},
-    {"list", LIST_TOK},
-    {"lte", LTE_TOK},
-    {"lt", LESS_TOK},
-    {"namespace", NAMESPACE_TOK},
-    {"neq", NOT_EQUAL_TOK},
-    {"not", NOT_TOK},
-    {"or", OR_TOK},
-    {"private", PRIVATE_TOK},
-    {"priv", PRIVATE_TOK},
-    {"protected", PROTECTED_TOK},
-    {"public", PUBLIC_TOK},
-    {"return", RETURN_TOK},
-    {"signed", INT_TOK},
-    {"string", STRING_TOK},
-    {"switch", SWITCH_TOK},
-    {"try", TRY_TOK},
-    {"uint", UINT_TOK},
-    {"unsigned", UINT_TOK},
-    {"while", WHILE_TOK}
-};
-
-#define KW_LIST_LEN (sizeof(_keyword_list)/sizeof(struct _keyword))
-*/
 
 static token* make_error_token() {
 
@@ -592,7 +541,7 @@ const char* tok_to_str(token_type tok) {
         (tok == STR_TOK)? "quoted string": \
         (tok == CLASS_TOK)? "class": \
         (tok == NAMESPACE_TOK)? "namespace": \
-        (tok == INCLUDE_TOK)? "include": \
+        (tok == IMPORT_TOK)? "import": \
         (tok == PUBLIC_TOK)? "public": \
         (tok == PRIVATE_TOK)? "private": \
         (tok == PROTECTED_TOK)? "protected": \

@@ -3,22 +3,22 @@ TARGET	=	../../bin/simple
 
 OBJS	=	main.o
 
-LDEPS	=	../../lib/libcommon.a \
+LDEPS	=	../../lib/libemit.a \
+			../../lib/libparser.a \
 			../../lib/libscanner.a \
-			../../lib/libast.a \
-			../../lib/libparser.a
+			../../lib/libcommon.a
 
 SRCS	=	$(OBJS:.o=.c)
 
 CARGS	=	-Wall -Wextra
 LIBS	=	-lm
-INCS	=	-I../common -I../scanner -I../ast -I../parser
+INCS	=	-I../common -I../scanner -I../emit -I../parser -I../symbols
 CC		=	gcc
 
 ifeq ($(RELEASE), 1)
 	CARGS += -O3
 else
-	CARGS += -g -DDEBUGGING
+	CARGS += -g -DTRACE
 endif
 
 .PHONY: clean all

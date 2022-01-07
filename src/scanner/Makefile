@@ -13,7 +13,7 @@ CC		=	gcc
 ifeq ($(RELEASE), 1)
 	CARGS += -O3
 else
-	CARGS += -g
+	CARGS += -g -DTRACE
 endif
 
 .PHONY: clean all

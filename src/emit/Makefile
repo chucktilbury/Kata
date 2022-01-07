@@ -1,12 +1,12 @@
 
-TARGET	=	../../lib/libparser.a
+TARGET	=	../../lib/libemit.a
 
-OBJS	=	parser.o
+OBJS	=	emit.o
 
 SRCS	=	$(OBJS:.o=.c)
 
 CARGS	=	-Wall -Wextra
-INCS	=	-I. -I../common -I../scanner -I../emit -I../parser -I../symbols
+INCS	=	-I. -I../common -I../scanner -I../parser
 LIBS	=	-lm
 CC		=	gcc
 
@@ -27,4 +27,4 @@ $(TARGET): $(OBJS)
 	$(CC) $(CARGS) $(INCS) -c $< -o $@
 
 clean:
-	-rm -f $(OBJS) $(TARGET) keywords.h mk_keywords
+	-rm -f $(OBJS) $(TARGET)
