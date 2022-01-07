@@ -1,5 +1,5 @@
 
-TARGET	=	simple
+TARGET	=	../bin/simple
 
 OBJS	=	scanner.o \
 			token.o \
