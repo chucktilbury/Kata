@@ -1,32 +1,46 @@
 
-all:
-	make -C common RELEASE=0
-	make -C scanner RELEASE=0
-	make -C emit RELEASE=0
-	make -C symbols RELEASE=0
-	make -C parser RELEASE=0
-	make -C main RELEASE=0
+TARGET	=	simple
 
-debug:
-	make -C common RELEASE=0
-	make -C scanner RELEASE=0
-	make -C emit RELEASE=0
-	make -C symbols RELEASE=0
-	make -C parser RELEASE=0
-	make -C main RELEASE=0
+OBJS	=	scanner.o \
+			token.o \
+			emit.o \
+			errors.o \
+			memory.o \
+			parser.o \
+			strings.o \
+			symbols.o \
+			trace.o \
+			main.o
 
-release:
-	make -C common RELEASE=1
-	make -C scanner RELEASE=1
-	make -C emit RELEASE=1
-	make -C symbols RELEASE=1
-	make -C parser RELEASE=1
-	make -C main RELEASE=1
+SRCS	=	$(OBJS:.o=.c)
+
+CARGS	=	-Wall -Wextra
+INCS	=	-I. -I../common
+CC		=	gcc
+
+ifeq ($(RELEASE), 1)
+	CARGS += -O3
+else
+	CARGS += -g -DTRACE
+endif
+
+.PHONY: clean all
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS) keywords.h
+	$(CC) $(INCS) $(CARGS) -o $(TARGET) $(OBJS)
+
+.c.o:
+	$(CC) $(INCS) $(CARGS) -c $< -o $@
+
+mk_keywords: mk_keywords.c
+	$(CC) $(INCS) $(CARGS) $< -o $@
+
+keywords.h: kw.txt mk_keywords
+	./mk_keywords
+
+token.o: keywords.h
 
 clean:
-	make -C common clean
-	make -C scanner clean
-	make -C emit clean
-	make -C symbols clean
-	make -C parser clean
-	make -C main clean
+	-rm -f $(OBJS) $(TARGET) keywords.h mk_keywords
