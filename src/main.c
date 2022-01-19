@@ -1,11 +1,6 @@
 
-#include <stdio.h>
+#include "common.h"
 
-#include "token.h"
-#include "scanner.h"
-#include "errors.h"
-#include "parser.h"
-#include "emit.h"
 
 
 int main(int argc, char** argv) {
@@ -22,21 +17,25 @@ int main(int argc, char** argv) {
 
     set_emitter(stdout);
 
-    init_scanner();
-    scanner_open(fname);
+    //init_scanner();
+    //scanner_open(fname);
+    //scanner_open("tests/test6.txt");
+    init_parser(fname);
 
     parse();
+
+    dump_symbols();
     //token* tok;
 
     //do {
 
-        //tok = scan_token();
+        //tok = get_token();
         //fprintf(stdout, "Token: %d: %d: \"%s\" -> %s\n",
                     //get_line_no(), get_col_no(),
-                    //get_string(tok->str), tok_to_str(tok->type));
+                    //tok->str, tok_to_str(tok->type));
         //if(tok->type == INPUT_END_TOK)
             //finished++;
-        //destroy_token(tok);
+        //next_token();
 
     //} while(!finished);
 

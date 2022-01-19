@@ -1,15 +1,18 @@
 
 TARGET	=	../bin/simple
 
-OBJS	=	scanner.o \
-			token.o \
-			emit.o \
+OBJS	=	token.o \
 			errors.o \
+			trace.o \
 			memory.o \
-			parser.o \
 			strings.o \
 			symbols.o \
-			trace.o \
+			scanner.o \
+			emit.o \
+			parser.o \
+			class.o \
+			func_def.o \
+			import.o \
 			main.o
 
 SRCS	=	$(OBJS:.o=.c)

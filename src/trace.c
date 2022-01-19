@@ -14,11 +14,11 @@ void message(int lev,
     va_list args;
 
     if(lev <= level) {
-        fprintf(stdout, "trace: %s: %s(): %d: ", file, func, line);
+        fprintf(stderr, "trace: %s: %s(): %d: ", file, func, line);
         va_start(args, fmt);
-        vfprintf(stdout, fmt, args);
+        vfprintf(stderr, fmt, args);
         va_end(args);
-        fprintf(stdout, "\n");
+        fprintf(stderr, "\n");
     }
 }
 

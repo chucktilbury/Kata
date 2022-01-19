@@ -1,8 +1,6 @@
 
-#include <stdlib.h>
-#include <string.h>
+#include "common.h"
 
-#include "errors.h"
 
 void* _alloc_to_macro(const char* str, int line, size_t size) {
 

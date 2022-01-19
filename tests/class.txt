@@ -1,0 +1,14 @@
+##
+    This tests classes. These tests are for correct syntax only. A class has
+    the following syntax:
+
+    [private|public]* class symbol ( compound_name+ ) { class_body *}
+
+    The scope operators are optional. The default scope is private. The parens
+    are mandatory, but the compound name is optional. The class body is
+    optional.
+##
+
+public class aname(the.inherit.class)   {}
+private class bname() {}
+class cname() { public int junk }

@@ -1,25 +1,11 @@
 
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-#include "memory.h"
-#include "errors.h"
-#include "token.h"
-#include "scanner.h"
+#include <stdarg.h> // see validate_token()
+#include "common.h"
 
 // generated file
 #include "keywords.h"
 
-static token* make_error_token() {
-
-    token* tok = create_token();
-
-    add_string_strg(tok->str, "error");
-    tok->type = ERROR_TOK;
-
-    return tok;
-}
+static token* current_token = NULL;
 
 static token_type find_keyword(const char* str) {
 
@@ -47,17 +33,27 @@ static token_type find_keyword(const char* str) {
 }
 
 /*
- * This is a normal word that cound be a symbol or a keyword. Whether it's a
+ * This is a normal word that could be a symbol or a keyword. Whether it's a
  * symbol or keyword is found in a later step.
  */
 static void do_symbol_or_keyword(token* tok) {
 
+    string* str = create_string();
+    int flag = 0;
+
     do {
-        add_string_char(tok->str, get_char());
+        add_string_char(str, get_char());
         next_char();
+        if(get_char() == '.')
+            flag++;
     } while(IS_SYM(get_char()));
 
-    tok->type = find_keyword(get_string(tok->str));
+    if(flag)
+        tok->type = COMPOUND_NAME_TOK;
+    else
+        tok->type = find_keyword(str->str);
+    tok->str = _strdup(str->str);
+    destroy_string(str);
 
 }
 
@@ -69,6 +65,7 @@ static void do_any_number(token* tok) {
 
     int state = 0;
     int finished = 0;
+    string* str = create_string();
 
     tok->type = ERROR_TOK;
     while(!finished) {
@@ -76,13 +73,13 @@ static void do_any_number(token* tok) {
             case 0: // initial state
                 if(get_char() == '0') {
                     // could be a float or a unsigned
-                    add_string_char(tok->str, get_char());
+                    add_string_char(str, get_char());
                     next_char();
                     state = 2;
                 }
                 else {
                     // is not an unsigned for sure
-                    add_string_char(tok->str, get_char());
+                    add_string_char(str, get_char());
                     next_char();
                     state = 3;
                 }
@@ -95,7 +92,7 @@ static void do_any_number(token* tok) {
             case 2:
                 if(get_char() == 'x' || get_char() == 'X') {
                     // it's definately a hex (unsigned) number
-                    add_string_char(tok->str, get_char());
+                    add_string_char(str, get_char());
                     next_char();
                     state = 5;  // finish a hex number
                 }
@@ -107,7 +104,7 @@ static void do_any_number(token* tok) {
                         // digits.
                         syntax("malformed number; leading zeros are not allowed");
                         while(IS_DIGIT(get_char())) {
-                            add_string_char(tok->str, get_char());
+                            add_string_char(str, get_char());
                             next_char();
                         }
                         state = 6;
@@ -115,7 +112,7 @@ static void do_any_number(token* tok) {
                     else if(get_char() == '.') {
                         // it's definately a float, but we expect to see a '.' in
                         // the number, i.e. "0.123" or "0.0"
-                        add_string_char(tok->str, get_char());
+                        add_string_char(str, get_char());
                         next_char();
                         state = 4;  // finish a float after the '.'
                     }
@@ -133,7 +130,7 @@ static void do_any_number(token* tok) {
                     int ch = get_char();
                     if(ch == '.') {
                         // finish a float with a possible mantisa
-                        add_string_char(tok->str, ch);
+                        add_string_char(str, ch);
                         next_char();
                         state = 4;  // finish a float
                     }
@@ -145,7 +142,7 @@ static void do_any_number(token* tok) {
                 }
                 else {
                     // add the character to the string
-                    add_string_char(tok->str, get_char());
+                    add_string_char(str, get_char());
                     next_char();
                 }
                 break;
@@ -154,7 +151,7 @@ static void do_any_number(token* tok) {
                 if(!IS_DIGIT(get_char())) {
                     int ch = get_char();
                     if(ch == 'e' || ch == 'E') {
-                        add_string_char(tok->str, ch);
+                        add_string_char(str, ch);
                         next_char();
                         state = 7;
                     }
@@ -165,7 +162,7 @@ static void do_any_number(token* tok) {
                 }
                 else {
                     // add the character to the string
-                    add_string_char(tok->str, get_char());
+                    add_string_char(str, get_char());
                     next_char();
                 }
                 break;
@@ -173,7 +170,7 @@ static void do_any_number(token* tok) {
             case 5: // finish a hex number
                 if(isxdigit(get_char())) {
                     // add the character to the string
-                    add_string_char(tok->str, get_char());
+                    add_string_char(str, get_char());
                     next_char();
                 }
                 else {
@@ -192,7 +189,7 @@ static void do_any_number(token* tok) {
                     // '+' or '-' and will have only digits.
                     int ch = get_char();
                     if(ch == '+' || ch == '-' || IS_DIGIT(ch)) {
-                        add_string_char(tok->str, ch);
+                        add_string_char(str, ch);
                         next_char();
                         state = 8;
                     }
@@ -205,7 +202,7 @@ static void do_any_number(token* tok) {
 
             case 8:
                 if(IS_DIGIT(get_char())) {
-                    add_string_char(tok->str, get_char());
+                    add_string_char(str, get_char());
                     next_char();
                 }
                 else {
@@ -215,6 +212,9 @@ static void do_any_number(token* tok) {
 
         }
     }
+
+    tok->str = _strdup(str->str);
+    destroy_string(str);
 }
 
 /*
@@ -222,6 +222,8 @@ static void do_any_number(token* tok) {
  * string in the token, honoring escape sequences.
  */
 static void get_dquote_str(token* tok) {
+
+    string* str = create_string();
 
     do {
         next_char();
@@ -241,35 +243,39 @@ static void get_dquote_str(token* tok) {
                 // have an escape character
                 ch = next_char();
                 switch(ch) {
-                    case 'a':  add_string_char(tok->str, '\a'); break;
-                    case 'b':  add_string_char(tok->str, '\b'); break;
-                    case 'f':  add_string_char(tok->str, '\f'); break;
-                    case 'n':  add_string_char(tok->str, '\n'); break;
-                    case 'r':  add_string_char(tok->str, '\r'); break;
-                    case 't':  add_string_char(tok->str, '\t'); break;
-                    case 'v':  add_string_char(tok->str, '\v'); break;
-                    case 'e':  add_string_char(tok->str, '\x1b'); break;
-                    case '\\': add_string_char(tok->str, '\\'); break;
-                    case '\'': add_string_char(tok->str, '\''); break;
-                    case '\"': add_string_char(tok->str, '\"'); break;
+                    case 'a':  add_string_char(str, '\a'); break;
+                    case 'b':  add_string_char(str, '\b'); break;
+                    case 'f':  add_string_char(str, '\f'); break;
+                    case 'n':  add_string_char(str, '\n'); break;
+                    case 'r':  add_string_char(str, '\r'); break;
+                    case 't':  add_string_char(str, '\t'); break;
+                    case 'v':  add_string_char(str, '\v'); break;
+                    case 'e':  add_string_char(str, '\x1b'); break;
+                    case '\\': add_string_char(str, '\\'); break;
+                    case '\'': add_string_char(str, '\''); break;
+                    case '\"': add_string_char(str, '\"'); break;
                     case 'x': {
                             // hex number < 0xFF
                             char buf[3];
                             buf[0] = next_char();
                             buf[1] = next_char();
                             buf[2] = '\0';
-                            add_string_char(tok->str, (int)strtol(buf, NULL, 16));
+                            add_string_char(str, (int)strtol(buf, NULL, 16));
                         }
                         break;
                     // escaped default to the character they are escaping.
-                    default:   add_string_char(tok->str, ch); break;
+                    default:   add_string_char(str, ch); break;
 
                 }
             }
             else
-                add_string_char(tok->str, ch);
+                add_string_char(str, ch);
         }
     } while(1);
+
+    tok->str = _strdup(str->str);
+    destroy_string(str);
+
 }
 
 /*
@@ -277,6 +283,8 @@ static void get_dquote_str(token* tok) {
  * string as an absolute literal.
  */
 static void get_squote_str(token* tok) {
+
+    string* str = create_string();
 
     do {
         next_char();
@@ -292,9 +300,12 @@ static void get_squote_str(token* tok) {
             break;
         }
         else {
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
         }
     } while(1);
+
+    tok->str = _strdup(str->str);
+    destroy_string(str);
 }
 
 /*
@@ -304,91 +315,93 @@ static void get_squote_str(token* tok) {
  */
 static void do_any_punct(token* tok) {
 
+    string* str = create_string();
+
     int ch = get_char();
     switch(ch) {
         case '(':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = OPAREN_TOK;
             break;
         case ')':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = CPAREN_TOK;
             break;
         case '[':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = OSQUARE_TOK;
             break;
         case ']':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = CSQUARE_TOK;
             break;
         case '{':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = OCURLY_TOK;
             break;
         case '}':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = CCURLY_TOK;
             break;
         case '+':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = PLUS_TOK;
             break;
         case '-':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = MINUS_TOK;
             break;
         case '%':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = PERCENT_TOK;
             break;
         case '*':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = STAR_TOK;
             break;
         case '&':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = AND_TOK;
             break;
         case '|':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = OR_TOK;
             break;
         case '/':
             // may have a comment or a divide operator.
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = SLASH_TOK;
             break;
         case ',':
             // may have a comment or a divide operator.
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = COMMA_TOK;
             break;
         case '.':
             // may have a comment or a divide operator.
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             tok->type = DOT_TOK;
             break;
         case '=':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             if(get_char() == '=') {
-                add_string_char(tok->str, get_char());
+                add_string_char(str, get_char());
                 next_char();
                 tok->type = EQUALITY_TOK;
             }
@@ -396,10 +409,10 @@ static void do_any_punct(token* tok) {
                 tok->type = EQUAL_TOK;
             break;
         case '!':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             if(get_char() == '=') {
-                add_string_char(tok->str, get_char());
+                add_string_char(str, get_char());
                 next_char();
                 tok->type = NOT_EQUAL_TOK;
             }
@@ -407,10 +420,10 @@ static void do_any_punct(token* tok) {
                 tok->type = NOT_TOK;
             break;
         case '>':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             if(get_char() == '=') {
-                add_string_char(tok->str, get_char());
+                add_string_char(str, get_char());
                 next_char();
                 tok->type = GTE_TOK;
             }
@@ -418,10 +431,10 @@ static void do_any_punct(token* tok) {
                 tok->type = GREATER_TOK;
             break;
         case '<':
-            add_string_char(tok->str, ch);
+            add_string_char(str, ch);
             next_char();
             if(get_char() == '=') {
-                add_string_char(tok->str, get_char());
+                add_string_char(str, get_char());
                 next_char();
                 tok->type = LTE_TOK;
             }
@@ -439,6 +452,8 @@ static void do_any_punct(token* tok) {
             get_squote_str(tok);
             break;
     }
+    tok->str = _strdup(str->str);
+    destroy_string(str);
 
 }
 
@@ -476,10 +491,22 @@ static void isolate_token(token* tok) {
 }
 
 /*
+ * Create a new token.
+ */
+static token* create_token() {
+
+    token* tok = _alloc(sizeof(token));
+    tok->str = NULL; //create_string();
+    tok->type = ERROR_TOK;
+
+    return tok;
+}
+
+/*
  * Deliver the next token to the caller. The token is removed from the input
  * stream when this is called.
  */
-token* scan_token() {
+static token* scan_token() {
 
     token* tok = create_token();
 
@@ -489,40 +516,77 @@ token* scan_token() {
 }
 
 /*
- * Create a new token.
- */
-token* create_token() {
-
-    token* tok = _alloc(sizeof(token));
-    tok->str = create_string();
-
-    return tok;
-}
-
-/*
  * Destroy a token. This must be called for every token to avoid memory leaks.
  */
-void destroy_token(token* tok) {
+static void destroy_token(token* tok) {
 
-    destroy_string(tok->str);
+    _free((void*)tok->str);
     _free(tok);
 }
 
-/*
- * Scan for a token and check if it is the one specified by the token type. If
- * not then a syntax error is generated and the error token is returned. If the
- * token type is a match, then return the token.
+/*************************************
+ * Public interface
  */
-token* expect_token(token_type tok_type) {
 
-    token* tok = scan_token();
-    if(tok->type != tok_type) {
-        syntax("expected %s but got %s", tok_to_str(tok_type), tok_to_str(tok->type));
-        destroy_token(tok);
-        return make_error_token();
+/*
+ * Validate a token against a list of token types. Publish a syntax error if
+ * the given token does not match one of the parameters. Automatically calls
+ * recover..()
+ */
+bool validate_token(token* tok, int nargs, ...) {
+
+    va_list args;
+
+    va_start(args, nargs);
+    token_type type = tok->type;
+    for(int i = 0; i < nargs; i++) {
+        if(type == va_arg(args, token_type))
+            return true; // yes, token is valid
     }
 
-    return tok;
+    // if we reach here then the token is not a match. Build the string and
+    // publish the syntax error.
+    fprintf(stderr, "error: %s: %d: %d: ", get_fname(), get_line_no(), get_col_no());
+    fprintf(stderr, "expected ");
+
+    va_start(args, nargs);
+    for(int i = 0; i < nargs; i++) {
+        fprintf(stderr, "%s", tok_to_str(va_arg(args, token_type)));
+        if(i + 1 < nargs)
+            fprintf(stderr, ", ");
+        if(i + 2 == nargs)
+            fprintf(stderr, "or ");
+
+    }
+    va_end(args);
+
+    fprintf(stderr, " but got ");
+    fprintf(stderr, "%s\n", tok_to_str(tok->type));
+
+    recover_from_error();
+    bump_error_count();
+    return false;   // no, token did not validate
+}
+
+
+/*
+ * Simply return the current token in the stream.
+ */
+token* get_token() {
+
+    return current_token;
+}
+
+/*
+ * Advanse to the next token in the stream.
+ */
+token* next_token() {
+
+    if(current_token != NULL)
+        destroy_token(current_token);
+
+    current_token = scan_token();
+    return current_token;
 }
 
 /*
@@ -531,62 +595,65 @@ token* expect_token(token_type tok_type) {
 const char* tok_to_str(token_type tok) {
 
     return (
-        (tok == ERROR_TOK)? "error": \
-        (tok == FILE_END_TOK)? "end of file": \
-        (tok == INPUT_END_TOK)? "end of input": \
-        (tok == SYMBOL_TOK)? "symbol": \
-        (tok == FNUM_TOK)? "floating point number": \
-        (tok == INUM_TOK)? "signed number": \
-        (tok == UNUM_TOK)? "unsigned number": \
-        (tok == STR_TOK)? "quoted string": \
-        (tok == CLASS_TOK)? "class": \
-        (tok == NAMESPACE_TOK)? "namespace": \
-        (tok == IMPORT_TOK)? "import": \
-        (tok == PUBLIC_TOK)? "public": \
-        (tok == PRIVATE_TOK)? "private": \
-        (tok == PROTECTED_TOK)? "protected": \
-        (tok == FLOAT_TOK)? "float": \
-        (tok == INT_TOK)? "signed": \
-        (tok == UINT_TOK)? "unsigned": \
-        (tok == BOOL_TOK)? "boolean": \
-        (tok == DICT_TOK)? "dictionary": \
-        (tok == LIST_TOK)? "list": \
-        (tok == STRING_TOK)? "string": \
-        (tok == FOR_TOK)? "for": \
-        (tok == WHILE_TOK)? "while": \
-        (tok == DO_TOK)? "do": \
-        (tok == IF_TOK)? "if": \
-        (tok == ELSE_TOK)? "else": \
-        (tok == SWITCH_TOK)? "switch": \
-        (tok == CASE_TOK)? "case": \
-        (tok == DEFAULT_TOK)? "default": \
-        (tok == CONTINUE_TOK)? "continue": \
-        (tok == BREAK_TOK)? "break": \
-        (tok == RETURN_TOK)? "return": \
-        (tok == TRY_TOK)? "try": \
-        (tok == EXCEPT_TOK)? "except": \
-        (tok == PLUS_TOK)? "\"add\"": \
-        (tok == MINUS_TOK)? "\"subtract\"": \
-        (tok == SLASH_TOK)? "\"divide\"": \
-        (tok == STAR_TOK)? "\"multiply\"": \
-        (tok == EQUAL_TOK)? "\"equals\"": \
-        (tok == PERCENT_TOK)? "\"modulo\"": \
-        (tok == EQUALITY_TOK)? "\"is equal to\"": \
-        (tok == NOT_EQUAL_TOK)? "\"is not equal to\"": \
-        (tok == LTE_TOK)? "\"is less or equal to\"": \
-        (tok == GTE_TOK)? "\"is more or equal to\"": \
-        (tok == GREATER_TOK)? "\"is greater than\"": \
-        (tok == LESS_TOK)? "\"is less than\"": \
-        (tok == OR_TOK)? "\"or\"": \
-        (tok == AND_TOK)? "\"and\"": \
-        (tok == NOT_TOK)? "\"not\"": \
-        (tok == OPAREN_TOK)? "open paren": \
-        (tok == CPAREN_TOK)? "close paren": \
-        (tok == OCURLY_TOK)? "open curly brace": \
-        (tok == CCURLY_TOK)? "close curly brace": \
-        (tok == OSQUARE_TOK)? "open square brace": \
-        (tok == CSQUARE_TOK)? "close square brace": \
-        (tok == DOT_TOK)? "period": \
-        (tok == COMMA_TOK)? "comma": "unknown"
+        (tok == ERROR_TOK)? "error":
+        (tok == FILE_END_TOK)? "end of file":
+        (tok == INPUT_END_TOK)? "end of input":
+        (tok == SYMBOL_TOK)? "symbol":
+        (tok == FNUM_TOK)? "floating point number":
+        (tok == INUM_TOK)? "signed number":
+        (tok == UNUM_TOK)? "unsigned number":
+        (tok == STR_TOK)? "quoted string":
+        (tok == CLASS_TOK)? "class keyword":
+        (tok == IMPORT_TOK)? "import keyword":
+        (tok == PUBLIC_TOK)? "public keyword":
+        (tok == PRIVATE_TOK)? "private keyword":
+        (tok == PROTECTED_TOK)? "protected keyword":
+        (tok == FLOAT_TOK)? "float keyword":
+        (tok == INT_TOK)? "signed (or int) keyword":
+        (tok == UINT_TOK)? "unsigned (or uint) keyword":
+        (tok == BOOL_TOK)? "boolean (or bool) keyword":
+        (tok == DICT_TOK)? "dictionary (or dict) keyword":
+        (tok == LIST_TOK)? "list keyword":
+        (tok == STRING_TOK)? "string keyword":
+        (tok == FOR_TOK)? "for keyword":
+        (tok == WHILE_TOK)? "while keyword":
+        (tok == DO_TOK)? "do keyword":
+        (tok == IF_TOK)? "if keyword":
+        (tok == ELSE_TOK)? "else keyword":
+        (tok == SWITCH_TOK)? "switch keyword":
+        (tok == CASE_TOK)? "case keyword":
+        (tok == DEFAULT_TOK)? "default keyword":
+        (tok == CONTINUE_TOK)? "continue keyword":
+        (tok == BREAK_TOK)? "break keyword":
+        (tok == RETURN_TOK)? "return keyword":
+        (tok == TRY_TOK)? "try keyword":
+        (tok == EXCEPT_TOK)? "except keyword":
+        (tok == ENTER_TOK)? "enter keyword":
+        (tok == LEAVE_TOK)? "leave keyword":
+        (tok == ANY_TOK)? "any (or nothing) keyword":
+        (tok == PLUS_TOK)? "\"add\" (+)":
+        (tok == MINUS_TOK)? "\"subtract\" (-)":
+        (tok == SLASH_TOK)? "\"divide\" (/)":
+        (tok == STAR_TOK)? "\"multiply\" (*)":
+        (tok == EQUAL_TOK)? "\"equals\" (=)":
+        (tok == PERCENT_TOK)? "\"modulo\" (%)":
+        (tok == EQUALITY_TOK)? "\"is equal to\" (eq | ==)":
+        (tok == NOT_EQUAL_TOK)? "\"is not equal to\" (neq | !=)":
+        (tok == LTE_TOK)? "\"is less or equal to\" (lte | <=)":
+        (tok == GTE_TOK)? "\"is more or equal to\" (gte | >=)":
+        (tok == GREATER_TOK)? "\"is greater than\" (gt | >)":
+        (tok == LESS_TOK)? "\"is less than\" (lt | <)":
+        (tok == OR_TOK)? "\"or\" (or | |)":
+        (tok == AND_TOK)? "\"and\" (and | &)":
+        (tok == NOT_TOK)? "\"not\" (not | !)":
+        (tok == OPAREN_TOK)? "open paren ('(')":
+        (tok == CPAREN_TOK)? "close paren (')')":
+        (tok == OCURLY_TOK)? "open curly brace ('{')":
+        (tok == CCURLY_TOK)? "close curly brace ('}')":
+        (tok == OSQUARE_TOK)? "open square brace ('[')":
+        (tok == CSQUARE_TOK)? "close square brace (']')":
+        (tok == DOT_TOK)? "period ('.')":
+        (tok == COMMA_TOK)? "comma (',')":
+        (tok == COMPOUND_NAME_TOK)? "compound name": "unknown"
     );
 }

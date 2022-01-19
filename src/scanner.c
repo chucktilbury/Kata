@@ -1,16 +1,7 @@
 /*
  */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-#include <ctype.h>
+#include "common.h"
 
-#include "token.h"
-#include "scanner.h"
-#include "errors.h"
-#include "memory.h"
-#include "strings.h"
 
 // Scanner data structure is private.
 typedef struct _scanner {
@@ -73,6 +64,8 @@ int next_char() {
             scanner->line_no++;
             scanner->col_no = 1;
         }
+        else
+            scanner->col_no++;
 
         int ch = fgetc(scanner->fp);
         switch(ch) {
@@ -99,7 +92,6 @@ int next_char() {
             default:
                 // a normal character.
                 current_char = ch;
-                scanner->col_no++;
                 break;
         }
     }
@@ -120,6 +112,7 @@ static void eat_multiline() {
 
     int finished = 0;
 
+    MSG("ignoring multi-line comment");
     while(!finished) {
         next_char();
         if(current_char == '#') {
@@ -137,6 +130,7 @@ static void eat_multiline() {
  */
 static void eat_singleline() {
 
+    MSG("ignoring single-line comment");
     while(current_char != '\n')
         next_char();
 }
@@ -160,6 +154,7 @@ int skip_whitespace() {
             next_char();
         }
 
+        // handle comments as white space.
         if(scanner != NULL) {
             // Single line comment goes until the end of the line. Multi-line
             // comments are limited by "##".
@@ -194,7 +189,8 @@ void init_scanner() {
     int white_chrs[] = {' ', '\t', '\f', '\v', '\r', '\n'};
     int punct_chrs[] = {'&', '%', '&', '*', '(', ')', '-', '+', '=', '[', ']',
                         '{', '}', '|', '\'', '\"', ',', '.', '/', '<', '>', '!'};
-    int symb_chars[] = {'`', '@', '$', '^', '?', '\\', '_', ':', ';'};
+    // Note the '.'. Experemental.
+    int symb_chars[] = {'`', '@', '$', '^', '?', '\\', '_', ':', ';', '.'};
 
     for(int i = 0; i < GET_SIZE(character_type, char_type_table); i++)
         char_type_table[i] = CT_INVALID;

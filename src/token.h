@@ -10,6 +10,7 @@ typedef enum {
 
     // constructed tokens
     SYMBOL_TOK = 1000,  // [A-Za-z_!@#$][0-9A-Za-z_!@#$]*
+    COMPOUND_NAME_TOK,  // SYMBOL with dots in it.
     FNUM_TOK,       // ([0-9]*\.)?[0-9]+([Ee][-+]?[0-9]+)?
     INUM_TOK,       // ([1-9]+[0-9]*)|0
     UNUM_TOK,       // 0[Xx][A-Fa-f0-9]+
@@ -19,11 +20,12 @@ typedef enum {
 
     // keyword tokens
     CLASS_TOK,      // class
-    NAMESPACE_TOK,  // namespace
     IMPORT_TOK,     // import
     PUBLIC_TOK,     // public
     PRIVATE_TOK,    // private
     PROTECTED_TOK,  // protected, protect
+    ENTER_TOK,      // enter
+    LEAVE_TOK,      // leave
 
     // native type keywords
     FLOAT_TOK,      // float
@@ -32,7 +34,8 @@ typedef enum {
     BOOL_TOK,       // bool, boolean
     DICT_TOK,       // dict, dictionary
     LIST_TOK,       // list
-    STRING_TOK,     // string keyword
+    STRING_TOK,     // string (keyword)
+    ANY_TOK,        // nothing, any
 
     // flow keywords
     FOR_TOK,        // for
@@ -48,6 +51,7 @@ typedef enum {
     RETURN_TOK,     // return
     TRY_TOK,        // try
     EXCEPT_TOK,     // except
+    RAISE_TOK,      // raise, throw
 
     // arithmetic operators
     PLUS_TOK,       // +
@@ -86,15 +90,14 @@ typedef enum {
 
 // Tokens.
 typedef struct _token {
-    string str;
+    const char* str;
     token_type type;
     //struct _scanner scanner;   // This is a snapshot of the scanner state
 } token;
 
-token* scan_token();
-token* create_token();
-void destroy_token(token* tok);
-token* expect_token(token_type tok_type);
+token* get_token();
+token* next_token();
+bool validate_token(token* tok, int nargs, ...);
 const char* tok_to_str(token_type tok);
 
 #endif

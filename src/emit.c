@@ -1,10 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <string.h>
 
-#include "scanner.h"
-#include "errors.h"
+#include "common.h"
 
 static FILE* outf = NULL;
 
@@ -26,14 +21,14 @@ void close_emitter() {
 
 void emit_preamble() {
     MSG("emit preamble");
-    fprintf(outf, "// Start of preamble\n");
-    fprintf(outf, "// End of preamble\n");
+    fprintf(outf, "\n// Start of preamble\n");
+    fprintf(outf, "// End of preamble\n\n");
 }
 
 void emit_postamble() {
-    MSG("emit post amble");
-    fprintf(outf, "// Start of postamble\n");
-    fprintf(outf, "// End of postamble\n");
+    MSG("emit postamble");
+    fprintf(outf, "\n// Start of postamble\n");
+    fprintf(outf, "// End of postamble\n\n");
 }
 
 /*

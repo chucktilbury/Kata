@@ -1,13 +1,12 @@
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <stdarg.h>
 
-#include "errors.h"
-#include "scanner.h"
+#include "common.h"
 
 static size_t errors = 0;
 static size_t warnings = 0;
+
+void bump_error_count() { errors++; }
 
 void syntax(const char* fmt, ...) {
 
@@ -19,6 +18,8 @@ void syntax(const char* fmt, ...) {
     va_end(args);
     fprintf(stderr, "\n");
     errors++;
+
+    recover_from_error();
 }
 
 void warning(const char* fmt, ...) {
@@ -26,6 +27,18 @@ void warning(const char* fmt, ...) {
     va_list args;
 
     fprintf(stderr, "warning: %s: %d: %d: ", get_fname(), get_line_no(), get_col_no());
+    va_start(args, fmt);
+    vfprintf(stderr, fmt, args);
+    va_end(args);
+    fprintf(stderr, "\n");
+    warnings++;
+}
+
+void info(const char* fmt, ...) {
+
+    va_list args;
+
+    fprintf(stderr, "info: ");
     va_start(args, fmt);
     vfprintf(stderr, fmt, args);
     va_end(args);

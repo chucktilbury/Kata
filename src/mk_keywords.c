@@ -70,7 +70,7 @@ void emit_str_list(FILE* fp) {
         fprintf(fp, "%s", strings->str[i]);
 
     fprintf(fp, "};\n\n");
-    fprintf(fp, "#define KW_LIST_LEN (sizeof(_keyword_list)/sizeof(struct _keyword))\n\n");
+    fprintf(fp, "#define KW_LIST_LEN ((sizeof(_keyword_list)/sizeof(struct _keyword))-1)\n\n");
 }
 
 void sort_str_list() {
