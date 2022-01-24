@@ -20,7 +20,7 @@
  * must be in a class.
  *
  */
-static void parse_module() {
+static void parse_module(ast_t* root) {
 
     int finished = 0;
 
@@ -31,13 +31,13 @@ static void parse_module() {
             case PUBLIC_TOK:
             case PRIVATE_TOK:
             case CLASS_TOK:
-                parse_class();
+                parse_class(root);
                 break;
             case IMPORT_TOK:
-                parse_import();
+                parse_import(root);
                 break;
             case COMPOUND_NAME_TOK:
-                parse_function_def(tok);
+                parse_function_def(root);
                 break;
             case INPUT_END_TOK:
                 finished++;
@@ -52,10 +52,10 @@ static void parse_module() {
  * Public entry point of the parser. A file must have already been opened in
  * the scanner.
  */
-int parse() {
+int parse(ast_t* root) {
 
     emit_preamble();
-    parse_module();
+    parse_module(root);
     emit_postamble();
 
     return 0;
@@ -88,10 +88,11 @@ void recover_from_error() {
 /*
  * Create the parser and open the initial file.
  */
-void init_parser(const char* fname) {
+ast_t* init_parser(const char* fname) {
 
     init_scanner();
     scanner_open(fname);
 
     next_token();   // start the token stream.
+    return create_root_node();
 }

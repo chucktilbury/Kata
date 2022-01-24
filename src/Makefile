@@ -5,8 +5,10 @@ OBJS	=	token.o \
 			errors.o \
 			trace.o \
 			memory.o \
+			str_list.o \
+			ptr_list.o \
 			strings.o \
-			symbols.o \
+			abstract_tab.o \
 			scanner.o \
 			emit.o \
 			parser.o \

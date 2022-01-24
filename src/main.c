@@ -20,11 +20,11 @@ int main(int argc, char** argv) {
     //init_scanner();
     //scanner_open(fname);
     //scanner_open("tests/test6.txt");
-    init_parser(fname);
+    ast_t* root = init_parser(fname);
 
-    parse();
+    parse(root);
 
-    dump_symbols();
+    dump_tree(root);
     //token* tok;
 
     //do {

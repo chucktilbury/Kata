@@ -1,7 +1,23 @@
-These are stream of thought notes as the system is implemented. When this file
-starts, the scanner is already implemented and somewhat tested. This file
-contains thanges that are made and thoughts about the implementation and
-languiage as they appear.
+
+--------------------
+Need to implement finding a symbol in the tree, including a compound symbol.
+
+--------------------
+Tokens need a payload. For example, compound name needs to be an array of strings
+and numbers need to have a value.
+
+----------------------
+Tree attributes need to be able to store trees to implement the structure of the
+tree.
+
+--------------
+Thinking of redesigning the parser so that there is a tree built as it is
+read from source. Right now, I concept it as a symbol table tree where each
+symbol has a table of attributes. One of those attributes is another table
+of symbols that are in the scope of the current symbol. For example, the root
+context has classes and a class has data and function definitions. A data item
+has a value and a function definition has an implementation. All of that would
+be represented in the tree in a natural hirarchy.
 
 --------------
 Deleted the namespace keyword. It's redundant. When an import is made, then
@@ -52,3 +68,6 @@ by defining it with the correct name.
 --------------
 When parsing a function definition, the return type and the types of any
 parameters are not required. They are set when the function is declared.
+
+---------------
+First entry appears last in the file.

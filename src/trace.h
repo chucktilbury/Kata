@@ -9,12 +9,14 @@ void set_msg_level(int level);
 #define ENTER message(1, __FILE__, __func__, __LINE__, "enter")
 #define LEAVE message(1, __FILE__, __func__, __LINE__, "leave")
 #define LEVEL(v) set_msg_level(v)
+#define MARK MSG("mark source line: %s: %d: %d", get_fname(), get_line_no(), get_col_no())
 #else
 #define MSG(f, ...)
 #define LOG(v, f, ...)
 #define LEVEL(v)
 #define ENTER
 #define LEAVE
+#define MARK
 #endif
 
 #endif

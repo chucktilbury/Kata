@@ -113,6 +113,8 @@ static void eat_multiline() {
     int finished = 0;
 
     MSG("ignoring multi-line comment");
+    MARK;
+
     while(!finished) {
         next_char();
         if(current_char == '#') {
@@ -123,6 +125,7 @@ static void eat_multiline() {
             }
         }
     }
+    MARK;
 }
 
 /*
@@ -130,7 +133,7 @@ static void eat_multiline() {
  */
 static void eat_singleline() {
 
-    MSG("ignoring single-line comment");
+    MSG("ignoring single-line comment"); MARK;
     while(current_char != '\n')
         next_char();
 }

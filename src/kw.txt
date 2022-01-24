@@ -43,3 +43,5 @@
     {"leave", LEAVE_TOK},
     {"any", ANY_TOK},
     {"nothing", ANY_TOK},
+    {"construct", CONSTRUCT_TOK},
+    {"destroy", DESTROY_TOK},

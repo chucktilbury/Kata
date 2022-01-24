@@ -26,6 +26,8 @@ typedef enum {
     PROTECTED_TOK,  // protected, protect
     ENTER_TOK,      // enter
     LEAVE_TOK,      // leave
+    CONSTRUCT_TOK,  // construct
+    DESTROY_TOK,    // destroy
 
     // native type keywords
     FLOAT_TOK,      // float
@@ -88,10 +90,19 @@ typedef enum {
 
 #include "strings.h"
 
+
+
 // Tokens.
 typedef struct _token {
     const char* str;
     token_type type;
+    union {
+        double fnum;
+        uint64_t unum;
+        int64_t inum;
+        bool boolean;
+        void* obj;
+    } data;
     //struct _scanner scanner;   // This is a snapshot of the scanner state
 } token;
 

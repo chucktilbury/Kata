@@ -11,5 +11,7 @@
  * format:
  * import STRING
  */
-void parse_import() {
+void parse_import(ast_t* root) {
+
+    (void) root;
 }

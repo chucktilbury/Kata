@@ -9,6 +9,30 @@
     optional.
 ##
 
-public class aname(the.inherit.class)   {}
+public class blart {
+
+    int ploop
+public
+    int plart # same name as in another class.
+    string bacon
+    list goobers
+
+}
+
+##
+    This is a comment test
+public class aname(the.inherit.class) {
+
+    peace.in.the.valey trogs
+    int pennies
+}
+
 private class bname() {}
 class cname() { public int junk }
+##
+
+class last_one {
+    int plart
+protected
+    string get_the_string(int one, int two, int three)
+}

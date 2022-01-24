@@ -33,6 +33,25 @@ static token_type find_keyword(const char* str) {
 }
 
 /*
+ * Split a string with '.'s in it into an array of strings in left to right
+ * order. The string list is returned in the obj data element of the token as
+ * a str_list_t*.
+ */
+void split_compound(token* tok, const char* str) {
+
+    str_list_t* lst = create_str_list();
+    char* buf = (char*)_strdup(str);
+
+    for(char* tmp = strtok(buf, "."); tmp != NULL; tmp = strtok(NULL, "."))
+        add_str_list(lst, tmp);
+
+    tok->data.obj = lst->list;
+    _free(buf);
+    // don't destroy it because that would free the list.
+    _free(lst);
+}
+
+/*
  * This is a normal word that could be a symbol or a keyword. Whether it's a
  * symbol or keyword is found in a later step.
  */
@@ -48,8 +67,10 @@ static void do_symbol_or_keyword(token* tok) {
             flag++;
     } while(IS_SYM(get_char()));
 
-    if(flag)
+    if(flag) {
         tok->type = COMPOUND_NAME_TOK;
+        split_compound(tok, str->str);
+    }
     else
         tok->type = find_keyword(str->str);
     tok->str = _strdup(str->str);

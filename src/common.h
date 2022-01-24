@@ -11,13 +11,14 @@
 
 #include "errors.h"
 #include "memory.h"
-//#include "ptr_list.h"
+#include "ptr_list.h"
+#include "str_list.h"
 #include "strings.h"
 
 #include "scanner.h"
 #include "token.h"
 
-#include "symbols.h"
+#include "abstract_tab.h"
 #include "emit.h"
 
 #include "parser.h"

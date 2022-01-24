@@ -11,7 +11,7 @@
  * format:
  * TYPE COMPOUND_SYMBOL ( parameter_list ) { func_statements }
  */
-void parse_function_def(token* tok) {
+void parse_function_def(ast_t* root) {
 
-
+    (void)root;
 }
