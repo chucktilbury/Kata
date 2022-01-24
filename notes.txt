@@ -1,16 +1,15 @@
 
---------------------
-Need to implement finding a symbol in the tree, including a compound symbol.
+Token payloads.
+Parsing class inheritance parameters.
+Decorating names. (can that wait until the code is being emitted?)
+More tests
+Finding a symbol in the tree, including a compound symbol.
 
---------------------
-Tokens need a payload. For example, compound name needs to be an array of strings
-and numbers need to have a value.
-
-----------------------
+--done--------------------
 Tree attributes need to be able to store trees to implement the structure of the
 tree.
 
---------------
+---working-----------
 Thinking of redesigning the parser so that there is a tree built as it is
 read from source. Right now, I concept it as a symbol table tree where each
 symbol has a table of attributes. One of those attributes is another table
