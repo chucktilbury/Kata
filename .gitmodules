@@ -1,0 +1,6 @@
+[submodule "src/util"]
+	path = src/util
+	url = git@github.com:chucktilbury/util.git
+[submodule "src/bdwgc"]
+	path = src/bdwgc
+	url = git@github.com:chucktilbury/bdwgc.git

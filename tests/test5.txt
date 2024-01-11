@@ -1,2 +1,0 @@
-"t"
-"this is a string\x0Awith another CR in it"

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# This script is used to set up the environment so that the cross compiler is
+# the default version of GCC in the path. The Makefile uses these vars to find
+# things like the compiler and its libraries.
+
+if [ -z "$1" ]; then
+    echo "Build types are debug, release, or profile. Set default to debug."
+    export _BUILD_TYPE=debug
+else
+    export _BUILD_TYPE=$1
+fi
+
+if [ -z "$_PROJECT_NAME" ]; then
+    if [ -f $PWD/.project_env ]; then
+        git submodule update --init --recursive
+        bash --init-file <(echo "source $PWD/.project_env")
+    else
+        echo "Cannot find .project_env. in current directory. "
+    fi
+else
+    echo "Project is already initialized. If this is an error, then restart the shell."
+fi
+
