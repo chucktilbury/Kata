@@ -1,0 +1,41 @@
+
+namespace name_space {
+
+struct somename {
+    int x;
+    int funcname(int p1, string p2, float p3);
+    int y
+};
+
+// syntax errors
+//struct {int y; } othername;
+//struct xyz;
+
+int somename.funcname(int p1, string p2, float p3) {
+
+    string m = 213 + 12 / 23
+    string m = int("something"())
+    int x = (1+2)/3;
+   while(x.y(132) + 123 / 23 != 12) {
+
+        if(asdf.qwe() > 0x123) {
+            break;
+        }
+        else {
+            do {
+                int dict stuff = [m=1, y=2, z=3, x=4];
+            } while (stuff()() != 0) ;
+        }
+    }
+}
+
+}
+
+import "somenoame"(asd, sd.ere[123+qwe.asd[1]/3].sdfjk())
+
+namespace another {
+    struct blart {int blar;}
+
+    int list somename.blart() {}
+    bool bacon() { return(true) }
+}

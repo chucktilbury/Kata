@@ -1,0 +1,26 @@
+
+/*
+ * Verify that namespace syntax is acceptied.
+ */
+
+namespace bacon {
+
+    struct test1 {
+        int var
+        nothing func()
+    };
+
+    nothing test1.func() {}
+
+    namespace eggs {
+
+        struct test2 {
+            int var
+            nothing func()
+        };
+
+        nothing test2.func() {
+            bacon.test1.func()
+        }
+    }
+}

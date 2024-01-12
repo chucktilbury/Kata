@@ -1,0 +1,33 @@
+;---------------------------------------
+; Test the if() {} else() {} clause
+;--------------------------------------
+
+nothing func () {
+
+    if () {}
+    if () { if() {}}
+    if (x != y and z ) {
+    }
+    else (z == pookie.the.brain) {
+        if(monop != 10) {
+        }
+    }
+    else {
+        ; Semantically this makes no sense. blank expressions are always true.
+        ; However, syntactically, it's fine because blank expressions are
+        ; acceptable.
+        if () {}
+        else(10 == 12) {}
+
+        ; a hanging block is acceptable (used to isolate symbol scopes)
+        {}
+
+        ; semantically, this make no sense because blank expressions are
+        ; always true
+        if () {}
+        else {}
+    }
+
+    ; another hanging block
+    {}
+}

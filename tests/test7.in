@@ -1,0 +1,23 @@
+; Test the FOR clause
+SOME_TYPE.name function.definition(NUM BLART) {
+
+    asd.asd.qwe = qwe.fdg.sds(123, 123)
+    asdf = qwe.fdg.sds(123, 123)
+    asdf = 123
+    num asd = 123
+    num asd = (13 + (qwe.fdg.sds + 123)) * 3
+    num asd = qwe()
+    num asd = asd.qwe(123, 123)
+
+    for {
+        ; comment
+        for() {
+            For (asd += 123) {}
+            for (asd IN asd.qwe.sdf) {}
+            for (asd IN asd.qwe.sdf()) {}
+            for ( asd IN asd + 1 * 5 ) {}
+            for ( asd != asd + 123 ) {}
+         }
+    }
+}
+

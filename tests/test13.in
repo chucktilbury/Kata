@@ -1,0 +1,8 @@
+; Test various small syntax
+
+nothing blart() {
+
+    Return
+    rEturn()
+    return(asd.asd.asd)
+}

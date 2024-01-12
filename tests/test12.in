@@ -1,0 +1,15 @@
+; Test the TRY_CLAUSE
+
+nothing plart() {
+
+    try {}
+    except(NAME) {}
+    except(NAME1) {
+        try {
+            ; comment
+        }
+        except(something) {
+            ; comment
+        }
+    }
+}

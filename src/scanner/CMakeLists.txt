@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 3.10)
-project(libsapcc)
+project(scanner)
 
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 add_library(${PROJECT_NAME} STATIC
-    library.c
+    scanner.c
     tok_queue.c
+    keyword.c
 )
 
 target_compile_options(${PROJECT_NAME}
@@ -22,3 +23,5 @@ target_compile_options(${PROJECT_NAME}
         $<$<CONFIG:RELEASE>:-Ofast >
         $<$<CONFIG:PROFILE>:-pg -O0 >
 )
+
+add_subdirectory(test)

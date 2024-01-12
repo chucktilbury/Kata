@@ -39,15 +39,17 @@ static void append_token(Token* tok) {
     assert(tqueue != NULL);
     assert(tok != NULL);
 
+    TokQueueItem* item;
+
     TRY {
-        TokQueueItem* item = _ALLOC_T(TokQueueItem);
+        item = _ALLOC_T(TokQueueItem);
         item->tok = copy_token(tok);
     }
     ANY_EXCEPT() {
         fprintf(stderr, "Fatal ");
         fprintf(stderr, "%s\n", EXCEPTION_MSG);
         exit(1);
-    }
+    } FINAL
 
     if(tqueue->tail != NULL) {
         tqueue->tail->next = item;
@@ -69,6 +71,16 @@ static void append_token(Token* tok) {
  */
 void open_file(const char* fname) {
 
+    // calling into the util library
+    TRY {
+        open_input_file(fname);
+    }
+    EXCEPT(FILE_ERROR) {
+        fprintf(stderr, "Fatal ");
+        fprintf(stderr, "%s\n", EXCEPTION_MSG);
+        exit(1);
+    } FINAL
+
     if(tqueue == NULL) {
         TRY {
             // prime the token pipeline
@@ -79,17 +91,7 @@ void open_file(const char* fname) {
             fprintf(stderr, "Fatal ");
             fprintf(stderr, "%s\n", EXCEPTION_MSG);
             exit(1);
-        }
-    }
-
-    // calling into the util library
-    TRY {
-        open_input_file(fname);
-    }
-    EXCEPT(FILE_ERROR) {
-        fprintf(stderr, "Fatal ");
-        fprintf(stderr, "%s\n", EXCEPTION_MSG);
-        exit(1);
+        } FINAL
     }
 }
 
@@ -122,8 +124,10 @@ Token* copy_token(const Token* tok) {
 
     assert(tok != NULL);
 
+    Token* ntok;
+
     TRY {
-        Token* ntok = _ALLOC_T(Token);
+        ntok = _ALLOC_T(Token);
         ntok->fname = _DUP_STR(tok->fname);
         ntok->str = copy_string(tok->str);
         ntok->line_no = tok->line_no;
@@ -135,7 +139,7 @@ Token* copy_token(const Token* tok) {
         fprintf(stderr, "Fatal ");
         fprintf(stderr, "%s\n", EXCEPTION_MSG);
         exit(1);
-    }
+    } FINAL
 
     return ntok;
 }

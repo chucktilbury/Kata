@@ -1,0 +1,6 @@
+"123 234\n\tqweqwe qwe"
+3.14e-12 ^ 123 ;_plart
+namespace class try raise 123 blart {} _asd 123.123
+0.012e-12 0 0.123
+'asd
+asd' != <= qwert+=_opert123_

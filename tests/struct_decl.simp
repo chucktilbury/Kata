@@ -1,0 +1,29 @@
+;-----------------------
+;
+; Test for structure declarations.
+;
+;-----------------------
+
+struct struct_name {
+    num a_number
+    string a_string
+    bool a_bool
+    dict a_dict
+    list a_list
+    simple a_simple_element
+    asd.wer.power a_complex
+}
+
+namespace ns1 {
+    struct struct_inside_a_namespace {
+        number value
+        strg a_string
+    }
+
+    class class_inside_a_namespace {
+        struct yep {
+            number value
+            strg a_string
+        }
+    }
+}

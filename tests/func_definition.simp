@@ -1,0 +1,18 @@
+;-----------------------
+; Function declaration syntax.
+;
+
+class the_class {
+    public
+    dict the_func(num, string)
+    protected
+    bool another()
+}
+
+string func.name.asd(num poo, string asd) {}
+
+; constructor definition
+obj.name.create(num poo) {}
+
+; destructor definition
+obj.name.destroy {}

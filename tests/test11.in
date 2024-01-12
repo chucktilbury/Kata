@@ -1,0 +1,20 @@
+; test the SWITCH_CASE clause
+
+nothing plart() {
+
+    switch(wer ) {
+        case(123) {}
+        case("asdf"(123+123, qwe.wqe.qwe)) {}
+        case ("asda"(123+23, asd.ert.sdf())) {
+            switch(wer ) {
+                case(123) {}
+                case("asdf"(123+123, qwe.wqe.qwe)) {}
+                case ("asda"(123+23, asd.ert.sdf())) {
+
+                }
+                default {}
+            }
+        }
+        default {}
+    }
+}

@@ -1,0 +1,27 @@
+Private
+; this is a comment
+namespace pluber { 
+
+asd.asd[asd[12]]['asd'][asd[123]] goobers = asd * 123 / qwe[123].wer(123, asd, oiu[1])
+asd.wrer.sds asdlkj
+
+}
+
+PuBlic
+ClAsS something (asd.wer.sdf) {
+    num sdfj
+    asd.asd val (num asd, string asd, sdfkj.sd plaw)
+    string sdf ()
+}
+
+num something:asd() {
+
+    inline{ this is some random text 
+        with a newline }
+}
+
+; end of file
+; asd
+
+
+string sdf () {}

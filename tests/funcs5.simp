@@ -1,0 +1,29 @@
+
+/*
+ * Verify that dict assignments are accepted in a function.
+ */
+namespace name {
+struct test_var_assign {
+
+    int var;
+    public nothing var_assign()
+};
+
+nothing var_assign() {
+
+    int dict var1
+    uint dict var2
+    bool dict var3
+    float dict var4
+    string dict var5
+    some_name dict var6
+
+    int dict var1 = [name1=1, name2=2, name3=3]
+    uint dict var2 = [name1=0x1, name2=0x2, name3=0x3]
+    bool dict var3 = [name1=true, name2=true, name3=false]
+    float dict var4 = [name1=1.1, name2=2.2, name3=3.3]
+    string dict var5 = [name1="first", name2="second", name3="third"]
+    some_name dict var6 = [name1=first.first, name2=second, name3=third.third]
+
+}
+}
