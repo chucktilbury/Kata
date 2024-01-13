@@ -7,3 +7,4 @@ class adad(qwe. wer) {
     num dfklj
     nothing plart(dsfd.dd asd,strg sdf, dict asd)
 }
+
