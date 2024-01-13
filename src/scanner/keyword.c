@@ -23,9 +23,9 @@ KeywordList keyword_list[] = {
     {"class", TOK_CLASS},
     {"const", TOK_CONST},
     {"continue", TOK_CONTINUE},
-    {"create", TOK_CTOR},
+    {"create", TOK_CREATE},
     {"default", TOK_DEFAULT},
-    {"destroy", TOK_DTOR},
+    {"destroy", TOK_DESTROY},
     {"dict", TOK_DICT},
     {"do", TOK_DO},
     {"else", TOK_ELSE},
@@ -66,4 +66,4 @@ KeywordList keyword_list[] = {
     {"yield", TOK_YIELD},
 };
 
-const int num_keywords = (sizeof(keyword_list)/sizeof(KeywordList));
+const int num_keywords = (sizeof(keyword_list) / sizeof(KeywordList));

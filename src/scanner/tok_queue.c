@@ -176,7 +176,7 @@ Token* advance_token() {
  *
  * @return Token*
  */
-Token* consume_token() {
+Token* consume_token_queue() {
 
     assert(tqueue != NULL);
     assert(tqueue->crnt != NULL);
@@ -193,7 +193,7 @@ Token* consume_token() {
  *
  * @return Token*
  */
-Token* reset_token() {
+Token* reset_token_queue() {
 
     assert(tqueue != NULL);
     assert(tqueue->crnt != NULL);
@@ -222,7 +222,7 @@ Token* reset_token() {
  * @param mark
  * @return Token*
  */
-Token* iterate_tokens(void** mark) {
+Token* iterate_token_queue(void** mark) {
 
     assert(tqueue != NULL);
     assert(tqueue->head != NULL);

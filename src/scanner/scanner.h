@@ -90,7 +90,7 @@ Token* advance_token();
  *
  * @return Token*
  */
-Token* consume_token();
+Token* consume_token_queue();
 
 /**
  * @brief Reset the token stream to the beginning. This is used when a rule
@@ -99,7 +99,7 @@ Token* consume_token();
  *
  * @return Token*
  */
-Token* reset_token();
+Token* reset_token_queue();
 
 /**
  * @brief Iterate the token queue. This is used by consumers that require raw
@@ -112,7 +112,7 @@ Token* reset_token();
  * @param mark
  * @return Token*
  */
-Token* iterate_tokens(void** mark);
+Token* iterate_token_queue(void** mark);
 
 /**
  * @brief Initialize the scanner data structures. This must be called before
