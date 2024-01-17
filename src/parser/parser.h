@@ -11,29 +11,8 @@
 #ifndef _PARSER_H
 #define _PARSER_H
 
-typedef enum {
-    NTT_SCOPE_OPERATOR,
-    NTT_TYPE_NAME,
-    NTT_TYPE_SPEC_ELEMENT,
-    NTT_TYPE_SPEC,
-    NTT_COMPOUND_NAME,
-} NonTermType;
+#include "ast.h"
 
-typedef struct {
-    NonTermType type;
-    void* data;
-} NonTerm;
-
-typedef struct {
-    Token* tok;
-} ScopeOperator;
-
-typedef struct {
-    Token* tok;
-} TypeName;
-
-typedef struct {
-    StrList* lst;
-} CompoundName;
+AstNode* module();
 
 #endif /* _PARSER_H */

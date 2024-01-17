@@ -723,8 +723,8 @@ const char* tok_to_str(TokenType type) {
         (type == TOK_TRY)? "TRY" :
         (type == TOK_EXCEPT)? "EXCEPT" :
         (type == TOK_RAISE)? "RAISE" :
-        (type == TOK_CTOR)? "CTOR" :
-        (type == TOK_DTOR)? "DTOR" :
+        (type == TOK_CREATE)? "CREATE" :
+        (type == TOK_DESTROY)? "DESTROY" :
         (type == TOK_START)? "START" :
         (type == TOK_NAMESPACE)? "NAMESPACE" :
         (type == TOK_CLASS)? "CLASS" :

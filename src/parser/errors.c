@@ -27,6 +27,16 @@ static int num_warnings = 0;
  */
 void handle_error(const char* fmt, ...) {
 
+    va_list args;
+
+    fprintf(stderr, "Syntax: %s: %d: %d: ", get_fname(),
+                get_line_no(), get_col_no());
+
+    va_start(args, fmt);
+    vfprintf(stderr, fmt, args);
+    va_end(args);
+    fputc('\n', stderr);
+    num_errors++;
 }
 
 /**
@@ -38,6 +48,16 @@ void handle_error(const char* fmt, ...) {
  */
 void handle_warning(const char* fmt, ...) {
 
+    va_list args;
+
+    fprintf(stderr, "Warning: %s: %d: %d: ", get_fname(),
+                get_line_no(), get_col_no());
+
+    va_start(args, fmt);
+    vfprintf(stderr, fmt, args);
+    va_end(args);
+    fputc('\n', stderr);
+    num_warnings++;
 }
 
 /**
