@@ -37,7 +37,8 @@ This requires cmake and doxygen. Other libraries and tools should be in the repo
 
 # Grammar
 This is the complete grammar for Simple:
-```
+```Python
+
 #####################
 #
 # This is a simplified grammar that is based upon BNF. It is intended to
@@ -567,34 +568,21 @@ else_clause
 # a single else with no SYMBOL that catches any exception. Since the internal
 # exception system uses the C non-local GOTO functionality, the SYMBOL that is
 # required names an internal ENUM that is used to longjmp() to the correct
-# location.
+# location. One or more except clauses can be present.
 #
 try_clause
-    = 'try' function_body except_clause
+    = 'try' function_body ( except_clause )+
 
 #####################
 #
-# Except clause with a required symbol. The first symbol names which exception is going to be caught. The second one is taken to be a string that is an error message that was given when the exception was raised.
-#
-except_clause_mid
-    = 'except' '(' SYMBOL, SYMBOL ')' function_body
-
-#####################
-#
-# Except clause with an optional empty symbol.
-#
-except_clause_final
-    = 'except' ( '(' ')' )? function_body
-
-#####################
-#
-# The actual except clause with the actual list. At least one except clause
-# is required. It could be a mid clause or a final clause but if it's final,
-# then that must be the only one.
+# Except clause with a required symbol. The first symbol names which exception
+# is going to be caught. The second one is taken to be a string that is an
+# error message that was given when the exception was raised. To capture any
+# exception, the exception type should be 'any' and the error message is
+# propagated as expected.
 #
 except_clause
-    = ( except_clause_mid )+ ( except_clause_final )?
-    / except_clause_final
+    = 'except' '(' ( 'any' / SYMBOL ) ',' SYMBOL ')' function_body
 
 #####################
 #
@@ -621,7 +609,8 @@ default_clause
 
 #####################
 #
-# The actual case body definition is similar to C.
+# The actual case body definition is similar to C. One or more 'case' clauses
+# followed by an optional 'default' clause.
 #
 case_body
     = '{' ( case_clause_list )+ ( default_clause )? '}'
