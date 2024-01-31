@@ -25,7 +25,6 @@ Features that are specifically not supported.
 * Pointers.
 * Multiple inheritance.
 * Monkey patching.
-* Code that is not declared as part of a class.
 
 This multi-pass compiler accepts Simple source code and outputs C source code. The output should be compilable by any modern ANSI C compiler. The output is not really intended to be human readable, but the #line directives are used to aid debugging. The goal is that there should be no way for the compiler to output incorrect code. All semantic errors are caught before emitting any output.
 
@@ -575,10 +574,10 @@ try_clause
 
 #####################
 #
-# Except clause with a required symbol.
+# Except clause with a required symbol. The first symbol names which exception is going to be caught. The second one is taken to be a string that is an error message that was given when the exception was raised.
 #
 except_clause_mid
-    = 'except' '(' SYMBOL ')' function_body
+    = 'except' '(' SYMBOL, SYMBOL ')' function_body
 
 #####################
 #
