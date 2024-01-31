@@ -30,10 +30,13 @@ This multi-pass compiler accepts Simple source code and outputs C source code. T
 
 # This repo
 (assuming you know how to use github)
-This repo has not nor ever will be build under any version of Windows. It should be usable on other operating systems. I don;t have a MAC, so I can't test anyhting. In general it should build under Linux without problems. It has a couple of files to make it easier to use. When you clone it, take a look at the .project_env file to see if it matches your setup. If it does, then you can just run ``./setup`` to check out the sub projects and create a sub-shell with some paths set up. To make the repo perfectly clean, run the ``./clean`` script or delete the build and bin directories.
+This repo has not nor ever will be built by me under any version of Windows. It should be usable on other operating systems. I don't have a MAC, so I can't test anything. In general it should build under Linux without problems. There are a couple of files to make it easier to use. After you clone it, take a look at the .project_env file to see if it matches your setup. If it does, then you can just run ``./setup`` to check out the sub projects and create a sub-shell with some paths set up. To make the repo perfectly clean, run the ``./clean`` script or delete the docs/out, build, and bin directories.
 
 ## required packages
-This requires cmake and doxygen. Other libraries and tools should be in the repo already.
+This requires cmake, graphiz, and doxygen. Other libraries and tools should be in the repo already.
+
+## Feedback is most welcome
+I would also welcome some help. Compilers are such a slog....
 
 # Grammar
 This is the complete grammar for Simple:
