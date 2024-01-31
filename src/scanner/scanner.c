@@ -36,7 +36,7 @@ static void eat_comment() {
     // the current char is a ';' when this is entered
     while(true) {
         ch = consume_char();
-        if(ch == '\n' || ch == '\r' || ch == EOF)
+        if(ch == '\n' || ch == '\r' || ch == END_OF_FILE || ch == END_OF_INPUT)
             break;
     }
 }
@@ -682,9 +682,13 @@ Token* scan_token() {
         }
         // end of input has been reached where there are no more files in
         // the file stack.
-        else {
-            token.type = END_OF_INPUT;
-            return &token;  // do not update the line, etc.
+        else if(ch == END_OF_FILE) {
+            token.type = TOK_END_OF_FILE;
+            finished = true;
+        }
+        else if(ch == END_OF_INPUT) {
+            token.type = TOK_END_OF_INPUT;
+            finished = true;
         }
     }
 
@@ -700,7 +704,8 @@ Token* scan_token() {
  */
 const char* tok_to_str(TokenType type) {
 
-    return (type == END_OF_INPUT)? "END_OF_INPUT" :
+    return (type == TOK_END_OF_INPUT)? "END OF INPUT" :
+        (type == TOK_END_OF_FILE)? "END OF FILE" :
         (type == TOK_ERROR)? "ERROR" :
         (type == TOK_BREAK)? "BREAK" :
         (type == TOK_CASE)? "CASE" :
@@ -741,41 +746,41 @@ const char* tok_to_str(TokenType type) {
         (type == TOK_TRACE)? "TRACE" :
         (type == TOK_PRINT)? "PRINT" :
         (type == TOK_TYPE)? "TYPE" :
-        (type == TOK_TRUE_BOOL)? "TRUE_BOOL" :
-        (type == TOK_FALSE_BOOL)? "FALSE_BOOL" :
-        (type == TOK_LORE)? "LORE" :
-        (type == TOK_GORE)? "GORE" :
-        (type == TOK_EQU)? "EQU" :
-        (type == TOK_NEQU)? "NEQU" :
+        (type == TOK_TRUE_BOOL)? "TRUE" :
+        (type == TOK_FALSE_BOOL)? "FALSE" :
+        (type == TOK_LORE)? "\'<=\'" :
+        (type == TOK_GORE)? "\'>=\'" :
+        (type == TOK_EQU)? "\'==\'" :
+        (type == TOK_NEQU)? "\'!=\'" :
         (type == TOK_OR)? "OR" :
         (type == TOK_AND)? "AND" :
-        (type == TOK_ADD_ASSIGN)? "ADD_ASSIGN" :
-        (type == TOK_SUB_ASSIGN)? "SUB_ASSIGN" :
-        (type == TOK_MUL_ASSIGN)? "MUL_ASSIGN" :
-        (type == TOK_DIV_ASSIGN)? "DIV_ASSIGN" :
-        (type == TOK_MOD_ASSIGN)? "MOD_ASSIGN" :
-        (type == TOK_ADD)? "ADD" :
-        (type == TOK_SUB)? "SUB" :
-        (type == TOK_ASSIGN)? "ASSIGN" :
-        (type == TOK_DIV)? "DIV" :
-        (type == TOK_MUL)? "MUL" :
-        (type == TOK_MOD)? "MOD" :
-        (type == TOK_OPAREN)? "OPAREN" :
-        (type == TOK_CPAREN)? "CPAREN" :
-        (type == TOK_OCBRACE)? "OCBRACE" :
-        (type == TOK_CCBRACE)? "CCBRACE" :
-        (type == TOK_OSBRACE)? "OSBRACE" :
-        (type == TOK_CSBRACE)? "CSBRACE" :
-        (type == TOK_COMMA)? "COMMA" :
-        (type == TOK_DOT)? "DOT" :
-        (type == TOK_OPBRACE)? "OPBRACE" :
-        (type == TOK_CPBRACE)? "CPBRACE" :
-        (type == TOK_COLON)? "COLON" :
-        (type == TOK_CARAT)? "CARAT" :
-        (type == TOK_AMPER)? "AMPER" :
+        (type == TOK_ADD_ASSIGN)? "\'+=\'" :
+        (type == TOK_SUB_ASSIGN)? "\'-=\'" :
+        (type == TOK_MUL_ASSIGN)? "\'*=\'" :
+        (type == TOK_DIV_ASSIGN)? "\'/=\'" :
+        (type == TOK_MOD_ASSIGN)? "\'%=\'" :
+        (type == TOK_ADD)? "\'+\'" :
+        (type == TOK_SUB)? "\'-\'" :
+        (type == TOK_ASSIGN)? "\'=\'" :
+        (type == TOK_DIV)? "\'/\'" :
+        (type == TOK_MUL)? "\'*\'" :
+        (type == TOK_MOD)? "\'%\'" :
+        (type == TOK_OPAREN)? "\'(\'" :
+        (type == TOK_CPAREN)? "\')\'" :
+        (type == TOK_OCBRACE)? "\'{\'" :
+        (type == TOK_CCBRACE)? "\'}\'" :
+        (type == TOK_OSBRACE)? "\'[\'" :
+        (type == TOK_CSBRACE)? "\']\'" :
+        (type == TOK_COMMA)? "\',\'" :
+        (type == TOK_DOT)? "\'.\'" :
+        (type == TOK_OPBRACE)? "\'<\'" :
+        (type == TOK_CPBRACE)? "\'>\'" :
+        (type == TOK_COLON)? "\':\'" :
+        (type == TOK_CARAT)? "\'^\'" :
+        (type == TOK_AMPER)? "\'&\'" :
         (type == TOK_INLINE)? "INLINE" :
-        (type == TOK_LITERAL_NUM)? "LITERAL_NUM" :
-        (type == TOK_LITERAL_STR)? "LITERAL_STR" :
+        (type == TOK_LITERAL_NUM)? "LITERAL NUMBER" :
+        (type == TOK_LITERAL_STR)? "LITERAL STRING" :
         (type == TOK_SYMBOL)? "SYMBOL" : "UNKNOWN";
 }
 

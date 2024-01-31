@@ -1,7 +1,28 @@
 /**
  * @file queue_test.c
  *
- * @brief Test the token queue.
+ * @brief Test the token queue. This test implements a small subset parser
+ * that is contrived to verify that the token queue is working correctly. The
+ * crux of the queue is that tokens can be marked as having been used and the
+ * protocol for discarding tokens is working correctly. This test also serves
+ * as a test bed to try out parser implementation ideas.
+ *
+ * Grammar:
+ *
+ *  module
+ *      : (module_element)+
+ *  module_element
+ *      : scope_operator
+ *      | namespace_definition
+ *      | SYMBOL
+ *  scope_operator
+ *      : PUBLIC
+ *      | PRIVATE
+ *      | PROTECTED
+ *  namespace_definition
+ *      : NAMESPACE (SYMBOL)? namespace_body
+ *  namespace_body
+ *      : OCBRACE (module_element)* CCBRACE
  *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
@@ -12,6 +33,76 @@
 #include "scanner.h"
 
 extern void print_token(Token* tok);
+
+/**
+ * @brief Parse for a complete module.
+ *
+ *  # One or more module items.
+ *  module
+ *      : (module_item)+
+ */
+void* module() {
+
+    void* node;
+
+    if(NULL == (node = module_element())) {
+
+    }
+
+    return node;
+}
+
+/**
+ * @brief Parse for a single module element.
+ *
+ *  # Exactly one of these alternatives
+ *  module_element
+ *      : scope_operator
+ *      | namespace_definition
+ *      | SYMBOL
+ */
+void* module_element() {
+
+}
+
+/**
+ * @brief Parse for a single keyword.
+ *
+ *  # A scope operator is a single keyword.
+ *  scope_operator
+ *      : PUBLIC
+ *      | PRIVATE
+ *      | PROTECTED
+ */
+void* scope_operator() {
+
+}
+
+/**
+ * @brief A namespace defintion has a keyword, an optional name, and a body.
+ * Note that this is contrived for the test. A real namespace requires the
+ * name.
+ *
+ *  # Keyword with an optional name and a body
+ *  namespace_definition
+ *      : NAMESPACE (SYMBOL)? namespace_body
+ */
+void* namespace_definition() {
+
+}
+
+/**
+ * @brief This is a recursive rule that parses for zero or more
+ * module_elements.
+ *
+ *  # Zero or more module elements enclosed in braces.
+ *  namespace_body
+ *      : OCBRACE (module_element)* CCBRACE
+ *
+ */
+void* namespace_body() {
+
+}
 
 int main(int argc, char** argv) {
 
@@ -24,39 +115,8 @@ int main(int argc, char** argv) {
     // runs from the build directory.
     open_file(argv[1]);
 
-//    Token* tok;
-
-    printf("\nget same token\n");
-    print_token(get_token());
-    print_token(get_token());
-
-    printf("\nadvance 3 tokens\n");
-    print_token(advance_token());
-    print_token(advance_token());
-    print_token(advance_token());
-    printf("\nprint same token\n");
-    print_token(get_token());
-
-    printf("\nreset token queue and print 3\n");
-    reset_token_queue();
-    print_token(advance_token());
-    print_token(advance_token());
-    print_token(advance_token());
-
-    printf("\nconsume token queue and print 6\n");
-    consume_token_queue();
-    print_token(advance_token());
-    print_token(advance_token());
-    print_token(advance_token());
-    print_token(advance_token());
-    print_token(advance_token());
-    print_token(advance_token());
-
-    printf("\nrepeat token queue via iteration\n");
-    void* mark = NULL;
-    for(Token* tok = iterate_token_queue(&mark); tok != NULL; tok = iterate_token_queue(&mark))
-        print_token(tok);
-
+    // since the module is a list, this is only called once.
+    module();
 
     return 0;
 }

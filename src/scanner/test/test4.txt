@@ -1,0 +1,15 @@
+;-------------------------------------------
+; Test the import/filestack functionality
+;-------------------------------------------
+
+print()
+print("this is the string")
+raise()
+
+import "../src/scanner/test/test3.txt"
+
+class adad(qwe. wer) {
+    num dfklj
+    nothing plart(dsfd.dd asd,strg sdf, dict asd)
+}
+

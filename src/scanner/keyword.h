@@ -15,7 +15,8 @@
 
 // List of every terminal symbol possible.
 typedef enum {
-    END_OF_INPUT,
+    TOK_END_OF_FILE,
+    TOK_END_OF_INPUT,
     TOK_ERROR,
     TOK_BREAK,
     TOK_CASE,

@@ -11,7 +11,7 @@ void scan_file() {
     while(1) {
         print_token(&token);
         scan_token();
-        if(token.type == END_OF_INPUT) {
+        if(token.type == TOK_END_OF_FILE) {
             print_token(&token);
             break;
         }
@@ -31,18 +31,32 @@ int main(int argc, char** argv) {
 
     int count = 1;
     while(1) {
-        printf("%d. ", count);
-        print_token(&token);
-        scan_token();
-        if(token.type == END_OF_INPUT) {
+        printf("%d. ", count++);
+        if(token.type == TOK_IMPORT) {
+            print_token(&token);
+            scan_token(); // must be a string
+            if(token.type == TOK_LITERAL_STR) {
+                printf("%d. ", count++);
+                print_token(&token);
+                open_file(raw_string(token.str));
+                printf("\n");
+            }
+        }
+        else if(token.type == TOK_END_OF_FILE) {
+            print_token(&token);
+            printf("\n");
+            close_file();
+        }
+        else if(token.type == TOK_END_OF_INPUT) {
             print_token(&token);
             break;
         }
-        else if(count++ == 5)
-            open_file(argv[2]);
+        else
+            print_token(&token);
+
+        scan_token();
     }
 
-
-    printf("stuff and junk\n");
+    printf("\nfinished\n");
     return 0;
 }

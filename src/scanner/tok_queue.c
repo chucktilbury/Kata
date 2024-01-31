@@ -73,7 +73,7 @@ void open_file(const char* fname) {
 
     // calling into the util library
     TRY {
-        open_input_file(fname);
+        push_input_file(fname);
     }
     EXCEPT(FILE_ERROR) {
         fprintf(stderr, "Fatal ");
@@ -93,6 +93,33 @@ void open_file(const char* fname) {
             exit(1);
         } FINAL
     }
+}
+
+/**
+ * @brief Close the current file and pop it off of the file stack.
+ */
+void close_file() {
+
+    pop_input_file();
+}
+
+/**
+ * @brief Mark this token as having been used to compose a rule.
+ *
+ * @param tok
+ *
+ */
+void finalize_token(Token* tok) {
+
+    tok->used = true;
+}
+
+/**
+ * @brief Reset the head of the token queue to the first token that has not
+ * been marked as being finalized.
+ */
+void finalize_token_queue() {
+
 }
 
 /**
@@ -158,7 +185,8 @@ Token* advance_token() {
     assert(tqueue != NULL);
     assert(tqueue->crnt != NULL);
 
-    if(tqueue->crnt->tok->type != END_OF_INPUT) {
+    if((tqueue->crnt->tok->type != TOK_END_OF_FILE) &&
+                (tqueue->crnt->tok->type != TOK_END_OF_INPUT)) {
         if(tqueue->crnt->next == NULL)
             append_token(scan_token());
 
@@ -169,38 +197,35 @@ Token* advance_token() {
 }
 
 /**
- * @brief Consume the token queue from the beginning to the current token.
- * This is called when a rule has been matched and there is no need to keep
- * that section of the token stream. Returns the current token. NOTE: this
- * library routine expects to use garbage collections.
+ * @brief Grab the current queue pointer so that it can be reset when the
+ * crnt pointer moves as a result of parsing the line. This is used in
+ * conjunction with reset_token_queue(). This should be called and the pointer
+ * saved at the beginning of any parser routine that expects alternatives.
  *
- * @return Token*
+ * @return void*
+ *
  */
-Token* consume_token_queue() {
+void* post_token_queue() {
 
     assert(tqueue != NULL);
-    assert(tqueue->crnt != NULL);
 
-    tqueue->head = tqueue->crnt;
-
-    return tqueue->crnt->tok;
+    return (void*)tqueue->crnt;
 }
 
 /**
  * @brief Reset the token stream to the beginning. This is used when a rule
  * could not be matched and the token stream needs to be rewound to test the
- * next rule in a list of alternatives.
+ * next rule in a list of alternatives. Call this when a parser alternative
+ * fails in order to reset the crnt pointer.
  *
  * @return Token*
  */
-Token* reset_token_queue() {
+void reset_token_queue(void* crnt) {
 
     assert(tqueue != NULL);
-    assert(tqueue->crnt != NULL);
 
-    tqueue->crnt = tqueue->head;
-
-    return tqueue->crnt->tok;
+    // cast is for clarity and a reminder...
+    tqueue->crnt = (TokQueueItem*)crnt;
 }
 
 /**
