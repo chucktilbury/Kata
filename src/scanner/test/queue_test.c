@@ -32,34 +32,8 @@
 #include "util.h"
 #include "scanner.h"
 #include "ast.h"
-#include "errors.h"
-
 #define USE_TRACE 1
-
-#if USE_TRACE
-static int count = 0;
-static const int increment = 4;
-#define ENTER do { \
-        printf("%*senter: %s: %d\n", count, "", __func__, __LINE__); \
-        count+=increment; \
-    } while(false)
-
-#define TRACE(f, ...) do { \
-        printf("%*s%d: ", count, "", __LINE__); \
-        printf(f, ##__VA_ARGS__); \
-        printf("\n"); \
-    } while(false)
-
-#define RET(v) do { \
-        count-=increment; \
-        printf("%*sret: %s: %d: %p\n", count, "", __func__, __LINE__, ((void*)v)); \
-        return (v); \
-    } while(false)
-#else
-#define ENTER
-#define TRACE(f, ...)
-#define RET(v) return v;
-#endif
+#include "errors.h"
 
 extern void print_token(Token* tok);
 
@@ -95,7 +69,7 @@ void* scope_operator() {
     // No tokens have been consumed so there is no need to reset the token
     // queue.
 
-    RET(node);
+    RETV(node);
 }
 
 /**
@@ -118,7 +92,7 @@ void* namespace_element_list() {
 
     if(tok->type != TOK_OCBRACE) {
         handle_error("expected a '{' but got %s", tok_to_str(tok->type));
-        return NULL;
+        RETV(NULL);
     }
     else {
         finalize_token(tok);
@@ -143,12 +117,12 @@ void* namespace_element_list() {
         else {
             // not a module_element or a CCBRACE, so it' an error
             handle_error("expected a module element or a '}' but got a %s", tok_to_str(get_token()->type));
-            RET(NULL);
+            RETV(NULL);
         }
     }
 
     finalize_token_queue(); // this is a valid nterm parse.
-    RET(node);
+    RETV(node);
 }
 
 /**
@@ -177,7 +151,7 @@ void* namespace_definition() {
 
         if(tok->type == TOK_SYMBOL) {
             // consume the token...
-            TRACE("have a name: \"%s\"", raw_string(tok->str));
+            TRACE("have a namespace name: \"%s\"", raw_string(tok->str));
             node = create_ast_node(AST_namespace_definition);
             add_ast_attrib(node, "name", tok, sizeof(Token));
             finalize_token(tok);
@@ -191,17 +165,17 @@ void* namespace_definition() {
             else {
                 // syntax error, could not parse the list
                 handle_error("expected a namespace element");
-                RET(NULL);
+                RETV(NULL);
             }
         }
         else {
             // syntax error, symbol required after namespace keyword
             handle_error("expected SYMBOL token but got %s", tok_to_str(tok->type));
-            RET(NULL);
+            RETV(NULL);
         }
     }
 
-    RET(node);
+    RETV(node);
 }
 
 /**
@@ -246,7 +220,7 @@ void* module_element() {
         reset_token_queue(post);
     }
 
-    RET(node);
+    RETV(node);
 }
 
 /**
@@ -269,7 +243,7 @@ void* module() {
     Token* tok = get_token();
     if(tok->type != TOK_END_OF_FILE) {
         handle_error("expected the end of file but got %s", tok_to_str(tok->type));
-        RET(NULL);
+        RETV(NULL);
     }
     else {
         TRACE("handle end of file");
@@ -282,14 +256,14 @@ void* module() {
     tok = get_token();
     if(tok->type != TOK_END_OF_INPUT) {
         handle_error("expected the end of input but got %s", tok_to_str(tok->type));
-        RET(NULL);
+        RETV(NULL);
     }
     TRACE("handle end of input and return node");
 
     AstNode* node = create_ast_node(AST_module);
     add_ast_attrib(node, "payload", node_lst, sizeof(List));
 
-    RET(node);
+    RETV(node);
 }
 
 int main(int argc, char** argv) {
@@ -297,7 +271,7 @@ int main(int argc, char** argv) {
     ENTER;
     if(argc < 2) {
         fprintf(stderr, "Error: Need file name\n");
-        return 1;
+        RETV(1);
     }
 
     init_scanner();
@@ -307,5 +281,6 @@ int main(int argc, char** argv) {
     // since the module is a list, this is only called once.
     module();
 
-    RET(0);
+    RETV(0);
 }
+
