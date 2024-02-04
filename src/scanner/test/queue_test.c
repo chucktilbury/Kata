@@ -32,8 +32,8 @@
 #include "util.h"
 #include "scanner.h"
 #include "ast.h"
-#define USE_TRACE 1
 #include "errors.h"
+#include "trace.h"
 
 extern void print_token(Token* tok);
 
@@ -60,7 +60,7 @@ void* scope_operator() {
             tok->type == TOK_PRIVATE ||
             tok->type == TOK_PROTECTED) {
 
-        TRACE("found a \"%s\"", tok_to_str(tok->type));
+        TRACE_TOKEN(tok);
         node = create_ast_node(AST_scope_operator);
         add_ast_attrib(node, "payload", tok, sizeof(Token));
         finalize_token(tok); // mark this token as used
@@ -151,7 +151,7 @@ void* namespace_definition() {
 
         if(tok->type == TOK_SYMBOL) {
             // consume the token...
-            TRACE("have a namespace name: \"%s\"", raw_string(tok->str));
+            TRACE_TOKEN(tok);
             node = create_ast_node(AST_namespace_definition);
             add_ast_attrib(node, "name", tok, sizeof(Token));
             finalize_token(tok);
@@ -207,7 +207,7 @@ void* module_element() {
         finalize_token_queue();
     }
     else if(get_token()->type == TOK_SYMBOL) {
-        TRACE("found a symbol definition: \"%s\"", raw_string(get_token()->str));
+        TRACE_TOKEN(get_token());
         node = create_ast_node(AST_module_element);
         add_ast_attrib(node, "payload", get_token(), sizeof(Token));
         // consume the token....

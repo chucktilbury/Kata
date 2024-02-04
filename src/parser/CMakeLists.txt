@@ -7,6 +7,7 @@ add_library(${PROJECT_NAME} STATIC
     module.c
     errors.c
     ast.c
+    trace.c
 )
 
 target_compile_options(${PROJECT_NAME}
@@ -19,7 +20,7 @@ target_compile_options(${PROJECT_NAME}
         -I${PROJECT_SOURCE_DIR}/../scanner
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DMEMORY_DEBUG >
-        $<$<CONFIG:DEBUG>:-DENA_TRACE >
+        $<$<CONFIG:DEBUG>:-DUSE_TRACE >
         $<$<CONFIG:RELEASE>:-Ofast >
         $<$<CONFIG:PROFILE>:-pg -O0 >
 )

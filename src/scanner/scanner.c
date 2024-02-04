@@ -23,7 +23,8 @@
 #include "keyword.h"
 #include "scanner.h"
 
-Token token;
+static Token token;
+static unsigned serial = 0;
 
 /**
  * @brief Comments are not retuned by the scanner. This reads from the ';' and
@@ -618,7 +619,8 @@ static void finish_token() {
 
     token.line_no = get_line_no();
     token.col_no = get_col_no();
-    token.fname = get_fname(); // simple const char*
+    token.fname = _DUP_STR(strrchr(get_fname(), '/')+1);
+    token.serial = serial++;
 }
 
 /**
@@ -791,9 +793,17 @@ const char* tok_to_str(TokenType type) {
  */
 void print_token(Token* tok) {
 
-    printf("token: %s: \"%s\": %d: %d: %s\n",
+    printf("token: %s: \"%s\": %d: %s: %d: %d: \"%s\"\n",
             tok_to_str(tok->type), raw_string(tok->str),
+            tok->serial, tok->used? "true": "false",
             tok->line_no, tok->col_no,
             tok->fname);
 }
 
+/*
+ * Low level get token, outside of official interface, so that token can be
+ * a static var.
+ */
+Token* sneak_token() {
+    return &token;
+}

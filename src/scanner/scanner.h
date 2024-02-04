@@ -29,6 +29,7 @@ typedef struct {
     int col_no;     // Column of the last character of the token
     const char* fname;  // File name where the token was taken
     bool used;      // When the token has been finalized in a rule.
+    unsigned serial;    // Serial number of token.
 } Token;
 
 /**

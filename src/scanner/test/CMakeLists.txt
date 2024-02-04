@@ -27,7 +27,7 @@ target_compile_options(${PROJECT_NAME}
         -I${PROJECT_SOURCE_DIR}/../../bdwgc/include
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DENABLE_LOGGER >
-        $<$<CONFIG:DEBUG>:-DENABLE_DUMP >
+        $<$<CONFIG:DEBUG>:-DUSE_TRACE >
         $<$<CONFIG:RELEASE>:-Ofast >
         $<$<CONFIG:PROFILE>:-pg -O0 >
 )
@@ -57,7 +57,7 @@ target_compile_options(queue_test
         -I${PROJECT_SOURCE_DIR}/../../bdwgc/include
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DENABLE_LOGGER >
-        $<$<CONFIG:DEBUG>:-DENABLE_DUMP >
+        $<$<CONFIG:DEBUG>:-DUSE_TRACE >
         $<$<CONFIG:RELEASE>:-Ofast >
         $<$<CONFIG:PROFILE>:-pg -O0 >
 )

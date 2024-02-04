@@ -174,6 +174,7 @@ Token* copy_token(const Token* tok) {
         ntok->line_no = tok->line_no;
         ntok->col_no = tok->col_no;
         ntok->type = tok->type;
+        ntok->serial = tok->serial;
     }
     ANY_EXCEPT() {
         // any exception is a fatal error:
@@ -233,12 +234,18 @@ void* post_token_queue() {
  *
  * @return Token*
  */
-void reset_token_queue(void* crnt) {
+void reset_token_queue(void* post) {
 
     assert(tqueue != NULL);
 
-    // cast is for clarity and a reminder...
-    tqueue->crnt = (TokQueueItem*)crnt;
+    TokQueueItem* tmp = (TokQueueItem*)post;
+    // NOTE: comparison of pointers is not portable
+    while(tmp != tqueue->crnt) {
+        tmp->tok->used = false;
+        tmp = tmp->next;
+    }
+
+    tqueue->crnt = (TokQueueItem*)post;
 }
 
 /**

@@ -4,15 +4,18 @@
 
 extern void print_token(Token* tok);
 extern Token* scan_token();
+extern Token* sneak_token();
 extern Token token;
 
 void scan_file() {
 
+    Token* tok = sneak_token();
+
     while(1) {
-        print_token(&token);
-        scan_token();
-        if(token.type == TOK_END_OF_FILE) {
-            print_token(&token);
+        print_token(tok);
+        tok = scan_token();
+        if(tok->type == TOK_END_OF_FILE) {
+            print_token(tok);
             break;
         }
     }
@@ -29,32 +32,33 @@ int main(int argc, char** argv) {
     // runs from the build directory.
     open_file(argv[1]);
 
+    Token* tok = sneak_token();
     int count = 1;
     while(1) {
         printf("%d. ", count++);
-        if(token.type == TOK_IMPORT) {
-            print_token(&token);
-            scan_token(); // must be a string
-            if(token.type == TOK_LITERAL_STR) {
+        if(tok->type == TOK_IMPORT) {
+            print_token(tok);
+            tok = scan_token(); // must be a string
+            if(tok->type == TOK_LITERAL_STR) {
                 printf("%d. ", count++);
-                print_token(&token);
-                open_file(raw_string(token.str));
+                print_token(tok);
+                open_file(raw_string(tok->str));
                 printf("\n");
             }
         }
-        else if(token.type == TOK_END_OF_FILE) {
-            print_token(&token);
+        else if(tok->type == TOK_END_OF_FILE) {
+            print_token(tok);
             printf("\n");
             close_file();
         }
-        else if(token.type == TOK_END_OF_INPUT) {
-            print_token(&token);
+        else if(tok->type == TOK_END_OF_INPUT) {
+            print_token(tok);
             break;
         }
         else
-            print_token(&token);
+            print_token(tok);
 
-        scan_token();
+        tok = scan_token();
     }
 
     printf("\nfinished\n");
