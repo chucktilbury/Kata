@@ -115,11 +115,25 @@ void finalize_token(Token* tok) {
 }
 
 /**
- * @brief Reset the head of the token queue to the first token that has not
- * been marked as being finalized.
+ * @brief Reset the token queue to the state that it was in before this parser
+ * function was called. This is used when the tokens that were consumed by
+ * this function do not produce a valid parse. That may or may not be an
+ * error. In the case of an error, this should not be called because the error
+ * recovery function needs to know which tokens are involved in the error and
+ * that data is captured by the flags this function undoes.
  */
 void finalize_token_queue() {
 
+    TokQueueItem* ptr = tqueue->head;
+    while(ptr != NULL) {
+        if(ptr->tok->used == true)
+            ptr = ptr->next;
+        else
+            break;
+    }
+
+    if(ptr != NULL)
+        tqueue->head = ptr;
 }
 
 /**
@@ -185,8 +199,7 @@ Token* advance_token() {
     assert(tqueue != NULL);
     assert(tqueue->crnt != NULL);
 
-    if((tqueue->crnt->tok->type != TOK_END_OF_FILE) &&
-                (tqueue->crnt->tok->type != TOK_END_OF_INPUT)) {
+    if(tqueue->crnt->tok->type != TOK_END_OF_INPUT) {
         if(tqueue->crnt->next == NULL)
             append_token(scan_token());
 
