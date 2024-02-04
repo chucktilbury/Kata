@@ -1,0 +1,5 @@
+;----------------------------------------
+; minimum syntax test for token queues.
+;----------------------------------------
+
+namespace sname { public }
