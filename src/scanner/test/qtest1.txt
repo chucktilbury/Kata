@@ -2,4 +2,11 @@
 ; minimum syntax test for token queues.
 ;----------------------------------------
 
-namespace sname { public }
+namespace sname {
+    bacon eggs
+    public
+}
+
+public
+another_name
+

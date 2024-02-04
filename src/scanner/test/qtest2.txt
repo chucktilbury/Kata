@@ -11,5 +11,8 @@ namespace another_name {
         public private
         a_name_123
     }
+    who_is_on_first
+    public
+    eight_oclock
 }
 
