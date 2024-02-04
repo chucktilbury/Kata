@@ -47,8 +47,8 @@ void close_file();
 
 /**
  * @brief Get the token object. This returns the current token, which is a
- * global in the scanner. If the value of this token needs to be preserved,
- * then the token should be copied.
+ * global in the scanner. If the pointer to this token needs to be referenced,
+ * after advance_token() is called, then the token should be copied.
  *
  * @return Token*
  */
@@ -63,10 +63,10 @@ Token* get_token();
 Token* copy_token(const Token* tok);
 
 /**
- * @brief Make the next token in the stream the current token. If the token
- * before this one was the end of the input, then nothing happens and the
- * returned token is the end of input token. Returns the current token after
- * the advance happens.
+ * @brief Make the next token in the stream the current token. This could
+ * return a token that has already been read if the queue was reset, or a new
+ * token could be read, depending on the state of the queue as set by the
+ * other functions.
  *
  * @return Token*
  */
@@ -82,14 +82,19 @@ void finalize_token(Token* tok);
 
 /**
  * @brief Reset the head of the token queue to the first token that has not
- * been marked as being finalized.
+ * been marked as being finalized. This actually discards the tokens that have
+ * been consumed. This is called when a valid non-terminal is recognized by
+ * the parser.
  */
 void finalize_token_queue();
 
 /**
- * @brief Reset the token queue to the state that it was in when the token was
- * read. It takes the token that is supplied as a parameter and makes it the
- * crnt token so that it is read as the next one.
+ * @brief Reset the token queue to the state that it was in before this parser
+ * function was called. This is used when the tokens that were consumed by
+ * this function do not produce a valid parse. That may or may not be an
+ * error. In the case of an error, this should not be called because the error
+ * recovery function needs to know which tokens are involved in the error and
+ * that data is captured by the flags this function undoes.
  *
  * @param tok
  */
