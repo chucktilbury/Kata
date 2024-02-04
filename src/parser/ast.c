@@ -37,11 +37,13 @@ AstNode* create_ast_node(AstType type) {
  * @param size
  *
  */
-void add_ast_attrib(AstNode* node, const char* key, void* data, size_t size) {
+AstResult add_ast_attrib(AstNode* node, const char* key, void* data, size_t size) {
 
-    HashResult res = insert_hashtable(node, key, data, size);
-    if(res != HASH_OK)
+    AstResult res = (AstResult)insert_hashtable(node, key, data, size);
+    if(res != AST_OK)
         RAISE(AST_GENERIC_ERROR, "cannot add AST table attribute");
+
+    return res;
 }
 
 /**
@@ -54,9 +56,7 @@ void add_ast_attrib(AstNode* node, const char* key, void* data, size_t size) {
  * @param size
  *
  */
-void get_ast_attrib(AstNode* node, const char* key, void* data, size_t size) {
+AstResult get_ast_attrib(AstNode* node, const char* key, void* data, size_t size) {
 
-    HashResult res = find_hashtable(node, key, data, size);
-    if(res != HASH_OK)
-        RAISE(AST_GENERIC_ERROR, "cannot find AST table attribute");
+    return (AstResult)find_hashtable(node, key, data, size);
 }

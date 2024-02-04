@@ -16,9 +16,12 @@
 #include "scanner.h"
 
 extern Token* scan_token();
+static unsigned serial = 0;
 
 typedef struct _tok_queue_item_ {
-    Token* tok;
+    Token* tok;     // the actual token pointer.
+    unsigned serial;// serial number of the token.
+    bool used;      // When the token has been finalized in a rule.
     struct _tok_queue_item_* next;
 } TokQueueItem;
 
@@ -44,6 +47,8 @@ static void append_token(Token* tok) {
     TRY {
         item = _ALLOC_T(TokQueueItem);
         item->tok = copy_token(tok);
+        item->serial = serial++;
+        item->used = false;
     }
     ANY_EXCEPT() {
         fprintf(stderr, "Fatal ");
@@ -109,9 +114,9 @@ void close_file() {
  * @param tok
  *
  */
-void finalize_token(Token* tok) {
+void finalize_token() {
 
-    tok->used = true;
+    tqueue->crnt->used = true;
 }
 
 /**
@@ -126,7 +131,7 @@ void finalize_token_queue() {
 
     TokQueueItem* ptr = tqueue->head;
     while(ptr != NULL) {
-        if(ptr->tok->used == true)
+        if(ptr->used)
             ptr = ptr->next;
         else
             break;
@@ -174,7 +179,6 @@ Token* copy_token(const Token* tok) {
         ntok->line_no = tok->line_no;
         ntok->col_no = tok->col_no;
         ntok->type = tok->type;
-        ntok->serial = tok->serial;
     }
     ANY_EXCEPT() {
         // any exception is a fatal error:
@@ -239,9 +243,10 @@ void reset_token_queue(void* post) {
     assert(tqueue != NULL);
 
     TokQueueItem* tmp = (TokQueueItem*)post;
-    // NOTE: comparison of pointers is not portable
-    while(tmp != tqueue->crnt) {
-        tmp->tok->used = false;
+    unsigned end = tqueue->crnt->serial;
+
+    while(tmp->serial < end) {
+        tmp->used = false;
         tmp = tmp->next;
     }
 

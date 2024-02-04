@@ -28,8 +28,6 @@ typedef struct {
     int line_no;    // Line number where the token was recognized
     int col_no;     // Column of the last character of the token
     const char* fname;  // File name where the token was taken
-    bool used;      // When the token has been finalized in a rule.
-    unsigned serial;    // Serial number of token.
 } Token;
 
 /**
@@ -75,11 +73,8 @@ Token* advance_token();
 
 /**
  * @brief Mark this token as having been used to compose a rule.
- *
- * @param tok
- *
  */
-void finalize_token(Token* tok);
+void finalize_token();
 
 /**
  * @brief Reset the head of the token queue to the first token that has not

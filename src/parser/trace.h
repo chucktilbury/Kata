@@ -17,6 +17,10 @@ extern void print_token(Token*);
 extern int trace_count;
 extern const int trace_increment;
 
+#define SET_TRACE_COUNT(v) do { \
+        trace_count = (v) * trace_increment; \
+    } while(false)
+
 #define ENTER do { \
         printf("%*senter: %s(): %d\n", trace_count, "", __func__, __LINE__); \
         trace_count+=trace_increment; \
@@ -54,6 +58,7 @@ extern const int trace_increment;
 
 #else
 
+#define SET_TRACE_COUNT(v)
 #define ENTER
 #define TRACE(f, ...)
 #define TRACE_TOKEN(t)

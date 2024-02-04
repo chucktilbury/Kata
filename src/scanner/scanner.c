@@ -24,7 +24,6 @@
 #include "scanner.h"
 
 static Token token;
-static unsigned serial = 0;
 
 /**
  * @brief Comments are not retuned by the scanner. This reads from the ';' and
@@ -619,8 +618,11 @@ static void finish_token() {
 
     token.line_no = get_line_no();
     token.col_no = get_col_no();
-    token.fname = _DUP_STR(strrchr(get_fname(), '/')+1);
-    token.serial = serial++;
+    const char* s = get_fname();
+    if(s != NULL)
+        token.fname = _DUP_STR(strrchr(s, '/')+1);
+    else
+        token.fname = _DUP_STR("no open file");
 }
 
 /**
@@ -793,9 +795,8 @@ const char* tok_to_str(TokenType type) {
  */
 void print_token(Token* tok) {
 
-    printf("token: %s: \"%s\": %d: %s: %d: %d: \"%s\"\n",
+    printf("token: %s: \"%s\": %d: %d: \"%s\"\n",
             tok_to_str(tok->type), raw_string(tok->str),
-            tok->serial, tok->used? "true": "false",
             tok->line_no, tok->col_no,
             tok->fname);
 }
@@ -807,3 +808,4 @@ void print_token(Token* tok) {
 Token* sneak_token() {
     return &token;
 }
+

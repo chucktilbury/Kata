@@ -111,9 +111,14 @@ typedef enum {
 #include "util.h"
 
 typedef HashTable AstNode;
+typedef enum {
+    AST_OK,
+    AST_DUP,
+    AST_NF,
+} AstResult;
 
 AstNode* create_ast_node(AstType type);
-void add_ast_attrib(AstNode* node, const char* key, void* data, size_t size);
-void get_ast_attrib(AstNode* name, const char* key, void* data, size_t size);
+AstResult add_ast_attrib(AstNode* node, const char* key, void* data, size_t size);
+AstResult get_ast_attrib(AstNode* name, const char* key, void* data, size_t size);
 
 #endif /* _AST_H */

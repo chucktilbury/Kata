@@ -62,8 +62,8 @@ void* scope_operator() {
 
         TRACE_TOKEN(tok);
         node = create_ast_node(AST_scope_operator);
-        add_ast_attrib(node, "payload", tok, sizeof(Token));
-        finalize_token(tok); // mark this token as used
+        add_ast_attrib(node, "token", tok, sizeof(Token));
+        finalize_token(); // mark this token as used
         advance_token(); // consume the token in the queue
     }
     // No tokens have been consumed so there is no need to reset the token
@@ -95,22 +95,26 @@ void* namespace_element_list() {
         RETV(NULL);
     }
     else {
-        finalize_token(tok);
+        TRACE("parsed a '{'");
+        finalize_token();
         advance_token();
     }
 
     // get the module element list
+    List* lst = create_list(sizeof(AstNode));
     while(true) {
         AstNode* me_node = NULL;
-        List* lst = create_list(sizeof(AstNode));
 
         if(NULL != (me_node = module_element())) {
+            TRACE("adding a module element to the list");
             append_list(lst, me_node);
         }
         else if(get_token()->type == TOK_CCBRACE) {
+            TRACE("parsed a '}'");
             node = create_ast_node(AST_namespace_element_list);
-            add_ast_attrib(node, "payload", lst, sizeof(List));
-            finalize_token(tok);
+            add_ast_attrib(node, "list", lst, sizeof(List));
+            TRACE("list size: %d", length_list(lst));
+            finalize_token();
             advance_token();
             break;
         }
@@ -145,7 +149,7 @@ void* namespace_definition() {
 
     if(tok->type == TOK_NAMESPACE) {
         // consume the token...
-        finalize_token(tok);
+        finalize_token();
         tok = advance_token();
         TRACE("parsing a namespace");
 
@@ -153,14 +157,14 @@ void* namespace_definition() {
             // consume the token...
             TRACE_TOKEN(tok);
             node = create_ast_node(AST_namespace_definition);
-            add_ast_attrib(node, "name", tok, sizeof(Token));
-            finalize_token(tok);
+            add_ast_attrib(node, "token", tok, sizeof(Token));
+            finalize_token();
             advance_token(); // consume the token
 
             AstNode* nsel;
             if(NULL != (nsel = namespace_element_list())) {
                 TRACE("have a valid namespace element list");
-                add_ast_attrib(node, "payload", nsel, sizeof(AstNode));
+                add_ast_attrib(node, "nterm", nsel, sizeof(AstNode));
             }
             else {
                 // syntax error, could not parse the list
@@ -197,21 +201,21 @@ void* module_element() {
     if(NULL != (mod_elem = scope_operator())) {
         TRACE("found a scope operator");
         node = create_ast_node(AST_module_element);
-        add_ast_attrib(node, "payload", mod_elem, sizeof(AstNode));
+        add_ast_attrib(node, "nterm", mod_elem, sizeof(AstNode));
         finalize_token_queue();
     }
     else if(NULL != (mod_elem = namespace_definition())) {
         TRACE("found a namespace definition");
         node = create_ast_node(AST_module_element);
-        add_ast_attrib(node, "payload", mod_elem, sizeof(AstNode));
+        add_ast_attrib(node, "nterm", mod_elem, sizeof(AstNode));
         finalize_token_queue();
     }
     else if(get_token()->type == TOK_SYMBOL) {
         TRACE_TOKEN(get_token());
         node = create_ast_node(AST_module_element);
-        add_ast_attrib(node, "payload", get_token(), sizeof(Token));
+        add_ast_attrib(node, "token", get_token(), sizeof(Token));
         // consume the token....
-        finalize_token(get_token());
+        finalize_token();
         advance_token();
         finalize_token_queue();
     }
@@ -261,9 +265,57 @@ void* module() {
     TRACE("handle end of input and return node");
 
     AstNode* node = create_ast_node(AST_module);
-    add_ast_attrib(node, "payload", node_lst, sizeof(List));
+    add_ast_attrib(node, "list", node_lst, sizeof(List));
 
     RETV(node);
+}
+
+const char* type_to_str(AstType type) {
+
+    return (type == AST_scope_operator)? "scope_operator" :
+        (type == AST_type_name)? "type_name" :
+        (type == AST_type_spec)? "type_spec" :
+        (type == AST_type_spec_element)? "type_spec_element" :
+        (type == AST_compound_name)? "compound_name" :
+        (type == AST_namespace_element)? "namespace_element" :
+        (type == AST_namespace_element_list)? "namespace_element_list" :
+        (type == AST_namespace_definition)? "namespace_definition" :
+        (type == AST_module_element)? "module_element" :
+        (type == AST_module_element_list)? "module_element_list" :
+        (type == AST_module)? "module" : "UNKNOWN";
+}
+
+int count = 0;
+
+void traverse_ast(AstNode* tree) {
+
+    ENTER;
+    Token tok;
+    AstNode node;
+    AstType type;
+    List list;
+
+    get_ast_attrib(tree, "type", &type, sizeof(AstType));
+    TRACE("type: \"%s\"", type_to_str(type));
+
+    if(AST_OK == get_ast_attrib(tree, "token", &tok, sizeof(Token))) {
+        TRACE_TOKEN(&tok);
+    }
+
+    if(AST_OK == get_ast_attrib(tree, "nterm", &node, sizeof(AstNode))) {
+        traverse_ast(&node);
+    }
+
+    if(AST_OK == get_ast_attrib(tree, "list", &list, sizeof(List))) {
+        TRACE("list length: %d", length_list(&list));
+        ListIter* iter = init_list_iterator(&list);
+        AstNode lnode;
+        while(iterate_list(iter, &lnode)) {
+            traverse_ast(&lnode);
+        }
+    }
+
+    RET;
 }
 
 int main(int argc, char** argv) {
@@ -279,7 +331,13 @@ int main(int argc, char** argv) {
     open_file(argv[1]);
 
     // since the module is a list, this is only called once.
-    module();
+    printf("\nParse the input\n");
+    AstNode* node = module();
+    printf("End Parse\n");
+
+    printf("\nDump the AST\n");
+    traverse_ast(node);
+    printf("End Dump\n\n");
 
     RETV(0);
 }
