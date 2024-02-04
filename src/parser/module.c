@@ -39,7 +39,7 @@ AstNode* scope_operator() {
         return node;
     }
     else {
-        reset_token_queue();
+        //reset_token_queue();
         return NULL;
     }
 }
@@ -73,7 +73,7 @@ AstNode* type_name() {
         return node;
     }
     else {
-        reset_token_queue();
+        //reset_token_queue();
         return NULL;
     }
 }
@@ -128,7 +128,7 @@ AstNode* compound_name() {
     }
     else {
         // not a match
-        reset_token_queue();
+        //reset_token_queue();
         return NULL;
     }
 }
@@ -156,7 +156,7 @@ AstNode* type_spec_element() {
     else {
         // this is not a match, but it could match the next alternative in
         // the caller.
-        reset_token_queue();
+        //reset_token_queue();
     }
 
     // there is no match, but that is not an error, yet.
@@ -200,7 +200,7 @@ AstNode* type_spec() {
     }
     else {
         // not an error ... yet.
-        reset_token_queue();
+        //reset_token_queue();
         return NULL;
     }
 
@@ -232,7 +232,7 @@ AstNode* namespace_element() {
         return nnode;
     }
     else
-        reset_token_queue();
+        //reset_token_queue();
 
     // not found, not an error
     return NULL;
@@ -261,7 +261,7 @@ AstNode* namespace_element_list() {
         return nnode;
     }
     else {
-        reset_token_queue();
+        //reset_token_queue();
     }
 
     // empty list is permissable
@@ -315,7 +315,7 @@ AstNode* namespace_definition() {
     }
     else {
         // not a namespace, not an error
-        reset_token_queue();
+        //reset_token_queue();
         return NULL;
     }
 
@@ -378,7 +378,7 @@ AstNode* module_element() {
         return nnode;
     }
     else
-        reset_token_queue();
+        //reset_token_queue();
 
     // not found, not an error
     return NULL;
@@ -407,7 +407,7 @@ AstNode* module_element_list() {
         return nnode;
     }
     else {
-        reset_token_queue();
+        //reset_token_queue();
     }
 
     // empty list is permissable

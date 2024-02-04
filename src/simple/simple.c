@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
     init_scanner();
     open_file(get_cmd_raw(cmd, "file"));
 
-    AstNode* node = module();
+    //AstNode* node = module();
 
     return 0;
 }
