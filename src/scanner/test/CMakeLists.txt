@@ -22,6 +22,8 @@ target_compile_options(${PROJECT_NAME}
         -DUSE_GC
         -I${PROJECT_SOURCE_DIR}/..
         -I${PROJECT_SOURCE_DIR}/../../util
+        -I${PROJECT_SOURCE_DIR}/../../scanner
+        -I${PROJECT_SOURCE_DIR}/../../parser
         -I${PROJECT_SOURCE_DIR}/../../bdwgc/include
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DENABLE_LOGGER >
@@ -37,6 +39,7 @@ add_executable(queue_test
 target_link_libraries(queue_test
     pthread
     scanner
+    parser
     util
     gc
 )
@@ -49,6 +52,8 @@ target_compile_options(queue_test
         -DUSE_GC
         -I${PROJECT_SOURCE_DIR}/..
         -I${PROJECT_SOURCE_DIR}/../../util
+        -I${PROJECT_SOURCE_DIR}/../../scanner
+        -I${PROJECT_SOURCE_DIR}/../../parser
         -I${PROJECT_SOURCE_DIR}/../../bdwgc/include
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DENABLE_LOGGER >
