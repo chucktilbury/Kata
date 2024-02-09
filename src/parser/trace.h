@@ -13,6 +13,7 @@
 
 #ifdef USE_TRACE
 
+#include "scanner.h"
 extern void print_token(Token*);
 extern int trace_count;
 extern const int trace_increment;
@@ -32,9 +33,16 @@ extern const int trace_increment;
         printf("\n"); \
     } while(false)
 
-#define TRACE_TOKEN(t) do {\
+#define TRACE_TERM(t) do {\
         printf("%*s*%d: ", trace_count, "", __LINE__); \
         print_token(t); \
+        printf("\n"); \
+    } while(false)
+
+#define TRACE_NTERM(n) do { \
+        printf("%*s*%d: ", trace_count, "", __LINE__); \
+        print_nonterminal(n); \
+        printf("\n"); \
     } while(false)
 
 #define RETV(v) do { \
@@ -61,7 +69,8 @@ extern const int trace_increment;
 #define SET_TRACE_COUNT(v)
 #define ENTER
 #define TRACE(f, ...)
-#define TRACE_TOKEN(t)
+#define TRACE_TERM(t)
+#define TRACE_NTERM(n)
 #define RETV(v) return v
 #define RET return
 #define EXIT(v) exit(v)

@@ -71,7 +71,7 @@ This is the complete grammar for Simple:
 # A module is the top-level production. It is a list of module items.
 #
 module
-    = module_item ( module_item )*
+    = ( module_item )+
 
 #####################
 #
@@ -396,7 +396,7 @@ expression_list
 # '{}' is not optional.
 #
 namespace_definition
-    = 'namespace' SYMBOL '{' ( namespace_item ( namespace_item )* )+ '}'
+    = 'namespace' SYMBOL '{' ( namespace_item )+ '}'
 
 #####################
 #
@@ -408,7 +408,7 @@ namespace_definition
 #
 class_definition
     = 'class' SYMBOL ( '(' ( compound_name )? ')' )?
-            '{' ( class_item ( class_item )* )+ '}'
+            '{' ( class_item )+ '}'
 
 #####################
 #

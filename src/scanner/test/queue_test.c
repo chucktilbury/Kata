@@ -60,7 +60,7 @@ void* scope_operator() {
             tok->type == TOK_PRIVATE ||
             tok->type == TOK_PROTECTED) {
 
-        TRACE_TOKEN(tok);
+        TRACE_TERM(tok);
         node = create_ast_node(AST_scope_operator);
         add_ast_attrib(node, "token", tok, sizeof(Token));
         finalize_token(); // mark this token as used
@@ -155,7 +155,7 @@ void* namespace_definition() {
 
         if(tok->type == TOK_SYMBOL) {
             // consume the token...
-            TRACE_TOKEN(tok);
+            TRACE_TERM(tok);
             node = create_ast_node(AST_namespace_definition);
             add_ast_attrib(node, "token", tok, sizeof(Token));
             finalize_token();
@@ -211,7 +211,7 @@ void* module_element() {
         finalize_token_queue();
     }
     else if(get_token()->type == TOK_SYMBOL) {
-        TRACE_TOKEN(get_token());
+        TRACE_TERM(get_token());
         node = create_ast_node(AST_module_element);
         add_ast_attrib(node, "token", get_token(), sizeof(Token));
         // consume the token....
@@ -270,6 +270,7 @@ void* module() {
     RETV(node);
 }
 
+#if 0
 const char* type_to_str(AstType type) {
 
     return (type == AST_scope_operator)? "scope_operator" :
@@ -299,7 +300,7 @@ void traverse_ast(AstNode* tree) {
     TRACE("type: \"%s\"", type_to_str(type));
 
     if(AST_OK == get_ast_attrib(tree, "token", &tok, sizeof(Token))) {
-        TRACE_TOKEN(&tok);
+        TRACE_TERM(&tok);
     }
 
     if(AST_OK == get_ast_attrib(tree, "nterm", &node, sizeof(AstNode))) {
@@ -317,6 +318,7 @@ void traverse_ast(AstNode* tree) {
 
     RET;
 }
+#endif
 
 int main(int argc, char** argv) {
 

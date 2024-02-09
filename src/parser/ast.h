@@ -92,7 +92,9 @@ typedef enum {
     AST_SYMBOL,
 
     // Non-terminal symbols
-    AST_scope_operator = 2000,
+    // defined in module.c
+    AST_symbol = 2000,
+    AST_scope_operator,
     AST_type_name,
     AST_type_spec,
     AST_type_spec_element,
@@ -103,6 +105,7 @@ typedef enum {
     AST_module_element,
     AST_module_element_list,
     AST_module,
+    AST_import_statement,
 
     // For the calls to RAISE();
     AST_GENERIC_ERROR = 3000,
@@ -120,5 +123,7 @@ typedef enum {
 AstNode* create_ast_node(AstType type);
 AstResult add_ast_attrib(AstNode* node, const char* key, void* data, size_t size);
 AstResult get_ast_attrib(AstNode* name, const char* key, void* data, size_t size);
+void traverse_ast(AstNode* node);
+void print_nonterminal(AstNode* node);
 
 #endif /* _AST_H */

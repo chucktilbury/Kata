@@ -132,5 +132,6 @@ void init_scanner();
  */
 const char* tok_to_str(TokenType type);
 
+void print_token(Token* tok);
 #endif
 

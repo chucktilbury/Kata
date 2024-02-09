@@ -9,8 +9,8 @@ add_executable(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     pthread
-    scanner
     parser
+    scanner
     util
     gc
 )
@@ -28,7 +28,7 @@ target_compile_options(${PROJECT_NAME}
         -I${PROJECT_SOURCE_DIR}/../scanner
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DENABLE_LOGGER >
-        $<$<CONFIG:DEBUG>:-DENABLE_DUMP >
+        $<$<CONFIG:DEBUG>:-DUSE_TRACE >
         $<$<CONFIG:RELEASE>:-Ofast >
         $<$<CONFIG:PROFILE>:-pg -O0 >
 )

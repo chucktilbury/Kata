@@ -1,32 +1,18 @@
 ;--
-    this is a comment
+;   this is a scratchpad used to bring up the parser.
 ;--
 
+this.is.a.compound.symbol
+const dict
 
-; so is this...
-; num bla = asd.wer[sdf[12]][44]
-namespace ns1 {
+; this is being run from the build directory
+import "../src/parser/test/a.simp" as poop
 
-    ; num sdflkj()  {df sd}
-    class theclass {
-        struct a_struct {
-            const num a_number
-            string a_string
-            ; type is a keyword
-            const user.trype another_one
-        }
-        ; declaration, not a definition
-        private string meth(num val, string val, list val)
-        private number meth1()
-    }
-
-}
-
-namespace ns2 {
+namespace blart {
     public
-    class withit (theclass) {
+    plart
+    namespace nugrbs {
+        private
         protected
-        struct lkasdkjl {}
-        dict some_data
     }
 }

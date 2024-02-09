@@ -4,9 +4,11 @@ project(parser)
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 add_library(${PROJECT_NAME} STATIC
-    module.c
-    errors.c
     ast.c
+    parser.c
+    module.c
+    import.c
+    errors.c
     trace.c
 )
 
