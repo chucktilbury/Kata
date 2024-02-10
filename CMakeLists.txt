@@ -17,9 +17,17 @@ set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/bin")
 
 add_subdirectory(src)
 add_subdirectory(docs EXCLUDE_FROM_ALL)
-add_subdirectory(tests)
+add_subdirectory(tests EXCLUDE_FROM_ALL)
 
-file(GLOB_RECURSE format_xxfiles ${PROJECT_SOURCE_DIR}/src/*.c ${PROJECT_SOURCE_DIR}/src/*.h)
+file(GLOB_RECURSE format_xxfiles 
+    ${PROJECT_SOURCE_DIR}/src/parser/*.c 
+    ${PROJECT_SOURCE_DIR}/src/parser/*.h
+    ${PROJECT_SOURCE_DIR}/src/scanner/*.c 
+    ${PROJECT_SOURCE_DIR}/src/scanner/*.h
+    ${PROJECT_SOURCE_DIR}/src/simple/*.c 
+    ${PROJECT_SOURCE_DIR}/src/simple/*.h
+)
+
 add_custom_target(format
     COMMENT "Format the source code"
     COMMAND clang-format --verbose -i ${format_xxfiles}
