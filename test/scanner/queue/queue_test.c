@@ -29,11 +29,11 @@
  * @date 01-12-2024
  * @copyright Copyright (c) 2024
  */
-#include "util.h"
-#include "scanner.h"
 #include "ast.h"
 #include "errors.h"
+#include "scanner.h"
 #include "trace.h"
+#include "util.h"
 
 extern void print_token(Token* tok);
 
@@ -53,18 +53,16 @@ void* scope_operator() {
 
     ENTER;
     AstNode* node = NULL;
-    Token* tok = get_token(); // this returns a pointer to the current token
-    //void* post = post_token_queue(); // mark the position in the token queue
+    Token* tok    = get_token(); // this returns a pointer to the current token
+    // void* post = post_token_queue(); // mark the position in the token queue
 
-    if(tok->type == TOK_PUBLIC ||
-            tok->type == TOK_PRIVATE ||
-            tok->type == TOK_PROTECTED) {
+    if(tok->type == TOK_PUBLIC || tok->type == TOK_PRIVATE || tok->type == TOK_PROTECTED) {
 
         TRACE_TERM(tok);
         node = create_ast_node(AST_scope_operator);
         add_ast_attrib(node, "token", tok, sizeof(Token));
         finalize_token(); // mark this token as used
-        advance_token(); // consume the token in the queue
+        advance_token();  // consume the token in the queue
     }
     // No tokens have been consumed so there is no need to reset the token
     // queue.
@@ -85,10 +83,10 @@ void* namespace_element_list() {
 
     ENTER;
     AstNode* node = NULL;
-    Token* tok = get_token();
+    Token* tok    = get_token();
     // There are no cases where this can return without a valid parse
     // or an error.
-    //void* post = post_token_queue();
+    // void* post = post_token_queue();
 
     if(tok->type != TOK_OCBRACE) {
         show_syntax_error("expected a '{' but got %s", tok_to_str(tok->type));
@@ -142,10 +140,10 @@ void* namespace_definition() {
 
     ENTER;
     AstNode* node = NULL;
-    Token* tok = get_token();
+    Token* tok    = get_token();
     // There are no cases where this can return and a token has been read
     // but there was no error. So there is no need to post the queue.
-    //void* post = post_token_queue();
+    // void* post = post_token_queue();
 
     if(tok->type == TOK_NAMESPACE) {
         // consume the token...
@@ -252,9 +250,9 @@ void* module() {
     else {
         TRACE("handle end of file");
         close_file();
-        //finalize_token(tok);
+        // finalize_token(tok);
         tok = advance_token();
-        //finalize_token_queue();
+        // finalize_token_queue();
     }
 
     tok = get_token();
@@ -343,4 +341,3 @@ int main(int argc, char** argv) {
 
     RETV(0);
 }
-

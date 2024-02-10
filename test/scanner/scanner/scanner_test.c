@@ -1,6 +1,6 @@
 
-#include "util.h"
 #include "scanner.h"
+#include "util.h"
 
 extern void print_token(Token* tok);
 extern Token* scan_token();
@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
     open_file(argv[1]);
 
     Token* tok = sneak_token();
-    int count = 1;
+    int count  = 1;
     while(1) {
         printf("%d. ", count++);
         if(tok->type == TOK_IMPORT) {

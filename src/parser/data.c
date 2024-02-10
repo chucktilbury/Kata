@@ -28,16 +28,12 @@
 AstNode* type_name() {
 
     ENTER;
-    Token* tok = get_token();
+    Token* tok    = get_token();
     AstNode* node = NULL;
-    void* post = post_token_queue();
+    void* post    = post_token_queue();
 
-    if(tok->type == TOK_NUMBER ||
-            tok->type == TOK_STRING ||
-            tok->type == TOK_NOTHING ||
-            tok->type == TOK_BOOLEAN ||
-            tok->type == TOK_LIST ||
-            tok->type == TOK_DICT) {
+    if(tok->type == TOK_NUMBER || tok->type == TOK_STRING || tok->type == TOK_NOTHING || tok->type == TOK_BOOLEAN ||
+       tok->type == TOK_LIST || tok->type == TOK_DICT) {
 
         TRACE_TERM(tok);
         node = create_ast_node(AST_type_name);
@@ -66,8 +62,8 @@ AstNode* type_name() {
 AstNode* compound_name() {
 
     ENTER;
-    Token* tok = get_token();
-    void* post = post_token_queue();
+    Token* tok    = get_token();
+    void* post    = post_token_queue();
     AstNode* node = NULL;
     List* lst;
 
@@ -92,8 +88,7 @@ AstNode* compound_name() {
                 else {
                     // handle an error because a dot must be followed by
                     // a TOK_SYMBOL in this context.
-                    show_syntax_error("expected a symbol but got a %s",
-                                    raw_string(tok->str));
+                    show_syntax_error("expected a symbol but got a %s", raw_string(tok->str));
                     RETV(NULL);
                 }
 
@@ -140,11 +135,10 @@ AstNode* compound_name() {
 AstNode* type_spec_element() {
 
     ENTER;
-    AstNode* nterm, *node = NULL;
+    AstNode *nterm, *node = NULL;
     void* post = post_token_queue();
 
-    if((NULL != (nterm = type_name())) ||
-            (NULL != (nterm = compound_name()))) {
+    if((NULL != (nterm = type_name())) || (NULL != (nterm = compound_name()))) {
 
         // the element is a valid type name
         TRACE_NTERM(nterm);
@@ -174,9 +168,9 @@ AstNode* type_spec_element() {
 AstNode* type_spec() {
 
     ENTER;
-    Token* tok = get_token();
+    Token* tok    = get_token();
     bool constant = false;
-    void* post = post_token_queue();
+    void* post    = post_token_queue();
     AstNode* node = NULL;
 
     if(tok->type == TOK_CONST) {
@@ -204,10 +198,8 @@ AstNode* type_spec() {
     // then that is a syntax error.
     else {
         tok = get_token();
-        show_syntax_error("expected a type name or a compound name but got %s",
-                        tok_to_str(tok->type));
+        show_syntax_error("expected a type name or a compound name but got %s", tok_to_str(tok->type));
     }
 
     RETV(node);
 }
-

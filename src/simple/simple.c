@@ -33,7 +33,8 @@ int main(int argc, char** argv) {
     ANY_EXCEPT() {
         fprintf(stderr, "AST Traverse exception: %s\n", EXCEPTION_MSG);
         RETV(1);
-    } FINAL
+    }
+    FINAL
 
     RETV(0);
 }

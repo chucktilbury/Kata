@@ -18,49 +18,57 @@ extern void print_token(Token*);
 extern int trace_count;
 extern const int trace_increment;
 
-#define SET_TRACE_COUNT(v) do { \
-        trace_count = (v) * trace_increment; \
+#define SET_TRACE_COUNT(v)                 \
+    do {                                   \
+        trace_count = (v)*trace_increment; \
     } while(false)
 
-#define ENTER do { \
+#define ENTER                                                                \
+    do {                                                                     \
         printf("%*senter: %s(): %d\n", trace_count, "", __func__, __LINE__); \
-        trace_count+=trace_increment; \
+        trace_count += trace_increment;                                      \
     } while(false)
 
-#define TRACE(f, ...) do { \
+#define TRACE(f, ...)                                  \
+    do {                                               \
         printf("%*s*%d: ", trace_count, "", __LINE__); \
-        printf(f __VA_OPT__(,) __VA_ARGS__); \
-        printf("\n"); \
+        printf(f __VA_OPT__(, ) __VA_ARGS__);          \
+        printf("\n");                                  \
     } while(false)
 
-#define TRACE_TERM(t) do {\
+#define TRACE_TERM(t)                                  \
+    do {                                               \
         printf("%*s*%d: ", trace_count, "", __LINE__); \
-        print_token(t); \
-        printf("\n"); \
+        print_token(t);                                \
+        printf("\n");                                  \
     } while(false)
 
-#define TRACE_NTERM(n) do { \
+#define TRACE_NTERM(n)                                 \
+    do {                                               \
         printf("%*s*%d: ", trace_count, "", __LINE__); \
-        print_nonterminal(n); \
-        printf("\n"); \
+        print_nonterminal(n);                          \
+        printf("\n");                                  \
     } while(false)
 
-#define RETV(v) do { \
-        trace_count-=trace_increment; \
-        if((void*)(v) == NULL) \
-            printf("%*sreturn(NULL): %s(): %d\n", trace_count, "", __func__, __LINE__); \
-        else \
+#define RETV(v)                                                                                     \
+    do {                                                                                            \
+        trace_count -= trace_increment;                                                             \
+        if((void*)(v) == NULL)                                                                      \
+            printf("%*sreturn(NULL): %s(): %d\n", trace_count, "", __func__, __LINE__);             \
+        else                                                                                        \
             printf("%*sreturn(%p): %s(): %d\n", trace_count, "", ((void*)(v)), __func__, __LINE__); \
-        return (v); \
+        return (v);                                                                                 \
     } while(false)
 
-#define RET do { \
-        trace_count-=trace_increment; \
+#define RET                                                                     \
+    do {                                                                        \
+        trace_count -= trace_increment;                                         \
         printf("%*sreturn(): %s(): %d\n", trace_count, "", __func__, __LINE__); \
-        return; \
+        return;                                                                 \
     } while(false)
 
-#define EXIT(v) do { \
+#define EXIT(v)                                                                           \
+    do {                                                                                  \
         printf("%*sexit(%d): %s: %d\n", trace_count, "", ((int)(v)), __func__, __LINE__); \
     } while(false)
 

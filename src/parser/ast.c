@@ -9,9 +9,9 @@
  * @copyright Copyright (c) 2024
  */
 #include "ast.h"
+#include "internal_parser.h"
 #include "scanner.h"
 #include "trace.h"
-#include "internal_parser.h"
 
 /**
  * @brief Create a ast node object
@@ -22,7 +22,7 @@
  */
 AstNode* create_ast_node(AstType type) {
 
-    AstNode* node = create_hashtable();
+    AstNode* node  = create_hashtable();
     HashResult res = insert_hashtable(node, "type", &type, sizeof(AstType));
     if(res != HASH_OK)
         RAISE(AST_ERROR, "cannot create AST table entry");
@@ -66,18 +66,19 @@ AstResult get_ast_attrib(AstNode* node, const char* key, void* data, size_t size
 
 static const char* n_to_str(AstType type) {
 
-    return (type == AST_scope_operator)? "scope_operator" :
-        (type == AST_type_name)? "type_name" :
-        (type == AST_type_spec)? "type_spec" :
-        (type == AST_type_spec_element)? "type_spec_element" :
-        (type == AST_compound_name)? "compound_name" :
-        (type == AST_namespace_element)? "namespace_element" :
-        (type == AST_namespace_element_list)? "namespace_element_list" :
-        (type == AST_namespace_definition)? "namespace_definition" :
-        (type == AST_module_element)? "module_element" :
-        (type == AST_module_element_list)? "module_element_list" :
-        (type == AST_import_statement)? "import_statement" :
-        (type == AST_module)? "module" : "UNKNOWN";
+    return (type == AST_scope_operator)  ? "scope_operator" :
+    (type == AST_type_name)              ? "type_name" :
+    (type == AST_type_spec)              ? "type_spec" :
+    (type == AST_type_spec_element)      ? "type_spec_element" :
+    (type == AST_compound_name)          ? "compound_name" :
+    (type == AST_namespace_element)      ? "namespace_element" :
+    (type == AST_namespace_element_list) ? "namespace_element_list" :
+    (type == AST_namespace_definition)   ? "namespace_definition" :
+    (type == AST_module_element)         ? "module_element" :
+    (type == AST_module_element_list)    ? "module_element_list" :
+    (type == AST_import_statement)       ? "import_statement" :
+    (type == AST_module)                 ? "module" :
+                                           "UNKNOWN";
 }
 
 /**
@@ -96,9 +97,7 @@ void traverse_ast(AstNode* tree) {
     List list;
 
     if(AST_OK != get_ast_attrib(tree, "type", &type, sizeof(AstType)))
-        RAISE(AST_ERROR,
-                "ast node does not have a \"type\" entry: %p\n",
-                (void*)tree);
+        RAISE(AST_ERROR, "ast node does not have a \"type\" entry: %p\n", (void*)tree);
 
     TRACE("type: \"%s\" (%d)", n_to_str(type), type);
 

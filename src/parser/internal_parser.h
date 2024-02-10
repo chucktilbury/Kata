@@ -11,11 +11,11 @@
  */
 #ifndef _INTERNAL_PARSER_H
 #define _INTERNAL_PARSER_H
-#include "util.h"
-#include "scanner.h"
-#include "errors.h"
-#include "trace.h"
 #include "ast.h"
+#include "errors.h"
+#include "scanner.h"
+#include "trace.h"
+#include "util.h"
 
 // Parser Exceptions
 typedef enum {

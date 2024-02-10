@@ -9,12 +9,12 @@
  * @date 02-05-2024
  * @copyright Copyright (c) 2024
  */
-#include "util.h"
-#include "scanner.h"
-#include "internal_parser.h"
 #include "parser.h"
 #include "errors.h"
+#include "internal_parser.h"
+#include "scanner.h"
 #include "trace.h"
+#include "util.h"
 
 static List* name_stack = NULL;
 
@@ -58,4 +58,3 @@ AstNode* parser(const char* fname) {
     // function instance, it will get called two times.
     RETV(node);
 }
-

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(parser)
 
-set(CMAKE_VERBOSE_MAKEFILE OFF)
+#set(CMAKE_VERBOSE_MAKEFILE ON)
 
 add_library(${PROJECT_NAME} STATIC
     trace.c
@@ -26,7 +26,7 @@ target_compile_options(${PROJECT_NAME}
         $<$<CONFIG:DEBUG>:-DMEMORY_DEBUG >
         $<$<CONFIG:DEBUG>:-DUSE_TRACE >
         $<$<CONFIG:RELEASE>:-Ofast >
-        $<$<CONFIG:PROFILE>:-pg -O0 >
+        $<$<CONFIG:PROFILE>:-pg -O0 >        
 )
 
 #add_subdirectory(test)

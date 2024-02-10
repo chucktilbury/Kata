@@ -8,13 +8,13 @@
  * @date 01-13-2024
  * @copyright Copyright (c) 2024
  */
-#include "util.h"
-#include "scanner.h"
 #include "errors.h"
+#include "scanner.h"
+#include "util.h"
 
 #include <stdarg.h>
 
-static int num_errors = 0;
+static int num_errors   = 0;
 static int num_warnings = 0;
 
 /*
@@ -26,7 +26,7 @@ static void recover_error() {
     discard_token_queue();
     for(int i = 0; i < 5; i++)
         advance_token();
-    //reset_token_queue();
+    // reset_token_queue();
 }
 
 /**
@@ -41,8 +41,7 @@ void show_syntax_error(const char* fmt, ...) {
 
     va_list args;
 
-    fprintf(stderr, "Syntax: %s: %d: %d: ", get_fname(),
-                get_line_no(), get_col_no());
+    fprintf(stderr, "Syntax: %s: %d: %d: ", get_fname(), get_line_no(), get_col_no());
 
     va_start(args, fmt);
     vfprintf(stderr, fmt, args);
@@ -63,8 +62,7 @@ void show_warning(const char* fmt, ...) {
 
     va_list args;
 
-    fprintf(stderr, "Warning: %s: %d: %d: ", get_fname(),
-                get_line_no(), get_col_no());
+    fprintf(stderr, "Warning: %s: %d: %d: ", get_fname(), get_line_no(), get_col_no());
 
     va_start(args, fmt);
     vfprintf(stderr, fmt, args);

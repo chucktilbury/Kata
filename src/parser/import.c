@@ -36,7 +36,7 @@ static bool do_import(Str* fname, Str* symbol) {
     // convert the file name into a namespace entry
 
     // do_namespace() is defined in parser.c
-    //push_namespace(symbol);
+    // push_namespace(symbol);
 
     RETV(true);
 }
@@ -56,7 +56,7 @@ AstNode* import_statement() {
 
     ENTER;
     AstNode* node = NULL;
-    Token* tok = get_token();
+    Token* tok    = get_token();
     Str* filename;
     Str* symbol;
 
@@ -96,7 +96,7 @@ AstNode* import_statement() {
         symbol = copy_string(tok->str);
         TRACE("symbol = \"%s\"", raw_string(symbol));
         finalize_token();
-        //advance_token();
+        // advance_token();
     }
     else {
         show_syntax_error("expected a SYMBOL but got a %s", tok_to_str(tok->type));
@@ -115,4 +115,3 @@ AstNode* import_statement() {
 
     RETV(node);
 }
-

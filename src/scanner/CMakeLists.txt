@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(scanner)
 
-set(CMAKE_VERBOSE_MAKEFILE OFF)
+#set(CMAKE_VERBOSE_MAKEFILE ON)
 
 add_library(${PROJECT_NAME} STATIC
     scanner.c

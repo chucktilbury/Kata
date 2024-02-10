@@ -26,13 +26,11 @@
 AstNode* scope_operator() {
 
     ENTER;
-    Token* tok = get_token();
+    Token* tok    = get_token();
     AstNode* node = NULL;
-    void* post = post_token_queue();
+    void* post    = post_token_queue();
 
-    if(tok->type == TOK_PUBLIC ||
-            tok->type == TOK_PRIVATE ||
-            tok->type == TOK_PROTECTED) {
+    if(tok->type == TOK_PUBLIC || tok->type == TOK_PRIVATE || tok->type == TOK_PROTECTED) {
 
         TRACE_TERM(tok);
         node = create_ast_node(AST_scope_operator);
@@ -62,11 +60,9 @@ AstNode* scope_operator() {
 AstNode* namespace_element() {
 
     ENTER;
-    AstNode* nterm, *node = NULL;
+    AstNode *nterm, *node = NULL;
 
-    if((NULL != (nterm = namespace_definition())) ||
-            (NULL != (nterm = type_spec())) ||
-            (NULL != (nterm = scope_operator()))) {
+    if((NULL != (nterm = namespace_definition())) || (NULL != (nterm = type_spec())) || (NULL != (nterm = scope_operator()))) {
 
         TRACE_NTERM(nterm);
         node = create_ast_node(AST_namespace_element);
@@ -87,7 +83,7 @@ AstNode* namespace_element() {
 AstNode* namespace_element_list() {
 
     ENTER;
-    Token* tok = get_token();
+    Token* tok    = get_token();
     AstNode* node = NULL;
 
     if(tok->type == TOK_OCBRACE) {
@@ -137,7 +133,7 @@ AstNode* namespace_element_list() {
 AstNode* namespace_definition() {
 
     ENTER;
-    AstNode* nterm, *node = NULL;
+    AstNode *nterm, *node = NULL;
     Token* tok = get_token();
 
     if(tok->type == TOK_NAMESPACE) {
@@ -161,8 +157,7 @@ AstNode* namespace_definition() {
         }
         else {
             // namespace requires a name, so this is an error
-            show_syntax_error("namespace expects a name, but got a %s",
-                        raw_string(tok->str));
+            show_syntax_error("namespace expects a name, but got a %s", raw_string(tok->str));
         }
     }
 
@@ -182,10 +177,9 @@ AstNode* namespace_definition() {
 AstNode* module_element() {
 
     ENTER;
-    AstNode* nterm, *node = NULL;
+    AstNode *nterm, *node = NULL;
 
-    if((NULL != (nterm = namespace_element())) ||
-            (NULL != (nterm = import_statement()))) {
+    if((NULL != (nterm = namespace_element())) || (NULL != (nterm = import_statement()))) {
 
         TRACE_NTERM(nterm);
         node = create_ast_node(AST_module_element);
@@ -206,7 +200,7 @@ AstNode* module_element() {
 AstNode* module() {
 
     ENTER;
-    AstNode* nterm, *node = NULL;
+    AstNode *nterm, *node = NULL;
     List* list = create_list(sizeof(AstNode));
     Token* tok;
 
@@ -218,7 +212,7 @@ AstNode* module() {
         else if(get_token()->type == TOK_END_OF_FILE) {
             // handle end of file
             TRACE_TERM(get_token());
-            //pop_namespace();
+            // pop_namespace();
             close_file();
             advance_token();
         }
@@ -235,8 +229,7 @@ AstNode* module() {
         RETV(node);
     }
     else {
-        show_syntax_error("expected end of input but got %s",
-                    tok_to_str(tok->type));
+        show_syntax_error("expected end of input but got %s", tok_to_str(tok->type));
         RETV(NULL);
     }
 }

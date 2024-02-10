@@ -12,16 +12,16 @@
  * @date 01-07-2024
  * @copyright Copyright (c) 2024
  */
-#include "util.h"
 #include "scanner.h"
+#include "util.h"
 
 extern Token* scan_token();
 static unsigned serial = 0;
 
 typedef struct _tok_queue_item_ {
-    Token* tok;     // the actual token pointer.
-    unsigned serial;// serial number of the token.
-    bool used;      // When the token has been finalized in a rule.
+    Token* tok;      // the actual token pointer.
+    unsigned serial; // serial number of the token.
+    bool used;       // When the token has been finalized in a rule.
     struct _tok_queue_item_* next;
 } TokQueueItem;
 
@@ -45,20 +45,21 @@ static void append_token(Token* tok) {
     TokQueueItem* item;
 
     TRY {
-        item = _ALLOC_T(TokQueueItem);
-        item->tok = copy_token(tok);
+        item         = _ALLOC_T(TokQueueItem);
+        item->tok    = copy_token(tok);
         item->serial = serial++;
-        item->used = false;
+        item->used   = false;
     }
     ANY_EXCEPT() {
         fprintf(stderr, "Fatal ");
         fprintf(stderr, "%s\n", EXCEPTION_MSG);
         exit(1);
-    } FINAL
+    }
+    FINAL
 
     if(tqueue->tail != NULL) {
         tqueue->tail->next = item;
-        tqueue->tail = item;
+        tqueue->tail       = item;
     }
     else {
         tqueue->head = item;
@@ -84,7 +85,8 @@ void open_file(const char* fname) {
         fprintf(stderr, "Fatal ");
         fprintf(stderr, "%s\n", EXCEPTION_MSG);
         exit(1);
-    } FINAL
+    }
+    FINAL
 
     if(tqueue == NULL) {
         TRY {
@@ -96,7 +98,8 @@ void open_file(const char* fname) {
             fprintf(stderr, "Fatal ");
             fprintf(stderr, "%s\n", EXCEPTION_MSG);
             exit(1);
-        } FINAL
+        }
+        FINAL
     }
 }
 
@@ -173,19 +176,20 @@ Token* copy_token(const Token* tok) {
     Token* ntok;
 
     TRY {
-        ntok = _ALLOC_T(Token);
-        ntok->fname = _DUP_STR(tok->fname);
-        ntok->str = copy_string(tok->str);
+        ntok          = _ALLOC_T(Token);
+        ntok->fname   = _DUP_STR(tok->fname);
+        ntok->str     = copy_string(tok->str);
         ntok->line_no = tok->line_no;
-        ntok->col_no = tok->col_no;
-        ntok->type = tok->type;
+        ntok->col_no  = tok->col_no;
+        ntok->type    = tok->type;
     }
     ANY_EXCEPT() {
         // any exception is a fatal error:
         fprintf(stderr, "Fatal ");
         fprintf(stderr, "%s\n", EXCEPTION_MSG);
         exit(1);
-    } FINAL
+    }
+    FINAL
 
     return ntok;
 }
@@ -243,11 +247,11 @@ void reset_token_queue(void* post) {
     assert(tqueue != NULL);
 
     TokQueueItem* tmp = (TokQueueItem*)post;
-    unsigned end = tqueue->crnt->serial;
+    unsigned end      = tqueue->crnt->serial;
 
     while(tmp->serial < end) {
         tmp->used = false;
-        tmp = tmp->next;
+        tmp       = tmp->next;
     }
 
     tqueue->crnt = (TokQueueItem*)post;
@@ -303,4 +307,3 @@ void discard_token_queue() {
     // Make the new token the head of the queue and the crnt item.
     tqueue->head = tqueue->crnt = tqueue->tail;
 }
-

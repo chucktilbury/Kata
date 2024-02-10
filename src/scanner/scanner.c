@@ -19,9 +19,8 @@
  * @date 01-07-2024
  * @copyright Copyright (c) 2024
  */
-#include "util.h"
-#include "keyword.h"
 #include "scanner.h"
+#include "keyword.h"
 
 static Token token;
 
@@ -161,7 +160,7 @@ static void scan_number() {
                     }
                     else if(isspace(ch) || ispunct(ch) || ch == EOF) {
                         token.type = TOK_LITERAL_NUM;
-                        finished = true;
+                        finished   = true;
                     }
                     else {
                         token.type = TOK_ERROR;
@@ -250,112 +249,112 @@ static void scan_operator() {
 
         // multi-character operators
         case '<': {
+            add_string_char(token.str, ch);
+            ch = consume_char();
+            if(ch == '=') {
                 add_string_char(token.str, ch);
-                ch = consume_char();
-                if(ch == '=') {
-                    add_string_char(token.str, ch);
-                    consume_char();
-                    token.type = TOK_LORE;
-                }
-                else
-                    token.type = TOK_OPAREN;
+                consume_char();
+                token.type = TOK_LORE;
             }
+            else
+                token.type = TOK_OPAREN;
+        }
             return;
         case '>': {
+            add_string_char(token.str, ch);
+            ch = consume_char();
+            if(ch == '=') {
                 add_string_char(token.str, ch);
-                ch = consume_char();
-                if(ch == '=') {
-                    add_string_char(token.str, ch);
-                    consume_char();
-                    token.type = TOK_GORE;
-                }
-                else
-                    token.type = TOK_CPAREN;
+                consume_char();
+                token.type = TOK_GORE;
             }
+            else
+                token.type = TOK_CPAREN;
+        }
             return;
         case '=': {
+            add_string_char(token.str, ch);
+            ch = consume_char();
+            if(ch == '=') {
                 add_string_char(token.str, ch);
-                ch = consume_char();
-                if(ch == '=') {
-                    add_string_char(token.str, ch);
-                    consume_char();
-                    token.type = TOK_EQU;
-                }
-                else
-                    token.type = TOK_ASSIGN;
+                consume_char();
+                token.type = TOK_EQU;
             }
+            else
+                token.type = TOK_ASSIGN;
+        }
             return;
         case '+': {
+            add_string_char(token.str, ch);
+            ch = consume_char();
+            if(ch == '=') {
                 add_string_char(token.str, ch);
-                ch = consume_char();
-                if(ch == '=') {
-                    add_string_char(token.str, ch);
-                    consume_char();
-                    token.type = TOK_ADD_ASSIGN;
-                }
-                else
-                    token.type = TOK_ADD;
+                consume_char();
+                token.type = TOK_ADD_ASSIGN;
             }
+            else
+                token.type = TOK_ADD;
+        }
             return;
         case '-': {
+            add_string_char(token.str, ch);
+            ch = consume_char();
+            if(ch == '=') {
                 add_string_char(token.str, ch);
-                ch = consume_char();
-                if(ch == '=') {
-                    add_string_char(token.str, ch);
-                    consume_char();
-                    token.type = TOK_SUB_ASSIGN;
-                }
-                else
-                    token.type = TOK_SUB;
+                consume_char();
+                token.type = TOK_SUB_ASSIGN;
             }
+            else
+                token.type = TOK_SUB;
+        }
             return;
         case '*': {
+            add_string_char(token.str, ch);
+            ch = consume_char();
+            if(ch == '=') {
                 add_string_char(token.str, ch);
-                ch = consume_char();
-                if(ch == '=') {
-                    add_string_char(token.str, ch);
-                    consume_char();
-                    token.type = TOK_MUL_ASSIGN;
-                }
-                else
-                    token.type = TOK_MUL;
+                consume_char();
+                token.type = TOK_MUL_ASSIGN;
             }
+            else
+                token.type = TOK_MUL;
+        }
             return;
         case '/': {
+            add_string_char(token.str, ch);
+            ch = consume_char();
+            if(ch == '=') {
                 add_string_char(token.str, ch);
-                ch = consume_char();
-                if(ch == '=') {
-                    add_string_char(token.str, ch);
-                    consume_char();
-                    token.type = TOK_DIV_ASSIGN;
-                }
-                else
-                    token.type = TOK_DIV;
+                consume_char();
+                token.type = TOK_DIV_ASSIGN;
             }
+            else
+                token.type = TOK_DIV;
+        }
             return;
         case '%': {
+            add_string_char(token.str, ch);
+            ch = consume_char();
+            if(ch == '=') {
                 add_string_char(token.str, ch);
-                ch = consume_char();
-                if(ch == '=') {
-                    add_string_char(token.str, ch);
-                    consume_char();
-                    token.type = TOK_MOD_ASSIGN;
-                }
-                else
-                    token.type = TOK_MOD;
+                consume_char();
+                token.type = TOK_MOD_ASSIGN;
             }
+            else
+                token.type = TOK_MOD;
+        }
             return;
         case '!': {
+            add_string_char(token.str, ch);
+            ch = consume_char();
+            if(ch == '=') {
                 add_string_char(token.str, ch);
-                ch = consume_char();
-                if(ch == '=') {
-                    add_string_char(token.str, ch);
-                    consume_char();
-                    token.type = TOK_NEQU;
-                }
-                else
-                    token.type = TOK_NOT;
+                consume_char();
+                token.type = TOK_NEQU;
             }
+            else
+                token.type = TOK_NOT;
+        }
             return;
     }
 }
@@ -368,7 +367,7 @@ static void scan_operator() {
 static void check_keyword() {
 
     const char* s = raw_string(token.str);
-    int l = 0, r = num_keywords-1, m, x;
+    int l = 0, r = num_keywords - 1, m, x;
 
     // setup the token. If the string is not found, then this is not changed.
     token.type = TOK_SYMBOL;
@@ -376,19 +375,19 @@ static void check_keyword() {
     // the loop will run till there are elements in the
     // subarray as l > r means that there are no elements to
     // consider in the given subarray
-    while (l <= r) {
+    while(l <= r) {
         // calculating mid point
         m = l + (r - l) / 2;
         // see how the string compares.
         x = strcasecmp(keyword_list[m].str, s);
 
         // Check if x is present at mid
-        if (x == 0) {
+        if(x == 0) {
             token.type = keyword_list[m].type;
             break;
         }
         // If x greater than zero ignore left half
-        if (x < 0) {
+        if(x < 0) {
             l = m + 1;
         }
         // If x is smaller than m, ignore right half
@@ -412,7 +411,8 @@ static void check_keyword() {
 static void scan_inline_block() {
 
     // skip white space
-    while(isspace(consume_char()));
+    while(isspace(consume_char()))
+        ;
 
     // get the opening '{'
     if(get_char() != '{') {
@@ -518,13 +518,13 @@ static void scan_squote_str() {
  */
 static void scan_dquote_str() {
 
-    int ch = consume_char(); // consume the '\"'
+    int ch        = consume_char(); // consume the '\"'
     bool finished = false;
 
     while(!finished) {
         ch = get_char();
         if(ch == '\"') {
-            finished = true;
+            finished   = true;
             token.type = TOK_LITERAL_STR;
             consume_char();
         }
@@ -576,22 +576,21 @@ static void scan_dquote_str() {
                     consume_char();
                     break;
                 case 'x': { // the next 2 characters must be hex digits
-                        char buf[5] = "0x";
-                        buf[2] = consume_char();
-                        buf[3] = consume_char();
-                        buf[4] = 0;
-                        if(isxdigit(buf[2]) && isxdigit(buf[3])) {
-                            add_string_char(token.str, (int)strtol(buf, NULL, 16));
-                        }
-                        else {
-                            // syntax error
-                            token.type = TOK_ERROR;
-                            clear_string(token.str);
-                            add_string_fmt(token.str, "invalid string. expected a hex number but got \\x%c%c", buf[2], buf[3]);
-                            finished = true;
-                        }
+                    char buf[5] = "0x";
+                    buf[2]      = consume_char();
+                    buf[3]      = consume_char();
+                    buf[4]      = 0;
+                    if(isxdigit(buf[2]) && isxdigit(buf[3])) {
+                        add_string_char(token.str, (int)strtol(buf, NULL, 16));
                     }
-                    break;
+                    else {
+                        // syntax error
+                        token.type = TOK_ERROR;
+                        clear_string(token.str);
+                        add_string_fmt(token.str, "invalid string. expected a hex number but got \\x%c%c", buf[2], buf[3]);
+                        finished = true;
+                    }
+                } break;
                 default: // just store the next character, whatever it is
                     add_string_char(token.str, ch);
                     break;
@@ -617,10 +616,10 @@ static void scan_dquote_str() {
 static void finish_token() {
 
     token.line_no = get_line_no();
-    token.col_no = get_col_no();
+    token.col_no  = get_col_no();
     const char* s = get_fname();
     if(s != NULL)
-        token.fname = _DUP_STR(strrchr(s, '/')+1);
+        token.fname = _DUP_STR(strrchr(s, '/') + 1);
     else
         token.fname = _DUP_STR("no open file");
 }
@@ -688,11 +687,11 @@ Token* scan_token() {
         // the file stack.
         else if(ch == END_OF_FILE) {
             token.type = TOK_END_OF_FILE;
-            finished = true;
+            finished   = true;
         }
         else if(ch == END_OF_INPUT) {
             token.type = TOK_END_OF_INPUT;
-            finished = true;
+            finished   = true;
         }
     }
 
@@ -708,84 +707,85 @@ Token* scan_token() {
  */
 const char* tok_to_str(TokenType type) {
 
-    return (type == TOK_END_OF_INPUT)? "END OF INPUT" :
-        (type == TOK_END_OF_FILE)? "END OF FILE" :
-        (type == TOK_ERROR)? "ERROR" :
-        (type == TOK_BREAK)? "BREAK" :
-        (type == TOK_CASE)? "CASE" :
-        (type == TOK_CONTINUE)? "CONTINUE" :
-        (type == TOK_CONST)? "CONST" :
-        (type == TOK_DEFAULT)? "DEFAULT" :
-        (type == TOK_IMPORT)? "IMPORT" :
-        (type == TOK_DO)? "DO" :
-        (type == TOK_ELSE)? "ELSE" :
-        (type == TOK_FOR)? "FOR" :
-        (type == TOK_IF)? "IF" :
-        (type == TOK_RETURN)? "RETURN" :
-        (type == TOK_SWITCH)? "SWITCH" :
-        (type == TOK_WHILE)? "WHILE" :
-        (type == TOK_IN)? "IN" :
-        (type == TOK_TO)? "TO" :
-        (type == TOK_AS)? "AS" :
-        (type == TOK_YIELD)? "YIELD" :
-        (type == TOK_EXIT)? "EXIT" :
-        (type == TOK_TRY)? "TRY" :
-        (type == TOK_EXCEPT)? "EXCEPT" :
-        (type == TOK_RAISE)? "RAISE" :
-        (type == TOK_CREATE)? "CREATE" :
-        (type == TOK_DESTROY)? "DESTROY" :
-        (type == TOK_START)? "START" :
-        (type == TOK_NAMESPACE)? "NAMESPACE" :
-        (type == TOK_CLASS)? "CLASS" :
-        (type == TOK_STRUCT)? "STRUCT" :
-        (type == TOK_PUBLIC)? "PUBLIC" :
-        (type == TOK_PRIVATE)? "PRIVATE" :
-        (type == TOK_PROTECTED)? "PROTECTED" :
-        (type == TOK_NUMBER)? "NUMBER" :
-        (type == TOK_NOTHING)? "NOTHING" :
-        (type == TOK_STRING)? "STRING" :
-        (type == TOK_BOOLEAN)? "BOOLEAN" :
-        (type == TOK_LIST)? "LIST" :
-        (type == TOK_DICT)? "DICT" :
-        (type == TOK_TRACE)? "TRACE" :
-        (type == TOK_PRINT)? "PRINT" :
-        (type == TOK_TYPE)? "TYPE" :
-        (type == TOK_TRUE_BOOL)? "TRUE" :
-        (type == TOK_FALSE_BOOL)? "FALSE" :
-        (type == TOK_LORE)? "\'<=\'" :
-        (type == TOK_GORE)? "\'>=\'" :
-        (type == TOK_EQU)? "\'==\'" :
-        (type == TOK_NEQU)? "\'!=\'" :
-        (type == TOK_OR)? "OR" :
-        (type == TOK_AND)? "AND" :
-        (type == TOK_ADD_ASSIGN)? "\'+=\'" :
-        (type == TOK_SUB_ASSIGN)? "\'-=\'" :
-        (type == TOK_MUL_ASSIGN)? "\'*=\'" :
-        (type == TOK_DIV_ASSIGN)? "\'/=\'" :
-        (type == TOK_MOD_ASSIGN)? "\'%=\'" :
-        (type == TOK_ADD)? "\'+\'" :
-        (type == TOK_SUB)? "\'-\'" :
-        (type == TOK_ASSIGN)? "\'=\'" :
-        (type == TOK_DIV)? "\'/\'" :
-        (type == TOK_MUL)? "\'*\'" :
-        (type == TOK_MOD)? "\'%\'" :
-        (type == TOK_OPAREN)? "\'(\'" :
-        (type == TOK_CPAREN)? "\')\'" :
-        (type == TOK_OCBRACE)? "\'{\'" :
-        (type == TOK_CCBRACE)? "\'}\'" :
-        (type == TOK_OSBRACE)? "\'[\'" :
-        (type == TOK_CSBRACE)? "\']\'" :
-        (type == TOK_COMMA)? "\',\'" :
-        (type == TOK_DOT)? "\'.\'" :
-        (type == TOK_OPBRACE)? "\'<\'" :
-        (type == TOK_CPBRACE)? "\'>\'" :
-        (type == TOK_COLON)? "\':\'" :
-        (type == TOK_CARAT)? "\'^\'" :
-        (type == TOK_AMPER)? "\'&\'" :
-        (type == TOK_INLINE)? "INLINE" :
-        (type == TOK_LITERAL_NUM)? "LITERAL NUMBER" :
-        (type == TOK_LITERAL_STR)? "LITERAL STRING" :
-        (type == TOK_SYMBOL)? "SYMBOL" : "UNKNOWN";
+    return (type == TOK_END_OF_INPUT) ? "END OF INPUT" :
+    (type == TOK_END_OF_FILE)         ? "END OF FILE" :
+    (type == TOK_ERROR)               ? "ERROR" :
+    (type == TOK_BREAK)               ? "BREAK" :
+    (type == TOK_CASE)                ? "CASE" :
+    (type == TOK_CONTINUE)            ? "CONTINUE" :
+    (type == TOK_CONST)               ? "CONST" :
+    (type == TOK_DEFAULT)             ? "DEFAULT" :
+    (type == TOK_IMPORT)              ? "IMPORT" :
+    (type == TOK_DO)                  ? "DO" :
+    (type == TOK_ELSE)                ? "ELSE" :
+    (type == TOK_FOR)                 ? "FOR" :
+    (type == TOK_IF)                  ? "IF" :
+    (type == TOK_RETURN)              ? "RETURN" :
+    (type == TOK_SWITCH)              ? "SWITCH" :
+    (type == TOK_WHILE)               ? "WHILE" :
+    (type == TOK_IN)                  ? "IN" :
+    (type == TOK_TO)                  ? "TO" :
+    (type == TOK_AS)                  ? "AS" :
+    (type == TOK_YIELD)               ? "YIELD" :
+    (type == TOK_EXIT)                ? "EXIT" :
+    (type == TOK_TRY)                 ? "TRY" :
+    (type == TOK_EXCEPT)              ? "EXCEPT" :
+    (type == TOK_RAISE)               ? "RAISE" :
+    (type == TOK_CREATE)              ? "CREATE" :
+    (type == TOK_DESTROY)             ? "DESTROY" :
+    (type == TOK_START)               ? "START" :
+    (type == TOK_NAMESPACE)           ? "NAMESPACE" :
+    (type == TOK_CLASS)               ? "CLASS" :
+    (type == TOK_STRUCT)              ? "STRUCT" :
+    (type == TOK_PUBLIC)              ? "PUBLIC" :
+    (type == TOK_PRIVATE)             ? "PRIVATE" :
+    (type == TOK_PROTECTED)           ? "PROTECTED" :
+    (type == TOK_NUMBER)              ? "NUMBER" :
+    (type == TOK_NOTHING)             ? "NOTHING" :
+    (type == TOK_STRING)              ? "STRING" :
+    (type == TOK_BOOLEAN)             ? "BOOLEAN" :
+    (type == TOK_LIST)                ? "LIST" :
+    (type == TOK_DICT)                ? "DICT" :
+    (type == TOK_TRACE)               ? "TRACE" :
+    (type == TOK_PRINT)               ? "PRINT" :
+    (type == TOK_TYPE)                ? "TYPE" :
+    (type == TOK_TRUE_BOOL)           ? "TRUE" :
+    (type == TOK_FALSE_BOOL)          ? "FALSE" :
+    (type == TOK_LORE)                ? "\'<=\'" :
+    (type == TOK_GORE)                ? "\'>=\'" :
+    (type == TOK_EQU)                 ? "\'==\'" :
+    (type == TOK_NEQU)                ? "\'!=\'" :
+    (type == TOK_OR)                  ? "OR" :
+    (type == TOK_AND)                 ? "AND" :
+    (type == TOK_ADD_ASSIGN)          ? "\'+=\'" :
+    (type == TOK_SUB_ASSIGN)          ? "\'-=\'" :
+    (type == TOK_MUL_ASSIGN)          ? "\'*=\'" :
+    (type == TOK_DIV_ASSIGN)          ? "\'/=\'" :
+    (type == TOK_MOD_ASSIGN)          ? "\'%=\'" :
+    (type == TOK_ADD)                 ? "\'+\'" :
+    (type == TOK_SUB)                 ? "\'-\'" :
+    (type == TOK_ASSIGN)              ? "\'=\'" :
+    (type == TOK_DIV)                 ? "\'/\'" :
+    (type == TOK_MUL)                 ? "\'*\'" :
+    (type == TOK_MOD)                 ? "\'%\'" :
+    (type == TOK_OPAREN)              ? "\'(\'" :
+    (type == TOK_CPAREN)              ? "\')\'" :
+    (type == TOK_OCBRACE)             ? "\'{\'" :
+    (type == TOK_CCBRACE)             ? "\'}\'" :
+    (type == TOK_OSBRACE)             ? "\'[\'" :
+    (type == TOK_CSBRACE)             ? "\']\'" :
+    (type == TOK_COMMA)               ? "\',\'" :
+    (type == TOK_DOT)                 ? "\'.\'" :
+    (type == TOK_OPBRACE)             ? "\'<\'" :
+    (type == TOK_CPBRACE)             ? "\'>\'" :
+    (type == TOK_COLON)               ? "\':\'" :
+    (type == TOK_CARAT)               ? "\'^\'" :
+    (type == TOK_AMPER)               ? "\'&\'" :
+    (type == TOK_INLINE)              ? "INLINE" :
+    (type == TOK_LITERAL_NUM)         ? "LITERAL NUMBER" :
+    (type == TOK_LITERAL_STR)         ? "LITERAL STRING" :
+    (type == TOK_SYMBOL)              ? "SYMBOL" :
+                                        "UNKNOWN";
 }
 
 /**
@@ -795,10 +795,7 @@ const char* tok_to_str(TokenType type) {
  */
 void print_token(Token* tok) {
 
-    printf("terminal: %s: \"%s\": %d: %d: \"%s\"",
-            tok_to_str(tok->type), raw_string(tok->str),
-            tok->line_no, tok->col_no,
-            tok->fname);
+    printf("terminal: %s: \"%s\": %d: %d: \"%s\"", tok_to_str(tok->type), raw_string(tok->str), tok->line_no, tok->col_no, tok->fname);
 }
 
 /*
@@ -808,4 +805,3 @@ void print_token(Token* tok) {
 Token* sneak_token() {
     return &token;
 }
-

@@ -13,6 +13,8 @@
 #ifndef _SCANNER_H
 #define _SCANNER_H
 
+#include "util.h"
+
 /*
  * This header contains a sorted list of the actual keywords that are scanned
  * in the scanner.
@@ -23,11 +25,11 @@
  * @brief The parser expects a token to look like this.
  */
 typedef struct {
-    Str* str;       // String that caused the token to be recognized
-    TokenType type; // Type of the token
-    int line_no;    // Line number where the token was recognized
-    int col_no;     // Column of the last character of the token
-    const char* fname;  // File name where the token was taken
+    Str* str;          // String that caused the token to be recognized
+    TokenType type;    // Type of the token
+    int line_no;       // Line number where the token was recognized
+    int col_no;        // Column of the last character of the token
+    const char* fname; // File name where the token was taken
 } Token;
 
 /**
@@ -142,4 +144,3 @@ void discard_token_queue();
 
 void print_token(Token* tok);
 #endif
-
