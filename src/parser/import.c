@@ -1,10 +1,10 @@
 /**
  * @file import.c
  *
- * @brief This is the import module. There is only one production, but there
- * is a lot in it. This production creates a namespace in the AST. It does
- * not, however, read the whole file. Only the symbols are read and the actual
- * implementation is expected to be linked as a separate module.
+ * @brief This is the import module. There is only one production, but
+ * there is a lot in it. This production creates a namespace in the AST. It
+ * does not, however, read the whole file. Only the symbols are read and
+ * the actual implementation is expected to be linked as a separate module.
  *
  * Syntax:
  *      "import" formatted_string ("as" SYMBOL)?
@@ -79,7 +79,8 @@ AstNode* import_statement() {
         tok = advance_token();
     }
     else {
-        show_syntax_error("expected a formatted string, but got a %s", tok_to_str(tok->type));
+        show_syntax_error("expected a formatted string, but got a %s",
+                          tok_to_str(tok->type));
         RETV(NULL);
     }
 

@@ -212,7 +212,7 @@ BreakConstructorInitializersBeforeComma: false
 # ColumnLimit (unsigned)
 # The column limit.
 # A column limit of 0 means that there is no column limit. In this case, clang-format will respect the input’s line breaking decisions within statements unless they contradict other rules.
-ColumnLimit: 128
+ColumnLimit: 80
 
 # CommentPragmas (std::string)
 # A regular expression that describes comments with special meaning, which should not be split into lines or otherwise changed.
@@ -228,7 +228,7 @@ ConstructorInitializerIndentWidth: 0
 
 # ContinuationIndentWidth (unsigned)
 # Indent width for line continuations.
-ContinuationIndentWidth: 0
+ContinuationIndentWidth: 8
 
 # Cpp11BracedListStyle (bool)
 # If true, format braced lists as best suited for C++11 braced lists.

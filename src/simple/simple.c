@@ -1,8 +1,8 @@
 /**
  * @file simple.c
  *
- * @brief Implementation of the main function and supporting routines for the
- * compiler.
+ * @brief Implementation of the main function and supporting routines for
+ * the compiler.
  *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0

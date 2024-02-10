@@ -1,9 +1,9 @@
 /**
  * @file scanner.h
  *
- * @brief Scanner header file. The items in this header must be implemented by
- * the scanner and the scanner queue. These routines are used directly by the
- * parser.
+ * @brief Scanner header file. The items in this header must be implemented
+ * by the scanner and the scanner queue. These routines are used directly
+ * by the parser.
  *
  * @author Chuck Tilbury (chucktilbury@gmail.com)
  * @version 0.0
@@ -16,8 +16,8 @@
 #include "util.h"
 
 /*
- * This header contains a sorted list of the actual keywords that are scanned
- * in the scanner.
+ * This header contains a sorted list of the actual keywords that are
+ * scanned in the scanner.
  */
 #include "keyword.h"
 
@@ -65,9 +65,9 @@ Token* copy_token(const Token* tok);
 
 /**
  * @brief Make the next token in the stream the current token. This could
- * return a token that has already been read if the queue was reset, or a new
- * token could be read, depending on the state of the queue as set by the
- * other functions.
+ * return a token that has already been read if the queue was reset, or a
+ * new token could be read, depending on the state of the queue as set by
+ * the other functions.
  *
  * @return Token*
  */
@@ -80,9 +80,9 @@ void finalize_token();
 
 /**
  * @brief Reset the head of the token queue to the first token that has not
- * been marked as being finalized. This actually discards the tokens that have
- * been consumed. This is called when a valid non-terminal is recognized by
- * the parser.
+ * been marked as being finalized. This actually discards the tokens that
+ * have been consumed. This is called when a valid non-terminal is
+ * recognized by the parser.
  */
 void finalize_token_queue();
 
@@ -108,12 +108,12 @@ void reset_token_queue(void* crnt);
 void* post_token_queue();
 
 /**
- * @brief Iterate the token queue. This is used by consumers that require raw
- * access to the token queue. That includes things like error reporting and
- * recovery. The first time that the iterator is called, the parameter needs
- * to be NULL. The current pointer in the queue is store there in order to
- * track the location in the queue. When there are no more elements in the
- * queue, then the return value is NULL.
+ * @brief Iterate the token queue. This is used by consumers that require
+ * raw access to the token queue. That includes things like error reporting
+ * and recovery. The first time that the iterator is called, the parameter
+ * needs to be NULL. The current pointer in the queue is store there in
+ * order to track the location in the queue. When there are no more
+ * elements in the queue, then the return value is NULL.
  *
  * @param mark
  * @return Token*
@@ -121,8 +121,8 @@ void* post_token_queue();
 Token* iterate_token_queue(void** mark);
 
 /**
- * @brief Initialize the scanner data structures. This must be called before
- * any other calls into the scanner.
+ * @brief Initialize the scanner data structures. This must be called
+ * before any other calls into the scanner.
  */
 void init_scanner();
 

@@ -4,7 +4,6 @@ project(parser)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
 add_library(${PROJECT_NAME} STATIC
-    trace.c
     ast.c
     parser.c
     module.c
@@ -29,4 +28,3 @@ target_compile_options(${PROJECT_NAME}
         $<$<CONFIG:PROFILE>:-pg -O0 >        
 )
 
-#add_subdirectory(test)

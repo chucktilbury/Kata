@@ -31,8 +31,8 @@ AstNode* create_ast_node(AstType type) {
 }
 
 /**
- * @brief Add an AST attribute to the node. Data is duplicated and copied to
- * the hash table data structure.
+ * @brief Add an AST attribute to the node. Data is duplicated and copied
+ * to the hash table data structure.
  *
  * @param node
  * @param key
@@ -43,7 +43,9 @@ AstNode* create_ast_node(AstType type) {
 AstResult add_ast_attrib(AstNode* node, const char* key, void* data, size_t size) {
 
     AstResult res = (AstResult)insert_hashtable(node, key, data, size);
-    if(res != AST_OK)
+    if(res == AST_DUP)
+        RAISE(AST_DUP_ERROR, "AST table attribute \"%s\" is a duplicate", key);
+    else if(res != AST_OK)
         RAISE(AST_ERROR, "cannot add AST table attribute");
 
     return res;
@@ -66,19 +68,19 @@ AstResult get_ast_attrib(AstNode* node, const char* key, void* data, size_t size
 
 static const char* n_to_str(AstType type) {
 
-    return (type == AST_scope_operator)  ? "scope_operator" :
-    (type == AST_type_name)              ? "type_name" :
-    (type == AST_type_spec)              ? "type_spec" :
-    (type == AST_type_spec_element)      ? "type_spec_element" :
-    (type == AST_compound_name)          ? "compound_name" :
-    (type == AST_namespace_element)      ? "namespace_element" :
-    (type == AST_namespace_element_list) ? "namespace_element_list" :
-    (type == AST_namespace_definition)   ? "namespace_definition" :
-    (type == AST_module_element)         ? "module_element" :
-    (type == AST_module_element_list)    ? "module_element_list" :
-    (type == AST_import_statement)       ? "import_statement" :
-    (type == AST_module)                 ? "module" :
-                                           "UNKNOWN";
+    return (type == AST_scope_operator)          ? "scope_operator" :
+            (type == AST_type_name)              ? "type_name" :
+            (type == AST_type_spec)              ? "type_spec" :
+            (type == AST_type_spec_element)      ? "type_spec_element" :
+            (type == AST_compound_name)          ? "compound_name" :
+            (type == AST_namespace_element)      ? "namespace_element" :
+            (type == AST_namespace_element_list) ? "namespace_element_list" :
+            (type == AST_namespace_definition)   ? "namespace_definition" :
+            (type == AST_module_element)         ? "module_element" :
+            (type == AST_module_element_list)    ? "module_element_list" :
+            (type == AST_import_statement)       ? "import_statement" :
+            (type == AST_module)                 ? "module" :
+                                                   "UNKNOWN";
 }
 
 /**
@@ -96,8 +98,11 @@ void traverse_ast(AstNode* tree) {
     AstType type;
     List list;
 
-    if(AST_OK != get_ast_attrib(tree, "type", &type, sizeof(AstType)))
-        RAISE(AST_ERROR, "ast node does not have a \"type\" entry: %p\n", (void*)tree);
+    AstResult res = get_ast_attrib(tree, "type", &type, sizeof(AstType));
+    if(AST_NF == res)
+        RAISE(AST_NF_ERROR, "ast node does not have a \"type\" entry: %p\n", (void*)tree);
+    else if(AST_OK != res)
+        RAISE(AST_ERROR, "cannot get an AST \"type\" entry: %p\n", (void*)tree);
 
     TRACE("type: \"%s\" (%d)", n_to_str(type), type);
 

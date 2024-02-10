@@ -18,8 +18,8 @@ static int num_errors   = 0;
 static int num_warnings = 0;
 
 /*
- * Recover from a syntax error. This discards the current token queue and reads
- * five new tokens.
+ * Recover from a syntax error. This discards the current token queue and
+ * reads five new tokens.
  */
 static void recover_error() {
 
@@ -30,8 +30,8 @@ static void recover_error() {
 }
 
 /**
- * @brief Top level function to handle a generic error inside the parser. It
- * also is the interface to error recovery.
+ * @brief Top level function to handle a generic error inside the parser.
+ * It also is the interface to error recovery.
  *
  * @param fmt
  * @param ...

@@ -197,8 +197,8 @@ Token* copy_token(const Token* tok) {
 /**
  * @brief Make the next token in the stream the current token. If the token
  * before this one was the end of the input, then nothing happens and the
- * returned token is the end of input token. Returns the current token after
- * the advance happens.
+ * returned token is the end of input token. Returns the current token
+ * after the advance happens.
  *
  * @return Token*
  */
@@ -236,9 +236,9 @@ void* post_token_queue() {
 
 /**
  * @brief Reset the token stream to the beginning. This is used when a rule
- * could not be matched and the token stream needs to be rewound to test the
- * next rule in a list of alternatives. Call this when a parser alternative
- * fails in order to reset the crnt pointer.
+ * could not be matched and the token stream needs to be rewound to test
+ * the next rule in a list of alternatives. Call this when a parser
+ * alternative fails in order to reset the crnt pointer.
  *
  * @return Token*
  */
@@ -258,12 +258,12 @@ void reset_token_queue(void* post) {
 }
 
 /**
- * @brief Iterate the token queue. This is used by consumers that require raw
- * access to the token queue. That includes things like error reporting and
- * recovery. The first time that the iterator is called, the parameter needs
- * to be NULL. The current pointer in the queue is store there in order to
- * track the location in the queue. When there are no more elements in the
- * queue, then the return value is NULL.
+ * @brief Iterate the token queue. This is used by consumers that require
+ * raw access to the token queue. That includes things like error reporting
+ * and recovery. The first time that the iterator is called, the parameter
+ * needs to be NULL. The current pointer in the queue is store there in
+ * order to track the location in the queue. When there are no more
+ * elements in the queue, then the return value is NULL.
  *
  * Example:
  * void* mark = NULL;

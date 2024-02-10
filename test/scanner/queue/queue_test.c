@@ -2,10 +2,10 @@
  * @file queue_test.c
  *
  * @brief Test the token queue. This test implements a small subset parser
- * that is contrived to verify that the token queue is working correctly. The
- * crux of the queue is that tokens can be marked as having been used and the
- * protocol for discarding tokens is working correctly. This test also serves
- * as a test bed to try out parser implementation ideas.
+ * that is contrived to verify that the token queue is working correctly.
+ * The crux of the queue is that tokens can be marked as having been used
+ * and the protocol for discarding tokens is working correctly. This test
+ * also serves as a test bed to try out parser implementation ideas.
  *
  * Grammar:
  *
@@ -118,7 +118,9 @@ void* namespace_element_list() {
         }
         else {
             // not a module_element or a CCBRACE, so it' an error
-            show_syntax_error("expected a module element or a '}' but got a %s", tok_to_str(get_token()->type));
+            show_syntax_error("expected a module element or a '}' but got "
+                              "a %s",
+                              tok_to_str(get_token()->type));
             RETV(NULL);
         }
     }
@@ -128,9 +130,9 @@ void* namespace_element_list() {
 }
 
 /**
- * @brief A namespace defintion has a keyword, an optional name, and a body.
- * Note that this is contrived for the test. A real namespace requires the
- * name.
+ * @brief A namespace defintion has a keyword, an optional name, and a
+ * body. Note that this is contrived for the test. A real namespace
+ * requires the name.
  *
  *  # Keyword with an optional name and a body
  *  namespace_definition

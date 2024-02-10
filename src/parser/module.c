@@ -62,7 +62,8 @@ AstNode* namespace_element() {
     ENTER;
     AstNode *nterm, *node = NULL;
 
-    if((NULL != (nterm = namespace_definition())) || (NULL != (nterm = type_spec())) || (NULL != (nterm = scope_operator()))) {
+    if((NULL != (nterm = namespace_definition())) ||
+       (NULL != (nterm = type_spec())) || (NULL != (nterm = scope_operator()))) {
 
         TRACE_NTERM(nterm);
         node = create_ast_node(AST_namespace_element);
@@ -109,7 +110,10 @@ AstNode* namespace_element_list() {
             }
             else {
                 // not a namespace element or a CCBRACE
-                show_syntax_error("expected a namespace element or a '}' but got %s", tok_to_str(get_token()->type));
+                show_syntax_error("expected a namespace element or a '}' "
+                                  "but "
+                                  "got %s",
+                                  tok_to_str(get_token()->type));
                 break;
             }
         }
@@ -157,7 +161,8 @@ AstNode* namespace_definition() {
         }
         else {
             // namespace requires a name, so this is an error
-            show_syntax_error("namespace expects a name, but got a %s", raw_string(tok->str));
+            show_syntax_error("namespace expects a name, but got a %s",
+                              raw_string(tok->str));
         }
     }
 
@@ -191,8 +196,8 @@ AstNode* module_element() {
 }
 
 /**
- * @brief Top level entry point into the parser. Node returned is a AST_module.
- *      module = (module_elem)+
+ * @brief Top level entry point into the parser. Node returned is a
+ * AST_module. module = (module_elem)+
  *
  * @return AstNode*
  *

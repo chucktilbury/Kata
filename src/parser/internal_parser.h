@@ -1,8 +1,8 @@
 /**
  * @file internal_parser.h
  *
- * @brief This is an internal header that forward-declares functions for the
- * recursive descent parser.
+ * @brief This is an internal header that forward-declares functions for
+ * the recursive descent parser.
  *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
@@ -21,6 +21,8 @@
 typedef enum {
     SYNTAX_ERROR = 0x8030,
     AST_ERROR,
+    AST_NF_ERROR,
+    AST_DUP_ERROR,
     MISC_ERROR,
 } ParserException;
 

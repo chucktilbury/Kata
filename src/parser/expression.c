@@ -17,50 +17,50 @@
  */
 static bool is_operator(TokenType type) {
 
-    return (type == TOK_LORE) ? true :
-    (type == TOK_GORE)        ? true :
-    (type == TOK_EQU)         ? true :
-    (type == TOK_NEQU)        ? true :
-    (type == TOK_OR)          ? true :
-    (type == TOK_AND)         ? true :
-    (type == TOK_OPBRACE)     ? true :
-    (type == TOK_CPBRACE)     ? true :
-    (type == TOK_ADD)         ? true :
-    (type == TOK_SUB)         ? true :
-    (type == TOK_ASSIGN)      ? true :
-    (type == TOK_DIV)         ? true :
-    (type == TOK_MUL)         ? true :
-    (type == TOK_MOD)         ? true :
-    (type == TOK_NOT)         ? true :
-    (type == TOK_CARAT)       ? true :
-    (type == TOK_UNARY_MINUS) ? true :
-                                false;
+    return (type == TOK_LORE)         ? true :
+            (type == TOK_GORE)        ? true :
+            (type == TOK_EQU)         ? true :
+            (type == TOK_NEQU)        ? true :
+            (type == TOK_OR)          ? true :
+            (type == TOK_AND)         ? true :
+            (type == TOK_OPBRACE)     ? true :
+            (type == TOK_CPBRACE)     ? true :
+            (type == TOK_ADD)         ? true :
+            (type == TOK_SUB)         ? true :
+            (type == TOK_ASSIGN)      ? true :
+            (type == TOK_DIV)         ? true :
+            (type == TOK_MUL)         ? true :
+            (type == TOK_MOD)         ? true :
+            (type == TOK_NOT)         ? true :
+            (type == TOK_CARAT)       ? true :
+            (type == TOK_UNARY_MINUS) ? true :
+                                        false;
 }
 
 /*
- * Return the precedence of the operator where the highest precedence is the
- * highest number.
+ * Return the precedence of the operator where the highest precedence is
+ * the highest number.
  */
 static int get_precedence(TokenType type) {
 
-    return (type == TOK_LORE) ? 0 :
-    (type == TOK_GORE)        ? 0 :
-    (type == TOK_EQU)         ? 0 :
-    (type == TOK_NEQU)        ? 0 :
-    (type == TOK_OR)          ? 0 :
-    (type == TOK_AND)         ? 0 :
-    (type == TOK_OPBRACE)     ? 0 :
-    (type == TOK_CPBRACE)     ? 0 :
-    (type == TOK_ADD)         ? 0 :
-    (type == TOK_SUB)         ? 0 :
-    (type == TOK_ASSIGN)      ? 0 :
-    (type == TOK_DIV)         ? 0 :
-    (type == TOK_MUL)         ? 0 :
-    (type == TOK_MOD)         ? 0 :
-    (type == TOK_CARAT)       ? 0 :
-    (type == TOK_NOT)         ? 0 :
-    (type == TOK_UNARY_MINUS) ? 0 :
-                                -1;
+    return (type == TOK_LORE)         ? 0 :
+            (type == TOK_GORE)        ? 0 :
+            (type == TOK_EQU)         ? 0 :
+            (type == TOK_NEQU)        ? 0 :
+            (type == TOK_OR)          ? 0 :
+            (type == TOK_AND)         ? 0 :
+            (type == TOK_OPBRACE)     ? 0 :
+            (type == TOK_CPBRACE)     ? 0 :
+            (type == TOK_ADD)         ? 0 :
+            (type == TOK_SUB)         ? 0 :
+            (type == TOK_ASSIGN)      ? 0 :
+            (type == TOK_DIV)         ? 0 :
+            (type == TOK_MUL)         ? 0 :
+            (type == TOK_MOD)         ? 0 :
+            (type == TOK_CARAT)       ? 0 :
+            (type == TOK_NOT)         ? 0 :
+            (type == TOK_UNARY_MINUS) ? 0 :
+                                        -1;
 }
 
 /**
