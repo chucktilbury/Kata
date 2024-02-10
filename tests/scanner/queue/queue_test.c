@@ -91,7 +91,7 @@ void* namespace_element_list() {
     //void* post = post_token_queue();
 
     if(tok->type != TOK_OCBRACE) {
-        handle_error("expected a '{' but got %s", tok_to_str(tok->type));
+        show_syntax_error("expected a '{' but got %s", tok_to_str(tok->type));
         RETV(NULL);
     }
     else {
@@ -120,7 +120,7 @@ void* namespace_element_list() {
         }
         else {
             // not a module_element or a CCBRACE, so it' an error
-            handle_error("expected a module element or a '}' but got a %s", tok_to_str(get_token()->type));
+            show_syntax_error("expected a module element or a '}' but got a %s", tok_to_str(get_token()->type));
             RETV(NULL);
         }
     }
@@ -168,13 +168,13 @@ void* namespace_definition() {
             }
             else {
                 // syntax error, could not parse the list
-                handle_error("expected a namespace element");
+                show_syntax_error("expected a namespace element");
                 RETV(NULL);
             }
         }
         else {
             // syntax error, symbol required after namespace keyword
-            handle_error("expected SYMBOL token but got %s", tok_to_str(tok->type));
+            show_syntax_error("expected SYMBOL token but got %s", tok_to_str(tok->type));
             RETV(NULL);
         }
     }
@@ -246,7 +246,7 @@ void* module() {
 
     Token* tok = get_token();
     if(tok->type != TOK_END_OF_FILE) {
-        handle_error("expected the end of file but got %s", tok_to_str(tok->type));
+        show_syntax_error("expected the end of file but got %s", tok_to_str(tok->type));
         RETV(NULL);
     }
     else {
@@ -259,7 +259,7 @@ void* module() {
 
     tok = get_token();
     if(tok->type != TOK_END_OF_INPUT) {
-        handle_error("expected the end of input but got %s", tok_to_str(tok->type));
+        show_syntax_error("expected the end of input but got %s", tok_to_str(tok->type));
         RETV(NULL);
     }
     TRACE("handle end of input and return node");

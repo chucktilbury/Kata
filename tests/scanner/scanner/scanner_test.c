@@ -38,6 +38,7 @@ int main(int argc, char** argv) {
         printf("%d. ", count++);
         if(tok->type == TOK_IMPORT) {
             print_token(tok);
+            printf("\n");
             tok = scan_token(); // must be a string
             if(tok->type == TOK_LITERAL_STR) {
                 printf("%d. ", count++);
@@ -55,8 +56,10 @@ int main(int argc, char** argv) {
             print_token(tok);
             break;
         }
-        else
+        else {
             print_token(tok);
+            printf("\n");
+        }
 
         tok = scan_token();
     }

@@ -1,8 +1,7 @@
 /**
- * @file simple.c
+ * @file parser_test.c
  *
- * @brief Implementation of the main function and supporting routines for the
- * compiler.
+ * @brief Test the parser without passes on the AST.
  *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0

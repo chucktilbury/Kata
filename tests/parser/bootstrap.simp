@@ -6,7 +6,7 @@ this.is.a.compound.symbol
 const dict
 
 ; this is being run from the build directory
-import "../src/parser/test/a.simp" as poop
+import "../tests/parser/a.simp" as poop
 
 namespace blart {
     public
