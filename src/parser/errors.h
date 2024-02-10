@@ -11,8 +11,8 @@
 #ifndef _ERRORS_H
 #define _ERRORS_H
 
-void handle_error(const char* fmt, ...);
-void handle_warning(const char* fmt, ...);
+void show_syntax_error(const char* fmt, ...);
+void show_warning(const char* fmt, ...);
 int get_num_errors();
 int get_num_warnings();
 

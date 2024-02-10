@@ -1,0 +1,2 @@
+# Parser Tests
+This directory holds tests from the parser. It uses parser_test program to parse the test input and print out a lot of information that can be used to verify that the test behaved as expected.

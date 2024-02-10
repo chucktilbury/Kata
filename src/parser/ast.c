@@ -11,6 +11,7 @@
 #include "ast.h"
 #include "scanner.h"
 #include "trace.h"
+#include "internal_parser.h"
 
 /**
  * @brief Create a ast node object
@@ -24,7 +25,7 @@ AstNode* create_ast_node(AstType type) {
     AstNode* node = create_hashtable();
     HashResult res = insert_hashtable(node, "type", &type, sizeof(AstType));
     if(res != HASH_OK)
-        RAISE(AST_GENERIC_ERROR, "cannot create AST table entry");
+        RAISE(AST_ERROR, "cannot create AST table entry");
 
     return node;
 }
@@ -43,7 +44,7 @@ AstResult add_ast_attrib(AstNode* node, const char* key, void* data, size_t size
 
     AstResult res = (AstResult)insert_hashtable(node, key, data, size);
     if(res != AST_OK)
-        RAISE(AST_GENERIC_ERROR, "cannot add AST table attribute");
+        RAISE(AST_ERROR, "cannot add AST table attribute");
 
     return res;
 }
@@ -95,7 +96,7 @@ void traverse_ast(AstNode* tree) {
     List list;
 
     if(AST_OK != get_ast_attrib(tree, "type", &type, sizeof(AstType)))
-        RAISE(AST_GENERIC_ERROR,
+        RAISE(AST_ERROR,
                 "ast node does not have a \"type\" entry: %p\n",
                 (void*)tree);
 

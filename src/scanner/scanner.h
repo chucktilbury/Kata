@@ -132,6 +132,14 @@ void init_scanner();
  */
 const char* tok_to_str(TokenType type);
 
+/**
+ * @brief This function literally discards the entire token queue. This
+ * is used in error recovery to discard tokens that are a part of the
+ * error so that parsing can resume.
+ *
+ */
+void discard_token_queue();
+
 void print_token(Token* tok);
 #endif
 

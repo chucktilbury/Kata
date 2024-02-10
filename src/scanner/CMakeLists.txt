@@ -24,4 +24,3 @@ target_compile_options(${PROJECT_NAME}
         $<$<CONFIG:PROFILE>:-pg -O0 >
 )
 
-add_subdirectory(test)

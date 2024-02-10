@@ -105,10 +105,15 @@ typedef enum {
     AST_module_element,
     AST_module_element_list,
     AST_module,
+
+    // import.c
     AST_import_statement,
 
-    // For the calls to RAISE();
-    AST_GENERIC_ERROR = 3000,
+    // expresion.c
+    AST_primary_expression,
+    AST_expression_list,
+    AST_expression,
+
 } AstType;
 
 #include "util.h"

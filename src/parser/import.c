@@ -27,6 +27,7 @@
 static bool do_import(Str* fname, Str* symbol) {
 
     ENTER;
+    (void)symbol;
     // Scan a search path of locations to find the actual file in.
 
     // Open the actual file.
@@ -78,7 +79,7 @@ AstNode* import_statement() {
         tok = advance_token();
     }
     else {
-        handle_error("expected a formatted string, but got a %s", tok_to_str(tok->type));
+        show_syntax_error("expected a formatted string, but got a %s", tok_to_str(tok->type));
         RETV(NULL);
     }
 
@@ -87,7 +88,7 @@ AstNode* import_statement() {
         tok = advance_token();
     }
     else {
-        handle_error("expected AS keyword, but got %s", tok_to_str(tok->type));
+        show_syntax_error("expected AS keyword, but got %s", tok_to_str(tok->type));
         RETV(NULL);
     }
 
@@ -98,7 +99,7 @@ AstNode* import_statement() {
         //advance_token();
     }
     else {
-        handle_error("expected a SYMBOL but got a %s", tok_to_str(tok->type));
+        show_syntax_error("expected a SYMBOL but got a %s", tok_to_str(tok->type));
         RETV(NULL);
     }
 

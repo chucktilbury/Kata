@@ -17,6 +17,13 @@
 #include "trace.h"
 #include "ast.h"
 
+// Parser Exceptions
+typedef enum {
+    SYNTAX_ERROR = 0x8030,
+    AST_ERROR,
+    MISC_ERROR,
+} ParserException;
+
 // Defined in parser.c
 void pop_namespace();
 void push_namespace(Str* str);
@@ -24,18 +31,26 @@ Str* peek_namespace();
 
 // Defined in module.c
 AstNode* scope_operator();
-AstNode* type_name();
-AstNode* compound_name();
-AstNode* type_spec_element();
-AstNode* type_spec();
 AstNode* namespace_element();
 AstNode* namespace_element_list();
 AstNode* namespace_definition();
 AstNode* module_element();
 AstNode* module();
 
+// Defined in data.c
+AstNode* type_name();
+AstNode* compound_name();
+AstNode* type_spec_element();
+AstNode* type_spec();
+
 // Defined in import.c
 AstNode* import_statement();
+
+// Defined in expression.c
+AstNode* primary_expression();
+AstNode* expression_list();
+AstNode* expression();
+AstNode* cast_statement();
 
 
 #endif /* _INTERNAL_PARSER_H */

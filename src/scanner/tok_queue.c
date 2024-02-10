@@ -287,3 +287,20 @@ Token* iterate_token_queue(void** mark) {
     return ((TokQueueItem*)(*mark))->tok;
 }
 
+/**
+ * @brief This function literally discards the entire token queue. This
+ * is used in error recovery to discard tokens that are a part of the
+ * error so that parsing can resume.
+ *
+ */
+void discard_token_queue() {
+
+    assert(tqueue != NULL);
+    assert(tqueue->head != NULL);
+
+    // Get a new token.
+    advance_token();
+    // Make the new token the head of the queue and the crnt item.
+    tqueue->head = tqueue->crnt = tqueue->tail;
+}
+

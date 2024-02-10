@@ -17,6 +17,18 @@
 static int num_errors = 0;
 static int num_warnings = 0;
 
+/*
+ * Recover from a syntax error. This discards the current token queue and reads
+ * five new tokens.
+ */
+static void recover_error() {
+
+    discard_token_queue();
+    for(int i = 0; i < 5; i++)
+        advance_token();
+    //reset_token_queue();
+}
+
 /**
  * @brief Top level function to handle a generic error inside the parser. It
  * also is the interface to error recovery.
@@ -25,7 +37,7 @@ static int num_warnings = 0;
  * @param ...
  *
  */
-void handle_error(const char* fmt, ...) {
+void show_syntax_error(const char* fmt, ...) {
 
     va_list args;
 
@@ -37,6 +49,7 @@ void handle_error(const char* fmt, ...) {
     va_end(args);
     fputc('\n', stderr);
     num_errors++;
+    recover_error();
 }
 
 /**
@@ -46,7 +59,7 @@ void handle_error(const char* fmt, ...) {
  * @param ...
  *
  */
-void handle_warning(const char* fmt, ...) {
+void show_warning(const char* fmt, ...) {
 
     va_list args;
 
