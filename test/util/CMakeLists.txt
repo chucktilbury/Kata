@@ -1,0 +1,5 @@
+add_subdirectory(cmd)
+add_subdirectory(str)
+add_subdirectory(hash)
+add_subdirectory(list)
+add_subdirectory(except)
