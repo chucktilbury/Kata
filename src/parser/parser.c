@@ -52,7 +52,7 @@ AstNode* parser(const char* fname) {
     init_scanner();
     open_file(fname);
 
-    AstNode* node = module();
+    AstNode* node = parse_module();
 
     // Note that this is a deficiency with these macros. If you return a
     // function instance, it will get called two times.

@@ -11,6 +11,7 @@
  */
 #ifndef _INTERNAL_PARSER_H
 #define _INTERNAL_PARSER_H
+
 #include "ast.h"
 #include "errors.h"
 #include "scanner.h"
@@ -32,27 +33,27 @@ void push_namespace(Str* str);
 Str* peek_namespace();
 
 // Defined in module.c
-AstNode* scope_operator();
-AstNode* namespace_element();
-AstNode* namespace_element_list();
-AstNode* namespace_definition();
-AstNode* module_element();
-AstNode* module();
+AstNode* parse_scope_operator();
+AstNode* parse_namespace_element();
+AstNode* parse_namespace_element_list();
+AstNode* parse_namespace_definition();
+AstNode* parse_module_element();
+AstNode* parse_module();
 
 // Defined in data.c
-AstNode* type_name();
-AstNode* compound_name();
-AstNode* type_spec_element();
-AstNode* type_spec();
+AstNode* parse_type_name();
+AstNode* parse_compound_name();
+AstNode* parse_type_spec_element();
+AstNode* parse_type_spec();
 
 // Defined in import.c
-AstNode* import_statement();
+AstNode* parse_import_statement();
 
 // Defined in expression.c
 AstNode* primary_expression();
-AstNode* expression_list();
-AstNode* expression();
-AstNode* cast_statement();
+AstNode* parse_expression_list();
+AstNode* parse_expression();
+AstNode* parse_cast_statement();
 
 
 #endif /* _INTERNAL_PARSER_H */

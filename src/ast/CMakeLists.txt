@@ -1,15 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
-project(parser)
+project(ast)
 
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
 add_library(${PROJECT_NAME} STATIC
-    parser.c
-    module.c
-    import.c
-    errors.c
-    expression.c
-    data.c
+    ast.c
 )
 
 target_compile_options(${PROJECT_NAME}

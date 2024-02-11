@@ -52,7 +52,7 @@ static bool do_import(Str* fname, Str* symbol) {
  * @return AstNode*
  *
  */
-AstNode* import_statement() {
+AstNode* parse_import_statement() {
 
     ENTER;
     AstNode* node = NULL;

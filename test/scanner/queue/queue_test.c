@@ -12,10 +12,10 @@
  *  module
  *      : (module_element)+
  *  module_element
- *      : scope_operator
+ *      : parse_scope_operator
  *      | namespace_definition
  *      | SYMBOL
- *  scope_operator
+ *  parse_scope_operator
  *      : PUBLIC
  *      | PRIVATE
  *      | PROTECTED
@@ -38,18 +38,18 @@
 extern void print_token(Token* tok);
 
 // forward declarations
-void* module_element();
+void* parse_module_element();
 
 /**
  * @brief Parse for a single keyword.
  *
  *  # A scope operator is a single keyword.
- *  scope_operator
+ *  parse_scope_operator
  *      : PUBLIC
  *      | PRIVATE
  *      | PROTECTED
  */
-void* scope_operator() {
+void* parse_scope_operator() {
 
     ENTER;
     AstNode* node = NULL;
@@ -79,7 +79,7 @@ void* scope_operator() {
  *      : OCBRACE (module_element)* CCBRACE
  *
  */
-void* namespace_element_list() {
+void* parse_namespace_element_list() {
 
     ENTER;
     AstNode* node = NULL;
@@ -103,7 +103,7 @@ void* namespace_element_list() {
     while(true) {
         AstNode* me_node = NULL;
 
-        if(NULL != (me_node = module_element())) {
+        if(NULL != (me_node = parse_module_element())) {
             TRACE("adding a module element to the list");
             append_list(lst, me_node);
         }
@@ -136,9 +136,9 @@ void* namespace_element_list() {
  *
  *  # Keyword with an optional name and a body
  *  namespace_definition
- *      : NAMESPACE (SYMBOL)? namespace_element_list
+ *      : NAMESPACE (SYMBOL)? parse_namespace_element_list
  */
-void* namespace_definition() {
+void* parse_namespace_definition() {
 
     ENTER;
     AstNode* node = NULL;
@@ -162,7 +162,7 @@ void* namespace_definition() {
             advance_token(); // consume the token
 
             AstNode* nsel;
-            if(NULL != (nsel = namespace_element_list())) {
+            if(NULL != (nsel = parse_namespace_element_list())) {
                 TRACE("have a valid namespace element list");
                 add_ast_attrib(node, "nterm", nsel, sizeof(AstNode));
             }
@@ -187,24 +187,24 @@ void* namespace_definition() {
  *
  *  # Exactly one of these alternatives
  *  module_element
- *      : scope_operator
+ *      : parse_scope_operator
  *      | namespace_definition
  *      | SYMBOL
  */
-void* module_element() {
+void* parse_module_element() {
 
     ENTER;
     AstNode* node = NULL;
     AstNode* mod_elem;
     void* post = post_token_queue();
 
-    if(NULL != (mod_elem = scope_operator())) {
+    if(NULL != (mod_elem = parse_scope_operator())) {
         TRACE("found a scope operator");
         node = create_ast_node(AST_module_element);
         add_ast_attrib(node, "nterm", mod_elem, sizeof(AstNode));
         finalize_token_queue();
     }
-    else if(NULL != (mod_elem = namespace_definition())) {
+    else if(NULL != (mod_elem = parse_namespace_definition())) {
         TRACE("found a namespace definition");
         node = create_ast_node(AST_module_element);
         add_ast_attrib(node, "nterm", mod_elem, sizeof(AstNode));
@@ -234,14 +234,14 @@ void* module_element() {
  *  module
  *      : (module_item)+
  */
-void* module() {
+void* parse_module() {
 
     ENTER;
     AstNode* mod_elem;
     List* node_lst = create_list(sizeof(AstNode));
 
     // one or more
-    while(NULL != (mod_elem = module_element()))
+    while(NULL != (mod_elem = parse_module_element()))
         append_list(node_lst, (void*)mod_elem);
 
     Token* tok = get_token();
@@ -273,12 +273,12 @@ void* module() {
 #if 0
 const char* type_to_str(AstType type) {
 
-    return (type == AST_scope_operator)? "scope_operator" :
+    return (type == AST_scope_operator)? "parse_scope_operator" :
         (type == AST_type_name)? "type_name" :
         (type == AST_type_spec)? "type_spec" :
         (type == AST_type_spec_element)? "type_spec_element" :
         (type == AST_compound_name)? "compound_name" :
-        (type == AST_namespace_element)? "namespace_element" :
+        (type == AST_namespace_element)? "parse_namespace_element" :
         (type == AST_namespace_element_list)? "namespace_element_list" :
         (type == AST_namespace_definition)? "namespace_definition" :
         (type == AST_module_element)? "module_element" :
@@ -334,7 +334,7 @@ int main(int argc, char** argv) {
 
     // since the module is a list, this is only called once.
     printf("\nParse the input\n");
-    AstNode* node = module();
+    AstNode* node = parse_module();
     printf("End Parse\n");
 
     printf("\nDump the AST\n");

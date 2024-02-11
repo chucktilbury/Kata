@@ -11,6 +11,7 @@ target_link_libraries(${PROJECT_NAME}
     pthread
     parser
     scanner
+    ast
     util
     gc
 )
@@ -26,6 +27,7 @@ target_compile_options(${PROJECT_NAME}
         -I${PROJECT_SOURCE_DIR}/../util/bdwgc/include
         -I${PROJECT_SOURCE_DIR}/../parser
         -I${PROJECT_SOURCE_DIR}/../scanner
+        -I${PROJECT_SOURCE_DIR}/../ast
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DENABLE_LOGGER >
         $<$<CONFIG:DEBUG>:-DUSE_TRACE >

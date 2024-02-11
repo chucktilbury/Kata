@@ -23,7 +23,7 @@
  * @return NonTerm*
  *
  */
-AstNode* scope_operator() {
+AstNode* parse_scope_operator() {
 
     ENTER;
     Token* tok    = get_token();
@@ -57,13 +57,13 @@ AstNode* scope_operator() {
  * @return AstNode*
  *
  */
-AstNode* namespace_element() {
+AstNode* parse_namespace_element() {
 
     ENTER;
     AstNode *nterm, *node = NULL;
 
-    if((NULL != (nterm = namespace_definition())) ||
-       (NULL != (nterm = type_spec())) || (NULL != (nterm = scope_operator()))) {
+    if((NULL != (nterm = parse_namespace_definition())) ||
+       (NULL != (nterm = parse_type_spec())) || (NULL != (nterm = parse_scope_operator()))) {
 
         TRACE_NTERM(nterm);
         node = create_ast_node(AST_namespace_element);
@@ -81,7 +81,7 @@ AstNode* namespace_element() {
  * @return AstNode*
  *
  */
-AstNode* namespace_element_list() {
+AstNode* parse_namespace_element_list() {
 
     ENTER;
     Token* tok    = get_token();
@@ -95,7 +95,7 @@ AstNode* namespace_element_list() {
 
         while(true) {
             AstNode* nterm;
-            if(NULL != (nterm = namespace_element())) {
+            if(NULL != (nterm = parse_namespace_element())) {
                 TRACE_NTERM(nterm);
                 append_list(list, nterm);
             }
@@ -134,7 +134,7 @@ AstNode* namespace_element_list() {
  * @return AstNode*
  *
  */
-AstNode* namespace_definition() {
+AstNode* parse_namespace_definition() {
 
     ENTER;
     AstNode *nterm, *node = NULL;
@@ -152,7 +152,7 @@ AstNode* namespace_definition() {
             finalize_token();
             advance_token(); // next token should be '{'
 
-            if(NULL != (nterm = namespace_element_list())) {
+            if(NULL != (nterm = parse_namespace_element_list())) {
                 TRACE_NTERM(node);
                 add_ast_attrib(node, "nterm", nterm, sizeof(AstNode));
                 finalize_token_queue();
@@ -179,12 +179,12 @@ AstNode* namespace_definition() {
  * @return AstNode*
  *
  */
-AstNode* module_element() {
+AstNode* parse_module_element() {
 
     ENTER;
     AstNode *nterm, *node = NULL;
 
-    if((NULL != (nterm = namespace_element())) || (NULL != (nterm = import_statement()))) {
+    if((NULL != (nterm = parse_namespace_element())) || (NULL != (nterm = parse_import_statement()))) {
 
         TRACE_NTERM(nterm);
         node = create_ast_node(AST_module_element);
@@ -197,12 +197,14 @@ AstNode* module_element() {
 
 /**
  * @brief Top level entry point into the parser. Node returned is a
- * AST_module. module = (module_elem)+
+ * AST_module.
+ *
+ *      module = (module_elem)+
  *
  * @return AstNode*
  *
  */
-AstNode* module() {
+AstNode* parse_module() {
 
     ENTER;
     AstNode *nterm, *node = NULL;
@@ -210,7 +212,7 @@ AstNode* module() {
     Token* tok;
 
     while(true) {
-        if(NULL != (nterm = module_element())) {
+        if(NULL != (nterm = parse_module_element())) {
             TRACE_NTERM(nterm);
             append_list(list, (void*)nterm);
         }

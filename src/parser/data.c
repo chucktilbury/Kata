@@ -25,7 +25,7 @@
  * @return NonTerm*
  *
  */
-AstNode* type_name() {
+AstNode* parse_type_name() {
 
     ENTER;
     Token* tok    = get_token();
@@ -59,7 +59,7 @@ AstNode* type_name() {
  * @return NonTerm*
  *
  */
-AstNode* compound_name() {
+AstNode* parse_compound_name() {
 
     ENTER;
     Token* tok    = get_token();
@@ -133,13 +133,13 @@ AstNode* compound_name() {
  * @return NonTerm*
  *
  */
-AstNode* type_spec_element() {
+AstNode* parse_type_spec_element() {
 
     ENTER;
     AstNode *nterm, *node = NULL;
     void* post = post_token_queue();
 
-    if((NULL != (nterm = type_name())) || (NULL != (nterm = compound_name()))) {
+    if((NULL != (nterm = parse_type_name())) || (NULL != (nterm = parse_compound_name()))) {
 
         // the element is a valid type name
         TRACE_NTERM(nterm);
@@ -166,7 +166,7 @@ AstNode* type_spec_element() {
  * @return NonTerm*
  *
  */
-AstNode* type_spec() {
+AstNode* parse_type_spec() {
 
     ENTER;
     Token* tok    = get_token();
@@ -182,7 +182,7 @@ AstNode* type_spec() {
     }
 
     AstNode* nterm;
-    if(NULL != (nterm = type_spec_element())) {
+    if(NULL != (nterm = parse_type_spec_element())) {
         TRACE_NTERM(nterm);
         node = create_ast_node(AST_type_spec);
         add_ast_attrib(node, "nterm", nterm, sizeof(AstNode));

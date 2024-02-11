@@ -91,7 +91,7 @@ AstNode* primary_expression() {
  * @return AstNode*
  *
  */
-AstNode* expression_list() {
+AstNode* parse_expression_list() {
 
     ENTER;
     RETV(NULL);
@@ -104,7 +104,7 @@ AstNode* expression_list() {
  * @return AstNode*
  *
  */
-AstNode* expression() {
+AstNode* parse_expression() {
 
     ENTER;
     get_precedence(0);
@@ -121,7 +121,7 @@ AstNode* expression() {
  * @return AstNode*
  *
  */
-AstNode* cast_statement() {
+AstNode* parse_cast_statement() {
 
     ENTER;
     RETV(NULL);
