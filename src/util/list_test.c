@@ -54,7 +54,7 @@ void test_ints() {
     printf("fail: %d:\n", del_base_list(lst, 9));
     printf("del: len: %d cap: %d size: %d\n", lst->len, lst->cap, lst->size);
     count = 0;
-    iter = init_base_list_iter(lst);
+    iter  = init_base_list_iter(lst);
     while(iter_base_list(iter, &value) == LIST_OK)
         printf("%d. value: %d\n", count++, value);
 
@@ -78,7 +78,7 @@ void test_ints() {
     ins_base_list(lst, 0, &value);
     printf("ins: len: %d cap: %d size: %d\n", lst->len, lst->cap, lst->size);
 
-    iter = init_base_list_iter(lst);
+    iter  = init_base_list_iter(lst);
     count = 0;
     while(iter_base_list(iter, &value) == LIST_OK)
         printf("%d. value: %d\n", count++, value);
@@ -93,7 +93,7 @@ void test_ints() {
     printf("value: %d\n", value);
     printf("ins: len: %d cap: %d size: %d\n", lst->len, lst->cap, lst->size);
 
-    iter = init_base_list_iter(lst);
+    iter  = init_base_list_iter(lst);
     count = 0;
     while(iter_base_list(iter, &value) == LIST_OK)
         printf("%d. value: %d\n", count++, value);
@@ -113,7 +113,7 @@ void test_ints() {
     printf("value: %d\n", value);
     printf("ins: len: %d cap: %d size: %d\n", lst->len, lst->cap, lst->size);
 
-    iter = init_base_list_iter(lst);
+    iter  = init_base_list_iter(lst);
     count = 0;
     while(iter_base_list(iter, &value) == LIST_OK)
         printf("%d. value: %d\n", count++, value);

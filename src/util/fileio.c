@@ -43,7 +43,7 @@ void pop_input_file() {
     if(file_stack != NULL) {
         fclose(file_stack->fp);
         struct _file_ptr_* tmp = file_stack;
-        file_stack = tmp->next;
+        file_stack             = tmp->next;
         destroy_string(tmp->fname);
         _FREE(tmp);
     }
@@ -62,11 +62,11 @@ void push_input_file(const char* fname) {
               strerror(errno));
 
     struct _file_ptr_* ptr = _ALLOC_T(struct _file_ptr_);
-    ptr->fp = fp;
-    ptr->fname = create_string(fname);
-    ptr->line_no = 1;
-    ptr->col_no = 1;
-    ptr->next = NULL;
+    ptr->fp                = fp;
+    ptr->fname             = create_string(fname);
+    ptr->line_no           = 1;
+    ptr->col_no            = 1;
+    ptr->next              = NULL;
     // prime the pump
     ptr->ch = fgetc(ptr->fp);
 
@@ -159,16 +159,16 @@ const char* get_fname() {
 FPTR open_output_file(const char* fname) {
 
     struct _file_ptr_* ptr = _ALLOC_T(struct _file_ptr_);
-    ptr->fp = fopen(fname, "w");
+    ptr->fp                = fopen(fname, "w");
     if(ptr->fp == NULL)
         RAISE(FILE_ERROR, "File Error: cannot open output file: %s: %s\n",
               fname, strerror(errno));
 
-    ptr->fname = create_string(fname);
+    ptr->fname   = create_string(fname);
     ptr->line_no = 1;
-    ptr->col_no = 1;
-    ptr->next = NULL;
-    ptr->ch = 0;
+    ptr->col_no  = 1;
+    ptr->next    = NULL;
+    ptr->ch      = 0;
 
     return (FPTR)ptr;
 }

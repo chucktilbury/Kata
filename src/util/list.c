@@ -39,10 +39,10 @@ List* create_list(int size) {
 
     List* ptr = _ALLOC_T(List);
 
-    ptr->cap = 1 << 3;
-    ptr->len = 0;
-    ptr->size = size;
-    ptr->buffer = _ALLOC(ptr->size * ptr->cap);
+    ptr->cap     = 1 << 3;
+    ptr->len     = 0;
+    ptr->size    = size;
+    ptr->buffer  = _ALLOC(ptr->size * ptr->cap);
     ptr->changed = false;
 
     return ptr;
@@ -83,8 +83,8 @@ void insert_list(List* lst, int index, void* data) {
     // aid in debugging
     int start, end, size;
     start = lst->size * normalize_index(lst, index);
-    end = start + lst->size;
-    size = lst->len - start;
+    end   = start + lst->size;
+    size  = lst->len - start;
 
     if((lst->size * index) < lst->len) {
         expand_buffer(lst);
@@ -106,8 +106,8 @@ void delete_list(List* lst, int index) {
     // aid in debugging
     int start, end, size;
     start = lst->size * normalize_index(lst, index);
-    end = start + lst->size;
-    size = lst->len - end;
+    end   = start + lst->size;
+    size  = lst->len - end;
 
     if(index >= 0 && ((lst->size * index) < lst->len)) {
         memmove(&lst->buffer[start], &lst->buffer[end], size);
@@ -146,7 +146,7 @@ void pop_list(List* lst, void* data) {
 
 void clear_list(List* lst) {
 
-    lst->len = 0;
+    lst->len     = 0;
     lst->changed = true;
 }
 
@@ -165,9 +165,9 @@ void* raw_list(List* lst) {
 ListIter* init_list_iterator(List* lst) {
 
     ListIter* iter = _ALLOC_T(ListIter);
-    iter->index = 0;
-    iter->list = lst;
-    lst->changed = false;
+    iter->index    = 0;
+    iter->list     = lst;
+    lst->changed   = false;
 
     return iter;
 }
@@ -190,9 +190,9 @@ int iterate_list(ListIter* iter, void* data) {
 ListIter* init_list_riterator(List* lst) {
 
     ListIter* iter = _ALLOC_T(ListIter);
-    iter->index = (lst->len / lst->size) - 1;
-    iter->list = lst;
-    lst->changed = false;
+    iter->index    = (lst->len / lst->size) - 1;
+    iter->list     = lst;
+    lst->changed   = false;
 
     return iter;
 }

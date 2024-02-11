@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
     add_cmd(cmd, "-v", "verbo", "Set the verbosity level.", "10", CMD_INT);
     add_cmd(cmd, "-x", "ecks", "Set the ecks flag.", NULL, CMD_BOOL);
     add_cmd(cmd, "", "bang", "When bangarang meets the planderflip, there will be trouble.",
-                NULL, CMD_REQD | CMD_LIST);
+            NULL, CMD_REQD | CMD_LIST);
 
     parse_cmd_line(cmd, argc, argv);
 

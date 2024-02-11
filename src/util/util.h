@@ -1,17 +1,17 @@
 #ifndef _UTIL_H
 #define _UTIL_H
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <assert.h>
+#include <ctype.h>
+#include <errno.h>
+#include <setjmp.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-#include <stdbool.h>
-#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <setjmp.h>
-#include <ctype.h>
-#include <assert.h>
-#include <errno.h>
+#include <unistd.h>
 
 //----------------------------------------------
 // mem.c
@@ -274,15 +274,15 @@ void emit_str(FPTR h, const char* str);
 // Flags are a bitmask. For example, OR them together, such as
 // (CMD_LIST|CMD_REQD) to specify a required list parameter.
 typedef enum {
-    CMD_NONE = 0x00,
-    CMD_REQD = 0x01,
-    CMD_LIST = 0x02,
-    CMD_STR = 0x04,
-    CMD_BOOL = 0x08,
+    CMD_NONE  = 0x00,
+    CMD_REQD  = 0x01,
+    CMD_LIST  = 0x02,
+    CMD_STR   = 0x04,
+    CMD_BOOL  = 0x08,
     CMD_FLOAT = 0x10,
-    CMD_INT = 0x20,
-    CMD_SEEN = 0x40,
-    CMD_HELP = 0x80,
+    CMD_INT   = 0x20,
+    CMD_SEEN  = 0x40,
+    CMD_HELP  = 0x80,
 } CmdFlag;
 
 // Opaque handle for command line.
@@ -359,12 +359,12 @@ typedef struct {
 extern _ExceptionState _exception_state;
 
 // Set up a try block
-#define TRY                                                          \
-    do {                                                             \
-        _ExceptionStack* _exception_ptr = _ALLOC_T(_ExceptionStack); \
-        _exception_ptr->next = _exception_state.stack;               \
-        _exception_state.stack = _exception_ptr;                     \
-        int _exception_number = setjmp(_exception_ptr->jmp);         \
+#define TRY                                                            \
+    do {                                                               \
+        _ExceptionStack* _exception_ptr = _ALLOC_T(_ExceptionStack);   \
+        _exception_ptr->next            = _exception_state.stack;      \
+        _exception_state.stack          = _exception_ptr;              \
+        int _exception_number           = setjmp(_exception_ptr->jmp); \
         if(_exception_number == 0)
 
 // Catch a specific exception
@@ -445,41 +445,46 @@ extern const int trace_increment;
 #define PAD printf("%*s", trace_count, "")
 #define CAP printf(" (%d)\n", __LINE__)
 
-#define TRACE(f, ...) do { \
-		PAD; \
-        printf("TRACE: %s(): ", __func__); \
-		printf((f) __VA_OPT__(,) __VA_ARGS__); \
-		CAP; \
+#define TRACE(f, ...)                          \
+    do {                                       \
+        PAD;                                   \
+        printf("TRACE: %s(): ", __func__);     \
+        printf((f)__VA_OPT__(, ) __VA_ARGS__); \
+        CAP;                                   \
     } while(false)
 
-#define ENTER do { \
-		PAD; \
-		printf("ENTER: %s(): ", __func__); \
-		trace_count += trace_increment; \
-		CAP; \
+#define ENTER                              \
+    do {                                   \
+        PAD;                               \
+        printf("ENTER: %s(): ", __func__); \
+        trace_count += trace_increment;    \
+        CAP;                               \
     } while(false)
 
-#define RET do { \
-		trace_count -= trace_increment; \
-		PAD; \
-		printf("RETURN: %s(): ", __func__); \
-		CAP; \
-		return; \
+#define RET                                 \
+    do {                                    \
+        trace_count -= trace_increment;     \
+        PAD;                                \
+        printf("RETURN: %s(): ", __func__); \
+        CAP;                                \
+        return;                             \
     } while(false)
 
-#define RETV(v) do { \
-		trace_count -= trace_increment; \
-		PAD; \
-		printf("RETURN(%s): %s(): ", #v, __func__); \
-		CAP; \
-		return(v); \
+#define RETV(v)                                     \
+    do {                                            \
+        trace_count -= trace_increment;             \
+        PAD;                                        \
+        printf("RETURN(%s): %s(): ", #v, __func__); \
+        CAP;                                        \
+        return (v);                                 \
     } while(false)
 
-#define EXIT(n) do { \
-		PAD; \
-		printf("EXIT(#n): %s(): ", __func__); \
-		CAP; \
-		exit(v); \
+#define EXIT(n)                               \
+    do {                                      \
+        PAD;                                  \
+        printf("EXIT(#n): %s(): ", __func__); \
+        CAP;                                  \
+        exit(v);                              \
     } while(false)
 
 #else
@@ -487,8 +492,8 @@ extern const int trace_increment;
 #define TRACE(f, ...)
 #define ENTER
 #define EXIT(n) exit(n)
-#define RET	return
-#define RETV(v)	return (v);
+#define RET return
+#define RETV(v) return (v);
 
 #endif
 

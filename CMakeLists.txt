@@ -26,6 +26,8 @@ file(GLOB_RECURSE format_xxfiles
     ${PROJECT_SOURCE_DIR}/src/scanner/*.h
     ${PROJECT_SOURCE_DIR}/src/simple/*.c
     ${PROJECT_SOURCE_DIR}/src/simple/*.h
+    ${PROJECT_SOURCE_DIR}/src/util/*.c
+    ${PROJECT_SOURCE_DIR}/src/util/*.h
     ${PROJECT_SOURCE_DIR}/test/*.c
     ${PROJECT_SOURCE_DIR}/test/*.h
 )
@@ -36,7 +38,7 @@ add_custom_target(format
     #WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src
 )
 
-add_custom_target(testing
+add_custom_target(test
     COMMENT "Build the test programs"
     COMMAND echo ${PROJECT_SOURCE_DIR}/test
     COMMAND make -C test

@@ -1,8 +1,8 @@
 
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdarg.h>
 
 #include "util.h"
 
@@ -18,7 +18,7 @@ void* mem_alloc(size_t size) {
 #ifdef USE_GC
     void* ptr = GC_malloc(size);
 #else
-    void* ptr = malloc(size);
+    void* ptr  = malloc(size);
 #endif
     if(ptr == NULL)
         RAISE(MEMORY_ERROR, "MEMORY: Cannot allocate %lu bytes\n", size);

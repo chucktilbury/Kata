@@ -1,3 +1,3 @@
 
-int trace_count = 0;
+int trace_count           = 0;
 const int trace_increment = 4;

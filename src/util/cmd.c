@@ -28,11 +28,11 @@ typedef PtrListIter CmdItemListIter;
 static CmdItem* create_item(const char* parm, const char* name, const char* help, CmdFlag flag) {
 
     CmdItem* ci = _ALLOC_T(CmdItem);
-    ci->parm = _DUP_STR(parm);
-    ci->name = _DUP_STR(name);
-    ci->help = _DUP_STR(help);
-    ci->flag = flag;
-    ci->bval = false;
+    ci->parm    = _DUP_STR(parm);
+    ci->name    = _DUP_STR(name);
+    ci->help    = _DUP_STR(help);
+    ci->flag    = flag;
+    ci->bval    = false;
 
     // don't allocate the list if it's a bool
     if(!(flag & CMD_BOOL))
@@ -101,7 +101,7 @@ static void show_help(Cmd* ptr) {
 
     printf("use: %s ", ptr->fname);
     CmdItemListIter* cili = init_ci_list_iter(ptr->table);
-    int len = 0;
+    int len               = 0;
     while(NULL != (ci = iterate_ci_list(cili))) {
         if(strlen(ci->parm) > 0)
             printf("[%s] ", ci->parm);
@@ -194,7 +194,7 @@ static CmdItem* find_by_parm(Cmd* ptr, const char* parm) {
 #endif
         if(!strncmp(ci->parm, parm, len)) {
             if(len >= max) {
-                max = len;
+                max  = len;
                 crnt = ci;
             }
         }
@@ -255,7 +255,7 @@ static void get_cats(Cmd* cmd, CmdItem* ci, int len, char* str) {
 
 static void get_dash(Cmd* cmd, CmdItem* ci) {
 
-    char* str = get_token(cmd);
+    char* str  = get_token(cmd);
     size_t len = strlen(ci->parm);
 
     if(strlen(str) != len)
@@ -317,11 +317,11 @@ static void get_cmd(Cmd* cmd) {
 
 CmdLine create_cmd_line(const char* description) {
 
-    Cmd* ptr = _ALLOC_T(Cmd);
-    ptr->desc = _DUP_STR(description);
-    ptr->fname = NULL;
-    ptr->table = create_ci_list();
-    ptr->index = 0;
+    Cmd* ptr      = _ALLOC_T(Cmd);
+    ptr->desc     = _DUP_STR(description);
+    ptr->fname    = NULL;
+    ptr->table    = create_ci_list();
+    ptr->index    = 0;
     ptr->max_args = 0;
 
     return ptr;
@@ -442,11 +442,11 @@ CmdFlag get_cmd_flag(CmdLine cl, const char* name) {
 // Read the command line from the system.
 void parse_cmd_line(CmdLine cl, int argc, char** argv) {
 
-    Cmd* cmd = (Cmd*)cl;
-    cmd->fname = _DUP_STR(argv[0]);
-    cmd->line = argv;
+    Cmd* cmd      = (Cmd*)cl;
+    cmd->fname    = _DUP_STR(argv[0]);
+    cmd->line     = argv;
     cmd->max_args = argc;
-    cmd->index = 1;
+    cmd->index    = 1;
     consume_token(cmd); // prime the pump
 
     while(get_token(cmd) != NULL) {

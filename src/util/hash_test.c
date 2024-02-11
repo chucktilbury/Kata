@@ -69,7 +69,7 @@ int main() {
 
     long val;
     char* str = "ghjk";
-    bool res = find_hashtable(table, str, &val, sizeof(val));
+    bool res  = find_hashtable(table, str, &val, sizeof(val));
     printf("find: %s: %s: %lu\n", str, res ? "true" : "false", val);
     val = 0;
 
