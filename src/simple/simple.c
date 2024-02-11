@@ -23,12 +23,12 @@ int main(int argc, char** argv) {
 
     TRACE("Begin Parse");
     AstNode* node = parser(get_cmd_raw(cmd, "file"));
-    TRACE("End Parse\n");
+    TRACE("End Parse");
 
     TRY {
         TRACE("Begin Traverse");
         traverse_ast(node);
-        TRACE("End Traverse\n");
+        TRACE("End Traverse");
     }
     ANY_EXCEPT() {
         fprintf(stderr, "AST Traverse exception: %s\n", EXCEPTION_MSG);

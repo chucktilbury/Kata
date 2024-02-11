@@ -15,24 +15,30 @@ set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/bin")
 #set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${LIBRARY_OUTPUT_PATH}")
 #set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${EXECUTABLE_OUTPUT_PATH}")
 
-add_subdirectory(docs EXCLUDE_FROM_ALL)
-add_subdirectory(test)
 add_subdirectory(src)
+add_subdirectory(test EXCLUDE_FROM_ALL)
+add_subdirectory(docs EXCLUDE_FROM_ALL)
 
-file(GLOB_RECURSE format_xxfiles 
-    ${PROJECT_SOURCE_DIR}/src/parser/*.c 
+file(GLOB_RECURSE format_xxfiles
+    ${PROJECT_SOURCE_DIR}/src/parser/*.c
     ${PROJECT_SOURCE_DIR}/src/parser/*.h
-    ${PROJECT_SOURCE_DIR}/src/scanner/*.c 
+    ${PROJECT_SOURCE_DIR}/src/scanner/*.c
     ${PROJECT_SOURCE_DIR}/src/scanner/*.h
-    ${PROJECT_SOURCE_DIR}/src/simple/*.c 
+    ${PROJECT_SOURCE_DIR}/src/simple/*.c
     ${PROJECT_SOURCE_DIR}/src/simple/*.h
-    ${PROJECT_SOURCE_DIR}/test/*.c 
+    ${PROJECT_SOURCE_DIR}/test/*.c
     ${PROJECT_SOURCE_DIR}/test/*.h
 )
 
 add_custom_target(format
     COMMENT "Format the source code"
     COMMAND clang-format --verbose -i ${format_xxfiles}
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src
+    #WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src
 )
 
+add_custom_target(testing
+    COMMENT "Build the test programs"
+    COMMAND echo ${PROJECT_SOURCE_DIR}/test
+    COMMAND make -C test
+    #WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+)

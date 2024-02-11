@@ -796,7 +796,7 @@ const char* tok_to_str(TokenType type) {
  */
 void print_token(Token* tok) {
 
-    printf("terminal: %s: \"%s\": %d: %d: \"%s\"", tok_to_str(tok->type),
+    printf("%s: \"%s\": %d: %d: \"%s\"", tok_to_str(tok->type),
            raw_string(tok->str), tok->line_no, tok->col_no, tok->fname);
 }
 

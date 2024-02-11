@@ -438,4 +438,58 @@ typedef enum {
     LIST_ERROR,
 } UTIL_EXCEPTIONS;
 
+#ifdef USE_TRACE
+extern int trace_count;
+extern const int trace_increment;
+
+#define PAD printf("%*s", trace_count, "")
+#define CAP printf(" (%d)\n", __LINE__)
+
+#define TRACE(f, ...) do { \
+		PAD; \
+        printf("TRACE: %s(): ", __func__); \
+		printf((f) __VA_OPT__(,) __VA_ARGS__); \
+		CAP; \
+    } while(false)
+
+#define ENTER do { \
+		PAD; \
+		printf("ENTER: %s(): ", __func__); \
+		trace_count += trace_increment; \
+		CAP; \
+    } while(false)
+
+#define RET do { \
+		trace_count -= trace_increment; \
+		PAD; \
+		printf("RETURN: %s(): ", __func__); \
+		CAP; \
+		return; \
+    } while(false)
+
+#define RETV(v) do { \
+		trace_count -= trace_increment; \
+		PAD; \
+		printf("RETURN(%s): %s(): ", #v, __func__); \
+		CAP; \
+		return(v); \
+    } while(false)
+
+#define EXIT(n) do { \
+		PAD; \
+		printf("EXIT(#n): %s(): ", __func__); \
+		CAP; \
+		exit(v); \
+    } while(false)
+
+#else
+
+#define TRACE(f, ...)
+#define ENTER
+#define EXIT(n) exit(n)
+#define RET	return
+#define RETV(v)	return (v);
+
+#endif
+
 #endif /* _UTIL_H */
