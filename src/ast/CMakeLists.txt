@@ -5,6 +5,11 @@ project(ast)
 
 add_library(${PROJECT_NAME} STATIC
     ast.c
+    data.c
+    import.c
+    expression.c
+    module.c
+    namespace.c
 )
 
 target_compile_options(${PROJECT_NAME}

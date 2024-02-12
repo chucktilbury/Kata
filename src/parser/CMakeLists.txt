@@ -10,6 +10,7 @@ add_library(${PROJECT_NAME} STATIC
     errors.c
     expression.c
     data.c
+    namespace.c
 )
 
 target_compile_options(${PROJECT_NAME}

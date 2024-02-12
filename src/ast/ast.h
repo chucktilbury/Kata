@@ -13,98 +13,23 @@
 #define _AST_H
 
 typedef enum {
-    // Terminal symbols
-    AST_BREAK = 1000,
-    AST_CASE,
-    AST_CONTINUE,
-    AST_CONST,
-    AST_DEFAULT,
-    AST_IMPORT,
-    AST_DO,
-    AST_ELSE,
-    AST_FOR,
-    AST_IF,
-    AST_RETURN,
-    AST_SWITCH,
-    AST_WHILE,
-    AST_IN,
-    AST_TO,
-    AST_AS,
-    AST_YIELD,
-    AST_EXIT,
-    AST_TRY,
-    AST_EXCEPT,
-    AST_RAISE,
-    AST_CREATE,
-    AST_DESTROY,
-    AST_START,
-    AST_NAMESPACE,
-    AST_CLASS,
-    AST_STRUCT,
-    AST_PUBLIC,
-    AST_PRIVATE,
-    AST_PROTECTED,
-    AST_NUMBER,
-    AST_NOTHING,
-    AST_STRING,
-    AST_BOOLEAN,
-    AST_LIST,
-    AST_DICT,
-    AST_TRACE,
-    AST_PRINT,
-    AST_TYPE,
-    AST_TRUE_BOOL,
-    AST_FALSE_BOOL,
-    AST_LORE,
-    AST_GORE,
-    AST_EQU,
-    AST_NEQU,
-    AST_OR,
-    AST_AND,
-    AST_NOT,
-    AST_ADD_ASSIGN,
-    AST_SUB_ASSIGN,
-    AST_MUL_ASSIGN,
-    AST_DIV_ASSIGN,
-    AST_MOD_ASSIGN,
-    AST_ADD,
-    AST_SUB,
-    AST_ASSIGN,
-    AST_DIV,
-    AST_MUL,
-    AST_MOD,
-    AST_OPAREN,
-    AST_CPAREN,
-    AST_OCBRACE,
-    AST_CCBRACE,
-    AST_OSBRACE,
-    AST_CSBRACE,
-    AST_COMMA,
-    AST_DOT,
-    AST_OPBRACE,
-    AST_CPBRACE,
-    AST_COLON,
-    AST_CARAT,
-    AST_AMPER,
-    AST_INLINE,
-    AST_LITERAL_NUM,
-    AST_LITERAL_STR,
-    AST_SYMBOL,
-
-    // Non-terminal symbols
-    // defined in module.c
+    // module.c
     AST_symbol = 2000,
     AST_scope_operator,
-    AST_type_name,
-    AST_type_spec,
-    AST_type_spec_element,
     AST_compound_name,
-    AST_namespace_element,
-    AST_namespace_element_list,
-    AST_namespace_definition,
     AST_module_element,
     AST_module_element_list,
     AST_module,
+
+    // namespace.c
+    AST_namespace_element,
+    AST_namespace_element_list,
+    AST_namespace_definition,
+
+    // data.c
+    AST_type_name,
+    AST_type_spec,
+    AST_type_spec_element,
 
     // import.c
     AST_import_statement,
@@ -118,17 +43,48 @@ typedef enum {
 
 #include "util.h"
 
-typedef HashTable AstNode;
+typedef struct {
+    AstType type;
+} AstNode;
+
+//typedef HashTable AstNode;
 typedef enum {
     AST_OK,
     AST_DUP,
     AST_NF,
 } AstResult;
 
-AstNode* create_ast_node(AstType type);
+#define CREATE_AST_NODE(d, t)   create_ast_node((t), sizeof(d))
+
+AstNode* create_ast_node(AstType type, size_t size);
 AstResult add_ast_attrib(AstNode* node, const char* key, void* data, size_t size);
 AstResult get_ast_attrib(AstNode* name, const char* key, void* data, size_t size);
 void traverse_ast(AstNode* node);
 void print_nonterminal(AstNode* node);
+
+// module.c
+typedef struct __ast_module__ AstModule;
+typedef struct __ast_scope_operator__ AstScopeOperator;
+typedef struct __ast_module_element__ AstModuleElement;
+typedef struct __ast_compound_name__ AstCompoundName;
+
+// namespace.c
+typedef struct __ast_namespace_element__ AstNamespaceElement;
+typedef struct __ast_namespace_element_list__ AstNamespaceElementList;
+typedef struct __ast_namespace_definition__ AstNamespaceDefinition;
+
+// data.c
+typedef struct __ast_type_name__ AstTypeName;
+typedef struct __ast_type_spec_element__ AstTypeSpecElement;
+typedef struct __ast_type_spec__ AstTypeSpec;
+
+// import.c
+typedef struct __ast_import_statement__ AstImportStatement;
+
+// expression.c
+typedef struct __ast_primary_expression__ AstPrimaryExpression;
+typedef struct __ast_expression_list__ AstExpressionList;
+typedef struct __ast_expression__ AstExpression;
+typedef struct __ast_cast_statement__ AstCastExpression;
 
 #endif /* _AST_H */

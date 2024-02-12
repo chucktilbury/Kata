@@ -20,7 +20,7 @@
  * @return AstNode*
  *
  */
-AstNode* create_ast_node(AstType type) {
+AstNode* create_ast_node(AstType type, size_t size) {
 
     AstNode* node  = create_hashtable();
     HashResult res = insert_hashtable(node, "type", &type, sizeof(AstType));

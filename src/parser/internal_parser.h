@@ -50,7 +50,7 @@ AstNode* parse_type_spec();
 AstNode* parse_import_statement();
 
 // Defined in expression.c
-AstNode* primary_expression();
+AstNode* parse_primary_expression();
 AstNode* parse_expression_list();
 AstNode* parse_expression();
 AstNode* parse_cast_statement();
