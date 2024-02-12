@@ -27,33 +27,35 @@ typedef enum {
     MISC_ERROR,
 } ParserException;
 
-// Defined in parser.c
+// parser.c
 void pop_namespace();
 void push_namespace(Str* str);
 Str* peek_namespace();
 
-// Defined in module.c
-AstNode* parse_scope_operator();
-AstNode* parse_namespace_element();
-AstNode* parse_namespace_element_list();
-AstNode* parse_namespace_definition();
-AstNode* parse_module_element();
-AstNode* parse_module();
+// module.c
+AstCompoundName* parse_compound_name();
+AstScopeOperator* parse_scope_operator();
+AstModuleElement* parse_module_element();
+AstModule* parse_module();
 
-// Defined in data.c
-AstNode* parse_type_name();
-AstNode* parse_compound_name();
-AstNode* parse_type_spec_element();
-AstNode* parse_type_spec();
+// namespace.c
+AstNamespaceElement* parse_namespace_element();
+AstNamespaceBody* parse_namespace_body();
+AstNamespaceDefinition* parse_namespace_definition();
+
+// data.c
+AstTypeName* parse_type_name();
+AstTypeSpecElement* parse_type_spec_element();
+AstTypeSpec* parse_type_spec();
 
 // Defined in import.c
-AstNode* parse_import_statement();
+AstImportStatement* parse_import_statement();
 
 // Defined in expression.c
-AstNode* parse_primary_expression();
-AstNode* parse_expression_list();
-AstNode* parse_expression();
-AstNode* parse_cast_statement();
+AstPrimaryExpression* parse_primary_expression();
+AstExpressionList* parse_expression_list();
+AstExpression* parse_expression();
+AstCastExpression* parse_cast_expression();
 
 
 #endif /* _INTERNAL_PARSER_H */

@@ -10,22 +10,50 @@
  */
 #include "internal_ast.h"
 
-struct __ast_namespace_element__ {
-    AstNode node;
-    AstNode* elem;
-};
+/**
+ *  namespace_element
+ *      = namespace_definition
+ *      | type_spec
+ *      | scope_operator
+ *
+ * @param node
+ *
+ */
+int ast_namespace_element(AstNamespaceElement* node) {
 
-struct __ast_namespace_element_list__ {
-    AstNode node;
-    List* lst;
-};
+    assert(node != NULL);
+    assert(node->node.type == AST_namespace_element);
 
-struct __ast_namespace_definition__ {
-    AstNode node;
-    AstNamespaceDefinition* def;
-};
+    ENTER;
+    RETV(0);
+}
 
+/**
+ *  namespace_body = '{' (namespace_element)* '}'
+ *
+ * @param node
+ *
+ */
+int ast_namespace_body(AstNamespaceBody* node) {
 
-void ast_namespace_element(AstNode* node);
-void ast_namespace_element_list(AstNode* node);
-void ast_namespace_definition(AstNode* node);
+    assert(node != NULL);
+    assert(node->node.type == AST_namespace_body);
+
+    ENTER;
+    RETV(0);
+}
+
+/**
+ *  namespace_definition = 'namespace' SYMBOL namespace_body
+ * @param node
+ *
+ */
+int ast_namespace_definition(AstNamespaceDefinition* node) {
+
+    assert(node != NULL);
+    assert(node->node.type == AST_namespace_definition);
+
+    ENTER;
+    RETV(0);
+}
+

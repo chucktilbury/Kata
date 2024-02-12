@@ -20,17 +20,20 @@
  * @return AstNode*
  *
  */
-AstNode* parse_namespace_element() {
+AstNamespaceElement* parse_namespace_element() {
 
     ENTER;
-    AstNode *nterm, *node = NULL;
+    AstNode *nterm;
+    AstNamespaceElement* node = NULL;
 
-    if((NULL != (nterm = parse_namespace_definition())) ||
-       (NULL != (nterm = parse_type_spec())) || (NULL != (nterm = parse_scope_operator()))) {
+    if((NULL != (nterm = (AstNode*)parse_namespace_definition())) ||
+            (NULL != (nterm = (AstNode*)parse_type_spec())) ||
+            (NULL != (nterm = (AstNode*)parse_scope_operator()))) {
 
         TRACE_NTERM(nterm);
-        node = create_ast_node(AST_namespace_element);
-        add_ast_attrib(node, "nterm", nterm, sizeof(AstNode));
+        node = CREATE_AST_NODE(AST_namespace_element, AstNamespaceElement);
+        //add_ast_attrib(node, "nterm", nterm, sizeof(AstNode));
+        node->elem = nterm;
         finalize_token_queue();
     }
 
@@ -39,34 +42,35 @@ AstNode* parse_namespace_element() {
 
 /**
  * @brief List of namespace elements.
- *      namespace_elem_list = '{' (namespace_elem)* '}'
+ *      namespace_body = '{' (namespace_elem)* '}'
  *
  * @return AstNode*
  *
  */
-AstNode* parse_namespace_element_list() {
+AstNamespaceBody* parse_namespace_body() {
 
     ENTER;
-    Token* tok    = get_token();
-    AstNode* node = NULL;
+    Token* tok = get_token();
+    AstNamespaceBody* node = NULL;
 
     if(tok->type == TOK_OCBRACE) {
         TRACE_TERM(tok);
-        List* list = create_list(sizeof(AstNode));
+        PtrList* list = create_ptr_list(sizeof(AstNode));
         finalize_token();
         advance_token();
 
         while(true) {
             AstNode* nterm;
-            if(NULL != (nterm = parse_namespace_element())) {
+            if(NULL != (nterm = (AstNode*)parse_namespace_element())) {
                 TRACE_NTERM(nterm);
-                append_list(list, nterm);
+                add_ptr_list(list, nterm);
             }
             else if(get_token()->type == TOK_CCBRACE) {
                 TRACE_TERM(get_token());
                 finalize_token();
-                node = create_ast_node(AST_namespace_element_list);
-                add_ast_attrib(node, "list", list, sizeof(List));
+                node = CREATE_AST_NODE(AST_namespace_body, AstNamespaceBody);
+                //add_ast_attrib(node, "list", list, sizeof(List));
+                node->lst = list;
                 finalize_token_queue();
                 advance_token();
                 break;
@@ -92,15 +96,16 @@ AstNode* parse_namespace_element_list() {
 /**
  * @brief A complete namespace specification.
  *      namespace_definition
- *          = NAMESPACE SYMBOL namespace_element_list
+ *          = 'namespace' SYMBOL namespace_body
  *
  * @return AstNode*
  *
  */
-AstNode* parse_namespace_definition() {
+AstNamespaceDefinition* parse_namespace_definition() {
 
     ENTER;
-    AstNode *nterm, *node = NULL;
+    AstNamespaceBody *nterm;
+    AstNamespaceDefinition *node = NULL;
     Token* tok = get_token();
 
     if(tok->type == TOK_NAMESPACE) {
@@ -110,14 +115,16 @@ AstNode* parse_namespace_definition() {
 
         if(tok->type == TOK_SYMBOL) {
             TRACE_TERM(tok);
-            node = create_ast_node(AST_namespace_definition);
-            add_ast_attrib(node, "token", tok, sizeof(Token));
+            node = CREATE_AST_NODE(AST_namespace_definition, AstNamespaceDefinition);
+            //add_ast_attrib(node, "token", tok, sizeof(Token));
+            node->name = tok;
             finalize_token();
             advance_token(); // next token should be '{'
 
-            if(NULL != (nterm = parse_namespace_element_list())) {
-                TRACE_NTERM(node);
-                add_ast_attrib(node, "nterm", nterm, sizeof(AstNode));
+            if(NULL != (nterm = parse_namespace_body())) {
+                TRACE_NTERM((AstNode*)node);
+                //add_ast_attrib(node, "nterm", nterm, sizeof(AstNode));
+                node->body = nterm;
                 finalize_token_queue();
             }
             // else error is reported by namespace_element_list().

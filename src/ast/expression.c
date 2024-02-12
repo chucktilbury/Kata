@@ -8,31 +8,42 @@
  * @date 02-11-2024
  * @copyright Copyright (c) 2024
  */
-
 #include "internal_ast.h"
 
-struct __ast_primary_expression__ {
-    AstNode node;
-    AstNode* elem;
-};
 
-struct __ast_expression_list__ {
-    AstNode node;
-    List* lst;
-};
+int ast_primary_expression(AstPrimaryExpression* node) {
 
-struct __ast_expression__ {
-    AstNode node;
-    AstNode* elem;
-};
+    assert(node != NULL);
+    assert(node->node.type == AST_primary_expression);
 
-struct __ast_cast_statement__ {
-    AstNode node;
-    AstNode* elem;
-};
+    ENTER;
+    RETV(0);
+}
 
+int ast_expression_list(AstExpressionList* node) {
 
-void ast_primary_expression(AstNode* node);
-void ast_expression_list(AstNode* node);
-void ast_expression(AstNode* node);
-void ast_cast_statement(AstNode* node);
+    assert(node != NULL);
+    assert(node->node.type == AST_expression_list);
+
+    ENTER;
+    RETV(0);
+}
+
+int ast_expression(AstExpression* node) {
+
+    assert(node != NULL);
+    assert(node->node.type == AST_expression);
+
+    ENTER;
+    RETV(0);
+}
+
+int ast_cast_expression(AstCastExpression* node) {
+
+    assert(node != NULL);
+    assert(node->node.type == AST_cast_expression);
+
+    ENTER;
+    RETV(0);
+}
+

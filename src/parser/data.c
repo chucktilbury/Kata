@@ -25,19 +25,24 @@
  * @return NonTerm*
  *
  */
-AstNode* parse_type_name() {
+AstTypeName* parse_type_name() {
 
     ENTER;
     Token* tok    = get_token();
-    AstNode* node = NULL;
+    AstTypeName* node = NULL;
     void* post    = post_token_queue();
 
-    if(tok->type == TOK_NUMBER || tok->type == TOK_STRING || tok->type == TOK_NOTHING ||
-       tok->type == TOK_BOOLEAN || tok->type == TOK_LIST || tok->type == TOK_DICT) {
+    if(tok->type == TOK_NUMBER ||
+            tok->type == TOK_STRING ||
+            tok->type == TOK_NOTHING ||
+            tok->type == TOK_BOOLEAN ||
+            tok->type == TOK_LIST ||
+            tok->type == TOK_DICT) {
 
         TRACE_TERM(tok);
-        node = create_ast_node(AST_type_name);
-        add_ast_attrib(node, "token", tok, sizeof(Token));
+        node = CREATE_AST_NODE(AST_type_name, AstTypeName);
+        //add_ast_attrib(node, "token", tok, sizeof(Token));
+        node->tok = tok;
         finalize_token();
         advance_token();
         finalize_token_queue();
@@ -60,18 +65,21 @@ AstNode* parse_type_name() {
  * @return NonTerm*
  *
  */
-AstNode* parse_type_spec_element() {
+AstTypeSpecElement* parse_type_spec_element() {
 
     ENTER;
-    AstNode *nterm, *node = NULL;
+    AstNode *nterm;
+    AstTypeSpecElement *node = NULL;
     void* post = post_token_queue();
 
-    if((NULL != (nterm = parse_type_name())) || (NULL != (nterm = parse_compound_name()))) {
+    if((NULL != (nterm = (AstNode*)parse_type_name())) ||
+            (NULL != (nterm = (AstNode*)parse_compound_name()))) {
 
         // the element is a valid type name
         TRACE_NTERM(nterm);
-        node = create_ast_node(AST_type_spec_element);
-        add_ast_attrib(node, "nterm", nterm, sizeof(AstNode));
+        node = CREATE_AST_NODE(AST_type_spec_element, AstTypeSpecElement);
+        //add_ast_attrib(node, "nterm", nterm, sizeof(AstNode));
+        node->elem = nterm;
         finalize_token_queue();
     }
     else {
@@ -93,13 +101,13 @@ AstNode* parse_type_spec_element() {
  * @return NonTerm*
  *
  */
-AstNode* parse_type_spec() {
+AstTypeSpec* parse_type_spec() {
 
     ENTER;
-    Token* tok    = get_token();
+    Token* tok = get_token();
     bool constant = false;
-    void* post    = post_token_queue();
-    AstNode* node = NULL;
+    void* post = post_token_queue();
+    AstTypeSpec* node = NULL;
 
     if(tok->type == TOK_CONST) {
         TRACE_TERM(tok);
@@ -108,12 +116,14 @@ AstNode* parse_type_spec() {
         advance_token();
     }
 
-    AstNode* nterm;
+    AstTypeSpecElement* nterm;
     if(NULL != (nterm = parse_type_spec_element())) {
-        TRACE_NTERM(nterm);
-        node = create_ast_node(AST_type_spec);
-        add_ast_attrib(node, "nterm", nterm, sizeof(AstNode));
-        add_ast_attrib(node, "is_const", &constant, sizeof(bool));
+        TRACE_NTERM((AstNode*)nterm);
+        node = CREATE_AST_NODE(AST_type_spec, AstTypeSpec);
+        //add_ast_attrib(node, "nterm", nterm, sizeof(AstNode));
+        //add_ast_attrib(node, "is_const", &constant, sizeof(bool));
+        node->elem = nterm;
+        node->is_const = constant;
         finalize_token_queue();
     }
     // if there is no const and it's not a type_spec_element, then it's not

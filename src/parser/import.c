@@ -52,10 +52,10 @@ static bool do_import(Str* fname, Str* symbol) {
  * @return AstNode*
  *
  */
-AstNode* parse_import_statement() {
+AstImportStatement* parse_import_statement() {
 
     ENTER;
-    AstNode* node = NULL;
+    AstImportStatement* node = NULL;
     Token* tok    = get_token();
     Str* filename;
     Str* symbol;
@@ -104,9 +104,11 @@ AstNode* parse_import_statement() {
         RETV(NULL);
     }
 
-    node = create_ast_node(AST_import_statement);
-    add_ast_attrib(node, "filename", filename, sizeof(Str));
-    add_ast_attrib(node, "symbol", symbol, sizeof(Str));
+    node = CREATE_AST_NODE(AST_import_statement, AstImportStatement);
+    //add_ast_attrib(node, "filename", filename, sizeof(Str));
+    //add_ast_attrib(node, "symbol", symbol, sizeof(Str));
+    node->fname = filename;
+    node->symbol = symbol;
     finalize_token_queue();
 
     TRACE("node is complete");

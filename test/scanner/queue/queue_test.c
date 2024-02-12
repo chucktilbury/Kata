@@ -52,15 +52,16 @@ void* parse_module_element();
 void* parse_scope_operator() {
 
     ENTER;
-    AstNode* node = NULL;
+    AstScopeOperator* node = NULL;
     Token* tok    = get_token(); // this returns a pointer to the current token
     // void* post = post_token_queue(); // mark the position in the token queue
 
     if(tok->type == TOK_PUBLIC || tok->type == TOK_PRIVATE || tok->type == TOK_PROTECTED) {
 
         TRACE_TERM(tok);
-        node = create_ast_node(AST_scope_operator);
-        add_ast_attrib(node, "token", tok, sizeof(Token));
+        node = CREATE_AST_NODE(AST_scope_operator, AstScopeOperator);
+        //add_ast_attrib(node, "token", tok, sizeof(Token));
+        node->tok = tok;
         finalize_token(); // mark this token as used
         advance_token();  // consume the token in the queue
     }
@@ -79,10 +80,10 @@ void* parse_scope_operator() {
  *      : OCBRACE (module_element)* CCBRACE
  *
  */
-void* parse_namespace_element_list() {
+void* parse_namespace_body() {
 
     ENTER;
-    AstNode* node = NULL;
+    AstNamespaceBody* node = NULL;
     Token* tok    = get_token();
     // There are no cases where this can return without a valid parse
     // or an error.
@@ -109,8 +110,9 @@ void* parse_namespace_element_list() {
         }
         else if(get_token()->type == TOK_CCBRACE) {
             TRACE("parsed a '}'");
-            node = create_ast_node(AST_namespace_element_list);
-            add_ast_attrib(node, "list", lst, sizeof(List));
+            node = CREATE_AST_NODE(AST_namespace_body, AstNamespaceBody);
+            //add_ast_attrib(node, "list", lst, sizeof(List));
+            node->lst = lst;
             TRACE("list size: %d", length_list(lst));
             finalize_token();
             advance_token();
@@ -136,12 +138,12 @@ void* parse_namespace_element_list() {
  *
  *  # Keyword with an optional name and a body
  *  namespace_definition
- *      : NAMESPACE (SYMBOL)? parse_namespace_element_list
+ *      : NAMESPACE (SYMBOL)? parse_namespace_body
  */
 void* parse_namespace_definition() {
 
     ENTER;
-    AstNode* node = NULL;
+    AstNamespaceDefinition* node = NULL;
     Token* tok    = get_token();
     // There are no cases where this can return and a token has been read
     // but there was no error. So there is no need to post the queue.
@@ -156,15 +158,17 @@ void* parse_namespace_definition() {
         if(tok->type == TOK_SYMBOL) {
             // consume the token...
             TRACE_TERM(tok);
-            node = create_ast_node(AST_namespace_definition);
-            add_ast_attrib(node, "token", tok, sizeof(Token));
+            node = CREATE_AST_NODE(AST_namespace_definition, AstNamespaceDefinition);
+            //add_ast_attrib(node, "token", tok, sizeof(Token));
+            node->name = tok;
             finalize_token();
             advance_token(); // consume the token
 
-            AstNode* nsel;
-            if(NULL != (nsel = parse_namespace_element_list())) {
+            AstNamespaceBody* body;
+            if(NULL != (body = parse_namespace_body())) {
                 TRACE("have a valid namespace element list");
-                add_ast_attrib(node, "nterm", nsel, sizeof(AstNode));
+                //add_ast_attrib(node, "nterm", nsel, sizeof(AstNode));
+                node->body = body;
             }
             else {
                 // syntax error, could not parse the list
@@ -194,26 +198,29 @@ void* parse_namespace_definition() {
 void* parse_module_element() {
 
     ENTER;
-    AstNode* node = NULL;
+    AstModuleElement* node = NULL;
     AstNode* mod_elem;
     void* post = post_token_queue();
 
     if(NULL != (mod_elem = parse_scope_operator())) {
         TRACE("found a scope operator");
-        node = create_ast_node(AST_module_element);
-        add_ast_attrib(node, "nterm", mod_elem, sizeof(AstNode));
+        node = CREATE_AST_NODE(AST_module_element, AstModuleElement);
+        //add_ast_attrib(node, "nterm", mod_elem, sizeof(AstNode));
+        node->elem = mod_elem;
         finalize_token_queue();
     }
     else if(NULL != (mod_elem = parse_namespace_definition())) {
         TRACE("found a namespace definition");
-        node = create_ast_node(AST_module_element);
-        add_ast_attrib(node, "nterm", mod_elem, sizeof(AstNode));
+        node = CREATE_AST_NODE(AST_module_element, AstModuleElement);
+        //add_ast_attrib(node, "nterm", mod_elem, sizeof(AstNode));
+        node->elem = mod_elem;
         finalize_token_queue();
     }
     else if(get_token()->type == TOK_SYMBOL) {
         TRACE_TERM(get_token());
-        node = create_ast_node(AST_module_element);
-        add_ast_attrib(node, "token", get_token(), sizeof(Token));
+        node = CREATE_AST_NODE(AST_module_element, AstModuleElement);
+        //add_ast_attrib(node, "token", get_token(), sizeof(Token));
+        node->elem = mod_elem;
         // consume the token....
         finalize_token();
         advance_token();
@@ -238,11 +245,11 @@ void* parse_module() {
 
     ENTER;
     AstNode* mod_elem;
-    List* node_lst = create_list(sizeof(AstNode));
+    PtrList* node_lst = create_ptr_list();
 
     // one or more
-    while(NULL != (mod_elem = parse_module_element()))
-        append_list(node_lst, (void*)mod_elem);
+    while(NULL != (mod_elem = (AstNode*)parse_module_element()))
+        add_ptr_list(node_lst, (void*)mod_elem);
 
     Token* tok = get_token();
     if(tok->type != TOK_END_OF_FILE) {
@@ -264,8 +271,9 @@ void* parse_module() {
     }
     TRACE("handle end of input and return node");
 
-    AstNode* node = create_ast_node(AST_module);
-    add_ast_attrib(node, "list", node_lst, sizeof(List));
+    AstModule* node = CREATE_AST_NODE(AST_module, AstModule);
+    //add_ast_attrib(node, "list", node_lst, sizeof(List));
+    node->lst = node_lst;
 
     RETV(node);
 }
@@ -338,7 +346,7 @@ int main(int argc, char** argv) {
     printf("End Parse\n");
 
     printf("\nDump the AST\n");
-    traverse_ast(node);
+    //traverse_ast(node);
     printf("End Dump\n\n");
 
     RETV(0);

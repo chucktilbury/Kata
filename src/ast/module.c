@@ -10,27 +10,87 @@
  */
 #include "internal_ast.h"
 
-struct __ast_module__ {
-    AstNode node;
-    List* lst;
-};
+/**
+ *  scope_operator
+ *      = PUBLIC
+ *      | PRIVATE
+ *      | PROTECTED
+ *
+ * @param node
+ *
+ */
+int ast_scope_operator(AstScopeOperator* node) {
 
-struct __ast_scope_operator__ {
-    AstNode node;
-    Token* token;
-};
+    assert(node != NULL);
+    assert(node->node.type == AST_scope_operator);
 
-struct __ast_module_element__ {
-    AstNode node;
-    AstNode* elem;
-};
+    ENTER;
+    RETV(0);
+}
 
-struct __ast_compound_name__ {
-    AstNode node;
-    List* lst;
-};
+/**
+ *  module_element
+ *      = namespace_element
+ *      | import_statement
+ *
+ * @param node
+ *
+ */
+int ast_module_element(AstModuleElement* node) {
 
-void ast_scope_operator(AstNode* node);
-void ast_module_element(AstNode* node);
-void ast_module(AstNode* node);
-void ast_compound_name(AstNode* node);
+    assert(node != NULL);
+    assert(node->node.type == AST_module_element);
+
+    ENTER;
+    RETV(0);
+}
+
+/**
+ * module = (module_element)+
+ *
+ * @param node
+ *
+ */
+int ast_module(AstModule* node) {
+
+    assert(node != NULL);
+    assert(node->node.type == AST_module);
+
+    ENTER;
+    TRACE("NODE: AstModule");
+    PtrListIter* iter = init_ptr_list_iterator(node->lst);
+    AstNode* n;
+
+    while(n = iterate_ptr_list(iter)) {
+        AstType type = get_ast_node_type((AstNode*)n);
+        switch(type) {
+            case AST_import_statement:
+                ast_import_statement((AstImportStatement*)n);
+                break;
+            case AST_namespace_element:
+                ast_namespace_element((AstNamespaceElement*)n);
+                break;
+            default:
+                RAISE(AST_TRAVERSE_ERROR, "expected import statment or a "
+                        "namespace element but got a %s", n_to_str(n));
+                break;
+        }
+    }
+    RETV(0);
+}
+
+/**
+ *  compound_name = SYMBOL ('.' SYMBOL)*
+ *
+ * @param node
+ *
+ */
+int ast_compound_name(AstCompoundName* node) {
+
+    assert(node != NULL);
+    assert(node->node.type == AST_compound_name);
+
+    ENTER;
+    RETV(0);
+}
+

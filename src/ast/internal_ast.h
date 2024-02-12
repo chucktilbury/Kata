@@ -19,28 +19,28 @@
 #include "util.h"
 
 // Defined in module.c
-void ast_scope_operator(AstNode* node);
-void ast_module_element(AstNode* node);
-void ast_module(AstNode* node);
-void ast_compound_name(AstNode* node);
+int ast_scope_operator(AstScopeOperator* node);
+int ast_module_element(AstModuleElement* node);
+int ast_module(AstModule* node);
+int ast_compound_name(AstCompoundName* node);
 
 // namespace.c
-void ast_namespace_element(AstNode* node);
-void ast_namespace_element_list(AstNode* node);
-void ast_namespace_definition(AstNode* node);
+int ast_namespace_element(AstNamespaceElement* node);
+int ast_namespace_element_list(AstNamespaceBody* node);
+int ast_namespace_definition(AstNamespaceDefinition* node);
 
 // Defined in data.c
-void ast_type_name(AstNode* node);
-void ast_type_spec_element(AstNode* node);
-void ast_type_spec(AstNode* node);
+int ast_type_name(AstTypeName* node);
+int ast_type_spec_element(AstTypeSpecElement* node);
+int ast_type_spec(AstTypeSpec* node);
 
 // Defined in import.c
-void ast_import_statement(AstNode* node);
+int ast_import_statement(AstImportStatement* node);
 
 // Defined in expression.c
-void ast_primary_expression(AstNode* node);
-void ast_expression_list(AstNode* node);
-void ast_expression(AstNode* node);
-void ast_cast_statement(AstNode* node);
+int ast_primary_expression(AstPrimaryExpression* node);
+int ast_expression_list(AstExpressionList* node);
+int ast_expression(AstExpression* node);
+int ast_cast_expression(AstCastExpression* node);
 
 #endif /* _INTERNAL_AST_H */

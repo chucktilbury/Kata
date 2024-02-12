@@ -76,7 +76,7 @@ static int get_precedence(TokenType type) {
  *
  *  NOTE: formatted string and compound reference hace not been implemented yet.
  */
-AstNode* parse_primary_expression() {
+AstPrimaryExpression* parse_primary_expression() {
 
     ENTER;
     RETV(NULL);
@@ -91,7 +91,7 @@ AstNode* parse_primary_expression() {
  * @return AstNode*
  *
  */
-AstNode* parse_expression_list() {
+AstExpressionList* parse_expression_list() {
 
     ENTER;
     RETV(NULL);
@@ -104,7 +104,7 @@ AstNode* parse_expression_list() {
  * @return AstNode*
  *
  */
-AstNode* parse_expression() {
+AstExpression* parse_expression() {
 
     ENTER;
     get_precedence(0);
@@ -121,7 +121,7 @@ AstNode* parse_expression() {
  * @return AstNode*
  *
  */
-AstNode* parse_cast_statement() {
+AstCastExpression* parse_cast_expression() {
 
     ENTER;
     RETV(NULL);

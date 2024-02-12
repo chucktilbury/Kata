@@ -12,6 +12,7 @@ target_link_libraries(${PROJECT_NAME}
     scanner
     parser
     util
+    ast
     gc
 )
 
@@ -25,7 +26,8 @@ target_compile_options(${PROJECT_NAME}
         -I${PROJECT_SOURCE_DIR}/../../../src/util
         -I${PROJECT_SOURCE_DIR}/../../../src/scanner
         -I${PROJECT_SOURCE_DIR}/../../../src/parser
-        -I${PROJECT_SOURCE_DIR}/../../../src/bdwgc/include
+        -I${PROJECT_SOURCE_DIR}/../../../src/gc
+        -I${PROJECT_SOURCE_DIR}/../../../src/ast
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DENABLE_LOGGER >
         $<$<CONFIG:DEBUG>:-DUSE_TRACE >

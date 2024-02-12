@@ -23,18 +23,20 @@
  * @return NonTerm*
  *
  */
-AstNode* parse_scope_operator() {
+AstScopeOperator* parse_scope_operator() {
 
     ENTER;
-    Token* tok    = get_token();
-    AstNode* node = NULL;
-    void* post    = post_token_queue();
+    Token* tok = get_token();
+    AstScopeOperator* node = NULL;
+    void* post = post_token_queue();
 
-    if(tok->type == TOK_PUBLIC || tok->type == TOK_PRIVATE || tok->type == TOK_PROTECTED) {
+    if(tok->type == TOK_PUBLIC || tok->type == TOK_PRIVATE ||
+        tok->type == TOK_PROTECTED) {
 
         TRACE_TERM(tok);
-        node = create_ast_node(AST_scope_operator);
-        add_ast_attrib(node, "token", tok, sizeof(Token));
+        node = CREATE_AST_NODE(AST_scope_operator, AstScopeOperator);
+        //node->tok = copy_token(tok);
+        node->tok = tok;
         finalize_token();
         advance_token();
         finalize_token_queue();
@@ -57,16 +59,17 @@ AstNode* parse_scope_operator() {
  * @return AstNode*
  *
  */
-AstNode* parse_module_element() {
+AstModuleElement* parse_module_element() {
 
     ENTER;
-    AstNode *nterm, *node = NULL;
+    AstNode *nterm;
+    AstModuleElement* node;
 
-    if((NULL != (nterm = parse_namespace_element())) || (NULL != (nterm = parse_import_statement()))) {
-
+    if((NULL != (nterm = (AstNode*)parse_namespace_element())) ||
+            (NULL != (nterm = (AstNode*)parse_import_statement()))) {
         TRACE_NTERM(nterm);
-        node = create_ast_node(AST_module_element);
-        add_ast_attrib(node, "nterm", nterm, sizeof(AstNode));
+        node = CREATE_AST_NODE(AST_module_element, AstModuleElement);
+        node->elem = nterm;
         finalize_token_queue();
     }
 
@@ -82,18 +85,18 @@ AstNode* parse_module_element() {
  * @return NonTerm*
  *
  */
-AstNode* parse_compound_name() {
+AstCompoundName* parse_compound_name() {
 
     ENTER;
-    Token* tok    = get_token();
-    void* post    = post_token_queue();
-    AstNode* node = NULL;
-    List* lst;
+    Token* tok = get_token();
+    void* post = post_token_queue();
+    AstCompoundName* node = NULL;
+    PtrList* lst;
 
     if(tok->type == TOK_SYMBOL) {
         TRACE_TERM(tok);
-        lst = create_list(sizeof(Token));
-        append_list(lst, tok);
+        lst = create_ptr_list();
+        add_ptr_list(lst, tok);
         finalize_token();
         tok = advance_token();
 
@@ -106,7 +109,7 @@ AstNode* parse_compound_name() {
                 if(tok->type == TOK_SYMBOL) {
                     // another element to add
                     TRACE_TERM(tok);
-                    append_list(lst, tok);
+                    add_ptr_list(lst, tok);
                 }
                 else {
                     // handle an error because a dot must be followed by
@@ -120,8 +123,9 @@ AstNode* parse_compound_name() {
                 tok = advance_token();
                 if(tok->type != TOK_DOT) {
                     // non-terminal is complete
-                    node = create_ast_node(AST_compound_name);
-                    add_ast_attrib(node, "tlist", lst, sizeof(List));
+                    node = CREATE_AST_NODE(AST_compound_name, AstCompoundName);
+                    //add_ast_attrib(node, "tlist", lst, sizeof(List));
+                    node->lst = lst;
                     finalize_token_queue();
                     break;
                 }
@@ -131,8 +135,9 @@ AstNode* parse_compound_name() {
         else {
             // single symbol is a match
             TRACE("single symbol compound");
-            node = create_ast_node(AST_compound_name);
-            add_ast_attrib(node, "tlist", lst, sizeof(List));
+            node = CREATE_AST_NODE(AST_compound_name, AstCompoundName);
+            //add_ast_attrib(node, "tlist", lst, sizeof(List));
+            node->lst = lst;
             finalize_token_queue();
         }
     }
@@ -155,17 +160,18 @@ AstNode* parse_compound_name() {
  * @return AstNode*
  *
  */
-AstNode* parse_module() {
+AstModule* parse_module() {
 
     ENTER;
-    AstNode *nterm, *node = NULL;
-    List* list = create_list(sizeof(AstNode));
+    AstNode *nterm;
+    AstModule* node = NULL;
+    PtrList* list = create_ptr_list();
     Token* tok;
 
     while(true) {
-        if(NULL != (nterm = parse_module_element())) {
+        if(NULL != (nterm = (AstNode*)parse_module_element())) {
             TRACE_NTERM(nterm);
-            append_list(list, (void*)nterm);
+            add_ptr_list(list, (void*)nterm);
         }
         else if(get_token()->type == TOK_END_OF_FILE) {
             // handle end of file
@@ -181,8 +187,9 @@ AstNode* parse_module() {
     tok = get_token();
     if(tok->type == TOK_END_OF_INPUT) {
         TRACE_TERM(tok);
-        node = create_ast_node(AST_module);
-        add_ast_attrib(node, "list", list, sizeof(List));
+        node = CREATE_AST_NODE(AST_module, AstModule);
+        //add_ast_attrib(node, "list", list, sizeof(List));
+        node->lst = list;
         finalize_token_queue();
         RETV(node);
     }

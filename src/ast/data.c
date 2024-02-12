@@ -10,21 +10,42 @@
  */
 #include "internal_ast.h"
 
-struct __ast_type_name__ {
-    AstNode node;
-    AstNode* elem;
-};
+/**
+ *  type_name
+*       = TOK_NUMBER
+ *      / TOK_NOTHING
+ *      / TOK_STRING
+ *      / TOK_BOOLEAN
+ *      / TOK_LIST
+ *      / TOK_DICT
+ *
+ * @param node
+ *
+ */
+int ast_type_name(AstTypeName* node) {
 
-struct __ast_type_spec_element__ {
-    AstNode node;
-    AstNode* elem;
-};
+    assert(node != NULL);
+    assert(node->node.type == AST_type_name);
 
-struct __ast_type_spec__ {
-    AstNode node;
-    AstNode* elem;
-};
+    ENTER;
+    RETV(0);
+}
 
-void ast_type_name(AstNode* node);
-void ast_type_spec_element(AstNode* node);
-void ast_type_spec(AstNode* node);
+int ast_type_spec_element(AstTypeSpecElement* node) {
+
+    assert(node != NULL);
+    assert(node->node.type == AST_type_spec_element);
+
+    ENTER;
+    RETV(0);
+}
+
+int ast_type_spec(AstTypeSpec* node) {
+
+    assert(node != NULL);
+    assert(node->node.type == AST_type_spec);
+
+    ENTER;
+    RETV(0);
+}
+

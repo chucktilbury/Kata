@@ -10,9 +10,11 @@
  */
 #include "internal_ast.h"
 
-struct __ast_import_statement__ {
-    AstNode node;
-    AstNode* elem;
-};
+int ast_import_statement(AstImportStatement* node) {
 
-void ast_import_statement(AstNode* node);
+    assert(node != NULL);
+    assert(node->node.type == AST_import_statement);
+
+    ENTER;
+    RETV(0);
+}
