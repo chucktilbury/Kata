@@ -42,6 +42,23 @@ int ast_module_element(AstModuleElement* node) {
     assert(node->node.type == AST_module_element);
 
     ENTER;
+    TRACE("NODE: %s", n_to_str(node));
+    PtrListIter* iter = init_ptr_list_iterator(node->lst);
+    AstNode* n;
+
+    AstType type = get_ast_node_type((AstNode*)n);
+    switch(type) {
+        case AST_import_statement:
+            ast_import_statement((AstImportStatement*)n);
+            break;
+        case AST_namespace_element:
+            ast_namespace_element((AstNamespaceElement*)n);
+            break;
+        default:
+            RAISE(AST_TRAVERSE_ERROR, "expected import statment or a "
+                    "namespace element but got a %s", n_to_str(n));
+            break;
+    }
     RETV(0);
 }
 
@@ -57,7 +74,7 @@ int ast_module(AstModule* node) {
     assert(node->node.type == AST_module);
 
     ENTER;
-    TRACE("NODE: AstModule");
+    TRACE("NODE: %s", n_to_str(node));
     PtrListIter* iter = init_ptr_list_iterator(node->lst);
     AstNode* n;
 

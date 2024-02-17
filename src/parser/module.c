@@ -30,8 +30,9 @@ AstScopeOperator* parse_scope_operator() {
     AstScopeOperator* node = NULL;
     void* post = post_token_queue();
 
-    if(tok->type == TOK_PUBLIC || tok->type == TOK_PRIVATE ||
-        tok->type == TOK_PROTECTED) {
+    if(tok->type == TOK_PUBLIC ||
+            tok->type == TOK_PRIVATE ||
+            tok->type == TOK_PROTECTED) {
 
         TRACE_TERM(tok);
         node = CREATE_AST_NODE(AST_scope_operator, AstScopeOperator);
