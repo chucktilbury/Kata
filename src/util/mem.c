@@ -61,10 +61,10 @@ char* mem_fdup_str(const char* str, ...) {
     va_list args;
 
     va_start(args, str);
-    size_t len = vsnprintf(NULL, 0, str, args);
+    size_t len = vsnprintf(NULL, 0, str, args) + 1;
     va_end(args);
 
-    char* buffer = mem_alloc(len + 1);
+    char* buffer = mem_alloc(len);
 
     va_start(args, str);
     vsnprintf(buffer, len, str, args);

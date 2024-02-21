@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2024
  */
 #include "ast.h"
-#include "internal_parser.h"
+#include "internal_ast.h"
 #include "scanner.h"
 #include "trace.h"
 
@@ -72,12 +72,16 @@ const char* n_to_str(AstNode* node) {
  * @param node
  *
  */
-int traverse_ast(AstModule* tree) {
+void traverse_ast(AstModule* tree) {
 
     assert(tree != NULL);
     ENTER;
 
-    RETV(0);
+    ast_module(tree);
+
+    RET;
+
+    //RETV(0);
 }
 
 /**

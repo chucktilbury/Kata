@@ -10,11 +10,21 @@
  */
 #include "internal_ast.h"
 
-int ast_import_statement(AstImportStatement* node) {
+/**
+ * import_statement
+ *      = 'import' STR 'as' SYMBOL
+ *
+ * @param node
+ *
+ */
+void ast_import_statement(AstImportStatement* node) {
 
     assert(node != NULL);
     assert(node->node.type == AST_import_statement);
 
     ENTER;
-    RETV(0);
+    TRACE("NODE: %s", n_to_str((AstNode*)node));
+    TRACE_TERM(node->fname);
+    TRACE_TERM(node->symbol);
+    RET;
 }

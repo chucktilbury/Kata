@@ -26,7 +26,7 @@
 #define _DUP_MEM_T(p, t) (t*)mem_dup((p), sizeof(t))
 #define _DUP_MEM_ARRAY(p, t, n) (t*)mem_dup((p), sizeof(t) * (n))
 #define _DUP_STR(p) mem_dup_str(p)
-#define _FDUP_STR(p, ...) mem_fdup_str(p, ##__VA_ARGS__)
+#define _FDUP_STR(p, ...) mem_fdup_str(p __VA_OPT__(,) __VA_ARGS__)
 #define _FREE(p) mem_free(((void*)p))
 
 void* mem_alloc(size_t size);
@@ -449,7 +449,7 @@ extern const int trace_increment;
     do {                                       \
         PAD;                                   \
         printf("TRACE: %s(): ", __func__);     \
-        printf((f)__VA_OPT__(, ) __VA_ARGS__); \
+        printf((f) __VA_OPT__(,) __VA_ARGS__); \
         CAP;                                   \
     } while(false)
 

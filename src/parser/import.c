@@ -57,8 +57,8 @@ AstImportStatement* parse_import_statement() {
     ENTER;
     AstImportStatement* node = NULL;
     Token* tok    = get_token();
-    Str* filename;
-    Str* symbol;
+    Token* filename;
+    Token* symbol;
 
     if(tok->type == TOK_IMPORT) {
         TRACE_TERM(tok);
@@ -73,8 +73,8 @@ AstImportStatement* parse_import_statement() {
     // NOTE: This calls for a TOK_LITERAL_STR, because the formatted
     // string production has not been written yet.
     if(tok->type == TOK_LITERAL_STR) {
-        filename = copy_string(tok->str);
-        TRACE("file name = %s", raw_string(filename));
+        filename = tok; //copy_string(tok->str);
+        TRACE("file name = %s", raw_string(tok->str));
         finalize_token();
         tok = advance_token();
     }
@@ -94,8 +94,8 @@ AstImportStatement* parse_import_statement() {
     }
 
     if(tok->type == TOK_SYMBOL) {
-        symbol = copy_string(tok->str);
-        TRACE("symbol = \"%s\"", raw_string(symbol));
+        symbol = tok; //copy_string(tok->str);
+        TRACE("symbol = \"%s\"", raw_string(tok->str));
         finalize_token();
         // advance_token();
     }
@@ -113,7 +113,7 @@ AstImportStatement* parse_import_statement() {
 
     TRACE("node is complete");
     // handle the actual import
-    if(!do_import(filename, symbol))
+    if(!do_import(filename->str, symbol->str))
         node = NULL;
 
     RETV(node);

@@ -11,39 +11,43 @@
 #include "internal_ast.h"
 
 
-int ast_primary_expression(AstPrimaryExpression* node) {
+void ast_primary_expression(AstPrimaryExpression* node) {
 
     assert(node != NULL);
     assert(node->node.type == AST_primary_expression);
 
     ENTER;
-    RETV(0);
+    TRACE("NODE: %s", n_to_str((AstNode*)node));
+    RET;
 }
 
-int ast_expression_list(AstExpressionList* node) {
+void ast_expression_list(AstExpressionList* node) {
 
     assert(node != NULL);
     assert(node->node.type == AST_expression_list);
 
     ENTER;
-    RETV(0);
+    TRACE("NODE: %s", n_to_str((AstNode*)node));
+    RET;
 }
 
-int ast_expression(AstExpression* node) {
+void ast_expression(AstExpression* node) {
 
     assert(node != NULL);
     assert(node->node.type == AST_expression);
 
     ENTER;
-    RETV(0);
+    TRACE("NODE: %s", n_to_str((AstNode*)node));
+    RET;
 }
 
-int ast_cast_expression(AstCastExpression* node) {
+void ast_cast_expression(AstCastExpression* node) {
 
     assert(node != NULL);
     assert(node->node.type == AST_cast_expression);
 
     ENTER;
-    RETV(0);
+    TRACE("NODE: %s", n_to_str((AstNode*)node));
+    RET;
 }
 

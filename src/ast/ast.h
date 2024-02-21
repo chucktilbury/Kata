@@ -49,6 +49,7 @@ typedef enum {
 
 typedef struct {
     AstType type;
+    bool seen;
 } AstNode;
 
 // module.c
@@ -70,7 +71,7 @@ typedef struct __ast_module_element__ {
 typedef struct __ast_compound_name__ {
     AstNode node;
     PtrList* lst; // list of tokens
-    Str* raw_str; // raw string
+    Str* str; // raw string
 } AstCompoundName;
 
 // namespace.c
@@ -110,8 +111,8 @@ typedef struct __ast_type_spec__ {
 // import.c
 typedef struct __ast_import_statement__ {
     AstNode node;
-    Str* fname;
-    Str* symbol;
+    Token* fname;
+    Token* symbol;
 } AstImportStatement;
 
 // expression.c
@@ -135,7 +136,8 @@ typedef struct __ast_cast_expression__ {
 
 AstNode* create_ast_node(AstType type, size_t size);
 AstType get_ast_node_type(AstNode* node);
-int traverse_ast(AstModule* node);
+void traverse_ast(AstModule* node);
 void print_nonterminal(AstNode* node);
+const char* n_to_str(AstNode* node);
 
 #endif /* _AST_H */

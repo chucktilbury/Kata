@@ -64,7 +64,7 @@ AstModuleElement* parse_module_element() {
 
     ENTER;
     AstNode *nterm;
-    AstModuleElement* node;
+    AstModuleElement* node = NULL;
 
     if((NULL != (nterm = (AstNode*)parse_namespace_element())) ||
             (NULL != (nterm = (AstNode*)parse_import_statement()))) {
@@ -93,16 +93,20 @@ AstCompoundName* parse_compound_name() {
     void* post = post_token_queue();
     AstCompoundName* node = NULL;
     PtrList* lst;
+    Str* str;
 
     if(tok->type == TOK_SYMBOL) {
         TRACE_TERM(tok);
         lst = create_ptr_list();
         add_ptr_list(lst, tok);
+        str = create_string(NULL);
+        add_string_Str(str, tok->str);
         finalize_token();
         tok = advance_token();
 
         if(tok->type == TOK_DOT) {
             // more than one element
+            add_string_char(str, '.');
             while(true) {
                 finalize_token();
                 tok = advance_token();
@@ -111,6 +115,7 @@ AstCompoundName* parse_compound_name() {
                     // another element to add
                     TRACE_TERM(tok);
                     add_ptr_list(lst, tok);
+                    add_string_Str(str, tok->str);
                 }
                 else {
                     // handle an error because a dot must be followed by
@@ -127,10 +132,14 @@ AstCompoundName* parse_compound_name() {
                     node = CREATE_AST_NODE(AST_compound_name, AstCompoundName);
                     //add_ast_attrib(node, "tlist", lst, sizeof(List));
                     node->lst = lst;
+                    node->str = str;
                     finalize_token_queue();
                     break;
                 }
-                // else it is a dot, so continue
+                else {
+                    // else it is a dot, so continue
+                    add_string_char(str, '.');
+                }
             }
         }
         else {
@@ -139,6 +148,7 @@ AstCompoundName* parse_compound_name() {
             node = CREATE_AST_NODE(AST_compound_name, AstCompoundName);
             //add_ast_attrib(node, "tlist", lst, sizeof(List));
             node->lst = lst;
+            node->str = str;
             finalize_token_queue();
         }
     }

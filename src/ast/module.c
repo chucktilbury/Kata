@@ -19,13 +19,16 @@
  * @param node
  *
  */
-int ast_scope_operator(AstScopeOperator* node) {
+void ast_scope_operator(AstScopeOperator* node) {
 
     assert(node != NULL);
     assert(node->node.type == AST_scope_operator);
 
     ENTER;
-    RETV(0);
+    TRACE("NODE: %s", n_to_str((AstNode*)node));
+    TRACE_TERM(node->tok);
+
+    RET;
 }
 
 /**
@@ -36,30 +39,29 @@ int ast_scope_operator(AstScopeOperator* node) {
  * @param node
  *
  */
-int ast_module_element(AstModuleElement* node) {
+void ast_module_element(AstModuleElement* node) {
 
     assert(node != NULL);
     assert(node->node.type == AST_module_element);
 
     ENTER;
-    TRACE("NODE: %s", n_to_str(node));
-    PtrListIter* iter = init_ptr_list_iterator(node->lst);
-    AstNode* n;
+    TRACE("NODE: %s", n_to_str((AstNode*)node));
 
-    AstType type = get_ast_node_type((AstNode*)n);
+    AstType type = get_ast_node_type((AstNode*)node->elem);
     switch(type) {
         case AST_import_statement:
-            ast_import_statement((AstImportStatement*)n);
+            ast_import_statement((AstImportStatement*)node->elem);
             break;
         case AST_namespace_element:
-            ast_namespace_element((AstNamespaceElement*)n);
+            ast_namespace_element((AstNamespaceElement*)node->elem);
             break;
         default:
             RAISE(AST_TRAVERSE_ERROR, "expected import statment or a "
-                    "namespace element but got a %s", n_to_str(n));
+                    "namespace element but got a %s", n_to_str((AstNode*)node->elem));
             break;
     }
-    RETV(0);
+
+    RET;
 }
 
 /**
@@ -68,32 +70,26 @@ int ast_module_element(AstModuleElement* node) {
  * @param node
  *
  */
-int ast_module(AstModule* node) {
+void ast_module(AstModule* node) {
 
     assert(node != NULL);
     assert(node->node.type == AST_module);
 
     ENTER;
-    TRACE("NODE: %s", n_to_str(node));
+    TRACE("NODE: %s", n_to_str((AstNode*)node));
     PtrListIter* iter = init_ptr_list_iterator(node->lst);
-    AstNode* n;
+    AstNode* n = NULL;
 
-    while(n = iterate_ptr_list(iter)) {
-        AstType type = get_ast_node_type((AstNode*)n);
-        switch(type) {
-            case AST_import_statement:
-                ast_import_statement((AstImportStatement*)n);
-                break;
-            case AST_namespace_element:
-                ast_namespace_element((AstNamespaceElement*)n);
-                break;
-            default:
-                RAISE(AST_TRAVERSE_ERROR, "expected import statment or a "
-                        "namespace element but got a %s", n_to_str(n));
-                break;
+    while(NULL != (n = iterate_ptr_list(iter))) {
+        if(AST_module_element == get_ast_node_type((AstNode*)n))
+            ast_module_element((AstModuleElement*)n);
+        else {
+            RAISE(AST_TRAVERSE_ERROR, "expected module element but got a %s", n_to_str(n));
+            //break;
         }
     }
-    RETV(0);
+
+    RET;
 }
 
 /**
@@ -102,12 +98,20 @@ int ast_module(AstModule* node) {
  * @param node
  *
  */
-int ast_compound_name(AstCompoundName* node) {
+void ast_compound_name(AstCompoundName* node) {
 
     assert(node != NULL);
     assert(node->node.type == AST_compound_name);
 
     ENTER;
-    RETV(0);
+    TRACE("NODE: %s", n_to_str((AstNode*)node));
+
+    TRACE("RAW: %s", raw_string(node->str));
+    PtrListIter* iter = init_ptr_list_iterator(node->lst);
+    Token* tok = NULL;
+    while(NULL != (tok = iterate_ptr_list(iter)))
+        TRACE_TERM(tok);
+
+    RET;
 }
 

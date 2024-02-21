@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
     parse_cmd_line(cmd, argc, argv);
 
     TRACE("Begin Parse");
-    AstNode* node = parser(get_cmd_raw(cmd, "file"));
+    AstModule* node = (AstModule*)parser(get_cmd_raw(cmd, "file"));
     TRACE("End Parse");
 
     TRY {

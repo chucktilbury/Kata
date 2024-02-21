@@ -19,13 +19,28 @@
  * @param node
  *
  */
-int ast_namespace_element(AstNamespaceElement* node) {
+void ast_namespace_element(AstNamespaceElement* node) {
 
     assert(node != NULL);
-    assert(node->node.type == AST_namespace_element);
+    assert(AST_namespace_element == get_ast_node_type((AstNode*)node));
 
     ENTER;
-    RETV(0);
+    TRACE("NODE: %s", n_to_str((AstNode*)node));
+    switch(get_ast_node_type(node->elem)) {
+        case AST_namespace_definition:
+            ast_namespace_definition((AstNamespaceDefinition*)node->elem);
+            break;
+        case AST_type_spec:
+            ast_type_spec((AstTypeSpec*)node->elem);
+            break;
+        case AST_scope_operator:
+            ast_scope_operator((AstScopeOperator*)node->elem);
+            break;
+        default:
+            RAISE(AST_TRAVERSE_ERROR,
+                    "expected a namespace element, but got %s", n_to_str(node->elem));
+    }
+    RET;
 }
 
 /**
@@ -34,13 +49,27 @@ int ast_namespace_element(AstNamespaceElement* node) {
  * @param node
  *
  */
-int ast_namespace_body(AstNamespaceBody* node) {
+void ast_namespace_body(AstNamespaceBody* node) {
 
     assert(node != NULL);
-    assert(node->node.type == AST_namespace_body);
+    assert(AST_namespace_body == get_ast_node_type((AstNode*)node));
 
     ENTER;
-    RETV(0);
+    TRACE("NODE: %s", n_to_str((AstNode*)node));
+
+    PtrListIter* iter = init_ptr_list_iterator(node->lst);
+    AstNode* n = NULL;
+    while(NULL != (n = iterate_ptr_list(iter))) {
+        if(AST_namespace_element == get_ast_node_type((AstNode*)n)) {
+            ast_namespace_element((AstNamespaceElement*)n);
+        }
+        else {
+            RAISE(AST_TRAVERSE_ERROR, "expected a namespace element but got %s", n_to_str(n));
+            // break;
+        }
+    }
+
+    RET;
 }
 
 /**
@@ -48,12 +77,23 @@ int ast_namespace_body(AstNamespaceBody* node) {
  * @param node
  *
  */
-int ast_namespace_definition(AstNamespaceDefinition* node) {
+void ast_namespace_definition(AstNamespaceDefinition* node) {
 
     assert(node != NULL);
-    assert(node->node.type == AST_namespace_definition);
+    assert(AST_namespace_definition == get_ast_node_type((AstNode*)node));
 
     ENTER;
-    RETV(0);
+    TRACE("NODE: %s", n_to_str((AstNode*)node));
+    TRACE_TERM(node->name);
+    if(AST_namespace_body == get_ast_node_type((AstNode*)node->body)) {
+        ast_namespace_body((AstNamespaceBody*)node->body);
+    }
+    else {
+        RAISE(AST_TRAVERSE_ERROR,
+                "expected a namespace body but got %s", n_to_str((AstNode*)node->body));
+        // break;
+    }
+
+    RET;
 }
 
