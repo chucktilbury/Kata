@@ -10,6 +10,7 @@ add_library(${PROJECT_NAME} STATIC
     expression.c
     module.c
     namespace.c
+    string.c
 )
 
 target_compile_options(${PROJECT_NAME}

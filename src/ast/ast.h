@@ -41,6 +41,9 @@ typedef enum {
     AST_expression,
     AST_cast_expression,
 
+    // string.c
+    AST_formatted_string,
+
 } AstType;
 
 typedef enum {
@@ -122,6 +125,7 @@ typedef struct __ast_primary_expression__ {
 
 typedef struct __ast_expression_list__ {
     AstNode node;
+    PtrList* lst;
 } AstExpressionList;
 
 typedef struct __ast_expression__ {
@@ -131,6 +135,12 @@ typedef struct __ast_expression__ {
 typedef struct __ast_cast_expression__ {
     AstNode node;
 } AstCastExpression;
+
+typedef struct __ast_formatted_string__ {
+    AstNode node;
+    Token* strg;
+    struct __ast_expression_list__* expr_lst;
+} AstFormattedString;
 
 #define CREATE_AST_NODE(d, t)   (t*)create_ast_node((d), sizeof(t))
 

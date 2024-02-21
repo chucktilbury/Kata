@@ -86,7 +86,12 @@ AstPrimaryExpression* parse_primary_expression() {
  * @brief Expression lists are used for things like parameter lists of
  * function calls or formatted strings.
  *      expression_list
- *          = expression (',' expression)*
+ *          = '(' (expression (',' expression)*)? ')'
+ *
+ * The open and close parens are required. Having an expression inside the
+ * parens are optional. If there is no expression, but there is a comma, then
+ * that is a syntax error. If there is an expression followed by a comma and
+ * then a close paren, then that is a syntax error.
  *
  * @return AstNode*
  *
@@ -94,7 +99,56 @@ AstPrimaryExpression* parse_primary_expression() {
 AstExpressionList* parse_expression_list() {
 
     ENTER;
-    RETV(NULL);
+    Token* tok = get_token();
+    AstExpressionList* node = NULL;
+    bool flag = false;
+
+    if(TOK_OPAREN == tok->type) {
+        finalize_token();
+        advance_token();
+        AstExpression* nterm = NULL;
+        PtrList* lst = create_ptr_list();
+
+        while(true) {
+            if(NULL != (nterm = parse_expression())) {
+                add_ptr_list(lst, nterm);
+                if(flag) {
+                    show_syntax_error("expected a ',' but got an expression");
+                    RETV(NULL);
+                }
+                flag = true;
+            }
+
+            tok = get_token();
+            if(TOK_CPAREN == tok->type) {
+                if(flag) {
+                    show_syntax_error("expected an expression or a ')' but got %s", tok_to_str(tok->type));
+                    RETV(NULL);
+                }
+                finalize_token();
+                advance_token();
+                node = CREATE_AST_NODE(AST_expression_list, AstExpressionList);
+                node->lst = lst;
+                RETV(node);
+            }
+            else if(TOK_COMMA == tok->type) {
+                // expect another expression
+                if(!flag) {
+                    show_syntax_error("expected an expression or a ')' but got ','");
+                    RETV(NULL);
+                }
+                flag = false;
+            }
+            else {
+                // everything else is a syntax error
+                show_syntax_error("expected a ')' or a ',' but got a %s", tok_to_str(tok->type));
+                RETV(NULL);
+            }
+        }
+    }
+    // else no expression list
+
+    RETV(node); // never reached
 }
 
 /**

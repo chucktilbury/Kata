@@ -57,5 +57,7 @@ AstExpressionList* parse_expression_list();
 AstExpression* parse_expression();
 AstCastExpression* parse_cast_expression();
 
+// string.c
+AstFormattedString* parse_formatted_string();
 
 #endif /* _INTERNAL_PARSER_H */

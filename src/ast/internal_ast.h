@@ -18,7 +18,7 @@
 #include "trace.h"
 #include "util.h"
 
-// Defined in module.c
+// module.c
 void ast_scope_operator(AstScopeOperator* node);
 void ast_module_element(AstModuleElement* node);
 void ast_module(AstModule* node);
@@ -29,18 +29,21 @@ void ast_namespace_element(AstNamespaceElement* node);
 void ast_namespace_element_list(AstNamespaceBody* node);
 void ast_namespace_definition(AstNamespaceDefinition* node);
 
-// Defined in data.c
+// data.c
 void ast_type_name(AstTypeName* node);
 void ast_type_spec_element(AstTypeSpecElement* node);
 void ast_type_spec(AstTypeSpec* node);
 
-// Defined in import.c
+// import.c
 void ast_import_statement(AstImportStatement* node);
 
-// Defined in expression.c
+// expression.c
 void ast_primary_expression(AstPrimaryExpression* node);
 void ast_expression_list(AstExpressionList* node);
 void ast_expression(AstExpression* node);
 void ast_cast_expression(AstCastExpression* node);
+
+// string.c
+void ast_formatted_string(AstFormattedString* node);
 
 #endif /* _INTERNAL_AST_H */

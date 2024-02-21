@@ -160,7 +160,7 @@ type_name
 # 'string {} some'(1+2) ; produce format ignored warning
 #
 formatted_strg
-    = LITERAL_DSTRG ( '(' (expression_list)? ')' )?
+    = LITERAL_DSTRG (expression_list)?
 
 #####################
 #
@@ -270,7 +270,7 @@ array_reference
 #
 function_reference
     = compound_name
-            '(' ( expression_list )+ ')'
+            ( expression_list )+
             '(' ( compound_name ( ',' compound_name )* )+ ')'
 
 #####################
@@ -387,7 +387,7 @@ expr_primary
 # The expression list is normally used for things like parameter lists.
 #
 expression_list
-    = expression ( ',' expression )*
+    = '(' (expression ( ',' expression )*)? ')'
 
 #####################
 #
@@ -497,7 +497,7 @@ function_body_element
     / 'yield' '(' compound_reference ')'
     / 'type' '(' compound_reference ')'
     / 'exit' '(' ( expression )? ')
-    / 'print' ( '(' ( expression_list )? ')' )?
+    / 'print' ( expression_list )?
     / 'return' ( '(' ( expression )? ')' )?
     / 'raise' '(' SYMBOL ',' formatted_strg ')'
     / function_body
