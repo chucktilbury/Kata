@@ -12,6 +12,8 @@
 #ifndef _INTERNAL_PARSER_H
 #define _INTERNAL_PARSER_H
 
+//#undef USE_TRACE
+
 #include "ast.h"
 #include "errors.h"
 #include "scanner.h"

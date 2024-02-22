@@ -24,7 +24,8 @@ void ast_import_statement(AstImportStatement* node) {
 
     ENTER;
     TRACE("NODE: %s", n_to_str((AstNode*)node));
-    TRACE_TERM(node->fname);
     TRACE_TERM(node->symbol);
+    //TRACE_TERM(node->fname);
+    ast_formatted_string(node->fname);
     RET;
 }

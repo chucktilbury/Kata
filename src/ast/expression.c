@@ -28,6 +28,7 @@ void ast_expression_list(AstExpressionList* node) {
 
     ENTER;
     TRACE("NODE: %s", n_to_str((AstNode*)node));
+    TRACE("LIST LEN: %d", length_list(node->lst));
     RET;
 }
 

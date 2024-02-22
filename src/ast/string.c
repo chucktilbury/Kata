@@ -18,7 +18,11 @@ void ast_formatted_string(AstFormattedString* node) {
     ENTER;
     TRACE("NODE: %s", n_to_str((AstNode*)node));
     TRACE_TERM(node->strg);
-    ast_expression_list(node->expr_lst);
+    if(node->expr_lst != NULL)
+        ast_expression_list(node->expr_lst);
+    else {
+        TRACE("no expression list");
+    }
 
     RET;
 }

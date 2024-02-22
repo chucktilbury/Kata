@@ -30,6 +30,27 @@ static void recover_error() {
 }
 
 /**
+ * @brief Abort the program.
+ *
+ * @param str
+ * @param ...
+ *
+ */
+void fatal_error(const char* str, ...) {
+
+    va_list args;
+
+    fprintf(stderr, "Internal Error: ");
+
+    va_start(args, str);
+    vfprintf(stderr, str, args);
+    va_end(args);
+    fputc('\n', stderr);
+    num_errors++;
+    exit(1);
+}
+
+/**
  * @brief Top level function to handle a generic error inside the parser.
  * It also is the interface to error recovery.
  *

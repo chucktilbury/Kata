@@ -21,9 +21,11 @@ int main(int argc, char** argv) {
     add_cmd(cmd, "", "file", "Name of file to compile.", NULL, CMD_REQD | CMD_STR);
     parse_cmd_line(cmd, argc, argv);
 
+    TRACE("--------------------------------------------");
     TRACE("Begin Parse");
     AstModule* node = (AstModule*)parser(get_cmd_raw(cmd, "file"));
     TRACE("End Parse");
+    TRACE("--------------------------------------------");
 
     TRY {
         TRACE("Begin Traverse");
@@ -35,6 +37,7 @@ int main(int argc, char** argv) {
         RETV(1);
     }
     FINAL
+    TRACE("--------------------------------------------");
 
     RETV(0);
 }

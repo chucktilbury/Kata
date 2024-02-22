@@ -164,16 +164,37 @@ formatted_strg
 
 #####################
 #
-# All numbers are doubles
-# A bool is "true" or "false" keywords.
 # An SSTRG is an absolute literal, but it can be assigned to a DSTRG to have
 # it formatted at a later time.
+#
+string_literal
+    = LITERAL_SSTRG
+    / formatted_strg
+
+#####################
+#
+# Items that can be in a string expression.
+#
+string_expr_item
+    = string_literal
+    / compound_reference
+    / literal_value
+
+#####################
+#
+# This is a way to concatenate strings with various types of objects.
+#
+string_expr
+    = string_expr_item ( '+' string_expr_item )*
+
+#####################
+#
+# All numbers are doubles
+# A bool is "true" or "false" keywords.
 #
 literal_value
     = LITERAL_NUM
     / LITERAL_BOOL
-    / LITERAL_SSTRG
-    / formatted_strg
 
 #####################
 #
@@ -198,6 +219,7 @@ assignment_item
     = expression
     / list_init
     / dict_init
+    / string_expr
 
 #####################
 #

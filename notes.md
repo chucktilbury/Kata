@@ -1,12 +1,21 @@
 
 # Problems...
 
-* The parser needs a global status. This status will keep the current name context and other information that is related to the global parsing context.
+* Separate formatted strings from arithmetic expressions. Have a separate type of expressions that can have the '+' operator. That can be assigned or passed in a function reference.
+  * Formatted strings use dquote strings and not squote strings. The scanner needs to be modified to accommodate the difference.
+  * A squote string is an absolute literal and not subject to formatting.
 
-* The AST is a hash table. The AST is scanned to implement a multi-pass compiler such that names do not need to be defined in advance of them being referenced. Things like verifying that names have been defined are implemented as iterations of scanning the AST. The hash table:
-  * allows node attributes to be added and updated as required
-  * allows any arbitrary data type to be added as a node attribute
-  * only requires a single data type to implement the AST
+* Imports only read in public names for use in the module that does the import. Imports need to actually create a module instead of simply including the text.
+
+---------------
+
+## scanner modifications
+* Differentiate single and double quote strings.
+* Add unsigned and signed int number types.
+* Differentiate numerical literals.
+* Tests.
+
+----------
 
 * When the token queue is rewound, it should only step back as far as the current rule has been read. When alternatives are evaluated they need to start in the stream where the function was called. So it looks more like a stack than like a queue. This makes sense in view of how a LALR(n) operates. The difference here is that the stack is not evaluated directly, but in code so to speak.
   * When a terminal actually gets used and the AST node is returned, then mark it as used. Then at some point, check the token stream. If the one at the head is marked as used, then dispose of each one in order until one that has not been marked is found. Then make that the new head.

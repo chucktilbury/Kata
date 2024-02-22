@@ -12,6 +12,8 @@
 #ifndef _INTERNAL_AST_H
 #define _INTERNAL_AST_H
 
+//#undef USE_TRACE
+
 #include "ast.h"
 #include "errors.h"
 #include "scanner.h"

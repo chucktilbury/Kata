@@ -24,14 +24,14 @@
  * @return false
  *
  */
-static bool do_import(Str* fname, Str* symbol) {
+static bool do_import(AstFormattedString* fname, Str* symbol) {
 
     ENTER;
     (void)symbol;
     // Scan a search path of locations to find the actual file in.
 
     // Open the actual file.
-    open_file(raw_string(fname));
+    open_file(raw_string(fname->strg->str));
 
     // convert the file name into a namespace entry
 
@@ -57,7 +57,7 @@ AstImportStatement* parse_import_statement() {
     ENTER;
     AstImportStatement* node = NULL;
     Token* tok    = get_token();
-    Token* filename;
+    AstFormattedString* filename = NULL;
     Token* symbol;
 
     if(tok->type == TOK_IMPORT) {
@@ -72,24 +72,27 @@ AstImportStatement* parse_import_statement() {
 
     // NOTE: This calls for a TOK_LITERAL_STR, because the formatted
     // string production has not been written yet.
-    if(tok->type == TOK_LITERAL_STR) {
-        filename = tok; //copy_string(tok->str);
-        TRACE("file name = %s", raw_string(tok->str));
-        finalize_token();
-        tok = advance_token();
-    }
-    else {
-        show_syntax_error("expected a formatted string, but got a %s",
-                          tok_to_str(tok->type));
+    // if(tok->type == TOK_LITERAL_STR) {
+    //     filename = tok; //copy_string(tok->str);
+    //     TRACE("file name = %s", raw_string(tok->str));
+    //     finalize_token();
+    //     tok = advance_token();
+    // }
+    if(NULL == (filename = parse_formatted_string())) {
+        // show_syntax_error("expected a formatted string, but got a %s",
+        //                   tok_to_str(tok->type));
+        EXPECTED("a formatted string");
         RETV(NULL);
     }
+    tok = get_token();
 
     if(tok->type == TOK_AS) {
         finalize_token();
         tok = advance_token();
     }
     else {
-        show_syntax_error("expected AS keyword, but got %s", tok_to_str(tok->type));
+        // show_syntax_error("expected AS keyword, but got %s", tok_to_str(tok->type));
+        EXPECTED("AS keyword");
         RETV(NULL);
     }
 
@@ -97,23 +100,24 @@ AstImportStatement* parse_import_statement() {
         symbol = tok; //copy_string(tok->str);
         TRACE("symbol = \"%s\"", raw_string(tok->str));
         finalize_token();
+        // Do not advance token because a new file will be opened and that
+        // will do it instead.
         // advance_token();
     }
     else {
-        show_syntax_error("expected a SYMBOL but got a %s", tok_to_str(tok->type));
+        //show_syntax_error("expected a SYMBOL but got a %s", tok_to_str(tok->type));
+        EXPECTED("a SYMBOL");
         RETV(NULL);
     }
 
     node = CREATE_AST_NODE(AST_import_statement, AstImportStatement);
-    //add_ast_attrib(node, "filename", filename, sizeof(Str));
-    //add_ast_attrib(node, "symbol", symbol, sizeof(Str));
     node->fname = filename;
     node->symbol = symbol;
     finalize_token_queue();
 
     TRACE("node is complete");
     // handle the actual import
-    if(!do_import(filename->str, symbol->str))
+    if(!do_import(filename, symbol->str))
         node = NULL;
 
     RETV(node);

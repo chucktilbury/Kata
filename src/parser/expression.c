@@ -70,15 +70,40 @@ static int get_precedence(TokenType type) {
  *          = LITERAL_NUMBER
  *          / formatted_string
  *          / compound_reference
- *          / cast_statement
+ *          / cast_expression
+ *          / '(' expression ')' # shunting yard does not use this.
  *
  * @return AstNode*
  *
- *  NOTE: formatted string and compound reference hace not been implemented yet.
+ *  NOTE: compound reference has not been implemented yet.
  */
 AstPrimaryExpression* parse_primary_expression() {
 
     ENTER;
+    Token* tok = get_token();
+    PtrList* list = create_ptr_list();
+    AstPrimaryExpression* node = CREATE_AST_NODE(AST_primary_expression, AstPrimaryExpression);
+    AstNode* nterm = NULL;
+
+    if(TOK_LITERAL_NUM == tok->type) {
+        node->num = tok;
+        finalize_token();
+        advance_token();
+        RETV(node);
+    }
+    else if(NULL != (nterm = (AstNode*)parse_formatted_string())) {
+        node->elem = nterm;
+        RETV(node);
+    }
+    // else if(NULL != (nterm = (AstNode*)parse_compound_reference())) {
+    //     node->elem = nterm;
+    //     RETV(node);
+    // }
+    // else if(NULL != (nterm = (AstNode*)parse_cast_expression())) {
+    //     node->elem = nterm;
+    //     RETV(node);
+    // }
+
     RETV(NULL);
 }
 
@@ -100,55 +125,97 @@ AstExpressionList* parse_expression_list() {
 
     ENTER;
     Token* tok = get_token();
-    AstExpressionList* node = NULL;
-    bool flag = false;
+    int state = 0;
+    bool finished = false;
 
-    if(TOK_OPAREN == tok->type) {
-        finalize_token();
-        advance_token();
-        AstExpression* nterm = NULL;
-        PtrList* lst = create_ptr_list();
+    PtrList* list = create_ptr_list();
+    AstExpression* node = NULL;
+    AstExpressionList* nterm = NULL;
 
-        while(true) {
-            if(NULL != (nterm = parse_expression())) {
-                add_ptr_list(lst, nterm);
-                if(flag) {
-                    show_syntax_error("expected a ',' but got an expression");
-                    RETV(NULL);
+    while(!finished) {
+        switch(state) {
+            case 0:
+                // must have an oparen or there is no expression list
+                tok = get_token();
+                if(TOK_OPAREN == tok->type) {
+                    finalize_token();
+                    advance_token();
+                    state = 1;
                 }
-                flag = true;
-            }
+                // not an error, no expression list present
+                else
+                    state = 101;
+                break;
 
-            tok = get_token();
-            if(TOK_CPAREN == tok->type) {
-                if(flag) {
-                    show_syntax_error("expected an expression or a ')' but got %s", tok_to_str(tok->type));
-                    RETV(NULL);
+            case 1:
+                // may have a cparen or an expression
+                tok = get_token();
+                if(TOK_CPAREN == tok->type) {
+                    finalize_token();
+                    advance_token();
+                    state = 100; // empty parens is okay
                 }
-                finalize_token();
-                advance_token();
-                node = CREATE_AST_NODE(AST_expression_list, AstExpressionList);
-                node->lst = lst;
-                RETV(node);
-            }
-            else if(TOK_COMMA == tok->type) {
-                // expect another expression
-                if(!flag) {
-                    show_syntax_error("expected an expression or a ')' but got ','");
-                    RETV(NULL);
+                else if(NULL != (node = parse_expression())) {
+                    add_ptr_list(list, node);
+                    state = 3;
                 }
-                flag = false;
-            }
-            else {
-                // everything else is a syntax error
-                show_syntax_error("expected a ')' or a ',' but got a %s", tok_to_str(tok->type));
-                RETV(NULL);
-            }
+                else {
+                    EXPECTED("an expression or ')'");
+                    state = 101;
+                }
+                break;
+
+            case 2:
+                // must be an expression
+                if(NULL != (node = parse_expression())) {
+                    add_ptr_list(list, node);
+                    state = 3;
+                }
+                else {
+                    EXPECTED("an expression");
+                    state = 101;
+                }
+                break;
+
+            case 3:
+                // must be a ')' or a ','
+                tok = get_token();
+                if(TOK_COMMA == tok->type) {
+                    finalize_token();
+                    advance_token();
+                    state = 2;
+                }
+                else if(TOK_CPAREN == tok->type) {
+                    finalize_token();
+                    advance_token();
+                    state = 100;
+                }
+                else {
+                    EXPECTED("')' or ','");
+                    state = 101;
+                }
+                break;
+
+            case 100:
+                // function will return pointer to node
+                nterm = CREATE_AST_NODE(AST_expression_list, AstExpressionList);
+                nterm->lst = list;
+                finalize_token_queue();
+                finished = true;
+                break;
+
+            case 101:
+                // function will return NULL (using GC)
+                finished = true;
+                break;
+
+            default:
+                fatal_error("invalid state in %s(): %d", __func__, state);
+                break;
         }
     }
-    // else no expression list
 
-    RETV(node); // never reached
+    RETV(nterm);
 }
 
 /**

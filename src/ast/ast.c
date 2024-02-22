@@ -62,6 +62,7 @@ const char* n_to_str(AstNode* node) {
         (type == AST_import_statement)? "import_statement" :
         (type == AST_primary_expression)? "primary_expression" :
         (type == AST_expression_list)? "expression_list" :
+        (type == AST_formatted_string)? "formatted_string" :
         (type == AST_expression)? "expression" : "UNKNOWN";
 }
 

@@ -89,77 +89,83 @@ AstModuleElement* parse_module_element() {
 AstCompoundName* parse_compound_name() {
 
     ENTER;
-    Token* tok = get_token();
-    void* post = post_token_queue();
-    AstCompoundName* node = NULL;
-    PtrList* lst;
-    Str* str;
+    Token* tok;
+    int state = 0;
+    bool finished = false;
 
-    if(tok->type == TOK_SYMBOL) {
-        TRACE_TERM(tok);
-        lst = create_ptr_list();
-        add_ptr_list(lst, tok);
-        str = create_string(NULL);
-        add_string_Str(str, tok->str);
-        finalize_token();
-        tok = advance_token();
+    AstCompoundName* nterm = NULL;
+    PtrList* list = create_ptr_list();
+    Str* strg = create_string(NULL);
 
-        if(tok->type == TOK_DOT) {
-            // more than one element
-            add_string_char(str, '.');
-            while(true) {
-                finalize_token();
-                tok = advance_token();
-
-                if(tok->type == TOK_SYMBOL) {
-                    // another element to add
-                    TRACE_TERM(tok);
-                    add_ptr_list(lst, tok);
-                    add_string_Str(str, tok->str);
+    while(!finished) {
+        switch(state) {
+            case 0:
+                tok = get_token();
+                if(TOK_SYMBOL == tok->type) {
+                    add_ptr_list(list, tok);
+                    add_string_Str(strg, tok->str);
+                    finalize_token();
+                    advance_token();
+                    state = 1;
                 }
                 else {
-                    // handle an error because a dot must be followed by
-                    // a TOK_SYMBOL in this context.
-                    show_syntax_error("expected a symbol but got a %s",
-                                      raw_string(tok->str));
-                    RETV(NULL);
+                    // exit with NULL, not an error
+                    state = 101;
                 }
+                break;
 
-                finalize_token();
-                tok = advance_token();
-                if(tok->type != TOK_DOT) {
-                    // non-terminal is complete
-                    node = CREATE_AST_NODE(AST_compound_name, AstCompoundName);
-                    //add_ast_attrib(node, "tlist", lst, sizeof(List));
-                    node->lst = lst;
-                    node->str = str;
-                    finalize_token_queue();
-                    break;
+            case 1:
+                // could be a dot. if not then exit the state machine
+                // with a valid nterm pointer.
+                tok = get_token();
+                if(TOK_DOT == tok->type) {
+                    add_string_char(strg, '.');
+                    finalize_token();
+                    advance_token();
+                    state = 2;
                 }
                 else {
-                    // else it is a dot, so continue
-                    add_string_char(str, '.');
+                    // have a valid nterm
+                    state = 100;
                 }
-            }
+                break;
+
+            case 2:
+                // must be a symbol. others are syntax error
+                tok = get_token();
+                if(TOK_SYMBOL == tok->type) {
+                    add_ptr_list(list, tok);
+                    add_string_Str(strg, tok->str);
+                    finalize_token();
+                    advance_token();
+                    state = 1;
+                }
+                else {
+                    // exit with error
+                    EXPECTED("symbol after '.'");
+                    state = 101;
+                }
+                break;
+
+            case 100:
+                nterm = CREATE_AST_NODE(AST_compound_name, AstCompoundName);
+                nterm->lst = list;
+                nterm->str = strg;
+                finalize_token_queue();
+                finished = true;
+                break;
+
+            case 101:
+                // returning NULL (with GC)
+                finished = true;
+                break;
+
+            default:
+                fatal_error("invalid state in %s(): %d", __func__, state);
         }
-        else {
-            // single symbol is a match
-            TRACE("single symbol compound");
-            node = CREATE_AST_NODE(AST_compound_name, AstCompoundName);
-            //add_ast_attrib(node, "tlist", lst, sizeof(List));
-            node->lst = lst;
-            node->str = str;
-            finalize_token_queue();
-        }
-    }
-    else {
-        // not a match
-        TRACE("not a compound symbol");
-        reset_token_queue(post);
     }
 
-    TRACE("complete list has %d items", length_list(lst));
-    RETV(node);
+    RETV(nterm);
 }
 
 /**

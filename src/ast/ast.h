@@ -114,13 +114,15 @@ typedef struct __ast_type_spec__ {
 // import.c
 typedef struct __ast_import_statement__ {
     AstNode node;
-    Token* fname;
+    struct __ast_formatted_string__* fname;
     Token* symbol;
 } AstImportStatement;
 
 // expression.c
 typedef struct __ast_primary_expression__ {
     AstNode node;
+    Token* num;     // literal number
+    AstNode* elem;  // other non-terminals
 } AstPrimaryExpression;
 
 typedef struct __ast_expression_list__ {
