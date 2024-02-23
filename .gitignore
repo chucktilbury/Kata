@@ -1,4 +1,5 @@
-
+tokens.c
+tokens.h
 build/
 bin/
 docs/out/

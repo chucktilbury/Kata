@@ -13,6 +13,7 @@
 * Differentiate single and double quote strings.
 * Add unsigned and signed int number types.
 * Differentiate numerical literals.
+* Add "virtual" keyword.
 * Tests.
 
 ----------

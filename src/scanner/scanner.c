@@ -20,7 +20,8 @@
  * @copyright Copyright (c) 2024
  */
 #include "scanner.h"
-#include "keyword.h"
+//#include "keyword.h"
+#include "tokens.h"
 
 static Token token;
 
@@ -66,7 +67,7 @@ static void scan_exponent() {
         // when we run out of digits we are done if ending on white space
         // or an operator. Otherwise, it's an error.
         if(isspace(ch) || ispunct(ch))
-            token.type = TOK_LITERAL_NUM;
+            token.type = TOK_LITERAL_FLOAT;
         else {
             token.type = TOK_ERROR;
             add_string_str(token.str, ": malformed number: expected digits, space, or operator");
@@ -98,7 +99,7 @@ static void scan_mantissa() {
     }
     else if(isspace(ch) || ispunct(ch)) {
         // no exponent. finished.
-        token.type = TOK_LITERAL_NUM;
+        token.type = TOK_LITERAL_FLOAT;
     }
     else {
         token.type = TOK_ERROR;
@@ -127,7 +128,7 @@ static void scan_number() {
 
         // the zero has been consumed.
         add_string_char(token.str, '0');
-        token.type = TOK_LITERAL_NUM;
+        token.type = TOK_LITERAL_FLOAT;
 
         if(ch == '.') {
             // the dot has not been consumed
@@ -159,7 +160,7 @@ static void scan_number() {
                         consume_char();
                     }
                     else if(isspace(ch) || ispunct(ch) || ch == EOF) {
-                        token.type = TOK_LITERAL_NUM;
+                        token.type = TOK_LITERAL_FLOAT;
                         finished   = true;
                     }
                     else {
@@ -492,7 +493,7 @@ static void scan_squote_str() {
     while(!finished) {
         ch = get_char();
         if(ch == '\'') {
-            token.type = TOK_LITERAL_STR;
+            token.type = TOK_LITERAL_SSTR;
             consume_char();
             finished = true;
         }
@@ -525,7 +526,7 @@ static void scan_dquote_str() {
         ch = get_char();
         if(ch == '\"') {
             finished   = true;
-            token.type = TOK_LITERAL_STR;
+            token.type = TOK_LITERAL_DSTR;
             consume_char();
         }
         else if(ch == '\\') {
@@ -700,6 +701,7 @@ Token* scan_token() {
     return &token;
 }
 
+#if 0
 /**
  * @brief Convert the binary token type to a string for display.
  *
@@ -788,6 +790,7 @@ const char* tok_to_str(TokenType type) {
             (type == TOK_SYMBOL)      ? "SYMBOL" :
                                         "UNKNOWN";
 }
+#endif
 
 /**
  * @brief Print the content of the token for debugging.
@@ -796,7 +799,7 @@ const char* tok_to_str(TokenType type) {
  */
 void print_token(Token* tok) {
 
-    printf("%s: \"%s\": %d: %d: \"%s\"", tok_to_str(tok->type),
+    printf("%s: \"%s\": %d: %d: \"%s\"", tok_to_str(tok),
            raw_string(tok->str), tok->line_no, tok->col_no, tok->fname);
 }
 

@@ -1,14 +1,15 @@
 # Read the keywords.txt file and generate keywords.c and keywords.h
+import sys
 
 raw_list = []
-with open("keywords.txt", "r") as inf:
+with open(sys.argv[1], "r") as inf:
     for line in inf:
         s = line.strip()
         if len(s) > 0:
             raw_list.append(s)
 
 raw_list.sort()
-print (raw_list)
+#print (raw_list)
 
 with open("tokens.h", "w") as outf:
 
@@ -16,6 +17,7 @@ with open("tokens.h", "w") as outf:
 /* This file is generated with a script. Do not edit. */
 #ifndef _TOKENS_H
 #define _TOKENS_H
+#include "util.h"
 
 typedef enum {
     // markers
@@ -68,15 +70,28 @@ typedef enum {
     TOK_UNARY_MINUS,
 } TokenType;
 
+/**
+ * @brief The parser expects a token to look like this.
+ */
 typedef struct {
     const char* str;
     TokenType type;
-} TokenList;
+} KeywordList;
 
-extern TokenList token_list[];
-extern const int num_tokens;
+/**
+ * @brief The parser expects a token to look like this.
+ */
+typedef struct {
+    Str* str;          // String that caused the token to be recognized
+    TokenType type;    // Type of the token
+    int line_no;       // Line number where the token was recognized
+    int col_no;        // Column of the last character of the token
+    const char* fname; // File name where the token was taken
+} Token;
 
-#include "scanner.h"
+extern KeywordList keyword_list[];
+extern const int num_keywords;
+
 const char* tok_to_str(Token* tok);
 
 ''')
@@ -86,11 +101,11 @@ const char* tok_to_str(Token* tok);
 with open("tokens.c", "w") as outf:
     outf.write("/* This file is generated with a script. Do not edit. */\n\n")
     outf.write("#include \"tokens.h\"\n\n")
-    outf.write("TokenList token_list[] = {\n")
+    outf.write("KeywordList keyword_list[] = {\n")
     for item in raw_list:
         outf.write("    { \"%s\", TOK_%s },\n"%(item, item.upper()))
     outf.write("};\n\n")
-    outf.write("const int num_tokens = (sizeof(token_list) / sizeof(TokenList));\n\n")
+    outf.write("const int num_keywords = (sizeof(keyword_list) / sizeof(KeywordList));\n\n")
 
     outf.write("const char* tok_to_str(Token* tok) {\n")
     outf.write("    assert(tok != NULL);\n\n")

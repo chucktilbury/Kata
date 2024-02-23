@@ -16,7 +16,7 @@ AstFormattedString* parse_formatted_string() {
     Token* tok = get_token();
     AstFormattedString* node = NULL;
 
-    if(TOK_LITERAL_STR == tok->type) {
+    if(TOK_LITERAL_DSTR == tok->type) {
         node = CREATE_AST_NODE(AST_formatted_string, AstFormattedString);
         node->strg = tok;
         TRACE_TERM(tok);

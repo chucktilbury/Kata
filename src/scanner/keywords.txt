@@ -28,8 +28,6 @@ struct
 public
 private
 protected
-num
-number
 nothing
 noth
 string
@@ -48,3 +46,8 @@ off
 or
 and
 inline
+virtual
+signed
+unsigned
+float
+not

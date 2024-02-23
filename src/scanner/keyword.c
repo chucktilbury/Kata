@@ -62,6 +62,7 @@ KeywordList keyword_list[] = {
     { "true", TOK_TRUE_BOOL },
     { "try", TOK_TRY },
     { "type", TOK_TYPE },
+    { "virtual", TOK_VIRTUAL },
     { "while", TOK_WHILE },
     { "yield", TOK_YIELD },
 };

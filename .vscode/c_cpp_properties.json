@@ -6,9 +6,9 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/src/",
                 "${workspaceFolder}/src/util",
-                "${workspaceFolder}/src/util/bdwgc",
                 "${workspaceFolder}/src/scanner",
-                "${workspaceFolder}/src/parser"
+                "${workspaceFolder}/src/parser",
+                "${workspaceFolder}/build/src/scanner"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc"

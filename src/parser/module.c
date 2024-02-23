@@ -211,7 +211,8 @@ AstModule* parse_module() {
         RETV(node);
     }
     else {
-        show_syntax_error("expected end of input but got %s", tok_to_str(tok->type));
+        EXPECTED("end of input");
+        //show_syntax_error("expected end of input but got %s", tok_to_str(tok->type));
         RETV(NULL);
     }
 }

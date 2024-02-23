@@ -90,7 +90,7 @@ void* parse_namespace_body() {
     // void* post = post_token_queue();
 
     if(tok->type != TOK_OCBRACE) {
-        show_syntax_error("expected a '{' but got %s", tok_to_str(tok->type));
+        show_syntax_error("expected a '{' but got %s", tok_to_str(tok));
         RETV(NULL);
     }
     else {
@@ -122,7 +122,7 @@ void* parse_namespace_body() {
             // not a module_element or a CCBRACE, so it' an error
             show_syntax_error("expected a module element or a '}' but got "
                               "a %s",
-                              tok_to_str(get_token()->type));
+                              tok_to_str(get_token()));
             RETV(NULL);
         }
     }
@@ -178,7 +178,7 @@ void* parse_namespace_definition() {
         }
         else {
             // syntax error, symbol required after namespace keyword
-            show_syntax_error("expected SYMBOL token but got %s", tok_to_str(tok->type));
+            show_syntax_error("expected SYMBOL token but got %s", tok_to_str(tok));
             RETV(NULL);
         }
     }
@@ -253,7 +253,7 @@ void* parse_module() {
 
     Token* tok = get_token();
     if(tok->type != TOK_END_OF_FILE) {
-        show_syntax_error("expected the end of file but got %s", tok_to_str(tok->type));
+        show_syntax_error("expected the end of file but got %s", tok_to_str(tok));
         RETV(NULL);
     }
     else {
@@ -266,7 +266,7 @@ void* parse_module() {
 
     tok = get_token();
     if(tok->type != TOK_END_OF_INPUT) {
-        show_syntax_error("expected the end of input but got %s", tok_to_str(tok->type));
+        show_syntax_error("expected the end of input but got %s", tok_to_str(tok));
         RETV(NULL);
     }
     TRACE("handle end of input and return node");

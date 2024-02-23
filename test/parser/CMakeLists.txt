@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(parser_test)
 
-set(CMAKE_VERBOSE_MAKEFILE OFF)
+#set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 add_executable(${PROJECT_NAME}
     parser_test.c
@@ -24,10 +24,11 @@ target_compile_options(${PROJECT_NAME}
         -DUSE_GC
         -I${PROJECT_SOURCE_DIR}/..
         -I${PROJECT_SOURCE_DIR}/../../src/util
-        -I${PROJECT_SOURCE_DIR}/../../src/util/bdwgc/include
+        -I${PROJECT_SOURCE_DIR}/../../src/util/gc/include
         -I${PROJECT_SOURCE_DIR}/../../src/parser
         -I${PROJECT_SOURCE_DIR}/../../src/scanner
         -I${PROJECT_SOURCE_DIR}/../../src/ast
+        -I${CMAKE_CURRENT_BINARY_DIR}/../../src/scanner
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DENABLE_LOGGER >
         $<$<CONFIG:DEBUG>:-DUSE_TRACE >

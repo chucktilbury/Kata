@@ -23,6 +23,7 @@ target_compile_options(${PROJECT_NAME}
         -I${PROJECT_SOURCE_DIR}/../scanner
         -I${PROJECT_SOURCE_DIR}/../parser
         -I${PROJECT_SOURCE_DIR}/../ast
+        -I${CMAKE_CURRENT_BINARY_DIR}/../scanner
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DMEMORY_DEBUG >
         $<$<CONFIG:DEBUG>:-DUSE_TRACE >

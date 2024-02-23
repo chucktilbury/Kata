@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(queue_test)
 
-set(CMAKE_VERBOSE_MAKEFILE OFF)
+#set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 add_executable(${PROJECT_NAME}
     queue_test.c
@@ -28,6 +28,7 @@ target_compile_options(${PROJECT_NAME}
         -I${PROJECT_SOURCE_DIR}/../../../src/parser
         -I${PROJECT_SOURCE_DIR}/../../../src/gc
         -I${PROJECT_SOURCE_DIR}/../../../src/ast
+        -I${CMAKE_CURRENT_BINARY_DIR}/../../../src/scanner
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DENABLE_LOGGER >
         $<$<CONFIG:DEBUG>:-DUSE_TRACE >

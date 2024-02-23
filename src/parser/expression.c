@@ -85,7 +85,7 @@ AstPrimaryExpression* parse_primary_expression() {
     AstPrimaryExpression* node = CREATE_AST_NODE(AST_primary_expression, AstPrimaryExpression);
     AstNode* nterm = NULL;
 
-    if(TOK_LITERAL_NUM == tok->type) {
+    if(TOK_LITERAL_FLOAT == tok->type) {
         node->num = tok;
         finalize_token();
         advance_token();

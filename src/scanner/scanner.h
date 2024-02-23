@@ -19,18 +19,8 @@
  * This header contains a sorted list of the actual keywords that are
  * scanned in the scanner.
  */
-#include "keyword.h"
-
-/**
- * @brief The parser expects a token to look like this.
- */
-typedef struct {
-    Str* str;          // String that caused the token to be recognized
-    TokenType type;    // Type of the token
-    int line_no;       // Line number where the token was recognized
-    int col_no;        // Column of the last character of the token
-    const char* fname; // File name where the token was taken
-} Token;
+//#include "keyword.h"
+#include "tokens.h"
 
 /**
  * @brief Open a file for the scanner to read from. Files are expected to be
@@ -132,7 +122,7 @@ void init_scanner();
  * @param type
  * @return const char*
  */
-const char* tok_to_str(TokenType type);
+//const char* tok_to_str(TokenType type);
 
 /**
  * @brief This function literally discards the entire token queue. This

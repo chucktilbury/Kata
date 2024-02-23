@@ -32,7 +32,9 @@ AstTypeName* parse_type_name() {
     AstTypeName* node = NULL;
     void* post    = post_token_queue();
 
-    if(tok->type == TOK_NUMBER ||
+    if(tok->type == TOK_FLOAT ||
+            tok->type == TOK_UNSIGNED ||
+            tok->type == TOK_SIGNED ||
             tok->type == TOK_STRING ||
             tok->type == TOK_NOTHING ||
             tok->type == TOK_BOOLEAN ||
@@ -136,9 +138,12 @@ AstTypeSpec* parse_type_spec() {
     // then that is a syntax error.
     else {
         tok = get_token();
+        EXPECTED("type name or a compound name");
+        /*
         show_syntax_error("expected a type name or a compound name but "
                           "got %s",
                           tok_to_str(tok->type));
+                          */
     }
 
     RETV(node);

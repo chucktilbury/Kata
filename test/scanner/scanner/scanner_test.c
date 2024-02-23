@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
             print_token(tok);
             printf("\n");
             tok = scan_token(); // must be a string
-            if(tok->type == TOK_LITERAL_STR) {
+            if(tok->type == TOK_LITERAL_DSTR) {
                 printf("%d. ", count++);
                 print_token(tok);
                 open_file(raw_string(tok->str));
