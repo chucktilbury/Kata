@@ -42,6 +42,30 @@ static void eat_comment() {
 }
 
 /**
+ * @brief Scan a number in hex format. When this is called, the 'x' is the
+ * current character.
+ */
+static void scan_unsigned() {
+
+    int ch = get_char();
+
+    while(true) {
+        if(isxdigit(ch)) {
+            add_string_char(token.str, ch);
+            ch = consume_char();
+        }
+        else if(isspace(ch) || ispunct(ch) || ch == EOF)
+            return;
+        else {
+            token.type = TOK_ERROR;
+            clear_string(token.str);
+            add_string_str(token.str, ": malformed hex number, expected hex digit, space or operator");
+            return;
+        }
+    }
+}
+
+/**
  * @brief Scan the exponent of a floating point number. When this is
  * entered, the 'e' has already been seen but not consumed.
  */
@@ -66,7 +90,7 @@ static void scan_exponent() {
 
         // when we run out of digits we are done if ending on white space
         // or an operator. Otherwise, it's an error.
-        if(isspace(ch) || ispunct(ch))
+        if(isspace(ch) || ispunct(ch) || ch == EOF)
             token.type = TOK_LITERAL_FLOAT;
         else {
             token.type = TOK_ERROR;
@@ -97,7 +121,7 @@ static void scan_mantissa() {
     if(ch == 'e' || ch == 'E') {
         scan_exponent();
     }
-    else if(isspace(ch) || ispunct(ch)) {
+    else if(isspace(ch) || ispunct(ch) || ch == EOF) {
         // no exponent. finished.
         token.type = TOK_LITERAL_FLOAT;
     }
@@ -120,28 +144,43 @@ static void scan_number() {
     if(ch == '0') {
         // if the leading character is a zero
         ch = consume_char();
-        if(!isspace(ch) && ch != '.') {
-            token.type = TOK_ERROR;
-            add_string_str(token.str, "malformed number: octal format not supported");
-            return;
-        }
-
-        // the zero has been consumed.
         add_string_char(token.str, '0');
-        token.type = TOK_LITERAL_FLOAT;
 
-        if(ch == '.') {
-            // the dot has not been consumed
-            scan_mantissa();
-            return;
+        switch(ch) {
+            case '.':
+                // has the format of "0.xxx"
+                // do not consume the dot.
+                token.type = TOK_LITERAL_FLOAT;
+                scan_mantissa();
+                return;
+            case 'x':
+            case 'X':
+                // scan for a hex number
+                // do not consume the 'x'
+                token.type = TOK_LITERAL_UNSIGNED;
+                scan_unsigned();
+                return;
+            default:
+                if(isspace(ch) || ispunct(ch)) {
+                    // single zero with no other chars
+                    token.type = TOK_LITERAL_SIGNED;
+                    return;
+                }
+                else if(isdigit(ch)) {
+                    token.type = TOK_ERROR;
+                    add_string_str(token.str, ": malformed number: octal format not supported");
+                    return;
+                }
+                // this should never happen
+                token.type = TOK_ERROR;
+                add_string_str(token.str, ": malformed number: unknown issue");
+                return;
         }
-        else
-            // It is a single zero with no other chars
-            return;
     }
     else {
         // the first character was not a zero.
         bool finished = false;
+
         while(!finished) {
             ch = get_char();
             switch(ch) {
@@ -160,7 +199,7 @@ static void scan_number() {
                         consume_char();
                     }
                     else if(isspace(ch) || ispunct(ch) || ch == EOF) {
-                        token.type = TOK_LITERAL_FLOAT;
+                        token.type = TOK_LITERAL_SIGNED;
                         finished   = true;
                     }
                     else {
@@ -443,8 +482,7 @@ static void scan_inline_block() {
         consume_char();
     } while(count > 0 && ch != EOF);
 
-    // token.type = INLINE
-    // token.str = the inline characters, not the keyword.
+    token.type = TOK_INLINE;
 }
 
 /**
@@ -700,97 +738,6 @@ Token* scan_token() {
     finish_token();
     return &token;
 }
-
-#if 0
-/**
- * @brief Convert the binary token type to a string for display.
- *
- * @param type
- * @return const char*
- */
-const char* tok_to_str(TokenType type) {
-
-    return (type == TOK_END_OF_INPUT) ? "END OF INPUT" :
-            (type == TOK_END_OF_FILE) ? "END OF FILE" :
-            (type == TOK_ERROR)       ? "ERROR" :
-            (type == TOK_BREAK)       ? "BREAK" :
-            (type == TOK_CASE)        ? "CASE" :
-            (type == TOK_CONTINUE)    ? "CONTINUE" :
-            (type == TOK_CONST)       ? "CONST" :
-            (type == TOK_DEFAULT)     ? "DEFAULT" :
-            (type == TOK_IMPORT)      ? "IMPORT" :
-            (type == TOK_DO)          ? "DO" :
-            (type == TOK_ELSE)        ? "ELSE" :
-            (type == TOK_FOR)         ? "FOR" :
-            (type == TOK_IF)          ? "IF" :
-            (type == TOK_RETURN)      ? "RETURN" :
-            (type == TOK_SWITCH)      ? "SWITCH" :
-            (type == TOK_WHILE)       ? "WHILE" :
-            (type == TOK_IN)          ? "IN" :
-            (type == TOK_TO)          ? "TO" :
-            (type == TOK_AS)          ? "AS" :
-            (type == TOK_YIELD)       ? "YIELD" :
-            (type == TOK_EXIT)        ? "EXIT" :
-            (type == TOK_TRY)         ? "TRY" :
-            (type == TOK_EXCEPT)      ? "EXCEPT" :
-            (type == TOK_RAISE)       ? "RAISE" :
-            (type == TOK_CREATE)      ? "CREATE" :
-            (type == TOK_DESTROY)     ? "DESTROY" :
-            (type == TOK_START)       ? "START" :
-            (type == TOK_NAMESPACE)   ? "NAMESPACE" :
-            (type == TOK_CLASS)       ? "CLASS" :
-            (type == TOK_STRUCT)      ? "STRUCT" :
-            (type == TOK_PUBLIC)      ? "PUBLIC" :
-            (type == TOK_PRIVATE)     ? "PRIVATE" :
-            (type == TOK_PROTECTED)   ? "PROTECTED" :
-            (type == TOK_NUMBER)      ? "NUMBER" :
-            (type == TOK_NOTHING)     ? "NOTHING" :
-            (type == TOK_STRING)      ? "STRING" :
-            (type == TOK_BOOLEAN)     ? "BOOLEAN" :
-            (type == TOK_LIST)        ? "LIST" :
-            (type == TOK_DICT)        ? "DICT" :
-            (type == TOK_TRACE)       ? "TRACE" :
-            (type == TOK_PRINT)       ? "PRINT" :
-            (type == TOK_TYPE)        ? "TYPE" :
-            (type == TOK_TRUE_BOOL)   ? "TRUE" :
-            (type == TOK_FALSE_BOOL)  ? "FALSE" :
-            (type == TOK_LORE)        ? "\'<=\'" :
-            (type == TOK_GORE)        ? "\'>=\'" :
-            (type == TOK_EQU)         ? "\'==\'" :
-            (type == TOK_NEQU)        ? "\'!=\'" :
-            (type == TOK_OR)          ? "OR" :
-            (type == TOK_AND)         ? "AND" :
-            (type == TOK_ADD_ASSIGN)  ? "\'+=\'" :
-            (type == TOK_SUB_ASSIGN)  ? "\'-=\'" :
-            (type == TOK_MUL_ASSIGN)  ? "\'*=\'" :
-            (type == TOK_DIV_ASSIGN)  ? "\'/=\'" :
-            (type == TOK_MOD_ASSIGN)  ? "\'%=\'" :
-            (type == TOK_ADD)         ? "\'+\'" :
-            (type == TOK_SUB)         ? "\'-\'" :
-            (type == TOK_ASSIGN)      ? "\'=\'" :
-            (type == TOK_DIV)         ? "\'/\'" :
-            (type == TOK_MUL)         ? "\'*\'" :
-            (type == TOK_MOD)         ? "\'%\'" :
-            (type == TOK_OPAREN)      ? "\'(\'" :
-            (type == TOK_CPAREN)      ? "\')\'" :
-            (type == TOK_OCBRACE)     ? "\'{\'" :
-            (type == TOK_CCBRACE)     ? "\'}\'" :
-            (type == TOK_OSBRACE)     ? "\'[\'" :
-            (type == TOK_CSBRACE)     ? "\']\'" :
-            (type == TOK_COMMA)       ? "\',\'" :
-            (type == TOK_DOT)         ? "\'.\'" :
-            (type == TOK_OPBRACE)     ? "\'<\'" :
-            (type == TOK_CPBRACE)     ? "\'>\'" :
-            (type == TOK_COLON)       ? "\':\'" :
-            (type == TOK_CARAT)       ? "\'^\'" :
-            (type == TOK_AMPER)       ? "\'&\'" :
-            (type == TOK_INLINE)      ? "INLINE" :
-            (type == TOK_LITERAL_NUM) ? "LITERAL NUMBER" :
-            (type == TOK_LITERAL_STR) ? "LITERAL STRING" :
-            (type == TOK_SYMBOL)      ? "SYMBOL" :
-                                        "UNKNOWN";
-}
-#endif
 
 /**
  * @brief Print the content of the token for debugging.

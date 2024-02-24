@@ -64,6 +64,8 @@ typedef enum {
 
     // constructed tokens
     TOK_LITERAL_FLOAT,
+    TOK_LITERAL_SIGNED,
+    TOK_LITERAL_UNSIGNED,
     TOK_LITERAL_DSTR,
     TOK_LITERAL_SSTR,
     TOK_SYMBOL,
@@ -150,6 +152,8 @@ with open("tokens.c", "w") as outf:
         (tok->type == TOK_CARAT)? "^":
         (tok->type == TOK_AMPER)? "&":
         (tok->type == TOK_LITERAL_FLOAT)? "literal float":
+        (tok->type == TOK_LITERAL_SIGNED)? "literal signed":
+        (tok->type == TOK_LITERAL_UNSIGNED)? "literal unsigned":
         (tok->type == TOK_LITERAL_DSTR)? "literal dstrg":
         (tok->type == TOK_LITERAL_SSTR)? "literal sstrg":
         (tok->type == TOK_SYMBOL)? "symbol":

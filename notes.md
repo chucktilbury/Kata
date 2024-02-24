@@ -10,10 +10,10 @@
 ---------------
 
 ## scanner modifications
-* Differentiate single and double quote strings.
-* Add unsigned and signed int number types.
+* <done> Differentiate single and double quote strings.
+* <done> Add unsigned and signed int number type names.
 * Differentiate numerical literals.
-* Add "virtual" keyword.
+* <done> Add "virtual" keyword.
 * Tests.
 
 ----------

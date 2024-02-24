@@ -1,3 +1,4 @@
+0
 "123 234\n\tqweqwe qwe"
 3.14e-12 ^ 123 ;_plart
 namespace class try raise 123 blart {} _asd 123.123
@@ -5,3 +6,4 @@ namespace class try raise 123 blart {} _asd 123.123
 'asd
 asd' != <= qwert+=_opert123_
 nacker.plart.qwe[123] virtual or not
+0x123abc^qwert

@@ -12,7 +12,6 @@ return
 switch
 while
 in
-to
 as
 yield
 exit

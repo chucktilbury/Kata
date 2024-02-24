@@ -19,7 +19,6 @@
  * This header contains a sorted list of the actual keywords that are
  * scanned in the scanner.
  */
-//#include "keyword.h"
 #include "tokens.h"
 
 /**

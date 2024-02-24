@@ -17,7 +17,7 @@ target_compile_options(${PROJECT_NAME}
         -Wpedantic
         -DUSE_GC
         -I${PROJECT_SOURCE_DIR}/../util
-        -I${PROJECT_SOURCE_DIR}/../bdwgc/include
+        -I${PROJECT_SOURCE_DIR}/../gc/include
         -I${CMAKE_CURRENT_BINARY_DIR}
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DMEMORY_DEBUG >

@@ -84,7 +84,7 @@ module
 #
 module_item
     = namespace_item
-    / 'import' formatted_strg ( AS SYMBOL )?
+    / 'import' formatted_strg AS SYMBOL
     / 'start' function_body
 
 #####################
@@ -126,7 +126,9 @@ scope_operator
 # A literal type name is a keyword that represents the name of a builtin type.
 #
 literal_type_name
-    = 'number'
+    = 'float'
+    / 'unsigned'
+    / 'signed'
     / 'string'
     / 'boolean'
     / 'nothing'
@@ -193,7 +195,9 @@ string_expr
 # A bool is "true" or "false" keywords.
 #
 literal_value
-    = LITERAL_NUM
+    = LITERAL_FLOAT
+    / LITERAL_UNSIGNED
+    / LITERAL_SIGNED
     / LITERAL_BOOL
 
 #####################
@@ -264,7 +268,7 @@ dict_init
 # allows syntax like asd[2][3].
 #
 array_param
-    = '[' expression ']' ( array_param )*
+    = '[' ( expression / string_expression ) ']' ( array_param )*
 
 #####################
 #
@@ -306,7 +310,8 @@ compound_name
 #####################
 #
 # A compound reference must name a variable that is suitable to have a value
-# assigned to it.
+# assigned to it. Note that unlike other languages, Simple does not allow
+# function references in a compound reference.
 #
 compound_ref_item
     = SYMBOL
@@ -406,7 +411,8 @@ expr_primary
 
 #####################
 #
-# The expression list is normally used for things like parameter lists.
+# The expression list is normally used for things like parameter lists. The
+# parens are required and the expression list is optional.
 #
 expression_list
     = '(' (expression ( ',' expression )*)? ')'
@@ -526,11 +532,18 @@ function_body_element
 
 #####################
 #
+# This simplifies a while definition
+#
+while_definition
+    = 'while' ( '(' ( expression )? ')' )?
+
+#####################
+#
 # Implement the while() {} clause. Note that an empty or missing expression
 # is an endless loop.
 #
 while_clause
-    = 'while' ( '(' ( expression )? ')' )? function_body
+    = while_definition function_body
 
 #####################
 #
@@ -538,19 +551,18 @@ while_clause
 # clause, a missing or blank expression is an endless loop.
 #
 do_clause
-    = 'do' function_body 'while' ( '(' ( expression )? ')' )?
+    = 'do' function_body while_definition
 
 #####################
 #
 # For clause is not like C or Python. If the expressions are missing then it's
 # the same as 'while {}'. The expression is evaluated after to loop is run and
-# the SYMBOL is updated. Unlike the others, if there is no 'to' clause, then
-# the loop will continue to evaluate the expression and never exit. If the 'to'
-# clause is present, then loop will exit when the expression evaluates to
-# 'true' as SYMBOL '==' expression.
+# the SYMBOL is updated. If the expression evaluates true, then the loop is
+# entered again otherwise the function body is skipped and execution continues
+# after the end of it.
 #
 for_clause
-    = 'for' ( '(' (type_name)? SYMBOL 'in' expression ( 'to' expression )? ')' )?
+    = 'for' ( '(' (type_name)? SYMBOL 'in' expression ')' )?
             function_body
 
 #####################
@@ -581,7 +593,8 @@ else_clause_final
 
 #####################
 #
-# Actual else clause list definition.
+# Actual else clause list definition. Zero or more mid clauses and zero or one
+# final clauses. Note that both are optional.
 #
 else_clause
     = ( else_clause_mid )* ( else_clause_final )?
@@ -595,18 +608,36 @@ else_clause
 # location. One or more except clauses can be present.
 #
 try_clause
-    = 'try' function_body ( except_clause )+
+    = 'try' function_body except_clause
 
 #####################
 #
 # Except clause with a required symbol. The first symbol names which exception
-# is going to be caught. The second one is taken to be a string that is an
+# is going to be caught. The second one is taken to be a string var that is an
 # error message that was given when the exception was raised. To capture any
 # exception, the exception type should be 'any' and the error message is
 # propagated as expected.
 #
+except_clause_mid
+    = 'except' '(' SYMBOL ',' SYMBOL ')' function_body
+
+#####################
+#
+# The final clause matches any exception, but it must be the last one that
+# appears in the list of clauses.
+#
+except_clause_final
+    = 'except' '(' 'any' ',' SYMBOL ')' function_body
+
+#####################
+#
+# The except clause must have at least one element, but that element could be a
+# mid or a final. There may be any number of mid clauses. A final clause must
+# be the last one.
+#
 except_clause
-    = 'except' '(' ( 'any' / SYMBOL ) ',' SYMBOL ')' function_body
+    = ( except_clause_mid )+ ( except_clause_final )?
+    / except_clause_final
 
 #####################
 #
@@ -622,7 +653,7 @@ switch_clause
 # declared as CONST.
 #
 case_clause
-    = 'case' '(' literal_value ')' function_body
+    = 'case' '(' ( literal_value / LITERAL_DSTR / LITERAL_SSTR ) ')' function_body
 
 #####################
 #
