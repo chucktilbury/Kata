@@ -116,6 +116,7 @@ typedef struct __ast_import_statement__ {
     AstNode node;
     struct __ast_formatted_string__* fname;
     Token* symbol;
+    struct __ast_module__* module;
 } AstImportStatement;
 
 // expression.c

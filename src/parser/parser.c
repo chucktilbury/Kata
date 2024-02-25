@@ -44,17 +44,39 @@ Str* peek_namespace() {
     RETV(copy_string(&str));
 }
 
-AstNode* parser(const char* fname) {
+AstModule* parser() {
+
 
     ENTER;
-    name_stack = create_list(sizeof(Str));
+    AstModule* node = NULL;
 
-    init_scanner();
-    open_file(fname);
+    if(NULL != (node = parse_module())) {
+        close_file();
+        advance_token();
+    }
+    else {
+        // error already given by parse_module()
+        RETV(NULL);
+    }
 
-    AstNode* node = (AstNode*)parse_module();
+    Token* tok = get_token();
 
-    // Note that this is a deficiency with these macros. If you return a
-    // function instance, it will get called two times.
+    if(tok->type != TOK_END_OF_INPUT) {
+        EXPECTED("end of input");
+        RETV(NULL);
+    }
+
     RETV(node);
+
+    // ENTER;
+    // name_stack = create_list(sizeof(Str));
+
+    // init_scanner();
+    // open_file(fname);
+
+    // AstNode* node = (AstNode*)parse_module();
+
+    // // Note that this is a deficiency with these macros. If you return a
+    // // function instance, it will get called two times.
+    // RETV(node);
 }

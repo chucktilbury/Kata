@@ -16,6 +16,8 @@
  */
 #include "internal_parser.h"
 
+AstModule* parser(const char* name);
+
 /**
  * @brief Actually open the input file so that parsing can begin on it.
  *
@@ -24,21 +26,25 @@
  * @return false
  *
  */
-static bool do_import(AstFormattedString* fname, Str* symbol) {
+static AstModule* do_import(AstFormattedString* fname, Str* symbol) {
 
     ENTER;
     (void)symbol;
     // Scan a search path of locations to find the actual file in.
 
-    // Open the actual file.
     open_file(raw_string(fname->strg->str));
+    AstModule* node = NULL;
 
-    // convert the file name into a namespace entry
+    if(NULL != (node = parse_module())) {
+        close_file();
+        advance_token();
+    }
+    else {
+        // error already given by parse_module()
+        RETV(NULL);
+    }
 
-    // do_namespace() is defined in parser.c
-    // push_namespace(symbol);
-
-    RETV(true);
+    RETV(node);
 }
 
 /**
@@ -115,10 +121,16 @@ AstImportStatement* parse_import_statement() {
     node->symbol = symbol;
     finalize_token_queue();
 
-    TRACE("node is complete");
-    // handle the actual import
-    if(!do_import(filename, symbol->str))
-        node = NULL;
+    TRACE("parseing node is complete");
 
-    RETV(node);
+    // handle the actual import
+    if(NULL != (node->module = do_import(filename, symbol->str))) {
+        RETV(node);
+    }
+    else {
+        show_syntax_error("error parsing import: %s", raw_string(filename->strg->str));
+        RETV(NULL);
+    }
+
+    RETV(NULL); // can never happen
 }

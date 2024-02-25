@@ -113,7 +113,7 @@ Token* iterate_token_queue(void** mark);
  * @brief Initialize the scanner data structures. This must be called
  * before any other calls into the scanner.
  */
-void init_scanner();
+void init_scanner(const char* fname);
 
 /**
  * @brief Convert the binary token type to a string for display.

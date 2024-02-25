@@ -13,6 +13,6 @@
 
 #include "ast.h"
 
-AstNode* parser(const char* fname);
+AstModule* parser();
 
 #endif /* _PARSER_H */

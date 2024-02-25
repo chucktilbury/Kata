@@ -668,10 +668,12 @@ static void finish_token() {
  * @brief Allocate the data structures that the scanner uses. This function
  * must be called before any characters are scanned.
  */
-void init_scanner() {
+void init_scanner(const char* fname) {
 
     memset(&token, 0, sizeof(Token));
     token.str = create_string(NULL);
+
+    open_file(fname);
 }
 
 /**

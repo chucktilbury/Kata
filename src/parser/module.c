@@ -183,7 +183,7 @@ AstModule* parse_module() {
     AstNode *nterm;
     AstModule* node = NULL;
     PtrList* list = create_ptr_list();
-    Token* tok;
+    //Token* tok;
 
     while(true) {
         if(NULL != (nterm = (AstNode*)parse_module_element())) {
@@ -193,26 +193,31 @@ AstModule* parse_module() {
         else if(get_token()->type == TOK_END_OF_FILE) {
             // handle end of file
             TRACE_TERM(get_token());
-            // pop_namespace();
-            close_file();
-            advance_token();
+            node = CREATE_AST_NODE(AST_module, AstModule);
+            node->lst = list;
+            finalize_token_queue();
+            RETV(node);
         }
-        else
-            break;
+        else {
+            EXPECTED("a module item or end of file");
+            RETV(NULL);
+        }
     }
 
-    tok = get_token();
-    if(tok->type == TOK_END_OF_INPUT) {
-        TRACE_TERM(tok);
-        node = CREATE_AST_NODE(AST_module, AstModule);
-        //add_ast_attrib(node, "list", list, sizeof(List));
-        node->lst = list;
-        finalize_token_queue();
-        RETV(node);
-    }
-    else {
-        EXPECTED("end of input");
-        //show_syntax_error("expected end of input but got %s", tok_to_str(tok->type));
-        RETV(NULL);
-    }
+    RETV(NULL); // never can happen...
+
+    // tok = get_token();
+    // if(tok->type == TOK_END_OF_INPUT) {
+    //     TRACE_TERM(tok);
+    //     node = CREATE_AST_NODE(AST_module, AstModule);
+    //     //add_ast_attrib(node, "list", list, sizeof(List));
+    //     node->lst = list;
+    //     finalize_token_queue();
+    //     RETV(node);
+    // }
+    // else {
+    //     EXPECTED("end of input");
+    //     //show_syntax_error("expected end of input but got %s", tok_to_str(tok->type));
+    //     RETV(NULL);
+    // }
 }
