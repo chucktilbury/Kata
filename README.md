@@ -230,7 +230,7 @@ assignment_item
 # A variable definition has an optional assignment.
 #
 var_definition
-    = var_decl ( '=' assignment_item)?
+    = var_decl ( '=' assignment_item )?
 
 #####################
 #
@@ -302,7 +302,7 @@ function_reference
 #####################
 #
 # A compound name can name a type or it can name a variable. The compiler is
-# to check for correctness upon compile time.
+# to check for correctness at compile time.
 #
 compound_name
     = SYMBOL ( '.' SYMBOL )*
@@ -329,7 +329,9 @@ compound_reference
 #
 # Head of an expression parse. The OR keyword is the lowest precedence
 # operator. This operator only understands boolean values. When this is
-# encountered in an expression, all operands are converted to bool.
+# encountered in an expression, all operands are converted to bool. Expressions
+# are actually implemented using the shuntinting yard algorithm. The segmented
+# representation here is to show the precedence of the operators.
 #
 expression
     = expr_and 'or' expr_or
@@ -431,7 +433,7 @@ namespace_definition
 # A class definition contains a list of class items. It accepts a single
 # optional parameter and the '()' around the parameter is optional. Also
 # the items in the class are optional. In the Simple language, a class can
-# only be declared once, and o declaring an empty class prevents it from
+# only be declared once, and declaring an empty class prevents it from
 # being declared elsewhere.
 #
 class_definition
@@ -532,7 +534,13 @@ function_body_element
 
 #####################
 #
-# This simplifies a while definition
+# This simplifies a while definition. The parens and the expression are 
+# optional. If they are not present, or if the parens are present but not 
+# the expression, then it is taken as true, same as while(1){}. String
+# expressions are not allowed. Expressions that evaluate to a float are 
+# always true because floats theoretically can never be exactly zero. This 
+# creates a runtime warning. The expression must evaluate to a boolean, a
+# signed or unsigned in order to be symantically valid.
 #
 while_definition
     = 'while' ( '(' ( expression )? ')' )?
@@ -557,9 +565,14 @@ do_clause
 #
 # For clause is not like C or Python. If the expressions are missing then it's
 # the same as 'while {}'. The expression is evaluated after to loop is run and
-# the SYMBOL is updated. If the expression evaluates true, then the loop is
-# entered again otherwise the function body is skipped and execution continues
-# after the end of it.
+# the SYMBOL is updated. The expression is then cast to a bool. If it evaluates 
+# to true, then the loop is entered again otherwise the function body is 
+# skipped and execution continues after the end of it. Strings are not allowed 
+# in the expression. if the expression evaluates to a float, then a runtime 
+# warning is generated because the only way for the expression to evaluate to 
+# false as a float is if it is exactly 0.0, which is theortically impossible. 
+# To be symantically correct, expression has to evaluate to a signed, unsigned, 
+# or a bool. Note that casting is allowed.
 #
 for_clause
     = 'for' ( '(' (type_name)? SYMBOL 'in' expression ')' )?
@@ -572,14 +585,17 @@ for_clause
 # clauses, if any, are ignored. If the first 'if' is false, then the second
 # one is tried and so on until a 'true' can be evaluated. All of these 'if'
 # statements require an expression except for the last one, where it's
-# optional, since blank or missing expressions are always true.
+# optional, since blank or missing expressions are always true. Only the last
+# else clause can have a blank (and therefore true) expression. This policy is
+# enforced by the parser, rather than with a compile time policy. Note that 
+# the else_clause is optional.
 #
 if_clause
     = 'if' '(' expression ')' function_body else_clause
 
 #####################
 #
-# Else clause with a required expression.
+# Else clause with a required expression. 
 #
 else_clause_mid
     = 'else' '(' expression ')' function_body
@@ -594,7 +610,7 @@ else_clause_final
 #####################
 #
 # Actual else clause list definition. Zero or more mid clauses and zero or one
-# final clauses. Note that both are optional.
+# final clauses. Note that a stand-alone if() is syntattically correct.
 #
 else_clause
     = ( else_clause_mid )* ( else_clause_final )?
@@ -633,7 +649,10 @@ except_clause_final
 #
 # The except clause must have at least one element, but that element could be a
 # mid or a final. There may be any number of mid clauses. A final clause must
-# be the last one.
+# be the last one. If there are no middle except clauses then the final one is
+# required. In other words, at least one except clause is required and if there
+# is an "any" except clause, then it needs to be the last one to be 
+# syntattically correct.
 #
 except_clause
     = ( except_clause_mid )+ ( except_clause_final )?
@@ -645,19 +664,24 @@ except_clause
 # strings as well as numbers.
 #
 switch_clause
-    = 'switch' '(' expression ')' case_body
+    = 'switch' '(' compound_reference ')' case_body
 
 #####################
 #
 # A case clause must have a literal value or a data reference that was
-# declared as CONST.
+# declared as CONST. First the match is made against the type that appears in
+# the switch clause. If the type does not match, then the case cannot match.
+# There is an exception in that a signed and an unsigned are considered to be 
+# the same type for a case clause.
 #
 case_clause
     = 'case' '(' ( literal_value / LITERAL_DSTR / LITERAL_SSTR ) ')' function_body
 
 #####################
 #
-# The default clause is the last thing if it's present.
+# The default clause is the last thing if it's present. If none of the cases 
+# match, then the default clause is matched and executed. If the default clause
+# is not present and none of the cases match, then the switch is not executed.
 #
 default_clause
     = 'default' function_body
@@ -665,7 +689,7 @@ default_clause
 #####################
 #
 # The actual case body definition is similar to C. One or more 'case' clauses
-# followed by an optional 'default' clause.
+# followed by exactly one optional 'default' clause.
 #
 case_body
     = '{' ( case_clause_list )+ ( default_clause )? '}'
