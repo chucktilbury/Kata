@@ -28,10 +28,7 @@ public
 private
 protected
 nothing
-noth
 string
-strg
-bool
 boolean
 list
 dict
@@ -50,3 +47,5 @@ signed
 unsigned
 float
 not
+any
+function

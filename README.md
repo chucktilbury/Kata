@@ -8,16 +8,20 @@ The language is a synthesis or Python and C. It has the object model of Python b
 General features in no particular order.
 * Curly braces to delimit blocks. Semicolons are used to introduce single-line comments. Whitespace is completely ignored except to separate some tokens.
 * Simplified type system, but is strongly typed with casting.
+* Durable typing. Once a type is specified, it cannot be changed. Casting is supported and a different var can be created with the different type. The exception to this is the ``nothing`` type. This allows the type to be assigned at runtime, and once it is assigned, then the type of the variable becomes durable and is enforced at runtime.
 * Function overloads by parameter type. Functions have a syntax of ``name(input parameters)(output parameters)``. Input parameters are passed to the function by value and output parameters are passed as references. Outputs not assigned in the function is a warning. Outputs accessed by value in a function is a syntax error, and duplicate names are a syntax error. This means that a function does not "return" anything. A syntax such as ``name.name.func()().name`` makes no sense. Use exceptions to communicate errors and such.
-* Nothing type takes the place of the ``void`` type in C. This is used to allow an data object to have a type assigned at run time.
+* Functions can be overridden by the signature, including the return values. 
+* Functions can be assigned to variables using a syntax such as ``nothing varname = func_name()()``.
+* The ``nothing`` type takes the place of the ``void`` type in C. This is used to allow an data object to have a type assigned at run time.
 * Classes with single inheritance only. Class definitions can contain no assignments or function definitions. The parent attributes and methods are accessed by name with the '.' operator. The scope operators set the scope of subsequent lines of code. The default scope is ``private``.
 * Membership is given by the '.' operator and spaces are allowed before or after it.
-* Virtual functions. If a virtual function has a definition in its class and a child class inherits it, then the child can still access the parent method using the membership '.' operator.
+* Virtual functions. If a virtual function has a definition in its class and a child class inherits it, then the child can still access the parent method using the membership '.' operator. Overriding a virtual function is optional. Defining a virtual function is optional. Accessing a virtual function that has not been defined is a runtime error.
 * Supports dictionaries and lists natively.
 * String is a native data type and all strings can be formatted without an explicit method call.
-* Managed memory using the Boehm-Demers-Weiser Garbage Collector found here: https://www.hboehm.info/gc/
+* The compiler and the runtime library both use managed memory implemented by the Boehm-Demers-Weiser Garbage Collector found here: https://www.hboehm.info/gc/
 * Exceptions using the non-local goto feature of ANSI C. A string error message is passed back to the exception handler.
-* Support for external libraries using an ``inline`` keyword that causes literal code to be copied directly to the output without any checking.
+* Support for external libraries using an ``inline`` keyword that causes literal code to be copied directly to the output without any checking. This is implemented as a scanner feature.
+* Constant values cannot be changed once they are assigned, but they are assigned at runtime.
 
 Features that are specifically not supported.
 
@@ -85,7 +89,7 @@ module
 module_item
     = namespace_item
     / 'import' formatted_strg AS SYMBOL
-    / 'start' function_body
+    / start_function
 
 #####################
 #
@@ -134,6 +138,7 @@ literal_type_name
     / 'nothing'
     / 'list'
     / 'dict'
+    / 'function'
 
 #####################
 #
@@ -449,7 +454,8 @@ class_definition
 # redefined and it can still be called using the name of the parent class and
 # the '.' operator. Normally, if a function is declared in a class declaration,
 # then not having a definition for it is a compile time error. A class
-# declaration cannot contain a function definition.
+# declaration cannot contain a function definition. The const variable is a 
+# constant only for that object.
 #
 class_item
     = scope_operator
@@ -465,7 +471,7 @@ class_item
 # course the default constructors and destructors are provided.
 #
 func_decl
-    = SYMBOL '(' ( var_decl_list )* ')' '(' ( var_decl_list )* ')'
+    = 'function' SYMBOL '(' ( var_decl_list )* ')' '(' ( var_decl_list )* ')'
     / 'create' '(' ( var_decl_list )* ')'
     / 'destroy'
 
@@ -478,10 +484,10 @@ func_decl
 # be a single symbol, meaning that it does not tie to a class.
 #
 func_definition
-    = compound_name
+    = 'function' compound_name
             '(' ( var_decl_list )* ')' '(' ( var_decl_list )* ')' function_body
-    / compound_name '.' 'create' '(' ( var_decl_list )* ')' function_body
-    / compound_name '.' 'destroy' function_body
+    / 'function' compound_name '.' 'create' '(' ( var_decl_list )* ')' function_body
+    / 'function' compound_name '.' 'destroy' function_body
 
 #####################
 #
