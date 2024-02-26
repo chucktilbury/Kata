@@ -23,6 +23,8 @@
  */
 void traverse_try_clause(ast_try_clause* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -38,6 +40,8 @@ void traverse_try_clause(ast_try_clause* node) {
  */
 void traverse_except_clause_mid(ast_except_clause_mid* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -53,6 +57,8 @@ void traverse_except_clause_mid(ast_except_clause_mid* node) {
  */
 void traverse_except_clause_final(ast_except_clause_final* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -69,6 +75,8 @@ void traverse_except_clause_final(ast_except_clause_final* node) {
  */
 void traverse_except_clause(ast_except_clause* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }

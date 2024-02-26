@@ -8,7 +8,8 @@
                 "${workspaceFolder}/src/util",
                 "${workspaceFolder}/src/scanner",
                 "${workspaceFolder}/src/parser",
-                "${workspaceFolder}/build/src/scanner"
+                "${workspaceFolder}/build/src/scanner",
+                "${workspaceFolder}/src/scan"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc"

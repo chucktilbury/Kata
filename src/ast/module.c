@@ -23,6 +23,8 @@
  */
 void traverse_module(ast_module* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -40,6 +42,8 @@ void traverse_module(ast_module* node) {
  */
 void traverse_module_item(ast_module_item* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -59,6 +63,8 @@ void traverse_module_item(ast_module_item* node) {
  */
 void traverse_namespace_item(ast_namespace_item* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -74,6 +80,8 @@ void traverse_namespace_item(ast_namespace_item* node) {
  */
 void traverse_namespace_definition(ast_namespace_definition* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -91,6 +99,8 @@ void traverse_namespace_definition(ast_namespace_definition* node) {
  */
 void traverse_class_item(ast_class_item* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -99,7 +109,7 @@ void traverse_class_item(ast_class_item* node) {
  * @brief 
  * 
  *  class_definition
- *      = 'class' SYMBOL ( '(' ( compound_name )? ')' )?
+ *      = 'class' SYMBOL ( '(' ( type_name )? ')' )?
  *              '{' ( class_item )+ '}'
  *      
  * @param node 
@@ -107,6 +117,8 @@ void traverse_class_item(ast_class_item* node) {
  */
 void traverse_class_definition(ast_class_definition* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }

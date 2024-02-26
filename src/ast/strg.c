@@ -23,6 +23,8 @@
  */
 void traverse_formatted_strg(ast_formatted_strg* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -39,6 +41,8 @@ void traverse_formatted_strg(ast_formatted_strg* node) {
  */
 void traverse_string_literal(ast_string_literal* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -56,6 +60,8 @@ void traverse_string_literal(ast_string_literal* node) {
  */
 void traverse_string_expr_item(ast_string_expr_item* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -71,6 +77,8 @@ void traverse_string_expr_item(ast_string_expr_item* node) {
  */
 void traverse_string_expr(ast_string_expr* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }

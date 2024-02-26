@@ -20,6 +20,8 @@
  */
 void traverse_compound_name(ast_compound_name* node) {
 
+    assert(node != NULL);
+
     ENTER;
     RET;
 }
@@ -32,6 +34,8 @@ void traverse_compound_name(ast_compound_name* node) {
  */
 void traverse_compound_ref_item(ast_compound_ref_item* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -44,6 +48,8 @@ void traverse_compound_ref_item(ast_compound_ref_item* node) {
  */
 void traverse_compound_reference(ast_compound_reference* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }

@@ -23,6 +23,8 @@
  */
 void traverse_var_decl(ast_var_decl* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -38,6 +40,8 @@ void traverse_var_decl(ast_var_decl* node) {
  */
 void traverse_var_decl_list(ast_var_decl_list* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -53,6 +57,8 @@ void traverse_var_decl_list(ast_var_decl_list* node) {
  */
 void traverse_var_definition(ast_var_definition* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }

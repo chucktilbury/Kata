@@ -13,6 +13,8 @@
 
 void traverse_ast(ast_module* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }

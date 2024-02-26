@@ -25,6 +25,8 @@
  */
 void traverse_scope_operator(ast_scope_operator* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -48,6 +50,8 @@ void traverse_scope_operator(ast_scope_operator* node) {
  */
 void traverse_literal_type_name(ast_literal_type_name* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -66,6 +70,8 @@ void traverse_literal_type_name(ast_literal_type_name* node) {
  */
 void traverse_literal_value(ast_literal_value* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -82,6 +88,8 @@ void traverse_literal_value(ast_literal_value* node) {
  */
 void traverse_type_name(ast_type_name* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }

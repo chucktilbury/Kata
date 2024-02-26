@@ -11,6 +11,7 @@
 #define USE_TRACE 1
 #include "util.h"
 #include "parse.h"
+#include "scan.h"
 
 /**
  * @brief Initialze the parser and open the first file.
@@ -21,6 +22,7 @@
 void init_parser(const char* fname) {
 
     ENTER;
+    init_scanner(fname);
     RET;
 }
 

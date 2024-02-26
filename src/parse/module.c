@@ -109,7 +109,7 @@ ast_class_item* parse_class_item() {
  * @brief 
  * 
  *  class_definition
- *      = 'class' SYMBOL ( '(' ( compound_name )? ')' )?
+ *      = 'class' SYMBOL ( '(' ( type_name )? ')' )?
  *              '{' ( class_item )+ '}'
  *      
  * @return ast_class_definition* 

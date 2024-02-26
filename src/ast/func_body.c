@@ -42,6 +42,8 @@
  */
 void traverse_function_body_element(ast_function_body_element* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -57,6 +59,8 @@ void traverse_function_body_element(ast_function_body_element* node) {
  */
 void traverse_break_statement(ast_break_statement* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -72,6 +76,8 @@ void traverse_break_statement(ast_break_statement* node) {
  */
 void traverse_continue_statement(ast_continue_statement* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -87,6 +93,8 @@ void traverse_continue_statement(ast_continue_statement* node) {
  */
 void traverse_trace_statement(ast_trace_statement* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -102,6 +110,8 @@ void traverse_trace_statement(ast_trace_statement* node) {
  */
 void traverse_inline_statement(ast_inline_statement* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -117,6 +127,8 @@ void traverse_inline_statement(ast_inline_statement* node) {
  */
 void traverse_yield_statement(ast_yield_statement* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -132,6 +144,8 @@ void traverse_yield_statement(ast_yield_statement* node) {
  */
 void traverse_type_statement(ast_type_statement* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -147,6 +161,8 @@ void traverse_type_statement(ast_type_statement* node) {
  */
 void traverse_exit_statement(ast_exit_statement* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -162,6 +178,8 @@ void traverse_exit_statement(ast_exit_statement* node) {
  */
 void traverse_print_statement(ast_print_statement* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -177,6 +195,8 @@ void traverse_print_statement(ast_print_statement* node) {
  */
 void traverse_return_statement(ast_return_statement* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -192,6 +212,8 @@ void traverse_return_statement(ast_return_statement* node) {
  */
 void traverse_raise_statement(ast_raise_statement* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }

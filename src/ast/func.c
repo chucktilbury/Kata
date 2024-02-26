@@ -25,6 +25,8 @@
  */
 void traverse_function_reference(ast_function_reference* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -42,6 +44,8 @@ void traverse_function_reference(ast_function_reference* node) {
  */
 void traverse_func_decl(ast_func_decl* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -60,6 +64,8 @@ void traverse_func_decl(ast_func_decl* node) {
  */
 void traverse_func_definition(ast_func_definition* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -75,6 +81,8 @@ void traverse_func_definition(ast_func_definition* node) {
  */
 void traverse_function_body(ast_function_body* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -90,6 +98,8 @@ void traverse_function_body(ast_function_body* node) {
  */
 void traverse_start_function(ast_start_function* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }

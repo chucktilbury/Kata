@@ -20,6 +20,8 @@
  */
 void traverse_expression(ast_expression* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -37,6 +39,8 @@ void traverse_expression(ast_expression* node) {
  */
 void traverse_expr_primary(ast_expr_primary* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -52,6 +56,8 @@ void traverse_expr_primary(ast_expr_primary* node) {
  */
 void traverse_expression_list(ast_expression_list* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -70,6 +76,8 @@ void traverse_expression_list(ast_expression_list* node) {
  */
 void traverse_assignment_item(ast_assignment_item* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -90,6 +98,8 @@ void traverse_assignment_item(ast_assignment_item* node) {
  */
 void traverse_assignment(ast_assignment* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }

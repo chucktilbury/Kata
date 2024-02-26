@@ -23,6 +23,8 @@
  */
 void traverse_while_definition(ast_while_definition* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -38,6 +40,8 @@ void traverse_while_definition(ast_while_definition* node) {
  */
 void traverse_while_clause(ast_while_clause* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -53,6 +57,8 @@ void traverse_while_clause(ast_while_clause* node) {
  */
 void traverse_do_clause(ast_do_clause* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }
@@ -69,6 +75,8 @@ void traverse_do_clause(ast_do_clause* node) {
  */
 void traverse_for_clause(ast_for_clause* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }

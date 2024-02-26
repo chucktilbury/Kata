@@ -460,7 +460,7 @@ namespace_definition
 # being declared elsewhere.
 #
 class_definition
-    = 'class' SYMBOL ( '(' ( compound_name )? ')' )?
+    = 'class' SYMBOL ( '(' ( type_name )? ')' )?
             '{' ( class_item )+ '}'
 
 #####################

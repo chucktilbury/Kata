@@ -23,6 +23,8 @@
  */
 void traverse_import_statement(ast_import_statement* node) {
 
+    assert(node != NULL);
+    
     ENTER;
     RET;
 }

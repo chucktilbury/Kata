@@ -25,7 +25,6 @@ target_compile_options(${PROJECT_NAME}
         -Wall
         -Wextra
         -Wpedantic
-        -Wno-unused-parameter
         -DUSE_GC
         -I${PROJECT_SOURCE_DIR}/../util
         -I${PROJECT_SOURCE_DIR}/../scan
