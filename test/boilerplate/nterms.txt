@@ -40,9 +40,10 @@ function_reference
 func_decl
 func_definition
 function_body
-function_body_element
+start_function
 
 // func_body.c
+function_body_element
 break_statement
 continue_statement
 trace_statement
@@ -83,3 +84,5 @@ except_clause_mid
 except_clause_final
 except_clause
 
+// import.c
+import_statement

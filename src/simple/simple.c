@@ -10,8 +10,8 @@
  * @copyright Copyright (c) 2024
  */
 #include "util.h"
-//#include "scanner.h"
-#include "parser.h"
+//#include "scan.h"
+#include "parse.h"
 #include "trace.h"
 
 int main(int argc, char** argv) {
@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
 
     TRACE("--------------------------------------------");
     TRACE("Begin Parse");
-    AstModule* node = parser();
+    ast_module* node = parse();
     TRACE("End Parse");
     TRACE("--------------------------------------------");
 

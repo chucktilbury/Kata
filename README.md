@@ -88,8 +88,26 @@ module
 #
 module_item
     = namespace_item
-    / 'import' formatted_strg AS SYMBOL
+    / import_statement
     / start_function
+
+#####################
+#
+# There must be exactly one start function in a program. This is where the 
+# program execution begins.
+#
+start_function
+    = 'start' function_body
+
+#####################
+#
+# Import statement must always be at the module level. An import is treated as
+# a separate module and only the names are read in so that they can be 
+# referenced. The imported module is then linked by the compiler to make the 
+# program.
+#
+import_statement
+    = 'import' formatted_strg AS SYMBOL
 
 #####################
 #

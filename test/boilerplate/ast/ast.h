@@ -72,6 +72,8 @@ typedef enum {
     AST_print_statement,
     AST_return_statement,
     AST_raise_statement,
+    AST_start_function,
+    AST_import_statement,
 } AstType;
 
 typedef struct _ast_node_ {
@@ -90,5 +92,6 @@ typedef struct _ast_node_ {
 #include "loop.h"
 #include "flow.h"
 #include "except.h"
+#include "import.h"
 
 #endif /* __AST_H__ */

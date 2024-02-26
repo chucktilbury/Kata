@@ -3,9 +3,15 @@ module
 
 module_item
     = namespace_item
-    / 'import' formatted_strg AS SYMBOL
+    / import_statement
     / start_function
 
+start_function
+    = 'start' function_body
+
+import_statement
+    = 'import' formatted_strg AS SYMBOL
+    
 namespace_item
     = scope_operator
     / namespace_definition

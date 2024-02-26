@@ -9,8 +9,8 @@ add_executable(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     pthread
-    parser
-    scanner
+    parse
+    scan
     ast
     util
     gc
@@ -24,11 +24,12 @@ target_compile_options(${PROJECT_NAME}
         -DUSE_GC
         -I${PROJECT_SOURCE_DIR}/..
         -I${PROJECT_SOURCE_DIR}/../util
-        -I${PROJECT_SOURCE_DIR}/../util/bdwgc/include
-        -I${PROJECT_SOURCE_DIR}/../parser
-        -I${PROJECT_SOURCE_DIR}/../scanner
+        -I${PROJECT_SOURCE_DIR}/../util/gc/include
+        -I${PROJECT_SOURCE_DIR}/../parse
+        -I${PROJECT_SOURCE_DIR}/../scan
         -I${PROJECT_SOURCE_DIR}/../ast
-        -I${CMAKE_CURRENT_BINARY_DIR}/../scanner
+        -I${PROJECT_SOURCE_DIR}/../misc
+        -I${CMAKE_CURRENT_BINARY_DIR}/../scan
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DENABLE_LOGGER >
         $<$<CONFIG:DEBUG>:-DUSE_TRACE >
