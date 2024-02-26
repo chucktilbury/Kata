@@ -42,8 +42,8 @@ This requires an ANSI C compiler, cmake, graphiz, and doxygen. No other librarie
 I would also welcome some help. Compilers are such a slog....
 
 # Grammar
-This is the complete grammar for Simple:
-```Python
+This is the complete and updated grammar for Simple:
+```
 
 #####################
 #

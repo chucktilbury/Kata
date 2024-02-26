@@ -1,5 +1,8 @@
 
-# Problems...
+# Problems and thoughts...
+
+---------------20240226---------------
+* (done) Create boilerplate for all parser and ast functions and data structures.
 
 ---------------20240217---------------
 
@@ -30,3 +33,10 @@
   * Change fileio.c so that instead of closing files automatically, it is closed manually. The parser then controls when the file is actually closed. New functions of push_input_file() and pop_input_file(). Instead of only returning a EOF token to represent the end of all input, return EOF as the end of a file and an EOI token to represent the end of the input. The end of input happens where the last file has been popped from the file stack.
   * The scanner needs to return the EOF and EOI as tokens so that the parser can see when to make a change to the current namespace.
   * <DONE> Added end of file and end of input tokens to the scanner and   verified that they are being properly returned.
+
+## Steps to add a parser non-terminal target
+1. Update the grammar in README.md
+2. Add the AST type in AstType in ast.h
+3. Add the data struture in the correct header in the ast directory.
+4. Add the parse and traverse function prototypes.
+5. Implement the parse and traverse functions.
