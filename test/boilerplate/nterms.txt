@@ -1,0 +1,85 @@
+// module.c
+module
+module_item
+namespace_item
+namespace_definition
+class_item
+class_definition
+
+// compound.c
+compound_name
+compound_ref_item
+compound_reference
+
+// literals.c
+scope_operator
+literal_type_name
+literal_value
+type_name
+formatted_strg
+
+// string.c
+string_literal
+string_expr_item
+string_expr
+
+// vars.c
+var_decl
+var_decl_list
+var_definition
+
+// list.c
+list_init
+dict_init_element
+dict_init
+array_param
+array_reference
+
+// func.c
+function_reference
+func_decl
+func_definition
+function_body
+function_body_element
+
+// func_body.c
+break_statement
+continue_statement
+trace_statement
+inline_statement
+yield_statement
+type_statement
+exit_statement
+print_statement
+return_statement
+raise_statement
+
+// expr.c
+expression
+expr_primary
+expression_list
+assignment_item
+assignment
+
+// loop.c
+while_definition
+while_clause
+do_clause
+for_clause
+
+// flow.c
+if_clause
+else_clause_mid
+else_clause_final
+else_clause
+switch_clause
+case_clause
+default_clause
+case_body
+
+// except.c
+try_clause
+except_clause_mid
+except_clause_final
+except_clause
+

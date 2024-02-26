@@ -1,0 +1,262 @@
+module
+    = ( module_item )+
+
+module_item
+    = namespace_item
+    / 'import' formatted_strg AS SYMBOL
+    / start_function
+
+namespace_item
+    = scope_operator
+    / namespace_definition
+    / class_definition
+    / func_definition
+    / ( 'const' )? var_definition
+
+scope_operator
+    = 'private'
+    / 'public'
+    / 'protected'
+
+literal_type_name
+    = 'float'
+    / 'unsigned'
+    / 'signed'
+    / 'string'
+    / 'boolean'
+    / 'nothing'
+    / 'list'
+    / 'dict'
+    / 'function'
+
+type_name
+    = literal_type_name
+    / compound_name
+
+formatted_strg
+    = LITERAL_DSTRG (expression_list)?
+
+string_literal
+    = LITERAL_SSTRG
+    / formatted_strg
+
+string_expr_item
+    = string_literal
+    / compound_reference
+    / literal_value
+
+string_expr
+    = string_expr_item ( '+' string_expr_item )*
+
+literal_value
+    = LITERAL_FLOAT
+    / LITERAL_UNSIGNED
+    / LITERAL_SIGNED
+    / LITERAL_BOOL
+
+var_decl
+    = type_name SYMBOL
+
+var_decl_list
+    = var_decl ( ',' var_decl )*
+
+assignment_item
+    = expression
+    / list_init
+    / dict_init
+    / string_expr
+
+var_definition
+    = var_decl ( '=' assignment_item )?
+
+list_init
+    = '[' assignment_item ( ',' assignment_item )* ']'
+
+dict_init_element
+    = ( LITERAL_DSTRG / LITERAL_SSTRG ) ':' assignment_item
+
+dict_init
+    = '[' dict_init_element ( ',' dict_init_element )* ']'
+
+array_param
+    = '[' ( expression / string_expression ) ']' ( array_param )*
+
+array_reference
+    = SYMBOL array_param
+
+function_reference
+    = compound_name
+            ( expression_list )+
+            '(' ( compound_name ( ',' compound_name )* )+ ')'
+
+compound_name
+    = SYMBOL ( '.' SYMBOL )*
+
+compound_ref_item
+    = SYMBOL
+    / array_reference
+
+compound_reference
+    = compound_ref_item ( '.' compound_ref_item )*
+
+expression
+    = expr_and 'or' expr_or
+    / expr_equ 'and' expr_and
+    / expr_mag '==' expr_equ
+    / expr_mag '!=' expr_equ
+    / expr_term '<' expr_mag
+    / expr_term '>' expr_mag
+    / expr_term '<=' expr_mag
+    / expr_term '>=' expr_mag
+    / expr_fact '+' expr_term
+    / expr_fact '-' expr_term
+    / expr_pow '*' expr_fact
+    / expr_pow '/' expr_fact
+    / expr_pow '%' expr_fact
+    / expr_unary '^' expr_pow
+    / '!' expr_primary
+    / '-' expr_primary
+
+expr_primary
+    = literal_value
+    / compound_reference
+    / ( type_name )? '(' expression ')'
+
+expression_list
+    = '(' (expression ( ',' expression )*)? ')'
+
+namespace_definition
+    = 'namespace' SYMBOL '{' ( namespace_item )+ '}'
+
+class_definition
+    = 'class' SYMBOL ( '(' ( compound_name )? ')' )?
+            '{' ( class_item )+ '}'
+
+class_item
+    = scope_operator
+    / ( 'const' )? var_decl
+    / ( 'virtual' )? func_decl
+
+func_decl
+    = 'function' SYMBOL '(' ( var_decl_list )* ')' '(' ( var_decl_list )* ')'
+    / 'create' '(' ( var_decl_list )* ')'
+    / 'destroy'
+
+func_definition
+    = 'function' compound_name
+            '(' ( var_decl_list )* ')' '(' ( var_decl_list )* ')' function_body
+    / 'function' compound_name '.' 'create' '(' ( var_decl_list )* ')' function_body
+    / 'function' compound_name '.' 'destroy' function_body
+
+function_body
+    = '{' ( function_body_element )* '}'
+
+assignment
+    = compound_reference '=' assignment_item
+    / compound_reference '+=' expression
+    / compound_reference '-=' expression
+    / compound_reference '*=' expression
+    / compound_reference '/=' expression
+    / compound_reference '%=' expression
+
+function_body_element
+    = var_definition
+    / function_reference
+    / assignment
+    / while_clause
+    / do_clause
+    / for_clause
+    / if_clause
+    / try_clause
+    / switch_clause
+    / break_statement
+    / continue_statement
+    / trace_statement
+    / inline_statement
+    / yield_statement
+    / type_statement
+    / exit_statement
+    / print_statement
+    / return_statement
+    / raise_statement
+    / function_body
+
+break_statement
+    = 'break'
+
+continue_statement
+    = 'continue'
+
+trace_statement
+    = 'trace'
+
+inline_statement
+    = 'inline' '{' RAW_TEXT '}'
+
+yield_statement
+    = 'yield' '(' compound_reference ')'
+
+type_statement
+    = 'type' '(' compound_reference ')'
+
+exit_statement
+    = 'exit' '(' ( expression )? ')
+
+print_statement
+    = 'print' ( expression_list )?
+
+return_statement
+    = 'return' ( '(' ( expression )? ')' )?
+
+raise_statement
+    = 'raise' '(' SYMBOL ',' formatted_strg ')'
+
+while_definition
+    = 'while' ( '(' ( expression )? ')' )?
+
+while_clause
+    = while_definition function_body
+
+do_clause
+    = 'do' function_body while_definition
+
+for_clause
+    = 'for' ( '(' (type_name)? SYMBOL 'in' expression ')' )?
+            function_body
+
+if_clause
+    = 'if' '(' expression ')' function_body else_clause
+
+else_clause_mid
+    = 'else' '(' expression ')' function_body
+
+else_clause_final
+    = 'else' ( '(' ')' )? function_body
+
+else_clause
+    = ( else_clause_mid )* ( else_clause_final )?
+
+try_clause
+    = 'try' function_body except_clause
+
+except_clause_mid
+    = 'except' '(' SYMBOL ',' SYMBOL ')' function_body
+
+except_clause_final
+    = 'except' '(' 'any' ',' SYMBOL ')' function_body
+
+except_clause
+    = ( except_clause_mid )+ ( except_clause_final )?
+    / except_clause_final
+
+switch_clause
+    = 'switch' '(' compound_reference ')' case_body
+
+case_clause
+    = 'case' '(' ( literal_value / LITERAL_DSTR / LITERAL_SSTR ) ')' function_body
+
+default_clause
+    = 'default' function_body
+
+case_body
+    = '{' ( case_clause_list )+ ( default_clause )? '}'

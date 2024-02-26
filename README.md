@@ -526,17 +526,77 @@ function_body_element
     / if_clause
     / try_clause
     / switch_clause
-    / 'break'
-    / 'continue'
-    / 'trace'
-    / 'inline' '{' RAW_TEXT '}'
-    / 'yield' '(' compound_reference ')'
-    / 'type' '(' compound_reference ')'
-    / 'exit' '(' ( expression )? ')
-    / 'print' ( expression_list )?
-    / 'return' ( '(' ( expression )? ')' )?
-    / 'raise' '(' SYMBOL ',' formatted_strg ')'
+    / break_statement
+    / continue_statement
+    / trace_statement
+    / inline_statement
+    / yield_statement
+    / type_statement
+    / exit_statement
+    / print_statement
+    / return_statement
+    / raise_statement
     / function_body
+
+#####################
+#
+#
+break_statement
+    = 'break'
+
+#####################
+#
+#
+continue_statement
+    = 'continue'
+
+#####################
+#
+#
+trace_statement
+    = 'trace'
+
+#####################
+#
+#
+inline_statement
+    = 'inline' '{' RAW_TEXT '}'
+
+#####################
+#
+#
+yield_statement
+    = 'yield' '(' compound_reference ')'
+
+#####################
+#
+#
+type_statement
+    = 'type' '(' compound_reference ')'
+
+#####################
+#
+#
+exit_statement
+    = 'exit' '(' ( expression )? ')
+
+#####################
+#
+#
+print_statement
+    = 'print' ( expression_list )?
+
+#####################
+#
+#
+return_statement
+    = 'return' ( '(' ( expression )? ')' )?
+
+#####################
+#
+#
+raise_statement
+    = 'raise' '(' SYMBOL ',' formatted_strg ')'
 
 #####################
 #
