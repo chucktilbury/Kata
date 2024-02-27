@@ -22,8 +22,10 @@
  * @return ast_string_literal* 
  * 
  */
-ast_string_literal* parse_string_literal() {
+ast_string_literal* parse_string_literal(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_string_literal* node = NULL;
 
@@ -41,8 +43,10 @@ ast_string_literal* parse_string_literal() {
  * @return ast_string_expr_item* 
  * 
  */
-ast_string_expr_item* parse_string_expr_item() {
+ast_string_expr_item* parse_string_expr_item(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_string_expr_item* node = NULL;
 
@@ -58,8 +62,10 @@ ast_string_expr_item* parse_string_expr_item() {
  * @return ast_string_expr* 
  * 
  */
-ast_string_expr* parse_string_expr() {
+ast_string_expr* parse_string_expr(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_string_expr* node = NULL;
 

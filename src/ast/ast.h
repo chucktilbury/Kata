@@ -103,5 +103,9 @@ typedef struct _ast_node_ {
 void traverse_ast(ast_module* node, PassFunc func);
 AstType ast_node_type(void* node);
 const char* nterm_to_str(ast_node* node);
+ast_node* create_ast_node(AstType type, size_t size);
+
+#define CREATE_AST_NODE(t, n) (n*)create_ast_node((t), sizeof(n))
 
 #endif /* __AST_H__ */
+

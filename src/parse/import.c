@@ -21,8 +21,10 @@
  * @return ast_import_statement* 
  * 
  */
-ast_import_statement* parse_import_statement() {
+ast_import_statement* parse_import_statement(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_import_statement* node = NULL;
 

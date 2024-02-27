@@ -19,11 +19,13 @@
  * @param fname
  *
  */
-void init_parser(const char* fname) {
+ParserState* init_parser(const char* fname) {
 
     ENTER;
     init_scanner(fname);
-    RET;
+    ParserState* state = _ALLOC_T(ParserState);
+
+    RETV(state);
 }
 
 /**
@@ -33,8 +35,10 @@ void init_parser(const char* fname) {
  * @return ast_module*
  *
  */
-ast_module* parse() {
+ast_module* parse(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     RETV(NULL);
 }

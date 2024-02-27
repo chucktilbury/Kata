@@ -21,8 +21,10 @@
  * @return ast_var_decl* 
  * 
  */
-ast_var_decl* parse_var_decl() {
+ast_var_decl* parse_var_decl(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_var_decl* node = NULL;
 
@@ -38,8 +40,10 @@ ast_var_decl* parse_var_decl() {
  * @return ast_var_decl_list* 
  * 
  */
-ast_var_decl_list* parse_var_decl_list() {
+ast_var_decl_list* parse_var_decl_list(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_var_decl_list* node = NULL;
 
@@ -55,8 +59,10 @@ ast_var_decl_list* parse_var_decl_list() {
  * @return ast_var_definition* 
  * 
  */
-ast_var_definition* parse_var_definition() {
+ast_var_definition* parse_var_definition(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_var_definition* node = NULL;
 

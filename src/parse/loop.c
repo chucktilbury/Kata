@@ -21,8 +21,10 @@
  * @return ast_while_definition* 
  * 
  */
-ast_while_definition* parse_while_definition() {
+ast_while_definition* parse_while_definition(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_while_definition* node = NULL;
 
@@ -38,8 +40,10 @@ ast_while_definition* parse_while_definition() {
  * @return ast_while_clause* 
  * 
  */
-ast_while_clause* parse_while_clause() {
+ast_while_clause* parse_while_clause(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_while_clause* node = NULL;
 
@@ -55,8 +59,10 @@ ast_while_clause* parse_while_clause() {
  * @return ast_do_clause* 
  * 
  */
-ast_do_clause* parse_do_clause() {
+ast_do_clause* parse_do_clause(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_do_clause* node = NULL;
 
@@ -73,8 +79,10 @@ ast_do_clause* parse_do_clause() {
  * @return ast_for_clause* 
  * 
  */
-ast_for_clause* parse_for_clause() {
+ast_for_clause* parse_for_clause(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_for_clause* node = NULL;
 

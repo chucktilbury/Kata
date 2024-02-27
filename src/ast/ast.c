@@ -26,6 +26,13 @@ AstType ast_node_type(void* ptr) {
     return ((ast_node*)ptr)->type ;
 }
 
+ast_node* create_ast_node(AstType type, size_t size) {
+
+    ast_node* node = _ALLOC(size);
+    node->type = type;
+    return node;
+}
+
 const char* nterm_to_str(ast_node* node) {
 
     AstType type = ast_node_type(node);

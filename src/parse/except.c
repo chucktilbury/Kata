@@ -21,8 +21,10 @@
  * @return ast_try_clause* 
  * 
  */
-ast_try_clause* parse_try_clause() {
+ast_try_clause* parse_try_clause(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_try_clause* node = NULL;
 
@@ -38,8 +40,10 @@ ast_try_clause* parse_try_clause() {
  * @return ast_except_clause_mid* 
  * 
  */
-ast_except_clause_mid* parse_except_clause_mid() {
+ast_except_clause_mid* parse_except_clause_mid(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_except_clause_mid* node = NULL;
 
@@ -55,8 +59,10 @@ ast_except_clause_mid* parse_except_clause_mid() {
  * @return ast_except_clause_final* 
  * 
  */
-ast_except_clause_final* parse_except_clause_final() {
+ast_except_clause_final* parse_except_clause_final(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_except_clause_final* node = NULL;
 
@@ -73,8 +79,10 @@ ast_except_clause_final* parse_except_clause_final() {
  * @return ast_except_clause* 
  * 
  */
-ast_except_clause* parse_except_clause() {
+ast_except_clause* parse_except_clause(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_except_clause* node = NULL;
 

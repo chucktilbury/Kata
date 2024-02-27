@@ -23,8 +23,10 @@
  * @return ast_scope_operator* 
  * 
  */
-ast_scope_operator* parse_scope_operator() {
+ast_scope_operator* parse_scope_operator(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_scope_operator* node = NULL;
 
@@ -48,8 +50,10 @@ ast_scope_operator* parse_scope_operator() {
  * @return ast_literal_type_name* 
  * 
  */
-ast_literal_type_name* parse_literal_type_name() {
+ast_literal_type_name* parse_literal_type_name(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_literal_type_name* node = NULL;
 
@@ -68,8 +72,10 @@ ast_literal_type_name* parse_literal_type_name() {
  * @return ast_literal_value* 
  * 
  */
-ast_literal_value* parse_literal_value() {
+ast_literal_value* parse_literal_value(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_literal_value* node = NULL;
 
@@ -86,8 +92,10 @@ ast_literal_value* parse_literal_value() {
  * @return ast_type_name* 
  * 
  */
-ast_type_name* parse_type_name() {
+ast_type_name* parse_type_name(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_type_name* node = NULL;
 
@@ -103,8 +111,10 @@ ast_type_name* parse_type_name() {
  * @return ast_formatted_strg* 
  * 
  */
-ast_formatted_strg* parse_formatted_strg() {
+ast_formatted_strg* parse_formatted_strg(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_formatted_strg* node = NULL;
 

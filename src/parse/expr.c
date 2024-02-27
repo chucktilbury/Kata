@@ -36,8 +36,10 @@
  * @return ast_expression* 
  * 
  */
-ast_expression* parse_expression() {
+ast_expression* parse_expression(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_expression* node = NULL;
 
@@ -55,8 +57,10 @@ ast_expression* parse_expression() {
  * @return ast_expr_primary* 
  * 
  */
-ast_expr_primary* parse_expr_primary() {
+ast_expr_primary* parse_expr_primary(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_expr_primary* node = NULL;
 
@@ -72,8 +76,10 @@ ast_expr_primary* parse_expr_primary() {
  * @return ast_expression_list* 
  * 
  */
-ast_expression_list* parse_expression_list() {
+ast_expression_list* parse_expression_list(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_expression_list* node = NULL;
 
@@ -92,8 +98,10 @@ ast_expression_list* parse_expression_list() {
  * @return ast_assignment_item* 
  * 
  */
-ast_assignment_item* parse_assignment_item() {
+ast_assignment_item* parse_assignment_item(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_assignment_item* node = NULL;
 
@@ -114,8 +122,10 @@ ast_assignment_item* parse_assignment_item() {
  * @return ast_assignment* 
  * 
  */
-ast_assignment* parse_assignment() {
+ast_assignment* parse_assignment(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_assignment* node = NULL;
 

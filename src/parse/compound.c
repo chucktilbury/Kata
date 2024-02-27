@@ -21,8 +21,10 @@
  * @return ast_compound_name* 
  * 
  */
-ast_compound_name* parse_compound_name() {
+ast_compound_name* parse_compound_name(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_compound_name* node = NULL;
 
@@ -39,8 +41,10 @@ ast_compound_name* parse_compound_name() {
  * @return ast_compound_ref_item* 
  * 
  */
-ast_compound_ref_item* parse_compound_ref_item() {
+ast_compound_ref_item* parse_compound_ref_item(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_compound_ref_item* node = NULL;
 
@@ -56,8 +60,10 @@ ast_compound_ref_item* parse_compound_ref_item() {
  * @return ast_compound_reference* 
  * 
  */
-ast_compound_reference* parse_compound_reference() {
+ast_compound_reference* parse_compound_reference(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_compound_reference* node = NULL;
 

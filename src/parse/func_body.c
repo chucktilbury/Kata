@@ -40,8 +40,10 @@
  * @return ast_function_body_element* 
  * 
  */
-ast_function_body_element* parse_function_body_element() {
+ast_function_body_element* parse_function_body_element(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_function_body_element* node = NULL;
 
@@ -57,8 +59,10 @@ ast_function_body_element* parse_function_body_element() {
  * @return ast_break_statement* 
  * 
  */
-ast_break_statement* parse_break_statement() {
+ast_break_statement* parse_break_statement(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_break_statement* node = NULL;
 
@@ -74,8 +78,10 @@ ast_break_statement* parse_break_statement() {
  * @return ast_continue_statement* 
  * 
  */
-ast_continue_statement* parse_continue_statement() {
+ast_continue_statement* parse_continue_statement(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_continue_statement* node = NULL;
 
@@ -91,8 +97,10 @@ ast_continue_statement* parse_continue_statement() {
  * @return ast_trace_statement* 
  * 
  */
-ast_trace_statement* parse_trace_statement() {
+ast_trace_statement* parse_trace_statement(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_trace_statement* node = NULL;
 
@@ -108,8 +116,10 @@ ast_trace_statement* parse_trace_statement() {
  * @return ast_inline_statement* 
  * 
  */
-ast_inline_statement* parse_inline_statement() {
+ast_inline_statement* parse_inline_statement(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_inline_statement* node = NULL;
 
@@ -125,8 +135,10 @@ ast_inline_statement* parse_inline_statement() {
  * @return ast_yield_statement* 
  * 
  */
-ast_yield_statement* parse_yield_statement() {
+ast_yield_statement* parse_yield_statement(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_yield_statement* node = NULL;
 
@@ -142,8 +154,10 @@ ast_yield_statement* parse_yield_statement() {
  * @return ast_type_statement* 
  * 
  */
-ast_type_statement* parse_type_statement() {
+ast_type_statement* parse_type_statement(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_type_statement* node = NULL;
 
@@ -159,8 +173,10 @@ ast_type_statement* parse_type_statement() {
  * @return ast_exit_statement* 
  * 
  */
-ast_exit_statement* parse_exit_statement() {
+ast_exit_statement* parse_exit_statement(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_exit_statement* node = NULL;
 
@@ -176,8 +192,10 @@ ast_exit_statement* parse_exit_statement() {
  * @return ast_print_statement* 
  * 
  */
-ast_print_statement* parse_print_statement() {
+ast_print_statement* parse_print_statement(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_print_statement* node = NULL;
 
@@ -193,8 +211,10 @@ ast_print_statement* parse_print_statement() {
  * @return ast_return_statement* 
  * 
  */
-ast_return_statement* parse_return_statement() {
+ast_return_statement* parse_return_statement(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_return_statement* node = NULL;
 
@@ -210,8 +230,10 @@ ast_return_statement* parse_return_statement() {
  * @return ast_raise_statement* 
  * 
  */
-ast_raise_statement* parse_raise_statement() {
+ast_raise_statement* parse_raise_statement(ParserState* state) {
 
+    assert(state != NULL);
+    
     ENTER;
     ast_raise_statement* node = NULL;
 
