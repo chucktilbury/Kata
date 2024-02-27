@@ -1,8 +1,8 @@
 /**
  * @file func.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-26-2024
@@ -13,15 +13,15 @@
 #include "parse.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  function_reference
  *      = compound_name
  *          ( expression_list )+
  *          '(' ( compound_name ( ',' compound_name )* )+ ')'
- *      
- * @return ast_function_reference* 
- * 
+ *
+ * @return ast_function_reference*
+ *
  */
 ast_function_reference* parse_function_reference() {
 
@@ -32,18 +32,18 @@ ast_function_reference* parse_function_reference() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  func_decl
- *      = 'function' SYMBOL 
- *          '(' ( var_decl_list )* ')' 
+ *      = 'function' SYMBOL
  *          '(' ( var_decl_list )* ')'
- *      / 'create' 
+ *          '(' ( var_decl_list )* ')'
+ *      / 'create'
  *          '(' ( var_decl_list )* ')'
  *      / 'destroy'
- *      
- * @return ast_func_decl* 
- * 
+ *
+ * @return ast_func_decl*
+ *
  */
 ast_func_decl* parse_func_decl() {
 
@@ -54,18 +54,18 @@ ast_func_decl* parse_func_decl() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  func_definition
  *      = 'function' compound_name
- *          '(' ( var_decl_list )* ')' 
+ *          '(' ( var_decl_list )* ')'
  *          '(' ( var_decl_list )* ')' function_body
- *      / 'function' compound_name '.' 'create' 
+ *      / 'function' compound_name '.' 'create'
  *          '(' ( var_decl_list )* ')' function_body
  *      / 'function' compound_name '.' 'destroy' function_body
- *      
- * @return ast_func_definition* 
- * 
+ *
+ * @return ast_func_definition*
+ *
  */
 ast_func_definition* parse_func_definition() {
 
@@ -76,13 +76,13 @@ ast_func_definition* parse_func_definition() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  function_body
  *      = '{' ( function_body_element )* '}'
- *      
- * @return ast_function_body* 
- * 
+ *
+ * @return ast_function_body*
+ *
  */
 ast_function_body* parse_function_body() {
 
@@ -93,13 +93,13 @@ ast_function_body* parse_function_body() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  start_function
- *      = 'start' function_body
- *      
- * @return ast_start_function* 
- * 
+ *      = 'function' 'start' function_body
+ *
+ * @return ast_start_function*
+ *
  */
 ast_start_function* parse_start_function() {
 

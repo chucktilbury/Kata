@@ -1,5 +1,5 @@
 
-#include "scan.h"
+#include "scanner.h"
 #include "util.h"
 
 extern void print_token(Token* tok);
@@ -28,9 +28,9 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    init_scanner();
+    init_scanner(argv[1]);
     // runs from the build directory.
-    open_file(argv[1]);
+    //open_file(argv[1]);
 
     Token* tok = sneak_token();
     int count  = 1;

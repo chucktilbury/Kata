@@ -11,6 +11,7 @@
 #include "util.h"
 //#include "scanner.h"
 #include "parse.h"
+#include "ast.h"
 #include "trace.h"
 
 int main(int argc, char** argv) {
@@ -21,7 +22,7 @@ int main(int argc, char** argv) {
     parse_cmd_line(cmd, argc, argv);
 
     TRACE("Begin Parse");
-    AstNode* node = parser(get_cmd_raw(cmd, "file"));
+    ast_module* node = parse(get_cmd_raw(cmd, "file"));
     TRACE("End Parse\n");
 
     // TRY {

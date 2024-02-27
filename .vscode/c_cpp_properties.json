@@ -3,13 +3,15 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/src/",
-                "${workspaceFolder}/src/util",
+                "${workspaceFolder}/build/src/ast/",
+                "${workspaceFolder}/build/src/parse/",
+                "${workspaceFolder}/build/src/scanner/",
+                "${workspaceFolder}/src/ast",
+                "${workspaceFolder}/src/parse",
                 "${workspaceFolder}/src/scanner",
-                "${workspaceFolder}/src/parser",
-                "${workspaceFolder}/build/src/scanner",
-                "${workspaceFolder}/src/scan"
+                "${workspaceFolder}/src/misc",
+                "${workspaceFolder}/src/util",
+                "${workspaceFolder}/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc"

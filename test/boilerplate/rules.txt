@@ -7,11 +7,11 @@ module_item
     / start_function
 
 start_function
-    = 'start' function_body
+    = 'function' 'start' function_body
 
 import_statement
     = 'import' formatted_strg AS SYMBOL
-    
+
 namespace_item
     = scope_operator
     / namespace_definition

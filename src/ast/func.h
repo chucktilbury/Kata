@@ -1,7 +1,7 @@
 /**
  * @file func.h
- * 
- * @brief 
+ *
+ * @brief
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -14,7 +14,7 @@
 /**
  *  function_reference
  *      = compound_name
- *          ( expression_list )+ 
+ *          ( expression_list )+
  *          '(' ( compound_name ( ',' compound_name )* )+ ')'
  */
 typedef struct _ast_function_reference_ {
@@ -23,8 +23,8 @@ typedef struct _ast_function_reference_ {
 
 /**
  *  func_decl
- *      = 'function' SYMBOL 
- *          '(' ( var_decl_list )* ')' 
+ *      = 'function' SYMBOL
+ *          '(' ( var_decl_list )* ')'
  *          '(' ( var_decl_list )* ')'
  *      / 'create' '(' ( var_decl_list )* ')'
  *      / 'destroy'
@@ -36,9 +36,9 @@ typedef struct _ast_func_decl_ {
 /**
  *  func_definition
  *      = 'function' compound_name
- *          '(' ( var_decl_list )* ')' 
+ *          '(' ( var_decl_list )* ')'
  *          '(' ( var_decl_list )* ')' function_body
- *      / 'function' compound_name '.' 'create' 
+ *      / 'function' compound_name '.' 'create'
  *          '(' ( var_decl_list )* ')' function_body
  *      / 'function' compound_name '.' 'destroy' function_body
  */
@@ -56,7 +56,7 @@ typedef struct _ast_function_body_ {
 
 /**
  *  start_function
- *      = 'start' function_body
+ *      = 'function' 'start' function_body
  */
 typedef struct _ast_start_function_ {
     ast_node node;

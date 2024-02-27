@@ -1,16 +1,18 @@
 cmake_minimum_required(VERSION 3.10)
-project(scan_test)
+project(queue_test)
 
 #set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 add_executable(${PROJECT_NAME}
-    scan_test.c
+    queue_test.c
 )
 
 target_link_libraries(${PROJECT_NAME}
     pthread
     scan
+    parse
     util
+    ast
     gc
 )
 
@@ -23,8 +25,10 @@ target_compile_options(${PROJECT_NAME}
         -I${PROJECT_SOURCE_DIR}/..
         -I${PROJECT_SOURCE_DIR}/../../../src/util
         -I${PROJECT_SOURCE_DIR}/../../../src/scanner
-        -I${PROJECT_SOURCE_DIR}/../../../src/parser
-        -I${PROJECT_SOURCE_DIR}/../../../src/gc/include
+        -I${PROJECT_SOURCE_DIR}/../../../src/parse
+        -I${PROJECT_SOURCE_DIR}/../../../src/gc
+        -I${PROJECT_SOURCE_DIR}/../../../src/ast
+        -I${PROJECT_SOURCE_DIR}/../../../src/misc
         -I${CMAKE_CURRENT_BINARY_DIR}/../../../src/scanner
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DENABLE_LOGGER >
