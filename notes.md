@@ -1,6 +1,10 @@
 
 # Problems and thoughts...
 
+---------------20240227---------------
+## AST passes. 
+The actual compilation happens as a result of traversing the AST. I am planning several passes. For example, a pass that verifies that all of the symbols exist and that the types of them are reasonable. So, there will be a pass that places all of the symbols in a table, along with their fully qualified name and type, and all, according to the way that they are defined. The code that implements the pass is a table of functions that is run when a particular non-terminal is handled. In other words, a table is passed to the traverse_xxx() function and if that function has an entry in the table, then it is run with access to the actual current node.
+
 ---------------20240226---------------
 * (done) Create boilerplate for all parser and ast functions and data structures.
 

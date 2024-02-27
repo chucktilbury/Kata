@@ -44,10 +44,10 @@ typedef struct _ast_for_clause_ {
     ast_node node;
 } ast_for_clause;
 
-void traverse_while_definition(ast_while_definition* node);
-void traverse_while_clause(ast_while_clause* node);
-void traverse_do_clause(ast_do_clause* node);
-void traverse_for_clause(ast_for_clause* node);
+void traverse_while_definition(ast_while_definition* node, PassFunc func);
+void traverse_while_clause(ast_while_clause* node, PassFunc func);
+void traverse_do_clause(ast_do_clause* node, PassFunc func);
+void traverse_for_clause(ast_for_clause* node, PassFunc func);
 
 
 #endif /* __LOOP_H__ */

@@ -67,11 +67,11 @@ typedef struct _ast_class_definition_ {
     ast_node node;
 } ast_class_definition;
 
-void traverse_module(ast_module* node);
-void traverse_module_item(ast_module_item* node);
-void traverse_namespace_item(ast_namespace_item* node);
-void traverse_namespace_definition(ast_namespace_definition* node);
-void traverse_class_item(ast_class_item* node);
-void traverse_class_definition(ast_class_definition* node);
+void traverse_module(ast_module* node, PassFunc func);
+void traverse_module_item(ast_module_item* node, PassFunc func);
+void traverse_namespace_item(ast_namespace_item* node, PassFunc func);
+void traverse_namespace_definition(ast_namespace_definition* node, PassFunc func);
+void traverse_class_item(ast_class_item* node, PassFunc func);
+void traverse_class_definition(ast_class_definition* node, PassFunc func);
 
 #endif /* __MODULE_H__ */

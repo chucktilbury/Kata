@@ -11,7 +11,8 @@
 #define __AST_H__
 
 typedef enum {
-    AST_module = 3000,
+    AST_FIRST = 3000,
+    AST_module = AST_FIRST,
     AST_module_item,
     AST_namespace_item,
     AST_namespace_definition,
@@ -74,11 +75,15 @@ typedef enum {
     AST_raise_statement,
     AST_start_function,
     AST_import_statement,
+    AST_LAST,   // has the number of non-terminals in the list
 } AstType;
 
 typedef struct _ast_node_ {
     AstType type;
+    bool seen; // used to detect infinite recursion.
 } ast_node;
+
+#include "pass.h"
 
 #include "module.h"
 #include "compound.h"
@@ -94,6 +99,9 @@ typedef struct _ast_node_ {
 #include "except.h"
 #include "import.h"
 
-void traverse_ast(ast_module* node);
+// public interface
+void traverse_ast(ast_module* node, PassFunc func);
+AstType ast_node_type(void* node);
+const char* nterm_to_str(ast_node* node);
 
 #endif /* __AST_H__ */

@@ -21,11 +21,13 @@
  * @param node 
  * 
  */
-void traverse_try_clause(ast_try_clause* node) {
+void traverse_try_clause(ast_try_clause* node, PassFunc func) {
 
     assert(node != NULL);
-    
+    assert(func != NULL);
+
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -38,11 +40,13 @@ void traverse_try_clause(ast_try_clause* node) {
  * @param node 
  * 
  */
-void traverse_except_clause_mid(ast_except_clause_mid* node) {
+void traverse_except_clause_mid(ast_except_clause_mid* node, PassFunc func) {
 
     assert(node != NULL);
-    
+    assert(func != NULL);
+
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -55,11 +59,13 @@ void traverse_except_clause_mid(ast_except_clause_mid* node) {
  * @param node 
  * 
  */
-void traverse_except_clause_final(ast_except_clause_final* node) {
+void traverse_except_clause_final(ast_except_clause_final* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -73,11 +79,13 @@ void traverse_except_clause_final(ast_except_clause_final* node) {
  * @param node 
  * 
  */
-void traverse_except_clause(ast_except_clause* node) {
+void traverse_except_clause(ast_except_clause* node, PassFunc func) {
 
     assert(node != NULL);
-    
+    assert(func != NULL);
+
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 

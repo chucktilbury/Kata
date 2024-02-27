@@ -12,17 +12,20 @@
 #include "util.h"
 #include "ast.h"
 
+
 /**
  * @brief 
  * 
  * @param node 
  * 
  */
-void traverse_compound_name(ast_compound_name* node) {
+void traverse_compound_name(ast_compound_name* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
 
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -32,11 +35,13 @@ void traverse_compound_name(ast_compound_name* node) {
  * @param node 
  * 
  */
-void traverse_compound_ref_item(ast_compound_ref_item* node) {
+void traverse_compound_ref_item(ast_compound_ref_item* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -46,11 +51,13 @@ void traverse_compound_ref_item(ast_compound_ref_item* node) {
  * @param node 
  * 
  */
-void traverse_compound_reference(ast_compound_reference* node) {
+void traverse_compound_reference(ast_compound_reference* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 

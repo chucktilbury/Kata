@@ -40,11 +40,13 @@
  * @param node 
  * 
  */
-void traverse_function_body_element(ast_function_body_element* node) {
+void traverse_function_body_element(ast_function_body_element* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -57,11 +59,13 @@ void traverse_function_body_element(ast_function_body_element* node) {
  * @param node 
  * 
  */
-void traverse_break_statement(ast_break_statement* node) {
+void traverse_break_statement(ast_break_statement* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -74,11 +78,13 @@ void traverse_break_statement(ast_break_statement* node) {
  * @param node 
  * 
  */
-void traverse_continue_statement(ast_continue_statement* node) {
+void traverse_continue_statement(ast_continue_statement* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -91,11 +97,13 @@ void traverse_continue_statement(ast_continue_statement* node) {
  * @param node 
  * 
  */
-void traverse_trace_statement(ast_trace_statement* node) {
+void traverse_trace_statement(ast_trace_statement* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -108,11 +116,13 @@ void traverse_trace_statement(ast_trace_statement* node) {
  * @param node 
  * 
  */
-void traverse_inline_statement(ast_inline_statement* node) {
+void traverse_inline_statement(ast_inline_statement* node, PassFunc func) {
 
     assert(node != NULL);
-    
+    assert(func != NULL);
+
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -125,11 +135,13 @@ void traverse_inline_statement(ast_inline_statement* node) {
  * @param node 
  * 
  */
-void traverse_yield_statement(ast_yield_statement* node) {
+void traverse_yield_statement(ast_yield_statement* node, PassFunc func) {
 
     assert(node != NULL);
-    
+    assert(func != NULL);
+
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -142,11 +154,13 @@ void traverse_yield_statement(ast_yield_statement* node) {
  * @param node 
  * 
  */
-void traverse_type_statement(ast_type_statement* node) {
+void traverse_type_statement(ast_type_statement* node, PassFunc func) {
 
     assert(node != NULL);
-    
+    assert(func != NULL);
+
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -159,11 +173,13 @@ void traverse_type_statement(ast_type_statement* node) {
  * @param node 
  * 
  */
-void traverse_exit_statement(ast_exit_statement* node) {
+void traverse_exit_statement(ast_exit_statement* node, PassFunc func) {
 
     assert(node != NULL);
-    
+    assert(func != NULL);
+
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -176,11 +192,13 @@ void traverse_exit_statement(ast_exit_statement* node) {
  * @param node 
  * 
  */
-void traverse_print_statement(ast_print_statement* node) {
+void traverse_print_statement(ast_print_statement* node, PassFunc func) {
 
     assert(node != NULL);
-    
+    assert(func != NULL);
+
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -193,11 +211,13 @@ void traverse_print_statement(ast_print_statement* node) {
  * @param node 
  * 
  */
-void traverse_return_statement(ast_return_statement* node) {
+void traverse_return_statement(ast_return_statement* node, PassFunc func) {
 
     assert(node != NULL);
-    
+    assert(func != NULL);
+
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -210,11 +230,13 @@ void traverse_return_statement(ast_return_statement* node) {
  * @param node 
  * 
  */
-void traverse_raise_statement(ast_raise_statement* node) {
+void traverse_raise_statement(ast_raise_statement* node, PassFunc func) {
 
     assert(node != NULL);
-    
+    assert(func != NULL);
+
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 

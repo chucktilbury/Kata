@@ -21,6 +21,6 @@ typedef struct _ast_import_statement_ {
     ast_node node;
 } ast_import_statement;
 
-void traverse_import_statement(ast_import_statement* node);
+void traverse_import_statement(ast_import_statement* node, PassFunc func);
 
 #endif /* __IMPORT_H__ */

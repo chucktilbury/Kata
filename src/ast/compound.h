@@ -36,8 +36,8 @@ typedef struct _ast_compound_reference_ {
     ast_node node;
 } ast_compound_reference;
 
-void traverse_compound_name(ast_compound_name* node);
-void traverse_compound_ref_item(ast_compound_ref_item* node);
-void traverse_compound_reference(ast_compound_reference* node);
+void traverse_compound_name(ast_compound_name* node, PassFunc func);
+void traverse_compound_ref_item(ast_compound_ref_item* node, PassFunc func);
+void traverse_compound_reference(ast_compound_reference* node, PassFunc func);
 
 #endif /* __COMPOUND_H__ */

@@ -21,11 +21,13 @@
  * @param node 
  * 
  */
-void traverse_module(ast_module* node) {
+void traverse_module(ast_module* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -40,11 +42,13 @@ void traverse_module(ast_module* node) {
  * @param node 
  * 
  */
-void traverse_module_item(ast_module_item* node) {
+void traverse_module_item(ast_module_item* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -61,11 +65,13 @@ void traverse_module_item(ast_module_item* node) {
  * @param node 
  * 
  */
-void traverse_namespace_item(ast_namespace_item* node) {
+void traverse_namespace_item(ast_namespace_item* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -78,11 +84,13 @@ void traverse_namespace_item(ast_namespace_item* node) {
  * @param node 
  * 
  */
-void traverse_namespace_definition(ast_namespace_definition* node) {
+void traverse_namespace_definition(ast_namespace_definition* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -97,11 +105,13 @@ void traverse_namespace_definition(ast_namespace_definition* node) {
  * @param node 
  * 
  */
-void traverse_class_item(ast_class_item* node) {
+void traverse_class_item(ast_class_item* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -115,11 +125,13 @@ void traverse_class_item(ast_class_item* node) {
  * @param node 
  * 
  */
-void traverse_class_definition(ast_class_definition* node) {
+void traverse_class_definition(ast_class_definition* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 

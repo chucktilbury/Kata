@@ -21,10 +21,12 @@
  * @param node 
  * 
  */
-void traverse_import_statement(ast_import_statement* node) {
+void traverse_import_statement(ast_import_statement* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }

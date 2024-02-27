@@ -21,11 +21,13 @@
  * @param node 
  * 
  */
-void traverse_formatted_strg(ast_formatted_strg* node) {
+void traverse_formatted_strg(ast_formatted_strg* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -39,11 +41,13 @@ void traverse_formatted_strg(ast_formatted_strg* node) {
  * @param node 
  * 
  */
-void traverse_string_literal(ast_string_literal* node) {
+void traverse_string_literal(ast_string_literal* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -58,11 +62,13 @@ void traverse_string_literal(ast_string_literal* node) {
  * @param node 
  * 
  */
-void traverse_string_expr_item(ast_string_expr_item* node) {
+void traverse_string_expr_item(ast_string_expr_item* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -75,11 +81,13 @@ void traverse_string_expr_item(ast_string_expr_item* node) {
  * @param node 
  * 
  */
-void traverse_string_expr(ast_string_expr* node) {
+void traverse_string_expr(ast_string_expr* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 

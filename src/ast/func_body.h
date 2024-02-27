@@ -118,17 +118,17 @@ typedef struct _ast_raise_statement_ {
     ast_node node;
 } ast_raise_statement;
 
-void traverse_function_body_element(ast_function_body_element* node);
-void traverse_break_statement(ast_break_statement* node);
-void traverse_continue_statement(ast_continue_statement* node);
-void traverse_trace_statement(ast_trace_statement* node);
-void traverse_inline_statement(ast_inline_statement* node);
-void traverse_yield_statement(ast_yield_statement* node);
-void traverse_type_statement(ast_type_statement* node);
-void traverse_exit_statement(ast_exit_statement* node);
-void traverse_print_statement(ast_print_statement* node);
-void traverse_return_statement(ast_return_statement* node);
-void traverse_raise_statement(ast_raise_statement* node);
+void traverse_function_body_element(ast_function_body_element* node, PassFunc func);
+void traverse_break_statement(ast_break_statement* node, PassFunc func);
+void traverse_continue_statement(ast_continue_statement* node, PassFunc func);
+void traverse_trace_statement(ast_trace_statement* node, PassFunc func);
+void traverse_inline_statement(ast_inline_statement* node, PassFunc func);
+void traverse_yield_statement(ast_yield_statement* node, PassFunc func);
+void traverse_type_statement(ast_type_statement* node, PassFunc func);
+void traverse_exit_statement(ast_exit_statement* node, PassFunc func);
+void traverse_print_statement(ast_print_statement* node, PassFunc func);
+void traverse_return_statement(ast_return_statement* node, PassFunc func);
+void traverse_raise_statement(ast_raise_statement* node, PassFunc func);
 
 
 #endif /* __FUNC_BODY_H__ */

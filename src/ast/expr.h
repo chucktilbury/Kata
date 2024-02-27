@@ -80,11 +80,11 @@ typedef struct _ast_assignment_ {
     ast_node node;
 } ast_assignment;
 
-void traverse_expression(ast_expression* node);
-void traverse_expr_primary(ast_expr_primary* node);
-void traverse_expression_list(ast_expression_list* node);
-void traverse_assignment_item(ast_assignment_item* node);
-void traverse_assignment(ast_assignment* node);
+void traverse_expression(ast_expression* node, PassFunc func);
+void traverse_expr_primary(ast_expr_primary* node, PassFunc func);
+void traverse_expression_list(ast_expression_list* node, PassFunc func);
+void traverse_assignment_item(ast_assignment_item* node, PassFunc func);
+void traverse_assignment(ast_assignment* node, PassFunc func);
 
 
 #endif /* __EXPR_H__ */

@@ -23,11 +23,13 @@
  * @param node 
  * 
  */
-void traverse_scope_operator(ast_scope_operator* node) {
+void traverse_scope_operator(ast_scope_operator* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -48,11 +50,13 @@ void traverse_scope_operator(ast_scope_operator* node) {
  * @param node 
  * 
  */
-void traverse_literal_type_name(ast_literal_type_name* node) {
+void traverse_literal_type_name(ast_literal_type_name* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -68,11 +72,13 @@ void traverse_literal_type_name(ast_literal_type_name* node) {
  * @param node 
  * 
  */
-void traverse_literal_value(ast_literal_value* node) {
+void traverse_literal_value(ast_literal_value* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -86,11 +92,13 @@ void traverse_literal_value(ast_literal_value* node) {
  * @param node 
  * 
  */
-void traverse_type_name(ast_type_name* node) {
+void traverse_type_name(ast_type_name* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 

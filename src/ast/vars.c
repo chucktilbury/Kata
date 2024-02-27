@@ -21,11 +21,13 @@
  * @param node 
  * 
  */
-void traverse_var_decl(ast_var_decl* node) {
+void traverse_var_decl(ast_var_decl* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -38,11 +40,13 @@ void traverse_var_decl(ast_var_decl* node) {
  * @param node 
  * 
  */
-void traverse_var_decl_list(ast_var_decl_list* node) {
+void traverse_var_decl_list(ast_var_decl_list* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 
@@ -55,11 +59,13 @@ void traverse_var_decl_list(ast_var_decl_list* node) {
  * @param node 
  * 
  */
-void traverse_var_definition(ast_var_definition* node) {
+void traverse_var_definition(ast_var_definition* node, PassFunc func) {
 
     assert(node != NULL);
+    assert(func != NULL);
     
     ENTER;
+    (*func)((ast_node*)node);
     RET;
 }
 

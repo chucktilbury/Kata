@@ -76,14 +76,14 @@ typedef struct _ast_case_body_ {
     ast_node node;
 } ast_case_body;
 
-void traverse_if_clause(ast_if_clause* node);
-void traverse_else_clause_mid(ast_else_clause_mid* node);
-void traverse_else_clause_final(ast_else_clause_final* node);
-void traverse_else_clause(ast_else_clause* node);
-void traverse_switch_clause(ast_switch_clause* node);
-void traverse_case_clause(ast_case_clause* node);
-void traverse_default_clause(ast_default_clause* node);
-void traverse_case_body(ast_case_body* node);
+void traverse_if_clause(ast_if_clause* node, PassFunc func);
+void traverse_else_clause_mid(ast_else_clause_mid* node, PassFunc func);
+void traverse_else_clause_final(ast_else_clause_final* node, PassFunc func);
+void traverse_else_clause(ast_else_clause* node, PassFunc func);
+void traverse_switch_clause(ast_switch_clause* node, PassFunc func);
+void traverse_case_clause(ast_case_clause* node, PassFunc func);
+void traverse_default_clause(ast_default_clause* node, PassFunc func);
+void traverse_case_body(ast_case_body* node, PassFunc func);
 
 
 #endif /* __FLOW_H__ */

@@ -1,23 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
-project(parse)
+project(pass)
 
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
 add_library(${PROJECT_NAME} STATIC
-    parse.c
-    strg.c
-    vars.c
-    compound.c
-    except.c
-    expr.c
-    flow.c
-    func_body.c
-    func.c
-    import.c
-    list.c
-    literals.c
-    loop.c
-    module.c
+    pass.c
 )
 
 target_compile_options(${PROJECT_NAME}

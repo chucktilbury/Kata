@@ -62,10 +62,10 @@ typedef struct _ast_start_function_ {
     ast_node node;
 } ast_start_function;
 
-void traverse_function_reference(ast_function_reference* node);
-void traverse_func_decl(ast_func_decl* node);
-void traverse_func_definition(ast_func_definition* node);
-void traverse_function_body(ast_function_body* node);
-void traverse_start_function(ast_start_function* node);
+void traverse_function_reference(ast_function_reference* node, PassFunc func);
+void traverse_func_decl(ast_func_decl* node, PassFunc func);
+void traverse_func_definition(ast_func_definition* node, PassFunc func);
+void traverse_function_body(ast_function_body* node, PassFunc func);
+void traverse_start_function(ast_start_function* node, PassFunc func);
 
 #endif /* __FUNC_H__ */

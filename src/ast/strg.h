@@ -7,8 +7,8 @@
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef __STRING_H__
-#define __STRING_H__
+#ifndef __STRG_H__
+#define __STRG_H__
 #include "ast.h"
 
 /**
@@ -47,10 +47,10 @@ typedef struct _ast_string_expr_ {
 } ast_string_expr;
 
 
-void traverse_formatted_strg(ast_formatted_strg* node);
-void traverse_string_literal(ast_string_literal* node);
-void traverse_string_expr_item(ast_string_expr_item* node);
-void traverse_string_expr(ast_string_expr* node);
+void traverse_formatted_strg(ast_formatted_strg* node, PassFunc func);
+void traverse_string_literal(ast_string_literal* node, PassFunc func);
+void traverse_string_expr_item(ast_string_expr_item* node, PassFunc func);
+void traverse_string_expr(ast_string_expr* node, PassFunc func);
 
 
-#endif /* __STRING_H__ */
+#endif /* __STRG_H__ */
