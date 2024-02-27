@@ -12,7 +12,7 @@
  * @date 01-07-2024
  * @copyright Copyright (c) 2024
  */
-#include "scan.h"
+#include "scanner.h"
 #include "util.h"
 
 extern Token* scan_token();

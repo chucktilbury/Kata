@@ -19,7 +19,7 @@
  * @date 01-07-2024
  * @copyright Copyright (c) 2024
  */
-#include "scan.h"
+#include "scanner.h"
 //#include "keyword.h"
 #include "tokens.h"
 

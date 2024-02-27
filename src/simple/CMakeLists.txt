@@ -26,10 +26,10 @@ target_compile_options(${PROJECT_NAME}
         -I${PROJECT_SOURCE_DIR}/../util
         -I${PROJECT_SOURCE_DIR}/../util/gc/include
         -I${PROJECT_SOURCE_DIR}/../parse
-        -I${PROJECT_SOURCE_DIR}/../scan
+        -I${PROJECT_SOURCE_DIR}/../scanner
         -I${PROJECT_SOURCE_DIR}/../ast
         -I${PROJECT_SOURCE_DIR}/../misc
-        -I${CMAKE_CURRENT_BINARY_DIR}/../scan
+        -I${CMAKE_CURRENT_BINARY_DIR}/../scanner
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DENABLE_LOGGER >
         $<$<CONFIG:DEBUG>:-DUSE_TRACE >

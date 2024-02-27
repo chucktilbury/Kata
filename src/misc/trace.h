@@ -14,7 +14,7 @@
 #ifdef USE_TRACE
 
 #include "ast.h"
-#include "scan.h"
+#include "scanner.h"
 void print_nonterminal(ast_node* node);
 void print_token(Token* tok);
 

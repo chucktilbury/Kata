@@ -4,7 +4,7 @@ project(scan)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
 add_library(${PROJECT_NAME} STATIC
-    scan.c
+    scanner.c
     tok_queue.c
     #keyword.c
     tokens.c

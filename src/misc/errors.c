@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2024
  */
 #include "errors.h"
-#include "scan.h"
+#include "scanner.h"
 #include "util.h"
 
 #include <stdarg.h>
