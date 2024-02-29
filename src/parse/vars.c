@@ -11,12 +11,13 @@
 #define USE_TRACE 1
 #include "util.h"
 #include "parse.h"
+#include "scanner.h"
 
 /**
  * @brief 
  * 
  *  var_decl
- *      = type_name SYMBOL
+ *      = ( 'const' )? type_name SYMBOL
  *      
  * @return ast_var_decl* 
  * 

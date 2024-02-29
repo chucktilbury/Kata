@@ -16,7 +16,7 @@
  * @brief 
  * 
  *  var_decl
- *      = type_name SYMBOL
+ *      = ( 'const' )? type_name SYMBOL
  *      
  * @param node 
  * 

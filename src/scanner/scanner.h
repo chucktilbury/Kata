@@ -45,6 +45,15 @@ void close_file();
 Token* get_token();
 
 /**
+ * @brief Return the token type.
+ * 
+ * @param tok 
+ * @return TokenType 
+ * 
+ */
+TokenType token_type(Token* tok);
+
+/**
  * @brief Do a deep copy of the given token pointer. All memory is duplicated.
  *
  * @param tok

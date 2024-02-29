@@ -11,6 +11,7 @@
 #define USE_TRACE 1
 #include "util.h"
 #include "parse.h"
+#include "scanner.h"
 
 /**
  * @brief 
@@ -72,4 +73,22 @@ ast_string_expr* parse_string_expr(ParserState* state) {
     RETV(node);
 }
 
+/**
+ * @brief 
+ * 
+ *  formatted_strg
+ *      = LITERAL_DSTRG (expression_list)?
+ *      
+ * @return ast_formatted_strg* 
+ * 
+ */
+ast_formatted_strg* parse_formatted_strg(ParserState* state) {
+
+    assert(state != NULL);
+    
+    ENTER;
+    ast_formatted_strg* node = NULL;
+
+    RETV(node);
+}
 

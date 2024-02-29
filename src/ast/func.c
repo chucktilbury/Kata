@@ -37,9 +37,9 @@ void traverse_function_reference(ast_function_reference* node, PassFunc func) {
  * @brief
  *
  *  func_decl
- *      = 'function' SYMBOL '(' ( var_decl_list )* ')' '(' ( var_decl_list )* ')'
- *      / 'create' '(' ( var_decl_list )* ')'
- *      / 'destroy'
+ *      = ( 'virtual' )? 'function' SYMBOL '(' ( var_decl_list )* ')' '(' ( var_decl_list )* ')'
+ *      / ( 'virtual' )? 'create' '(' ( var_decl_list )* ')'
+ *      / ( 'virtual' )? 'destroy'
  *
  * @param node
  *

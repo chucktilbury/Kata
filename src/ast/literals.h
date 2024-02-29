@@ -19,6 +19,7 @@
  */
 typedef struct _ast_scope_operator_ {
     ast_node node;
+    Token* token;
 } ast_scope_operator;
 
 /**
@@ -35,6 +36,7 @@ typedef struct _ast_scope_operator_ {
  */
 typedef struct _ast_literal_type_name_ {
     ast_node node;
+    Token* token;
 } ast_literal_type_name;
 
 /**
@@ -46,6 +48,13 @@ typedef struct _ast_literal_type_name_ {
  */
 typedef struct _ast_literal_value_ {
     ast_node node;
+    Token* token;
+    union {
+        double fnum;
+        uint64_t unum;
+        int64_t snum;
+        bool bval;
+    } value;
 } ast_literal_value;
 
 /**
@@ -55,6 +64,7 @@ typedef struct _ast_literal_value_ {
  */
 typedef struct _ast_type_name_ {
     ast_node node;
+    ast_node* nterm;
 } ast_type_name;
 
 void traverse_scope_operator(ast_scope_operator* node, PassFunc func);

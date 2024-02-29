@@ -759,3 +759,9 @@ void print_token(Token* tok) {
 Token* sneak_token() {
     return &token;
 }
+
+TokenType token_type(Token* tok) {
+
+    assert(tok != NULL);
+    return tok->type;
+}

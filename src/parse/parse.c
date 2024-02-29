@@ -24,7 +24,7 @@ ParserState* init_parser(const char* fname) {
     ENTER;
     init_scanner(fname);
     ParserState* state = _ALLOC_T(ParserState);
-
+    state->scope = TOK_PRIVATE;
     RETV(state);
 }
 

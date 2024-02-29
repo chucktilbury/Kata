@@ -17,6 +17,7 @@
  */
 typedef struct _ast_module_ {
     ast_node node;
+    PtrList* list;
 } ast_module;
 
 /**
@@ -27,6 +28,8 @@ typedef struct _ast_module_ {
  */
 typedef struct _ast_module_item_ {
     ast_node node;
+    ast_node* nterm;
+    TokenType scope;
 } ast_module_item;
 
 /**
@@ -35,10 +38,12 @@ typedef struct _ast_module_item_ {
  *      / namespace_definition
  *      / class_definition
  *      / func_definition
- *      / ( 'const' )? var_definition
+ *      / var_definition
  */
 typedef struct _ast_namespace_item_ {
     ast_node node;
+    ast_node* nterm;
+    TokenType scope;
 } ast_namespace_item;
 
 /**
@@ -47,16 +52,21 @@ typedef struct _ast_namespace_item_ {
  */
 typedef struct _ast_namespace_definition_ {
     ast_node node;
+    Token* name;
+    PtrList* list;
+    TokenType scope;
 } ast_namespace_definition;
 
 /**
  *  class_item
  *      = scope_operator
- *      / ( 'const' )? var_decl
- *      / ( 'virtual' )? func_decl
+ *      / var_decl
+ *      / func_decl
  */
 typedef struct _ast_class_item_ {
     ast_node node;
+    ast_node* nterm;
+    TokenType scope;
 } ast_class_item;
 
 /**
@@ -65,6 +75,10 @@ typedef struct _ast_class_item_ {
  */
 typedef struct _ast_class_definition_ {
     ast_node node;
+    Token* name;
+    struct _ast_type_name_* parent;
+    PtrList* list;
+    TokenType scope;
 } ast_class_definition;
 
 void traverse_module(ast_module* node, PassFunc func);

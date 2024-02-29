@@ -17,6 +17,8 @@
  */
 typedef struct _ast_compound_name_ {
     ast_node node;
+    PtrList* list;
+    Str* raw_name;
 } ast_compound_name;
 
 /**
@@ -26,6 +28,8 @@ typedef struct _ast_compound_name_ {
  */
 typedef struct _ast_compound_ref_item_ {
     ast_node node;
+    Token* token;
+    ast_node* nterm;
 } ast_compound_ref_item;
 
 /**
@@ -34,6 +38,7 @@ typedef struct _ast_compound_ref_item_ {
  */
 typedef struct _ast_compound_reference_ {
     ast_node node;
+    PtrList* list;
 } ast_compound_reference;
 
 void traverse_compound_name(ast_compound_name* node, PassFunc func);

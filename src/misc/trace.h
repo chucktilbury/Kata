@@ -8,8 +8,8 @@
  * @date 02-03-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef _TRACE_H
-#define _TRACE_H
+#ifndef __TRACE_H__
+#define __TRACE_H__
 
 #ifdef USE_TRACE
 
@@ -41,4 +41,4 @@ void print_token(Token* tok);
 
 #endif
 
-#endif /* _TRACE_H */
+#endif /* __TRACE_H__ */

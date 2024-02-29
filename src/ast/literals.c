@@ -30,6 +30,7 @@ void traverse_scope_operator(ast_scope_operator* node, PassFunc func) {
     
     ENTER;
     (*func)((ast_node*)node);
+    TRACE_TERM(node->token);
     RET;
 }
 
@@ -57,6 +58,7 @@ void traverse_literal_type_name(ast_literal_type_name* node, PassFunc func) {
     
     ENTER;
     (*func)((ast_node*)node);
+    TRACE_TERM(node->token);
     RET;
 }
 
@@ -79,6 +81,7 @@ void traverse_literal_value(ast_literal_value* node, PassFunc func) {
     
     ENTER;
     (*func)((ast_node*)node);
+    TRACE_TERM(node->token);
     RET;
 }
 
@@ -99,6 +102,16 @@ void traverse_type_name(ast_type_name* node, PassFunc func) {
     
     ENTER;
     (*func)((ast_node*)node);
+    switch(ast_node_type(node->nterm)) {
+        case AST_literal_type_name:
+            traverse_literal_type_name((ast_literal_type_name*)node->nterm, func);
+            break;
+        case AST_compound_name:
+            traverse_compound_name((ast_compound_name*)node->nterm, func);
+            break;
+        default:
+            RAISE(TRAVERSE_ERROR, "unexpected node type in %s: %s", __func__, nterm_to_str(node->nterm));
+    }
     RET;
 }
 

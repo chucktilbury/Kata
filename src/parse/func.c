@@ -11,6 +11,7 @@
 #define USE_TRACE 1
 #include "util.h"
 #include "parse.h"
+#include "scanner.h"
 
 /**
  * @brief
@@ -37,12 +38,12 @@ ast_function_reference* parse_function_reference(ParserState* state) {
  * @brief
  *
  *  func_decl
- *      = 'function' SYMBOL
+ *      = ( 'virtual' )? 'function' SYMBOL
  *          '(' ( var_decl_list )* ')'
  *          '(' ( var_decl_list )* ')'
- *      / 'create'
+ *      / ( 'virtual' )? 'create'
  *          '(' ( var_decl_list )* ')'
- *      / 'destroy'
+ *      / ( 'virtual' )? 'destroy'
  *
  * @return ast_func_decl*
  *

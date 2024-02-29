@@ -11,13 +11,14 @@
 #define __PARSE_H__
 
 #include "ast.h"
+#include "errors.h"
 
 /**
  * @brief This data structure is a stub to template passing a state to parse 
  * funcitons.
  */
 typedef struct {
-    int dummy;
+    TokenType scope;
 } ParserState;
 
 // module.c
@@ -38,12 +39,12 @@ ast_scope_operator* parse_scope_operator(ParserState* state);
 ast_literal_type_name* parse_literal_type_name(ParserState* state);
 ast_literal_value* parse_literal_value(ParserState* state);
 ast_type_name* parse_type_name(ParserState* state);
-ast_formatted_strg* parse_formatted_strg(ParserState* state);
 
 // string.c
 ast_string_literal* parse_string_literal(ParserState* state);
 ast_string_expr_item* parse_string_expr_item(ParserState* state);
 ast_string_expr* parse_string_expr(ParserState* state);
+ast_formatted_strg* parse_formatted_strg(ParserState* state);
 
 // vars.c
 ast_var_decl* parse_var_decl(ParserState* state);

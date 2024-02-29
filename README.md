@@ -120,7 +120,7 @@ namespace_item
     / namespace_definition
     / class_definition
     / func_definition
-    / ( 'const' )? var_definition
+    / var_definition
 
 #####################
 #
@@ -229,7 +229,7 @@ literal_value
 # a compound_name.
 #
 var_decl
-    = type_name SYMBOL
+    = ( 'const' )? type_name SYMBOL
 
 #####################
 #
@@ -477,8 +477,8 @@ class_definition
 #
 class_item
     = scope_operator
-    / ( 'const' )? var_decl
-    / ( 'virtual' )? func_decl
+    / var_decl
+    / func_decl
 
 #####################
 #
@@ -489,9 +489,12 @@ class_item
 # course the default constructors and destructors are provided.
 #
 func_decl
-    = 'function' SYMBOL '(' ( var_decl_list )* ')' '(' ( var_decl_list )* ')'
-    / 'create' '(' ( var_decl_list )* ')'
-    / 'destroy'
+    = ( 'virtual' )? 'function' SYMBOL 
+            '(' ( var_decl_list )* ')' 
+            '(' ( var_decl_list )* ')'
+    / ( 'virtual' )? 'function' 'create' 
+            '(' ( var_decl_list )* ')'
+    / ( 'virtual' )? 'function' 'destroy'
 
 #####################
 #

@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "util.h": "c",
-        "pass.h": "c"
+        "pass.h": "c",
+        "scanner.h": "c"
     }
 }

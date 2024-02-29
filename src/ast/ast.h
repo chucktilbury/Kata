@@ -83,6 +83,8 @@ typedef struct _ast_node_ {
     bool seen; // used to detect infinite recursion.
 } ast_node;
 
+#include "scanner.h"
+#include "trace.h"
 #include "pass.h"
 
 #include "module.h"
@@ -106,6 +108,7 @@ const char* nterm_to_str(ast_node* node);
 ast_node* create_ast_node(AstType type, size_t size);
 
 #define CREATE_AST_NODE(t, n) (n*)create_ast_node((t), sizeof(n))
+#define TRAVERSE_ERROR AST_FIRST
 
 #endif /* __AST_H__ */
 
