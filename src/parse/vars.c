@@ -1,8 +1,8 @@
 /**
  * @file vars.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-26-2024
@@ -14,18 +14,16 @@
 #include "scanner.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  var_decl
  *      = ( 'const' )? type_name SYMBOL
- *      
- * @return ast_var_decl* 
- * 
+ *
+ * @return ast_var_decl*
+ *
  */
-ast_var_decl* parse_var_decl(ParserState* state) {
+ast_var_decl* parse_var_decl() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_var_decl* node = NULL;
 
@@ -33,18 +31,16 @@ ast_var_decl* parse_var_decl(ParserState* state) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  var_decl_list
  *      = var_decl ( ',' var_decl )*
- *      
- * @return ast_var_decl_list* 
- * 
+ *
+ * @return ast_var_decl_list*
+ *
  */
-ast_var_decl_list* parse_var_decl_list(ParserState* state) {
+ast_var_decl_list* parse_var_decl_list() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_var_decl_list* node = NULL;
 
@@ -52,18 +48,16 @@ ast_var_decl_list* parse_var_decl_list(ParserState* state) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  var_definition
  *      = var_decl ( '=' assignment_item )?
- *      
- * @return ast_var_definition* 
- * 
+ *
+ * @return ast_var_definition*
+ *
  */
-ast_var_definition* parse_var_definition(ParserState* state) {
+ast_var_definition* parse_var_definition() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_var_definition* node = NULL;
 

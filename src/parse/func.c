@@ -24,10 +24,8 @@
  * @return ast_function_reference*
  *
  */
-ast_function_reference* parse_function_reference(ParserState* state) {
+ast_function_reference* parse_function_reference() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_function_reference* node = NULL;
 
@@ -48,10 +46,8 @@ ast_function_reference* parse_function_reference(ParserState* state) {
  * @return ast_func_decl*
  *
  */
-ast_func_decl* parse_func_decl(ParserState* state) {
+ast_func_decl* parse_func_decl() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_func_decl* node = NULL;
 
@@ -72,10 +68,8 @@ ast_func_decl* parse_func_decl(ParserState* state) {
  * @return ast_func_definition*
  *
  */
-ast_func_definition* parse_func_definition(ParserState* state) {
+ast_func_definition* parse_func_definition() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_func_definition* node = NULL;
 
@@ -91,10 +85,8 @@ ast_func_definition* parse_func_definition(ParserState* state) {
  * @return ast_function_body*
  *
  */
-ast_function_body* parse_function_body(ParserState* state) {
+ast_function_body* parse_function_body() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_function_body* node = NULL;
 
@@ -110,10 +102,8 @@ ast_function_body* parse_function_body(ParserState* state) {
  * @return ast_start_function*
  *
  */
-ast_start_function* parse_start_function(ParserState* state) {
+ast_start_function* parse_start_function() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_start_function* node = NULL;
 

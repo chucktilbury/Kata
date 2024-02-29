@@ -1,26 +1,26 @@
 /**
  * @file pass.c
- * 
+ *
  * @brief This is a template of an AST pass. It implements a single funciton
  * that uses TRACE to show that it was executed.
- * 
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-27-2024
  * @copyright Copyright (c) 2024
  */
 #include "util.h"
-#include "ast.h"
+#include "parse.h"
 #include "trace.h"
 
 
 /**
  * @brief Simple function that simply prints the node type and the number
  * to demonstrate that the function as actually called.
- * 
- * @param node 
- * @param number 
- * 
+ *
+ * @param node
+ * @param number
+ *
  */
 void test_pass_func(ast_node* node, int number) {
 
@@ -30,7 +30,7 @@ void test_pass_func(ast_node* node, int number) {
 }
 
 /**
- * @brief This function specifically does nothing. It is called when none of 
+ * @brief This function specifically does nothing. It is called when none of
  * the nodes are a match in the test_pass().
  */
 void dummy_function() {
@@ -41,16 +41,16 @@ void dummy_function() {
 }
 
 /**
- * @brief This function calls the test pass function. This way, there can be 
- * only the elements that are active in the array. There must be a dummy 
+ * @brief This function calls the test pass function. This way, there can be
+ * only the elements that are active in the array. There must be a dummy
  * function that does nothing if a node is entered without a handler. There
  * are no actual restrictions on the signature of the function called, but
  * all of the information needed by the pass must be provided in the caller.
- * 
- * @param node 
- * @param type 
- * @return * void 
- * 
+ *
+ * @param node
+ * @param type
+ * @return * void
+ *
  */
 void test_pass(ast_node* node) {
 
@@ -118,7 +118,7 @@ void test_pass(ast_node* node) {
     (type == AST_return_statement)? test_pass_func(node, AST_return_statement) :
     (type == AST_raise_statement)? test_pass_func(node, AST_raise_statement) :
     (type == AST_start_function)? test_pass_func(node, AST_start_function) :
-    (type == AST_import_statement)? test_pass_func(node, AST_import_statement) : 
+    (type == AST_import_statement)? test_pass_func(node, AST_import_statement) :
         dummy_function();
 
 }

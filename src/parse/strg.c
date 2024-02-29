@@ -1,8 +1,8 @@
 /**
  * @file string.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-26-2024
@@ -14,19 +14,17 @@
 #include "scanner.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  string_literal
  *      = LITERAL_SSTRG
  *      / formatted_strg
- *      
- * @return ast_string_literal* 
- * 
+ *
+ * @return ast_string_literal*
+ *
  */
-ast_string_literal* parse_string_literal(ParserState* state) {
+ast_string_literal* parse_string_literal() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_string_literal* node = NULL;
 
@@ -34,20 +32,18 @@ ast_string_literal* parse_string_literal(ParserState* state) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  string_expr_item
  *      = string_literal
  *      / compound_reference
  *      / literal_value
- *      
- * @return ast_string_expr_item* 
- * 
+ *
+ * @return ast_string_expr_item*
+ *
  */
-ast_string_expr_item* parse_string_expr_item(ParserState* state) {
+ast_string_expr_item* parse_string_expr_item() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_string_expr_item* node = NULL;
 
@@ -55,18 +51,16 @@ ast_string_expr_item* parse_string_expr_item(ParserState* state) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  string_expr
  *      = string_expr_item ( '+' string_expr_item )*
- *      
- * @return ast_string_expr* 
- * 
+ *
+ * @return ast_string_expr*
+ *
  */
-ast_string_expr* parse_string_expr(ParserState* state) {
+ast_string_expr* parse_string_expr() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_string_expr* node = NULL;
 
@@ -74,18 +68,16 @@ ast_string_expr* parse_string_expr(ParserState* state) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  formatted_strg
  *      = LITERAL_DSTRG (expression_list)?
- *      
- * @return ast_formatted_strg* 
- * 
+ *
+ * @return ast_formatted_strg*
+ *
  */
-ast_formatted_strg* parse_formatted_strg(ParserState* state) {
+ast_formatted_strg* parse_formatted_strg() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_formatted_strg* node = NULL;
 

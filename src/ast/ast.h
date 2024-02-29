@@ -1,7 +1,7 @@
 /**
  * @file ast.h
- * 
- * @brief 
+ *
+ * @brief
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -86,6 +86,7 @@ typedef struct _ast_node_ {
 #include "scanner.h"
 #include "trace.h"
 #include "pass.h"
+#include "parse_state.h"
 
 #include "module.h"
 #include "compound.h"

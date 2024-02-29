@@ -1,8 +1,8 @@
 /**
  * @file import.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-26-2024
@@ -14,18 +14,16 @@
 #include "scanner.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  import_statement
  *      = 'import' formatted_strg AS SYMBOL
- *      
- * @return ast_import_statement* 
- * 
+ *
+ * @return ast_import_statement*
+ *
  */
-ast_import_statement* parse_import_statement(ParserState* state) {
+ast_import_statement* parse_import_statement() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_import_statement* node = NULL;
 

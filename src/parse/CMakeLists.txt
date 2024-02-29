@@ -5,6 +5,7 @@ project(parse)
 
 add_library(${PROJECT_NAME} STATIC
     parse.c
+    parse_state.c
     strg.c
     vars.c
     compound.c

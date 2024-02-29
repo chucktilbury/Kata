@@ -1,8 +1,8 @@
 /**
  * @file literals.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-26-2024
@@ -14,31 +14,31 @@
 #include "scanner.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  scope_operator
  *      = 'private'
  *      / 'public'
  *      / 'protected'
- *      
- * @return ast_scope_operator* 
- * 
+ *
+ * @return ast_scope_operator*
+ *
  */
-ast_scope_operator* parse_scope_operator(ParserState* state) {
+ast_scope_operator* parse_scope_operator() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_scope_operator* node = NULL;
     TokenType ttype = token_type(get_token());
 
-    if((TOK_PRIVATE == ttype) || 
-            (TOK_PUBLIC == ttype) || 
+    if((TOK_PRIVATE == ttype) ||
+            (TOK_PUBLIC == ttype) ||
             (TOK_PROTECTED == ttype)) {
-        
+
         node = CREATE_AST_NODE(AST_scope_operator, ast_scope_operator);
         node->token = get_token();
-        state->scope = ttype;
+        set_scope((ttype == TOK_PRIVATE)? SCOPE_PRIV:
+                    (ttype == TOK_PUBLIC)? SCOPE_PUB:
+                    (ttype == TOK_PROTECTED)? SCOPE_PROT: SCOPE_PRIV);
         finalize_token();
         advance_token();
     }
@@ -47,8 +47,8 @@ ast_scope_operator* parse_scope_operator(ParserState* state) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  literal_type_name
  *      = 'float'
  *      / 'unsigned'
@@ -59,14 +59,12 @@ ast_scope_operator* parse_scope_operator(ParserState* state) {
  *      / 'list'
  *      / 'dict'
  *      / 'function'
- *      
- * @return ast_literal_type_name* 
- * 
+ *
+ * @return ast_literal_type_name*
+ *
  */
-ast_literal_type_name* parse_literal_type_name(ParserState* state) {
+ast_literal_type_name* parse_literal_type_name() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_literal_type_name* node = NULL;
     TokenType ttype = token_type(get_token());
@@ -91,21 +89,19 @@ ast_literal_type_name* parse_literal_type_name(ParserState* state) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  literal_value
  *      = LITERAL_FLOAT
  *      / LITERAL_UNSIGNED
  *      / LITERAL_SIGNED
  *      / LITERAL_BOOL
- *      
- * @return ast_literal_value* 
- * 
+ *
+ * @return ast_literal_value*
+ *
  */
-ast_literal_value* parse_literal_value(ParserState* state) {
+ast_literal_value* parse_literal_value() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_literal_value* node = NULL;
     TokenType ttype = token_type(get_token());
@@ -122,7 +118,7 @@ ast_literal_value* parse_literal_value(ParserState* state) {
         node->token = get_token();
         finalize_token();
         advance_token();
-        
+
         switch(ttype) {
             case TOK_LITERAL_FLOAT:
                 node->value.fnum = strtod(raw_string(get_token()->str), NULL);
@@ -151,25 +147,23 @@ ast_literal_value* parse_literal_value(ParserState* state) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  type_name
  *      = literal_type_name
  *      / compound_name
- *      
- * @return ast_type_name* 
- * 
+ *
+ * @return ast_type_name*
+ *
  */
-ast_type_name* parse_type_name(ParserState* state) {
+ast_type_name* parse_type_name() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_type_name* node = NULL;
     ast_node* nterm;
 
-    if((NULL != (nterm = (ast_node*)parse_literal_type_name(state))) ||
-            (NULL != (nterm = (ast_node*)parse_compound_name(state)))) {
+    if((NULL != (nterm = (ast_node*)parse_literal_type_name())) ||
+            (NULL != (nterm = (ast_node*)parse_compound_name()))) {
 
         node = CREATE_AST_NODE(AST_type_name, ast_type_name);
         node->nterm = nterm;

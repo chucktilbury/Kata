@@ -13,19 +13,22 @@
 #include "parse.h"
 #include "scanner.h"
 
+extern ParserState* parser_state;
+
 /**
  * @brief Initialze the parser and open the first file.
  *
  * @param fname
  *
  */
-ParserState* init_parser(const char* fname) {
+void init_parser(const char* fname) {
 
     ENTER;
     init_scanner(fname);
-    ParserState* state = _ALLOC_T(ParserState);
-    state->scope = TOK_PRIVATE;
-    RETV(state);
+    parser_state = _ALLOC_T(ParserState);
+    parser_state->scope = SCOPE_PRIV;
+    parser_state->is_import = false;
+    RET;
 }
 
 /**
@@ -35,10 +38,20 @@ ParserState* init_parser(const char* fname) {
  * @return ast_module*
  *
  */
-ast_module* parse(ParserState* state) {
+ast_module* parse() {
 
-    assert(state != NULL);
-    
     ENTER;
-    RETV(NULL);
+    ast_module* node = NULL;
+
+    if(NULL != (node = parse_module())) {
+        if(TOK_END_OF_INPUT != token_type(get_token())) {
+            EXPECTED("end of input");
+            node = NULL;
+        }
+    }
+    else {
+        show_syntax_error("module cannot be empty");
+    }
+
+    RETV(node);
 }

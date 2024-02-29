@@ -20,6 +20,10 @@ static int num_warnings = 0;
 /*
  * Recover from a syntax error. This discards the current token queue and
  * reads five new tokens.
+ *
+ * TODO: This should search for the end of a block or a keyword where parsing
+ * can resume and errors caused by the one that this is showing has been
+ * skipped.
  */
 static void recover_error() {
 

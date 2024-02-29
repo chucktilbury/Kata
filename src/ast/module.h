@@ -1,7 +1,7 @@
 /**
  * @file module.h
- * 
- * @brief 
+ *
+ * @brief
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -29,7 +29,7 @@ typedef struct _ast_module_ {
 typedef struct _ast_module_item_ {
     ast_node node;
     ast_node* nterm;
-    TokenType scope;
+    ScopeType scope;
 } ast_module_item;
 
 /**
@@ -43,7 +43,7 @@ typedef struct _ast_module_item_ {
 typedef struct _ast_namespace_item_ {
     ast_node node;
     ast_node* nterm;
-    TokenType scope;
+    ScopeType scope;
 } ast_namespace_item;
 
 /**
@@ -54,7 +54,7 @@ typedef struct _ast_namespace_definition_ {
     ast_node node;
     Token* name;
     PtrList* list;
-    TokenType scope;
+    ScopeType scope;
 } ast_namespace_definition;
 
 /**
@@ -66,7 +66,7 @@ typedef struct _ast_namespace_definition_ {
 typedef struct _ast_class_item_ {
     ast_node node;
     ast_node* nterm;
-    TokenType scope;
+    ScopeType scope;
 } ast_class_item;
 
 /**
@@ -78,7 +78,7 @@ typedef struct _ast_class_definition_ {
     Token* name;
     struct _ast_type_name_* parent;
     PtrList* list;
-    TokenType scope;
+    ScopeType scope;
 } ast_class_definition;
 
 void traverse_module(ast_module* node, PassFunc func);

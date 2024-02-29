@@ -14,10 +14,10 @@ target_compile_options(${PROJECT_NAME}
         -Wpedantic
         -DUSE_GC
         -I${PROJECT_SOURCE_DIR}/../util
-        -I${PROJECT_SOURCE_DIR}/../scan
+        -I${PROJECT_SOURCE_DIR}/../scanner
         -I${PROJECT_SOURCE_DIR}/../parse
         -I${PROJECT_SOURCE_DIR}/../ast
-        -I${CMAKE_CURRENT_BINARY_DIR}/../scan
+        -I${CMAKE_CURRENT_BINARY_DIR}/../scanner
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DMEMORY_DEBUG >
         $<$<CONFIG:DEBUG>:-DUSE_TRACE >
