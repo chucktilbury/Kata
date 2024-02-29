@@ -658,8 +658,13 @@ static void finish_token() {
     token.line_no = get_line_no();
     token.col_no  = get_col_no();
     const char* s = get_fname();
-    if(s != NULL)
-        token.fname = _DUP_STR(strrchr(s, '/') + 1);
+    if(s != NULL) {
+        const char* tmp = strrchr(s, '/');
+        if(tmp)
+            token.fname = _DUP_STR(tmp + 1);
+        else
+            token.fname = _DUP_STR(s);
+    }
     else
         token.fname = _DUP_STR("no open file");
 }

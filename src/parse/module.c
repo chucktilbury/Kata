@@ -36,6 +36,10 @@ ast_module* parse_module() {
         else if(TOK_END_OF_FILE == token_type(get_token())) {
             node = CREATE_AST_NODE(AST_module, ast_module);
             node->list = list;
+            finalize_token_queue();
+            close_file();
+            advance_token();
+            TRACE("end of file");
             break;
         }
         else {

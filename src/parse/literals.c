@@ -34,6 +34,7 @@ ast_scope_operator* parse_scope_operator() {
             (TOK_PUBLIC == ttype) ||
             (TOK_PROTECTED == ttype)) {
 
+        TRACE_TERM(get_token());
         node = CREATE_AST_NODE(AST_scope_operator, ast_scope_operator);
         node->token = get_token();
         set_scope((ttype == TOK_PRIVATE)? SCOPE_PRIV:
@@ -79,6 +80,7 @@ ast_literal_type_name* parse_literal_type_name() {
             (TOK_DICT == ttype) ||
             (TOK_FUNCTION == ttype)) {
 
+        TRACE_TERM(get_token());
         node = CREATE_AST_NODE(AST_literal_type_name, ast_literal_type_name);
         node->token = get_token();
         finalize_token();
@@ -114,6 +116,7 @@ ast_literal_value* parse_literal_value() {
             (TOK_ON == ttype) ||
             (TOK_OFF == ttype)) {
 
+        TRACE_TERM(get_token());
         node = CREATE_AST_NODE(AST_literal_value, ast_literal_value);
         node->token = get_token();
         finalize_token();
@@ -165,6 +168,7 @@ ast_type_name* parse_type_name() {
     if((NULL != (nterm = (ast_node*)parse_literal_type_name())) ||
             (NULL != (nterm = (ast_node*)parse_compound_name()))) {
 
+        TRACE_TERM(get_token());
         node = CREATE_AST_NODE(AST_type_name, ast_type_name);
         node->nterm = nterm;
         finalize_token_queue();
