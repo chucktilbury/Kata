@@ -80,6 +80,7 @@ ast_compound_name* parse_compound_name(ParserState* state) {
                 // is a compound name, and not an error
                 node = CREATE_AST_NODE(AST_compound_name, ast_compound_name);
                 node->list = lst;
+                node->raw_name = str;
                 finalize_token_queue();
                 finished = true;
                 break;

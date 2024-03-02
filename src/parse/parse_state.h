@@ -8,8 +8,8 @@
  * @date 02-29-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef _PARSE_STATE_H
-#define _PARSE_STATE_H
+#ifndef __PARSE_STATE_H__
+#define __PARSE_STATE_H__
 
 /**
  * @brief The scope is a state that is tracked as items are parsed.
@@ -32,4 +32,4 @@ typedef struct {
 void set_scope(ScopeType scope);
 ScopeType get_scope();
 
-#endif /* _PARSE_STATE_H */
+#endif /* __PARSE_STATE_H__ */

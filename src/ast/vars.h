@@ -13,10 +13,13 @@
 
 /**
  *  var_decl
- *      = type_name SYMBOL
+ *      = (const)? type_name SYMBOL
  */
 typedef struct _ast_var_decl_ {
     ast_node node;
+    bool is_const;
+    struct _ast_type_name_* type;
+    Token* name;
 } ast_var_decl;
 
 /**
@@ -25,6 +28,7 @@ typedef struct _ast_var_decl_ {
  */
 typedef struct _ast_var_decl_list_ {
     ast_node node;
+    PtrList* list;
 } ast_var_decl_list;
 
 /**
@@ -33,6 +37,9 @@ typedef struct _ast_var_decl_list_ {
  */
 typedef struct _ast_var_definition_ {
     ast_node node;
+    struct _ast_var_decl_* type;
+    struct _ast_assignment_item_* item;
+    bool is_assigned;
 } ast_var_definition;
 
 

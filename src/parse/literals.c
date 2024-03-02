@@ -142,7 +142,7 @@ ast_literal_value* parse_literal_value() {
                 break;
             default:
                 // never can happen
-                fatal_error("invalid token type in %s()", __func__);
+                fatal_error("invalid token type in %s(): %d", __func__, ttype);
         }
     }
 

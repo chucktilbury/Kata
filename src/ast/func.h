@@ -23,11 +23,11 @@ typedef struct _ast_function_reference_ {
 
 /**
  *  func_decl
- *      = 'function' SYMBOL
+ *      = ('virtual')? 'function' SYMBOL
  *          '(' ( var_decl_list )* ')'
  *          '(' ( var_decl_list )* ')'
- *      / 'create' '(' ( var_decl_list )* ')'
- *      / 'destroy'
+ *      / ('virtual')? 'create' '(' ( var_decl_list )* ')'
+ *      / ('virtual')? 'destroy'
  */
 typedef struct _ast_func_decl_ {
     ast_node node;

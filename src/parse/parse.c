@@ -15,6 +15,14 @@
 
 extern ParserState* parser_state;
 
+const char* scope_name(ScopeType type) {
+
+    return (type == SCOPE_PUB)? "PUBLIC": 
+            (type == SCOPE_PRIV)? "PRIVATE": 
+            (type == SCOPE_PROT)? "PROTECTED": "UNKNOWN" ;
+
+}
+
 /**
  * @brief Initialze the parser and open the first file.
  *

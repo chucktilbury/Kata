@@ -29,7 +29,7 @@ void traverse_compound_name(ast_compound_name* node, PassFunc func) {
 
     ENTER;
     (*func)((ast_node*)node);
-    TRACE("raw_string: %s", raw_string(node->raw_name));
+    TRACE("raw_name: %s", raw_string(node->raw_name));
     PtrListIter* iter = init_ptr_list_iterator(node->list);
     Token* tok;
     while(NULL != (tok = iterate_ptr_list(iter))) {

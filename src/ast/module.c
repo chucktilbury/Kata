@@ -12,6 +12,8 @@
 #include "util.h"
 #include "ast.h"
 
+const char* scope_name(ScopeType type);
+
 /**
  * @brief
  *
@@ -54,6 +56,7 @@ void traverse_module_item(ast_module_item* node, PassFunc func) {
 
     ENTER;
     (*func)((ast_node*)node);
+    TRACE("SCOPE: %s", scope_name(node->scope));
     switch(ast_node_type(node->nterm)) {
         case AST_namespace_item:
             traverse_namespace_item((ast_namespace_item*)node->nterm, func);
@@ -91,6 +94,7 @@ void traverse_namespace_item(ast_namespace_item* node, PassFunc func) {
 
     ENTER;
     (*func)((ast_node*)node);
+    TRACE("SCOPE: %s", scope_name(node->scope));
     switch(ast_node_type(node->nterm)) {
         case AST_scope_operator:
             traverse_scope_operator((ast_scope_operator*)node->nterm, func);
@@ -131,6 +135,7 @@ void traverse_namespace_definition(ast_namespace_definition* node, PassFunc func
     ENTER;
     (*func)((ast_node*)node);
     TRACE("NAME: %s", raw_string(node->name->str));
+    TRACE("SCOPE: %s", scope_name(node->scope));
     PtrListIter* iter = init_ptr_list_iterator(node->list);
     ast_node* nterm;
     while(NULL != (nterm = iterate_ptr_list(iter)))
@@ -156,6 +161,7 @@ void traverse_class_item(ast_class_item* node, PassFunc func) {
 
     ENTER;
     (*func)((ast_node*)node);
+    TRACE("SCOPE: %s", scope_name(node->scope));
     switch(ast_node_type(node->nterm)) {
         case AST_scope_operator:
             traverse_scope_operator((ast_scope_operator*)node->nterm, func);
@@ -191,12 +197,13 @@ void traverse_class_definition(ast_class_definition* node, PassFunc func) {
     ENTER;
     (*func)((ast_node*)node);
     TRACE("NAME: %s", raw_string(node->name->str));
+    TRACE("SCOPE: %s", scope_name(node->scope));
     if(node->parent)
         traverse_type_name(node->parent, func);
     PtrListIter* iter = init_ptr_list_iterator(node->list);
     ast_node* nterm;
     while(NULL != (nterm = iterate_ptr_list(iter)))
-        traverse_namespace_item((ast_namespace_item*)nterm, func);
+        traverse_class_item((ast_class_item*)nterm, func);
     RET;
 }
 
