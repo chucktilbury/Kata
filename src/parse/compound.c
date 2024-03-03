@@ -22,10 +22,8 @@
  * @return ast_compound_name* 
  * 
  */
-ast_compound_name* parse_compound_name(ParserState* state) {
+ast_compound_name* parse_compound_name() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_compound_name* node = NULL;
     PtrList* lst = create_ptr_list();
@@ -112,10 +110,8 @@ ast_compound_name* parse_compound_name(ParserState* state) {
  * @return ast_compound_ref_item* 
  * 
  */
-ast_compound_ref_item* parse_compound_ref_item(ParserState* state) {
+ast_compound_ref_item* parse_compound_ref_item() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_compound_ref_item* node = NULL;
     ast_array_reference* nterm;
@@ -129,7 +125,7 @@ ast_compound_ref_item* parse_compound_ref_item(ParserState* state) {
         finalize_token();
         advance_token();
     }
-    else if(NULL != (nterm = parse_array_reference(state))) {
+    else if(NULL != (nterm = parse_array_reference())) {
         node = CREATE_AST_NODE(AST_compound_ref_item, ast_compound_ref_item);
         node->token = NULL;
         node->nterm = (ast_node*)nterm;
@@ -151,10 +147,8 @@ ast_compound_ref_item* parse_compound_ref_item(ParserState* state) {
  * @return ast_compound_reference* 
  * 
  */
-ast_compound_reference* parse_compound_reference(ParserState* state) {
+ast_compound_reference* parse_compound_reference() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_compound_reference* node = NULL;
     ast_compound_ref_item* nterm;
@@ -169,7 +163,7 @@ ast_compound_reference* parse_compound_reference(ParserState* state) {
         switch(s) {
             case 0:
                 // entry point
-                if(NULL != (nterm = parse_compound_ref_item(state))) {
+                if(NULL != (nterm = parse_compound_ref_item())) {
                     add_ptr_list(list, nterm);
                     s = 1;
                 }
@@ -190,7 +184,7 @@ ast_compound_reference* parse_compound_reference(ParserState* state) {
                 break;
             case 2:
                 // must be a compound_ref_item 
-                if(NULL != (nterm = parse_compound_ref_item(state))) {
+                if(NULL != (nterm = parse_compound_ref_item())) {
                     add_ptr_list(list, nterm);
                     s = 1;
                 }

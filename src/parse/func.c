@@ -36,12 +36,12 @@ ast_function_reference* parse_function_reference() {
  * @brief
  *
  *  func_decl
- *      = ( 'virtual' )? 'function' SYMBOL
+ *      = ( 'virtual' )? ( 'function' )? SYMBOL
  *          '(' ( var_decl_list )* ')'
  *          '(' ( var_decl_list )* ')'
- *      / ( 'virtual' )? 'create'
+ *      / ( 'virtual' )?  ( 'function' )? 'create'
  *          '(' ( var_decl_list )* ')'
- *      / ( 'virtual' )? 'destroy'
+ *      / ( 'virtual' )?  ( 'function' )? 'destroy'
  *
  * @return ast_func_decl*
  *
@@ -58,12 +58,12 @@ ast_func_decl* parse_func_decl() {
  * @brief
  *
  *  func_definition
- *      = 'function' compound_name
+ *      =  ( 'function' )? compound_name
  *          '(' ( var_decl_list )* ')'
  *          '(' ( var_decl_list )* ')' function_body
- *      / 'function' compound_name '.' 'create'
+ *      /  ( 'function' )? compound_name '.' 'create'
  *          '(' ( var_decl_list )* ')' function_body
- *      / 'function' compound_name '.' 'destroy' function_body
+ *      /  ( 'function' )? compound_name '.' 'destroy' function_body
  *
  * @return ast_func_definition*
  *

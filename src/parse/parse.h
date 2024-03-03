@@ -77,6 +77,7 @@ ast_expr_primary* parse_expr_primary();
 ast_expression_list* parse_expression_list();
 ast_assignment_item* parse_assignment_item();
 ast_assignment* parse_assignment();
+ast_cast_statement* parse_cast_statement();
 
 // loop.c
 ast_while_definition* parse_while_definition();

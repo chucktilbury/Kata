@@ -247,6 +247,7 @@ assignment_item
     / list_init
     / dict_init
     / string_expr
+    / cast_statement
 
 #####################
 #
@@ -424,6 +425,13 @@ expr_unary
 
 #####################
 #
+# A cast is used to convert one type to another for assignemnt
+#
+cast_statement
+    = type_name ':' expression 
+
+#####################
+#
 # A primary value to use in an expression. A compound reference must name a
 # data element. The '(' expression ')' changes the precedence of an operation
 # and the ( type_name )? specifies a casting operation. Casting operations can
@@ -432,7 +440,8 @@ expr_unary
 expr_primary
     = literal_value
     / compound_reference
-    / ( type_name )? '(' expression ')'
+    / cast_statement
+    / '(' expression ')'
 
 #####################
 #
@@ -489,12 +498,12 @@ class_item
 # course the default constructors and destructors are provided.
 #
 func_decl
-    = ( 'virtual' )? 'function' SYMBOL 
+    = ( 'virtual' )? ( 'function' )? SYMBOL 
             '(' ( var_decl_list )* ')' 
             '(' ( var_decl_list )* ')'
-    / ( 'virtual' )? 'function' 'create' 
+    / ( 'virtual' )? ( 'function' )? 'create' 
             '(' ( var_decl_list )* ')'
-    / ( 'virtual' )? 'function' 'destroy'
+    / ( 'virtual' )? ( 'function' )? 'destroy'
 
 #####################
 #
@@ -505,10 +514,10 @@ func_decl
 # be a single symbol, meaning that it does not tie to a class.
 #
 func_definition
-    = 'function' compound_name
+    = ( 'function' )? compound_name
             '(' ( var_decl_list )* ')' '(' ( var_decl_list )* ')' function_body
-    / 'function' compound_name '.' 'create' '(' ( var_decl_list )* ')' function_body
-    / 'function' compound_name '.' 'destroy' function_body
+    / ( 'function' )? compound_name '.' 'create' '(' ( var_decl_list )* ')' function_body
+    / ( 'function' )? compound_name '.' 'destroy' function_body
 
 #####################
 #

@@ -37,9 +37,12 @@ void traverse_function_reference(ast_function_reference* node, PassFunc func) {
  * @brief
  *
  *  func_decl
- *      = ( 'virtual' )? 'function' SYMBOL '(' ( var_decl_list )* ')' '(' ( var_decl_list )* ')'
- *      / ( 'virtual' )? 'create' '(' ( var_decl_list )* ')'
- *      / ( 'virtual' )? 'destroy'
+ *      = ( 'virtual' )? ( 'function' )? SYMBOL 
+ *              '(' ( var_decl_list )* ')' 
+ *              '(' ( var_decl_list )* ')'
+ *      / ( 'virtual' )? ( 'function' )? 'create' 
+ *              '(' ( var_decl_list )* ')'
+ *      / ( 'virtual' )? ( 'function' )? 'destroy'
  *
  * @param node
  *
@@ -58,10 +61,14 @@ void traverse_func_decl(ast_func_decl* node, PassFunc func) {
  * @brief
  *
  *  func_definition
- *      = 'function' compound_name
- *              '(' ( var_decl_list )* ')' '(' ( var_decl_list )* ')' function_body
- *      / 'function' compound_name '.' 'create' '(' ( var_decl_list )* ')' function_body
- *      / 'function' compound_name '.' 'destroy' function_body
+ *      =  ( 'function' )? compound_name
+ *              '(' ( var_decl_list )* ')' 
+ *              '(' ( var_decl_list )* ')' 
+ *              function_body
+ *      /  ( 'function' )? compound_name '.' 'create' 
+ *              '(' ( var_decl_list )* ')' function_body
+ *      /  ( 'function' )? compound_name '.' 'destroy' 
+ *              function_body
  *
  * @param node
  *

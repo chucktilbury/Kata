@@ -99,6 +99,8 @@ const char* nterm_to_str(ast_node* node) {
         (type == AST_return_statement)? "return_statement" :
         (type == AST_raise_statement)? "raise_statement" :
         (type == AST_start_function)? "start_function" :
+        (type == AST_operator)? "operator" :
+        (type == AST_cast_statement)? "cast_statement" :
         (type == AST_import_statement)? "import_statement" : 
             "UNKNOWN");
 }

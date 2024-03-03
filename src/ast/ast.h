@@ -75,7 +75,9 @@ typedef enum {
     AST_raise_statement,
     AST_start_function,
     AST_import_statement,
-    AST_LAST,   // has the number of non-terminals in the list
+    AST_operator,
+    AST_cast_statement,
+    AST_LAST,   // number of non-terminals in the list
 } AstType;
 
 typedef struct _ast_node_ {

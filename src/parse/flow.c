@@ -22,10 +22,8 @@
  * @return ast_if_clause* 
  * 
  */
-ast_if_clause* parse_if_clause(ParserState* state) {
+ast_if_clause* parse_if_clause() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_if_clause* node = NULL;
 
@@ -41,10 +39,8 @@ ast_if_clause* parse_if_clause(ParserState* state) {
  * @return ast_else_clause_mid* 
  * 
  */
-ast_else_clause_mid* parse_else_clause_mid(ParserState* state) {
+ast_else_clause_mid* parse_else_clause_mid() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_else_clause_mid* node = NULL;
 
@@ -60,10 +56,8 @@ ast_else_clause_mid* parse_else_clause_mid(ParserState* state) {
  * @return ast_else_clause_final* 
  * 
  */
-ast_else_clause_final* parse_else_clause_final(ParserState* state) {
+ast_else_clause_final* parse_else_clause_final() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_else_clause_final* node = NULL;
 
@@ -79,10 +73,8 @@ ast_else_clause_final* parse_else_clause_final(ParserState* state) {
  * @return ast_else_clause* 
  * 
  */
-ast_else_clause* parse_else_clause(ParserState* state) {
+ast_else_clause* parse_else_clause() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_else_clause* node = NULL;
 
@@ -98,10 +90,8 @@ ast_else_clause* parse_else_clause(ParserState* state) {
  * @return ast_switch_clause* 
  * 
  */
-ast_switch_clause* parse_switch_clause(ParserState* state) {
+ast_switch_clause* parse_switch_clause() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_switch_clause* node = NULL;
 
@@ -117,10 +107,8 @@ ast_switch_clause* parse_switch_clause(ParserState* state) {
  * @return ast_case_clause* 
  * 
  */
-ast_case_clause* parse_case_clause(ParserState* state) {
+ast_case_clause* parse_case_clause() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_case_clause* node = NULL;
 
@@ -136,10 +124,8 @@ ast_case_clause* parse_case_clause(ParserState* state) {
  * @return ast_default_clause* 
  * 
  */
-ast_default_clause* parse_default_clause(ParserState* state) {
+ast_default_clause* parse_default_clause() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_default_clause* node = NULL;
 
@@ -155,10 +141,8 @@ ast_default_clause* parse_default_clause(ParserState* state) {
  * @return ast_case_body* 
  * 
  */
-ast_case_body* parse_case_body(ParserState* state) {
+ast_case_body* parse_case_body() {
 
-    assert(state != NULL);
-    
     ENTER;
     ast_case_body* node = NULL;
 

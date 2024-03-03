@@ -31,10 +31,67 @@ void traverse_expression(ast_expression* node, PassFunc func) {
 /**
  * @brief 
  * 
+ *  ast_operator
+ *      = AND
+ *      / OR
+ *      / '=='
+ *      / '!='
+ *      / '<'
+ *      / '>'
+ *      / '<='
+ *      / '>='
+ *      / '+'
+ *      / '-'
+ *      / '*'
+ *      / '/'
+ *      / '%'
+ *      / '^'
+ *      / UNARY_MINUS
+ *      / '!'
+ *      / '('
+ *      / ')'
+
+ * @param node 
+ * @param func 
+ * 
+ */
+void traverse_operator(ast_operator* node, PassFunc func) {
+
+    assert(node != NULL);
+    assert(func != NULL);
+
+    ENTER;
+    (*func)((ast_node*)node);
+    RET;
+}
+
+/**
+ * @brief 
+ * 
+ *  cast_statement
+ *      = type_name ':' expression
+ * 
+ * @param node 
+ * @param func 
+ * 
+ */
+void traverse_cast_statement(ast_cast_statement* node, PassFunc func) {
+
+    assert(node != NULL);
+    assert(func != NULL);
+
+    ENTER;
+    (*func)((ast_node*)node);
+    RET;
+}
+
+/**
+ * @brief 
+ * 
  *  expr_primary
  *      = literal_value
  *      / compound_reference
- *      / ( type_name )? '(' expression ')'
+ *      / cast_statement
  * 
  * @param node 
  * 
@@ -76,6 +133,7 @@ void traverse_expression_list(ast_expression_list* node, PassFunc func) {
  *      / list_init
  *      / dict_init
  *      / string_expr
+ *      / cast_statement
  * 
  * @param node 
  * 
@@ -95,7 +153,7 @@ void traverse_assignment_item(ast_assignment_item* node, PassFunc func) {
  * 
  *  assignment
  *      = compound_reference '=' assignment_item
- *      / compound_reference '+=' expression
+ *      / compound_reference '+=' expression 
  *      / compound_reference '-=' expression
  *      / compound_reference '*=' expression
  *      / compound_reference '/=' expression

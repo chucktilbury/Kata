@@ -33,19 +33,58 @@
  *      / expr_unary '^' expr_pow
  *      / '!' expr_primary
  *      / '-' expr_primary
+ *      / '(' expression ')'
  */
 typedef struct _ast_expression_ {
     ast_node node;
+    PtrList* list;
 } ast_expression;
+
+/**
+ *  ast_operator
+ *      = AND
+ *      / OR
+ *      / '=='
+ *      / '!='
+ *      / '<'
+ *      / '>'
+ *      / '<='
+ *      / '>='
+ *      / '+'
+ *      / '-'
+ *      / '*'
+ *      / '/'
+ *      / '%'
+ *      / '^'
+ *      / UNARY_MINUS
+ *      / '!'
+ *      / '('
+ *      / ')'
+ */
+typedef struct _ast_operator_ {
+    ast_node node;
+    Token* tok;
+} ast_operator;
+
+/**
+ * cast_statement
+ *      = type_name '(' expression ')'
+ */
+typedef struct _ast_cast_statement_ {
+    ast_node node;
+    struct ast_type_name_* type;
+    struct _ast_expression_* expr;
+} ast_cast_statement;
 
 /**
  *  expr_primary
  *      = literal_value
  *      / compound_reference
- *      / ( type_name )? '(' expression ')'
+ *      / cast_statement
  */
 typedef struct _ast_expr_primary_ {
     ast_node node;
+    ast_node* nterm;
 } ast_expr_primary;
 
 /**
@@ -54,6 +93,7 @@ typedef struct _ast_expr_primary_ {
  */
 typedef struct _ast_expression_list_ {
     ast_node node;
+    PtrList* list;
 } ast_expression_list;
 
 /**
@@ -65,6 +105,7 @@ typedef struct _ast_expression_list_ {
  */
 typedef struct _ast_assignment_item_ {
     ast_node node;
+    ast_node* nterm;
 } ast_assignment_item;
 
 /**
@@ -78,6 +119,9 @@ typedef struct _ast_assignment_item_ {
  */
 typedef struct _ast_assignment_ {
     ast_node node;
+    struct _ast_compound_reference_* lhs;
+    ast_node* rhs;
+    Token* oper;
 } ast_assignment;
 
 void traverse_expression(ast_expression* node, PassFunc func);
