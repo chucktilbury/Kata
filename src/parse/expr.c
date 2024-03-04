@@ -1,8 +1,8 @@
 /**
  * @file expr.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-26-2024
@@ -13,10 +13,39 @@
 #include "parse.h"
 #include "scanner.h"
 
-// This is used to detect unary operators. If it is true, and an operator is 
-// found then it could be unary. Only the '!' and the '-' can be unary, all 
+// This is used to detect unary operators. If it is true, and an operator is
+// found then it could be unary. Only the '!' and the '-' can be unary, all
 // others are errors if the flag is set.
 static bool flag = true;
+
+static int get_oper_type(TokenType type) {
+
+    switch(type) {
+        case TOK_OR:
+        case TOK_AND:
+        case TOK_EQU:
+        case TOK_NEQU:
+        case TOK_LORE:
+        case TOK_GORE:
+            return 1;
+        case TOK_OPBRACE:
+        case TOK_CPBRACE:
+            return 2;
+        case TOK_ADD:
+        case TOK_SUB:
+        case TOK_DIV:
+        case TOK_MUL:
+        case TOK_MOD:
+        case TOK_CARAT:
+            return 3;
+        case TOK_NOT:
+        case TOK_UNARY_MINUS:
+            return 4;
+        default:
+            // not an operator
+            return 0;
+    }
+}
 
 static int get_prec(TokenType type) {
 
@@ -47,7 +76,7 @@ static int get_prec(TokenType type) {
             return 80;
         default:
             // no precidence
-            return 0; 
+            return 0;
     }
 }
 
@@ -64,60 +93,8 @@ static bool get_assoc(TokenType type) {
 }
 
 /**
- * @brief 
- * 
- *  expression
- *      = expr_and 'or' expr_or
- *      / expr_equ 'and' expr_and
- *      / expr_mag '==' expr_equ
- *      / expr_mag '!=' expr_equ
- *      / expr_term '<' expr_mag
- *      / expr_term '>' expr_mag
- *      / expr_term '<=' expr_mag
- *      / expr_term '>=' expr_mag
- *      / expr_fact '+' expr_term
- *      / expr_fact '-' expr_term
- *      / expr_pow '*' expr_fact
- *      / expr_pow '/' expr_fact
- *      / expr_pow '%' expr_fact
- *      / expr_unary '^' expr_pow
- *      / '!' expr_primary
- *      / '-' expr_primary
- *      / '(' expression ')'
- *      
- * @return ast_expression* 
- * 
- */
-ast_expression* parse_expression() {
-
-    ENTER;
-    ast_expression* node = NULL;
-    PtrList* stack = create_ptr_list();
-    PtrList* queue = create_ptr_list();
-    ast_node* nterm;
-
-    while(true) {
-        if((NULL != (nterm = parse_operator())) ||
-                (NULL != (nterm = parse_expr_primary()))) {
-
-            if(AST_expr_primary == ast_node_type(nterm)) {
-
-            }
-            else {
-                
-            }
-        }
-        else 
-            break;
-
-    }
-
-    RETV(node);
-}
-
-/**
- * @brief 
- * 
+ * @brief
+ *
  *  ast_operator
  *      = AND
  *      / OR
@@ -137,9 +114,9 @@ ast_expression* parse_expression() {
  *      / '!'
  *      / '('
  *      / ')'
- *      
- * @return ast_operator* 
- * 
+ *
+ * @return ast_operator*
+ *
  */
 ast_operator* parse_operator() {
 
@@ -180,7 +157,7 @@ ast_operator* parse_operator() {
             node = CREATE_AST_NODE(AST_operator, ast_operator);
             node->tok = tok;
             if(flag)
-                node->tok = TOK_UNARY_MINUS;
+                node->tok->type = TOK_UNARY_MINUS;
             finalize_token();
             advance_token();
             flag = true;
@@ -195,7 +172,7 @@ ast_operator* parse_operator() {
                 advance_token();
                 flag = true;
             }
-            else 
+            else
                 show_syntax_error("the not operator must be unary");
             break;
 
@@ -206,20 +183,21 @@ ast_operator* parse_operator() {
             advance_token();
             flag = false;
             break;
+        default:
+            break;
     }
-
 
     RETV(node);
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  cast_statement
- *      = type_name ':' expression 
- * 
- * @return ast_cast_statement* 
- * 
+ *      = type_name ':' expression
+ *
+ * @return ast_cast_statement*
+ *
  */
 ast_cast_statement* parse_cast_statement() {
 
@@ -230,7 +208,7 @@ ast_cast_statement* parse_cast_statement() {
     ast_expression* expr;
 
     if(NULL != (type = parse_type_name())) {
-        if(TOK_COLON == token_type(get_token)) {
+        if(TOK_COLON == token_type(get_token())) {
             finalize_token();
             advance_token();
 
@@ -252,15 +230,15 @@ ast_cast_statement* parse_cast_statement() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  expr_primary
  *      = literal_value
  *      / compound_reference
  *      / cast_statement
- *      
- * @return ast_expr_primary* 
- * 
+ *
+ * @return ast_expr_primary*
+ *
  */
 ast_expr_primary* parse_expr_primary() {
 
@@ -269,10 +247,10 @@ ast_expr_primary* parse_expr_primary() {
     ast_node* nterm;
     void* post = post_token_queue();
 
-    if((NULL != (nterm = parse_literal_value())) ||
-            (NULL != (nterm = parse_compound_reference())) ||
-            (NULL != (nterm = parse_cast_statement()))) {
-        
+    if((NULL != (nterm = (ast_node*)parse_literal_value())) ||
+            (NULL != (nterm = (ast_node*)parse_compound_reference())) ||
+            (NULL != (nterm = (ast_node*)parse_cast_statement()))) {
+
         node = CREATE_AST_NODE(AST_expr_primary, ast_expr_primary);
         node->nterm = nterm;
         flag = false;
@@ -285,13 +263,13 @@ ast_expr_primary* parse_expr_primary() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  expression_list
  *      = '(' (expression ( ',' expression )*)? ')'
- *      
- * @return ast_expression_list* 
- * 
+ *
+ * @return ast_expression_list*
+ *
  */
 ast_expression_list* parse_expression_list() {
 
@@ -302,17 +280,17 @@ ast_expression_list* parse_expression_list() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  assignment_item
  *      = expression
  *      / list_init
  *      / dict_init
  *      / string_expr
  *      / cast_statement
- *      
- * @return ast_assignment_item* 
- * 
+ *
+ * @return ast_assignment_item*
+ *
  */
 ast_assignment_item* parse_assignment_item() {
 
@@ -321,11 +299,11 @@ ast_assignment_item* parse_assignment_item() {
     ast_node* nterm;
     void* post = post_token_queue();
 
-    if((NULL != (nterm = parse_expression())) ||
-            (NULL != (nterm = parse_list_init())) ||
-            (NULL != (nterm = parse_dict_init())) ||
-            (NULL != (nterm = parse_string_expr())) ||
-            (NULL != (nterm = parse_cast_statement()))) {
+    if((NULL != (nterm = (ast_node*)parse_expression())) ||
+            (NULL != (nterm = (ast_node*)parse_list_init())) ||
+            (NULL != (nterm = (ast_node*)parse_dict_init())) ||
+            (NULL != (nterm = (ast_node*)parse_string_expr())) ||
+            (NULL != (nterm = (ast_node*)parse_cast_statement()))) {
 
         node = CREATE_AST_NODE(AST_assignment_item, ast_assignment_item);
         node->nterm = nterm;
@@ -338,8 +316,8 @@ ast_assignment_item* parse_assignment_item() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  assignment
  *      = compound_reference '=' assignment_item
  *      / compound_reference '+=' expression
@@ -347,9 +325,9 @@ ast_assignment_item* parse_assignment_item() {
  *      / compound_reference '*=' expression
  *      / compound_reference '/=' expression
  *      / compound_reference '%=' expression
- *      
- * @return ast_assignment* 
- * 
+ *
+ * @return ast_assignment*
+ *
  */
 ast_assignment* parse_assignment() {
 
@@ -359,4 +337,227 @@ ast_assignment* parse_assignment() {
     RETV(node);
 }
 
+/**
+ * @brief
+ *
+ *  expression
+ *      = expr_and 'or' expr_or
+ *      / expr_equ 'and' expr_and
+ *      / expr_mag '==' expr_equ
+ *      / expr_mag '!=' expr_equ
+ *      / expr_term '<' expr_mag
+ *      / expr_term '>' expr_mag
+ *      / expr_term '<=' expr_mag
+ *      / expr_term '>=' expr_mag
+ *      / expr_fact '+' expr_term
+ *      / expr_fact '-' expr_term
+ *      / expr_pow '*' expr_fact
+ *      / expr_pow '/' expr_fact
+ *      / expr_pow '%' expr_fact
+ *      / expr_unary '^' expr_pow
+ *      / '!' expr_primary
+ *      / '-' expr_primary
+ *      / '(' expression ')'
+ *
+ * @return ast_expression*
+ *
+ */
+ast_expression* parse_expression() {
 
+    ENTER;
+    ast_expression* node = NULL;
+    PtrList* stack = create_ptr_list();
+    PtrList* queue = create_ptr_list();
+    ast_node* nterm;
+    void* post = post_token_queue();
+    int type = 0;
+
+    int state = 0;
+    bool finished = false;
+
+    while(!finished) {
+        switch(state) {
+            case 0:
+                // entry point; make sure it's an expression
+                if(NULL != (nterm = (ast_node*)parse_operator()))
+                    state = 3;
+                else if (NULL != (nterm = (ast_node*)parse_expr_primary()))
+                    state = 8;
+                else
+                    state = 101;
+                break;
+
+            case 1:
+                // must have a primary or a unary
+                if(NULL != (nterm = (ast_node*)parse_operator()))
+                    state = 3;
+                else if (NULL != (nterm = (ast_node*)parse_expr_primary()))
+                    state = 8;
+                else
+                    state = 100;
+                break;
+
+            case 2:
+                // must have an operator
+                break;
+
+            case 3: {
+                    // handle an operator
+                    TokenType type = token_type(((ast_operator*)nterm)->tok);
+                    switch(type) {
+                        case TOK_OPAREN:
+                            state = 4;
+                            break;
+                        case TOK_CPAREN:
+                            state = 5;
+                            break;
+                        default:
+                            if(get_assoc(type))
+                                state = 6;
+                            else
+                                state = 7;
+                            break;
+                    }
+                }
+                break;
+
+            case 5:
+                // operator is close paren
+                state = 1;
+                while(true) {
+                    ast_operator* op = pop_ptr_list(stack);
+                    if(NULL == op) {
+                        show_syntax_error("imbalanced parens in expression");
+                        state = 102;
+                        break;
+                    }
+                    else if(TOK_OPAREN == token_type(op->tok)) {
+                        state = 1;
+                        break;
+                    }
+                    else
+                        add_ptr_list(queue, op);
+                }
+                break;
+
+            case 6: {
+                    // operator is left assoc
+                    ast_operator* op = peek_ptr_list(stack);
+                    Token* tok = op->tok;
+
+                    state = 1;
+                }
+                break;
+
+            case 7:
+                // operator it right assoc
+                state = 1;
+                break;
+
+            case 4:
+            case 8:
+                // handle a primary or an open paren
+                add_ptr_list(queue, nterm);
+                state = 1;
+                break;
+
+            case 100:
+                // finished expression
+                node = CREATE_AST_NODE(AST_expression, ast_expression);
+                node->list = queue;
+                node->expr_type = type;
+                finalize_token_queue();
+                finished = true;
+                break;
+
+            case 101:
+                // not an expression, not an error;
+                reset_token_queue(post);
+                finished = true;
+                break;
+
+            case 102:
+                // exit on a syntax error;
+                node = NULL;
+                finished = true;
+                break;
+
+            default:
+                // cannot happen
+                fatal_error("invalid state in %s: %d", __func__, state);
+                break;
+        }
+    }
+
+    RETV(node);
+}
+
+/*
+    while((NULL != (nterm = (ast_node*)parse_operator())) ||
+                (NULL != (nterm = (ast_node*)parse_expr_primary()))) {
+
+            if(AST_expr_primary == ast_node_type(nterm)) {
+                add_ptr_list(queue, nterm);
+                finalize_token_queue();
+            }
+            else {
+                ast_operator* oper = (ast_operator*)nterm;
+                Token* oper_tok = oper->tok;
+
+                if(TOK_OPAREN == token_type(oper_tok)) {
+                    // open paren
+                    push_ptr_list(stack, nterm);
+                    finalize_token_queue();
+                }
+                else if(TOK_CPAREN == token_type(oper_tok)) {
+                    // close paren. pop until open paren
+                    while(true) {
+                        ast_operator* item = pop_ptr_list(stack);
+                        if(NULL == item) {
+                            EXPECTED("a ')'");
+                            RETV(NULL);
+                        }
+                        else if(TOK_OPAREN == token_type(item->tok)) {
+                            break; // finished and discard paren
+                        }
+                        else {
+                            // copy it to the queue
+                            add_ptr_list(queue, item);
+                        }
+                    }
+                }
+                else if(get_assoc(token_type(oper_tok))) {
+                    // is left assoc
+                    ast_operator* item = peek_ptr_list(stack);
+                    while(item != NULL &&
+                            (get_prec(token_type(item->tok)) >=
+                            get_prec(token_type(oper_tok)))) {
+                        add_ptr_list(queue, pop_ptr_list(stack));
+                    }
+
+                    push_ptr_list(stack, oper);
+                }
+                else {
+                    // is right assoc
+                    ast_operator* item = peek_ptr_list(stack);
+                    while(item != NULL &&
+                            (get_prec(token_type(item->tok)) >
+                            get_prec(token_type(oper_tok)))) {
+                        add_ptr_list(queue, pop_ptr_list(stack));
+                    }
+
+                    push_ptr_list(stack, oper);
+                }
+            }
+        }
+        else {
+            node =
+            break;
+        }
+
+    }
+
+    RETV(node);
+}
+
+*/

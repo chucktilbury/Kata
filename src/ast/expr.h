@@ -1,7 +1,7 @@
 /**
  * @file expr.h
- * 
- * @brief 
+ *
+ * @brief
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -15,7 +15,7 @@
  *  Note that this does not match what is actually implemented. Expressions
  *  are actually implemented using the shunting yard algoritim. This is here
  *  as a place marker and illustration.
- * 
+ *
  *  expression
  *      = expr_and 'or' expr_or
  *      / expr_equ 'and' expr_and
@@ -38,6 +38,7 @@
 typedef struct _ast_expression_ {
     ast_node node;
     PtrList* list;
+    int expr_type;
 } ast_expression;
 
 /**
@@ -72,7 +73,7 @@ typedef struct _ast_operator_ {
  */
 typedef struct _ast_cast_statement_ {
     ast_node node;
-    struct ast_type_name_* type;
+    struct _ast_type_name_* type;
     struct _ast_expression_* expr;
 } ast_cast_statement;
 
