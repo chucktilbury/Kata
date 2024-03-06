@@ -12,8 +12,9 @@
  * @date 01-07-2024
  * @copyright Copyright (c) 2024
  */
-#include "scanner.h"
+#define USE_TRACE 1
 #include "util.h"
+#include "scanner.h"
 
 extern Token* scan_token();
 static unsigned serial = 0;
@@ -77,6 +78,7 @@ static void append_token(Token* tok) {
  */
 void open_file(const char* fname) {
 
+    ENTER;
     // calling into the util library
     TRY {
         push_input_file(fname);
@@ -101,6 +103,7 @@ void open_file(const char* fname) {
         }
         FINAL
     }
+    RET;
 }
 
 /**
@@ -117,32 +120,10 @@ void close_file() {
  * @param tok
  *
  */
-void finalize_token() {
+// void finalize_token() {
 
-    tqueue->crnt->used = true;
-}
-
-/**
- * @brief Reset the token queue to the state that it was in before this parser
- * function was called. This is used when the tokens that were consumed by
- * this function do not produce a valid parse. That may or may not be an
- * error. In the case of an error, this should not be called because the error
- * recovery function needs to know which tokens are involved in the error and
- * that data is captured by the flags this function undoes.
- */
-void finalize_token_queue() {
-
-    TokQueueItem* ptr = tqueue->head;
-    while(ptr != NULL) {
-        if(ptr->used)
-            ptr = ptr->next;
-        else
-            break;
-    }
-
-    if(ptr != NULL)
-        tqueue->head = ptr;
-}
+//     tqueue->crnt->used = true;
+// }
 
 /**
  * @brief Get the token object. This returns the current token, which is a
@@ -219,6 +200,30 @@ Token* advance_token() {
 }
 
 /**
+ * @brief After a rule is parsed, this function sets the head of the token 
+ * queue to the first unused token. All of the tokens that have been used 
+ * are discarded and collected by the garbage collector.
+ */
+void finalize_token_queue() {
+
+    ENTER;
+    // TokQueueItem* ptr = tqueue->head;
+    // while(ptr != NULL) {
+    //     if(ptr->used)
+    //         ptr = ptr->next;
+    //     else
+    //         break;
+    // }
+
+    // if(ptr != NULL)
+    //     tqueue->head = ptr;
+    //TRACE("head: %p, crnt = %p, tail = %p", (void*)tqueue->head, (void*)tqueue->crnt, (void*)tqueue->tail);
+    tqueue->head = tqueue->crnt;
+
+    RET;
+}
+
+/**
  * @brief Grab the current queue pointer so that it can be reset when the
  * crnt pointer moves as a result of parsing the line. This is used in
  * conjunction with reset_token_queue(). This should be called and the pointer
@@ -230,8 +235,8 @@ Token* advance_token() {
 void* post_token_queue() {
 
     assert(tqueue != NULL);
-
-    return (void*)tqueue->crnt;
+    ENTER;
+    RETV((void*)tqueue->crnt);
 }
 
 /**
@@ -246,15 +251,18 @@ void reset_token_queue(void* post) {
 
     assert(tqueue != NULL);
 
-    TokQueueItem* tmp = (TokQueueItem*)post;
-    unsigned end      = tqueue->crnt->serial;
+    ENTER;
+    // TokQueueItem* tmp = (TokQueueItem*)post;
+    // unsigned end      = tqueue->crnt->serial;
 
-    while(tmp->serial < end) {
-        tmp->used = false;
-        tmp       = tmp->next;
-    }
+    // while(tmp->serial < end) {
+    //     print_token(tmp->tok);
+    //     //tmp->used = false;
+    //     tmp       = tmp->next;
+    // }
 
     tqueue->crnt = (TokQueueItem*)post;
+    RET;
 }
 
 /**

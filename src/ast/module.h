@@ -17,7 +17,7 @@
  */
 typedef struct _ast_module_ {
     ast_node node;
-    PtrList* list;
+    LList list;
 } ast_module;
 
 /**
@@ -53,7 +53,7 @@ typedef struct _ast_namespace_item_ {
 typedef struct _ast_namespace_definition_ {
     ast_node node;
     Token* name;
-    PtrList* list;
+    LList list;
     ScopeType scope;
 } ast_namespace_definition;
 
@@ -77,7 +77,7 @@ typedef struct _ast_class_definition_ {
     ast_node node;
     Token* name;
     struct _ast_type_name_* parent;
-    PtrList* list;
+    LList list;
     ScopeType scope;
 } ast_class_definition;
 

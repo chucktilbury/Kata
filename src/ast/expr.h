@@ -37,7 +37,7 @@
  */
 typedef struct _ast_expression_ {
     ast_node node;
-    PtrList* list;
+    LList list;
     int expr_type;
 } ast_expression;
 
@@ -94,7 +94,7 @@ typedef struct _ast_expr_primary_ {
  */
 typedef struct _ast_expression_list_ {
     ast_node node;
-    PtrList* list;
+    LList list;
 } ast_expression_list;
 
 /**
@@ -130,6 +130,7 @@ void traverse_expr_primary(ast_expr_primary* node, PassFunc func);
 void traverse_expression_list(ast_expression_list* node, PassFunc func);
 void traverse_assignment_item(ast_assignment_item* node, PassFunc func);
 void traverse_assignment(ast_assignment* node, PassFunc func);
+void traverse_operator(ast_operator* node, PassFunc func);
 
 
 #endif /* __EXPR_H__ */

@@ -11,6 +11,7 @@ add_library(${PROJECT_NAME} STATIC
     cmd.c
     except.c
     list.c
+    llist.c
     trace.c
 )
 

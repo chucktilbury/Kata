@@ -30,7 +30,6 @@ ast_var_decl* parse_var_decl() {
 
     if(TOK_CONST == token_type(get_token())) {
         is_const = true;
-        finalize_token();
         advance_token();
     }
 
@@ -43,7 +42,6 @@ ast_var_decl* parse_var_decl() {
 
         if(TOK_SYMBOL == token_type(get_token())) {
             node->name = get_token();
-            finalize_token();
             advance_token();
         }
         else {
@@ -74,7 +72,7 @@ ast_var_decl_list* parse_var_decl_list() {
     ENTER;
     ast_var_decl_list* node = NULL;
     ast_var_decl* nterm;
-    PtrList* list = create_ptr_list();
+    LList list = create_llist();
     int state = 0;
     bool finished = false;
     void* post = post_token_queue();
@@ -83,7 +81,7 @@ ast_var_decl_list* parse_var_decl_list() {
         switch(state) {
             case 0:
                 if(NULL != (nterm = parse_var_decl())) {
-                    add_ptr_list(list, nterm);
+                    append_llist(list, nterm);
                     state = 1;
                 }
                 else
@@ -92,7 +90,6 @@ ast_var_decl_list* parse_var_decl_list() {
             case 1:
                 // if the token is a ',', then expect another item, else finished
                 if(TOK_COMMA == token_type(get_token())) {
-                    finalize_token();
                     advance_token();
                     state = 2;
                 }
@@ -102,7 +99,7 @@ ast_var_decl_list* parse_var_decl_list() {
             case 2:
                 // must be an var_decl, or an error
                 if(NULL != (nterm = parse_var_decl())) {
-                    add_ptr_list(list, nterm);
+                    append_llist(list, nterm);
                     state = 1;
                 }
                 else {
@@ -158,7 +155,6 @@ ast_var_definition* parse_var_definition() {
 
         // optional assignement
         if(TOK_ASSIGN == token_type(get_token())) {
-            finalize_token();
             advance_token();
 
             if(NULL != (item = parse_assignment_item())) {

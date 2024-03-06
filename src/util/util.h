@@ -127,6 +127,21 @@ static inline void* pop_ptr_list(PtrList* h) {
 }
 
 //--------------------------------------------------------
+// llist.c
+//--------------------------------------------------------
+// Specialize the ptr list to be a str list.
+typedef void* LList;
+LList create_llist();
+void append_llist(LList ll, void* data);
+void prepend_llist(LList ll, void* data);
+void push_llist(LList ll, void* data);
+void* pop_llist(LList ll);
+void* peek_llist(LList ll);
+void* init_llist_iter(LList ll);
+void* iter_llist(LList ll);
+int len_llist(LList ll);
+
+//--------------------------------------------------------
 // str.c
 //--------------------------------------------------------
 // Specialize the ptr list to be a str list.
@@ -474,7 +489,7 @@ extern const int trace_increment;
     do {                                            \
         trace_count -= trace_increment;             \
         PAD;                                        \
-        printf("RETURN(%s): %s(): ", #v, __func__); \
+        printf("RETURN(%s): %s(): (%p)", #v, __func__, (void*)(v)); \
         CAP;                                        \
         return (v);                                 \
     } while(false)

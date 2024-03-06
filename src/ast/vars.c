@@ -50,9 +50,10 @@ void traverse_var_decl_list(ast_var_decl_list* node, PassFunc func) {
     
     ENTER;
     (*func)((ast_node*)node);
-    PtrListIter* iter = init_ptr_list_iterator(node->list);
     ast_var_decl* nterm;
-    while(NULL != (nterm = iterate_ptr_list(iter)))
+
+    init_llist_iter(node->list);
+    while(NULL != (nterm = iter_llist(node->list)))
         traverse_var_decl(nterm, func);
     RET;
 }

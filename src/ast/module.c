@@ -30,9 +30,10 @@ void traverse_module(ast_module* node, PassFunc func) {
 
     ENTER;
     (*func)((ast_node*)node);
-    PtrListIter* iter = init_ptr_list_iterator(node->list);
     ast_node* nterm;
-    while(NULL != (nterm = iterate_ptr_list(iter))) {
+
+    init_llist_iter(node->list);
+    while(NULL != (nterm = iter_llist(node->list))) {
         traverse_module_item((ast_module_item*)nterm, func);
     }
     RET;
@@ -136,9 +137,10 @@ void traverse_namespace_definition(ast_namespace_definition* node, PassFunc func
     (*func)((ast_node*)node);
     TRACE("NAME: %s", raw_string(node->name->str));
     TRACE("SCOPE: %s", scope_name(node->scope));
-    PtrListIter* iter = init_ptr_list_iterator(node->list);
     ast_node* nterm;
-    while(NULL != (nterm = iterate_ptr_list(iter)))
+
+    init_llist_iter(node->list);
+    while(NULL != (nterm = iter_llist(node->list)))
         traverse_namespace_item((ast_namespace_item*)nterm, func);
     RET;
 }
@@ -200,9 +202,11 @@ void traverse_class_definition(ast_class_definition* node, PassFunc func) {
     TRACE("SCOPE: %s", scope_name(node->scope));
     if(node->parent)
         traverse_type_name(node->parent, func);
-    PtrListIter* iter = init_ptr_list_iterator(node->list);
+    
     ast_node* nterm;
-    while(NULL != (nterm = iterate_ptr_list(iter)))
+
+    init_llist_iter(node->list);
+    while(NULL != (nterm = iter_llist(node->list)))
         traverse_class_item((ast_class_item*)nterm, func);
     RET;
 }

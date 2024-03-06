@@ -74,7 +74,7 @@ Token* advance_token();
 /**
  * @brief Mark this token as having been used to compose a rule.
  */
-void finalize_token();
+//void finalize_token();
 
 /**
  * @brief Reset the head of the token queue to the first token that has not

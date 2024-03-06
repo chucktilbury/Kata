@@ -26,7 +26,7 @@ ast_compound_name* parse_compound_name() {
 
     ENTER;
     ast_compound_name* node = NULL;
-    PtrList* lst = create_ptr_list();
+    LList lst = create_llist();
     Str* str = create_string(NULL);
     bool finished = false;
     int s = 0;
@@ -38,9 +38,8 @@ ast_compound_name* parse_compound_name() {
             case 0:
                 // initial state
                 if(TOK_SYMBOL == token_type(tok)) {
-                    add_ptr_list(lst, tok);
+                    append_llist(lst, tok);
                     add_string_Str(str, tok->str);
-                    finalize_token();
                     advance_token();
                     s = 1;
                 }
@@ -53,7 +52,6 @@ ast_compound_name* parse_compound_name() {
                 // seen a symbol, this must be a dot or something else.
                 if(TOK_DOT == token_type(tok)) {
                     add_string_char(str, '.');
-                    finalize_token();
                     advance_token();
                     s = 2;
                 }
@@ -64,9 +62,8 @@ ast_compound_name* parse_compound_name() {
             case 2:
                 // must be a symbol or it's an error
                 if(TOK_SYMBOL == token_type(tok)) {
-                    add_ptr_list(lst, tok);
+                    append_llist(lst, tok);
                     add_string_Str(str, tok->str);
-                    finalize_token();
                     advance_token();
                     s = 1;
                 }
@@ -122,7 +119,6 @@ ast_compound_ref_item* parse_compound_ref_item() {
         node = CREATE_AST_NODE(AST_compound_ref_item, ast_compound_ref_item);
         node->token = tok;
         node->nterm = NULL;
-        finalize_token();
         advance_token();
     }
     else if(NULL != (nterm = parse_array_reference())) {
@@ -152,7 +148,7 @@ ast_compound_reference* parse_compound_reference() {
     ENTER;
     ast_compound_reference* node = NULL;
     ast_compound_ref_item* nterm;
-    PtrList* list = create_ptr_list();
+    LList list = create_llist();
     Token* tok;
     int s = 0;
     bool finished = false;
@@ -164,7 +160,7 @@ ast_compound_reference* parse_compound_reference() {
             case 0:
                 // entry point
                 if(NULL != (nterm = parse_compound_ref_item())) {
-                    add_ptr_list(list, nterm);
+                    append_llist(list, nterm);
                     s = 1;
                 }
                 else {
@@ -174,7 +170,6 @@ ast_compound_reference* parse_compound_reference() {
             case 1:
                 // optional dot. if it's not a dot, then return the nterm
                 if(TOK_DOT == token_type(tok)) {
-                    finalize_token();
                     advance_token();
                     s = 2;
                 }
@@ -185,7 +180,7 @@ ast_compound_reference* parse_compound_reference() {
             case 2:
                 // must be a compound_ref_item 
                 if(NULL != (nterm = parse_compound_ref_item())) {
-                    add_ptr_list(list, nterm);
+                    append_llist(list, nterm);
                     s = 1;
                 }
                 else {

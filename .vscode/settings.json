@@ -2,6 +2,7 @@
     "files.associations": {
         "util.h": "c",
         "pass.h": "c",
-        "scanner.h": "c"
+        "scanner.h": "c",
+        "hash_map": "c"
     }
 }

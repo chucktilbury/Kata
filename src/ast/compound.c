@@ -30,9 +30,10 @@ void traverse_compound_name(ast_compound_name* node, PassFunc func) {
     ENTER;
     (*func)((ast_node*)node);
     TRACE("raw_name: %s", raw_string(node->raw_name));
-    PtrListIter* iter = init_ptr_list_iterator(node->list);
     Token* tok;
-    while(NULL != (tok = iterate_ptr_list(iter))) {
+
+    init_llist_iter(node->list);
+    while(NULL != (tok = iter_llist(node->list))) {
         TRACE_TERM(tok);
     }
     RET;
@@ -80,9 +81,10 @@ void traverse_compound_reference(ast_compound_reference* node, PassFunc func) {
     
     ENTER;
     (*func)((ast_node*)node);
-    PtrListIter* iter = init_ptr_list_iterator(node->list);
     ast_compound_ref_item* nterm;
-    while(NULL != (nterm = iterate_ptr_list(iter))) {
+
+    init_llist_iter(node->list);
+    while(NULL != (nterm = iter_llist(node->list))) {
         traverse_compound_ref_item(nterm, func);
     }
     RET;

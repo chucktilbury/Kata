@@ -27,11 +27,11 @@ ast_module* parse_module() {
     ENTER;
     ast_module* node = NULL;
     ast_module_item* nterm;
-    PtrList* list = create_ptr_list();
+    LList list = create_llist();
 
     while(true) {
         if(NULL != (nterm = parse_module_item())) {
-            add_ptr_list(list, nterm);
+            append_llist(list, nterm);
         }
         else if(TOK_END_OF_FILE == token_type(get_token())) {
             node = CREATE_AST_NODE(AST_module, ast_module);
@@ -143,25 +143,21 @@ ast_namespace_definition* parse_namespace_definition() {
     if(TOK_NAMESPACE == token_type(get_token())) {
         node = CREATE_AST_NODE(AST_namespace_definition, ast_namespace_definition);
         node->scope = get_scope();
-        finalize_token();
         advance_token();
 
         if(TOK_SYMBOL == token_type(get_token())) {
             node->name = get_token();
-            finalize_token();
             advance_token();
 
             if(TOK_OCBRACE == token_type(get_token())) {
-                finalize_token();
                 advance_token();
 
-                node->list = create_ptr_list();
+                node->list = create_llist();
                 ast_node* nterm;
                 while(true) {
                     if(NULL != (nterm = (ast_node*)parse_namespace_item()))
-                        add_ptr_list(node->list, nterm);
+                        append_llist(node->list, nterm);
                     else if(TOK_CCBRACE == token_type(get_token())) {
-                        finalize_token();
                         advance_token();
                         break;
                     }
@@ -212,10 +208,13 @@ ast_class_item* parse_class_item() {
         node = CREATE_AST_NODE(AST_module_item, ast_class_item);
         node->nterm = nterm;
         node->scope = get_scope();
+        TRACE_TERM(get_token());
         finalize_token_queue();
+        TRACE_TERM(get_token());
     }
     else {
         // returning NULL, but no error.... yet...
+        TRACE_TERM(get_token());
         reset_token_queue(post);
     }
 
@@ -240,17 +239,14 @@ ast_class_definition* parse_class_definition() {
     if(TOK_CLASS == token_type(get_token())) {
         node = CREATE_AST_NODE(AST_class_definition, ast_class_definition);
         node->scope = get_scope();
-        finalize_token();
         advance_token();
 
         if(TOK_SYMBOL == token_type(get_token())) {
             node->name = get_token();
-            finalize_token();
             advance_token();
 
             // optional type name
             if(TOK_OPAREN == token_type(get_token())) {
-                finalize_token();
                 advance_token();
 
                 ast_type_name* nterm;
@@ -260,7 +256,6 @@ ast_class_definition* parse_class_definition() {
                     node->parent = NULL;
 
                 if(TOK_CPAREN == token_type(get_token())) {
-                    finalize_token();
                     advance_token();
                 }
                 else {
@@ -271,16 +266,14 @@ ast_class_definition* parse_class_definition() {
             // else no parens
 
             if(TOK_OCBRACE == token_type(get_token())) {
-                finalize_token();
                 advance_token();
 
-                node->list = create_ptr_list();
+                node->list = create_llist();
                 ast_node* nterm;
                 while(true) {
                     if(NULL != (nterm = (ast_node*)parse_class_item()))
-                        add_ptr_list(node->list, nterm);
+                        append_llist(node->list, nterm);
                     else if(TOK_CCBRACE == token_type(get_token())) {
-                        finalize_token();
                         advance_token();
                         break;
                     }

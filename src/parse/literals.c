@@ -40,7 +40,7 @@ ast_scope_operator* parse_scope_operator() {
         set_scope((ttype == TOK_PRIVATE)? SCOPE_PRIV:
                     (ttype == TOK_PUBLIC)? SCOPE_PUB:
                     (ttype == TOK_PROTECTED)? SCOPE_PROT: SCOPE_PRIV);
-        finalize_token();
+        
         advance_token();
     }
 
@@ -83,7 +83,6 @@ ast_literal_type_name* parse_literal_type_name() {
         TRACE_TERM(get_token());
         node = CREATE_AST_NODE(AST_literal_type_name, ast_literal_type_name);
         node->token = get_token();
-        finalize_token();
         advance_token();
     }
 
@@ -119,7 +118,6 @@ ast_literal_value* parse_literal_value() {
         TRACE_TERM(get_token());
         node = CREATE_AST_NODE(AST_literal_value, ast_literal_value);
         node->token = get_token();
-        finalize_token();
         advance_token();
 
         switch(ttype) {
