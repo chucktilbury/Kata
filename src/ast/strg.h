@@ -17,6 +17,8 @@
  */
 typedef struct _ast_formatted_strg_ {
     ast_node node;
+    Token* str;
+    struct _ast_expression_list_* exprs;
 } ast_formatted_strg;
 
 /**
@@ -26,6 +28,8 @@ typedef struct _ast_formatted_strg_ {
  */
 typedef struct _ast_string_literal_ {
     ast_node node;
+    Token* literal;
+    struct _ast_formatted_strg_* fmt;
 } ast_string_literal;
 
 /**
@@ -36,6 +40,7 @@ typedef struct _ast_string_literal_ {
  */
 typedef struct _ast_string_expr_item_ {
     ast_node node;
+    ast_node* nterm;
 } ast_string_expr_item;
 
 /**
@@ -44,6 +49,7 @@ typedef struct _ast_string_expr_item_ {
  */
 typedef struct _ast_string_expr_ {
     ast_node node;
+    LList list;
 } ast_string_expr;
 
 

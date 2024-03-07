@@ -33,7 +33,8 @@ ast_function_reference* parse_function_reference() {
 }
 
 /**
- * @brief
+ * @brief Note that the 'virtual' and the 'function' keywords are optional and 
+ * may appear in any order.
  *
  *  func_decl
  *      = ( 'virtual' )? ( 'function' )? SYMBOL
@@ -55,7 +56,7 @@ ast_func_decl* parse_func_decl() {
 }
 
 /**
- * @brief
+ * @brief Note that the 'function' keyword is optional. 
  *
  *  func_definition
  *      =  ( 'function' )? compound_name

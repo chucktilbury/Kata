@@ -440,7 +440,6 @@ cast_statement
 expr_primary
     = literal_value
     / compound_reference
-    / cast_statement
     / '(' expression ')'
 
 #####################

@@ -82,12 +82,16 @@ void* init_llist_iter(LList ll) {
 
     assert(ll != NULL);
     llist* lst = (llist*)ll;
-    assert(lst->head != NULL);
+    // an empty list is allowed
+    //assert(lst->head != NULL);
 
     lst->crnt = lst->head;
     lst->changed = false;
 
-    return lst->crnt->data;
+    if(lst->crnt != NULL)
+        return lst->crnt->data;
+    else 
+        return NULL;
 }
 
 void* iter_llist(LList ll) {

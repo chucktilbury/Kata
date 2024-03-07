@@ -27,14 +27,16 @@ void traverse_expression(ast_expression* node, PassFunc func) {
     (*func)((ast_node*)node);
     ast_node* nterm;
 
-    init_llist_iter(node->list);
-    while(NULL != (nterm = iter_llist(node->list))) {
-        if(AST_expr_primary == ast_node_type(nterm))
-            traverse_expr_primary((ast_expr_primary*)nterm, func);
-        else if(AST_operator == ast_node_type(nterm))
-            traverse_operator((ast_operator*)nterm, func);
-        else 
-            RAISE(TRAVERSE_ERROR, "expected a primary or operator, but got %s", nterm_to_str(nterm));
+    if(node->list != NULL) {
+        init_llist_iter(node->list);
+        while(NULL != (nterm = iter_llist(node->list))) {
+            if(AST_expr_primary == ast_node_type(nterm))
+                traverse_expr_primary((ast_expr_primary*)nterm, func);
+            else if(AST_operator == ast_node_type(nterm))
+                traverse_operator((ast_operator*)nterm, func);
+            else 
+                RAISE(TRAVERSE_ERROR, "expected a primary or operator, but got %s", nterm_to_str(nterm));
+        }
     }
 
     RET;
@@ -106,7 +108,6 @@ void traverse_cast_statement(ast_cast_statement* node, PassFunc func) {
  *  expr_primary
  *      = literal_value
  *      / compound_reference
- *      / cast_statement
  * 
  * @param node 
  * 
@@ -123,8 +124,6 @@ void traverse_expr_primary(ast_expr_primary* node, PassFunc func) {
         traverse_literal_value((ast_literal_value*)nterm, func);
     else if(AST_compound_reference == ast_node_type(nterm))
         traverse_compound_reference((ast_compound_reference*)nterm, func);
-    else if(AST_cast_statement == ast_node_type(nterm))
-        traverse_cast_statement((ast_cast_statement*)nterm, func);
     else 
         RAISE(TRAVERSE_ERROR, "expected an expr_primary, but got %s", nterm_to_str(nterm));
 
