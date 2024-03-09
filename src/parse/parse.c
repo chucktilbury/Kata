@@ -52,7 +52,7 @@ ast_module* parse() {
     ast_module* node = NULL;
 
     if(NULL != (node = parse_module())) {
-        if(TOK_END_OF_INPUT != token_type(get_token())) {
+        if(TOK_END_OF_INPUT != TOK_TYPE) {
             EXPECTED("end of input");
             node = NULL;
         }

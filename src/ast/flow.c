@@ -40,26 +40,7 @@ void traverse_if_clause(ast_if_clause* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_else_clause_mid(ast_else_clause_mid* node, PassFunc func) {
-
-    assert(node != NULL);
-    assert(func != NULL);
-
-    ENTER;
-    (*func)((ast_node*)node);
-    RET;
-}
-
-/**
- * @brief 
- * 
- *  else_clause_final
- *      = 'else' ( '(' ')' )? function_body
- * 
- * @param node 
- * 
- */
-void traverse_else_clause_final(ast_else_clause_final* node, PassFunc func) {
+void traverse_else_clause_item(ast_else_clause_item* node, PassFunc func) {
 
     assert(node != NULL);
     assert(func != NULL);
@@ -110,9 +91,30 @@ void traverse_switch_clause(ast_switch_clause* node, PassFunc func) {
 /**
  * @brief 
  * 
+ *  case_item
+ *      = literal_value
+ *      / LITERAL_DSTR
+ *      / LITERAL_SSTR
+ * 
+ * @param node 
+ * @param func 
+ * 
+ */
+void traverse_case_item(ast_case_item* node, PassFunc func) {
+
+    assert(node != NULL);
+    assert(func != NULL);
+
+    ENTER;
+    (*func)((ast_node*)node);
+    RET;
+}
+
+/**
+ * @brief 
+ * 
  *  case_clause
- *      = 'case' '(' ( literal_value / LITERAL_DSTR / LITERAL_SSTR ) ')' 
- *          function_body
+ *      = 'case' '(' case_item ')' function_body
  *
  * @param node 
  * 

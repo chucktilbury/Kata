@@ -77,6 +77,7 @@ typedef enum {
     AST_import_statement,
     AST_operator,
     AST_cast_statement,
+    AST_case_item,
     AST_LAST,   // number of non-terminals in the list
 } AstType;
 

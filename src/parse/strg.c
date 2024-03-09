@@ -30,7 +30,7 @@ ast_string_literal* parse_string_literal() {
     ast_formatted_strg* fstr;
     void* post = post_token_queue();
 
-    if(TOK_LITERAL_SSTR == token_type(get_token())) {
+    if(TOK_LITERAL_SSTR == TOK_TYPE) {
         node = CREATE_AST_NODE(AST_string_literal, ast_string_literal);
         node->literal = get_token();
         node->fmt = NULL;
@@ -125,7 +125,7 @@ ast_string_expr* parse_string_expr() {
             case 2:
                 // expecting a '+' or something else. if it's something else, 
                 // then finished parsing the string expr
-                if(TOK_ADD == token_type(get_token())) {
+                if(TOK_ADD == TOK_TYPE) {
                     state = 1;
                     advance_token();
                 }
@@ -178,7 +178,7 @@ ast_formatted_strg* parse_formatted_strg() {
     ast_formatted_strg* node = NULL;
     ast_expression_list* nterm;
 
-    if(TOK_LITERAL_DSTR == token_type(get_token())) {
+    if(TOK_LITERAL_DSTR == TOK_TYPE) {
         node = CREATE_AST_NODE(AST_formatted_strg, ast_formatted_strg);
         node->str = get_token();
         advance_token();

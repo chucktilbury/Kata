@@ -21,6 +21,8 @@
  */
 #include "tokens.h"
 
+#define TOK_TYPE    (token_type(get_token()))
+
 /**
  * @brief Open a file for the scanner to read from. Files are expected to be
  * opened in a stack so that when a file is opened the input stream is
@@ -141,4 +143,5 @@ void init_scanner(const char* fname);
 void discard_token_queue();
 
 void print_token(Token* tok);
+
 #endif /* __SCAN_H__ */

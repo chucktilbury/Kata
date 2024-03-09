@@ -28,6 +28,10 @@ void traverse_try_clause(ast_try_clause* node, PassFunc func) {
 
     ENTER;
     (*func)((ast_node*)node);
+
+    traverse_function_body(node->fbod, func);
+    traverse_except_clause(node->ecla, func);
+    
     RET;
 }
 
@@ -47,6 +51,11 @@ void traverse_except_clause_mid(ast_except_clause_mid* node, PassFunc func) {
 
     ENTER;
     (*func)((ast_node*)node);
+
+    TRACE_TERM(node->name);
+    TRACE_TERM(node->msg);
+    traverse_function_body(node->fbod, func);
+
     RET;
 }
 
@@ -66,6 +75,10 @@ void traverse_except_clause_final(ast_except_clause_final* node, PassFunc func) 
     
     ENTER;
     (*func)((ast_node*)node);
+
+    TRACE_TERM(node->msg);
+    traverse_function_body(node->fbod, func);
+
     RET;
 }
 
@@ -86,6 +99,13 @@ void traverse_except_clause(ast_except_clause* node, PassFunc func) {
 
     ENTER;
     (*func)((ast_node*)node);
+    ast_except_clause_mid* mid;
+
+    init_llist_iter(node->list);
+    while(NULL != (mid = iter_llist(node->list)))
+        traverse_except_clause_mid(mid, func);
+    if(node->fin != NULL)
+        traverse_except_clause_final(node->fin, func);
     RET;
 }
 

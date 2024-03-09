@@ -17,6 +17,8 @@
  */
 typedef struct _ast_try_clause_ {
     ast_node node;
+    struct _ast_function_body_* fbod;
+    struct _ast_except_clause_* ecla;
 } ast_try_clause;
 
 /**
@@ -25,6 +27,9 @@ typedef struct _ast_try_clause_ {
  */
 typedef struct _ast_except_clause_mid_ {
     ast_node node;
+    Token* name;
+    Token* msg;
+    struct _ast_function_body_* fbod;
 } ast_except_clause_mid;
 
 /**
@@ -33,6 +38,8 @@ typedef struct _ast_except_clause_mid_ {
  */
 typedef struct _ast_except_clause_final_ {
     ast_node node;
+    Token* msg;
+    struct _ast_function_body_* fbod;
 } ast_except_clause_final;
 
 /**
@@ -42,6 +49,8 @@ typedef struct _ast_except_clause_final_ {
  */
 typedef struct _ast_except_clause_ {
     ast_node node;
+    LList* list;
+    struct _ast_except_clause_final_* fin;
 } ast_except_clause;
 
 void traverse_try_clause(ast_try_clause* node, PassFunc func);

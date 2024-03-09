@@ -26,6 +26,28 @@ ast_try_clause* parse_try_clause() {
 
     ENTER;
     ast_try_clause* node = NULL;
+    ast_function_body* fbod;
+    ast_except_clause* ecla;
+
+    if(TOK_TRY == TOK_TYPE) {
+        advance_token();
+
+        if(NULL != (fbod = parse_function_body())) {
+
+            if(NULL != (ecla = parse_except_clause())) {
+                node = CREATE_AST_NODE(AST_try_clause, ast_try_clause);
+                node->fbod = fbod;
+                node->ecla = ecla;
+            }
+            else {
+                EXPECTED("an exception handler");
+            }
+        }
+        else {
+            EXPECTED("a function body");
+        }
+    }
+    // else no tokes consumed
 
     RETV(node);
 }
@@ -43,6 +65,50 @@ ast_except_clause_mid* parse_except_clause_mid() {
 
     ENTER;
     ast_except_clause_mid* node = NULL;
+    Token* name;
+    Token* msg;
+    ast_function_body* fbod;
+    void* post = post_token_queue();
+
+    if(TOK_EXCEPT == TOK_TYPE) {
+        advance_token();
+        if(TOK_OPAREN == TOK_TYPE) {
+            advance_token();
+            if(TOK_SYMBOL == TOK_TYPE) {
+                name = get_token();
+                advance_token();
+                if(TOK_COMMA == TOK_TYPE) {
+                    advance_token();
+                    if(TOK_SYMBOL == TOK_TYPE) {
+                        msg = get_token();
+                        advance_token();
+                        if(TOK_CPAREN == TOK_TYPE) {
+                            advance_token();
+                            if(NULL != (fbod = parse_function_body())) {
+                                node = CREATE_AST_NODE(AST_except_clause_mid, ast_except_clause_mid);
+                                node->name = name;
+                                node->msg = msg;
+                                node->fbod = fbod;
+                            }
+                            else 
+                                EXPECTED("a function body");
+                        }
+                        else 
+                            EXPECTED("a ')'");
+                    }
+                    else
+                        EXPECTED("a valid symbol");
+                }
+                else
+                    EXPECTED("a ','");
+            }
+            else 
+                reset_token_queue(post);
+        }
+        else 
+            EXPECTED("a '('");
+    }
+    // else no tokens consumed
 
     RETV(node);
 }
@@ -60,6 +126,47 @@ ast_except_clause_final* parse_except_clause_final() {
 
     ENTER;
     ast_except_clause_final* node = NULL;
+    Token* msg;
+    ast_function_body* fbod;
+    void* post = post_token_queue();
+
+    if(TOK_EXCEPT == TOK_TYPE) {
+        advance_token();
+        if(TOK_OPAREN == TOK_TYPE) {
+            advance_token();
+            if(TOK_ANY == TOK_TYPE) {
+                advance_token();
+                if(TOK_COMMA == TOK_TYPE) {
+                    advance_token();
+                    if(TOK_SYMBOL == TOK_TYPE) {
+                        msg = get_token();
+                        advance_token();
+                        if(TOK_CPAREN == TOK_TYPE) {
+                            advance_token();
+                            if(NULL != (fbod = parse_function_body())) {
+                                node = CREATE_AST_NODE(AST_except_clause_final, ast_except_clause_final);
+                                node->msg = msg;
+                                node->fbod = fbod;
+                            }
+                            else 
+                                EXPECTED("a function body");
+                        }
+                        else 
+                            EXPECTED("a ')'");
+                    }
+                    else
+                        EXPECTED("a valid symbol");
+                }
+                else
+                    EXPECTED("a ','");
+            }
+            else 
+                reset_token_queue(post);
+        }
+        else 
+            EXPECTED("a '('");
+    }
+    // else no tokens consumed
 
     RETV(node);
 }
@@ -78,6 +185,67 @@ ast_except_clause* parse_except_clause() {
 
     ENTER;
     ast_except_clause* node = NULL;
+    LList* list = create_llist();
+    ast_except_clause_mid* mid = NULL;
+    ast_except_clause_final* fin = NULL;
+
+    int state = 0;
+    bool finished = false;
+    void* post = post_token_queue();
+
+    while(!finished) {
+        switch(state) {
+            case 0:
+                // initial state
+                if(NULL != (mid = parse_except_clause_mid())) {
+                    append_llist(list, mid);
+                    state = 1;
+                }
+                else if(NULL != (fin = parse_except_clause_final())) {
+                    state = 100;
+                }
+                else
+                    state = 101;
+                break;
+
+            case 1:
+                // repeat for mid clause
+                if(NULL != (mid = parse_except_clause_mid())) {
+                    append_llist(list, mid);
+                    state = 1;
+                }
+                else if(NULL != (fin = parse_except_clause_final())) {
+                    state = 100;
+                }
+                else
+                    EXPECTED("an exception handler");
+                break;
+
+            case 100:
+                // successful parse
+                node = CREATE_AST_NODE(AST_except_clause, ast_except_clause);
+                node->fin = fin;
+                node->list = list;
+                finalize_token_queue();
+                finished = true;
+                break;
+
+            case 101:
+                // successful parse of final only
+                reset_token_queue(post);
+                finished = true;
+                break;
+
+            case 102:
+                // error
+                finished = true;
+                break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
+
+        }
+    }
 
     RETV(node);
 }

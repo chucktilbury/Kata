@@ -763,6 +763,15 @@ switch_clause
 
 #####################
 #
+# Case item so that the data structures can line up.
+#
+case_item
+    = literal_value 
+    / LITERAL_DSTR 
+    / LITERAL_SSTR
+
+#####################
+#
 # A case clause must have a literal value or a data reference that was
 # declared as CONST. First the match is made against the type that appears in
 # the switch clause. If the type does not match, then the case cannot match.
@@ -770,7 +779,7 @@ switch_clause
 # the same type for a case clause.
 #
 case_clause
-    = 'case' '(' ( literal_value / LITERAL_DSTR / LITERAL_SSTR ) ')' function_body
+    = 'case' '(' case_item ')' function_body
 
 #####################
 #

@@ -88,8 +88,7 @@ ast_for_clause* parse_for_clause();
 
 // flow.c
 ast_if_clause* parse_if_clause();
-ast_else_clause_mid* parse_else_clause_mid();
-ast_else_clause_final* parse_else_clause_final();
+ast_else_clause_item* parse_else_clause_item();
 ast_else_clause* parse_else_clause();
 ast_switch_clause* parse_switch_clause();
 ast_case_clause* parse_case_clause();

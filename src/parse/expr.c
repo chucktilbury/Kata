@@ -231,7 +231,7 @@ ast_cast_statement* parse_cast_statement() {
     ast_expression* expr;
 
     if(NULL != (type = parse_type_name())) {
-        if(TOK_COLON == token_type(get_token())) {
+        if(TOK_COLON == TOK_TYPE) {
             advance_token();
 
             if(NULL != (expr = parse_expression())) {
@@ -307,7 +307,7 @@ ast_expression_list* parse_expression_list() {
             case 0:
                 TRACE("state: %d, len: %d", state, len_llist(list));
                 // open paren required, or no error, no tokens consumed
-                if(TOK_OPAREN == token_type(get_token())) {
+                if(TOK_OPAREN == TOK_TYPE) {
                     pcount++;
                     advance_token();
                     state = 1;
@@ -322,7 +322,7 @@ ast_expression_list* parse_expression_list() {
                     append_llist(list, expr);
                     state = 2;
                 }
-                else if(TOK_CPAREN == token_type(get_token())) {
+                else if(TOK_CPAREN == TOK_TYPE) {
                     pcount--;
                     advance_token();
                     state = 100;
@@ -336,11 +336,11 @@ ast_expression_list* parse_expression_list() {
                 TRACE("state: %d, len: %d", state, len_llist(list));
                 TRACE_TERM(get_token());
                 // require an ',' or a ')'
-                if(TOK_COMMA == token_type(get_token())) {
+                if(TOK_COMMA == TOK_TYPE) {
                     advance_token();
                     state = 3;
                 }
-                else if(TOK_CPAREN == token_type(get_token())) {
+                else if(TOK_CPAREN == TOK_TYPE) {
                     pcount--;
                     advance_token();
                     state = 100;
