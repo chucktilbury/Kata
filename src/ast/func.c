@@ -29,7 +29,7 @@ void traverse_function_reference(ast_function_reference* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -53,7 +53,7 @@ void traverse_func_decl(ast_func_decl* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -79,7 +79,7 @@ void traverse_func_definition(ast_func_definition* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -98,7 +98,7 @@ void traverse_function_body(ast_function_body* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -117,6 +117,6 @@ void traverse_start_function(ast_start_function* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }

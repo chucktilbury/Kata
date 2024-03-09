@@ -24,7 +24,7 @@ void traverse_expression(ast_expression* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     ast_node* nterm;
 
     if(node->list != NULL) {
@@ -75,7 +75,7 @@ void traverse_operator(ast_operator* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     TRACE_TERM(node->tok);
     RET;
 }
@@ -96,7 +96,7 @@ void traverse_cast_statement(ast_cast_statement* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     traverse_type_name(node->type, func);
     traverse_expression(node->expr, func);
     RET;
@@ -118,7 +118,7 @@ void traverse_expr_primary(ast_expr_primary* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     ast_node* nterm = node->nterm;
     if(AST_literal_value == ast_node_type(nterm))
         traverse_literal_value((ast_literal_value*)nterm, func);
@@ -145,7 +145,7 @@ void traverse_expression_list(ast_expression_list* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     ast_node* nterm;
 
     init_llist_iter(node->list);
@@ -173,7 +173,7 @@ void traverse_assignment_item(ast_assignment_item* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     switch(ast_node_type(node->nterm)) {
         case AST_expression:
             traverse_expression((ast_expression*)node->nterm, func);
@@ -217,7 +217,7 @@ void traverse_assignment(ast_assignment* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     traverse_compound_reference(node->lhs, func);
     TRACE_TERM(node->oper);
     traverse_assignment_item((ast_assignment_item*)node->rhs, func);

@@ -29,7 +29,7 @@ void traverse_scope_operator(ast_scope_operator* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     TRACE_TERM(node->token);
     RET;
 }
@@ -57,7 +57,7 @@ void traverse_literal_type_name(ast_literal_type_name* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     TRACE_TERM(node->token);
     RET;
 }
@@ -80,7 +80,7 @@ void traverse_literal_value(ast_literal_value* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     TRACE_TERM(node->token);
     RET;
 }
@@ -101,7 +101,7 @@ void traverse_type_name(ast_type_name* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     switch(ast_node_type(node->nterm)) {
         case AST_literal_type_name:
             traverse_literal_type_name((ast_literal_type_name*)node->nterm, func);

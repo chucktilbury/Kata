@@ -45,7 +45,8 @@ void dummy_function() {
  * only the elements that are active in the array. There must be a dummy
  * function that does nothing if a node is entered without a handler. There
  * are no actual restrictions on the signature of the function called, but
- * all of the information needed by the pass must be provided in the caller.
+ * all of the information needed by the pass function must be provided in the 
+ * AST node. This function should be used as a template for other passes.
  *
  * @param node
  * @param type
@@ -119,6 +120,9 @@ void test_pass(ast_node* node) {
     (type == AST_raise_statement)? test_pass_func(node, AST_raise_statement) :
     (type == AST_start_function)? test_pass_func(node, AST_start_function) :
     (type == AST_import_statement)? test_pass_func(node, AST_import_statement) :
+    (type == AST_operator)? test_pass_func(node, AST_operator) :
+    (type == AST_cast_statement)? test_pass_func(node, AST_cast_statement) :
+    (type == AST_case_item)? test_pass_func(node, AST_case_item) :
         dummy_function();
 
 }

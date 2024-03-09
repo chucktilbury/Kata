@@ -27,7 +27,7 @@ void traverse_var_decl(ast_var_decl* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     traverse_type_name(node->type, func);
     TRACE("is_const: %s", node->is_const? "true": "false");
     TRACE_TERM(node->name);
@@ -49,7 +49,7 @@ void traverse_var_decl_list(ast_var_decl_list* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     ast_var_decl* nterm;
 
     init_llist_iter(node->list);
@@ -73,7 +73,7 @@ void traverse_var_definition(ast_var_definition* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     traverse_var_decl(node->type, func);
     TRACE("is_assigned: %s", node->is_assigned? "true": "false");
     if(node->is_assigned) 

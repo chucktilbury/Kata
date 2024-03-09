@@ -46,7 +46,7 @@ void traverse_function_body_element(ast_function_body_element* node, PassFunc fu
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -65,7 +65,7 @@ void traverse_break_statement(ast_break_statement* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -84,7 +84,7 @@ void traverse_continue_statement(ast_continue_statement* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -103,7 +103,7 @@ void traverse_trace_statement(ast_trace_statement* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -122,7 +122,7 @@ void traverse_inline_statement(ast_inline_statement* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -141,7 +141,7 @@ void traverse_yield_statement(ast_yield_statement* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -160,7 +160,7 @@ void traverse_type_statement(ast_type_statement* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -179,7 +179,7 @@ void traverse_exit_statement(ast_exit_statement* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -198,7 +198,7 @@ void traverse_print_statement(ast_print_statement* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -217,7 +217,7 @@ void traverse_return_statement(ast_return_statement* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -236,7 +236,7 @@ void traverse_raise_statement(ast_raise_statement* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 

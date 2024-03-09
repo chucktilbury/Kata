@@ -27,7 +27,7 @@ void traverse_formatted_strg(ast_formatted_strg* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     TRACE_TERM(node->str);
     TRACE("expr list len: %d", len_llist(node->exprs));
     traverse_expression_list(node->exprs, func);
@@ -50,7 +50,7 @@ void traverse_string_literal(ast_string_literal* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     if(node->literal != NULL)
         TRACE_TERM(node->literal);
     else
@@ -75,7 +75,7 @@ void traverse_string_expr_item(ast_string_expr_item* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     switch(ast_node_type(node->nterm)) {
         case AST_string_literal:
             traverse_string_literal((ast_string_literal*)node->nterm, func);
@@ -108,7 +108,7 @@ void traverse_string_expr(ast_string_expr* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     ast_string_expr_item* item;
 
     TRACE("num expr items: %d", len_llist(node->list));

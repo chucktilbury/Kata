@@ -27,7 +27,7 @@ void traverse_if_clause(ast_if_clause* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -46,7 +46,7 @@ void traverse_else_clause_item(ast_else_clause_item* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -65,7 +65,7 @@ void traverse_else_clause(ast_else_clause* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -84,7 +84,7 @@ void traverse_switch_clause(ast_switch_clause* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -106,7 +106,7 @@ void traverse_case_item(ast_case_item* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -125,7 +125,7 @@ void traverse_case_clause(ast_case_clause* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -144,7 +144,7 @@ void traverse_default_clause(ast_default_clause* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
@@ -163,7 +163,7 @@ void traverse_case_body(ast_case_body* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
+    PASS_FUNC(func, node);
     RET;
 }
 
