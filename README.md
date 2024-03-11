@@ -89,14 +89,14 @@ module
 module_item
     = namespace_item
     / import_statement
-    / start_function
+    / start_defintion
 
 #####################
 #
 # There must be exactly one start function in a program. This is where the
 # program execution begins.
 #
-start_function
+start_defintion
     = 'function' 'start' function_body
 
 #####################
@@ -119,7 +119,9 @@ namespace_item
     = scope_operator
     / namespace_definition
     / class_definition
-    / func_definition
+    / function_definition
+    / create_definition
+    / destroy_definition
     / var_definition
 
 #####################
@@ -248,6 +250,7 @@ assignment_item
     / dict_init
     / string_expr
     / cast_statement
+    / function_declaration
 
 #####################
 #
@@ -319,9 +322,18 @@ array_reference
 # some.name()(12, asd.qwe) ; syntax error because 12 does not name a variable
 #
 function_reference
-    = compound_name
-            ( expression_list )+
-            '(' ( compound_name ( ',' compound_name )* )+ ')'
+    = compound_name expression_list
+            '(' ( compound_name ( ',' compound_name )* )? ')'
+
+#####################
+#
+create_reference
+    = create_name expression_list
+
+#####################
+#
+destroy_reference
+    = destroy_name
 
 #####################
 #
@@ -486,37 +498,75 @@ class_definition
 class_item
     = scope_operator
     / var_decl
-    / func_decl
+    / function_declaration
+    / create_declaration
+    / destroy_declaration
+
 
 #####################
 #
-# There are 3 types of functions that can be declared. Functions are decorated
-# according to the parameters that they are declared with, so functions can be
-# overloaded. The constructor cannot return anything and the destructor cannot
-# have any parameters, but it must be declared if a definition is provided. Of
-# course the default constructors and destructors are provided.
+# This specifies whether the funciton is virtual or not and also accepts the 
+# 'funciton' keyword which is ignored. The word function exists to allow an
+# array of functions to be generated. So, it's a reference type, not a 
+# definition type. But it seems good to allow it to be specificed for calrity
+# when declaring or defining a function. Both the virtual and the function 
+# keywords are optional and can appear in any order. However, they can only 
+# appear once.
 #
-func_decl
-    = ( 'virtual' )? ( 'function' )? SYMBOL 
+func_qualifier
+    = ('virtual')?
+    / ('function')?
+
+#####################
+#
+function_declaration
+    = (func_qualifier)? SYMBOL 
             '(' ( var_decl_list )* ')' 
             '(' ( var_decl_list )* ')'
-    / ( 'virtual' )? ( 'function' )? 'create' 
-            '(' ( var_decl_list )* ')'
-    / ( 'virtual' )? ( 'function' )? 'destroy'
 
 #####################
 #
-# The function definition is just like the declaration except that it must be
-# tied to the class that it was declared in, if it exists. A normal function
-# does not need to tie to a class, but a compound name needs to name a type
-# such that this function can be defined for it. However, a compound name can
-# be a single symbol, meaning that it does not tie to a class.
+create_declaration
+    = (func_qualifier)? 'create' 
+            '(' ( var_decl_list )* ')'
+
+#####################
 #
-func_definition
-    = ( 'function' )? compound_name
-            '(' ( var_decl_list )* ')' '(' ( var_decl_list )* ')' function_body
-    / ( 'function' )? compound_name '.' 'create' '(' ( var_decl_list )* ')' function_body
-    / ( 'function' )? compound_name '.' 'destroy' function_body
+destroy_declaration
+    = (func_qualifier)? 'destroy'
+
+#####################
+#
+function_definition
+    = (func_qualifier)? compound_name
+            '(' ( var_decl_list )* ')' 
+            '(' ( var_decl_list )* ')' function_body
+
+#####################
+#
+# This exists because of a conflict with coumpound_name
+#
+create_name
+    = SYMBOL ('.' SYMBOL)? '.' 'create'
+
+#####################
+#
+create_definition
+    = (func_qualifier)? create_name
+            '(' ( var_decl_list )* ')' function_body
+
+#####################
+#
+# This exists because of a conflict with coumpound_name
+#
+destroy_name
+    = SYMBOL ('.' SYMBOL)? '.' 'destroy'
+
+#####################
+#
+destroy_definition
+    = (func_qualifier)? destroy_name function_body
+
 
 #####################
 #
@@ -548,6 +598,8 @@ assignment
 function_body_element
     = var_definition
     / function_reference
+    / create_reference
+    / destroy_reference
     / assignment
     / while_clause
     / do_clause

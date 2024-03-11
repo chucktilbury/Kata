@@ -38,8 +38,17 @@ typedef enum {
     AST_array_param,
     AST_array_reference,
     AST_function_reference,
-    AST_func_decl,
-    AST_func_definition,
+    AST_create_reference,
+    AST_destroy_reference,
+    AST_func_qualifier,
+    AST_function_declaration,
+    AST_create_declaration,
+    AST_destroy_declaration,
+    AST_function_definition,
+    AST_ctor_name,
+    AST_dtor_name,
+    AST_create_definition,
+    AST_destroy_definition,
     AST_function_body,
     AST_function_body_element,
     AST_expression,
@@ -111,6 +120,8 @@ AstType ast_node_type(void* node);
 const char* nterm_to_str(ast_node* node);
 ast_node* create_ast_node(AstType type, size_t size);
 
+// hide the icky syntax
+#define AST_CALLBACK(f, n) (*(f))((ast_node*)(n))
 #define CREATE_AST_NODE(t, n) (n*)create_ast_node((t), sizeof(n))
 #define TRAVERSE_ERROR AST_FIRST
 

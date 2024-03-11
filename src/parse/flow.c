@@ -30,12 +30,12 @@ ast_if_clause* parse_if_clause() {
     ast_function_body* fbod;
     ast_else_clause* els;
 
-    if(TOK_IF == TOK_TYPE) {
+    if(TOK_IF == TTYPE) {
         advance_token();
-        if(TOK_OPAREN == TOK_TYPE) {
+        if(TOK_OPAREN == TTYPE) {
             advance_token();
             if(NULL != (expr = parse_expression())) {
-                if(TOK_CPAREN == TOK_TYPE) {
+                if(TOK_CPAREN == TTYPE) {
                     advance_token();
                     if(NULL != (fbod = parse_function_body())) {
                         els = parse_else_clause(); // optional
@@ -80,12 +80,12 @@ ast_else_clause_item* parse_else_clause_item() {
     ast_expression* expr;
     ast_function_body* fbod;
 
-    if(TOK_ELSE == TOK_TYPE) {
+    if(TOK_ELSE == TTYPE) {
         advance_token();
-        if(TOK_OPAREN == TOK_TYPE) {
+        if(TOK_OPAREN == TTYPE) {
             advance_token();
             if(NULL != (expr = parse_expression())) {
-                if(TOK_CPAREN == TOK_TYPE) {
+                if(TOK_CPAREN == TTYPE) {
                     advance_token();
                     if(NULL != (fbod = parse_function_body())) {
                         node = CREATE_AST_NODE(AST_else_clause_mid, ast_else_clause_item);
@@ -100,7 +100,7 @@ ast_else_clause_item* parse_else_clause_item() {
             }
             else {
                 // have parens but no expression means we are parsing a else-final
-                if(TOK_CPAREN == TOK_TYPE) {
+                if(TOK_CPAREN == TTYPE) {
                     advance_token();
                     if(NULL != (fbod = parse_function_body())) {
                         node = CREATE_AST_NODE(AST_else_clause_final, ast_else_clause_item);
@@ -235,12 +235,12 @@ ast_switch_clause* parse_switch_clause() {
     ast_compound_reference* cref;
     ast_case_body* cbod;
 
-    if(TOK_SWITCH == TOK_TYPE) {
+    if(TOK_SWITCH == TTYPE) {
         advance_token();
-        if(TOK_OPAREN == TOK_TYPE) {
+        if(TOK_OPAREN == TTYPE) {
             advance_token();
             if(NULL != (cref = parse_compound_reference())) {
-                if(TOK_OPAREN == TOK_TYPE) {
+                if(TOK_OPAREN == TTYPE) {
                     advance_token();
                     if(NULL != (cbod = parse_case_body())) {
                         node = CREATE_AST_NODE(AST_switch_clause, ast_switch_clause);
@@ -288,8 +288,8 @@ ast_case_item* parse_case_item() {
         node->lval = nterm;
         node->lstr = NULL;
     }
-    else if((TOK_LITERAL_DSTR == TOK_TYPE) ||
-            (TOK_LITERAL_SSTR == TOK_TYPE)) {
+    else if((TOK_LITERAL_DSTR == TTYPE) ||
+            (TOK_LITERAL_SSTR == TTYPE)) {
         advance_token();
         node = CREATE_AST_NODE(AST_case_item, ast_case_item);
         node->lstr = get_token();
@@ -317,12 +317,12 @@ ast_case_clause* parse_case_clause() {
     ast_case_item* item;
     ast_function_body* fbod;
 
-    if(TOK_CASE == TOK_TYPE) {
+    if(TOK_CASE == TTYPE) {
         advance_token();
-        if(TOK_OPAREN == TOK_TYPE) {
+        if(TOK_OPAREN == TTYPE) {
             advance_token();
             if(NULL != (item = parse_case_item())) {
-                if(TOK_CPAREN == TOK_TYPE) {
+                if(TOK_CPAREN == TTYPE) {
                     advance_token();
                     if(NULL != (fbod = parse_function_body())) {
                         node = CREATE_AST_NODE(AST_case_clause, ast_case_clause);
@@ -361,7 +361,7 @@ ast_default_clause* parse_default_clause() {
     ast_default_clause* node = NULL;
     ast_function_body* fbod;
 
-    if(TOK_DEFAULT == TOK_TYPE) {
+    if(TOK_DEFAULT == TTYPE) {
         advance_token();
         if(NULL != (fbod = parse_function_body())) {
             node = CREATE_AST_NODE(AST_default_clause, ast_default_clause);
@@ -399,7 +399,7 @@ ast_case_body* parse_case_body() {
         switch(state) {
             case 0:
                 // initial state. a '{' is required
-                if(TOK_OCBRACE == TOK_TYPE) {
+                if(TOK_OCBRACE == TTYPE) {
                     advance_token();
                     state = 2;
                 }
@@ -430,7 +430,7 @@ ast_case_body* parse_case_body() {
                     append_llist(list, defc);
                     state = 3;
                 }
-                else if(TOK_CCBRACE == TOK_TYPE) {
+                else if(TOK_CCBRACE == TTYPE) {
                     advance_token();
                     state = 100;
                 }
@@ -443,7 +443,7 @@ ast_case_body* parse_case_body() {
 
             case 3:
                 // seen a default, the next thing must be a '}'
-                if(TOK_CCBRACE == TOK_TYPE) {
+                if(TOK_CCBRACE == TTYPE) {
                     advance_token();
                     state = 100;
                 }

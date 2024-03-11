@@ -103,6 +103,7 @@ typedef struct _ast_expression_list_ {
  *      / list_init
  *      / dict_init
  *      / string_expr
+ *      / function_definition
  */
 typedef struct _ast_assignment_item_ {
     ast_node node;
@@ -110,6 +111,8 @@ typedef struct _ast_assignment_item_ {
 } ast_assignment_item;
 
 /**
+ *  NOTE: support the += for arrays
+ * 
  *  assignment
  *      = compound_reference '=' assignment_item
  *      / compound_reference '+=' expression

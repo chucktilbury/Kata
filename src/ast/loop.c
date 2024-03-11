@@ -27,7 +27,7 @@ void traverse_while_definition(ast_while_definition* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     RET;
 }
 
@@ -46,7 +46,7 @@ void traverse_while_clause(ast_while_clause* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     RET;
 }
 
@@ -65,7 +65,7 @@ void traverse_do_clause(ast_do_clause* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     RET;
 }
 
@@ -85,7 +85,7 @@ void traverse_for_clause(ast_for_clause* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     RET;
 }
 

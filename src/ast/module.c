@@ -29,7 +29,7 @@ void traverse_module(ast_module* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     ast_node* nterm;
 
     init_llist_iter(node->list);
@@ -56,7 +56,7 @@ void traverse_module_item(ast_module_item* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     TRACE("SCOPE: %s", scope_name(node->scope));
     switch(ast_node_type(node->nterm)) {
         case AST_namespace_item:
@@ -82,8 +82,10 @@ void traverse_module_item(ast_module_item* node, PassFunc func) {
  *      = scope_operator
  *      / namespace_definition
  *      / class_definition
- *      / func_definition
- *      / ( 'const' )? var_definition
+ *      / function_definition
+ *      / create_definition
+ *      / destroy_definition
+ *      / var_definition
  *
  * @param node
  *
@@ -94,14 +96,20 @@ void traverse_namespace_item(ast_namespace_item* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     TRACE("SCOPE: %s", scope_name(node->scope));
     switch(ast_node_type(node->nterm)) {
         case AST_scope_operator:
             traverse_scope_operator((ast_scope_operator*)node->nterm, func);
             break;
-        case AST_func_definition:
-            traverse_func_definition((ast_func_definition*)node->nterm, func);
+        case AST_function_definition:
+            traverse_function_definition((ast_function_definition*)node->nterm, func);
+            break;
+        case AST_create_definition:
+            traverse_create_definition((ast_create_definition*)node->nterm, func);
+            break;
+        case AST_destroy_definition:
+            traverse_destroy_definition((ast_destroy_definition*)node->nterm, func);
             break;
         case AST_namespace_definition:
             traverse_namespace_definition((ast_namespace_definition*)node->nterm, func);
@@ -134,7 +142,7 @@ void traverse_namespace_definition(ast_namespace_definition* node, PassFunc func
     assert(func != NULL);
 
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     TRACE("NAME: %s", raw_string(node->name->str));
     TRACE("SCOPE: %s", scope_name(node->scope));
     ast_node* nterm;
@@ -151,7 +159,9 @@ void traverse_namespace_definition(ast_namespace_definition* node, PassFunc func
  *  class_item
  *      = scope_operator
  *      / var_decl
- *      / func_decl
+ *      / function_declaration
+ *      / create_declaration
+ *      / destroy_declaration
  *
  * @param node
  *
@@ -162,7 +172,7 @@ void traverse_class_item(ast_class_item* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     TRACE("SCOPE: %s", scope_name(node->scope));
     switch(ast_node_type(node->nterm)) {
         case AST_scope_operator:
@@ -171,8 +181,14 @@ void traverse_class_item(ast_class_item* node, PassFunc func) {
         case AST_var_decl:
             traverse_var_decl((ast_var_decl*)node->nterm, func);
             break;
-        case AST_func_decl:
-            traverse_func_decl((ast_func_decl*)node->nterm, func);
+        case AST_function_declaration:
+            traverse_function_declaration((ast_function_declaration*)node->nterm, func);
+            break;
+        case AST_create_declaration:
+            traverse_create_declaration((ast_create_declaration*)node->nterm, func);
+            break;
+        case AST_destroy_declaration:
+            traverse_destroy_declaration((ast_destroy_declaration*)node->nterm, func);
             break;
         default:
             RAISE(TRAVERSE_ERROR, "unexpected node type in %s: %d",
@@ -197,7 +213,7 @@ void traverse_class_definition(ast_class_definition* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     TRACE("NAME: %s", raw_string(node->name->str));
     TRACE("SCOPE: %s", scope_name(node->scope));
     if(node->parent)

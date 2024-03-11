@@ -32,6 +32,7 @@ const char* scope_name(ScopeType type) {
 void init_parser(const char* fname) {
 
     ENTER;
+    TRACE("file name: \"%s\"", fname);
     init_scanner(fname);
     parser_state = _ALLOC_T(ParserState);
     parser_state->scope = SCOPE_PRIV;
@@ -52,7 +53,7 @@ ast_module* parse() {
     ast_module* node = NULL;
 
     if(NULL != (node = parse_module())) {
-        if(TOK_END_OF_INPUT != TOK_TYPE) {
+        if(TOK_END_OF_INPUT != TTYPE) {
             EXPECTED("end of input");
             node = NULL;
         }

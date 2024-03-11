@@ -458,7 +458,8 @@ extern int trace_count;
 extern const int trace_increment;
 
 #define PAD printf("%*s", trace_count, "")
-#define CAP printf(" (%d)\n", __LINE__)
+//#define CAP printf(" (%d)\n", __LINE__)
+#define CAP fputc('\n', stdout);
 
 #define TRACE(f, ...)                          \
     do {                                       \

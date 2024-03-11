@@ -63,8 +63,17 @@ const char* nterm_to_str(ast_node* node) {
         (type == AST_array_param)? "array_param" :
         (type == AST_array_reference)? "array_reference" :
         (type == AST_function_reference)? "function_reference" :
-        (type == AST_func_decl)? "func_decl" :
-        (type == AST_func_definition)? "func_definition" :
+        (type == AST_create_reference)? "create_reference" :
+        (type == AST_destroy_reference)? "destroy_reference" :
+        (type == AST_func_qualifier)? "func_qualifier" :
+        (type == AST_function_declaration)? "function_declaration" :
+        (type == AST_create_declaration)? "create_declaration" :
+        (type == AST_destroy_declaration)? "destroy_declaration" :
+        (type == AST_function_definition)? "function_definition" :
+        (type == AST_ctor_name)? "ctor_name" :
+        (type == AST_dtor_name)? "dtor_name" :
+        (type == AST_create_definition)? "create_definition" :
+        (type == AST_destroy_definition)? "destroy_definition" :
         (type == AST_function_body)? "function_body" :
         (type == AST_function_body_element)? "function_body_element" :
         (type == AST_expression)? "expression" :

@@ -28,7 +28,7 @@ ast_var_decl* parse_var_decl() {
     ast_var_decl* node = NULL;
     bool is_const = false;
 
-    if(TOK_CONST == TOK_TYPE) {
+    if(TOK_CONST == TTYPE) {
         is_const = true;
         advance_token();
     }
@@ -40,7 +40,7 @@ ast_var_decl* parse_var_decl() {
         node->type = nterm;
         finalize_token_queue();
 
-        if(TOK_SYMBOL == TOK_TYPE) {
+        if(TOK_SYMBOL == TTYPE) {
             node->name = get_token();
             advance_token();
         }
@@ -89,7 +89,7 @@ ast_var_decl_list* parse_var_decl_list() {
                 break;
             case 1:
                 // if the token is a ',', then expect another item, else finished
-                if(TOK_COMMA == TOK_TYPE) {
+                if(TOK_COMMA == TTYPE) {
                     advance_token();
                     state = 2;
                 }
@@ -154,7 +154,7 @@ ast_var_definition* parse_var_definition() {
         node->type = nterm;
 
         // optional assignement
-        if(TOK_ASSIGN == TOK_TYPE) {
+        if(TOK_ASSIGN == TTYPE) {
             advance_token();
 
             if(NULL != (item = parse_assignment_item())) {

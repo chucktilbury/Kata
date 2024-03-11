@@ -29,7 +29,7 @@ ast_try_clause* parse_try_clause() {
     ast_function_body* fbod;
     ast_except_clause* ecla;
 
-    if(TOK_TRY == TOK_TYPE) {
+    if(TOK_TRY == TTYPE) {
         advance_token();
 
         if(NULL != (fbod = parse_function_body())) {
@@ -70,19 +70,19 @@ ast_except_clause_mid* parse_except_clause_mid() {
     ast_function_body* fbod;
     void* post = post_token_queue();
 
-    if(TOK_EXCEPT == TOK_TYPE) {
+    if(TOK_EXCEPT == TTYPE) {
         advance_token();
-        if(TOK_OPAREN == TOK_TYPE) {
+        if(TOK_OPAREN == TTYPE) {
             advance_token();
-            if(TOK_SYMBOL == TOK_TYPE) {
+            if(TOK_SYMBOL == TTYPE) {
                 name = get_token();
                 advance_token();
-                if(TOK_COMMA == TOK_TYPE) {
+                if(TOK_COMMA == TTYPE) {
                     advance_token();
-                    if(TOK_SYMBOL == TOK_TYPE) {
+                    if(TOK_SYMBOL == TTYPE) {
                         msg = get_token();
                         advance_token();
-                        if(TOK_CPAREN == TOK_TYPE) {
+                        if(TOK_CPAREN == TTYPE) {
                             advance_token();
                             if(NULL != (fbod = parse_function_body())) {
                                 node = CREATE_AST_NODE(AST_except_clause_mid, ast_except_clause_mid);
@@ -130,18 +130,18 @@ ast_except_clause_final* parse_except_clause_final() {
     ast_function_body* fbod;
     void* post = post_token_queue();
 
-    if(TOK_EXCEPT == TOK_TYPE) {
+    if(TOK_EXCEPT == TTYPE) {
         advance_token();
-        if(TOK_OPAREN == TOK_TYPE) {
+        if(TOK_OPAREN == TTYPE) {
             advance_token();
-            if(TOK_ANY == TOK_TYPE) {
+            if(TOK_ANY == TTYPE) {
                 advance_token();
-                if(TOK_COMMA == TOK_TYPE) {
+                if(TOK_COMMA == TTYPE) {
                     advance_token();
-                    if(TOK_SYMBOL == TOK_TYPE) {
+                    if(TOK_SYMBOL == TTYPE) {
                         msg = get_token();
                         advance_token();
-                        if(TOK_CPAREN == TOK_TYPE) {
+                        if(TOK_CPAREN == TTYPE) {
                             advance_token();
                             if(NULL != (fbod = parse_function_body())) {
                                 node = CREATE_AST_NODE(AST_except_clause_final, ast_except_clause_final);

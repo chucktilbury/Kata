@@ -12,9 +12,6 @@
 #define __PASS_H__
 #include "ast.h"
 
-// hide the icky syntax
-#define PASS_FUNC(f, n)    (*(f))((ast_node*)(n))
-
 // funciton proto of the pass function
 typedef void (*PassFunc)(ast_node* node);
 

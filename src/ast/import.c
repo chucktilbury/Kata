@@ -27,6 +27,6 @@ void traverse_import_statement(ast_import_statement* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     RET;
 }

@@ -1,5 +1,8 @@
 
 # Problems and thoughts...
+---------------20240311---------------
+* need to support the '+=' operator for arrays, dictionaries, and strings. This requires that an array reference could just be the name, rather than a subscript. Runtime issue?
+* change function declarations to only have parameter type names. This is because function_declaration assignments have to use type names because of function overloading.
 
 ---------------20240227---------------
 ## AST passes. 

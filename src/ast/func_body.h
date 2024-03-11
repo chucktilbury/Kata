@@ -15,6 +15,8 @@
  *  function_body_element
  *      = var_definition
  *      / function_reference
+ *      / create_reference
+ *      / destroy_reference
  *      / assignment
  *      / while_clause
  *      / do_clause
@@ -36,6 +38,7 @@
  */
 typedef struct _ast_function_body_element_ {
     ast_node node;
+    ast_node* nterm;
 } ast_function_body_element;
 
 /**
@@ -68,6 +71,7 @@ typedef struct _ast_trace_statement_ {
  */
 typedef struct _ast_inline_statement_ {
     ast_node node;
+    Token* tok;
 } ast_inline_statement;
 
 /**
@@ -76,6 +80,7 @@ typedef struct _ast_inline_statement_ {
  */
 typedef struct _ast_yield_statement_ {
     ast_node node;
+    struct _ast_compound_reference_* ref;
 } ast_yield_statement;
 
 /**
@@ -84,6 +89,7 @@ typedef struct _ast_yield_statement_ {
  */
 typedef struct _ast_type_statement_ {
     ast_node node;
+    struct _ast_compound_reference_* ref;
 } ast_type_statement;
 
 /**
@@ -92,6 +98,7 @@ typedef struct _ast_type_statement_ {
  */
 typedef struct _ast_exit_statement_ {
     ast_node node;
+    struct _ast_expression_* expr;
 } ast_exit_statement;
 
 /**
@@ -100,6 +107,7 @@ typedef struct _ast_exit_statement_ {
  */
 typedef struct _ast_print_statement_ {
     ast_node node;
+    struct _ast_expression_list_* elst;
 } ast_print_statement;
 
 /**
@@ -108,6 +116,7 @@ typedef struct _ast_print_statement_ {
  */
 typedef struct _ast_return_statement_ {
     ast_node node;
+    struct _ast_expression_* expr;
 } ast_return_statement;
 
 /**
@@ -116,6 +125,8 @@ typedef struct _ast_return_statement_ {
  */
 typedef struct _ast_raise_statement_ {
     ast_node node;
+    Token* symb;
+    struct _ast_formatted_strg_* str;
 } ast_raise_statement;
 
 void traverse_function_body_element(ast_function_body_element* node, PassFunc func);

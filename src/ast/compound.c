@@ -28,7 +28,7 @@ void traverse_compound_name(ast_compound_name* node, PassFunc func) {
     assert(func != NULL);
 
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     TRACE("raw_name: %s", raw_string(node->raw_name));
     Token* tok;
 
@@ -55,7 +55,7 @@ void traverse_compound_ref_item(ast_compound_ref_item* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     if(node->token != NULL)
         TRACE_TERM(node->token);
     else if(node->nterm != NULL)
@@ -80,7 +80,7 @@ void traverse_compound_reference(ast_compound_reference* node, PassFunc func) {
     assert(func != NULL);
     
     ENTER;
-    PASS_FUNC(func, node);
+    AST_CALLBACK(func, node);
     ast_compound_ref_item* nterm;
 
     init_llist_iter(node->list);

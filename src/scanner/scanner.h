@@ -10,8 +10,8 @@
  * @date 01-07-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef __SCAN_H__
-#define __SCAN_H__
+#ifndef __SCANNER_H__
+#define __SCANNER_H__
 
 #include "util.h"
 
@@ -21,7 +21,7 @@
  */
 #include "tokens.h"
 
-#define TOK_TYPE    (token_type(get_token()))
+#define TTYPE    (token_type(get_token()))
 
 /**
  * @brief Open a file for the scanner to read from. Files are expected to be
@@ -144,4 +144,4 @@ void discard_token_queue();
 
 void print_token(Token* tok);
 
-#endif /* __SCAN_H__ */
+#endif /* __SCANNER_H__ */
