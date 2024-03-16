@@ -18,8 +18,8 @@
 // others are errors if the flag is set.
 static bool flag = true;
 
-// Boolean expressions take precedence over arithmetic. Any boolean 
-// operator in the expression causes the whole expression to be a boolean, 
+// Boolean expressions take precedence over arithmetic. Any boolean
+// operator in the expression causes the whole expression to be a boolean,
 // no matter what else is in it.
 static int get_oper_type(TokenType type, TokenType crnt) {
 
@@ -57,33 +57,33 @@ static int get_prec(TokenType type) {
     int prec = 0;
 
     switch(type) {
-        case TOK_OR: 
-            prec = 10; 
+        case TOK_OR:
+            prec = 10;
             break;
-        case TOK_AND: 
-            prec = 20; 
+        case TOK_AND:
+            prec = 20;
             break;
         case TOK_EQU:
-        case TOK_NEQU: 
-            prec = 30; 
+        case TOK_NEQU:
+            prec = 30;
             break;
         case TOK_LORE:
         case TOK_GORE:
         case TOK_OPBRACE:
-        case TOK_CPBRACE: 
-            prec = 40; 
+        case TOK_CPBRACE:
+            prec = 40;
             break;
         case TOK_ADD:
-        case TOK_SUB: 
-            prec = 50; 
+        case TOK_SUB:
+            prec = 50;
             break;
         case TOK_DIV:
         case TOK_MUL:
-        case TOK_MOD: 
-            prec = 60; 
+        case TOK_MOD:
+            prec = 60;
             break;
-        case TOK_CARAT: 
-            prec = 70; 
+        case TOK_CARAT:
+            prec = 70;
             break;
         case TOK_NOT:
         case TOK_UNARY_MINUS:
@@ -400,7 +400,7 @@ ast_expression_list* parse_expression_list() {
  *      / dict_init
  *      / string_expr
  *      / cast_statement
- *      / function_declaration
+ *      / function_assignment
  *
  * @return ast_assignment_item*
  *
@@ -417,6 +417,8 @@ ast_assignment_item* parse_assignment_item() {
             (NULL != (nterm = (ast_node*)parse_dict_init())) ||
             (NULL != (nterm = (ast_node*)parse_string_expr())) ||
             (NULL != (nterm = (ast_node*)parse_cast_statement()))) {
+
+// TODO: add function assignement rule
 
         node = CREATE_AST_NODE(AST_assignment_item, ast_assignment_item);
         node->nterm = nterm;
@@ -453,12 +455,12 @@ ast_assignment* parse_assignment() {
     if(NULL != (cref = parse_compound_reference())) {
         Token* tok = get_token();
         switch(token_type(tok)) {
-            case TOK_ADD_ASSIGN: 
-            case TOK_SUB_ASSIGN: 
-            case TOK_MUL_ASSIGN: 
-            case TOK_DIV_ASSIGN: 
-            case TOK_MOD_ASSIGN: 
-            case TOK_ASSIGN: 
+            case TOK_ADD_ASSIGN:
+            case TOK_SUB_ASSIGN:
+            case TOK_MUL_ASSIGN:
+            case TOK_DIV_ASSIGN:
+            case TOK_MOD_ASSIGN:
+            case TOK_ASSIGN:
                 advance_token();
                 break;
             default:
@@ -469,7 +471,7 @@ ast_assignment* parse_assignment() {
 
         if((NULL == (nterm = (ast_node*)parse_assignment_item())) &&
                 (NULL == (nterm = (ast_node*)parse_expression()))) {
-            
+
             EXPECTED("an expression");
             RETV(NULL);
         }
@@ -481,7 +483,7 @@ ast_assignment* parse_assignment() {
             finalize_token_queue();
         }
     }
-    else 
+    else
         reset_token_queue(post);
 
     RETV(node);
@@ -579,8 +581,8 @@ ast_expression* parse_expression() {
                             if(pcount >= 0) {
                                 advance_token();
                                 state = 5;
-                            }                                
-                            else if(pcount < 0) 
+                            }
+                            else if(pcount < 0)
                                 state = 100;
                             //state = 5;
                             break;
@@ -623,11 +625,11 @@ ast_expression* parse_expression() {
                 }
                 break;
 
-            case 6: 
+            case 6:
                 TRACE("state: %d, stack: %d, queue: %d", state, len_llist(stack), len_llist(queue));
                 // operator is left assoc
                 TRACE("left assoc");
-                while(peek_llist(stack) != NULL && 
+                while(peek_llist(stack) != NULL &&
                         (get_prec(token_type(((ast_operator*)peek_llist(stack))->tok))) >=
                         (get_prec(token_type(((ast_operator*)nterm)->tok)))) {
 
@@ -641,7 +643,7 @@ ast_expression* parse_expression() {
                 TRACE("state: %d, stack: %d, queue: %d", state, len_llist(stack), len_llist(queue));
                 TRACE("right assoc");
                 // operator it right assoc
-                while(peek_llist(stack) != NULL && 
+                while(peek_llist(stack) != NULL &&
                         (get_prec(token_type(((ast_operator*)peek_llist(stack))->tok))) >
                         (get_prec(token_type(((ast_operator*)nterm)->tok)))) {
 
@@ -653,13 +655,13 @@ ast_expression* parse_expression() {
 
             case 8:
                 TRACE("state: %d, stack: %d, queue: %d", state, len_llist(stack), len_llist(queue));
-                // handle a primary 
+                // handle a primary
                 append_llist(queue, nterm);
                 state = 1;
                 break;
 
             case 100:
-                TRACE("state: %d, stack: %d, queue: %d, pcount: %d", 
+                TRACE("state: %d, stack: %d, queue: %d, pcount: %d",
                         state, len_llist(stack), len_llist(queue), pcount);
                 TRACE_TERM(get_token());
                 if(pcount > 0) {

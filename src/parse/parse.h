@@ -24,6 +24,7 @@ ast_class_definition* parse_class_definition();
 
 // compound.c
 ast_compound_name* parse_compound_name();
+ast_compound_name_list* parse_compound_name_list();
 ast_compound_ref_item* parse_compound_ref_item();
 ast_compound_reference* parse_compound_reference();
 
@@ -32,6 +33,7 @@ ast_scope_operator* parse_scope_operator();
 ast_literal_type_name* parse_literal_type_name();
 ast_literal_value* parse_literal_value();
 ast_type_name* parse_type_name();
+ast_type_name_list* parse_type_name_list();
 
 // string.c
 ast_string_literal* parse_string_literal();
@@ -66,6 +68,7 @@ ast_create_definition* parse_create_definition();
 ast_destroy_definition* parse_destroy_definition();
 ast_function_body* parse_function_body();
 ast_start_function* parse_start_function();
+ast_function_assignment* parse_function_assignment();
 
 // func_body.c
 ast_function_body_element* parse_function_body_element();

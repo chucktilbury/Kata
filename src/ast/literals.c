@@ -1,8 +1,8 @@
 /**
  * @file literals.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -13,21 +13,21 @@
 #include "ast.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  scope_operator
  *      = 'private'
  *      / 'public'
  *      / 'protected'
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_scope_operator(ast_scope_operator* node, PassFunc func) {
 
     assert(node != NULL);
     assert(func != NULL);
-    
+
     ENTER;
     AST_CALLBACK(func, node);
     TRACE_TERM(node->token);
@@ -35,8 +35,8 @@ void traverse_scope_operator(ast_scope_operator* node, PassFunc func) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  literal_type_name
  *      = 'float'
  *      / 'unsigned'
@@ -47,15 +47,15 @@ void traverse_scope_operator(ast_scope_operator* node, PassFunc func) {
  *      / 'list'
  *      / 'dict'
  *      / 'function'
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_literal_type_name(ast_literal_type_name* node, PassFunc func) {
 
     assert(node != NULL);
     assert(func != NULL);
-    
+
     ENTER;
     AST_CALLBACK(func, node);
     TRACE_TERM(node->token);
@@ -63,22 +63,22 @@ void traverse_literal_type_name(ast_literal_type_name* node, PassFunc func) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  literal_value
  *      = LITERAL_FLOAT
  *      / LITERAL_UNSIGNED
  *      / LITERAL_SIGNED
  *      / LITERAL_BOOL
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_literal_value(ast_literal_value* node, PassFunc func) {
 
     assert(node != NULL);
     assert(func != NULL);
-    
+
     ENTER;
     AST_CALLBACK(func, node);
     TRACE_TERM(node->token);
@@ -86,20 +86,20 @@ void traverse_literal_value(ast_literal_value* node, PassFunc func) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  type_name
  *      = literal_type_name
  *      / compound_name
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_type_name(ast_type_name* node, PassFunc func) {
 
     assert(node != NULL);
     assert(func != NULL);
-    
+
     ENTER;
     AST_CALLBACK(func, node);
     switch(ast_node_type(node->nterm)) {
@@ -115,4 +115,14 @@ void traverse_type_name(ast_type_name* node, PassFunc func) {
     RET;
 }
 
+void traverse_type_name_list(ast_type_name_list* node, PassFunc func) {
+
+    assert(node != NULL);
+    assert(func != NULL);
+
+    ENTER;
+    AST_CALLBACK(func, node);
+
+    RET;
+}
 

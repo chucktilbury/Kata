@@ -171,6 +171,15 @@ type_name
 
 #####################
 #
+# Type name list is a list of type names without the var name. It is used for
+# function declarations. It can have blank internals, but the parens are
+# required.
+#
+type_name_list
+    = '(' ( type_name (',' type_name)* )? ')'
+
+#####################
+#
 # Most strings in Simple are presented as formatted. There is no need to call
 # a function to format a string. Strings that are enclosed in double-quotes
 # have escape characters interpreted, included hex characters. Single quote
@@ -238,7 +247,14 @@ var_decl
 # This non-terminal is used for things like function parameter definitions.
 #
 var_decl_list
-    = var_decl ( ',' var_decl )*
+    = '(' ( var_decl ( ',' var_decl )* )? ')'
+
+#####################
+#
+# This allows a complete and specific function id to be assigned to a var.
+#
+function_assignment
+    = compound_reference type_name_list type_name_list
 
 #####################
 #
@@ -250,11 +266,12 @@ assignment_item
     / dict_init
     / string_expr
     / cast_statement
-    / function_declaration
+    / function_assignment
 
 #####################
 #
-# A variable definition has an optional assignment.
+# A variable definition has an optional assignment. This is not the same as an
+# assignment. It's an initialization that may have to honor a const property.
 #
 var_definition
     = var_decl ( '=' assignment_item )?
@@ -322,8 +339,7 @@ array_reference
 # some.name()(12, asd.qwe) ; syntax error because 12 does not name a variable
 #
 function_reference
-    = compound_name expression_list
-            '(' ( compound_name ( ',' compound_name )* )? ')'
+    = compound_reference expression_list compound_name_list
 
 #####################
 #
@@ -342,6 +358,13 @@ destroy_reference
 #
 compound_name
     = SYMBOL ( '.' SYMBOL )*
+
+#####################
+#
+# List of compound names, used in a function reference.
+#
+compound_name_list
+    = '(' ( compound_name (',' compound_name)* )? ')'
 
 #####################
 #
@@ -440,7 +463,7 @@ expr_unary
 # A cast is used to convert one type to another for assignemnt
 #
 cast_statement
-    = type_name ':' expression 
+    = type_name ':' expression
 
 #####################
 #
@@ -505,12 +528,12 @@ class_item
 
 #####################
 #
-# This specifies whether the funciton is virtual or not and also accepts the 
+# This specifies whether the funciton is virtual or not and also accepts the
 # 'funciton' keyword which is ignored. The word function exists to allow an
-# array of functions to be generated. So, it's a reference type, not a 
+# array of functions to be generated. So, it's a reference type, not a
 # definition type. But it seems good to allow it to be specificed for calrity
-# when declaring or defining a function. Both the virtual and the function 
-# keywords are optional and can appear in any order. However, they can only 
+# when declaring or defining a function. Both the virtual and the function
+# keywords are optional and can appear in any order. However, they can only
 # appear once.
 #
 func_qualifier
@@ -520,15 +543,12 @@ func_qualifier
 #####################
 #
 function_declaration
-    = (func_qualifier)? SYMBOL 
-            '(' ( var_decl_list )* ')' 
-            '(' ( var_decl_list )* ')'
+    = (func_qualifier)? SYMBOL type_name_list type_name_list
 
 #####################
 #
 create_declaration
-    = (func_qualifier)? 'create' 
-            '(' ( var_decl_list )* ')'
+    = (func_qualifier)? 'create' type_name_list
 
 #####################
 #
@@ -538,9 +558,7 @@ destroy_declaration
 #####################
 #
 function_definition
-    = (func_qualifier)? compound_name
-            '(' ( var_decl_list )* ')' 
-            '(' ( var_decl_list )* ')' function_body
+    = (func_qualifier)? compound_name var_decl_list var_decl_list function_body
 
 #####################
 #
@@ -552,8 +570,7 @@ create_name
 #####################
 #
 create_definition
-    = (func_qualifier)? create_name
-            '(' ( var_decl_list )* ')' function_body
+    = (func_qualifier)? create_name var_decl_list function_body
 
 #####################
 #
@@ -818,8 +835,8 @@ switch_clause
 # Case item so that the data structures can line up.
 #
 case_item
-    = literal_value 
-    / LITERAL_DSTR 
+    = literal_value
+    / LITERAL_DSTR
     / LITERAL_SSTR
 
 #####################

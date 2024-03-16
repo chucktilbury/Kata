@@ -62,12 +62,15 @@ ast_var_decl* parse_var_decl() {
  * @brief
  *
  *  var_decl_list
- *      = var_decl ( ',' var_decl )*
+ *      = '(' ( var_decl ( ',' var_decl )* )? ')'
  *
  * @return ast_var_decl_list*
  *
  */
 ast_var_decl_list* parse_var_decl_list() {
+
+// This is wrong!
+exit(1);
 
     ENTER;
     ast_var_decl_list* node = NULL;

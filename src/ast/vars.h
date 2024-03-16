@@ -1,7 +1,7 @@
 /**
  * @file vars.h
- * 
- * @brief 
+ *
+ * @brief
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -24,7 +24,7 @@ typedef struct _ast_var_decl_ {
 
 /**
  *  var_decl_list
- *      = var_decl ( ',' var_decl )*
+ *      = '(' ( var_decl ( ',' var_decl )* )? ')'
  */
 typedef struct _ast_var_decl_list_ {
     ast_node node;

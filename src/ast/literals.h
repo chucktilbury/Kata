@@ -1,7 +1,7 @@
 /**
  * @file literals.h
- * 
- * @brief 
+ *
+ * @brief
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -67,10 +67,20 @@ typedef struct _ast_type_name_ {
     ast_node* nterm;
 } ast_type_name;
 
+/**
+ *  type_name_list
+ *      = '(' ( type_name (',' type_name)* )? ')'
+ */
+typedef struct _ast_type_name_list_ {
+    ast_node node;
+    LList list;
+} ast_type_name_list;
+
 void traverse_scope_operator(ast_scope_operator* node, PassFunc func);
 void traverse_literal_type_name(ast_literal_type_name* node, PassFunc func);
 void traverse_literal_value(ast_literal_value* node, PassFunc func);
 void traverse_type_name(ast_type_name* node, PassFunc func);
+void traverse_type_name_list(ast_type_name_list* node, PassFunc func);
 
 
 #endif /* __LITERALS_H__ */

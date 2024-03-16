@@ -40,7 +40,7 @@ ast_scope_operator* parse_scope_operator() {
         set_scope((ttype == TOK_PRIVATE)? SCOPE_PRIV:
                     (ttype == TOK_PUBLIC)? SCOPE_PUB:
                     (ttype == TOK_PROTECTED)? SCOPE_PROT: SCOPE_PRIV);
-        
+
         advance_token();
     }
 
@@ -175,4 +175,12 @@ ast_type_name* parse_type_name() {
     RETV(node);
 }
 
+ast_type_name_list* parse_type_name_list() {
+
+    ENTER;
+    ast_type_name* node = NULL;
+    ast_node* nterm;
+
+    RETV(node);
+}
 

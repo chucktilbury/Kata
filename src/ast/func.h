@@ -13,19 +13,18 @@
 
 /**
  *  function_reference
- *      = compound_name expression_list 
- *          '(' ( compound_name ( ',' compound_name )* )+ ')'
- */
+ *      = compound_reference expression_list compound_name_list
+\ */
 typedef struct _ast_function_reference_ {
     ast_node node;
-    struct _ast_compound_name_* name;
+    struct _ast_compound_reference_* name;
     struct _ast_expression_list_* inp;
-    LList outp;
+    struct _ast_compound_name_list_* outp;
 } ast_function_reference;
 
 /**
  *  create_reference
- *      = create_name expression_list 
+ *      = create_name expression_list
  */
 typedef struct _ast_create_reference_ {
     ast_node node;
@@ -54,26 +53,24 @@ typedef struct _ast_func_qualifier_ {
 
 /**
  *  function_declaration
- *      = (func_qualifier)? ('funciton')? SYMBOL
- *          '(' ( var_decl_list )* ')'
- *          '(' ( var_decl_list )* ')'
+ *      = (func_qualifier)? SYMBOL type_name_list type_name_list
  */
 typedef struct _ast_function_declaration_ {
     ast_node node;
     Token* name;
     struct _ast_func_qualifier_* qual;
-    struct _ast_var_decl_list_* inputs;
-    struct _ast_var_decl_list_* outputs;
+    struct _ast_type_name_list_* inputs;
+    struct _ast_type_name_list_* outputs;
 } ast_function_declaration;
 
 /**
  *  create_declaration
- *      = (func_qualifier)? 'create' '(' ( var_decl_list )* ')'
+ *      = (func_qualifier)? 'create' type_name_list
  */
 typedef struct _ast_create_declaration_ {
     ast_node node;
     struct _ast_func_qualifier_* qual;
-    struct _ast_var_decl_list_* inputs;
+    struct _ast_type_name_list_* inputs;
 } ast_create_declaration;
 
 /**
@@ -88,12 +85,11 @@ typedef struct _ast_destroy_declaration_ {
 /**
  *  function_definition
  *      = (func_qualifier)? compound_name
- *          '(' ( var_decl_list )* ')'
- *          '(' ( var_decl_list )* ')' function_body
+ *          var_decl_list var_decl_list function_body
  */
 typedef struct _ast_function_definition_ {
     ast_node node;
-    struct _ast_compound_name_* name;
+    struct _ast_compound_reference_* name;
     struct _ast_func_qualifier_* qual;
     struct _ast_var_decl_list_* inputs;
     struct _ast_var_decl_list_* outputs;
@@ -102,7 +98,7 @@ typedef struct _ast_function_definition_ {
 
 /**
  * A special rule is needed because of a conflict with compound_name
- * 
+ *
  *  ctor_name
  *      = SYMBOL ('.' SYMBOL)? '.' 'create'
 */
@@ -113,7 +109,7 @@ typedef struct _ast_ctor_name_ {
 
 /**
  * A special rule is needed because of a conflict with compound_name
- * 
+ *
  *  dtor_name
  *      = SYMBOL ('.' SYMBOL)? '.' 'destroy'
 */
@@ -124,8 +120,7 @@ typedef struct _ast_dtor_name_ {
 
 /**
  *  create_definition
- *      = (func_qualifier)? ctor_name 
- *          '(' ( var_decl_list )* ')' function_body
+ *      = (func_qualifier)? ctor_name var_decl_list function_body
  */
 typedef struct _ast_create_definition_ {
     ast_node node;
@@ -164,6 +159,17 @@ typedef struct _ast_start_function_ {
     struct _ast_function_body_* body;
 } ast_start_function;
 
+/**
+ *  function_assignment
+ *      = compound_reference type_name_list type_name_list
+ */
+typedef struct _ast_function_assignment_ {
+    ast_node node;
+    struct _ast_compound_reference_* name;
+    struct _ast_type_name_list_* inp;
+    struct _ast_type_name_list_* outp;
+} ast_function_assignment;
+
 void traverse_function_reference(ast_function_reference* node, PassFunc func);
 void traverse_create_reference(ast_create_reference* node, PassFunc func);
 void traverse_destroy_reference(ast_destroy_reference* node, PassFunc func);
@@ -178,5 +184,6 @@ void traverse_create_definition(ast_create_definition* node, PassFunc func);
 void traverse_destroy_definition(ast_destroy_definition* node, PassFunc func);
 void traverse_function_body(ast_function_body* node, PassFunc func);
 void traverse_start_function(ast_start_function* node, PassFunc func);
+void traverse_function_assignment(ast_start_function* node, PassFunc func);
 
 #endif /* __FUNC_H__ */

@@ -1,8 +1,8 @@
 /**
  * @file vars.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -13,19 +13,19 @@
 #include "ast.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  var_decl
  *      = ( 'const' )? type_name SYMBOL
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_var_decl(ast_var_decl* node, PassFunc func) {
 
     assert(node != NULL);
     assert(func != NULL);
-    
+
     ENTER;
     AST_CALLBACK(func, node);
     traverse_type_name(node->type, func);
@@ -35,19 +35,19 @@ void traverse_var_decl(ast_var_decl* node, PassFunc func) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  var_decl_list
- *      = var_decl ( ',' var_decl )*
- *      
- * @param node 
- * 
+ *      = '(' ( var_decl ( ',' var_decl )* )? ')'
+ *
+ * @param node
+ *
  */
 void traverse_var_decl_list(ast_var_decl_list* node, PassFunc func) {
 
     assert(node != NULL);
     assert(func != NULL);
-    
+
     ENTER;
     AST_CALLBACK(func, node);
     ast_var_decl* nterm;
@@ -59,24 +59,24 @@ void traverse_var_decl_list(ast_var_decl_list* node, PassFunc func) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  var_definition
  *      = var_decl ( '=' assignment_item )?
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_var_definition(ast_var_definition* node, PassFunc func) {
 
     assert(node != NULL);
     assert(func != NULL);
-    
+
     ENTER;
     AST_CALLBACK(func, node);
     traverse_var_decl(node->type, func);
     TRACE("is_assigned: %s", node->is_assigned? "true": "false");
-    if(node->is_assigned) 
+    if(node->is_assigned)
         traverse_assignment_item(node->item, func);
     RET;
 }

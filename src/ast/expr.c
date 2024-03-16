@@ -1,8 +1,8 @@
 /**
  * @file expr.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -13,10 +13,10 @@
 #include "ast.h"
 
 /**
- * @brief 
- * 
- * @param node 
- * 
+ * @brief
+ *
+ * @param node
+ *
  */
 void traverse_expression(ast_expression* node, PassFunc func) {
 
@@ -34,7 +34,7 @@ void traverse_expression(ast_expression* node, PassFunc func) {
                 traverse_expr_primary((ast_expr_primary*)nterm, func);
             else if(AST_operator == ast_node_type(nterm))
                 traverse_operator((ast_operator*)nterm, func);
-            else 
+            else
                 RAISE(TRAVERSE_ERROR, "expected a primary or operator, but got %s", nterm_to_str(nterm));
         }
     }
@@ -43,8 +43,8 @@ void traverse_expression(ast_expression* node, PassFunc func) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  ast_operator
  *      = AND
  *      / OR
@@ -65,9 +65,9 @@ void traverse_expression(ast_expression* node, PassFunc func) {
  *      / '('
  *      / ')'
 
- * @param node 
- * @param func 
- * 
+ * @param node
+ * @param func
+ *
  */
 void traverse_operator(ast_operator* node, PassFunc func) {
 
@@ -81,14 +81,14 @@ void traverse_operator(ast_operator* node, PassFunc func) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  cast_statement
  *      = type_name ':' expression
- * 
- * @param node 
- * @param func 
- * 
+ *
+ * @param node
+ * @param func
+ *
  */
 void traverse_cast_statement(ast_cast_statement* node, PassFunc func) {
 
@@ -103,14 +103,14 @@ void traverse_cast_statement(ast_cast_statement* node, PassFunc func) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  expr_primary
  *      = literal_value
  *      / compound_reference
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_expr_primary(ast_expr_primary* node, PassFunc func) {
 
@@ -124,20 +124,20 @@ void traverse_expr_primary(ast_expr_primary* node, PassFunc func) {
         traverse_literal_value((ast_literal_value*)nterm, func);
     else if(AST_compound_reference == ast_node_type(nterm))
         traverse_compound_reference((ast_compound_reference*)nterm, func);
-    else 
+    else
         RAISE(TRAVERSE_ERROR, "expected an expr_primary, but got %s", nterm_to_str(nterm));
 
     RET;
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  expression_list
  *      = '(' (expression ( ',' expression )*)? ')'
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_expression_list(ast_expression_list* node, PassFunc func) {
 
@@ -155,22 +155,26 @@ void traverse_expression_list(ast_expression_list* node, PassFunc func) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  assignment_item
  *      = expression
  *      / list_init
  *      / dict_init
  *      / string_expr
  *      / cast_statement
- * 
- * @param node 
- * 
+ *      / function_assignment
+ *
+ * @param node
+ *
  */
 void traverse_assignment_item(ast_assignment_item* node, PassFunc func) {
 
     assert(node != NULL);
     assert(func != NULL);
+
+// This is wrong!
+exit(1);
 
     ENTER;
     AST_CALLBACK(func, node);
@@ -198,18 +202,18 @@ void traverse_assignment_item(ast_assignment_item* node, PassFunc func) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  assignment
  *      = compound_reference '=' assignment_item
- *      / compound_reference '+=' expression 
+ *      / compound_reference '+=' expression
  *      / compound_reference '-=' expression
  *      / compound_reference '*=' expression
  *      / compound_reference '/=' expression
  *      / compound_reference '%=' expression
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_assignment(ast_assignment* node, PassFunc func) {
 

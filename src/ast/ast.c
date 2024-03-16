@@ -1,7 +1,7 @@
 /**
  * @file ast.c
- * 
- * @brief 
+ *
+ * @brief
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -14,7 +14,7 @@
 void traverse_ast(ast_module* node, PassFunc func) {
 
     assert(node != NULL);
-    
+
     ENTER;
     (*func)((ast_node*)node);
     traverse_module(node, func);
@@ -110,7 +110,10 @@ const char* nterm_to_str(ast_node* node) {
         (type == AST_start_function)? "start_function" :
         (type == AST_operator)? "operator" :
         (type == AST_cast_statement)? "cast_statement" :
-        (type == AST_import_statement)? "import_statement" : 
+        (type == AST_import_statement)? "import_statement" :
+        (type == AST_type_name_list)? "type_name_list" :
+        (type == AST_function_assignment)? "function_assignment" :
+        (type == AST_compound_name_list)? "compound_name_list":
             "UNKNOWN");
 }
 

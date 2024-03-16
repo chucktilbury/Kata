@@ -87,6 +87,9 @@ typedef enum {
     AST_operator,
     AST_cast_statement,
     AST_case_item,
+    AST_type_name_list,
+    AST_function_assignment,
+    AST_compound_name_list,
     AST_LAST,   // number of non-terminals in the list
 } AstType;
 

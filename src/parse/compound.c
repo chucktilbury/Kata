@@ -1,8 +1,8 @@
 /**
  * @file compound.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-26-2024
@@ -14,13 +14,13 @@
 #include "scanner.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  compound_name
  *      = SYMBOL ( '.' SYMBOL )*
- *      
- * @return ast_compound_name* 
- * 
+ *
+ * @return ast_compound_name*
+ *
  */
 ast_compound_name* parse_compound_name() {
 
@@ -98,14 +98,31 @@ ast_compound_name* parse_compound_name() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
+ *  compound_name_list
+ *      = '(' ( compound_name (',' compound_name)* )? ')'
+ *
+ * @return ast_compound_name_list*
+ *
+ */
+ast_compound_name_list* parse_compound_name_list() {
+
+    ENTER;
+    ast_compound_name_list* node = NULL;
+
+    RETV(node);
+}
+
+/**
+ * @brief
+ *
  *  compound_ref_item
  *      = SYMBOL
  *      / array_reference
- *      
- * @return ast_compound_ref_item* 
- * 
+ *
+ * @return ast_compound_ref_item*
+ *
  */
 ast_compound_ref_item* parse_compound_ref_item() {
 
@@ -135,13 +152,13 @@ ast_compound_ref_item* parse_compound_ref_item() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  compound_reference
  *      = compound_ref_item ( '.' compound_ref_item )*
- *      
- * @return ast_compound_reference* 
- * 
+ *
+ * @return ast_compound_reference*
+ *
  */
 ast_compound_reference* parse_compound_reference() {
 
@@ -178,7 +195,7 @@ ast_compound_reference* parse_compound_reference() {
                 }
                 break;
             case 2:
-                // must be a compound_ref_item 
+                // must be a compound_ref_item
                 if(NULL != (nterm = parse_compound_ref_item())) {
                     append_llist(list, nterm);
                     s = 1;
