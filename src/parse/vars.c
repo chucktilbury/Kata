@@ -69,9 +69,6 @@ ast_var_decl* parse_var_decl() {
  */
 ast_var_decl_list* parse_var_decl_list() {
 
-// This is wrong!
-exit(1);
-
     ENTER;
     ast_var_decl_list* node = NULL;
     ast_var_decl* nterm;
@@ -82,50 +79,77 @@ exit(1);
 
     while(!finished) {
         switch(state) {
-            case 0:
-                if(NULL != (nterm = parse_var_decl())) {
-                    append_llist(list, nterm);
+            case 0 :
+                // if there is no '(' then it's not a var decl list.
+                if(TOK_OPAREN == TTYPE) {
+                    advance_token();
                     state = 1;
                 }
                 else
                     state = 101;
                 break;
+
             case 1:
+                // if there is no var decl, then there must be a ')'
+                if(NULL != (nterm = parse_var_decl())) {
+                    append_llist(list, nterm);
+                    state = 2;
+                }
+                else if(TOK_CPAREN == TTYPE) {
+                    advance_token();
+                    state = 100;
+                }
+                else
+                    state = 101;
+                break;
+
+            case 2:
                 // if the token is a ',', then expect another item, else finished
                 if(TOK_COMMA == TTYPE) {
                     advance_token();
-                    state = 2;
+                    state = 3;
                 }
-                else
+                else if(TOK_CPAREN == TTYPE) {
+                    advance_token();
                     state = 100;
+                }
+                else {
+                    EXPECTED("a ')' or a ','");
+                    state = 102;
+                }
                 break;
-            case 2:
+
+            case 3:
                 // must be an var_decl, or an error
                 if(NULL != (nterm = parse_var_decl())) {
                     append_llist(list, nterm);
-                    state = 1;
+                    state = 2;
                 }
                 else {
                     EXPECTED("a variable declaration");
                     state = 102;
                 }
                 break;
+
             case 100:
                 // var_decl is complete
                 node = CREATE_AST_NODE(AST_var_decl_list, ast_var_decl_list);
                 node->list = list;
                 finished = true;
                 break;
+
             case 101:
                 // not a var_decl, no error
                 reset_token_queue(post);
                 finished = true;
                 break;
+
             case 102:
                 // not a var_decl, is an error
                 node = NULL;
                 finished = true;
                 break;
+
             default:
                 fatal_error("unknown state number in %s: %d", __func__, state);
         }

@@ -1,7 +1,7 @@
 /**
  * @file literals.c
  *
- * @brief
+ * @brief Note that there is no parse_error() function.
  *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
@@ -90,7 +90,7 @@ ast_literal_type_name* parse_literal_type_name() {
 }
 
 /**
- * @brief
+ * @brief These are used in arithmetic expressions.
  *
  *  literal_value
  *      = LITERAL_FLOAT
@@ -175,11 +175,105 @@ ast_type_name* parse_type_name() {
     RETV(node);
 }
 
+/**
+ * @brief
+ *
+ *  type_name_list
+ *      = '(' (type_name (',' type_name)* )? ')'
+ *
+ * @return ast_type_name_list*
+ *
+ */
 ast_type_name_list* parse_type_name_list() {
 
     ENTER;
-    ast_type_name* node = NULL;
+    ast_type_name_list* node = NULL;
     ast_node* nterm;
+    LList list = create_llist();
+
+    int state = 0;
+    bool finished = false;
+
+    while(!finished) {
+        switch(state) {
+            case 0:
+                // must start with a '('
+                if(TOK_OPAREN == TTYPE) {
+                    advance_token();
+                    state = 1;
+                }
+                else
+                    state = 101;
+                break;
+
+            case 1:
+                // can be a type name or a ')'
+                if(NULL != (nterm = (ast_node*)parse_type_name())) {
+                    append_llist(list, nterm);
+                    state = 2;
+                }
+                else if(TOK_CPAREN == TTYPE) {
+                    advance_token();
+                    state = 100;
+                }
+                else {
+                    EXPECTED("a type name or a ')'");
+                    state = 102;
+                }
+                break;
+
+            case 2:
+                // must be a ',' or a ')'
+                if(TOK_COMMA == TTYPE) {
+                    advance_token();
+                    state = 3;
+                }
+                else if(TOK_CPAREN == TTYPE) {
+                    advance_token();
+                    state = 100;
+                }
+                else {
+                    EXPECTED("a ',' or a ')'");
+                    state = 102;
+                }
+                break;
+
+            case 3:
+                // must be a type name or error
+                if(NULL != (nterm = (ast_node*)parse_type_name())) {
+                    append_llist(list, nterm);
+                    state = 2;
+                }
+                else {
+                    EXPECTED("a type name");
+                    state = 102;
+                }
+                break;
+
+            case 100:
+                // finished parsing non-terminal
+                node = CREATE_AST_NODE(AST_type_name_list, ast_type_name_list);
+                node->list = list;
+                finalize_token_queue();
+                finished = true;
+                break;
+
+            case 101:
+                // this is not a match and not an error
+                // There are no tokens consumed that need to be reset.
+                finished = true;
+                break;
+
+            case 102:
+                // there was an error
+                node = NULL;
+                finished = true;
+                break;
+
+            default:
+                fatal_error("invalid state in %s: %d", __func__, state);
+        }
+    }
 
     RETV(node);
 }

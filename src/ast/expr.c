@@ -173,9 +173,6 @@ void traverse_assignment_item(ast_assignment_item* node, PassFunc func) {
     assert(node != NULL);
     assert(func != NULL);
 
-// This is wrong!
-exit(1);
-
     ENTER;
     AST_CALLBACK(func, node);
     switch(ast_node_type(node->nterm)) {
@@ -194,6 +191,9 @@ exit(1);
         case AST_cast_statement:
             traverse_cast_statement((ast_cast_statement*)node->nterm, func);
             break;
+        case AST_function_assignment:
+            traverse_function_assignment((ast_function_assignment*)node->nterm, func);
+            break;
         default:
             RAISE(TRAVERSE_ERROR, "unexpected node type in %s: %d",
                     __func__, ast_node_type(node->nterm));
@@ -206,7 +206,7 @@ exit(1);
  *
  *  assignment
  *      = compound_reference '=' assignment_item
- *      / compound_reference '+=' expression
+ *      / compound_reference '+=' assignment_item
  *      / compound_reference '-=' expression
  *      / compound_reference '*=' expression
  *      / compound_reference '/=' expression

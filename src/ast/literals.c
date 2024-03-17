@@ -112,9 +112,20 @@ void traverse_type_name(ast_type_name* node, PassFunc func) {
         default:
             RAISE(TRAVERSE_ERROR, "unexpected node type in %s: %s", __func__, nterm_to_str(node->nterm));
     }
+
     RET;
 }
 
+/**
+ * @brief
+ *
+ *  type_name_list
+ *      = '(' ( type_name ( ',' type_name )* )? ')'
+ *
+ * @param node
+ * @param func
+ *
+ */
 void traverse_type_name_list(ast_type_name_list* node, PassFunc func) {
 
     assert(node != NULL);
@@ -122,7 +133,21 @@ void traverse_type_name_list(ast_type_name_list* node, PassFunc func) {
 
     ENTER;
     AST_CALLBACK(func, node);
+    ast_type_name* nterm;
+
+    init_llist_iter(node->list);
+    while(NULL != (nterm = (ast_type_name*)iter_llist(node->list)))
+        traverse_type_name(nterm, func);
 
     RET;
 }
 
+void traverse_error(ast_error* node, PassFunc func) {
+
+    assert(node != NULL);
+    assert(func != NULL);
+
+    ENTER;
+    AST_CALLBACK(func, node);
+    RET;
+}

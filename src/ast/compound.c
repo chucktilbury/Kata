@@ -56,6 +56,12 @@ void traverse_compound_name_list(ast_compound_name_list* node, PassFunc func) {
 
     ENTER;
     AST_CALLBACK(func, node);
+
+    ast_compound_name* nterm;
+    init_llist_iter(node->list);
+    while(NULL != (nterm = (ast_compound_name*)iter_llist(node->list)))
+        traverse_compound_name(nterm, func);
+
     RET;
 }
 

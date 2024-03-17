@@ -416,9 +416,8 @@ ast_assignment_item* parse_assignment_item() {
             (NULL != (nterm = (ast_node*)parse_list_init())) ||
             (NULL != (nterm = (ast_node*)parse_dict_init())) ||
             (NULL != (nterm = (ast_node*)parse_string_expr())) ||
-            (NULL != (nterm = (ast_node*)parse_cast_statement()))) {
-
-// TODO: add function assignement rule
+            (NULL != (nterm = (ast_node*)parse_cast_statement())) ||
+            (NULL != (nterm = (ast_node*)parse_function_assignment()))) {
 
         node = CREATE_AST_NODE(AST_assignment_item, ast_assignment_item);
         node->nterm = nterm;
@@ -435,7 +434,7 @@ ast_assignment_item* parse_assignment_item() {
  *
  *  assignment
  *      = compound_reference '=' assignment_item
- *      / compound_reference '+=' expression
+ *      / compound_reference '+=' assignment_item
  *      / compound_reference '-=' expression
  *      / compound_reference '*=' expression
  *      / compound_reference '/=' expression
@@ -455,32 +454,38 @@ ast_assignment* parse_assignment() {
     if(NULL != (cref = parse_compound_reference())) {
         Token* tok = get_token();
         switch(token_type(tok)) {
-            case TOK_ADD_ASSIGN:
             case TOK_SUB_ASSIGN:
             case TOK_MUL_ASSIGN:
             case TOK_DIV_ASSIGN:
             case TOK_MOD_ASSIGN:
+                if(NULL != (nterm = (ast_node*)parse_expression())) {
+                    node = CREATE_AST_NODE(AST_assignment, ast_assignment);
+                    node->lhs = cref;
+                    node->rhs = nterm;
+                    node->oper = tok;
+                    advance_token();
+                    finalize_token_queue();
+                }
+                else
+                    EXPECTED("an expression");
+                break;
+            case TOK_ADD_ASSIGN:
             case TOK_ASSIGN:
-                advance_token();
+                if(NULL != (nterm = (ast_node*)parse_assignment_item())) {
+                    node = CREATE_AST_NODE(AST_assignment, ast_assignment);
+                    node->lhs = cref;
+                    node->rhs = nterm;
+                    node->oper = tok;
+                    advance_token();
+                    finalize_token_queue();
+                }
+                else
+                    EXPECTED("an assignment item");
                 break;
             default:
                 // another rule might match
                 reset_token_queue(post);
                 RETV(NULL);
-        }
-
-        if((NULL == (nterm = (ast_node*)parse_assignment_item())) &&
-                (NULL == (nterm = (ast_node*)parse_expression()))) {
-
-            EXPECTED("an expression");
-            RETV(NULL);
-        }
-        else {
-            node = CREATE_AST_NODE(AST_assignment, ast_assignment);
-            node->lhs = cref;
-            node->rhs = nterm;
-            node->oper = tok;
-            finalize_token_queue();
         }
     }
     else

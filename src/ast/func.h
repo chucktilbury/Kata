@@ -184,6 +184,6 @@ void traverse_create_definition(ast_create_definition* node, PassFunc func);
 void traverse_destroy_definition(ast_destroy_definition* node, PassFunc func);
 void traverse_function_body(ast_function_body* node, PassFunc func);
 void traverse_start_function(ast_start_function* node, PassFunc func);
-void traverse_function_assignment(ast_start_function* node, PassFunc func);
+void traverse_function_assignment(ast_function_assignment* node, PassFunc func);
 
 #endif /* __FUNC_H__ */

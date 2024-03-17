@@ -89,9 +89,7 @@ void traverse_func_qualifier(ast_func_qualifier* node, PassFunc func) {
  * @brief
  *
  *  function_declaration
- *      = (func_qualifier)? ('funciton')? SYMBOL
- *          '(' ( var_decl_list )* ')'
- *          '(' ( var_decl_list )* ')'
+ *      = (func_qualifier)? SYMBOL type_name_list type_name_list
  *
  * @param node
  * @param func
@@ -111,7 +109,7 @@ void traverse_function_declaration(ast_function_declaration* node, PassFunc func
  * @brief
  *
  *  create_declaration
- *      = (func_qualifier)? 'create' '(' ( var_decl_list )* ')'
+ *      = (func_qualifier)? 'create' type_name_list
  *
  * @param node
  * @param func
@@ -152,8 +150,7 @@ void traverse_destroy_declaration(ast_destroy_declaration* node, PassFunc func) 
  *
  *  function_definition
  *      = (func_qualifier)? compound_name
- *          '(' ( var_decl_list )* ')'
- *          '(' ( var_decl_list )* ')' function_body
+ *          var_decl_list var_decl_list function_body
  *
  * @param node
  * @param func
@@ -213,8 +210,7 @@ void traverse_dtor_name(ast_dtor_name* node, PassFunc func) {
  * @brief
  *
  *  create_definition
- *      = (func_qualifier)? ctor_name
- *          '(' ( var_decl_list )* ')' function_body
+ *      = (func_qualifier)? ctor_name var_decl_list function_body
  *
  * @param node
  * @param func
@@ -294,7 +290,7 @@ void traverse_start_function(ast_start_function* node, PassFunc func) {
  *  function_assignment
  *      = compound_reference type_name_list type_name_list
  */
-void traverse_function_assignment(ast_start_function* node, PassFunc func) {
+void traverse_function_assignment(ast_function_assignment* node, PassFunc func) {
 
     assert(node != NULL);
     assert(func != NULL);

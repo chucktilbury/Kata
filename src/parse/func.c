@@ -272,3 +272,4 @@ ast_function_assignment* parse_function_assignment() {
 
     RETV(node);
 }
+

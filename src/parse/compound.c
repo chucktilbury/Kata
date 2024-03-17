@@ -110,6 +110,87 @@ ast_compound_name_list* parse_compound_name_list() {
 
     ENTER;
     ast_compound_name_list* node = NULL;
+    ast_compound_name* nterm;
+    LList list = create_llist();
+
+    int state = 0;
+    bool finished = false;
+
+    while(!finished) {
+        switch(state) {
+            case 0:
+                // must start with a '(' or not a list
+                if(TOK_OPAREN == TTYPE) {
+                    advance_token();
+                    state = 1;
+                }
+                else
+                    state = 101;
+                break;
+
+            case 1:
+                // must be a compound name or a ')'
+                if(NULL != (nterm = parse_compound_name())) {
+                    append_llist(list, nterm);
+                    state = 2;
+                }
+                else if(TOK_CPAREN == TTYPE) {
+                    advance_token();
+                    state = 100;
+                }
+                else {
+                    EXPECTED("a compound name or a ')'");
+                    state = 102;
+                }
+                break;
+
+            case 2:
+                // must be a ',' or a ')'
+                if(TOK_COMMA == TTYPE) {
+                    advance_token();
+                    state = 3;
+                }
+                if(TOK_CPAREN == TTYPE) {
+                    advance_token();
+                    state = 100;
+                }
+                else {
+                    EXPECTED("a ',' or a ')'");
+                    state = 102;
+                }
+                break;
+
+            case 3:
+                // must be a compound name or it's an error
+                if(NULL != (nterm = parse_compound_name())) {
+                    append_llist(list, nterm);
+                    state = 2;
+                }
+                else {
+                    EXPECTED("a compound name");
+                    state = 102;
+                }
+                break;
+
+            case 100:
+                // complete non-terminal parsed
+                node = CREATE_AST_NODE(AST_compound_name_list, ast_compound_name_list);
+                node->list = list;
+                finished = true;
+                break;
+
+            case 101:
+                // not a match, not an error
+                finished = true;
+                break;
+
+            case 102:
+                // is an error.
+                node = NULL;
+                finished = true;
+                break;
+        }
+    }
 
     RETV(node);
 }

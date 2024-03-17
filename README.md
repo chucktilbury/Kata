@@ -602,7 +602,7 @@ function_body
 #
 assignment
     = compound_reference '=' assignment_item
-    / compound_reference '+=' expression
+    / compound_reference '+=' assignment_item
     / compound_reference '-=' expression
     / compound_reference '*=' expression
     / compound_reference '/=' expression
