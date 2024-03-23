@@ -1,6 +1,9 @@
 
 # Problems and thoughts...
 
+---------------20240317---------------
+* Potential bug: over use of finialize_token_queue(). Requires more careful analysis because there are instances where a match is not made and tokens are finalized. The answer may be to only finalize at the module level.
+
 ---------------20240316---------------
 * **(done)** Array reference needs to have function references.
 * **(done)** Function declarations need to have type names only. When a function is assigned to a variable, then the whole function declaration is used because of function decorations.

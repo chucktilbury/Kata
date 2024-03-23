@@ -49,6 +49,7 @@ typedef struct _ast_destroy_reference_ {
 typedef struct _ast_func_qualifier_ {
     ast_node node;
     bool is_virtual;
+    bool func_seen;
 } ast_func_qualifier;
 
 /**
@@ -102,10 +103,10 @@ typedef struct _ast_function_definition_ {
  *  ctor_name
  *      = SYMBOL ('.' SYMBOL)? '.' 'create'
 */
-typedef struct _ast_ctor_name_ {
+typedef struct _ast_create_name_ {
     ast_node node;
     LList* list;
-} ast_ctor_name;
+} ast_create_name;
 
 /**
  * A special rule is needed because of a conflict with compound_name
@@ -113,10 +114,10 @@ typedef struct _ast_ctor_name_ {
  *  dtor_name
  *      = SYMBOL ('.' SYMBOL)? '.' 'destroy'
 */
-typedef struct _ast_dtor_name_ {
+typedef struct _ast_destroy_name_ {
     ast_node node;
     LList* list;
-} ast_dtor_name;
+} ast_destroy_name;
 
 /**
  *  create_definition
@@ -124,7 +125,7 @@ typedef struct _ast_dtor_name_ {
  */
 typedef struct _ast_create_definition_ {
     ast_node node;
-    struct _ast_ctor_name_* name;
+    struct _ast_create_name_* name;
     struct _ast_func_qualifier_* qual;
     struct _ast_var_decl_list_* inputs;
     struct _ast_function_body_* body;
@@ -136,7 +137,7 @@ typedef struct _ast_create_definition_ {
  */
 typedef struct _ast_destroy_definition_ {
     ast_node node;
-    struct _ast_dtor_name_* name;
+    struct _ast_destroy_name_* name;
     struct _ast_func_qualifier_* qual;
     struct _ast_function_body_* body;
 } ast_destroy_definition;
@@ -178,8 +179,8 @@ void traverse_function_declaration(ast_function_declaration* node, PassFunc func
 void traverse_create_declaration(ast_create_declaration* node, PassFunc func);
 void traverse_destroy_declaration(ast_destroy_declaration* node, PassFunc func);
 void traverse_function_definition(ast_function_definition* node, PassFunc func);
-void traverse_ctor_name(ast_ctor_name* node, PassFunc func);
-void traverse_dtor_name(ast_dtor_name* node, PassFunc func);
+void traverse_create_name(ast_create_name* node, PassFunc func);
+void traverse_destroy_name(ast_destroy_name* node, PassFunc func);
 void traverse_create_definition(ast_create_definition* node, PassFunc func);
 void traverse_destroy_definition(ast_destroy_definition* node, PassFunc func);
 void traverse_function_body(ast_function_body* node, PassFunc func);
