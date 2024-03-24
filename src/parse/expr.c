@@ -385,6 +385,9 @@ ast_expression_list* parse_expression_list() {
                 node = NULL;
                 finished = true;
                 break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 

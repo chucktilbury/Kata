@@ -179,7 +179,7 @@ void traverse_function_definition(ast_function_definition* node, PassFunc func) 
     ENTER;
     AST_CALLBACK(func, node);
     traverse_func_qualifier(node->qual, func);
-    traverse_compound_reference(node->name, func);
+    traverse_compound_name(node->name, func);
     traverse_var_decl_list(node->inputs, func);
     traverse_var_decl_list(node->outputs, func);
     traverse_function_body(node->body, func);
@@ -205,7 +205,7 @@ void traverse_create_name(ast_create_name* node, PassFunc func) {
     AST_CALLBACK(func, node);
     Token* tok;
     init_llist_iter(node->list);
-    while(NULL != (tok = iter_llit(node->list)))
+    while(NULL != (tok = iter_llist(node->list)))
         TRACE_TERM(tok);
     RET;
 }
@@ -229,7 +229,7 @@ void traverse_destroy_name(ast_destroy_name* node, PassFunc func) {
     AST_CALLBACK(func, node);
     Token* tok;
     init_llist_iter(node->list);
-    while(NULL != (tok = iter_llit(node->list)))
+    while(NULL != (tok = iter_llist(node->list)))
         TRACE_TERM(tok);
     RET;
 }
@@ -299,7 +299,7 @@ void traverse_function_body(ast_function_body* node, PassFunc func) {
     ENTER;
     AST_CALLBACK(func, node);
     ast_function_body_element* elem;
-    init_llist(node->list);
+    init_llist_iter(node->list);
     while(NULL != (elem = iter_llist(node->list)))
         traverse_function_body_element(elem, func);
     RET;

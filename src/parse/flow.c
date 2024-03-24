@@ -464,6 +464,9 @@ ast_case_body* parse_case_body() {
                 // error
                 finished = true;
                 break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 

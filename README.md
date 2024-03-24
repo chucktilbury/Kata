@@ -89,14 +89,14 @@ module
 module_item
     = namespace_item
     / import_statement
-    / start_defintion
+    / start_definition
 
 #####################
 #
 # There must be exactly one start function in a program. This is where the
 # program execution begins.
 #
-start_defintion
+start_definition
     = 'function' 'start' function_body
 
 #####################
@@ -389,7 +389,7 @@ compound_reference
 # Head of an expression parse. The OR keyword is the lowest precedence
 # operator. This operator only understands boolean values. When this is
 # encountered in an expression, all operands are converted to bool. Expressions
-# are actually implemented using the shuntinting yard algorithm. The segmented
+# are actually implemented using the shunting yard algorithm. The segmented
 # representation here is to show the precedence of the operators.
 #
 expression
@@ -460,7 +460,7 @@ expr_unary
 
 #####################
 #
-# A cast is used to convert one type to another for assignemnt
+# A cast is used to convert one type to another for assignment
 #
 cast_statement
     = type_name ':' expression
@@ -528,10 +528,10 @@ class_item
 
 #####################
 #
-# This specifies whether the funciton is virtual or not and also accepts the
-# 'funciton' keyword which is ignored. The word function exists to allow an
+# This specifies whether the function is virtual or not and also accepts the
+# 'function' keyword which is ignored. The word function exists to allow an
 # array of functions to be generated. So, it's a reference type, not a
-# definition type. But it seems good to allow it to be specificed for calrity
+# definition type. But it seems good to allow it to be specified for clarity
 # when declaring or defining a function. Both the virtual and the function
 # keywords are optional and can appear in any order. However, they can only
 # appear once.
@@ -562,7 +562,7 @@ function_definition
 
 #####################
 #
-# This exists because of a conflict with coumpound_name
+# This exists because of a conflict with compound_name
 #
 create_name
     = SYMBOL ('.' SYMBOL)? '.' 'create'
@@ -574,7 +574,7 @@ create_definition
 
 #####################
 #
-# This exists because of a conflict with coumpound_name
+# This exists because of a conflict with compound_name
 #
 destroy_name
     = SYMBOL ('.' SYMBOL)? '.' 'destroy'
@@ -704,7 +704,7 @@ raise_statement
 # expressions are not allowed. Expressions that evaluate to a float are
 # always true because floats theoretically can never be exactly zero. This
 # creates a runtime warning. The expression must evaluate to a boolean, a
-# signed or unsigned in order to be symantically valid.
+# signed or unsigned in order to be semantically valid.
 #
 while_definition
     = 'while' ( '(' ( expression )? ')' )?
@@ -734,8 +734,8 @@ do_clause
 # skipped and execution continues after the end of it. Strings are not allowed
 # in the expression. if the expression evaluates to a float, then a runtime
 # warning is generated because the only way for the expression to evaluate to
-# false as a float is if it is exactly 0.0, which is theortically impossible.
-# To be symantically correct, expression has to evaluate to a signed, unsigned,
+# false as a float is if it is exactly 0.0, which is theoretically impossible.
+# To be semantically correct, expression has to evaluate to a signed, unsigned,
 # or a bool. Note that casting is allowed.
 #
 for_clause
@@ -774,7 +774,7 @@ else_clause_final
 #####################
 #
 # Actual else clause list definition. Zero or more mid clauses and zero or one
-# final clauses. Note that a stand-alone if() is syntattically correct.
+# final clauses. Note that a stand-alone if() is syntactically correct.
 #
 else_clause
     = ( else_clause_mid )* ( else_clause_final )?
@@ -816,7 +816,7 @@ except_clause_final
 # be the last one. If there are no middle except clauses then the final one is
 # required. In other words, at least one except clause is required and if there
 # is an "any" except clause, then it needs to be the last one to be
-# syntattically correct.
+# syntactically correct.
 #
 except_clause
     = ( except_clause_mid )+ ( except_clause_final )?

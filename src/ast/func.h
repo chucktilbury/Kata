@@ -90,7 +90,7 @@ typedef struct _ast_destroy_declaration_ {
  */
 typedef struct _ast_function_definition_ {
     ast_node node;
-    struct _ast_compound_reference_* name;
+    struct _ast_compound_name_* name;
     struct _ast_func_qualifier_* qual;
     struct _ast_var_decl_list_* inputs;
     struct _ast_var_decl_list_* outputs;

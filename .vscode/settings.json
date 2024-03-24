@@ -4,5 +4,18 @@
         "pass.h": "c",
         "scanner.h": "c",
         "hash_map": "c"
-    }
+    },
+    "cSpell.words": [
+        "doxygen",
+        "dquote",
+        "DSTR",
+        "DSTRG",
+        "graphiz",
+        "longjmp",
+        "parens",
+        "squote",
+        "SSTR",
+        "SSTRG",
+        "strg"
+    ]
 }

@@ -1,8 +1,60 @@
 
 # Problems and thoughts...
 
+## --------------------Current TODO--------------------
+
+* Potential bug: reset_token_queue() should be called at any time there is no match, even if no tokens appear to be consumed. Do not make assumptions and the code is harmless if wrong.
+
+* Potential bug: over use of finalize_token_queue(). Requires more careful analysis because there are instances where a match is not made and tokens are finalized. The answer may be to only finalize at the module level.
+
+* Re-order non-terminals for efficiency. Minimize the need to reset the token queue as much as possible.
+
+* The parser needs to keep track of the current naming context and store the proper name when a new one is defined.
+  * The parser needs to create the symbol table where all of the symbols are stored so that a pointer to the node in the AST can be referenced by name. 
+  * Symbol table is probably going to be a separate library. 
+  * It needs to be able to find a partially specified name, according to a naming context. In other words, the current context is ```some.name``` and there are names defined as ```some.name.here``` and ```other.name.here```. You are looking for ```here```. The proper name ```some.name.here``` should be returned. So proper names are located by constructing potential names and searching for them.
+
+* Need to support the '+=' operator for arrays, dictionaries, and strings. 
+  * This requires that an array reference could just be the name, rather than a subscript. 
+  * Runtime issue?
+
+* Indicate a difference in error handling between terminal and non-terminal errors. 
+  * Non-terminal errors need a line and file to produce a correct error message, or, rely on a terminal. In any case, this is going to need some attention in the future.
+
+* Add callback to AST to be run after a node has been traversed. Add to the data structures, etc.
+
+* TODO: (someday) Rework all parser functions into state machines.
+
+### Modules
+* list.c  
+* loop.c  
+* **(done)** compound.c  
+* **(done)** except.c  
+* **(done)** expr.c  
+* **(done)** flow.c  
+* **(done)** func_body.c  
+* **(done)** func.c  
+* **(done)** literals.c  
+* **(done)** module.c  
+* **(done)** strg.c  
+* **(done)** vars.c
+* import.c  
+
+
+-----------------------------------------------------
+
+## --------------------TODO by date--------------------
+
+---------------20240324---------------
+* **(done)** Need to modify the compound name so that create and destroy are excluded.
+* Potential bug: reset_token_queue() should be called at any time there is no match, even if no tokens appear to be consumed. Do not make assumptions and the code is harmless if wrong.
+* TODO: (someday) Rework all parser functions into state machines.
+* Indicate a difference in error handling between terminal and non-terminal errors. 
+* Non-terminal errors need a line and file to produce a correct error message, or, rely on a terminal. In any case, this is going to need some attention in the future.
+* Add callback to AST to be run after a node has been traversed. Add to the data structures, etc.
+
 ---------------20240317---------------
-* Potential bug: over use of finialize_token_queue(). Requires more careful analysis because there are instances where a match is not made and tokens are finalized. The answer may be to only finalize at the module level.
+* Potential bug: over use of finalize_token_queue(). Requires more careful analysis because there are instances where a match is not made and tokens are finalized. The answer may be to only finalize at the module level.
 
 ---------------20240316---------------
 * **(done)** Array reference needs to have function references.
@@ -55,6 +107,6 @@ The actual compilation happens as a result of traversing the AST. I am planning 
 ## Steps to add a parser non-terminal target
 1. Update the grammar in README.md
 2. Add the AST type in AstType in ast.h
-3. Add the data struture in the correct header in the ast directory.
+3. Add the data structure in the correct header in the ast directory.
 4. Add the parse and traverse function prototypes.
 5. Implement the parse and traverse functions.

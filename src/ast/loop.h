@@ -17,6 +17,7 @@
  */
 typedef struct _ast_while_definition_ {
     ast_node node;
+    struct _ast_expression_* expr;
 } ast_while_definition;
 
 /**
@@ -25,6 +26,8 @@ typedef struct _ast_while_definition_ {
  */
 typedef struct _ast_while_clause_ {
     ast_node node;
+    struct _ast_while_definition_* nterm;
+    struct _ast_function_body_* body;
 } ast_while_clause;
 
 /**
@@ -33,6 +36,8 @@ typedef struct _ast_while_clause_ {
  */
 typedef struct _ast_do_clause_ {
     ast_node node;
+    struct _ast_while_definition_* nterm;
+    struct _ast_function_body_* body;
 } ast_do_clause;
 
 /**
@@ -42,6 +47,10 @@ typedef struct _ast_do_clause_ {
  */
 typedef struct _ast_for_clause_ {
     ast_node node;
+    Token* symbol;
+    struct _ast_type_name_* type;
+    struct _ast_expression_* expr;
+    struct _ast_function_body_* body;
 } ast_for_clause;
 
 void traverse_while_definition(ast_while_definition* node, PassFunc func);

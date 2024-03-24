@@ -85,6 +85,9 @@ ast_function_reference* parse_function_reference() {
                 node = NULL;
                 finished = true;
                 break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -115,7 +118,7 @@ ast_create_reference* parse_create_reference() {
         switch(state) {
             case 0:
                 // name or not a match
-                if(NULL != (name == parse_create_name()))
+                if(NULL != (name = parse_create_name()))
                     state = 1;
                 else
                     state = 101;
@@ -151,6 +154,9 @@ ast_create_reference* parse_create_reference() {
                 node = NULL;
                 finished = true;
                 break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -181,7 +187,7 @@ ast_destroy_reference* parse_destroy_reference() {
         switch(state) {
             case 0:
                 // destroy name or not a match
-                if(NULL != (name == parse_create_name()))
+                if(NULL != (name = parse_destroy_name()))
                     state = 100;
                 else
                     state = 101;
@@ -189,7 +195,7 @@ ast_destroy_reference* parse_destroy_reference() {
 
             case 100:
                 // finished parsing
-                node = CREATE_AST_NODE(AST_create_reference, ast_create_reference);
+                node = CREATE_AST_NODE(AST_destroy_reference, ast_destroy_reference);
                 node->name = name;
                 finalize_token_queue();
                 finished = true;
@@ -200,6 +206,9 @@ ast_destroy_reference* parse_destroy_reference() {
                 reset_token_queue(post);
                 finished = true;
                 break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -271,6 +280,9 @@ ast_func_qualifier* parse_func_qualifier() {
                 node->is_virtual = is_virtual;
                 node->func_seen = func_seen;
                 break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -364,6 +376,9 @@ ast_function_declaration* parse_function_declaration() {
                 node = NULL;
                 finished = true;
                 break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -440,6 +455,9 @@ ast_create_declaration* parse_create_declaration() {
                 node = NULL;
                 finished = true;
                 break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -504,6 +522,9 @@ ast_destroy_declaration* parse_destroy_declaration() {
                 node = NULL;
                 finished = true;
                 break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -525,7 +546,7 @@ ast_function_definition* parse_function_definition() {
     ENTER;
     ast_function_definition* node = NULL;
     ast_func_qualifier* qual;
-    ast_compound_reference* name;
+    ast_compound_name* name;
     ast_var_decl_list* inputs;
     ast_var_decl_list* outputs;
     ast_function_body* body;
@@ -544,18 +565,40 @@ ast_function_definition* parse_function_definition() {
 
             case 1:
                 // compound reference or not a match
+                if(NULL != (name = parse_compound_name())) 
+                    state = 2;
+                else 
+                    state = 101;
                 break;
 
             case 2:
                 // var decl list or not a match
+                if(NULL != (inputs = parse_var_decl_list())) 
+                    state = 3;
+                else {
+                    EXPECTED("input parameters");
+                    state = 102;
+                }
                 break;
 
             case 3:
                 // var decl list or an error
+                if(NULL != (outputs = parse_var_decl_list())) 
+                    state = 4;
+                else {
+                    EXPECTED("output parameters");
+                    state = 102;
+                }
                 break;
 
             case 4:
                 // function body or error
+                if(NULL != (body = parse_function_body()))
+                    state = 100;
+                else {
+                    EXPECTED("function body");
+                    state = 102;
+                }
                 break;
 
             case 100:
@@ -581,6 +624,9 @@ ast_function_definition* parse_function_definition() {
                 node = NULL;
                 finished = true;
                 break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -600,7 +646,7 @@ ast_create_name* parse_create_name() {
 
     ENTER;
     ast_create_name* node = NULL;
-    LList list;
+    LList list = create_llist();
     void* post = post_token_queue();
 
     int state = 0;
@@ -608,6 +654,67 @@ ast_create_name* parse_create_name() {
 
     while(!finished) {
         switch(state) {
+            case 0:
+                // SYMBOL or not a match
+                if(TOK_SYMBOL == TTYPE) {
+                    append_llist(list, get_token());
+                    advance_token();
+                    state = 1;
+                }
+                else 
+                    state = 101;
+                break;
+
+            case 1:
+                // must be a '.' or not a match
+                if(TOK_DOT == TTYPE) {
+                    advance_token();
+                    state = 2;
+                }
+                else 
+                    state = 101;
+                break;
+
+            case 2:
+                // must be a symbol or 'create' or error
+                if(TOK_SYMBOL == TTYPE) {
+                    append_llist(list, get_token());
+                    advance_token();
+                    state = 2;
+                }
+                else if(TOK_CREATE == TTYPE) {
+                    append_llist(list, get_token());
+                    advance_token();
+                    state = 100;
+                }
+                else { 
+                    EXPECTED("a SYMBOL or 'create'");
+                    state = 102;
+                }
+                break;
+
+            case 100:
+                // matching object
+                finished = true;
+                node = CREATE_AST_NODE(AST_create_name, ast_create_name);
+                node->list = list;
+                finalize_token_queue();
+                break;
+
+            case 101:
+                // object not a match
+                reset_token_queue(post);
+                finished = true;
+                break;
+
+            case 102:
+                // error
+                node = NULL;
+                finished = true;
+                break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -627,7 +734,7 @@ ast_destroy_name* parse_destroy_name() {
 
     ENTER;
     ast_destroy_name* node = NULL;
-    LList list;
+    LList list = create_llist();
     void* post = post_token_queue();
 
     int state = 0;
@@ -635,6 +742,67 @@ ast_destroy_name* parse_destroy_name() {
 
     while(!finished) {
         switch(state) {
+            case 0:
+                // SYMBOL or not a match
+                if(TOK_SYMBOL == TTYPE) {
+                    append_llist(list, get_token());
+                    advance_token();
+                    state = 1;
+                }
+                else 
+                    state = 101;
+                break;
+
+            case 1:
+                // must be a '.' or not a match
+                if(TOK_DOT == TTYPE) {
+                    advance_token();
+                    state = 2;
+                }
+                else 
+                    state = 101;
+                break;
+
+            case 2:
+                // must be a symbol or 'destroy' or error
+                if(TOK_SYMBOL == TTYPE) {
+                    append_llist(list, get_token());
+                    advance_token();
+                    state = 2;
+                }
+                else if(TOK_DESTROY == TTYPE) {
+                    append_llist(list, get_token());
+                    advance_token();
+                    state = 100;
+                }
+                else { 
+                    EXPECTED("a SYMBOL or 'destroy'");
+                    state = 102;
+                }
+                break;
+
+            case 100:
+                // matching object
+                finished = true;
+                node = CREATE_AST_NODE(AST_destroy_name, ast_destroy_name);
+                node->list = list;
+                finalize_token_queue();
+                break;
+
+            case 101:
+                // object not a match
+                reset_token_queue(post);
+                finished = true;
+                break;
+
+            case 102:
+                // error
+                node = NULL;
+                finished = true;
+                break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -665,6 +833,65 @@ ast_create_definition* parse_create_definition() {
 
     while(!finished) {
         switch(state) {
+            case 0:
+                // qualifier is always a match.
+                qual = parse_func_qualifier();
+                state = 1;
+                break;
+
+            case 1:
+                // create name or not a match
+                if(NULL != (name = parse_create_name())) 
+                    state = 2;
+                else 
+                    state = 101;
+                break;
+
+            case 2:
+                // var decl list or not a match
+                if(NULL != (inputs = parse_var_decl_list())) 
+                    state = 4;
+                else {
+                    EXPECTED("input parameters");
+                    state = 102;
+                }
+                break;
+
+            case 4:
+                // function body or error
+                if(NULL != (body = parse_function_body()))
+                    state = 100;
+                else {
+                    EXPECTED("function body");
+                    state = 102;
+                }
+                break;
+
+            case 100:
+                // matching object
+                finished = true;
+                node = CREATE_AST_NODE(AST_create_definition, ast_create_definition);
+                node->qual = qual;
+                node->name = name;
+                node->inputs = inputs;
+                node->body = body;
+                finalize_token_queue();
+                break;
+
+            case 101:
+                // object not a match
+                reset_token_queue(post);
+                finished = true;
+                break;
+
+            case 102:
+                // error
+                node = NULL;
+                finished = true;
+                break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -686,7 +913,6 @@ ast_destroy_definition* parse_destroy_definition() {
     ast_destroy_definition* node = NULL;
     ast_destroy_name* name;
     ast_func_qualifier* qual;
-    ast_var_decl_list* inputs;
     ast_function_body* body;
     void* post = post_token_queue();
 
@@ -695,6 +921,54 @@ ast_destroy_definition* parse_destroy_definition() {
 
     while(!finished) {
         switch(state) {
+            case 0:
+                // qualifier is always a match.
+                qual = parse_func_qualifier();
+                state = 1;
+                break;
+
+            case 1:
+                // create name or not a match
+                if(NULL != (name = parse_destroy_name())) 
+                    state = 4;
+                else 
+                    state = 101;
+                break;
+
+            case 4:
+                // function body or error
+                if(NULL != (body = parse_function_body()))
+                    state = 100;
+                else {
+                    EXPECTED("function body");
+                    state = 102;
+                }
+                break;
+
+            case 100:
+                // matching object
+                finished = true;
+                node = CREATE_AST_NODE(AST_destroy_definition, ast_destroy_definition);
+                node->qual = qual;
+                node->name = name;
+                node->body = body;
+                finalize_token_queue();
+                break;
+
+            case 101:
+                // object not a match
+                reset_token_queue(post);
+                finished = true;
+                break;
+
+            case 102:
+                // error
+                node = NULL;
+                finished = true;
+                break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -714,7 +988,8 @@ ast_function_body* parse_function_body() {
 
     ENTER;
     ast_function_body* node = NULL;
-    LList list;
+    ast_function_body_element* nterm;
+    LList list = create_llist();
     void* post = post_token_queue();
 
     int state = 0;
@@ -722,6 +997,52 @@ ast_function_body* parse_function_body() {
 
     while(!finished) {
         switch(state) {
+            case 0:
+                // must be a '{' or not a match
+                if(TOK_OCBRACE == TTYPE) {
+                    advance_token();
+                    state = 1;
+                }
+                else 
+                    state = 101;
+                break;
+
+            case 1:
+                // must be a func body element or a '}' or error
+                if(NULL != (nterm = parse_function_body_element()))
+                    append_llist(list, nterm); // no state change
+                else if(TOK_CCBRACE == TTYPE) {
+                    advance_token();
+                    state = 100;
+                }
+                else {
+                    EXPECTED("funciton body element");
+                    state = 102;
+                }
+                break;
+
+            case 100:
+                // matching object
+                finished = true;
+                node = CREATE_AST_NODE(AST_function_body, ast_function_body);
+                node->list = list;
+                finalize_token_queue();
+                break;
+
+            case 101:
+                // object not a match
+                reset_token_queue(post);
+                finished = true;
+                break;
+
+            case 102:
+                // error
+                node = NULL;
+                finished = true;
+                break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -749,6 +1070,48 @@ ast_start_function* parse_start_function() {
 
     while(!finished) {
         switch(state) {
+            case 0:
+                // 'start' or not a match
+                if(TOK_START == TTYPE) {
+                    advance_token();
+                    state = 1;
+                }
+                else
+                    state = 101;
+                break;
+
+            case 1:
+                // must be function body or an error
+                if(NULL != (body = parse_function_body())) {
+                    EXPECTED("function body");
+                    state = 102;
+                }
+                else
+                    state = 100;
+                break;
+
+            case 100:
+                // matching object
+                finished = true;
+                node = CREATE_AST_NODE(AST_start_function, ast_start_function);
+                node->body = body;
+                finalize_token_queue();
+                break;
+
+            case 101:
+                // object not a match
+                reset_token_queue(post);
+                finished = true;
+                break;
+
+            case 102:
+                // error
+                node = NULL;
+                finished = true;
+                break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 
@@ -779,6 +1142,43 @@ ast_function_assignment* parse_function_assignment() {
 
     while(!finished) {
         switch(state) {
+            case 0:
+                // compound reference or not a match
+                break;
+
+            case 1:
+                // type name list or not a match
+                break;
+
+            case 2:
+                // type name list or an error
+                break;
+
+            case 100:
+                // matching object
+                finished = true;
+                node = CREATE_AST_NODE(AST_function_assignment, ast_function_assignment);
+                node->name = name;
+                node->inp = inp;
+                node->outp = outp;
+                finalize_token_queue();
+                break;
+
+            case 101:
+                // object not a match
+                reset_token_queue(post);
+                finished = true;
+                break;
+
+            case 102:
+                // error
+                node = NULL;
+                finished = true;
+                break;
+            
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
 

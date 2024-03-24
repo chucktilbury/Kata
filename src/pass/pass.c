@@ -90,8 +90,8 @@ void test_pass(ast_node* node) {
     (type == AST_create_declaration)? test_pass_func(node, AST_create_declaration) :
     (type == AST_destroy_declaration)? test_pass_func(node, AST_destroy_declaration) :
     (type == AST_function_definition)? test_pass_func(node, AST_function_definition) :
-    (type == AST_ctor_name)? test_pass_func(node, AST_ctor_name) :
-    (type == AST_dtor_name)? test_pass_func(node, AST_dtor_name) :
+    (type == AST_create_name)? test_pass_func(node, AST_create_name) :
+    (type == AST_destroy_name)? test_pass_func(node, AST_destroy_name) :
     (type == AST_create_definition)? test_pass_func(node, AST_create_definition) :
     (type == AST_destroy_definition)? test_pass_func(node, AST_destroy_definition) :
     (type == AST_function_body)? test_pass_func(node, AST_function_body) :

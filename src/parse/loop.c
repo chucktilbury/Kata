@@ -26,7 +26,8 @@ ast_while_definition* parse_while_definition() {
 
     ENTER;
     ast_while_definition* node = NULL;
-
+    ast_expression* expr;
+    
     RETV(node);
 }
 

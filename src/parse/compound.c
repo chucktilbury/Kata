@@ -28,24 +28,26 @@ ast_compound_name* parse_compound_name() {
     ast_compound_name* node = NULL;
     LList lst = create_llist();
     Str* str = create_string(NULL);
-    bool finished = false;
-    int s = 0;
     Token* tok;
+    void* post = post_token_queue();
+
+    bool finished = false;
+    int state = 0;
 
     while(!finished) {
         tok = get_token();
-        switch(s) {
+        switch(state) {
             case 0:
                 // initial state
                 if(TOK_SYMBOL == token_type(tok)) {
                     append_llist(lst, tok);
                     add_string_Str(str, tok->str);
                     advance_token();
-                    s = 1;
+                    state = 1;
                 }
                 else {
                     // not a symbol, not an error
-                    s = 101;
+                    state = 101;
                 }
                 break;
             case 1:
@@ -53,22 +55,24 @@ ast_compound_name* parse_compound_name() {
                 if(TOK_DOT == token_type(tok)) {
                     add_string_char(str, '.');
                     advance_token();
-                    s = 2;
+                    state = 2;
                 }
                 else {
-                    s = 100;
+                    state = 100;
                 }
                 break;
             case 2:
-                // must be a symbol or it's an error
-                if(TOK_SYMBOL == token_type(tok)) {
+                // must be a symbol or it's not a match (conflict with create/destroy)
+                if((TOK_CREATE == TTYPE) || (TOK_DESTROY == TTYPE)) 
+                    state = 101;
+                else if(TOK_SYMBOL == token_type(tok)) {
                     append_llist(lst, tok);
                     add_string_Str(str, tok->str);
                     advance_token();
-                    s = 1;
+                    state = 1;
                 }
                 else {
-                    s = 102;
+                    state = 102;
                 }
                 break;
             case 100:
@@ -81,6 +85,7 @@ ast_compound_name* parse_compound_name() {
                 break;
             case 101:
                 // not a compound symbol, not an error
+                reset_token_queue(post);
                 finished = true;
                 break;
             case 102:
@@ -90,7 +95,7 @@ ast_compound_name* parse_compound_name() {
                 node = NULL;
                 break;
             default:
-                fatal_error("unknown state number in %s: %d", __func__, s);
+                fatal_error("unknown state number in %s: %d", __func__, state);
         }
     }
 

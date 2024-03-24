@@ -70,8 +70,8 @@ const char* nterm_to_str(ast_node* node) {
         (type == AST_create_declaration)? "create_declaration" :
         (type == AST_destroy_declaration)? "destroy_declaration" :
         (type == AST_function_definition)? "function_definition" :
-        (type == AST_ctor_name)? "ctor_name" :
-        (type == AST_dtor_name)? "dtor_name" :
+        (type == AST_create_name)? "create_name" :
+        (type == AST_destroy_name)? "destroy_name" :
         (type == AST_create_definition)? "create_definition" :
         (type == AST_destroy_definition)? "destroy_definition" :
         (type == AST_function_body)? "function_body" :
