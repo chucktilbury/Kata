@@ -53,10 +53,10 @@ typedef struct _ast_for_clause_ {
     struct _ast_function_body_* body;
 } ast_for_clause;
 
-void traverse_while_definition(ast_while_definition* node, PassFunc func);
-void traverse_while_clause(ast_while_clause* node, PassFunc func);
-void traverse_do_clause(ast_do_clause* node, PassFunc func);
-void traverse_for_clause(ast_for_clause* node, PassFunc func);
+void traverse_while_definition(ast_while_definition* node, PassFunc pre, PassFunc post);
+void traverse_while_clause(ast_while_clause* node, PassFunc pre, PassFunc post);
+void traverse_do_clause(ast_do_clause* node, PassFunc pre, PassFunc post);
+void traverse_for_clause(ast_for_clause* node, PassFunc pre, PassFunc post);
 
 
 #endif /* __LOOP_H__ */

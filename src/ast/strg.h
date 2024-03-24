@@ -53,10 +53,10 @@ typedef struct _ast_string_expr_ {
 } ast_string_expr;
 
 
-void traverse_formatted_strg(ast_formatted_strg* node, PassFunc func);
-void traverse_string_literal(ast_string_literal* node, PassFunc func);
-void traverse_string_expr_item(ast_string_expr_item* node, PassFunc func);
-void traverse_string_expr(ast_string_expr* node, PassFunc func);
+void traverse_formatted_strg(ast_formatted_strg* node, PassFunc pre, PassFunc post);
+void traverse_string_literal(ast_string_literal* node, PassFunc pre, PassFunc post);
+void traverse_string_expr_item(ast_string_expr_item* node, PassFunc pre, PassFunc post);
+void traverse_string_expr(ast_string_expr* node, PassFunc pre, PassFunc post);
 
 
 #endif /* __STRG_H__ */

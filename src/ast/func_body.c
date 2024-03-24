@@ -42,85 +42,88 @@
  * @param node 
  * 
  */
-void traverse_function_body_element(ast_function_body_element* node, PassFunc func) {
+void traverse_function_body_element(ast_function_body_element* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
     
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
     switch(ast_node_type(node->nterm)) {
         case AST_var_definition:
-            traverse_var_definition((ast_var_definition*)node->nterm, func);
+            traverse_var_definition((ast_var_definition*)node->nterm, pre, post);
             break;
         case AST_function_reference:
-            traverse_function_reference((ast_function_reference*)node->nterm, func);
+            traverse_function_reference((ast_function_reference*)node->nterm, pre, post);
             break;
         case AST_create_reference:
-            traverse_create_reference((ast_create_reference*)node->nterm, func);
+            traverse_create_reference((ast_create_reference*)node->nterm, pre, post);
             break;
         case AST_destroy_reference:
-            traverse_destroy_reference((ast_destroy_reference*)node->nterm, func);
+            traverse_destroy_reference((ast_destroy_reference*)node->nterm, pre, post);
             break;
         case AST_assignment:
-            traverse_assignment((ast_assignment*)node->nterm, func);
+            traverse_assignment((ast_assignment*)node->nterm, pre, post);
             break;
         case AST_while_clause:
-            traverse_while_clause((ast_while_clause*)node->nterm, func);
+            traverse_while_clause((ast_while_clause*)node->nterm, pre, post);
             break;
         case AST_do_clause:
-            traverse_do_clause((ast_do_clause*)node->nterm, func);
+            traverse_do_clause((ast_do_clause*)node->nterm, pre, post);
             break;
         case AST_for_clause:
-            traverse_for_clause((ast_for_clause*)node->nterm, func);
+            traverse_for_clause((ast_for_clause*)node->nterm, pre, post);
             break;
         case AST_if_clause:
-            traverse_if_clause((ast_if_clause*)node->nterm, func);
+            traverse_if_clause((ast_if_clause*)node->nterm, pre, post);
             break;
         case AST_try_clause:
-            traverse_try_clause((ast_try_clause*)node->nterm, func);
+            traverse_try_clause((ast_try_clause*)node->nterm, pre, post);
             break;
         case AST_switch_clause:
-            traverse_switch_clause((ast_switch_clause*)node->nterm, func);
+            traverse_switch_clause((ast_switch_clause*)node->nterm, pre, post);
             break;
         case AST_break_statement:
-            traverse_break_statement((ast_break_statement*)node->nterm, func);
+            traverse_break_statement((ast_break_statement*)node->nterm, pre, post);
             break;
         case AST_continue_statement:
-            traverse_continue_statement((ast_continue_statement*)node->nterm, func);
+            traverse_continue_statement((ast_continue_statement*)node->nterm, pre, post);
             break;
         case AST_trace_statement:
-            traverse_trace_statement((ast_trace_statement*)node->nterm, func);
+            traverse_trace_statement((ast_trace_statement*)node->nterm, pre, post);
             break;
         case AST_inline_statement:
-            traverse_inline_statement((ast_inline_statement*)node->nterm, func);
+            traverse_inline_statement((ast_inline_statement*)node->nterm, pre, post);
             break;
         case AST_yield_statement:
-            traverse_yield_statement((ast_yield_statement*)node->nterm, func);
+            traverse_yield_statement((ast_yield_statement*)node->nterm, pre, post);
             break;
         case AST_type_statement:
-            traverse_type_statement((ast_type_statement*)node->nterm, func);
+            traverse_type_statement((ast_type_statement*)node->nterm, pre, post);
             break;
         case AST_exit_statement:
-            traverse_exit_statement((ast_exit_statement*)node->nterm, func);
+            traverse_exit_statement((ast_exit_statement*)node->nterm, pre, post);
             break;
         case AST_print_statement:
-            traverse_print_statement((ast_print_statement*)node->nterm, func);
+            traverse_print_statement((ast_print_statement*)node->nterm, pre, post);
             break;
         case AST_return_statement:
-            traverse_return_statement((ast_return_statement*)node->nterm, func);
+            traverse_return_statement((ast_return_statement*)node->nterm, pre, post);
             break;
         case AST_raise_statement:
-            traverse_raise_statement((ast_raise_statement*)node->nterm, func);
+            traverse_raise_statement((ast_raise_statement*)node->nterm, pre, post);
             break;
         case AST_function_body:
-            traverse_function_body((ast_function_body*)node->nterm, func);
+            traverse_function_body((ast_function_body*)node->nterm, pre, post);
             break;
         default:
             RAISE(TRAVERSE_ERROR, "unknown node type in %s: %s", __func__, nterm_to_str(node->nterm));
             break;
     }
 
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -133,13 +136,16 @@ void traverse_function_body_element(ast_function_body_element* node, PassFunc fu
  * @param node 
  * 
  */
-void traverse_break_statement(ast_break_statement* node, PassFunc func) {
+void traverse_break_statement(ast_break_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
     
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -152,13 +158,16 @@ void traverse_break_statement(ast_break_statement* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_continue_statement(ast_continue_statement* node, PassFunc func) {
+void traverse_continue_statement(ast_continue_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
     
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -171,13 +180,16 @@ void traverse_continue_statement(ast_continue_statement* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_trace_statement(ast_trace_statement* node, PassFunc func) {
+void traverse_trace_statement(ast_trace_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
     
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -190,14 +202,18 @@ void traverse_trace_statement(ast_trace_statement* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_inline_statement(ast_inline_statement* node, PassFunc func) {
+void traverse_inline_statement(ast_inline_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
     TRACE_TERM(node->tok);
+    
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -210,14 +226,18 @@ void traverse_inline_statement(ast_inline_statement* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_yield_statement(ast_yield_statement* node, PassFunc func) {
+void traverse_yield_statement(ast_yield_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
-    traverse_compound_reference(node->ref, func);
+    AST_CALLBACK(pre, node);
+
+    traverse_compound_reference(node->ref, pre, post);
+    
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -230,14 +250,18 @@ void traverse_yield_statement(ast_yield_statement* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_type_statement(ast_type_statement* node, PassFunc func) {
+void traverse_type_statement(ast_type_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
-    traverse_compound_reference(node->ref, func);
+    AST_CALLBACK(pre, node);
+
+    traverse_compound_reference(node->ref, pre, post);
+    
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -250,14 +274,18 @@ void traverse_type_statement(ast_type_statement* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_exit_statement(ast_exit_statement* node, PassFunc func) {
+void traverse_exit_statement(ast_exit_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
-    traverse_expression(node->expr, func);
+    AST_CALLBACK(pre, node);
+
+    traverse_expression(node->expr, pre, post);
+    
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -270,14 +298,18 @@ void traverse_exit_statement(ast_exit_statement* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_print_statement(ast_print_statement* node, PassFunc func) {
+void traverse_print_statement(ast_print_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
-    traverse_expression_list(node->elst, func);
+    AST_CALLBACK(pre, node);
+
+    traverse_expression_list(node->elst, pre, post);
+    
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -290,14 +322,18 @@ void traverse_print_statement(ast_print_statement* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_return_statement(ast_return_statement* node, PassFunc func) {
+void traverse_return_statement(ast_return_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
-    traverse_expression(node->expr, func);
+    AST_CALLBACK(pre, node);
+
+    traverse_expression(node->expr, pre, post);
+    
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -310,15 +346,19 @@ void traverse_return_statement(ast_return_statement* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_raise_statement(ast_raise_statement* node, PassFunc func) {
+void traverse_raise_statement(ast_raise_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
     TRACE_TERM(node->symb);
-    traverse_formatted_strg(node->str, func);
+    traverse_formatted_strg(node->str, pre, post);
+    
+    AST_CALLBACK(post, node);
     RET;
 }
 

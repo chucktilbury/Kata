@@ -21,16 +21,20 @@
  * @param node
  *
  */
-void traverse_var_decl(ast_var_decl* node, PassFunc func) {
+void traverse_var_decl(ast_var_decl* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
-    traverse_type_name(node->type, func);
+    AST_CALLBACK(pre, node);
+
+    traverse_type_name(node->type, pre, post);
     TRACE("is_const: %s", node->is_const? "true": "false");
     TRACE_TERM(node->name);
+    
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -43,18 +47,22 @@ void traverse_var_decl(ast_var_decl* node, PassFunc func) {
  * @param node
  *
  */
-void traverse_var_decl_list(ast_var_decl_list* node, PassFunc func) {
+void traverse_var_decl_list(ast_var_decl_list* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
     ast_var_decl* nterm;
 
     init_llist_iter(node->list);
     while(NULL != (nterm = iter_llist(node->list)))
-        traverse_var_decl(nterm, func);
+        traverse_var_decl(nterm, pre, post);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -67,17 +75,21 @@ void traverse_var_decl_list(ast_var_decl_list* node, PassFunc func) {
  * @param node
  *
  */
-void traverse_var_definition(ast_var_definition* node, PassFunc func) {
+void traverse_var_definition(ast_var_definition* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
-    traverse_var_decl(node->type, func);
+    AST_CALLBACK(pre, node);
+
+    traverse_var_decl(node->type, pre, post);
     TRACE("is_assigned: %s", node->is_assigned? "true": "false");
     if(node->is_assigned)
-        traverse_assignment_item(node->item, func);
+        traverse_assignment_item(node->item, pre, post);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 

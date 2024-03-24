@@ -171,20 +171,20 @@ typedef struct _ast_function_assignment_ {
     struct _ast_type_name_list_* outp;
 } ast_function_assignment;
 
-void traverse_function_reference(ast_function_reference* node, PassFunc func);
-void traverse_create_reference(ast_create_reference* node, PassFunc func);
-void traverse_destroy_reference(ast_destroy_reference* node, PassFunc func);
-void traverse_func_qualifier(ast_func_qualifier* node, PassFunc func);
-void traverse_function_declaration(ast_function_declaration* node, PassFunc func);
-void traverse_create_declaration(ast_create_declaration* node, PassFunc func);
-void traverse_destroy_declaration(ast_destroy_declaration* node, PassFunc func);
-void traverse_function_definition(ast_function_definition* node, PassFunc func);
-void traverse_create_name(ast_create_name* node, PassFunc func);
-void traverse_destroy_name(ast_destroy_name* node, PassFunc func);
-void traverse_create_definition(ast_create_definition* node, PassFunc func);
-void traverse_destroy_definition(ast_destroy_definition* node, PassFunc func);
-void traverse_function_body(ast_function_body* node, PassFunc func);
-void traverse_start_function(ast_start_function* node, PassFunc func);
-void traverse_function_assignment(ast_function_assignment* node, PassFunc func);
+void traverse_function_reference(ast_function_reference* node, PassFunc pre, PassFunc post);
+void traverse_create_reference(ast_create_reference* node, PassFunc pre, PassFunc post);
+void traverse_destroy_reference(ast_destroy_reference* node, PassFunc pre, PassFunc post);
+void traverse_func_qualifier(ast_func_qualifier* node, PassFunc pre, PassFunc post);
+void traverse_function_declaration(ast_function_declaration* node, PassFunc pre, PassFunc post);
+void traverse_create_declaration(ast_create_declaration* node, PassFunc pre, PassFunc post);
+void traverse_destroy_declaration(ast_destroy_declaration* node, PassFunc pre, PassFunc post);
+void traverse_function_definition(ast_function_definition* node, PassFunc pre, PassFunc post);
+void traverse_create_name(ast_create_name* node, PassFunc pre, PassFunc post);
+void traverse_destroy_name(ast_destroy_name* node, PassFunc pre, PassFunc post);
+void traverse_create_definition(ast_create_definition* node, PassFunc pre, PassFunc post);
+void traverse_destroy_definition(ast_destroy_definition* node, PassFunc pre, PassFunc post);
+void traverse_function_body(ast_function_body* node, PassFunc pre, PassFunc post);
+void traverse_start_function(ast_start_function* node, PassFunc pre, PassFunc post);
+void traverse_function_assignment(ast_function_assignment* node, PassFunc pre, PassFunc post);
 
 #endif /* __FUNC_H__ */

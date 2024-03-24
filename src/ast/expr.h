@@ -128,12 +128,12 @@ typedef struct _ast_assignment_ {
     Token* oper;
 } ast_assignment;
 
-void traverse_expression(ast_expression* node, PassFunc func);
-void traverse_expr_primary(ast_expr_primary* node, PassFunc func);
-void traverse_expression_list(ast_expression_list* node, PassFunc func);
-void traverse_assignment_item(ast_assignment_item* node, PassFunc func);
-void traverse_assignment(ast_assignment* node, PassFunc func);
-void traverse_operator(ast_operator* node, PassFunc func);
+void traverse_expression(ast_expression* node, PassFunc pre, PassFunc post);
+void traverse_expr_primary(ast_expr_primary* node, PassFunc pre, PassFunc post);
+void traverse_expression_list(ast_expression_list* node, PassFunc pre, PassFunc post);
+void traverse_assignment_item(ast_assignment_item* node, PassFunc pre, PassFunc post);
+void traverse_assignment(ast_assignment* node, PassFunc pre, PassFunc post);
+void traverse_operator(ast_operator* node, PassFunc pre, PassFunc post);
 
 
 #endif /* __EXPR_H__ */

@@ -21,13 +21,18 @@
  * @param node 
  * 
  */
-void traverse_while_definition(ast_while_definition* node, PassFunc func) {
+void traverse_while_definition(ast_while_definition* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
     
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
+    traverse_expression(node->expr, pre, post);
+    
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -40,13 +45,16 @@ void traverse_while_definition(ast_while_definition* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_while_clause(ast_while_clause* node, PassFunc func) {
+void traverse_while_clause(ast_while_clause* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
     
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -59,13 +67,16 @@ void traverse_while_clause(ast_while_clause* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_do_clause(ast_do_clause* node, PassFunc func) {
+void traverse_do_clause(ast_do_clause* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
     
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -79,13 +90,16 @@ void traverse_do_clause(ast_do_clause* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_for_clause(ast_for_clause* node, PassFunc func) {
+void traverse_for_clause(ast_for_clause* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
     
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 

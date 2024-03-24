@@ -22,13 +22,14 @@
  * @param node
  *
  */
-void traverse_compound_name(ast_compound_name* node, PassFunc func) {
+void traverse_compound_name(ast_compound_name* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
     TRACE("raw_name: %s", raw_string(node->raw_name));
     Token* tok;
 
@@ -36,6 +37,7 @@ void traverse_compound_name(ast_compound_name* node, PassFunc func) {
     while(NULL != (tok = iter_llist(node->list))) {
         TRACE_TERM(tok);
     }
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -46,22 +48,24 @@ void traverse_compound_name(ast_compound_name* node, PassFunc func) {
  *      = '(' ( compound_name (',' compound_name)* )? ')'
  *
  * @param node
- * @param func
+ * @param pre
  *
  */
-void traverse_compound_name_list(ast_compound_name_list* node, PassFunc func) {
+void traverse_compound_name_list(ast_compound_name_list* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
 
     ast_compound_name* nterm;
     init_llist_iter(node->list);
     while(NULL != (nterm = (ast_compound_name*)iter_llist(node->list)))
-        traverse_compound_name(nterm, func);
+        traverse_compound_name(nterm, pre, post);
 
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -75,19 +79,21 @@ void traverse_compound_name_list(ast_compound_name_list* node, PassFunc func) {
  * @param node
  *
  */
-void traverse_compound_ref_item(ast_compound_ref_item* node, PassFunc func) {
+void traverse_compound_ref_item(ast_compound_ref_item* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
     if(node->token != NULL)
         TRACE_TERM(node->token);
     else if(node->nterm != NULL)
-        traverse_array_reference((ast_array_reference*)node->nterm, func);
+        traverse_array_reference((ast_array_reference*)node->nterm, pre, post);
     else
         RAISE(TRAVERSE_ERROR, "invalid compound reference item");
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -100,19 +106,21 @@ void traverse_compound_ref_item(ast_compound_ref_item* node, PassFunc func) {
  * @param node
  *
  */
-void traverse_compound_reference(ast_compound_reference* node, PassFunc func) {
+void traverse_compound_reference(ast_compound_reference* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
 
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
     ast_compound_ref_item* nterm;
 
     init_llist_iter(node->list);
     while(NULL != (nterm = iter_llist(node->list))) {
-        traverse_compound_ref_item(nterm, func);
+        traverse_compound_ref_item(nterm, pre, post);
     }
+    AST_CALLBACK(post, node);
     RET;
 }
 

@@ -15,7 +15,8 @@
 #include "trace.h"
 //#include "pass.h"
 
-void test_pass(ast_node* node);
+void pre_test_pass(ast_node* node);
+void post_test_pass(ast_node* node);
 
 int main(int argc, char** argv) {
 
@@ -34,7 +35,7 @@ int main(int argc, char** argv) {
 
     TRY {
         TRACE("Begin Traverse");
-        traverse_ast(node, test_pass);
+        traverse_ast(node, pre_test_pass, post_test_pass);
         TRACE("End Traverse");
     }
     ANY_EXCEPT() {

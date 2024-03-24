@@ -118,13 +118,13 @@ typedef struct _ast_node_ {
 #include "import.h"
 
 // public interface
-void traverse_ast(ast_module* node, PassFunc func);
+void traverse_ast(ast_module* node, PassFunc pre, PassFunc post);
 AstType ast_node_type(void* node);
 const char* nterm_to_str(ast_node* node);
 ast_node* create_ast_node(AstType type, size_t size);
 
 // hide the icky syntax
-#define AST_CALLBACK(f, n) (*(f))((ast_node*)(n))
+#define AST_CALLBACK(f, n) do { if(NULL != (f)) (*(f))((ast_node*)(n)); } while(false)
 #define CREATE_AST_NODE(t, n) (n*)create_ast_node((t), sizeof(n))
 #define TRAVERSE_ERROR AST_FIRST
 

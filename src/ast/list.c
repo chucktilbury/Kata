@@ -21,13 +21,16 @@
  * @param node 
  * 
  */
-void traverse_list_init(ast_list_init* node, PassFunc func) {
+void traverse_list_init(ast_list_init* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
     
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -40,13 +43,16 @@ void traverse_list_init(ast_list_init* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_dict_init_element(ast_dict_init_element* node, PassFunc func) {
+void traverse_dict_init_element(ast_dict_init_element* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
     
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -59,13 +65,16 @@ void traverse_dict_init_element(ast_dict_init_element* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_dict_init(ast_dict_init* node, PassFunc func) {
+void traverse_dict_init(ast_dict_init* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
     
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -78,13 +87,16 @@ void traverse_dict_init(ast_dict_init* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_array_param(ast_array_param* node, PassFunc func) {
+void traverse_array_param(ast_array_param* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
     
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -97,13 +109,16 @@ void traverse_array_param(ast_array_param* node, PassFunc func) {
  * @param node 
  * 
  */
-void traverse_array_reference(ast_array_reference* node, PassFunc func) {
+void traverse_array_reference(ast_array_reference* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(func != NULL);
+    assert(pre != NULL);
+    assert(post != NULL);
     
     ENTER;
-    AST_CALLBACK(func, node);
+    AST_CALLBACK(pre, node);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 

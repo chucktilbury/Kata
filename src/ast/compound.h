@@ -51,9 +51,9 @@ typedef struct _ast_compound_reference_ {
     LList list;
 } ast_compound_reference;
 
-void traverse_compound_name(ast_compound_name* node, PassFunc func);
-void traverse_compound_name_list(ast_compound_name_list* node, PassFunc func);
-void traverse_compound_ref_item(ast_compound_ref_item* node, PassFunc func);
-void traverse_compound_reference(ast_compound_reference* node, PassFunc func);
+void traverse_compound_name(ast_compound_name* node, PassFunc pre, PassFunc post);
+void traverse_compound_name_list(ast_compound_name_list* node, PassFunc pre, PassFunc post);
+void traverse_compound_ref_item(ast_compound_ref_item* node, PassFunc pre, PassFunc post);
+void traverse_compound_reference(ast_compound_reference* node, PassFunc pre, PassFunc post);
 
 #endif /* __COMPOUND_H__ */

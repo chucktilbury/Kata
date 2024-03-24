@@ -101,13 +101,13 @@ typedef struct _ast_case_body_ {
     LList list;
 } ast_case_body;
 
-void traverse_if_clause(ast_if_clause* node, PassFunc func);
-void traverse_else_clause_item(ast_else_clause_item* node, PassFunc func);
-void traverse_else_clause(ast_else_clause* node, PassFunc func);
-void traverse_switch_clause(ast_switch_clause* node, PassFunc func);
-void traverse_case_clause(ast_case_clause* node, PassFunc func);
-void traverse_default_clause(ast_default_clause* node, PassFunc func);
-void traverse_case_body(ast_case_body* node, PassFunc func);
+void traverse_if_clause(ast_if_clause* node, PassFunc pre, PassFunc post);
+void traverse_else_clause_item(ast_else_clause_item* node, PassFunc pre, PassFunc post);
+void traverse_else_clause(ast_else_clause* node, PassFunc pre, PassFunc post);
+void traverse_switch_clause(ast_switch_clause* node, PassFunc pre, PassFunc post);
+void traverse_case_clause(ast_case_clause* node, PassFunc pre, PassFunc post);
+void traverse_default_clause(ast_default_clause* node, PassFunc pre, PassFunc post);
+void traverse_case_body(ast_case_body* node, PassFunc pre, PassFunc post);
 
 
 #endif /* __FLOW_H__ */

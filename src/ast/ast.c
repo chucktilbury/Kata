@@ -11,13 +11,14 @@
 #include "util.h"
 #include "ast.h"
 
-void traverse_ast(ast_module* node, PassFunc func) {
+void traverse_ast(ast_module* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
 
     ENTER;
-    (*func)((ast_node*)node);
-    traverse_module(node, func);
+    AST_CALLBACK(pre, node);
+    traverse_module(node, pre, post);
+    AST_CALLBACK(post, node);
     RET;
 }
 

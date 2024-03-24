@@ -53,9 +53,9 @@ typedef struct _ast_except_clause_ {
     struct _ast_except_clause_final_* fin;
 } ast_except_clause;
 
-void traverse_try_clause(ast_try_clause* node, PassFunc func);
-void traverse_except_clause_mid(ast_except_clause_mid* node, PassFunc func);
-void traverse_except_clause_final(ast_except_clause_final* node, PassFunc func);
-void traverse_except_clause(ast_except_clause* node, PassFunc func);
+void traverse_try_clause(ast_try_clause* node, PassFunc pre, PassFunc post);
+void traverse_except_clause_mid(ast_except_clause_mid* node, PassFunc pre, PassFunc post);
+void traverse_except_clause_final(ast_except_clause_final* node, PassFunc pre, PassFunc post);
+void traverse_except_clause(ast_except_clause* node, PassFunc pre, PassFunc post);
 
 #endif /* __EXCEPT_H__ */
