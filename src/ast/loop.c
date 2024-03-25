@@ -30,7 +30,10 @@ void traverse_while_definition(ast_while_definition* node, PassFunc pre, PassFun
     ENTER;
     AST_CALLBACK(pre, node);
 
-    traverse_expression(node->expr, pre, post);
+    if(node->expr != NULL)
+        traverse_expression(node->expr, pre, post);
+    else 
+        TRACE("no expression");
     
     AST_CALLBACK(post, node);
     RET;
@@ -54,6 +57,9 @@ void traverse_while_clause(ast_while_clause* node, PassFunc pre, PassFunc post) 
     ENTER;
     AST_CALLBACK(pre, node);
 
+    traverse_while_definition(node->nterm, pre, post);
+    traverse_function_body(node->body, pre, post);
+
     AST_CALLBACK(post, node);
     RET;
 }
@@ -75,6 +81,9 @@ void traverse_do_clause(ast_do_clause* node, PassFunc pre, PassFunc post) {
     
     ENTER;
     AST_CALLBACK(pre, node);
+
+    traverse_function_body(node->body, pre, post);
+    traverse_while_definition(node->nterm, pre, post);
 
     AST_CALLBACK(post, node);
     RET;
@@ -98,6 +107,23 @@ void traverse_for_clause(ast_for_clause* node, PassFunc pre, PassFunc post) {
     
     ENTER;
     AST_CALLBACK(pre, node);
+
+    if(node->type != NULL)
+        traverse_type_name(node->type, pre, post);
+    else 
+        TRACE("no type name");
+    
+    if(node->symbol != NULL)
+        TRACE_TERM(node->symbol);
+    else 
+        TRACE("no symbol");
+    
+    if(node->expr != NULL)
+        traverse_expression(node->expr, pre, post);
+    else 
+        TRACE("no expression");
+
+    traverse_function_body(node->body, pre, post);
 
     AST_CALLBACK(post, node);
     RET;

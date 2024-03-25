@@ -90,7 +90,7 @@ static int get_prec(TokenType type) {
             prec = 80;
             break;
         default:
-            // no precidence
+            // no precedence
             TRACE("no precedence");
             prec = 0;
             break;
