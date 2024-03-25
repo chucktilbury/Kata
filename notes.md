@@ -7,6 +7,8 @@
 
 * Potential bug: over use of finalize_token_queue(). Requires more careful analysis because there are instances where a match is not made and tokens are finalized. The answer may be to only finalize at the module level.
 
+* Potential grammar problem: Take a look at list assignments.
+
 * Re-order non-terminals for efficiency. Minimize the need to reset the token queue as much as possible.
 
 * The parser needs to keep track of the current naming context and store the proper name when a new one is defined.
@@ -27,7 +29,7 @@
 
 ### Modules
 * list.c  
-* loop.c  
+* **(done)** loop.c  
 * **(done)** compound.c  
 * **(done)** except.c  
 * **(done)** expr.c  

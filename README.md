@@ -308,18 +308,24 @@ dict_init
 
 #####################
 #
-# Array parameter for an array reference. This is right-recursive rule that
-# allows syntax like asd[2][3].
+# Array parameter for an array reference.
 #
 array_param
-    = '[' ( expression / string_expression ) ']' ( array_param )*
+    = '[' ( expression / string_expression ) ']'
+
+#####################
+#
+# This is right-recursive rule that allows syntax like asd[2][3].
+#
+array_param_list
+    = array_param (array_param)*
 
 #####################
 #
 # An array reference is part of a compound_reference.
 #
 array_reference
-    = SYMBOL array_param
+    = SYMBOL array_param_list
 
 #####################
 #

@@ -51,6 +51,7 @@ ast_list_init* parse_list_init();
 ast_dict_init_element* parse_dict_init_element();
 ast_dict_init* parse_dict_init();
 ast_array_param* parse_array_param();
+ast_array_param_list* parse_array_param_list();
 ast_array_reference* parse_array_reference();
 
 // func.c

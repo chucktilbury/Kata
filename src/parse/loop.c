@@ -78,6 +78,7 @@ ast_while_definition* parse_while_definition() {
                     EXPECTED("a ')'");
                     state = 102;
                 }
+                break;
 
             case 100:
                 // completed parse
@@ -145,6 +146,7 @@ ast_while_clause* parse_while_clause() {
                     EXPECTED("a function body");
                     state = 102;
                 }
+                break;
 
             case 100:
                 // completed parse

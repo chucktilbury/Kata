@@ -115,6 +115,7 @@ const char* nterm_to_str(ast_node* node) {
         (type == AST_type_name_list)? "type_name_list" :
         (type == AST_function_assignment)? "function_assignment" :
         (type == AST_compound_name_list)? "compound_name_list" :
+        (type == AST_array_param_list)? "array_param_list" :
             "UNKNOWN");
 }
 
