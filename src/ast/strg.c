@@ -24,14 +24,14 @@
 void traverse_formatted_strg(ast_formatted_strg* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);
     TRACE_TERM(node->str);
     TRACE("expr list len: %d", len_llist(node->exprs));
     traverse_expression_list(node->exprs, pre, post);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -48,8 +48,6 @@ void traverse_formatted_strg(ast_formatted_strg* node, PassFunc pre, PassFunc po
 void traverse_string_literal(ast_string_literal* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);
@@ -57,6 +55,8 @@ void traverse_string_literal(ast_string_literal* node, PassFunc pre, PassFunc po
         TRACE_TERM(node->literal);
     else
         traverse_formatted_strg(node->fmt, pre, post);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -74,8 +74,6 @@ void traverse_string_literal(ast_string_literal* node, PassFunc pre, PassFunc po
 void traverse_string_expr_item(ast_string_expr_item* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);
@@ -111,8 +109,6 @@ void traverse_string_expr_item(ast_string_expr_item* node, PassFunc pre, PassFun
 void traverse_string_expr(ast_string_expr* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);

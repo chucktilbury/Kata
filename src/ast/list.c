@@ -25,8 +25,6 @@
 void traverse_list_init(ast_list_init* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);
@@ -52,8 +50,6 @@ void traverse_list_init(ast_list_init* node, PassFunc pre, PassFunc post) {
 void traverse_dict_init_element(ast_dict_init_element* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);
@@ -77,8 +73,6 @@ void traverse_dict_init_element(ast_dict_init_element* node, PassFunc pre, PassF
 void traverse_dict_init(ast_dict_init* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);
@@ -104,8 +98,6 @@ void traverse_dict_init(ast_dict_init* node, PassFunc pre, PassFunc post) {
 void traverse_array_param(ast_array_param* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);
@@ -137,8 +129,6 @@ void traverse_array_param(ast_array_param* node, PassFunc pre, PassFunc post) {
 void traverse_array_param_list(ast_array_param_list* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);
@@ -164,8 +154,6 @@ void traverse_array_param_list(ast_array_param_list* node, PassFunc pre, PassFun
 void traverse_array_reference(ast_array_reference* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);

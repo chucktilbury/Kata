@@ -17,8 +17,8 @@ extern ParserState* parser_state;
 
 const char* scope_name(ScopeType type) {
 
-    return (type == SCOPE_PUB)? "PUBLIC": 
-            (type == SCOPE_PRIV)? "PRIVATE": 
+    return (type == SCOPE_PUB)? "PUBLIC":
+            (type == SCOPE_PRIV)? "PRIVATE":
             (type == SCOPE_PROT)? "PROTECTED": "UNKNOWN" ;
 
 }
@@ -34,9 +34,7 @@ void init_parser(const char* fname) {
     ENTER;
     TRACE("file name: \"%s\"", fname);
     init_scanner(fname);
-    parser_state = _ALLOC_T(ParserState);
-    parser_state->scope = SCOPE_PRIV;
-    parser_state->is_import = false;
+    create_parser_state();
     RET;
 }
 

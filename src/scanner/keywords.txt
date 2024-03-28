@@ -49,3 +49,6 @@ float
 not
 any
 function
+func
+var
+variable

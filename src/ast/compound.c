@@ -25,8 +25,6 @@
 void traverse_compound_name(ast_compound_name* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -54,8 +52,6 @@ void traverse_compound_name(ast_compound_name* node, PassFunc pre, PassFunc post
 void traverse_compound_name_list(ast_compound_name_list* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -82,8 +78,6 @@ void traverse_compound_name_list(ast_compound_name_list* node, PassFunc pre, Pas
 void traverse_compound_ref_item(ast_compound_ref_item* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -109,8 +103,6 @@ void traverse_compound_ref_item(ast_compound_ref_item* node, PassFunc pre, PassF
 void traverse_compound_reference(ast_compound_reference* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);

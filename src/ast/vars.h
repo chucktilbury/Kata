@@ -33,7 +33,7 @@ typedef struct _ast_var_decl_list_ {
 
 /**
  *  var_definition
- *      = var_decl ( '=' assignment_item )?
+ *      = ( 'var' / 'variable' ) var_decl ( '=' assignment_item )?
  */
 typedef struct _ast_var_definition_ {
     ast_node node;

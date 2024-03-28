@@ -13,12 +13,15 @@
 
 void traverse_ast(ast_module* node, PassFunc pre, PassFunc post) {
 
-    assert(node != NULL);
-
     ENTER;
-    AST_CALLBACK(pre, node);
-    traverse_module(node, pre, post);
-    AST_CALLBACK(post, node);
+    if(node != NULL) {
+        AST_CALLBACK(pre, node);
+        traverse_module(node, pre, post);
+        AST_CALLBACK(post, node);
+    }
+    else {
+        TRACE("no ast present");
+    }
     RET;
 }
 
@@ -66,7 +69,6 @@ const char* nterm_to_str(ast_node* node) {
         (type == AST_function_reference)? "function_reference" :
         (type == AST_create_reference)? "create_reference" :
         (type == AST_destroy_reference)? "destroy_reference" :
-        (type == AST_func_qualifier)? "func_qualifier" :
         (type == AST_function_declaration)? "function_declaration" :
         (type == AST_create_declaration)? "create_declaration" :
         (type == AST_destroy_declaration)? "destroy_declaration" :
@@ -116,6 +118,7 @@ const char* nterm_to_str(ast_node* node) {
         (type == AST_function_assignment)? "function_assignment" :
         (type == AST_compound_name_list)? "compound_name_list" :
         (type == AST_array_param_list)? "array_param_list" :
+        (type == AST_class_var_declaration)? "class_var_declaration" :
             "UNKNOWN");
 }
 

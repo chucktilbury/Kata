@@ -20,7 +20,9 @@ void post_test_pass(ast_node* node);
 
 int main(int argc, char** argv) {
 
+    PUSH_TRACE_STATE(false);
     ENTER;
+
     CmdLine cmd = create_cmd_line("The Simple programming language");
     add_cmd(cmd, "", "file", "Name of file to compile.", NULL, CMD_REQD | CMD_STR);
     parse_cmd_line(cmd, argc, argv);
@@ -33,6 +35,7 @@ int main(int argc, char** argv) {
     TRACE("End Parse");
     TRACE("--------------------------------------------");
 
+    SET_TRACE_STATE(true);
     TRY {
         TRACE("Begin Traverse");
         traverse_ast(node, pre_test_pass, post_test_pass);
@@ -44,6 +47,7 @@ int main(int argc, char** argv) {
     }
     FINAL
     TRACE("--------------------------------------------");
+    POP_TRACE_STATE();
 
     RETV(0);
 }

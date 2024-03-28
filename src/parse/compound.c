@@ -42,6 +42,7 @@ ast_compound_name* parse_compound_name() {
                 if(TOK_SYMBOL == token_type(tok)) {
                     append_llist(lst, tok);
                     add_string_Str(str, tok->str);
+                    TRACE_TERM(tok);
                     advance_token();
                     state = 1;
                 }
@@ -63,9 +64,10 @@ ast_compound_name* parse_compound_name() {
                 break;
             case 2:
                 // must be a symbol or it's not a match (conflict with create/destroy)
-                if((TOK_CREATE == TTYPE) || (TOK_DESTROY == TTYPE)) 
+                if((TOK_CREATE == TTYPE) || (TOK_DESTROY == TTYPE))
                     state = 101;
                 else if(TOK_SYMBOL == token_type(tok)) {
+                    TRACE_TERM(tok);
                     append_llist(lst, tok);
                     add_string_Str(str, tok->str);
                     advance_token();
@@ -220,6 +222,7 @@ ast_compound_ref_item* parse_compound_ref_item() {
 
     if(TOK_SYMBOL == token_type(tok)) {
         node = CREATE_AST_NODE(AST_compound_ref_item, ast_compound_ref_item);
+        TRACE_TERM(tok);
         node->token = tok;
         node->nterm = NULL;
         advance_token();

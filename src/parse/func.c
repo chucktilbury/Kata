@@ -216,84 +216,10 @@ ast_destroy_reference* parse_destroy_reference() {
 }
 
 /**
- * @brief The function qualifier has one,the other or both, but only one of
- * each. The function keyword is simply ignored.
- *
- *  func_qualifier
- *      = ('virtual')?
- *      / ('function')?
- *
- * @return ast_func_qualifier*
- *
- */
-ast_func_qualifier* parse_func_qualifier() {
-
-    ENTER;
-    ast_func_qualifier* node = NULL;
-    bool is_virtual = false;
-    bool func_seen = false;
-
-    int state = 0;
-    bool finished = false;
-
-    while(!finished) {
-        switch(state) {
-            case 0:
-                // could be either keyword
-                if(TOK_VIRTUAL == TTYPE) {
-                    is_virtual = true;
-                    advance_token();
-                    state = 2;
-                }
-                else if(TOK_FUNCTION == TTYPE) {
-                    advance_token();
-                    func_seen = true;
-                    state = 1;
-                }
-                else
-                    state = 100;
-                break;
-
-            case 1:
-                // could be the 'virtual' keyword or not a match
-                if(TOK_VIRTUAL == TTYPE) {
-                    is_virtual = true;
-                    advance_token();
-                    state = 100;
-                }
-                else
-                    state = 100;
-                break;
-
-            case 2:
-                // could be the 'function' keyword or not a match
-                if(TOK_FUNCTION == TTYPE) {
-                    advance_token();
-                    func_seen = true;
-                }
-                state = 100;
-                break;
-
-            case 100:
-                // create the data structure whether there is a match or not
-                node = CREATE_AST_NODE(AST_func_qualifier, ast_func_qualifier);
-                node->is_virtual = is_virtual;
-                node->func_seen = func_seen;
-                break;
-
-            default:
-                fatal_error("unexpected state in %s: %d", __func__, state);
-        }
-    }
-
-    RETV(node);
-}
-
-/**
  * @brief
  *
  *  function_declaration
- *      = (func_qualifier)? SYMBOL type_name_list type_name_list
+ *      = ('func' / 'function') ('virtual')? SYMBOL type_name_list type_name_list
  *
  * @return ast_function_declaration*
  *
@@ -303,7 +229,7 @@ ast_function_declaration* parse_function_declaration() {
     ENTER;
     ast_function_declaration* node = NULL;
     Token* name;
-    ast_func_qualifier* qual;
+    bool is_virtual = false;
     ast_type_name_list* inputs;
     ast_type_name_list* outputs;
     void* post = post_token_queue();
@@ -311,67 +237,98 @@ ast_function_declaration* parse_function_declaration() {
     int state = 0;
     bool finished = false;
 
+    PUSH_TRACE_STATE(false);
     while(!finished) {
         switch(state) {
             case 0:
-                // qualifier is always a match.
-                qual = parse_func_qualifier();
-                state = 1;
-                break;
-
-            case 1:
-                // SYMBOL token or not a match
-                if(TOK_SYMBOL == TTYPE) {
-                    name = get_token();
+                TRACE("state: %d", state);
+                // func or not a match
+                if((TOK_FUNC == TTYPE) || (TOK_FUNCTION == TTYPE)) {
                     advance_token();
-                    state = 2;
-                }
-                else if(qual->is_virtual || qual->func_seen) {
-                    EXPECTED("a function definition");
-                    state = 102;
+                    state = 1;
                 }
                 else
                     state = 101;
                 break;
 
+            case 1:
+                TRACE("state: %d", state);
+                // 'virtual' or SYMBOL token or not a match
+                if(TOK_SYMBOL == TTYPE) {
+                    name = get_token();
+                    advance_token();
+                    TRACE_TERM(name);
+                    state = 2;
+                }
+                else if(TOK_VIRTUAL == TTYPE) {
+                    is_virtual = true;
+                    advance_token();
+                    state = 4;
+                }
+                else {
+                    state = 101;
+                }
+                break;
+
             case 2:
+                TRACE("state: %d", state);
                 // type_name list or an error
                 if(NULL != (inputs = parse_type_name_list()))
                     state = 3;
                 else {
+                    reset_token_queue(post);
                     EXPECTED("a type name list");
                     state = 102;
                 }
                 break;
 
             case 3:
+                TRACE("state: %d", state);
                 // type_name_list or an error
                 if(NULL != (outputs = parse_type_name_list()))
-                    state = 3;
+                    state = 100;
                 else {
                     EXPECTED("a type name list");
                     state = 102;
                 }
                 break;
 
+            case 4:
+                // must be a SYMBOL or not a match
+                TRACE("state: %d", state);
+                if(TOK_SYMBOL == TTYPE) {
+                    name = get_token();
+                    advance_token();
+                    TRACE_TERM(name);
+                    state = 2;
+                }
+                else {
+                    state = 101;
+                }
+                break;
+
+
             case 100:
+                TRACE("state: %d", state);
                 // matching object
                 finished = true;
                 node = CREATE_AST_NODE(AST_function_declaration, ast_function_declaration);
                 node->name = name;
-                node->qual = qual;
+                node->is_virtual = is_virtual;
                 node->inputs = inputs;
                 node->outputs = outputs;
                 finalize_token_queue();
                 break;
 
             case 101:
+                TRACE("state: %d", state);
                 // object not a match
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
+                TRACE("state: %d", state);
                 // error
                 node = NULL;
                 finished = true;
@@ -382,6 +339,7 @@ ast_function_declaration* parse_function_declaration() {
         }
     }
 
+    POP_TRACE_STATE();
     RETV(node);
 }
 
@@ -389,7 +347,7 @@ ast_function_declaration* parse_function_declaration() {
  * @brief
  *
  *  create_declaration
- *      = (func_qualifier)? 'create' type_name_list
+ *      = ('func' / 'function') ('virtual')? 'create' type_name_list
  *
  * @return ast_create_declaration*
  *
@@ -398,7 +356,7 @@ ast_create_declaration* parse_create_declaration() {
 
     ENTER;
     ast_create_declaration* node = NULL;
-    ast_func_qualifier* qual;
+    bool is_virtual = false;
     ast_type_name_list* inputs;
     void* post = post_token_queue();
 
@@ -408,21 +366,29 @@ ast_create_declaration* parse_create_declaration() {
     while(!finished) {
         switch(state) {
             case 0:
-                // qualifier is always a match.
-                qual = parse_func_qualifier();
-                state = 1;
-                break;
-
-            case 1:
-                // 'create' keyword or not a match
-                if(TOK_CREATE == TTYPE)
-                    state = 2;
-                else if(qual->is_virtual || qual->func_seen) {
-                    EXPECTED("a function definition");
-                    state = 102;
+                // 'function' keyword or not a match'
+                if((TOK_FUNC == TTYPE) || (TOK_FUNCTION == TTYPE)) {
+                    advance_token();
+                    state = 1;
                 }
                 else
                     state = 101;
+                break;
+
+            case 1:
+                // virtual or create or not a match
+                if(TOK_CREATE == TTYPE) {
+                    advance_token();
+                    state = 2;
+                }
+                else if(TOK_VIRTUAL == TTYPE) {
+                    is_virtual = true;
+                    advance_token();
+                    state = 3;
+                }
+                else {
+                    state = 101;
+                }
                 break;
 
             case 2:
@@ -435,11 +401,21 @@ ast_create_declaration* parse_create_declaration() {
                 }
                 break;
 
+            case 3:
+                // must be CREATE or nt a match
+                if(TOK_CREATE == TTYPE) {
+                    advance_token();
+                    state = 2;
+                }
+                else
+                    state = 101;
+                break;
+
             case 100:
                 // matching object
                 finished = true;
                 node = CREATE_AST_NODE(AST_create_declaration, ast_create_declaration);
-                node->qual = qual;
+                node->is_virtual = is_virtual;
                 node->inputs = inputs;
                 finalize_token_queue();
                 break;
@@ -468,7 +444,7 @@ ast_create_declaration* parse_create_declaration() {
  * @brief
  *
  *  destroy_declaration
- *      = (func_qualifier)? 'destroy'
+ *      = ('func' / 'function') ('virtual')? 'destroy'
  *
  * @return ast_destroy_declaration*
  *
@@ -477,7 +453,7 @@ ast_destroy_declaration* parse_destroy_declaration() {
 
     ENTER;
     ast_destroy_declaration* node = NULL;
-    ast_func_qualifier* qual;
+    bool is_virtual = false;
     void* post = post_token_queue();
 
     int state = 0;
@@ -486,18 +462,35 @@ ast_destroy_declaration* parse_destroy_declaration() {
     while(!finished) {
         switch(state) {
             case 0:
-                // qualifier is always a match.
-                qual = parse_func_qualifier();
-                state = 1;
+                // 'function' keyword or not a match'
+                if((TOK_FUNC == TTYPE) || (TOK_FUNCTION == TTYPE)) {
+                    advance_token();
+                    state = 1;
+                }
+                else
+                    state = 101;
                 break;
 
             case 1:
                 // 'destroy' keyword or not a match
-                if(TOK_DESTROY == TTYPE)
+                if(TOK_DESTROY == TTYPE) {
+                    advance_token();
                     state = 100;
-                else if(qual->is_virtual || qual->func_seen) {
-                    EXPECTED("a function definition");
-                    state = 102;
+                }
+                else if(TOK_VIRTUAL == TTYPE) {
+                    advance_token();
+                    is_virtual = true;
+                    state = 2;
+                }
+                else
+                    state = 101;
+                break;
+
+            case 2:
+                // DESTROY or not a match
+                if(TOK_DESTROY == TTYPE) {
+                    advance_token();
+                    state = 100;
                 }
                 else
                     state = 101;
@@ -507,7 +500,7 @@ ast_destroy_declaration* parse_destroy_declaration() {
                 // matching object
                 finished = true;
                 node = CREATE_AST_NODE(AST_destroy_declaration, ast_destroy_declaration);
-                node->qual = qual;
+                node->is_virtual = is_virtual;
                 finalize_token_queue();
                 break;
 
@@ -535,7 +528,7 @@ ast_destroy_declaration* parse_destroy_declaration() {
  * @brief
  *
  *  function_definition
- *      = (func_qualifier)? compound_name
+ *      = ('func' / 'function') ('virtual')? compound_name
  *          var_decl_list var_decl_list function_body
  *
  * @return ast_function_definition*
@@ -545,7 +538,7 @@ ast_function_definition* parse_function_definition() {
 
     ENTER;
     ast_function_definition* node = NULL;
-    ast_func_qualifier* qual;
+    bool is_virtual = false;
     ast_compound_name* name;
     ast_var_decl_list* inputs;
     ast_var_decl_list* outputs;
@@ -558,22 +551,31 @@ ast_function_definition* parse_function_definition() {
     while(!finished) {
         switch(state) {
             case 0:
-                // qualifier is always a match.
-                qual = parse_func_qualifier();
-                state = 1;
+                // 'function' keyword or not a match'
+                if((TOK_FUNC == TTYPE) || (TOK_FUNCTION == TTYPE)) {
+                    advance_token();
+                    state = 1;
+                }
+                else
+                    state = 101;
                 break;
 
             case 1:
                 // compound reference or not a match
-                if(NULL != (name = parse_compound_name())) 
+                if(NULL != (name = parse_compound_name()))
                     state = 2;
-                else 
+                else if(TOK_VIRTUAL == TTYPE) {
+                    advance_token();
+                    is_virtual = true;
+                    state = 5;
+                }
+                else
                     state = 101;
                 break;
 
             case 2:
                 // var decl list or not a match
-                if(NULL != (inputs = parse_var_decl_list())) 
+                if(NULL != (inputs = parse_var_decl_list()))
                     state = 3;
                 else {
                     EXPECTED("input parameters");
@@ -583,7 +585,7 @@ ast_function_definition* parse_function_definition() {
 
             case 3:
                 // var decl list or an error
-                if(NULL != (outputs = parse_var_decl_list())) 
+                if(NULL != (outputs = parse_var_decl_list()))
                     state = 4;
                 else {
                     EXPECTED("output parameters");
@@ -601,11 +603,19 @@ ast_function_definition* parse_function_definition() {
                 }
                 break;
 
+            case 5:
+                // must be a compound name or not a match
+                if(NULL != (name = parse_compound_name()))
+                    state = 2;
+                else
+                    state = 101;
+                break;
+
             case 100:
                 // matching object
                 finished = true;
                 node = CREATE_AST_NODE(AST_function_definition, ast_function_definition);
-                node->qual = qual;
+                node->is_virtual = is_virtual;
                 node->name = name;
                 node->inputs = inputs;
                 node->outputs = outputs;
@@ -661,7 +671,7 @@ ast_create_name* parse_create_name() {
                     advance_token();
                     state = 1;
                 }
-                else 
+                else
                     state = 101;
                 break;
 
@@ -671,7 +681,7 @@ ast_create_name* parse_create_name() {
                     advance_token();
                     state = 2;
                 }
-                else 
+                else
                     state = 101;
                 break;
 
@@ -687,7 +697,7 @@ ast_create_name* parse_create_name() {
                     advance_token();
                     state = 100;
                 }
-                else { 
+                else {
                     EXPECTED("a SYMBOL or 'create'");
                     state = 102;
                 }
@@ -749,7 +759,7 @@ ast_destroy_name* parse_destroy_name() {
                     advance_token();
                     state = 1;
                 }
-                else 
+                else
                     state = 101;
                 break;
 
@@ -759,7 +769,7 @@ ast_destroy_name* parse_destroy_name() {
                     advance_token();
                     state = 2;
                 }
-                else 
+                else
                     state = 101;
                 break;
 
@@ -775,7 +785,7 @@ ast_destroy_name* parse_destroy_name() {
                     advance_token();
                     state = 100;
                 }
-                else { 
+                else {
                     EXPECTED("a SYMBOL or 'destroy'");
                     state = 102;
                 }
@@ -813,7 +823,8 @@ ast_destroy_name* parse_destroy_name() {
  * @brief
  *
  *  create_definition
- *      = (func_qualifier)? create_name var_decl_list function_body
+ *      = ('func' / 'function') ('virtual')? create_name
+ *              var_decl_list function_body
  *
  * @return ast_create_definition*
  *
@@ -823,7 +834,7 @@ ast_create_definition* parse_create_definition() {
     ENTER;
     ast_create_definition* node = NULL;
     ast_create_name* name;
-    ast_func_qualifier* qual;
+    bool is_virtual = false;
     ast_var_decl_list* inputs;
     ast_function_body* body;
     void* post = post_token_queue();
@@ -834,22 +845,31 @@ ast_create_definition* parse_create_definition() {
     while(!finished) {
         switch(state) {
             case 0:
-                // qualifier is always a match.
-                qual = parse_func_qualifier();
-                state = 1;
+                // 'function' keyword or not a match'
+                if((TOK_FUNC == TTYPE) || (TOK_FUNCTION == TTYPE)) {
+                    advance_token();
+                    state = 1;
+                }
+                else
+                    state = 101;
                 break;
 
             case 1:
-                // create name or not a match
-                if(NULL != (name = parse_create_name())) 
+                // create name or 'virtual' or not a match
+                if(NULL != (name = parse_create_name()))
                     state = 2;
-                else 
+                else if(TOK_VIRTUAL == TTYPE) {
+                    is_virtual = true;
+                    advance_token();
+                    state = 5;
+                }
+                else
                     state = 101;
                 break;
 
             case 2:
                 // var decl list or not a match
-                if(NULL != (inputs = parse_var_decl_list())) 
+                if(NULL != (inputs = parse_var_decl_list()))
                     state = 4;
                 else {
                     EXPECTED("input parameters");
@@ -867,11 +887,19 @@ ast_create_definition* parse_create_definition() {
                 }
                 break;
 
+            case 5:
+                // must be a create_name or not a match
+                if(NULL != (name = parse_create_name()))
+                    state = 2;
+                else
+                    state = 101;
+                break;
+
             case 100:
                 // matching object
                 finished = true;
                 node = CREATE_AST_NODE(AST_create_definition, ast_create_definition);
-                node->qual = qual;
+                node->is_virtual = is_virtual;
                 node->name = name;
                 node->inputs = inputs;
                 node->body = body;
@@ -902,7 +930,7 @@ ast_create_definition* parse_create_definition() {
  * @brief
  *
  *  destroy_definition
- *      = (func_qualifier)? destroy_name function_body
+ *      = ('func' / 'function') ('virtual')? destroy_name function_body
  *
  * @return ast_destroy_definition*
  *
@@ -912,7 +940,7 @@ ast_destroy_definition* parse_destroy_definition() {
     ENTER;
     ast_destroy_definition* node = NULL;
     ast_destroy_name* name;
-    ast_func_qualifier* qual;
+    bool is_virtual = false;
     ast_function_body* body;
     void* post = post_token_queue();
 
@@ -922,20 +950,29 @@ ast_destroy_definition* parse_destroy_definition() {
     while(!finished) {
         switch(state) {
             case 0:
-                // qualifier is always a match.
-                qual = parse_func_qualifier();
-                state = 1;
-                break;
-
-            case 1:
-                // create name or not a match
-                if(NULL != (name = parse_destroy_name())) 
-                    state = 4;
-                else 
+                // 'function' keyword or not a match'
+                if((TOK_FUNC == TTYPE) || (TOK_FUNCTION == TTYPE)) {
+                    advance_token();
+                    state = 1;
+                }
+                else
                     state = 101;
                 break;
 
-            case 4:
+            case 1:
+                // destroy_name virtual or not a match
+                if(NULL != (name = parse_destroy_name()))
+                    state = 2;
+                else if(TOK_VIRTUAL == TTYPE) {
+                    is_virtual = true;
+                    advance_token();
+                    state = 3;
+                }
+                else
+                    state = 101;
+                break;
+
+            case 2:
                 // function body or error
                 if(NULL != (body = parse_function_body()))
                     state = 100;
@@ -945,11 +982,19 @@ ast_destroy_definition* parse_destroy_definition() {
                 }
                 break;
 
+            case 3:
+                // destroy_name virtual or not a match
+                if(NULL != (name = parse_destroy_name()))
+                    state = 2;
+                else
+                    state = 101;
+                break;
+
             case 100:
                 // matching object
                 finished = true;
                 node = CREATE_AST_NODE(AST_destroy_definition, ast_destroy_definition);
-                node->qual = qual;
+                node->is_virtual = is_virtual;
                 node->name = name;
                 node->body = body;
                 finalize_token_queue();
@@ -1003,7 +1048,7 @@ ast_function_body* parse_function_body() {
                     advance_token();
                     state = 1;
                 }
-                else 
+                else
                     state = 101;
                 break;
 
@@ -1016,7 +1061,7 @@ ast_function_body* parse_function_body() {
                     state = 100;
                 }
                 else {
-                    EXPECTED("funciton body element");
+                    EXPECTED("function body element");
                     state = 102;
                 }
                 break;
@@ -1053,7 +1098,7 @@ ast_function_body* parse_function_body() {
  * @brief
  *
  *  start_function
- *      = ('function')? 'start' function_body
+ *      = ('func' / 'function') 'start' function_body
  *
  * @return ast_start_function*
  *
@@ -1071,8 +1116,8 @@ ast_start_function* parse_start_function() {
     while(!finished) {
         switch(state) {
             case 0:
-                // 'start' or not a match
-                if(TOK_START == TTYPE) {
+                // 'function' keyword or not a match'
+                if((TOK_FUNC == TTYPE) || (TOK_FUNCTION == TTYPE)) {
                     advance_token();
                     state = 1;
                 }
@@ -1081,6 +1126,16 @@ ast_start_function* parse_start_function() {
                 break;
 
             case 1:
+                // must be start or not a match
+                if(TOK_START == TTYPE) {
+                    advance_token();
+                    state = 2;
+                }
+                else
+                    state = 101;
+                break;
+
+            case 2:
                 // must be function body or an error
                 if(NULL != (body = parse_function_body())) {
                     EXPECTED("function body");
@@ -1175,7 +1230,7 @@ ast_function_assignment* parse_function_assignment() {
                 node = NULL;
                 finished = true;
                 break;
-            
+
 
             default:
                 fatal_error("unexpected state in %s: %d", __func__, state);

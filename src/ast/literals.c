@@ -26,12 +26,13 @@
 void traverse_scope_operator(ast_scope_operator* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
+
     TRACE_TERM(node->token);
+
+    AST_CALLBACK(post, node);
     RET;
 }
 
@@ -55,8 +56,6 @@ void traverse_scope_operator(ast_scope_operator* node, PassFunc pre, PassFunc po
 void traverse_literal_type_name(ast_literal_type_name* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -82,8 +81,6 @@ void traverse_literal_type_name(ast_literal_type_name* node, PassFunc pre, PassF
 void traverse_literal_value(ast_literal_value* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -107,8 +104,6 @@ void traverse_literal_value(ast_literal_value* node, PassFunc pre, PassFunc post
 void traverse_type_name(ast_type_name* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -141,8 +136,6 @@ void traverse_type_name(ast_type_name* node, PassFunc pre, PassFunc post) {
 void traverse_type_name_list(ast_type_name_list* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -160,8 +153,6 @@ void traverse_type_name_list(ast_type_name_list* node, PassFunc pre, PassFunc po
 void traverse_error(ast_error* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);

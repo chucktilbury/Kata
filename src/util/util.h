@@ -453,9 +453,18 @@ typedef enum {
     LIST_ERROR,
 } UTIL_EXCEPTIONS;
 
+//------------------------------------------------------------------------------
+//
+// trace.c
+//
+//------------------------------------------------------------------------------
 #ifdef USE_TRACE
 extern int trace_count;
 extern const int trace_increment;
+void push_trace_state(bool state);
+void set_trace_state(bool state);
+bool pop_trace_state();
+bool peek_trace_state();
 
 #define PAD printf("%*s", trace_count, "")
 //#define CAP printf(" (%d)\n", __LINE__)
@@ -463,44 +472,72 @@ extern const int trace_increment;
 
 #define TRACE(f, ...)                          \
     do {                                       \
-        PAD;                                   \
-        printf("TRACE: %s(): ", __func__);     \
-        printf((f) __VA_OPT__(,) __VA_ARGS__); \
-        CAP;                                   \
+        if(peek_trace_state()) { \
+            PAD;                                   \
+            printf("TRACE: %s(): ", __func__);     \
+            printf((f) __VA_OPT__(,) __VA_ARGS__); \
+            CAP;              \
+        } \
     } while(false)
 
 #define ENTER                              \
     do {                                   \
-        PAD;                               \
-        printf("ENTER: %s(): ", __func__); \
-        trace_count += trace_increment;    \
-        CAP;                               \
+        if(peek_trace_state()) { \
+            PAD;                               \
+            printf("ENTER: %s(): ", __func__); \
+            trace_count += trace_increment;    \
+            CAP;                               \
+        } \
     } while(false)
 
 #define RET                                 \
     do {                                    \
-        trace_count -= trace_increment;     \
-        PAD;                                \
-        printf("RETURN: %s(): ", __func__); \
-        CAP;                                \
+        if(peek_trace_state()) { \
+            trace_count -= trace_increment;     \
+            PAD;                                \
+            printf("RETURN: %s(): ", __func__); \
+            CAP;                                \
+        } \
         return;                             \
     } while(false)
 
 #define RETV(v)                                     \
     do {                                            \
-        trace_count -= trace_increment;             \
-        PAD;                                        \
-        printf("RETURN(%s): %s(): (%p)", #v, __func__, (void*)(v)); \
-        CAP;                                        \
+        if(peek_trace_state()) { \
+            trace_count -= trace_increment;             \
+            PAD;                                        \
+            printf("RETURN(%s): %s(): (%p)", #v, __func__, (void*)(v)); \
+            CAP;                                        \
+        } \
         return (v);                                 \
     } while(false)
 
 #define EXIT(n)                               \
     do {                                      \
-        PAD;                                  \
-        printf("EXIT(#n): %s(): ", __func__); \
-        CAP;                                  \
+        if(peek_trace_state()) { \
+            PAD;                                  \
+            printf("EXIT(#n): %s(): ", __func__); \
+            CAP;                                  \
+        } \
         exit(v);                              \
+    } while(false)
+
+#define PUSH_TRACE_STATE(s) \
+    do { \
+        push_trace_state(s); \
+        TRACE("push trace state: %s", (s)? "true": "false"); \
+    } while(false)
+
+#define SET_TRACE_STATE(s) \
+    do { \
+        set_trace_state(s); \
+        TRACE("set trace state: %s", (s)? "true": "false"); \
+    } while(false)
+
+#define POP_TRACE_STATE() \
+    do { \
+        pop_trace_state(); \
+        TRACE("pop trace state"); \
     } while(false)
 
 #else
@@ -509,7 +546,10 @@ extern const int trace_increment;
 #define ENTER
 #define EXIT(n) exit(n)
 #define RET return
-#define RETV(v) return (v);
+#define RETV(v) return (v)
+#define PUSH_TRACE_STATE(s)
+#define POP_TRACE_STATE()
+#define SET_TRACE_STATE(s)
 
 #endif
 

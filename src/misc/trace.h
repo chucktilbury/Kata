@@ -20,18 +20,22 @@ void print_token(Token* tok);
 
 #define TRACE_TERM(t)                     \
     do {                                  \
-        PAD;                              \
-        printf("TERM: %s(): ", __func__); \
-        print_token(t);                   \
-        CAP;                              \
+        if(peek_trace_state()) { \
+            PAD;                              \
+            printf("TERM: %s(): ", __func__); \
+            print_token(t);                   \
+            CAP;                              \
+        } \
     } while(false)
 
 #define TRACE_NTERM(n)                        \
-    do {                                      \
-        PAD;                                  \
-        printf("NON-TERM: %s(): ", __func__); \
-        print_nonterminal(n);                 \
-        CAP;                                  \
+    do {   \
+        if(peek_trace_state()) {                                  \
+            PAD;                                  \
+            printf("NON-TERM: %s(): ", __func__); \
+            print_nonterminal(n);                 \
+            CAP;                                  \
+        } \
     } while(false)
 
 #else

@@ -162,7 +162,7 @@ ast_var_decl_list* parse_var_decl_list() {
  * @brief
  *
  *  var_definition
- *      = var_decl ( '=' assignment_item )?
+ *      = ( 'var' / 'variable' ) var_decl ( '=' assignment_item )?
  *
  * @return ast_var_definition*
  *
@@ -175,26 +175,33 @@ ast_var_definition* parse_var_definition() {
     ast_assignment_item* item;
     void* post = post_token_queue();
 
-    if(NULL != (nterm = parse_var_decl())) {
-        node = CREATE_AST_NODE(AST_var_definition, ast_var_definition);
-        node->is_assigned = false;
-        node->type = nterm;
+    if(TOK_VAR == TTYPE || TOK_VARIABLE == TTYPE) {
+        advance_token();
+        if(NULL != (nterm = parse_var_decl())) {
+            node = CREATE_AST_NODE(AST_var_definition, ast_var_definition);
+            node->is_assigned = false;
+            node->type = nterm;
 
-        // optional assignement
-        if(TOK_ASSIGN == TTYPE) {
-            advance_token();
+            // optional assignment
+            if(TOK_ASSIGN == TTYPE) {
+                advance_token();
 
-            if(NULL != (item = parse_assignment_item())) {
-                node->item = item;
-                node->is_assigned = true;
+                if(NULL != (item = parse_assignment_item())) {
+                    node->item = item;
+                    node->is_assigned = true;
+                }
+                else {
+                    EXPECTED("an assignment item");
+                    node = NULL;
+                }
             }
-            else {
-                EXPECTED("an assigment item");
-                node = NULL;
-            }
+
+            finalize_token_queue();
         }
-
-        finalize_token_queue();
+        else {
+            // nope
+            EXPECTED("a variable declaration");
+        }
     }
     else {
         // not an error

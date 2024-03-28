@@ -6,6 +6,8 @@
         "hash_map": "c"
     },
     "cSpell.words": [
+        "assignement",
+        "blart",
         "CCBRACE",
         "CPAREN",
         "CPBRACE",
@@ -18,11 +20,13 @@
         "graphiz",
         "longjmp",
         "NEQU",
+        "OCBRACE",
         "OPAREN",
         "OPBRACE",
         "OSBRACE",
         "parens",
         "RETV",
+        "sptr",
         "squote",
         "SSTR",
         "SSTRG",

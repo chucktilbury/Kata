@@ -45,8 +45,6 @@
 void traverse_function_body_element(ast_function_body_element* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);
@@ -139,8 +137,6 @@ void traverse_function_body_element(ast_function_body_element* node, PassFunc pr
 void traverse_break_statement(ast_break_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);
@@ -161,8 +157,6 @@ void traverse_break_statement(ast_break_statement* node, PassFunc pre, PassFunc 
 void traverse_continue_statement(ast_continue_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);
@@ -183,8 +177,6 @@ void traverse_continue_statement(ast_continue_statement* node, PassFunc pre, Pas
 void traverse_trace_statement(ast_trace_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);
@@ -205,8 +197,6 @@ void traverse_trace_statement(ast_trace_statement* node, PassFunc pre, PassFunc 
 void traverse_inline_statement(ast_inline_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -229,8 +219,6 @@ void traverse_inline_statement(ast_inline_statement* node, PassFunc pre, PassFun
 void traverse_yield_statement(ast_yield_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -253,8 +241,6 @@ void traverse_yield_statement(ast_yield_statement* node, PassFunc pre, PassFunc 
 void traverse_type_statement(ast_type_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -277,8 +263,6 @@ void traverse_type_statement(ast_type_statement* node, PassFunc pre, PassFunc po
 void traverse_exit_statement(ast_exit_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -301,8 +285,6 @@ void traverse_exit_statement(ast_exit_statement* node, PassFunc pre, PassFunc po
 void traverse_print_statement(ast_print_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -325,8 +307,6 @@ void traverse_print_statement(ast_print_statement* node, PassFunc pre, PassFunc 
 void traverse_return_statement(ast_return_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -349,8 +329,6 @@ void traverse_return_statement(ast_return_statement* node, PassFunc pre, PassFun
 void traverse_raise_statement(ast_raise_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);

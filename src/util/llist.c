@@ -1,8 +1,8 @@
 /**
  * @file llist.c
- * 
+ *
  * @brief Implement opaque generic single linked lists.
- * 
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 03-04-2024
@@ -73,7 +73,7 @@ void prepend_llist(LList ll, void* data) {
 
     elem->next = lst->head;
     lst->head = elem;
-    
+
     lst->changed = true;
     lst->length ++;
 }
@@ -90,7 +90,7 @@ void* init_llist_iter(LList ll) {
 
     if(lst->crnt != NULL)
         return lst->crnt->data;
-    else 
+    else
         return NULL;
 }
 
@@ -100,7 +100,7 @@ void* iter_llist(LList ll) {
     llist* lst = (llist*)ll;
     void* data = NULL;
 
-    if(lst->changed) 
+    if(lst->changed)
         RAISE(LIST_ERROR, "list changed while iterating");
 
     if(lst->crnt != NULL) {
@@ -115,9 +115,8 @@ void push_llist(LList ll, void* data) {
 
     assert(ll != NULL);
     assert(data != NULL);
-    ENTER;
+
     prepend_llist(ll, data);
-    RET;
 }
 
 void* pop_llist(LList ll) {

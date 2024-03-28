@@ -60,14 +60,25 @@ typedef struct _ast_namespace_definition_ {
 /**
  *  class_item
  *      = scope_operator
- *      / var_decl
- *      / func_decl
+ *      / class_var_declaration
+ *      / function_declaration
+ *      / create_declaration
+ *      / destroy_declaration
  */
 typedef struct _ast_class_item_ {
     ast_node node;
     ast_node* nterm;
     ScopeType scope;
 } ast_class_item;
+
+/**
+ *  class_var_declaration
+ *      ( 'var' / 'variable' ) var_decl
+ */
+typedef struct _ast_class_var_declaration_ {
+    ast_node node;
+    struct _ast_var_decl_* var;
+} ast_class_var_declaration;
 
 /**
  *  class_definition
@@ -87,5 +98,6 @@ void traverse_namespace_item(ast_namespace_item* node, PassFunc pre, PassFunc po
 void traverse_namespace_definition(ast_namespace_definition* node, PassFunc pre, PassFunc post);
 void traverse_class_item(ast_class_item* node, PassFunc pre, PassFunc post);
 void traverse_class_definition(ast_class_definition* node, PassFunc pre, PassFunc post);
+void traverse_class_var_declaration(ast_class_var_declaration* node, PassFunc pre, PassFunc post);
 
 #endif /* __MODULE_H__ */

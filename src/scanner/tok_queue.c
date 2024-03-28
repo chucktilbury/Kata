@@ -200,8 +200,8 @@ Token* advance_token() {
 }
 
 /**
- * @brief After a rule is parsed, this function sets the head of the token 
- * queue to the first unused token. All of the tokens that have been used 
+ * @brief After a rule is parsed, this function sets the head of the token
+ * queue to the first unused token. All of the tokens that have been used
  * are discarded and collected by the garbage collector.
  */
 void finalize_token_queue() {
@@ -314,4 +314,17 @@ void discard_token_queue() {
     advance_token();
     // Make the new token the head of the queue and the crnt item.
     tqueue->head = tqueue->crnt = tqueue->tail;
+}
+
+void dump_token_queue() {
+
+    assert(tqueue != NULL);
+    assert(tqueue->head != NULL);
+
+    void* mark = NULL;
+    Token* tok;
+    for(tok = iterate_token_queue(&mark); tok != NULL; tok = iterate_token_queue(&mark)) {
+        print_token(tok);
+        fputc('\n', stdout);
+    }
 }

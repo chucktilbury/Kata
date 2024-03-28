@@ -26,8 +26,6 @@ const char* scope_name(ScopeType type);
 void traverse_module(ast_module* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -38,7 +36,7 @@ void traverse_module(ast_module* node, PassFunc pre, PassFunc post) {
     while(NULL != (nterm = iter_llist(node->list))) {
         traverse_module_item((ast_module_item*)nterm, pre, post);
     }
-    
+
     AST_CALLBACK(post, node);
 
     AST_CALLBACK(post, node);
@@ -59,8 +57,6 @@ void traverse_module(ast_module* node, PassFunc pre, PassFunc post) {
 void traverse_module_item(ast_module_item* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -80,7 +76,7 @@ void traverse_module_item(ast_module_item* node, PassFunc pre, PassFunc post) {
             RAISE(TRAVERSE_ERROR, "unexpected node type in %s: %d",
                     __func__, ast_node_type(node->nterm));
     }
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
@@ -103,8 +99,6 @@ void traverse_module_item(ast_module_item* node, PassFunc pre, PassFunc post) {
 void traverse_namespace_item(ast_namespace_item* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -136,7 +130,7 @@ void traverse_namespace_item(ast_namespace_item* node, PassFunc pre, PassFunc po
             RAISE(TRAVERSE_ERROR, "unexpected node type in %s: %d",
                     __func__, ast_node_type(node->nterm));
     }
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
@@ -153,8 +147,6 @@ void traverse_namespace_item(ast_namespace_item* node, PassFunc pre, PassFunc po
 void traverse_namespace_definition(ast_namespace_definition* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -166,7 +158,7 @@ void traverse_namespace_definition(ast_namespace_definition* node, PassFunc pre,
     init_llist_iter(node->list);
     while(NULL != (nterm = iter_llist(node->list)))
         traverse_namespace_item((ast_namespace_item*)nterm, pre, post);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
@@ -187,8 +179,6 @@ void traverse_namespace_definition(ast_namespace_definition* node, PassFunc pre,
 void traverse_class_item(ast_class_item* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -198,8 +188,8 @@ void traverse_class_item(ast_class_item* node, PassFunc pre, PassFunc post) {
         case AST_scope_operator:
             traverse_scope_operator((ast_scope_operator*)node->nterm, pre, post);
             break;
-        case AST_var_decl:
-            traverse_var_decl((ast_var_decl*)node->nterm, pre, post);
+        case AST_class_var_declaration:
+            traverse_class_var_declaration((ast_class_var_declaration*)node->nterm, pre, post);
             break;
         case AST_function_declaration:
             traverse_function_declaration((ast_function_declaration*)node->nterm, pre, post);
@@ -232,8 +222,6 @@ void traverse_class_item(ast_class_item* node, PassFunc pre, PassFunc post) {
 void traverse_class_definition(ast_class_definition* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -242,15 +230,27 @@ void traverse_class_definition(ast_class_definition* node, PassFunc pre, PassFun
     TRACE("SCOPE: %s", scope_name(node->scope));
     if(node->parent)
         traverse_type_name(node->parent, pre, post);
-    
+
     ast_node* nterm;
 
     init_llist_iter(node->list);
     while(NULL != (nterm = iter_llist(node->list)))
         traverse_class_item((ast_class_item*)nterm, pre, post);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
 
 
+void traverse_class_var_declaration(ast_class_var_declaration* node, PassFunc pre, PassFunc post) {
+
+    assert(node != NULL);
+
+    ENTER;
+    AST_CALLBACK(pre, node);
+
+    traverse_var_decl(node->var, pre, post);
+
+    AST_CALLBACK(post, node);
+    RET;
+}

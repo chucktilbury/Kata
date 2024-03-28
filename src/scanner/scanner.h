@@ -48,10 +48,10 @@ Token* get_token();
 
 /**
  * @brief Return the token type.
- * 
- * @param tok 
- * @return TokenType 
- * 
+ *
+ * @param tok
+ * @return TokenType
+ *
  */
 TokenType token_type(Token* tok);
 
@@ -143,5 +143,6 @@ void init_scanner(const char* fname);
 void discard_token_queue();
 
 void print_token(Token* tok);
+void dump_token_queue();
 
 #endif /* __SCANNER_H__ */

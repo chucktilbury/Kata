@@ -14,7 +14,7 @@ typedef struct {
     const char* parm; // string recognized from the command line
     const char* name; // name to access the param by
     const char* help; // help string for this item
-    CmdFlag flag;     // Flags controling the behavior of this item
+    CmdFlag flag;     // Flags controlling the behavior of this item
     // all parameters are a list. A str is a single item.
     StrList* list;
     // A boolean value is always initialized to false and it set to true

@@ -24,8 +24,6 @@
 void traverse_var_decl(ast_var_decl* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -33,7 +31,7 @@ void traverse_var_decl(ast_var_decl* node, PassFunc pre, PassFunc post) {
     traverse_type_name(node->type, pre, post);
     TRACE("is_const: %s", node->is_const? "true": "false");
     TRACE_TERM(node->name);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
@@ -50,8 +48,6 @@ void traverse_var_decl(ast_var_decl* node, PassFunc pre, PassFunc post) {
 void traverse_var_decl_list(ast_var_decl_list* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -70,7 +66,7 @@ void traverse_var_decl_list(ast_var_decl_list* node, PassFunc pre, PassFunc post
  * @brief
  *
  *  var_definition
- *      = var_decl ( '=' assignment_item )?
+ *      = ( 'var' / 'variable' ) var_decl ( '=' assignment_item )?
  *
  * @param node
  *
@@ -78,8 +74,6 @@ void traverse_var_decl_list(ast_var_decl_list* node, PassFunc pre, PassFunc post
 void traverse_var_definition(ast_var_definition* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);

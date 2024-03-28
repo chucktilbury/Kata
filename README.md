@@ -97,7 +97,7 @@ module_item
 # program execution begins.
 #
 start_definition
-    = 'function' 'start' function_body
+    = ('func' / 'function') 'start' function_body
 
 #####################
 #
@@ -274,7 +274,7 @@ assignment_item
 # assignment. It's an initialization that may have to honor a const property.
 #
 var_definition
-    = var_decl ( '=' assignment_item )?
+    = ( 'var' / 'variable' ) var_decl ( '=' assignment_item )?
 
 #####################
 #
@@ -526,45 +526,33 @@ class_definition
 #
 class_item
     = scope_operator
-    / var_decl
+    / class_var_declaration
     / function_declaration
     / create_declaration
     / destroy_declaration
 
-
-#####################
-#
-# This specifies whether the function is virtual or not and also accepts the
-# 'function' keyword which is ignored. The word function exists to allow an
-# array of functions to be generated. So, it's a reference type, not a
-# definition type. But it seems good to allow it to be specified for clarity
-# when declaring or defining a function. Both the virtual and the function
-# keywords are optional and can appear in any order. However, they can only
-# appear once.
-#
-func_qualifier
-    = ('virtual')?
-    / ('function')?
+class_var_declaration
+    = ( 'var' / 'variable' ) var_decl
 
 #####################
 #
 function_declaration
-    = (func_qualifier)? SYMBOL type_name_list type_name_list
+    = ('func' / 'function') ('virtual')? SYMBOL type_name_list type_name_list
 
 #####################
 #
 create_declaration
-    = (func_qualifier)? 'create' type_name_list
+    = ('func' / 'function') ('virtual')? 'create' type_name_list
 
 #####################
 #
 destroy_declaration
-    = (func_qualifier)? 'destroy'
+    = ('func' / 'function') ('virtual')? 'destroy'
 
 #####################
 #
 function_definition
-    = (func_qualifier)? compound_name var_decl_list var_decl_list function_body
+    = ('func' / 'function') ('virtual')? compound_name var_decl_list var_decl_list function_body
 
 #####################
 #
@@ -576,7 +564,7 @@ create_name
 #####################
 #
 create_definition
-    = (func_qualifier)? create_name var_decl_list function_body
+    = ('func' / 'function') ('virtual')? create_name var_decl_list function_body
 
 #####################
 #
@@ -588,7 +576,7 @@ destroy_name
 #####################
 #
 destroy_definition
-    = (func_qualifier)? destroy_name function_body
+    = ('func' / 'function') ('virtual')? destroy_name function_body
 
 
 #####################

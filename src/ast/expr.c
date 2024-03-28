@@ -21,8 +21,6 @@
 void traverse_expression(ast_expression* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -74,8 +72,6 @@ void traverse_expression(ast_expression* node, PassFunc pre, PassFunc post) {
 void traverse_operator(ast_operator* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -99,8 +95,6 @@ void traverse_operator(ast_operator* node, PassFunc pre, PassFunc post) {
 void traverse_cast_statement(ast_cast_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -125,8 +119,6 @@ void traverse_cast_statement(ast_cast_statement* node, PassFunc pre, PassFunc po
 void traverse_expr_primary(ast_expr_primary* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -155,8 +147,6 @@ void traverse_expr_primary(ast_expr_primary* node, PassFunc pre, PassFunc post) 
 void traverse_expression_list(ast_expression_list* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -188,8 +178,6 @@ void traverse_expression_list(ast_expression_list* node, PassFunc pre, PassFunc 
 void traverse_assignment_item(ast_assignment_item* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -239,8 +227,6 @@ void traverse_assignment_item(ast_assignment_item* node, PassFunc pre, PassFunc 
 void traverse_assignment(ast_assignment* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);

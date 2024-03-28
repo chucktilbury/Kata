@@ -6,7 +6,7 @@
 #include "util.h"
 
 // Join a list where the str is between the elements of the list.
-Str* join_str_list(StrList* lst, const char* str) {
+Str* join_string_list(StrList* lst, const char* str) {
 
     Str* s = create_string(NULL);
     Str* tmp;

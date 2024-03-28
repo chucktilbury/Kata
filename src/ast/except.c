@@ -24,8 +24,6 @@
 void traverse_try_clause(ast_try_clause* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -49,8 +47,6 @@ void traverse_try_clause(ast_try_clause* node, PassFunc pre, PassFunc post) {
 void traverse_except_clause_mid(ast_except_clause_mid* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -75,8 +71,6 @@ void traverse_except_clause_mid(ast_except_clause_mid* node, PassFunc pre, PassF
 void traverse_except_clause_final(ast_except_clause_final* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
     
     ENTER;
     AST_CALLBACK(pre, node);
@@ -101,8 +95,6 @@ void traverse_except_clause_final(ast_except_clause_final* node, PassFunc pre, P
 void traverse_except_clause(ast_except_clause* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);

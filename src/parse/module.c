@@ -141,16 +141,20 @@ ast_namespace_item* parse_namespace_item() {
  */
 ast_namespace_definition* parse_namespace_definition() {
 
+    PUSH_TRACE_STATE(true);
     ENTER;
     ast_namespace_definition* node = NULL;
 
     if(TOK_NAMESPACE == TTYPE) {
         node = CREATE_AST_NODE(AST_namespace_definition, ast_namespace_definition);
-        node->scope = get_scope();
         advance_token();
+        node->scope = get_scope();
+        push_scope(SCOPE_PRIV);
 
         if(TOK_SYMBOL == TTYPE) {
             node->name = get_token();
+            TRACE_TERM(node->name);
+            push_name(node->name->str);
             advance_token();
 
             if(TOK_OCBRACE == TTYPE) {
@@ -162,7 +166,10 @@ ast_namespace_definition* parse_namespace_definition() {
                     if(NULL != (nterm = (ast_node*)parse_namespace_item()))
                         append_llist(node->list, nterm);
                     else if(TOK_CCBRACE == TTYPE) {
+                        TRACE("return here: %s", raw_string(get_compound_name()));
                         advance_token();
+                        pop_scope();
+                        pop_name();
                         break;
                     }
                     else {
@@ -183,7 +190,7 @@ ast_namespace_definition* parse_namespace_definition() {
         }
     }
     // else not a namespace definition
-
+    POP_TRACE_STATE();
     RETV(node);
 }
 
@@ -192,7 +199,7 @@ ast_namespace_definition* parse_namespace_definition() {
  *
  *  class_item
  *      = scope_operator
- *      / var_decl
+ *      / class_var_declaration
  *      / function_declaration
  *      / create_declaration
  *      / destroy_declaration
@@ -207,11 +214,12 @@ ast_class_item* parse_class_item() {
     ast_node* nterm;
     void* post = post_token_queue();
 
+    PUSH_TRACE_STATE(false);
     if((NULL != (nterm = (ast_node*)parse_scope_operator())) ||
-            (NULL != (nterm = (ast_node*)parse_var_decl())) ||
             (NULL != (nterm = (ast_node*)parse_destroy_declaration())) ||
             (NULL != (nterm = (ast_node*)parse_create_declaration())) ||
-            (NULL != (nterm = (ast_node*)parse_function_declaration()))) {
+            (NULL != (nterm = (ast_node*)parse_function_declaration())) ||
+            (NULL != (nterm = (ast_node*)parse_class_var_declaration()))) {
 
         node = CREATE_AST_NODE(AST_module_item, ast_class_item);
         node->nterm = nterm;
@@ -225,6 +233,7 @@ ast_class_item* parse_class_item() {
         TRACE_TERM(get_token());
         reset_token_queue(post);
     }
+    POP_TRACE_STATE();
 
     RETV(node);
 }
@@ -247,10 +256,12 @@ ast_class_definition* parse_class_definition() {
     if(TOK_CLASS == TTYPE) {
         node = CREATE_AST_NODE(AST_class_definition, ast_class_definition);
         node->scope = get_scope();
+        push_scope(SCOPE_PRIV);
         advance_token();
 
         if(TOK_SYMBOL == TTYPE) {
             node->name = get_token();
+            push_name(node->name->str);
             advance_token();
 
             // optional type name
@@ -282,6 +293,8 @@ ast_class_definition* parse_class_definition() {
                     if(NULL != (nterm = (ast_node*)parse_class_item()))
                         append_llist(node->list, nterm);
                     else if(TOK_CCBRACE == TTYPE) {
+                        pop_scope();
+                        pop_name();
                         advance_token();
                         break;
                     }
@@ -309,3 +322,66 @@ ast_class_definition* parse_class_definition() {
 }
 
 
+/**
+ * @brief
+ *
+ *  class_var_declaration
+ *      = ( 'var' / 'variable' ) var_decl
+ *
+ * @return ast_class_var_declaration*
+ *
+ */
+ast_class_var_declaration* parse_class_var_declaration() {
+
+    ENTER;
+    ast_class_var_declaration* node = NULL;
+    ast_var_decl* var;
+
+    bool finished = false;
+    int state = 0;
+    void* post = post_token_queue();
+
+    while(!finished) {
+        switch(state) {
+            case 0:
+                // must be var or no match
+                if(TOK_VAR == TTYPE || TOK_VARIABLE == TTYPE) {
+                    advance_token();
+                    state = 1;
+                }
+                else
+                    state = 101;
+                break;
+
+            case 1:
+                if(NULL != (var = parse_var_decl()))
+                    state = 100;
+                else {
+                    EXPECTED("a variable declaration");
+                    state = 102;
+                }
+                break;
+
+            case 100:
+                finished = true;
+                node = CREATE_AST_NODE(AST_class_var_declaration, ast_class_var_declaration);
+                node->var = var;
+                finished = true;
+                break;
+
+            case 101:
+                reset_token_queue(post);
+                finished = true;
+                break;
+
+            case 102:
+                finished = true;
+                break;
+
+            default:
+                fatal_error("unexpected state in %s: %d", __func__, state);
+        }
+    }
+
+    RETV(node);
+}

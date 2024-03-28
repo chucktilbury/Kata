@@ -52,7 +52,7 @@ void dummy_function() {
  * only the elements that are active in the array. There must be a dummy
  * function that does nothing if a node is entered without a handler. There
  * are no actual restrictions on the signature of the function called, but
- * all of the information needed by the pass function must be provided in the 
+ * all of the information needed by the pass function must be provided in the
  * AST node. This function should be used as a template for other passes.
  *
  * @param node
@@ -92,7 +92,6 @@ void pre_test_pass(ast_node* node) {
     (type == AST_function_reference)? pre_test_pass_func(node, AST_function_reference) :
     (type == AST_create_reference)? pre_test_pass_func(node, AST_create_reference) :
     (type == AST_destroy_reference)? pre_test_pass_func(node, AST_destroy_reference) :
-    (type == AST_func_qualifier)? pre_test_pass_func(node, AST_func_qualifier) :
     (type == AST_function_declaration)? pre_test_pass_func(node, AST_function_declaration) :
     (type == AST_create_declaration)? pre_test_pass_func(node, AST_create_declaration) :
     (type == AST_destroy_declaration)? pre_test_pass_func(node, AST_destroy_declaration) :
@@ -139,6 +138,7 @@ void pre_test_pass(ast_node* node) {
     (type == AST_operator)? pre_test_pass_func(node, AST_operator) :
     (type == AST_cast_statement)? pre_test_pass_func(node, AST_cast_statement) :
     (type == AST_case_item)? pre_test_pass_func(node, AST_case_item) :
+    (type == AST_class_var_declaration)? pre_test_pass_func(node, AST_class_var_declaration) :
 
         dummy_function();
 
@@ -176,7 +176,6 @@ void post_test_pass(ast_node* node) {
     (type == AST_function_reference)? post_test_pass_func(node, AST_function_reference) :
     (type == AST_create_reference)? post_test_pass_func(node, AST_create_reference) :
     (type == AST_destroy_reference)? post_test_pass_func(node, AST_destroy_reference) :
-    (type == AST_func_qualifier)? post_test_pass_func(node, AST_func_qualifier) :
     (type == AST_function_declaration)? post_test_pass_func(node, AST_function_declaration) :
     (type == AST_create_declaration)? post_test_pass_func(node, AST_create_declaration) :
     (type == AST_destroy_declaration)? post_test_pass_func(node, AST_destroy_declaration) :
@@ -223,6 +222,7 @@ void post_test_pass(ast_node* node) {
     (type == AST_operator)? post_test_pass_func(node, AST_operator) :
     (type == AST_cast_statement)? post_test_pass_func(node, AST_cast_statement) :
     (type == AST_case_item)? post_test_pass_func(node, AST_case_item) :
+    (type == AST_class_var_declaration)? pre_test_pass_func(node, AST_class_var_declaration) :
 
         dummy_function();
 

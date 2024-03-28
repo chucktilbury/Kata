@@ -24,8 +24,6 @@
 void traverse_if_clause(ast_if_clause* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -50,8 +48,6 @@ void traverse_if_clause(ast_if_clause* node, PassFunc pre, PassFunc post) {
 void traverse_else_clause_item(ast_else_clause_item* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -76,8 +72,6 @@ void traverse_else_clause_item(ast_else_clause_item* node, PassFunc pre, PassFun
 void traverse_else_clause(ast_else_clause* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -103,8 +97,6 @@ void traverse_else_clause(ast_else_clause* node, PassFunc pre, PassFunc post) {
 void traverse_switch_clause(ast_switch_clause* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -131,8 +123,6 @@ void traverse_switch_clause(ast_switch_clause* node, PassFunc pre, PassFunc post
 void traverse_case_item(ast_case_item* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -160,8 +150,6 @@ void traverse_case_item(ast_case_item* node, PassFunc pre, PassFunc post) {
 void traverse_case_clause(ast_case_clause* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -185,8 +173,6 @@ void traverse_case_clause(ast_case_clause* node, PassFunc pre, PassFunc post) {
 void traverse_default_clause(ast_default_clause* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);
@@ -209,8 +195,6 @@ void traverse_default_clause(ast_default_clause* node, PassFunc pre, PassFunc po
 void traverse_case_body(ast_case_body* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    assert(pre != NULL);
-    assert(post != NULL);
 
     ENTER;
     AST_CALLBACK(pre, node);

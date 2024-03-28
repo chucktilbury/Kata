@@ -40,7 +40,6 @@ typedef enum {
     AST_function_reference,
     AST_create_reference,
     AST_destroy_reference,
-    AST_func_qualifier,
     AST_function_declaration,
     AST_create_declaration,
     AST_destroy_declaration,
@@ -91,6 +90,7 @@ typedef enum {
     AST_function_assignment,
     AST_compound_name_list,
     AST_array_param_list,
+    AST_class_var_declaration,
     AST_LAST,   // number of non-terminals in the list
 } AstType;
 

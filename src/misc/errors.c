@@ -27,9 +27,10 @@ static int num_warnings = 0;
  */
 static void recover_error() {
 
-    discard_token_queue();
-    for(int i = 0; i < 5; i++)
-        advance_token();
+    dump_token_queue();
+    // discard_token_queue();
+    // for(int i = 0; i < 5; i++)
+    //     advance_token();
     // reset_token_queue();
 }
 

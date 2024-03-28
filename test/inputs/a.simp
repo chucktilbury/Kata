@@ -4,3 +4,21 @@
 
 public
 
+namespace symbol {
+
+    class something {
+        var some.complex.name blart
+        func a_func_name()()
+    }
+
+    namespace lapidary {
+        private
+        class cname (something.external) {
+            var float some_number
+            func virtual with_input_params(signed, string)()
+            func with_output_params()(signed, string)
+            func with_both_params(signed, string)(this.is.a.contrived.x, dict)
+        }
+    }
+}
+
