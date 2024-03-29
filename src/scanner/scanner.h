@@ -13,7 +13,7 @@
 #ifndef __SCANNER_H__
 #define __SCANNER_H__
 
-#include "util.h"
+//#include "util.h"
 
 /*
  * This header contains a sorted list of the actual keywords that are
@@ -118,7 +118,7 @@ void* post_token_queue();
  * @param mark
  * @return Token*
  */
-Token* iterate_token_queue(void** mark);
+// Token* iterate_token_queue(void** mark);
 
 /**
  * @brief Initialize the scanner data structures. This must be called
@@ -140,9 +140,9 @@ void init_scanner(const char* fname);
  * error so that parsing can resume.
  *
  */
-void discard_token_queue();
+// void discard_token_queue();
 
-void print_token(Token* tok);
+// void print_token(Token* tok);
 void dump_token_queue();
 
 #endif /* __SCANNER_H__ */

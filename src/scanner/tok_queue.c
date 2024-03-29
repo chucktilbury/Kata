@@ -13,7 +13,10 @@
  * @copyright Copyright (c) 2024
  */
 #define USE_TRACE 1
-#include "util.h"
+//#include "util.h"
+#include "link_list.h"
+#include "trace.h"
+#include "memory.h"
 #include "scanner.h"
 
 extern Token* scan_token();
@@ -252,16 +255,9 @@ void reset_token_queue(void* post) {
     assert(tqueue != NULL);
 
     ENTER;
-    // TokQueueItem* tmp = (TokQueueItem*)post;
-    // unsigned end      = tqueue->crnt->serial;
-
-    // while(tmp->serial < end) {
-    //     print_token(tmp->tok);
-    //     //tmp->used = false;
-    //     tmp       = tmp->next;
-    // }
 
     tqueue->crnt = (TokQueueItem*)post;
+
     RET;
 }
 
@@ -284,20 +280,20 @@ void reset_token_queue(void* post) {
  * @param mark
  * @return Token*
  */
-Token* iterate_token_queue(void** mark) {
+// Token* iterate_token_queue(void** mark) {
 
-    assert(tqueue != NULL);
-    assert(tqueue->head != NULL);
+//     assert(tqueue != NULL);
+//     assert(tqueue->head != NULL);
 
-    if(*mark == NULL)
-        *mark = tqueue->head;
-    else if(((TokQueueItem*)(*mark))->next != NULL)
-        *mark = ((TokQueueItem*)(*mark))->next;
-    else
-        return NULL;
+//     if(*mark == NULL)
+//         *mark = tqueue->head;
+//     else if(((TokQueueItem*)(*mark))->next != NULL)
+//         *mark = ((TokQueueItem*)(*mark))->next;
+//     else
+//         return NULL;
 
-    return ((TokQueueItem*)(*mark))->tok;
-}
+//     return ((TokQueueItem*)(*mark))->tok;
+// }
 
 /**
  * @brief This function literally discards the entire token queue. This
@@ -305,26 +301,27 @@ Token* iterate_token_queue(void** mark) {
  * error so that parsing can resume.
  *
  */
-void discard_token_queue() {
+// void discard_token_queue() {
 
-    assert(tqueue != NULL);
-    assert(tqueue->head != NULL);
+//     assert(tqueue != NULL);
+//     assert(tqueue->head != NULL);
 
-    // Get a new token.
-    advance_token();
-    // Make the new token the head of the queue and the crnt item.
-    tqueue->head = tqueue->crnt = tqueue->tail;
-}
+//     // Get a new token.
+//     advance_token();
+//     // Make the new token the head of the queue and the crnt item.
+//     tqueue->head = tqueue->crnt = tqueue->tail;
+// }
 
 void dump_token_queue() {
 
     assert(tqueue != NULL);
     assert(tqueue->head != NULL);
 
-    void* mark = NULL;
-    Token* tok;
-    for(tok = iterate_token_queue(&mark); tok != NULL; tok = iterate_token_queue(&mark)) {
-        print_token(tok);
+    // Token* tok;
+    // for(tok = iterate_token_queue(&mark); tok != NULL; tok = iterate_token_queue(&mark)) {
+    for(TokQueueItem* crnt = tqueue->head; crnt != NULL; crnt = crnt->next) {
+        print_terminal(crnt->tok);
         fputc('\n', stdout);
     }
 }
+

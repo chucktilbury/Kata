@@ -3,7 +3,8 @@
         "util.h": "c",
         "pass.h": "c",
         "scanner.h": "c",
-        "hash_map": "c"
+        "hash_map": "c",
+        "string_view": "c"
     },
     "cSpell.words": [
         "assignement",
@@ -17,9 +18,12 @@
         "dquote",
         "DSTR",
         "DSTRG",
+        "fdup",
         "graphiz",
+        "LLFOR",
         "longjmp",
         "NEQU",
+        "ntok",
         "OCBRACE",
         "OPAREN",
         "OPBRACE",
@@ -30,6 +34,7 @@
         "squote",
         "SSTR",
         "SSTRG",
-        "strg"
+        "strg",
+        "tqueue"
     ]
 }

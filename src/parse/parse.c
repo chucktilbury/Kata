@@ -8,7 +8,7 @@
  * @date 02-26-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
+//#define USE_TRACE 1
 #include "util.h"
 #include "parse.h"
 #include "scanner.h"
@@ -24,7 +24,7 @@ const char* scope_name(ScopeType type) {
 }
 
 /**
- * @brief Initialze the parser and open the first file.
+ * @brief Initialize the parser and open the first file.
  *
  * @param fname
  *
@@ -57,7 +57,7 @@ ast_module* parse() {
         }
     }
     else {
-        show_syntax_error("module cannot be empty");
+        show_syntax("module cannot be empty");
     }
 
     RETV(node);

@@ -167,7 +167,7 @@ ast_operator* parse_operator() {
                 flag = true;
             }
             else
-                show_syntax_error("the %s operator must not be unary", tok_to_str(tok));
+                show_syntax("the %s operator must not be unary", tok_to_str(tok));
             break;
 
         case TOK_SUB:
@@ -189,7 +189,7 @@ ast_operator* parse_operator() {
                 flag = true;
             }
             else
-                show_syntax_error("the not operator must be unary");
+                show_syntax("the not operator must be unary");
             break;
 
         case TOK_OPAREN:
@@ -552,7 +552,7 @@ ast_expression* parse_expression() {
                             state = 3;
                             break;
                         default:
-                            show_syntax_error("the %s operator cannot be unary", tok_to_str(((ast_operator*)nterm)->tok));
+                            show_syntax("the %s operator cannot be unary", tok_to_str(((ast_operator*)nterm)->tok));
                             state = 102;
                     }
                 }
@@ -620,7 +620,7 @@ ast_expression* parse_expression() {
                 while(true) {
                     ast_operator* op = (ast_operator*)pop_llist(stack);
                     if(NULL == op) {
-                        show_syntax_error("imbalanced parens in expression");
+                        show_syntax("imbalanced parens in expression");
                         state = 102;
                         break;
                     }
@@ -673,7 +673,7 @@ ast_expression* parse_expression() {
                         state, len_llist(stack), len_llist(queue), pcount);
                 TRACE_TERM(get_token());
                 if(pcount > 0) {
-                    show_syntax_error("imbalanced parentheses in expression");
+                    show_syntax("imbalanced parentheses in expression");
                     state = 102;
                 }
                 else {

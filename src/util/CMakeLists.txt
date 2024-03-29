@@ -7,12 +7,12 @@ add_library(${PROJECT_NAME} STATIC
     fileio.c
     hash.c
     str.c
-    mem.c
+    #mem.c
     cmd.c
     except.c
     list.c
     llist.c
-    trace.c
+    #trace.c
 )
 
 target_compile_options(${PROJECT_NAME}

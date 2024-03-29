@@ -63,7 +63,7 @@ void fatal_error(const char* str, ...) {
  * @param ...
  *
  */
-void show_syntax_error(const char* fmt, ...) {
+void show_syntax(const char* fmt, ...) {
 
     va_list args;
 

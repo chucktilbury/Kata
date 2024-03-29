@@ -746,17 +746,6 @@ Token* scan_token() {
     return &token;
 }
 
-/**
- * @brief Print the content of the token for debugging.
- *
- * @param tok
- */
-void print_token(Token* tok) {
-
-    printf("%s: \"%s\": %d: %d: \"%s\"", tok_to_str(tok),
-           raw_string(tok->str), tok->line_no, tok->col_no, tok->fname);
-}
-
 /*
  * Low level get token, outside of official interface, so that token can be
  * a static var.

@@ -462,7 +462,6 @@ typedef enum {
 // trace.c
 //
 //------------------------------------------------------------------------------
-#if 0
 #ifdef USE_TRACE
 extern int trace_count;
 extern const int trace_increment;
@@ -556,7 +555,6 @@ bool peek_trace_state();
 #define POP_TRACE_STATE()
 #define SET_TRACE_STATE(s)
 
-#endif
 #endif
 
 #endif /* _UTIL_H */

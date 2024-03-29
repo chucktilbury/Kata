@@ -1,8 +1,8 @@
 /**
  * @file flow.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-26-2024
@@ -14,13 +14,13 @@
 #include "scanner.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  if_clause
  *      = 'if' '(' expression ')' function_body else_clause
- *      
- * @return ast_if_clause* 
- * 
+ *
+ * @return ast_if_clause*
+ *
  */
 ast_if_clause* parse_if_clause() {
 
@@ -53,7 +53,7 @@ ast_if_clause* parse_if_clause() {
             else
                 EXPECTED("an expression");
         }
-        else 
+        else
             EXPECTED("a '('");
 
     }
@@ -64,14 +64,14 @@ ast_if_clause* parse_if_clause() {
 
 /**
  * @brief These are combined because they are so similar.
- * 
+ *
  *  else_clause_mid
  *      = 'else' '(' expression ')' function_body
  *  else_clause_final
  *      = 'else' ( '(' ')' )? function_body
- *      
- * @return ast_else_clause_item* 
- * 
+ *
+ * @return ast_else_clause_item*
+ *
  */
 ast_else_clause_item* parse_else_clause_item() {
 
@@ -112,9 +112,9 @@ ast_else_clause_item* parse_else_clause_item() {
                 else
                     EXPECTED("a ')'");
             }
-                
+
         }
-        else { 
+        else {
             // have no parens means parsing a else-final
             if(NULL != (fbod = parse_function_body())) {
                 node = CREATE_AST_NODE(AST_else_clause_final, ast_else_clause_item);
@@ -130,16 +130,16 @@ ast_else_clause_item* parse_else_clause_item() {
 }
 
 /**
- * @brief The description below gives the node type, not the data type. The 
- * data type is combined. See above. If an else appears after a "final" else, 
- * then it will be picked up as a syntax error my the next rule that is 
+ * @brief The description below gives the node type, not the data type. The
+ * data type is combined. See above. If an else appears after a "final" else,
+ * then it will be picked up as a syntax error my the next rule that is
  * parsed.
- * 
+ *
  *  else_clause
  *      = ( ( else_clause_mid )* ( else_clause_final )? )?
- *      
- * @return ast_else_clause* 
- * 
+ *
+ * @return ast_else_clause*
+ *
  */
 ast_else_clause* parse_else_clause() {
 
@@ -163,7 +163,7 @@ ast_else_clause* parse_else_clause() {
                     }
                     else if(AST_else_clause_final == ast_node_type(nterm)){
                         append_llist(list, nterm);
-                        state = 100; 
+                        state = 100;
                     }
                     else
                         state = 101; // should never happen
@@ -172,7 +172,7 @@ ast_else_clause* parse_else_clause() {
                     // not an else clause
                     state = 101;
                 break;
-            
+
             case 1:
                 // initial needs to be absent, or a mid, or a final, else one or more
                 if(NULL == (nterm = parse_else_clause_item())) {
@@ -182,7 +182,7 @@ ast_else_clause* parse_else_clause() {
                     }
                     else if(AST_else_clause_final == ast_node_type(nterm)){
                         append_llist(list, nterm);
-                        state = 100; 
+                        state = 100;
                     }
                     else
                         state = 101; // should never happen
@@ -191,7 +191,7 @@ ast_else_clause* parse_else_clause() {
                     // not an else clause, end of list
                     state = 100;
                 break;
-            
+
             case 100:
                 // returning a valid
                 node = CREATE_AST_NODE(AST_else_clause, ast_else_clause);
@@ -220,13 +220,13 @@ ast_else_clause* parse_else_clause() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  switch_clause
  *      = 'switch' '(' compound_reference ')' case_body
- *      
- * @return ast_switch_clause* 
- * 
+ *
+ * @return ast_switch_clause*
+ *
  */
 ast_switch_clause* parse_switch_clause() {
 
@@ -265,15 +265,15 @@ ast_switch_clause* parse_switch_clause() {
 
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  case_item
- *      = literal_value 
- *      / LITERAL_DSTR 
+ *      = literal_value
+ *      / LITERAL_DSTR
  *      / LITERAL_SSTR
- * 
- * @return ast_case_item* 
- * 
+ *
+ * @return ast_case_item*
+ *
  */
 ast_case_item* parse_case_item() {
 
@@ -281,7 +281,7 @@ ast_case_item* parse_case_item() {
     ast_case_item* node = NULL;
     ast_literal_value* nterm;
 
-    // QUESTION: Should I reduce this to a single token? All of the elements 
+    // QUESTION: Should I reduce this to a single token? All of the elements
     // that could be a part of a literal value are terminals.
     if(NULL != (nterm = parse_literal_value())) {
         node = CREATE_AST_NODE(AST_case_item, ast_case_item);
@@ -302,13 +302,13 @@ ast_case_item* parse_case_item() {
 
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  case_clause
  *      = 'case' '(' case_item ')' function_body
- *      
- * @return ast_case_clause* 
- * 
+ *
+ * @return ast_case_clause*
+ *
  */
 ast_case_clause* parse_case_clause() {
 
@@ -347,13 +347,13 @@ ast_case_clause* parse_case_clause() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  default_clause
  *      = 'default' function_body
- *      
- * @return ast_default_clause* 
- * 
+ *
+ * @return ast_default_clause*
+ *
  */
 ast_default_clause* parse_default_clause() {
 
@@ -376,13 +376,13 @@ ast_default_clause* parse_default_clause() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  case_body
  *      = '{' ( case_clause_list )+ ( default_clause )? '}'
- *      
- * @return ast_case_body* 
- * 
+ *
+ * @return ast_case_body*
+ *
  */
 ast_case_body* parse_case_body() {
 
@@ -416,15 +416,15 @@ ast_case_body* parse_case_body() {
                     state = 2;
                 }
                 else {
-                    show_syntax_error("at least one case clause is required.");
+                    show_syntax("at least one case clause is required.");
                     EXPECTED("a case clause");
                     state = 101;
                 }
                 break;
 
-            case 2: 
+            case 2:
                 // can be a case, a default, or a '}'
-                if(NULL != (ccla = parse_case_clause())) 
+                if(NULL != (ccla = parse_case_clause()))
                     append_llist(list, ccla);
                 else if(NULL != (defc = parse_default_clause())) {
                     append_llist(list, defc);
@@ -435,7 +435,7 @@ ast_case_body* parse_case_body() {
                     state = 100;
                 }
                 else {
-                    show_syntax_error("malformed switch/case");
+                    show_syntax("malformed switch/case");
                     EXPECTED("a case clause, a default clause, or a '}'");
                     state = 101;
                 }
@@ -454,7 +454,7 @@ ast_case_body* parse_case_body() {
                 break;
 
             case 100:
-                // no errors end. on a default 
+                // no errors end. on a default
                 node = CREATE_AST_NODE(AST_case_body, ast_case_body);
                 node->list = list;
                 finished = true;
