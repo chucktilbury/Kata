@@ -8,9 +8,12 @@
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+#include <assert.h>
+
+#include "trace.h"
+#include "link_list.h"
 #include "ast.h"
+#include "errors.h"
 
 const char* scope_name(ScopeType type);
 
@@ -32,8 +35,8 @@ void traverse_module(ast_module* node, PassFunc pre, PassFunc post) {
 
     ast_node* nterm;
 
-    init_llist_iter(node->list);
-    while(NULL != (nterm = iter_llist(node->list))) {
+    void* mark = NULL;
+    while(NULL != (nterm = iter_link_list(node->list, &mark))) {
         traverse_module_item((ast_module_item*)nterm, pre, post);
     }
 
@@ -73,7 +76,7 @@ void traverse_module_item(ast_module_item* node, PassFunc pre, PassFunc post) {
             traverse_start_function((ast_start_function*)node->nterm, pre, post);
             break;
         default:
-            RAISE(TRAVERSE_ERROR, "unexpected node type in %s: %d",
+            fatal_error("unexpected node type in %s: %d",
                     __func__, ast_node_type(node->nterm));
     }
 
@@ -127,7 +130,7 @@ void traverse_namespace_item(ast_namespace_item* node, PassFunc pre, PassFunc po
             traverse_var_definition((ast_var_definition*)node->nterm, pre, post);
             break;
         default:
-            RAISE(TRAVERSE_ERROR, "unexpected node type in %s: %d",
+            fatal_error("unexpected node type in %s: %d",
                     __func__, ast_node_type(node->nterm));
     }
 
@@ -155,8 +158,8 @@ void traverse_namespace_definition(ast_namespace_definition* node, PassFunc pre,
     TRACE("SCOPE: %s", scope_name(node->scope));
     ast_node* nterm;
 
-    init_llist_iter(node->list);
-    while(NULL != (nterm = iter_llist(node->list)))
+    void* mark = NULL;
+    while(NULL != (nterm = iter_link_list(node->list, &mark)))
         traverse_namespace_item((ast_namespace_item*)nterm, pre, post);
 
     AST_CALLBACK(post, node);
@@ -201,7 +204,7 @@ void traverse_class_item(ast_class_item* node, PassFunc pre, PassFunc post) {
             traverse_destroy_declaration((ast_destroy_declaration*)node->nterm, pre, post);
             break;
         default:
-            RAISE(TRAVERSE_ERROR, "unexpected node type in %s: %d",
+            fatal_error("unexpected node type in %s: %d",
                     __func__, ast_node_type(node->nterm));
     }
 
@@ -233,8 +236,8 @@ void traverse_class_definition(ast_class_definition* node, PassFunc pre, PassFun
 
     ast_node* nterm;
 
-    init_llist_iter(node->list);
-    while(NULL != (nterm = iter_llist(node->list)))
+    void* mark = NULL;
+    while(NULL != (nterm = iter_link_list(node->list, &mark)))
         traverse_class_item((ast_class_item*)nterm, pre, post);
 
     AST_CALLBACK(post, node);

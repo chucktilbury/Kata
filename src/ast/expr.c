@@ -8,9 +8,12 @@
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+#include <assert.h>
+
+#include "link_list.h"
+#include "trace.h"
 #include "ast.h"
+#include "errors.h"
 
 /**
  * @brief
@@ -27,14 +30,14 @@ void traverse_expression(ast_expression* node, PassFunc pre, PassFunc post) {
     ast_node* nterm;
 
     if(node->list != NULL) {
-        init_llist_iter(node->list);
-        while(NULL != (nterm = iter_llist(node->list))) {
+        void* mark = NULL;
+        while(NULL != (nterm = iter_link_list(node->list, &mark))) {
             if(AST_expr_primary == ast_node_type(nterm))
                 traverse_expr_primary((ast_expr_primary*)nterm, pre, post);
             else if(AST_operator == ast_node_type(nterm))
                 traverse_operator((ast_operator*)nterm, pre, post);
             else
-                RAISE(TRAVERSE_ERROR, "expected a primary or operator, but got %s", nterm_to_str(nterm));
+                fatal_error("expected a primary or operator, but got %s", nterm_to_str(nterm));
         }
     }
 
@@ -129,7 +132,7 @@ void traverse_expr_primary(ast_expr_primary* node, PassFunc pre, PassFunc post) 
     else if(AST_compound_reference == ast_node_type(nterm))
         traverse_compound_reference((ast_compound_reference*)nterm, pre, post);
     else
-        RAISE(TRAVERSE_ERROR, "expected an expr_primary, but got %s", nterm_to_str(nterm));
+        fatal_error("expected an expr_primary, but got %s", nterm_to_str(nterm));
 
     AST_CALLBACK(post, node);
     RET;
@@ -153,8 +156,8 @@ void traverse_expression_list(ast_expression_list* node, PassFunc pre, PassFunc 
 
     ast_node* nterm;
 
-    init_llist_iter(node->list);
-    while(NULL != (nterm = iter_llist(node->list)))
+    void* mark = NULL;
+    while(NULL != (nterm = iter_link_list(node->list, &mark)))
         traverse_expression((ast_expression*)nterm, pre, post);
 
     AST_CALLBACK(post, node);
@@ -202,7 +205,7 @@ void traverse_assignment_item(ast_assignment_item* node, PassFunc pre, PassFunc 
             traverse_function_assignment((ast_function_assignment*)node->nterm, pre, post);
             break;
         default:
-            RAISE(TRAVERSE_ERROR, "unexpected node type in %s: %d",
+            fatal_error("unexpected node type in %s: %d",
                     __func__, ast_node_type(node->nterm));
     }
 

@@ -12,12 +12,13 @@
  * @date 01-07-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-//#include "util.h"
+#include <assert.h>
+
 #include "link_list.h"
 #include "trace.h"
 #include "memory.h"
 #include "scanner.h"
+#include "fileio.h"
 
 extern Token* scan_token();
 static unsigned serial = 0;
@@ -48,18 +49,10 @@ static void append_token(Token* tok) {
 
     TokQueueItem* item;
 
-    TRY {
-        item         = _ALLOC_T(TokQueueItem);
-        item->tok    = copy_token(tok);
-        item->serial = serial++;
-        item->used   = false;
-    }
-    ANY_EXCEPT() {
-        fprintf(stderr, "Fatal ");
-        fprintf(stderr, "%s\n", EXCEPTION_MSG);
-        exit(1);
-    }
-    FINAL
+    item         = _ALLOC_T(TokQueueItem);
+    item->tok    = copy_token(tok);
+    item->serial = serial++;
+    item->used   = false;
 
     if(tqueue->tail != NULL) {
         tqueue->tail->next = item;
@@ -83,28 +76,12 @@ void open_file(const char* fname) {
 
     ENTER;
     // calling into the util library
-    TRY {
-        push_input_file(fname);
-    }
-    EXCEPT(FILE_ERROR) {
-        fprintf(stderr, "Fatal ");
-        fprintf(stderr, "%s\n", EXCEPTION_MSG);
-        exit(1);
-    }
-    FINAL
+    push_input_file(fname);
 
     if(tqueue == NULL) {
-        TRY {
-            // prime the token pipeline
-            tqueue = _ALLOC_T(TokQueue);
-            append_token(scan_token());
-        }
-        EXCEPT(MEMORY_ERROR) {
-            fprintf(stderr, "Fatal ");
-            fprintf(stderr, "%s\n", EXCEPTION_MSG);
-            exit(1);
-        }
-        FINAL
+        // prime the token pipeline
+        tqueue = _ALLOC_T(TokQueue);
+        append_token(scan_token());
     }
     RET;
 }
@@ -159,21 +136,12 @@ Token* copy_token(const Token* tok) {
 
     Token* ntok;
 
-    TRY {
-        ntok          = _ALLOC_T(Token);
-        ntok->fname   = _DUP_STR(tok->fname);
-        ntok->str     = copy_string(tok->str);
-        ntok->line_no = tok->line_no;
-        ntok->col_no  = tok->col_no;
-        ntok->type    = tok->type;
-    }
-    ANY_EXCEPT() {
-        // any exception is a fatal error:
-        fprintf(stderr, "Fatal ");
-        fprintf(stderr, "%s\n", EXCEPTION_MSG);
-        exit(1);
-    }
-    FINAL
+    ntok          = _ALLOC_T(Token);
+    ntok->fname   = _DUP_STR(tok->fname);
+    ntok->str     = copy_string(tok->str);
+    ntok->line_no = tok->line_no;
+    ntok->col_no  = tok->col_no;
+    ntok->type    = tok->type;
 
     return ntok;
 }

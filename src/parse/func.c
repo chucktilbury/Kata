@@ -8,8 +8,8 @@
  * @date 02-26-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+//#define USE_TRACE 1
+//#include "util.h"
 #include "parse.h"
 #include "scanner.h"
 
@@ -656,7 +656,7 @@ ast_create_name* parse_create_name() {
 
     ENTER;
     ast_create_name* node = NULL;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
     void* post = post_token_queue();
 
     int state = 0;
@@ -667,7 +667,7 @@ ast_create_name* parse_create_name() {
             case 0:
                 // SYMBOL or not a match
                 if(TOK_SYMBOL == TTYPE) {
-                    append_llist(list, get_token());
+                    append_link_list(list, get_token());
                     advance_token();
                     state = 1;
                 }
@@ -688,12 +688,12 @@ ast_create_name* parse_create_name() {
             case 2:
                 // must be a symbol or 'create' or error
                 if(TOK_SYMBOL == TTYPE) {
-                    append_llist(list, get_token());
+                    append_link_list(list, get_token());
                     advance_token();
                     state = 2;
                 }
                 else if(TOK_CREATE == TTYPE) {
-                    append_llist(list, get_token());
+                    append_link_list(list, get_token());
                     advance_token();
                     state = 100;
                 }
@@ -744,7 +744,7 @@ ast_destroy_name* parse_destroy_name() {
 
     ENTER;
     ast_destroy_name* node = NULL;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
     void* post = post_token_queue();
 
     int state = 0;
@@ -755,7 +755,7 @@ ast_destroy_name* parse_destroy_name() {
             case 0:
                 // SYMBOL or not a match
                 if(TOK_SYMBOL == TTYPE) {
-                    append_llist(list, get_token());
+                    append_link_list(list, get_token());
                     advance_token();
                     state = 1;
                 }
@@ -776,12 +776,12 @@ ast_destroy_name* parse_destroy_name() {
             case 2:
                 // must be a symbol or 'destroy' or error
                 if(TOK_SYMBOL == TTYPE) {
-                    append_llist(list, get_token());
+                    append_link_list(list, get_token());
                     advance_token();
                     state = 2;
                 }
                 else if(TOK_DESTROY == TTYPE) {
-                    append_llist(list, get_token());
+                    append_link_list(list, get_token());
                     advance_token();
                     state = 100;
                 }
@@ -1034,7 +1034,7 @@ ast_function_body* parse_function_body() {
     ENTER;
     ast_function_body* node = NULL;
     ast_function_body_element* nterm;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
     void* post = post_token_queue();
 
     int state = 0;
@@ -1055,7 +1055,7 @@ ast_function_body* parse_function_body() {
             case 1:
                 // must be a func body element or a '}' or error
                 if(NULL != (nterm = parse_function_body_element()))
-                    append_llist(list, nterm); // no state change
+                    append_link_list(list, nterm); // no state change
                 else if(TOK_CCBRACE == TTYPE) {
                     advance_token();
                     state = 100;

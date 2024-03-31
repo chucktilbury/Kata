@@ -8,8 +8,9 @@
  * @date 02-26-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+#include <stdlib.h>
+
+#include "trace.h"
 #include "parse.h"
 #include "scanner.h"
 
@@ -189,7 +190,7 @@ ast_type_name_list* parse_type_name_list() {
     ENTER;
     ast_type_name_list* node = NULL;
     ast_node* nterm;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
 
     int state = 0;
     bool finished = false;
@@ -209,7 +210,7 @@ ast_type_name_list* parse_type_name_list() {
             case 1:
                 // can be a type name or a ')'
                 if(NULL != (nterm = (ast_node*)parse_type_name())) {
-                    append_llist(list, nterm);
+                    append_link_list(list, nterm);
                     state = 2;
                 }
                 else if(TOK_CPAREN == TTYPE) {
@@ -241,7 +242,7 @@ ast_type_name_list* parse_type_name_list() {
             case 3:
                 // must be a type name or error
                 if(NULL != (nterm = (ast_node*)parse_type_name())) {
-                    append_llist(list, nterm);
+                    append_link_list(list, nterm);
                     state = 2;
                 }
                 else {

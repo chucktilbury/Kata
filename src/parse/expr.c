@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2024
  */
 #define USE_TRACE 1
-#include "util.h"
+//#include "util.h"
 #include "parse.h"
 #include "scanner.h"
 
@@ -296,7 +296,7 @@ ast_expression_list* parse_expression_list() {
     ENTER;
     ast_expression_list* node = NULL;
     ast_expression* expr;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
     bool finished = false;
     int state = 0;
     int pcount = 0;
@@ -305,7 +305,7 @@ ast_expression_list* parse_expression_list() {
     while(!finished) {
         switch(state) {
             case 0:
-                TRACE("state: %d, len: %d", state, len_llist(list));
+                TRACE("state: %d, len: %d", state, len_link_list(list));
                 // open paren required, or no error, no tokens consumed
                 if(TOK_OPAREN == TTYPE) {
                     pcount++;
@@ -316,10 +316,10 @@ ast_expression_list* parse_expression_list() {
                     state = 101;
                 break;
             case 1:
-                TRACE("state: %d, len: %d", state, len_llist(list));
+                TRACE("state: %d, len: %d", state, len_link_list(list));
                 // expression is optional for first time through
                 if(NULL != (expr = parse_expression())) {
-                    append_llist(list, expr);
+                    append_link_list(list, expr);
                     state = 2;
                 }
                 else if(TOK_CPAREN == TTYPE) {
@@ -333,7 +333,7 @@ ast_expression_list* parse_expression_list() {
                 }
                 break;
             case 2:
-                TRACE("state: %d, len: %d", state, len_llist(list));
+                TRACE("state: %d, len: %d", state, len_link_list(list));
                 TRACE_TERM(get_token());
                 // require an ',' or a ')'
                 if(TOK_COMMA == TTYPE) {
@@ -351,10 +351,10 @@ ast_expression_list* parse_expression_list() {
                 }
                 break;
             case 3:
-                TRACE("state: %d, len: %d", state, len_llist(list));
+                TRACE("state: %d, len: %d", state, len_link_list(list));
                 // expression is required after a ','
                 if(NULL != (expr = parse_expression())) {
-                    append_llist(list, expr);
+                    append_link_list(list, expr);
                     state = 2;
                 }
                 else {
@@ -364,7 +364,7 @@ ast_expression_list* parse_expression_list() {
                 break;
 
             case 100:
-                TRACE("state: %d, len: %d, pcount: %d", state, len_llist(list), pcount);
+                TRACE("state: %d, len: %d, pcount: %d", state, len_link_list(list), pcount);
                 // finished no error
                 node = CREATE_AST_NODE(AST_expression_list, ast_expression_list);
                 node->list = list;
@@ -373,14 +373,14 @@ ast_expression_list* parse_expression_list() {
                 break;
 
             case 101:
-                TRACE("state: %d, len: %d", state, len_llist(list));
+                TRACE("state: %d, len: %d", state, len_link_list(list));
                 // finished no expression with no error
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
-                TRACE("state: %d, len: %d", state, len_llist(list));
+                TRACE("state: %d, len: %d", state, len_link_list(list));
                 // finished with an error
                 node = NULL;
                 finished = true;
@@ -526,8 +526,8 @@ ast_expression* parse_expression() {
 
     ENTER;
     ast_expression* node = NULL;
-    LList stack = create_llist();
-    LList queue = create_llist();
+    LinkList* stack = create_link_list();
+    LinkList* queue = create_link_list();
     ast_node* nterm;
     void* post = post_token_queue();
     int expr_type = 0;
@@ -539,7 +539,7 @@ ast_expression* parse_expression() {
     while(!finished) {
         switch(state) {
             case 0:
-                TRACE("state: %d, stack: %d, queue: %d", state, len_llist(stack), len_llist(queue));
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 // entry point; make sure it's an expression
                 if(NULL != (nterm = (ast_node*)parse_operator())) {
                     switch(token_type(((ast_operator*)nterm)->tok)) {
@@ -563,7 +563,7 @@ ast_expression* parse_expression() {
                 break;
 
             case 1:
-                TRACE("state: %d, stack: %d, queue: %d", state, len_llist(stack), len_llist(queue));
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 // must have a primary or a unary
                 if(NULL != (nterm = (ast_node*)parse_operator()))
                     state = 3;
@@ -575,7 +575,7 @@ ast_expression* parse_expression() {
 
             case 2:
             case 3: {
-                TRACE("state: %d, stack: %d, queue: %d", state, len_llist(stack), len_llist(queue));
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                     // handle an operator
                     TokenType type = token_type(((ast_operator*)nterm)->tok);
                     switch(type) {
@@ -609,16 +609,16 @@ ast_expression* parse_expression() {
 
             case 4:
                 // operator is an open paren
-                push_llist(stack, nterm);
+                push_link_list(stack, nterm);
                 state = 1;
                 break;
 
             case 5:
-                TRACE("state: %d, stack: %d, queue: %d", state, len_llist(stack), len_llist(queue));
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 // operator is close paren
                 state = 1;
                 while(true) {
-                    ast_operator* op = (ast_operator*)pop_llist(stack);
+                    ast_operator* op = (ast_operator*)pop_link_list(stack);
                     if(NULL == op) {
                         show_syntax("imbalanced parens in expression");
                         state = 102;
@@ -629,48 +629,48 @@ ast_expression* parse_expression() {
                         break;
                     }
                     else
-                        append_llist(queue, op);
+                        append_link_list(queue, op);
                 }
                 break;
 
             case 6:
-                TRACE("state: %d, stack: %d, queue: %d", state, len_llist(stack), len_llist(queue));
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 // operator is left assoc
                 TRACE("left assoc");
-                while(peek_llist(stack) != NULL &&
-                        (get_prec(token_type(((ast_operator*)peek_llist(stack))->tok))) >=
+                while(peek_link_list(stack) != NULL &&
+                        (get_prec(token_type(((ast_operator*)peek_link_list(stack))->tok))) >=
                         (get_prec(token_type(((ast_operator*)nterm)->tok)))) {
 
-                    append_llist(queue, pop_llist(stack));
+                    append_link_list(queue, pop_link_list(stack));
                 }
-                push_llist(stack, nterm);
+                push_link_list(stack, nterm);
                 state = 1;
                 break;
 
             case 7:
-                TRACE("state: %d, stack: %d, queue: %d", state, len_llist(stack), len_llist(queue));
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 TRACE("right assoc");
                 // operator it right assoc
-                while(peek_llist(stack) != NULL &&
-                        (get_prec(token_type(((ast_operator*)peek_llist(stack))->tok))) >
+                while(peek_link_list(stack) != NULL &&
+                        (get_prec(token_type(((ast_operator*)peek_link_list(stack))->tok))) >
                         (get_prec(token_type(((ast_operator*)nterm)->tok)))) {
 
-                    append_llist(queue, pop_llist(stack));
+                    append_link_list(queue, pop_link_list(stack));
                 }
-                push_llist(stack, nterm);
+                push_link_list(stack, nterm);
                 state = 1;
                 break;
 
             case 8:
-                TRACE("state: %d, stack: %d, queue: %d", state, len_llist(stack), len_llist(queue));
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 // handle a primary
-                append_llist(queue, nterm);
+                append_link_list(queue, nterm);
                 state = 1;
                 break;
 
             case 100:
                 TRACE("state: %d, stack: %d, queue: %d, pcount: %d",
-                        state, len_llist(stack), len_llist(queue), pcount);
+                        state, len_link_list(stack), len_link_list(queue), pcount);
                 TRACE_TERM(get_token());
                 if(pcount > 0) {
                     show_syntax("imbalanced parentheses in expression");
@@ -678,8 +678,8 @@ ast_expression* parse_expression() {
                 }
                 else {
                     // finished expression
-                    while(peek_llist(stack) != NULL)
-                        append_llist(queue, pop_llist(stack));
+                    while(peek_link_list(stack) != NULL)
+                        append_link_list(queue, pop_link_list(stack));
 
                     node = CREATE_AST_NODE(AST_expression, ast_expression);
                     node->list = queue;
@@ -690,7 +690,7 @@ ast_expression* parse_expression() {
                 break;
 
             case 101:
-                TRACE("state: %d, stack: %d, queue: %d", state, len_llist(stack), len_llist(queue));
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 // not an expression, not an error;
                 reset_token_queue(post);
                 finished = true;
@@ -704,7 +704,7 @@ ast_expression* parse_expression() {
                 break;
 
             default:
-                TRACE("state: %d, stack: %d, queue: %d", state, len_llist(stack), len_llist(queue));
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 // cannot happen
                 fatal_error("invalid state in %s: %d", __func__, state);
                 break;

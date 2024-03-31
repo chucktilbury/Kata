@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2024
  */
 #define USE_TRACE 1
-#include "util.h"
+#include "strings.h"
 #include "parse.h"
 #include "scanner.h"
 
@@ -26,8 +26,8 @@ ast_compound_name* parse_compound_name() {
 
     ENTER;
     ast_compound_name* node = NULL;
-    LList lst = create_llist();
-    Str* str = create_string(NULL);
+    LinkList* lst = create_link_list();
+    String* str = create_string(NULL);
     Token* tok;
     void* post = post_token_queue();
 
@@ -40,7 +40,7 @@ ast_compound_name* parse_compound_name() {
             case 0:
                 // initial state
                 if(TOK_SYMBOL == token_type(tok)) {
-                    append_llist(lst, tok);
+                    append_link_list(lst, tok);
                     add_string_Str(str, tok->str);
                     TRACE_TERM(tok);
                     advance_token();
@@ -68,7 +68,7 @@ ast_compound_name* parse_compound_name() {
                     state = 101;
                 else if(TOK_SYMBOL == token_type(tok)) {
                     TRACE_TERM(tok);
-                    append_llist(lst, tok);
+                    append_link_list(lst, tok);
                     add_string_Str(str, tok->str);
                     advance_token();
                     state = 1;
@@ -82,7 +82,7 @@ ast_compound_name* parse_compound_name() {
                 node = CREATE_AST_NODE(AST_compound_name, ast_compound_name);
                 node->list = lst;
                 node->raw_name = str;
-                finalize_token_queue();
+                //finalize_token_queue();
                 finished = true;
                 break;
             case 101:
@@ -118,7 +118,7 @@ ast_compound_name_list* parse_compound_name_list() {
     ENTER;
     ast_compound_name_list* node = NULL;
     ast_compound_name* nterm;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
 
     int state = 0;
     bool finished = false;
@@ -138,7 +138,7 @@ ast_compound_name_list* parse_compound_name_list() {
             case 1:
                 // must be a compound name or a ')'
                 if(NULL != (nterm = parse_compound_name())) {
-                    append_llist(list, nterm);
+                    append_link_list(list, nterm);
                     state = 2;
                 }
                 else if(TOK_CPAREN == TTYPE) {
@@ -170,7 +170,7 @@ ast_compound_name_list* parse_compound_name_list() {
             case 3:
                 // must be a compound name or it's an error
                 if(NULL != (nterm = parse_compound_name())) {
-                    append_llist(list, nterm);
+                    append_link_list(list, nterm);
                     state = 2;
                 }
                 else {
@@ -254,7 +254,7 @@ ast_compound_reference* parse_compound_reference() {
     ENTER;
     ast_compound_reference* node = NULL;
     ast_compound_ref_item* nterm;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
     Token* tok;
     int s = 0;
     bool finished = false;
@@ -266,7 +266,7 @@ ast_compound_reference* parse_compound_reference() {
             case 0:
                 // entry point
                 if(NULL != (nterm = parse_compound_ref_item())) {
-                    append_llist(list, nterm);
+                    append_link_list(list, nterm);
                     s = 1;
                 }
                 else {
@@ -286,7 +286,7 @@ ast_compound_reference* parse_compound_reference() {
             case 2:
                 // must be a compound_ref_item
                 if(NULL != (nterm = parse_compound_ref_item())) {
-                    append_llist(list, nterm);
+                    append_link_list(list, nterm);
                     s = 1;
                 }
                 else {

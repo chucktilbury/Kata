@@ -1,25 +1,27 @@
 /**
  * @file flow.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+#include <assert.h>
+
+#include "trace.h"
 #include "ast.h"
+#include "errors.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  if_clause
  *      = 'if' '(' expression ')' function_body else_clause
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_if_clause(ast_if_clause* node, PassFunc pre, PassFunc post) {
 
@@ -37,13 +39,13 @@ void traverse_if_clause(ast_if_clause* node, PassFunc pre, PassFunc post) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  else_clause_mid
  *      = 'else' '(' expression ')' function_body
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_else_clause_item(ast_else_clause_item* node, PassFunc pre, PassFunc post) {
 
@@ -55,19 +57,19 @@ void traverse_else_clause_item(ast_else_clause_item* node, PassFunc pre, PassFun
     TRACE("type: %s", nterm_to_str((ast_node*)node));
     traverse_expression(node->expr, pre, post);
     traverse_function_body(node->fbod, pre, post);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  else_clause
  *      = ( else_clause_mid )* ( else_clause_final )?
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_else_clause(ast_else_clause* node, PassFunc pre, PassFunc post) {
 
@@ -76,23 +78,23 @@ void traverse_else_clause(ast_else_clause* node, PassFunc pre, PassFunc post) {
     ENTER;
     AST_CALLBACK(pre, node);
 
-    init_llist_iter(node->list);
+    void* mark = NULL;
     ast_else_clause_item* item;
-    while(NULL != (item = iter_llist(node->list)))
+    while(NULL != (item = iter_link_list(node->list, &mark)))
         traverse_else_clause_item(item, pre, post);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  switch_clause
  *      = 'switch' '(' compound_reference ')' case_body
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_switch_clause(ast_switch_clause* node, PassFunc pre, PassFunc post) {
 
@@ -103,22 +105,22 @@ void traverse_switch_clause(ast_switch_clause* node, PassFunc pre, PassFunc post
 
     traverse_compound_reference(node->cref, pre, post);
     traverse_case_body(node->cbod, pre, post);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  case_item
  *      = literal_value
  *      / LITERAL_DSTR
  *      / LITERAL_SSTR
- * 
- * @param node 
- * @param func 
- * 
+ *
+ * @param node
+ * @param func
+ *
  */
 void traverse_case_item(ast_case_item* node, PassFunc pre, PassFunc post) {
 
@@ -132,20 +134,20 @@ void traverse_case_item(ast_case_item* node, PassFunc pre, PassFunc post) {
     else if(node->lval != NULL)
         traverse_literal_value(node->lval, pre, post);
     else
-        RAISE(TRAVERSE_ERROR, "no object for a case item");
-    
+        fatal_error("no object for a case item");
+
     AST_CALLBACK(post, node);
     RET;
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  case_clause
  *      = 'case' '(' case_item ')' function_body
  *
- * @param node 
- * 
+ * @param node
+ *
  */
 void traverse_case_clause(ast_case_clause* node, PassFunc pre, PassFunc post) {
 
@@ -162,13 +164,13 @@ void traverse_case_clause(ast_case_clause* node, PassFunc pre, PassFunc post) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  default_clause
  *      = 'default' function_body
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_default_clause(ast_default_clause* node, PassFunc pre, PassFunc post) {
 
@@ -178,19 +180,19 @@ void traverse_default_clause(ast_default_clause* node, PassFunc pre, PassFunc po
     AST_CALLBACK(pre, node);
 
     traverse_function_body(node->fbod, pre, post);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  case_body
  *      = '{' ( case_clause_list )+ ( default_clause )? '}'
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_case_body(ast_case_body* node, PassFunc pre, PassFunc post) {
 
@@ -199,9 +201,9 @@ void traverse_case_body(ast_case_body* node, PassFunc pre, PassFunc post) {
     ENTER;
     AST_CALLBACK(pre, node);
 
-    init_llist_iter(node->list);
     ast_node* nterm;
-    while(NULL != (nterm = node->list)) {
+    void* mark = NULL;
+    while(NULL != (nterm = iter_link_list(node->list, &mark))) {
         switch(ast_node_type(nterm)) {
             case AST_case_clause:
                 traverse_case_clause((ast_case_clause*)nterm, pre, post);
@@ -210,10 +212,10 @@ void traverse_case_body(ast_case_body* node, PassFunc pre, PassFunc post) {
                 traverse_default_clause((ast_default_clause*)nterm, pre, post);
                 break;
             default:
-                RAISE(TRAVERSE_ERROR, "unknown node type in %s: %s", __func__, nterm_to_str(nterm));
+                fatal_error("unknown node type in %s: %s", __func__, nterm_to_str(nterm));
         }
     }
-    
+
     AST_CALLBACK(post, node);
     RET;
 }

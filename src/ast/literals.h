@@ -9,7 +9,10 @@
  */
 #ifndef __LITERALS_H__
 #define __LITERALS_H__
+#include <stdint.h>
+
 #include "ast.h"
+#include "link_list.h"
 
 /**
  *  scope_operator
@@ -73,7 +76,7 @@ typedef struct _ast_type_name_ {
  */
 typedef struct _ast_type_name_list_ {
     ast_node node;
-    LList list;
+    LinkList* list;
 } ast_type_name_list;
 
 /**

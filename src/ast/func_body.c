@@ -1,20 +1,22 @@
 /**
  * @file func_body.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+#include <assert.h>
+
+#include "trace.h"
 #include "ast.h"
+#include "errors.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  * function_body_element
  *      = var_definition
  *      / function_reference
@@ -38,14 +40,14 @@
  *      / return_statement
  *      / raise_statement
  *      / function_body
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_function_body_element(ast_function_body_element* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
 
@@ -117,7 +119,7 @@ void traverse_function_body_element(ast_function_body_element* node, PassFunc pr
             traverse_function_body((ast_function_body*)node->nterm, pre, post);
             break;
         default:
-            RAISE(TRAVERSE_ERROR, "unknown node type in %s: %s", __func__, nterm_to_str(node->nterm));
+            fatal_error("unknown node type in %s: %s", __func__, nterm_to_str(node->nterm));
             break;
     }
 
@@ -126,18 +128,18 @@ void traverse_function_body_element(ast_function_body_element* node, PassFunc pr
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  break_statement
  *      = 'break'
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_break_statement(ast_break_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
 
@@ -146,18 +148,18 @@ void traverse_break_statement(ast_break_statement* node, PassFunc pre, PassFunc 
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  continue_statement
  *      = 'continue'
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_continue_statement(ast_continue_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
 
@@ -166,18 +168,18 @@ void traverse_continue_statement(ast_continue_statement* node, PassFunc pre, Pas
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  trace_statement
  *      = 'trace'
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_trace_statement(ast_trace_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
 
@@ -186,13 +188,13 @@ void traverse_trace_statement(ast_trace_statement* node, PassFunc pre, PassFunc 
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  inline_statement
  *      = 'inline' '{' RAW_TEXT '}'
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_inline_statement(ast_inline_statement* node, PassFunc pre, PassFunc post) {
 
@@ -202,19 +204,19 @@ void traverse_inline_statement(ast_inline_statement* node, PassFunc pre, PassFun
     AST_CALLBACK(pre, node);
 
     TRACE_TERM(node->tok);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  yield_statement
  *      = 'yield' '(' compound_reference ')'
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_yield_statement(ast_yield_statement* node, PassFunc pre, PassFunc post) {
 
@@ -224,19 +226,19 @@ void traverse_yield_statement(ast_yield_statement* node, PassFunc pre, PassFunc 
     AST_CALLBACK(pre, node);
 
     traverse_compound_reference(node->ref, pre, post);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  type_statement
  *      = 'type' '(' compound_reference ')'
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_type_statement(ast_type_statement* node, PassFunc pre, PassFunc post) {
 
@@ -246,19 +248,19 @@ void traverse_type_statement(ast_type_statement* node, PassFunc pre, PassFunc po
     AST_CALLBACK(pre, node);
 
     traverse_compound_reference(node->ref, pre, post);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  exit_statement
  *      = 'exit' '(' ( expression )? ')
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_exit_statement(ast_exit_statement* node, PassFunc pre, PassFunc post) {
 
@@ -268,19 +270,19 @@ void traverse_exit_statement(ast_exit_statement* node, PassFunc pre, PassFunc po
     AST_CALLBACK(pre, node);
 
     traverse_expression(node->expr, pre, post);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  print_statement
  *      = 'print' ( expression_list )?
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_print_statement(ast_print_statement* node, PassFunc pre, PassFunc post) {
 
@@ -290,19 +292,19 @@ void traverse_print_statement(ast_print_statement* node, PassFunc pre, PassFunc 
     AST_CALLBACK(pre, node);
 
     traverse_expression_list(node->elst, pre, post);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  return_statement
  *      = 'return' ( '(' ( expression )? ')' )?
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_return_statement(ast_return_statement* node, PassFunc pre, PassFunc post) {
 
@@ -312,19 +314,19 @@ void traverse_return_statement(ast_return_statement* node, PassFunc pre, PassFun
     AST_CALLBACK(pre, node);
 
     traverse_expression(node->expr, pre, post);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  raise_statement
  *      = 'raise' '(' SYMBOL ',' formatted_strg ')'
- * 
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_raise_statement(ast_raise_statement* node, PassFunc pre, PassFunc post) {
 
@@ -335,7 +337,7 @@ void traverse_raise_statement(ast_raise_statement* node, PassFunc pre, PassFunc 
 
     TRACE_TERM(node->symb);
     traverse_formatted_strg(node->str, pre, post);
-    
+
     AST_CALLBACK(post, node);
     RET;
 }

@@ -1,7 +1,7 @@
 /**
  * @file except.h
- * 
- * @brief 
+ *
+ * @brief
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -49,7 +49,7 @@ typedef struct _ast_except_clause_final_ {
  */
 typedef struct _ast_except_clause_ {
     ast_node node;
-    LList* list;
+    LinkList* list;
     struct _ast_except_clause_final_* fin;
 } ast_except_clause;
 

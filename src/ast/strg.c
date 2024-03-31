@@ -1,34 +1,36 @@
 /**
  * @file string.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+#include <assert.h>
+
+#include "trace.h"
 #include "ast.h"
+#include "errors.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  formatted_strg
  *      = LITERAL_DSTRG (expression_list)?
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_formatted_strg(ast_formatted_strg* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
+
     TRACE_TERM(node->str);
-    TRACE("expr list len: %d", len_llist(node->exprs));
     traverse_expression_list(node->exprs, pre, post);
 
     AST_CALLBACK(post, node);
@@ -36,19 +38,19 @@ void traverse_formatted_strg(ast_formatted_strg* node, PassFunc pre, PassFunc po
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  string_literal
  *      = LITERAL_SSTRG
  *      / formatted_strg
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_string_literal(ast_string_literal* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
     if(node->literal != NULL)
@@ -61,20 +63,20 @@ void traverse_string_literal(ast_string_literal* node, PassFunc pre, PassFunc po
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  string_expr_item
  *      = string_literal
  *      / compound_reference
  *      / literal_value
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_string_expr_item(ast_string_expr_item* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
 
@@ -89,8 +91,8 @@ void traverse_string_expr_item(ast_string_expr_item* node, PassFunc pre, PassFun
             traverse_literal_value((ast_literal_value*)node->nterm, pre, post);
             break;
         default:
-            RAISE(TRAVERSE_ERROR, "unexpected node type in %s: %d",
-                    __func__, ast_node_type(node->nterm));
+            fatal_error("unexpected node type in %s: %d",
+                        __func__, ast_node_type(node->nterm));
     }
 
     AST_CALLBACK(post, node);
@@ -98,26 +100,26 @@ void traverse_string_expr_item(ast_string_expr_item* node, PassFunc pre, PassFun
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  string_expr
  *      = string_expr_item ( '+' string_expr_item )*
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_string_expr(ast_string_expr* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
 
     ast_string_expr_item* item;
 
-    TRACE("num expr items: %d", len_llist(node->list));
-    init_llist_iter(node->list);
-    while(NULL != (item = (ast_string_expr_item*)iter_llist(node->list)))
+    TRACE("num expr items: %d", len_link_list(node->list));
+    void* mark = NULL;
+    while(NULL != (item = (ast_string_expr_item*)iter_link_list(node->list, &mark)))
         traverse_string_expr_item(item, pre, post);
 
     AST_CALLBACK(post, node);

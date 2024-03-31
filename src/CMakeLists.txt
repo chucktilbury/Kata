@@ -1,5 +1,5 @@
 add_subdirectory(gc)
-add_subdirectory(util)
+#add_subdirectory(util)
 add_subdirectory(scanner)
 add_subdirectory(parse)
 add_subdirectory(pass)

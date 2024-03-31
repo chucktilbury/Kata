@@ -8,9 +8,11 @@
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+#include <assert.h>
+
+#include "trace.h"
 #include "ast.h"
+#include "errors.h"
 
 /**
  * @brief
@@ -116,7 +118,7 @@ void traverse_type_name(ast_type_name* node, PassFunc pre, PassFunc post) {
             traverse_compound_name((ast_compound_name*)node->nterm, pre, post);
             break;
         default:
-            RAISE(TRAVERSE_ERROR, "unexpected node type in %s: %s", __func__, nterm_to_str(node->nterm));
+            fatal_error("unexpected node type in %s: %s", __func__, nterm_to_str(node->nterm));
     }
 
     AST_CALLBACK(post, node);
@@ -142,8 +144,8 @@ void traverse_type_name_list(ast_type_name_list* node, PassFunc pre, PassFunc po
 
     ast_type_name* nterm;
 
-    init_llist_iter(node->list);
-    while(NULL != (nterm = (ast_type_name*)iter_llist(node->list)))
+    void* mark = NULL;
+    while(NULL != (nterm = (ast_type_name*)iter_link_list(node->list, &mark)))
         traverse_type_name(nterm, pre, post);
 
     AST_CALLBACK(post, node);

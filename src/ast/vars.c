@@ -8,8 +8,10 @@
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+#include <assert.h>
+
+#include "link_list.h"
+#include "trace.h"
 #include "ast.h"
 
 /**
@@ -54,8 +56,8 @@ void traverse_var_decl_list(ast_var_decl_list* node, PassFunc pre, PassFunc post
 
     ast_var_decl* nterm;
 
-    init_llist_iter(node->list);
-    while(NULL != (nterm = iter_llist(node->list)))
+    void* mark = NULL;
+    while(NULL != (nterm = iter_link_list(node->list, &mark)))
         traverse_var_decl(nterm, pre, post);
 
     AST_CALLBACK(post, node);

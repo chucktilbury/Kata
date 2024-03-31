@@ -7,7 +7,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "util.h"
+#include "memory.h"
+#include "link_list.h"
+#include "command_line.h"
 
 // Individual command line item.
 typedef struct {
@@ -22,8 +24,7 @@ typedef struct {
     bool bval;
 } CmdItem;
 
-typedef PtrList CmdItemList;
-typedef PtrListIter CmdItemListIter;
+typedef LinkList CmdItemList;
 
 static CmdItem* create_item(const char* parm, const char* name, const char* help, CmdFlag flag) {
 
@@ -55,33 +56,29 @@ static void destroy_item(CmdItem* ptr) {
     }
 }
 
-static CmdItemListIter* init_ci_list_iter(CmdItemList* h) {
-    return init_ptr_list_iterator(h);
-}
-
-static CmdItem* iterate_ci_list(CmdItemListIter* iter) {
-    return iterate_ptr_list(iter);
+static CmdItem* iterate_ci_list(CmdItemList* ptr, void** mark) {
+    return iter_link_list(ptr, mark);
 }
 
 static CmdItemList* create_ci_list() {
-    return (CmdItemList*)create_ptr_list();
+    return (CmdItemList*)create_link_list();
 }
 
 static void destroy_ci_list(CmdItemList* h) {
 
     if(h != NULL) {
         CmdItem* item;
-        CmdItemListIter* iter = init_ci_list_iter(h);
-        while(NULL != (item = iterate_ci_list(iter)))
+        void* mark = NULL;
+        while(NULL != (item = iterate_ci_list(h, &mark)))
             destroy_item(item);
         // for(int x = 0; x < h->len; x++)
         //     destroy_item(h->list[x]);
-        destroy_ptr_list(h);
+        destroy_link_list(h);
     }
 }
 
 static void add_ci_list(CmdItemList* h, CmdItem* ptr) {
-    add_ptr_list(h, ptr);
+    append_link_list(h, ptr);
 }
 
 typedef struct {
@@ -100,9 +97,9 @@ static void show_help(Cmd* ptr) {
     CmdItem* ci;
 
     printf("use: %s ", ptr->fname);
-    CmdItemListIter* cili = init_ci_list_iter(ptr->table);
-    int len               = 0;
-    while(NULL != (ci = iterate_ci_list(cili))) {
+    void* mark = NULL;
+    int len = 0;
+    while(NULL != (ci = iterate_ci_list(ptr->table, &mark))) {
         if(strlen(ci->parm) > 0)
             printf("[%s] ", ci->parm);
         else
@@ -114,8 +111,8 @@ static void show_help(Cmd* ptr) {
     len /= 2;
 
     printf("\n\n%s\n\n", ptr->desc);
-    cili = init_ci_list_iter(ptr->table);
-    while(NULL != (ci = iterate_ci_list(cili))) {
+    mark = NULL;
+    while(NULL != (ci = iterate_ci_list(ptr->table, &mark))) {
         printf(" %*s%*s ", (int)(len + (strlen(ci->parm) / 2)), ci->parm,
                (int)(len - (strlen(ci->parm) / 2)), "");
 
@@ -166,8 +163,8 @@ static CmdItem* find_by_name(Cmd* ptr, const char* name) {
 
     CmdItem* ci;
 
-    CmdItemListIter* cili = init_ci_list_iter(ptr->table);
-    while(NULL != (ci = iterate_ci_list(cili))) {
+    void* mark = NULL;
+    while(NULL != (ci = iterate_ci_list(ptr->table, &mark))) {
         if(!strcmp(ci->name, name))
             return ci;
     }
@@ -183,8 +180,8 @@ static CmdItem* find_by_parm(Cmd* ptr, const char* parm) {
     CmdItem *ci, *crnt = NULL;
     int len = 0, max = 0, plen = strlen(parm);
 
-    CmdItemListIter* cili = init_ci_list_iter(ptr->table);
-    while(NULL != (ci = iterate_ci_list(cili))) {
+    void* mark = NULL;
+    while(NULL != (ci = iterate_ci_list(ptr->table, &mark))) {
         len = strlen(ci->parm);
 #if 1
         // if you want file list items with a leading '-' and/or you don't want
@@ -356,8 +353,8 @@ void add_cmd(CmdLine cl,
         exit(1);
     }
     else {
-        CmdItemListIter* cili = init_ci_list_iter(cmd->table);
-        while(NULL != (ci = iterate_ci_list(cili))) {
+        void* mark = NULL;
+        while(NULL != (ci = iterate_ci_list(cmd->table, &mark))) {
             if(!strcmp(ci->parm, parm)) {
                 fprintf(stderr, "cmd dev error: attempt to create duplicate parameter: %s\n",
                         name);
@@ -378,7 +375,7 @@ void add_cmd(CmdLine cl,
     add_ci_list(cmd->table, ci);
 }
 
-Str* get_cmd_str(CmdLine cl, const char* name) {
+String* get_cmd_str(CmdLine cl, const char* name) {
 
     assert(cl != NULL);
     assert(name != NULL);
@@ -390,21 +387,21 @@ Str* get_cmd_str(CmdLine cl, const char* name) {
 
 long int get_cmd_int(CmdLine cl, const char* name) {
 
-    Str* s = get_cmd_str(cl, name);
+    String* s = get_cmd_str(cl, name);
 
     return strtol(raw_string(s), NULL, 10);
 }
 
 unsigned long int get_cmd_unsigned(CmdLine cl, const char* name) {
 
-    Str* s = get_cmd_str(cl, name);
+    String* s = get_cmd_str(cl, name);
 
     return strtol(raw_string(s), NULL, 16);
 }
 
 double get_cmd_float(CmdLine cl, const char* name) {
 
-    Str* s = get_cmd_str(cl, name);
+    String* s = get_cmd_str(cl, name);
 
     return strtod(raw_string(s), NULL);
 }
@@ -455,8 +452,8 @@ void parse_cmd_line(CmdLine cl, int argc, char** argv) {
 
     // make sure that all of the required parameters have been seen
     CmdItem* ci;
-    CmdItemListIter* cili = init_ci_list_iter(cmd->table);
-    while(NULL != (ci = iterate_ci_list(cili))) {
+    void* mark = NULL;
+    while(NULL != (ci = iterate_ci_list(cmd->table, &mark))) {
         if(ci->flag & CMD_REQD && !(ci->flag & CMD_SEEN)) {
             if(strlen(ci->parm) == 0)
                 show_error(cmd, "required file list not seen");
@@ -478,8 +475,8 @@ void dump_cmd_line(CmdLine cl) {
     Cmd* cmd = (Cmd*)cl;
     CmdItem* ci;
 
-    CmdItemListIter* cili = init_ci_list_iter(cmd->table);
-    while(NULL != (ci = iterate_ci_list(cili))) {
+    void* mark = NULL;
+    while(NULL != (ci = iterate_ci_list(cmd->table, &mark))) {
         printf("%s:\n", ci->name);
         printf("    %s -- %s\n", ci->parm, ci->help);
         printf("    flags: (CMD_NONE");
@@ -504,10 +501,12 @@ void dump_cmd_line(CmdLine cl) {
         if(ci->flag & CMD_BOOL)
             printf("%s\n", (ci->bval) ? "true" : "false");
         else {
-            Str* str;
-            CmdItemListIter* cili = init_ci_list_iter(ci->list);
-            while(NULL != (str = iterate_string_list(cili)))
+            String* str;
+            mark = NULL;
+            while(NULL != (str = iterate_string_list(ci->list, &mark))) {
+                printf("HERE!\n");
                 printf(" %s", raw_string(str));
+            }
         }
         printf("\n");
     }

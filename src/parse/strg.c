@@ -8,8 +8,8 @@
  * @date 02-26-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+//#define USE_TRACE 1
+//#include "util.h"
 #include "parse.h"
 #include "scanner.h"
 
@@ -68,12 +68,12 @@ ast_string_expr_item* parse_string_expr_item() {
     if((NULL != (nterm = (ast_node*)parse_string_literal())) ||
             (NULL != (nterm = (ast_node*)parse_compound_reference())) ||
             (NULL != (nterm = (ast_node*)parse_literal_value()))) {
-        
+
         node = CREATE_AST_NODE(AST_string_expr_item, ast_string_expr_item);
         node->nterm = nterm;
         finalize_token_queue();
     }
-    else 
+    else
         reset_token_queue(post);
 
     RETV(node);
@@ -93,7 +93,7 @@ ast_string_expr* parse_string_expr() {
     ENTER;
     ast_string_expr* node = NULL;
     ast_node* nterm;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
     int state = 0;
     bool finished = false;
     void* post = post_token_queue();
@@ -103,17 +103,17 @@ ast_string_expr* parse_string_expr() {
             case 0:
                 // first entry must be a string expr item or no error
                 if(NULL != (nterm = (ast_node*)parse_string_expr_item())) {
-                    append_llist(list, nterm);
+                    append_link_list(list, nterm);
                     state = 2;
                 }
-                else 
+                else
                     state = 101;
                 break;
 
             case 1:
                 // expecting a str expr item or an error
                 if(NULL != (nterm = (ast_node*)parse_string_expr_item())) {
-                    append_llist(list, nterm);
+                    append_link_list(list, nterm);
                     state = 2;
                 }
                 else {
@@ -123,7 +123,7 @@ ast_string_expr* parse_string_expr() {
                 break;
 
             case 2:
-                // expecting a '+' or something else. if it's something else, 
+                // expecting a '+' or something else. if it's something else,
                 // then finished parsing the string expr
                 if(TOK_ADD == TTYPE) {
                     state = 1;
@@ -154,9 +154,9 @@ ast_string_expr* parse_string_expr() {
                 break;
 
             default:
-                // should never happen. 
+                // should never happen.
                 fatal_error("invalid state in %s(): %d", __func__, state);
-            
+
         }
     }
 
@@ -186,7 +186,7 @@ ast_formatted_strg* parse_formatted_strg() {
         if(NULL != (nterm = parse_expression_list())) {
             node->exprs = nterm;
         }
-        else 
+        else
             node->exprs = NULL;
     }
     // else no tokens are consumed

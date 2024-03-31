@@ -8,8 +8,9 @@
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+#include <assert.h>
+
+#include "trace.h"
 #include "ast.h"
 
 /**
@@ -193,8 +194,8 @@ void traverse_create_name(ast_create_name* node, PassFunc pre, PassFunc post) {
     AST_CALLBACK(pre, node);
 
     Token* tok;
-    init_llist_iter(node->list);
-    while(NULL != (tok = iter_llist(node->list)))
+    void* mark = NULL;
+    while(NULL != (tok = iter_link_list(node->list, &mark)))
         TRACE_TERM(tok);
 
     AST_CALLBACK(post, node);
@@ -219,8 +220,8 @@ void traverse_destroy_name(ast_destroy_name* node, PassFunc pre, PassFunc post) 
     AST_CALLBACK(pre, node);
 
     Token* tok;
-    init_llist_iter(node->list);
-    while(NULL != (tok = iter_llist(node->list)))
+    void* mark = NULL;
+    while(NULL != (tok = iter_link_list(node->list, &mark)))
         TRACE_TERM(tok);
 
     AST_CALLBACK(post, node);
@@ -296,8 +297,8 @@ void traverse_function_body(ast_function_body* node, PassFunc pre, PassFunc post
     AST_CALLBACK(pre, node);
 
     ast_function_body_element* elem;
-    init_llist_iter(node->list);
-    while(NULL != (elem = iter_llist(node->list)))
+    void* mark = NULL;
+    while(NULL != (elem = iter_link_list(node->list, &mark)))
         traverse_function_body_element(elem, pre, post);
 
     AST_CALLBACK(post, node);

@@ -1,7 +1,7 @@
 /**
  * @file list.h
- * 
- * @brief 
+ *
+ * @brief
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -17,7 +17,7 @@
  */
 typedef struct _ast_list_init_ {
     ast_node node;
-    LList list;
+    LinkList* list;
 } ast_list_init;
 
 /**
@@ -36,7 +36,7 @@ typedef struct _ast_dict_init_element_ {
  */
 typedef struct _ast_dict_init_ {
     ast_node node;
-    LList list;
+    LinkList* list;
 } ast_dict_init;
 
 /**
@@ -54,7 +54,7 @@ typedef struct _ast_array_param_ {
  */
 typedef struct _ast_array_param_list_ {
     ast_node node;
-    LList list;
+    LinkList* list;
 } ast_array_param_list;
 
 /**

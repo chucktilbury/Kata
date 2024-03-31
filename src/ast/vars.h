@@ -28,7 +28,7 @@ typedef struct _ast_var_decl_ {
  */
 typedef struct _ast_var_decl_list_ {
     ast_node node;
-    LList list;
+    LinkList* list;
 } ast_var_decl_list;
 
 /**

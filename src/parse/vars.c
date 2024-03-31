@@ -8,8 +8,8 @@
  * @date 02-26-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+//#define USE_TRACE 1
+//#include "util.h"
 #include "parse.h"
 #include "scanner.h"
 
@@ -72,7 +72,7 @@ ast_var_decl_list* parse_var_decl_list() {
     ENTER;
     ast_var_decl_list* node = NULL;
     ast_var_decl* nterm;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
     int state = 0;
     bool finished = false;
     void* post = post_token_queue();
@@ -92,7 +92,7 @@ ast_var_decl_list* parse_var_decl_list() {
             case 1:
                 // if there is no var decl, then there must be a ')'
                 if(NULL != (nterm = parse_var_decl())) {
-                    append_llist(list, nterm);
+                    append_link_list(list, nterm);
                     state = 2;
                 }
                 else if(TOK_CPAREN == TTYPE) {
@@ -122,7 +122,7 @@ ast_var_decl_list* parse_var_decl_list() {
             case 3:
                 // must be an var_decl, or an error
                 if(NULL != (nterm = parse_var_decl())) {
-                    append_llist(list, nterm);
+                    append_link_list(list, nterm);
                     state = 2;
                 }
                 else {

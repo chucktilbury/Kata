@@ -8,8 +8,8 @@
  * @date 03-29-2024
  * @copyright Copyright (c) 2024
  */
-#include <stdio.h>
-#include <stdbool.h>
+#include <assert.h>
+
 #include "memory.h"
 #include "link_list.h"
 
@@ -24,7 +24,7 @@ LinkList* trace_state_stack = NULL;
 void push_trace_state(bool state) {
 
     if(NULL == trace_state_stack)
-        trace_state_stack = create_llist();
+        trace_state_stack = create_link_list();
 
     bool* node = _ALLOC_T(bool);
     *node = state;

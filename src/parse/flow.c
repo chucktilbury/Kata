@@ -8,8 +8,7 @@
  * @date 02-26-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+#include "trace.h"
 #include "parse.h"
 #include "scanner.h"
 
@@ -146,7 +145,7 @@ ast_else_clause* parse_else_clause() {
     ENTER;
     ast_else_clause* node = NULL;
     ast_else_clause_item* nterm;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
     void* post = post_token_queue();
 
     bool finished = false;
@@ -158,11 +157,11 @@ ast_else_clause* parse_else_clause() {
                 // initial needs to be absent, or a mid, or a final, else none
                 if(NULL == (nterm = parse_else_clause_item())) {
                     if(AST_else_clause_mid == ast_node_type(nterm)) {
-                        append_llist(list, nterm);
+                        append_link_list(list, nterm);
                         state = 1;
                     }
                     else if(AST_else_clause_final == ast_node_type(nterm)){
-                        append_llist(list, nterm);
+                        append_link_list(list, nterm);
                         state = 100;
                     }
                     else
@@ -177,11 +176,11 @@ ast_else_clause* parse_else_clause() {
                 // initial needs to be absent, or a mid, or a final, else one or more
                 if(NULL == (nterm = parse_else_clause_item())) {
                     if(AST_else_clause_mid == ast_node_type(nterm)) {
-                        append_llist(list, nterm);
+                        append_link_list(list, nterm);
                         // state is still 1
                     }
                     else if(AST_else_clause_final == ast_node_type(nterm)){
-                        append_llist(list, nterm);
+                        append_link_list(list, nterm);
                         state = 100;
                     }
                     else
@@ -390,7 +389,7 @@ ast_case_body* parse_case_body() {
     ast_case_body* node = NULL;
     ast_case_clause* ccla;
     ast_default_clause* defc;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
 
     int state = 0;
     bool finished = false;
@@ -412,7 +411,7 @@ ast_case_body* parse_case_body() {
             case 1:
                 // a case is required
                 if(NULL != (ccla = parse_case_clause())) {
-                    append_llist(list, ccla);
+                    append_link_list(list, ccla);
                     state = 2;
                 }
                 else {
@@ -425,9 +424,9 @@ ast_case_body* parse_case_body() {
             case 2:
                 // can be a case, a default, or a '}'
                 if(NULL != (ccla = parse_case_clause()))
-                    append_llist(list, ccla);
+                    append_link_list(list, ccla);
                 else if(NULL != (defc = parse_default_clause())) {
-                    append_llist(list, defc);
+                    append_link_list(list, defc);
                     state = 3;
                 }
                 else if(TOK_CCBRACE == TTYPE) {

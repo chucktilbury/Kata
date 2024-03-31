@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 3.10)
 project(misc)
 
-set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 add_library(${PROJECT_NAME} STATIC
     errors.c
     memory.c
     link_list.c
     trace.c
+    sstrings.c
 )
 
 target_compile_options(${PROJECT_NAME}

@@ -37,7 +37,7 @@
  */
 typedef struct _ast_expression_ {
     ast_node node;
-    LList list;
+    LinkList* list;
     int expr_type;
 } ast_expression;
 
@@ -94,7 +94,7 @@ typedef struct _ast_expr_primary_ {
  */
 typedef struct _ast_expression_list_ {
     ast_node node;
-    LList list;
+    LinkList* list;
 } ast_expression_list;
 
 /**

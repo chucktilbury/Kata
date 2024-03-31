@@ -6,7 +6,7 @@ project(scan)
 add_library(${PROJECT_NAME} STATIC
     scanner.c
     tok_queue.c
-    #keyword.c
+    fileio.c
     tokens.c
 )
 
@@ -16,6 +16,7 @@ target_compile_options(${PROJECT_NAME}
         -Wextra
         -Wpedantic
         -DUSE_GC
+        -I${PROJECT_SOURCE_DIR}
         -I${PROJECT_SOURCE_DIR}/../util
         -I${PROJECT_SOURCE_DIR}/../misc
         -I${PROJECT_SOURCE_DIR}/../ast
@@ -26,7 +27,7 @@ target_compile_options(${PROJECT_NAME}
         -I${CMAKE_CURRENT_BINARY_DIR}
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DMEMORY_DEBUG >
-        $<$<CONFIG:DEBUG>:-DENA_TRACE >
+        $<$<CONFIG:DEBUG>:-DUSE_TRACE >
         $<$<CONFIG:RELEASE>:-Ofast >
         $<$<CONFIG:PROFILE>:-pg -O0 >
 )
@@ -35,7 +36,7 @@ target_compile_options(${PROJECT_NAME}
 
 add_custom_command(
     OUTPUT tokens.c tokens.h
-    COMMENT "Make a sorted list of the tokens and associated infrastrucutre."
+    COMMENT "Make a sorted list of the tokens and associated infrastructure."
     COMMAND python ${PROJECT_SOURCE_DIR}/mk_tokens.py ${PROJECT_SOURCE_DIR}/keywords.txt
     #SOURCES keywords.txt
     DEPENDS mk_tokens.py keywords.txt

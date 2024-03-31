@@ -1,37 +1,38 @@
 /**
  * @file list.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+#include <assert.h>
+
+#include "trace.h"
 #include "ast.h"
 #include "errors.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  list_init
  *      = '[' assignment_item ( ',' assignment_item )* ']'
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_list_init(ast_list_init* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
 
-    init_llist_iter(node->list);
+    void* mark = NULL;
     ast_assignment_item* item;
-    while(NULL != (item = iter_llist(node->list))) 
+    while(NULL != (item = iter_link_list(node->list, &mark)))
         traverse_assignment_item(item, pre, post);
 
     AST_CALLBACK(post, node);
@@ -39,18 +40,18 @@ void traverse_list_init(ast_list_init* node, PassFunc pre, PassFunc post) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  dict_init_element
  *      = ( LITERAL_DSTRG / LITERAL_SSTRG ) ':' assignment_item
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_dict_init_element(ast_dict_init_element* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
 
@@ -62,24 +63,24 @@ void traverse_dict_init_element(ast_dict_init_element* node, PassFunc pre, PassF
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  dict_init
  *      = '[' dict_init_element ( ',' dict_init_element )* ']'
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_dict_init(ast_dict_init* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
 
-    init_llist_iter(node->list);
+    void* mark = NULL;
     ast_dict_init_element* elem;
-    while(NULL != (elem = iter_llist(node->list)))
+    while(NULL != (elem = iter_link_list(node->list, &mark)))
         traverse_dict_init_element(elem, pre, post);
 
     AST_CALLBACK(post, node);
@@ -87,18 +88,18 @@ void traverse_dict_init(ast_dict_init* node, PassFunc pre, PassFunc post) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  array_param
  *      = '[' ( expression / string_expression ) ']'
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_array_param(ast_array_param* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
 
@@ -118,24 +119,24 @@ void traverse_array_param(ast_array_param* node, PassFunc pre, PassFunc post) {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  array_param_list
  *      = array_param ( array_param )*
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_array_param_list(ast_array_param_list* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
 
-    init_llist_iter(node->list);
+    void* mark = NULL;
     ast_array_param* item;
-    while(NULL != (item = iter_llist(node->list)))
+    while(NULL != (item = iter_link_list(node->list, &mark)))
         traverse_array_param(item, pre, post);
 
     AST_CALLBACK(post, node);
@@ -143,18 +144,18 @@ void traverse_array_param_list(ast_array_param_list* node, PassFunc pre, PassFun
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  array_reference
  *      = SYMBOL array_param_list
- *      
- * @param node 
- * 
+ *
+ * @param node
+ *
  */
 void traverse_array_reference(ast_array_reference* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
-    
+
     ENTER;
     AST_CALLBACK(pre, node);
 

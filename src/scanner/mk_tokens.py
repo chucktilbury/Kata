@@ -17,7 +17,9 @@ with open("tokens.h", "w") as outf:
 /* This file is generated with a script. Do not edit. */
 #ifndef _TOKENS_H
 #define _TOKENS_H
-#include "util.h"
+//#include "util.h"
+#include <stdbool.h>
+#include "sstrings.h"
 
 typedef enum {
     // markers
@@ -84,7 +86,7 @@ typedef struct {
  * @brief The parser expects a token to look like this.
  */
 typedef struct {
-    Str* str;          // String that caused the token to be recognized
+    String* str;       // String that caused the token to be recognized
     TokenType type;    // Type of the token
     int line_no;       // Line number where the token was recognized
     int col_no;        // Column of the last character of the token
@@ -102,6 +104,7 @@ const char* tok_to_str(Token* tok);
 
 with open("tokens.c", "w") as outf:
     outf.write("/* This file is generated with a script. Do not edit. */\n\n")
+    outf.write("#include <assert.h>\n\n")
     outf.write("#include \"tokens.h\"\n\n")
     outf.write("KeywordList keyword_list[] = {\n")
     for item in raw_list:

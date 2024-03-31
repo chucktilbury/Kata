@@ -94,6 +94,8 @@ typedef enum {
     AST_LAST,   // number of non-terminals in the list
 } AstType;
 
+#include <stdbool.h>
+
 typedef struct _ast_node_ {
     AstType type;
     bool seen; // used to detect infinite recursion.
@@ -103,6 +105,7 @@ typedef struct _ast_node_ {
 #include "trace.h"
 #include "pass.h"
 #include "parse_state.h"
+#include "link_list.h"
 
 #include "module.h"
 #include "compound.h"

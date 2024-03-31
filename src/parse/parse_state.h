@@ -11,6 +11,9 @@
 #ifndef __PARSE_STATE_H__
 #define __PARSE_STATE_H__
 
+#include "sstrings.h"
+#include "link_list.h"
+
 /**
  * @brief The scope is a state that is tracked as items are parsed.
  */
@@ -25,8 +28,8 @@ typedef enum {
  * functions.
  */
 typedef struct {
-    LList scope_stack;
-    LList name_stack;
+    LinkList* scope_stack;
+    LinkList* name_stack;
     bool is_import;
 } ParserState;
 
@@ -35,9 +38,9 @@ void set_scope(ScopeType scope);
 void push_scope(ScopeType scope);
 ScopeType pop_scope();
 ScopeType get_scope();
-void push_name(Str* name);
-Str* pop_name();
-Str* get_name();
-Str* get_compound_name();
+void push_name(String* name);
+String* pop_name();
+String* get_name();
+String* get_compound_name();
 
 #endif /* __PARSE_STATE_H__ */

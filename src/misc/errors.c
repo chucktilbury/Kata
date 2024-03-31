@@ -8,9 +8,11 @@
  * @date 01-13-2024
  * @copyright Copyright (c) 2024
  */
+#include <stdlib.h>
+
 #include "errors.h"
 #include "scanner.h"
-#include "util.h"
+#include "fileio.h"
 
 #include <stdarg.h>
 

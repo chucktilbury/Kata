@@ -34,6 +34,17 @@ LinkList* create_link_list() {
 }
 
 /**
+ * @brief Destroy list. Currently a no-op.
+ *
+ * @param lst
+ *
+ */
+void destroy_link_list(LinkList* lst) {
+
+    assert(lst != NULL);
+}
+
+/**
  * @brief Append an arbitrary pointer to the end of the list.
  *
  * @param lst
@@ -229,8 +240,8 @@ int len_link_list(LinkList* lst) {
  *
  * Build string
 gcc -Wall -Wextra -g -DTEST_LINK_LIST \
-     -I../scanner -I../util -I../../build/src/scanner \
-     link_list.c memory.c errors.c \
+     -I../scanner -I../util -I../../build/src/scanner -I. \
+     link_list.c memory.c errors.c -o t \
      -L../../bin -lutil -lscan -lmisc -lutil
  */
 #ifdef TEST_LINK_LIST
@@ -242,7 +253,8 @@ void print_list(LinkList* lst) {
 
     printf("\n------------\n");
     //for(str = iter_link_list(lst, &post); str != NULL; str = iter_link_list(lst, &post))
-    LLFOR(lst, str, post)
+    //LLFOR(lst, str, post)
+    while(NULL != (str = iter_link_list(lst, &post)))
         printf("string: %s\n", str);
 }
 

@@ -14,7 +14,7 @@
 /**
  *  function_reference
  *      = compound_reference expression_list compound_name_list
-\ */
+ */
 typedef struct _ast_function_reference_ {
     ast_node node;
     struct _ast_compound_reference_* name;
@@ -94,7 +94,7 @@ typedef struct _ast_function_definition_ {
 */
 typedef struct _ast_create_name_ {
     ast_node node;
-    LList* list;
+    LinkList* list;
 } ast_create_name;
 
 /**
@@ -105,7 +105,7 @@ typedef struct _ast_create_name_ {
 */
 typedef struct _ast_destroy_name_ {
     ast_node node;
-    LList* list;
+    LinkList* list;
 } ast_destroy_name;
 
 /**
@@ -137,7 +137,7 @@ typedef struct _ast_destroy_definition_ {
  */
 typedef struct _ast_function_body_ {
     ast_node node;
-    LList* list;
+    LinkList* list;
 } ast_function_body;
 
 /**

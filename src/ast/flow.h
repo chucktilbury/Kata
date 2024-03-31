@@ -1,7 +1,7 @@
 /**
  * @file flow.h
- * 
- * @brief 
+ *
+ * @brief
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -48,7 +48,7 @@ typedef struct _ast_else_clause_final_ {
  */
 typedef struct _ast_else_clause_ {
     ast_node node;
-    LList* list; // expects to have a final as the end or only.
+    LinkList* list; // expects to have a final as the end or only.
 } ast_else_clause;
 
 /**
@@ -98,7 +98,7 @@ typedef struct _ast_default_clause_ {
  */
 typedef struct _ast_case_body_ {
     ast_node node;
-    LList list;
+    LinkList* list;
 } ast_case_body;
 
 void traverse_if_clause(ast_if_clause* node, PassFunc pre, PassFunc post);

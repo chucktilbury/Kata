@@ -8,8 +8,8 @@
  * @date 02-26-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+//#define USE_TRACE 1
+//#include "util.h"
 #include "parse.h"
 #include "scanner.h"
 
@@ -50,13 +50,13 @@ ast_while_definition* parse_while_definition() {
                     advance_token();
                     state = 2;
                 }
-                else 
+                else
                     state = 100;
                 break;
 
             case 2:
                 // an expression or a ')'
-                if(NULL != (expr = parse_expression())) 
+                if(NULL != (expr = parse_expression()))
                     state = 3;
                 else if(TOK_CPAREN == TTYPE) {
                     advance_token();
@@ -104,7 +104,7 @@ ast_while_definition* parse_while_definition() {
                 fatal_error("unhandled state in %s: %d", __func__, state);
         }
     }
-    
+
     RETV(node);
 }
 
@@ -210,7 +210,7 @@ ast_do_clause* parse_do_clause() {
 
             case 1:
                 // must be a function body
-                if(NULL != (body = parse_function_body())) 
+                if(NULL != (body = parse_function_body()))
                     state = 2;
                 else {
                     EXPECTED("a function body");
@@ -287,7 +287,7 @@ ast_for_clause* parse_for_clause() {
                     advance_token();
                     state = 1;
                 }
-                else 
+                else
                     state = 101;
                 break;
 
@@ -297,7 +297,7 @@ ast_for_clause* parse_for_clause() {
                     advance_token();
                     state = 2;
                 }
-                else 
+                else
                     state = 3;
                 break;
 
@@ -365,7 +365,7 @@ ast_for_clause* parse_for_clause() {
 
             case 7:
                 // must be an expression or error
-                if(NULL != (expr = parse_expression())) 
+                if(NULL != (expr = parse_expression()))
                     state = 4;
                 else {
                     EXPECTED("an expression");

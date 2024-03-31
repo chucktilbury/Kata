@@ -1,7 +1,7 @@
 /**
  * @file string.h
- * 
- * @brief 
+ *
+ * @brief
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-25-2024
@@ -49,7 +49,7 @@ typedef struct _ast_string_expr_item_ {
  */
 typedef struct _ast_string_expr_ {
     ast_node node;
-    LList list;
+    LinkList* list;
 } ast_string_expr;
 
 

@@ -12,6 +12,8 @@
 #define __TRACE_H__
 
 #ifdef USE_TRACE
+#include <stdio.h>
+#include <stdbool.h>
 
 extern int trace_count;
 extern const int trace_increment;

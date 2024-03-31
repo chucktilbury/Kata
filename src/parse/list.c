@@ -8,8 +8,8 @@
  * @date 02-26-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+//#define USE_TRACE 1
+//#include "util.h"
 #include "parse.h"
 #include "scanner.h"
 
@@ -27,7 +27,7 @@ ast_list_init* parse_list_init() {
     ENTER;
     ast_list_init* node = NULL;
     ast_assignment_item* nterm;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
 
     bool finished = false;
     int state = 0;
@@ -48,7 +48,7 @@ ast_list_init* parse_list_init() {
             case 1:
                 // at least one assignment item is required
                 if(NULL != (nterm = parse_assignment_item())) {
-                    append_llist(list, nterm);
+                    append_link_list(list, nterm);
                     state = 2;
                 }
                 else {
@@ -129,7 +129,7 @@ ast_dict_init_element* parse_dict_init_element() {
                     advance_token();
                     state = 1;
                 }
-                else 
+                else
                     state = 101;
                 break;
 
@@ -197,7 +197,7 @@ ast_dict_init* parse_dict_init() {
     ENTER;
     ast_dict_init* node = NULL;
     ast_dict_init_element* nterm;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
 
     bool finished = false;
     int state = 0;
@@ -211,14 +211,14 @@ ast_dict_init* parse_dict_init() {
                     advance_token();
                     state = 1;
                 }
-                else 
+                else
                     state = 101;
                 break;
 
             case 1:
                 // must be a dict element or error
                 if(NULL != (nterm = parse_dict_init_element())) {
-                    append_llist(list, nterm);
+                    append_link_list(list, nterm);
                     state = 2;
                 }
                 else {
@@ -271,7 +271,7 @@ ast_dict_init* parse_dict_init() {
 }
 
 /**
- * @brief 
+ * @brief
  *
  *  array_param
  *      = '[' ( expression / string_expression ) ']'
@@ -303,7 +303,7 @@ ast_array_param* parse_array_param() {
 
             case 1:
                 // must be an expression or a string_expression or an error
-                if((NULL != (nterm = (ast_node*)parse_string_expr())) || 
+                if((NULL != (nterm = (ast_node*)parse_string_expr())) ||
                         (NULL != (nterm = (ast_node*)parse_expression()))) {
                     state = 2;
                 }
@@ -353,7 +353,7 @@ ast_array_param* parse_array_param() {
 }
 
 /**
- * @brief 
+ * @brief
  *
  *  array_param_list
  *      = array_param (array_param)*
@@ -366,7 +366,7 @@ ast_array_param_list* parse_array_param_list() {
     ENTER;
     ast_array_param_list* node = NULL;
     ast_array_param* nterm;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
 
     bool finished = false;
     int state = 0;
@@ -387,7 +387,7 @@ ast_array_param_list* parse_array_param_list() {
             case 1:
                 // must be an expression or a string_expression or an error
                 if(NULL != (nterm = parse_array_param())) {
-                    append_llist(list, nterm);
+                    append_link_list(list, nterm);
                 }
                 else {
                     state = 100;

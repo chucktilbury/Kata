@@ -1,21 +1,20 @@
 /**
  * @file func_body.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-26-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+//#include "util.h"
 #include "parse.h"
 #include "scanner.h"
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  function_body_element
  *      = var_definition
  *      / function_reference
@@ -39,9 +38,9 @@
  *      / return_statement
  *      / raise_statement
  *      / function_body
- *      
- * @return ast_function_body_element* 
- * 
+ *
+ * @return ast_function_body_element*
+ *
  */
 ast_function_body_element* parse_function_body_element() {
 
@@ -76,20 +75,20 @@ ast_function_body_element* parse_function_body_element() {
         node = CREATE_AST_NODE(AST_function_body_element, ast_function_body_element);
         node->nterm = nterm;
     }
-    else 
+    else
         reset_token_queue(post);
 
     RETV(node);
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  break_statement
  *      = 'break'
- *      
- * @return ast_break_statement* 
- * 
+ *
+ * @return ast_break_statement*
+ *
  */
 ast_break_statement* parse_break_statement() {
 
@@ -105,13 +104,13 @@ ast_break_statement* parse_break_statement() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  continue_statement
  *      = 'continue'
- *      
- * @return ast_continue_statement* 
- * 
+ *
+ * @return ast_continue_statement*
+ *
  */
 ast_continue_statement* parse_continue_statement() {
 
@@ -127,13 +126,13 @@ ast_continue_statement* parse_continue_statement() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  trace_statement
  *      = 'trace'
- *      
- * @return ast_trace_statement* 
- * 
+ *
+ * @return ast_trace_statement*
+ *
  */
 ast_trace_statement* parse_trace_statement() {
 
@@ -149,13 +148,13 @@ ast_trace_statement* parse_trace_statement() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  inline_statement
  *      = 'inline' '{' RAW_TEXT '}'
- *      
- * @return ast_inline_statement* 
- * 
+ *
+ * @return ast_inline_statement*
+ *
  */
 ast_inline_statement* parse_inline_statement() {
 
@@ -172,13 +171,13 @@ ast_inline_statement* parse_inline_statement() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  yield_statement
  *      = 'yield' '(' compound_reference ')'
- *      
- * @return ast_yield_statement* 
- * 
+ *
+ * @return ast_yield_statement*
+ *
  */
 ast_yield_statement* parse_yield_statement() {
 
@@ -210,13 +209,13 @@ ast_yield_statement* parse_yield_statement() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  type_statement
  *      = 'type' '(' compound_reference ')'
- *      
- * @return ast_type_statement* 
- * 
+ *
+ * @return ast_type_statement*
+ *
  */
 ast_type_statement* parse_type_statement() {
 
@@ -248,13 +247,13 @@ ast_type_statement* parse_type_statement() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  exit_statement
  *      = 'exit' '(' ( expression )? ')
- *      
- * @return ast_exit_statement* 
- * 
+ *
+ * @return ast_exit_statement*
+ *
  */
 ast_exit_statement* parse_exit_statement() {
 
@@ -288,13 +287,13 @@ ast_exit_statement* parse_exit_statement() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  print_statement
  *      = 'print' ( expression_list )?
- *      
- * @return ast_print_statement* 
- * 
+ *
+ * @return ast_print_statement*
+ *
  */
 ast_print_statement* parse_print_statement() {
 
@@ -311,13 +310,13 @@ ast_print_statement* parse_print_statement() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  return_statement
  *      = 'return' ( '(' ( expression )? ')' )?
- *      
- * @return ast_return_statement* 
- * 
+ *
+ * @return ast_return_statement*
+ *
  */
 ast_return_statement* parse_return_statement() {
 
@@ -344,13 +343,13 @@ ast_return_statement* parse_return_statement() {
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  raise_statement
  *      = 'raise' '(' SYMBOL ',' formatted_strg ')'
- *      
- * @return ast_raise_statement* 
- * 
+ *
+ * @return ast_raise_statement*
+ *
  */
 ast_raise_statement* parse_raise_statement() {
 

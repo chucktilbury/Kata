@@ -8,8 +8,8 @@
  * @date 01-13-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef _ERRORS_H
-#define _ERRORS_H
+#ifndef __ERRORS_H__
+#define __ERRORS_H__
 
 void show_syntax(const char* fmt, ...);
 void show_warning(const char* fmt, ...);
@@ -21,4 +21,4 @@ int get_num_warnings();
     show_syntax("expected %s but got %s", \
         (s), tok_to_str(get_token())); } while(false)
 
-#endif /* _ERRORS_H */
+#endif /* __ERRORS_H__ */

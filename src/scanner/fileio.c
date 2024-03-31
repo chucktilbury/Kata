@@ -20,11 +20,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "util.h"
+#include "memory.h"
+#include "fileio.h"
+#include "errors.h"
+#include "sstrings.h"
+#include "trace.h"
 
 struct _file_ptr_ {
     FILE* fp;
-    Str* fname;
+    String* fname;
     int line_no;
     int col_no;
     int ch;
@@ -40,6 +44,7 @@ static struct _file_ptr_* file_stack = NULL;
  */
 void pop_input_file() {
 
+    ENTER;
     if(file_stack != NULL) {
         fclose(file_stack->fp);
         struct _file_ptr_* tmp = file_stack;
@@ -47,6 +52,7 @@ void pop_input_file() {
         destroy_string(tmp->fname);
         _FREE(tmp);
     }
+    RET;
 }
 
 /**
@@ -56,9 +62,11 @@ void pop_input_file() {
  */
 void push_input_file(const char* fname) {
 
+    ENTER;
+    TRACE("input file: %s", fname);
     FILE* fp = fopen(fname, "r");
     if(fp == NULL)
-        RAISE(FILE_ERROR, "File Error: cannot open input file: %s: %s\n", fname,
+        fatal_error("File Error: cannot open input file: %s: %s\n", fname,
               strerror(errno));
 
     struct _file_ptr_* ptr = _ALLOC_T(struct _file_ptr_);
@@ -74,6 +82,7 @@ void push_input_file(const char* fname) {
     if(file_stack != NULL)
         ptr->next = file_stack;
     file_stack = ptr;
+    RET;
 }
 
 /**
@@ -156,54 +165,54 @@ const char* get_fname() {
         return NULL;
 }
 
-FPTR open_output_file(const char* fname) {
+// FPTR open_output_file(const char* fname) {
 
-    struct _file_ptr_* ptr = _ALLOC_T(struct _file_ptr_);
-    ptr->fp                = fopen(fname, "w");
-    if(ptr->fp == NULL)
-        RAISE(FILE_ERROR, "File Error: cannot open output file: %s: %s\n",
-              fname, strerror(errno));
+//     struct _file_ptr_* ptr = _ALLOC_T(struct _file_ptr_);
+//     ptr->fp                = fopen(fname, "w");
+//     if(ptr->fp == NULL)
+//         RAISE(FILE_ERROR, "File Error: cannot open output file: %s: %s\n",
+//               fname, strerror(errno));
 
-    ptr->fname   = create_string(fname);
-    ptr->line_no = 1;
-    ptr->col_no  = 1;
-    ptr->next    = NULL;
-    ptr->ch      = 0;
+//     ptr->fname   = create_string(fname);
+//     ptr->line_no = 1;
+//     ptr->col_no  = 1;
+//     ptr->next    = NULL;
+//     ptr->ch      = 0;
 
-    return (FPTR)ptr;
-}
+//     return (FPTR)ptr;
+// }
 
-void close_output_file(FPTR fp) {
+// void close_output_file(FPTR fp) {
 
-    struct _file_ptr_* ptr = (struct _file_ptr_*)fp;
-    fclose(ptr->fp);
-    destroy_string(ptr->fname);
-    _FREE(fp);
-}
+//     struct _file_ptr_* ptr = (struct _file_ptr_*)fp;
+//     fclose(ptr->fp);
+//     destroy_string(ptr->fname);
+//     _FREE(fp);
+// }
 
-void emit_buf(FPTR h, void* buf, unsigned int size) {
+// void emit_buf(FPTR h, void* buf, unsigned int size) {
 
-    fwrite(buf, 1, size, ((struct _file_ptr_*)h)->fp);
-}
+//     fwrite(buf, 1, size, ((struct _file_ptr_*)h)->fp);
+// }
 
-void emit_fmt(FPTR h, const char* fmt, ...) {
+// void emit_fmt(FPTR h, const char* fmt, ...) {
 
-    struct _file_ptr_* ptr = (struct _file_ptr_*)h;
-    va_list args;
+//     struct _file_ptr_* ptr = (struct _file_ptr_*)h;
+//     va_list args;
 
-    va_start(args, fmt);
-    vfprintf(ptr->fp, fmt, args);
-    va_end(args);
-}
+//     va_start(args, fmt);
+//     vfprintf(ptr->fp, fmt, args);
+//     va_end(args);
+// }
 
-void emit_Str(FPTR h, Str* str) {
+// void emit_Str(FPTR h, Str* str) {
 
-    struct _file_ptr_* ptr = (struct _file_ptr_*)h;
-    fprintf(ptr->fp, "%s", raw_string(str));
-}
+//     struct _file_ptr_* ptr = (struct _file_ptr_*)h;
+//     fprintf(ptr->fp, "%s", raw_string(str));
+// }
 
-void emit_str(FPTR h, const char* str) {
+// void emit_str(FPTR h, const char* str) {
 
-    struct _file_ptr_* ptr = (struct _file_ptr_*)h;
-    fprintf(ptr->fp, "%s", str);
-}
+//     struct _file_ptr_* ptr = (struct _file_ptr_*)h;
+//     fprintf(ptr->fp, "%s", str);
+// }

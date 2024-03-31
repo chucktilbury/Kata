@@ -4,17 +4,17 @@ project(simple)
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 add_executable(${PROJECT_NAME}
+    command_line.c
     simple.c
 )
 
 target_link_libraries(${PROJECT_NAME}
     pthread
+    misc
     parse
     scan
     ast
     pass
-    util
-    misc
     gc
 )
 

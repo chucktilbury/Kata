@@ -6,9 +6,11 @@
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-29-2024
- * @copyright Copyright (c) 2024
+ * @copyright Copyright (c) 2024a
  */
-#include "util.h"
+#include <assert.h>
+
+#include "memory.h"
 #include "parse_state.h"
 
 ParserState* parser_state = NULL;
@@ -22,7 +24,7 @@ ParserState* parser_state = NULL;
  */
 void set_scope(ScopeType scope) {
 
-    ScopeType* node = peek_llist(parser_state->scope_stack);
+    ScopeType* node = peek_link_list(parser_state->scope_stack);
     assert(node != NULL);   // should never happen
 
     *node = scope;
@@ -39,7 +41,7 @@ void push_scope(ScopeType scope) {
     ScopeType* node = _ALLOC_T(ScopeType);
     *node = scope;
 
-    push_llist(parser_state->scope_stack, node);
+    push_link_list(parser_state->scope_stack, node);
 }
 
 /**
@@ -50,7 +52,7 @@ void push_scope(ScopeType scope) {
  */
 ScopeType pop_scope() {
 
-    ScopeType* node = pop_llist(parser_state->scope_stack);
+    ScopeType* node = pop_link_list(parser_state->scope_stack);
     assert(node != NULL);
 
     return *node;
@@ -64,7 +66,7 @@ ScopeType pop_scope() {
  */
 ScopeType get_scope() {
 
-    ScopeType* node = peek_llist(parser_state->scope_stack);
+    ScopeType* node = peek_link_list(parser_state->scope_stack);
     assert(node != NULL);
 
     return *node;
@@ -80,10 +82,10 @@ ParserState* create_parser_state() {
 
     parser_state = _ALLOC_T(ParserState);
 
-    parser_state->scope_stack = create_llist();
+    parser_state->scope_stack = create_link_list();
     push_scope(SCOPE_PRIV);
 
-    parser_state->name_stack = create_llist();
+    parser_state->name_stack = create_link_list();
     push_name(create_string("root"));
 
     parser_state->is_import = false;
@@ -91,28 +93,33 @@ ParserState* create_parser_state() {
     return parser_state;
 }
 
-void push_name(Str* name) {
+void push_name(String* name) {
 
-    push_llist(parser_state->name_stack, name);
+    push_link_list(parser_state->name_stack, name);
 }
 
-Str* pop_name() {
+String* pop_name() {
 
-    return pop_llist(parser_state->name_stack);
+    return pop_link_list(parser_state->name_stack);
 }
 
-Str* get_name() {
+String* get_name() {
 
-    return peek_llist(parser_state->name_stack);
+    return peek_link_list(parser_state->name_stack);
 }
 
-Str* get_compound_name() {
+String* get_compound_name() {
 
-    init_llist_iter(parser_state->name_stack);
-    Str* str = create_string(NULL);
-    Str* sptr;
+    String* str = create_string(NULL);
+    String* sptr;
+    StrList* lptr = create_string_list();
+    void* mark = NULL;
 
-    while(NULL != (sptr = iter_llist(parser_state->name_stack))) {
+    while(NULL != (sptr = iter_link_list(parser_state->name_stack, &mark)))
+        push_string_list(lptr, sptr);
+
+    mark = NULL;
+    while(NULL != (sptr = iter_link_list(lptr, &mark))) {
         add_string_Str(str, sptr);
         add_string_char(str, '.');
     }

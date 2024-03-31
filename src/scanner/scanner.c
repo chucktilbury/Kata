@@ -1,7 +1,7 @@
 /**
  * @file scanner.c
  *
- * @brief This is the implemetation of the default example scanner. It
+ * @brief This is the implementation of the default example scanner. It
  * implements scanning for keywords that are defined in the grammar and
  * also default constructed tokens that are literal numbers and literal
  * strings. Also symbols and operators such as "!=" and "==". It is
@@ -19,14 +19,25 @@
  * @date 01-07-2024
  * @copyright Copyright (c) 2024
  */
+#include <ctype.h>
+#include <stdbool.h>
+#include <string.h>
+#include <strings.h>
+#include <stdlib.h>
+#include <assert.h>
+
 #include "scanner.h"
 //#include "keyword.h"
 #include "tokens.h"
+#include "fileio.h"
+#include "except.h"
+#include "strings.h"
+#include "memory.h"
 
 static Token token;
 
 /**
- * @brief Comments are not retuned by the scanner. This reads from the ';'
+ * @brief Comments are not returned by the scanner. This reads from the ';'
  * and discards the data.
  */
 static void eat_comment() {
@@ -413,8 +424,8 @@ static void check_keyword() {
     token.type = TOK_SYMBOL;
 
     // the loop will run till there are elements in the
-    // subarray as l > r means that there are no elements to
-    // consider in the given subarray
+    // sub-array as l > r means that there are no elements to
+    // consider in the given sub-array
     while(l <= r) {
         // calculating mid point
         m = l + (r - l) / 2;
@@ -685,7 +696,7 @@ void init_scanner(const char* fname) {
  * @brief This function reads a token from the input stream and returns in
  * in a pointer to a global static Token data structure. When the token is
  * read, a deep copy is performed to preserve the value. This keeps us from
- * having to recompose the data structhre every time a token is read.
+ * having to recompose the data structure every time a token is read.
  */
 Token* scan_token() {
 

@@ -1,8 +1,8 @@
 /**
  * @file import.h
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 02-26-2024
@@ -15,7 +15,7 @@
 /**
  * import_statement
  *      = 'import' formatted_string 'as' SYMBOL
- * 
+ *
  */
 typedef struct _ast_import_statement_ {
     ast_node node;

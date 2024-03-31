@@ -10,15 +10,15 @@
 #ifndef __COMPOUND_H__
 #define __COMPOUND_H__
 #include "ast.h"
-
+#include "strings.h"
 /**
  *  compound_name
  *      = SYMBOL ( '.' SYMBOL )*
  */
 typedef struct _ast_compound_name_ {
     ast_node node;
-    LList list;
-    Str* raw_name;
+    LinkList* list;
+    String* raw_name;
 } ast_compound_name;
 
 
@@ -28,7 +28,7 @@ typedef struct _ast_compound_name_ {
  */
 typedef struct _ast_compound_name_list_ {
     ast_node node;
-    LList list;
+    LinkList* list;
 } ast_compound_name_list;
 
 /**
@@ -48,7 +48,7 @@ typedef struct _ast_compound_ref_item_ {
  */
 typedef struct _ast_compound_reference_ {
     ast_node node;
-    LList list;
+    LinkList* list;
 } ast_compound_reference;
 
 void traverse_compound_name(ast_compound_name* node, PassFunc pre, PassFunc post);

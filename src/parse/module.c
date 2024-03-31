@@ -8,8 +8,9 @@
  * @date 02-26-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-#include "util.h"
+//#define USE_TRACE 1
+#include "link_list.h"
+#include "trace.h"
 #include "parse.h"
 #include "scanner.h"
 
@@ -27,11 +28,11 @@ ast_module* parse_module() {
     ENTER;
     ast_module* node = NULL;
     ast_module_item* nterm;
-    LList list = create_llist();
+    LinkList* list = create_link_list();
 
     while(true) {
         if(NULL != (nterm = parse_module_item())) {
-            append_llist(list, nterm);
+            append_link_list(list, nterm);
         }
         else if(TOK_END_OF_FILE == TTYPE) {
             node = CREATE_AST_NODE(AST_module, ast_module);
@@ -141,7 +142,6 @@ ast_namespace_item* parse_namespace_item() {
  */
 ast_namespace_definition* parse_namespace_definition() {
 
-    PUSH_TRACE_STATE(true);
     ENTER;
     ast_namespace_definition* node = NULL;
 
@@ -160,11 +160,11 @@ ast_namespace_definition* parse_namespace_definition() {
             if(TOK_OCBRACE == TTYPE) {
                 advance_token();
 
-                node->list = create_llist();
+                node->list = create_link_list();
                 ast_node* nterm;
                 while(true) {
                     if(NULL != (nterm = (ast_node*)parse_namespace_item()))
-                        append_llist(node->list, nterm);
+                        append_link_list(node->list, nterm);
                     else if(TOK_CCBRACE == TTYPE) {
                         TRACE("return here: %s", raw_string(get_compound_name()));
                         advance_token();
@@ -190,7 +190,6 @@ ast_namespace_definition* parse_namespace_definition() {
         }
     }
     // else not a namespace definition
-    POP_TRACE_STATE();
     RETV(node);
 }
 
@@ -214,7 +213,6 @@ ast_class_item* parse_class_item() {
     ast_node* nterm;
     void* post = post_token_queue();
 
-    PUSH_TRACE_STATE(false);
     if((NULL != (nterm = (ast_node*)parse_scope_operator())) ||
             (NULL != (nterm = (ast_node*)parse_destroy_declaration())) ||
             (NULL != (nterm = (ast_node*)parse_create_declaration())) ||
@@ -233,7 +231,6 @@ ast_class_item* parse_class_item() {
         TRACE_TERM(get_token());
         reset_token_queue(post);
     }
-    POP_TRACE_STATE();
 
     RETV(node);
 }
@@ -287,11 +284,11 @@ ast_class_definition* parse_class_definition() {
             if(TOK_OCBRACE == TTYPE) {
                 advance_token();
 
-                node->list = create_llist();
+                node->list = create_link_list();
                 ast_node* nterm;
                 while(true) {
                     if(NULL != (nterm = (ast_node*)parse_class_item()))
-                        append_llist(node->list, nterm);
+                        append_link_list(node->list, nterm);
                     else if(TOK_CCBRACE == TTYPE) {
                         pop_scope();
                         pop_name();
