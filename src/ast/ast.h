@@ -102,10 +102,10 @@ typedef struct _ast_node_ {
 } ast_node;
 
 #include "scanner.h"
-#include "trace.h"
+// #include "trace.h"
 #include "pass.h"
 #include "parse_state.h"
-#include "link_list.h"
+// #include "link_list.h"
 
 #include "module.h"
 #include "compound.h"

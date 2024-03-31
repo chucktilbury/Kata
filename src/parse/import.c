@@ -8,13 +8,17 @@
  * @date 02-26-2024
  * @copyright Copyright (c) 2024
  */
-//#define USE_TRACE 1
-//#include "util.h"
+#include "trace.h"
 #include "parse.h"
 #include "scanner.h"
 
 /**
- * @brief
+ * @brief The import statement is like a namespace except that it opens a new
+ * file and reads from that instead of the current file. When the imported
+ * file is finished, then the input stream automatically switches back to the
+ * previous file. When an imported file is being read, only the new symbols
+ * are placed into the AST so that they can be checked when the symbol resolver
+ * pass is entered.
  *
  *  import_statement
  *      = 'import' formatted_strg AS SYMBOL

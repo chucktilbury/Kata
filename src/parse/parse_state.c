@@ -10,6 +10,7 @@
  */
 #include <assert.h>
 
+#include "trace.h"
 #include "memory.h"
 #include "parse_state.h"
 

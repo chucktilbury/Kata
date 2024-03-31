@@ -8,8 +8,7 @@
  * @date 02-26-2024
  * @copyright Copyright (c) 2024
  */
-#define USE_TRACE 1
-//#include "util.h"
+#include "trace.h"
 #include "parse.h"
 #include "scanner.h"
 
