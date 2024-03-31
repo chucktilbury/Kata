@@ -36,14 +36,38 @@ typedef struct {
     TokQueueItem* tail;
 } TokQueue;
 
-static TokQueue* tqueue = NULL;
+//static TokQueue* tqueue = NULL;
+static LinkList* tqueue_stack = NULL;
+
+/**
+ * @brief Push the token queue.
+ *
+ *
+ */
+void push_token_queue() {
+
+    TokQueue* queue = _ALLOC_T(TokQueue);
+    push_link_list(tqueue_stack, queue);
+    append_token(scan_token());
+}
+
+/**
+ * @brief Pop the token queue
+ *
+ *
+ */
+void pop_token_queue() {
+
+    pop_link_list(tqueue_stack);
+}
 
 /*
  * Append a token to the end of the queue. It could be that advance_token()
  * has found the end of the queue, but it could be something else.
  */
-static void append_token(Token* tok) {
+void append_token(Token* tok) {
 
+    TokQueue* tqueue = peek_link_list(tqueue_stack);
     assert(tqueue != NULL);
     assert(tok != NULL);
 
@@ -75,14 +99,13 @@ static void append_token(Token* tok) {
 void open_file(const char* fname) {
 
     ENTER;
-    // calling into the util library
-    push_input_file(fname);
 
-    if(tqueue == NULL) {
-        // prime the token pipeline
-        tqueue = _ALLOC_T(TokQueue);
-        append_token(scan_token());
-    }
+    if(tqueue_stack == NULL)
+        tqueue_stack = create_link_list();
+
+    push_input_file(fname);
+    push_token_queue();
+
     RET;
 }
 
@@ -91,19 +114,11 @@ void open_file(const char* fname) {
  */
 void close_file() {
 
+    ENTER;
     pop_input_file();
+    pop_link_list(tqueue_stack);
+    RET;
 }
-
-/**
- * @brief Mark this token as having been used to compose a rule.
- *
- * @param tok
- *
- */
-// void finalize_token() {
-
-//     tqueue->crnt->used = true;
-// }
 
 /**
  * @brief Get the token object. This returns the current token, which is a
@@ -114,6 +129,7 @@ void close_file() {
  */
 Token* get_token() {
 
+    TokQueue* tqueue = peek_link_list(tqueue_stack);
     assert(tqueue != NULL);
 
     if(tqueue->crnt != NULL) {
@@ -156,7 +172,9 @@ Token* copy_token(const Token* tok) {
  */
 Token* advance_token() {
 
+    ENTER;
     // avoid stupid programmer tricks
+    TokQueue* tqueue = peek_link_list(tqueue_stack);
     assert(tqueue != NULL);
     assert(tqueue->crnt != NULL);
 
@@ -167,7 +185,7 @@ Token* advance_token() {
         tqueue->crnt = tqueue->crnt->next;
     }
 
-    return tqueue->crnt->tok;
+    RETV(tqueue->crnt->tok);
 }
 
 /**
@@ -178,17 +196,8 @@ Token* advance_token() {
 void finalize_token_queue() {
 
     ENTER;
-    // TokQueueItem* ptr = tqueue->head;
-    // while(ptr != NULL) {
-    //     if(ptr->used)
-    //         ptr = ptr->next;
-    //     else
-    //         break;
-    // }
 
-    // if(ptr != NULL)
-    //     tqueue->head = ptr;
-    //TRACE("head: %p, crnt = %p, tail = %p", (void*)tqueue->head, (void*)tqueue->crnt, (void*)tqueue->tail);
+    TokQueue* tqueue = peek_link_list(tqueue_stack);
     tqueue->head = tqueue->crnt;
 
     RET;
@@ -205,8 +214,9 @@ void finalize_token_queue() {
  */
 void* post_token_queue() {
 
-    assert(tqueue != NULL);
     ENTER;
+    TokQueue* tqueue = peek_link_list(tqueue_stack);
+    assert(tqueue != NULL);
     RETV((void*)tqueue->crnt);
 }
 
@@ -220,68 +230,19 @@ void* post_token_queue() {
  */
 void reset_token_queue(void* post) {
 
-    assert(tqueue != NULL);
-
     ENTER;
+
+    TokQueue* tqueue = peek_link_list(tqueue_stack);
+    assert(tqueue != NULL);
 
     tqueue->crnt = (TokQueueItem*)post;
 
     RET;
 }
 
-/**
- * @brief Iterate the token queue. This is used by consumers that require
- * raw access to the token queue. That includes things like error reporting
- * and recovery. The first time that the iterator is called, the parameter
- * needs to be NULL. The current pointer in the queue is store there in
- * order to track the location in the queue. When there are no more
- * elements in the queue, then the return value is NULL.
- *
- * Example:
- * void* mark = NULL;
- * for(Token* tok = iterate_tokens(&mark);
- *            tok != NULL;
- *            tok = iterate_tokens(&mark)) {
- *     // do stuff with tok
- * }
- *
- * @param mark
- * @return Token*
- */
-// Token* iterate_token_queue(void** mark) {
-
-//     assert(tqueue != NULL);
-//     assert(tqueue->head != NULL);
-
-//     if(*mark == NULL)
-//         *mark = tqueue->head;
-//     else if(((TokQueueItem*)(*mark))->next != NULL)
-//         *mark = ((TokQueueItem*)(*mark))->next;
-//     else
-//         return NULL;
-
-//     return ((TokQueueItem*)(*mark))->tok;
-// }
-
-/**
- * @brief This function literally discards the entire token queue. This
- * is used in error recovery to discard tokens that are a part of the
- * error so that parsing can resume.
- *
- */
-// void discard_token_queue() {
-
-//     assert(tqueue != NULL);
-//     assert(tqueue->head != NULL);
-
-//     // Get a new token.
-//     advance_token();
-//     // Make the new token the head of the queue and the crnt item.
-//     tqueue->head = tqueue->crnt = tqueue->tail;
-// }
-
 void dump_token_queue() {
 
+    TokQueue* tqueue = peek_link_list(tqueue_stack);
     assert(tqueue != NULL);
     assert(tqueue->head != NULL);
 

@@ -9,6 +9,7 @@ add_library(${PROJECT_NAME} STATIC
     link_list.c
     trace.c
     sstrings.c
+    paths.c
 )
 
 target_compile_options(${PROJECT_NAME}

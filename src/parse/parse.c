@@ -11,6 +11,21 @@
 #include "trace.h"
 #include "parse.h"
 #include "scanner.h"
+#include "paths.h"
+
+// this is a temporary path for development otherwise, this would be received
+// from configurations.
+static const char* dummy_path[] = {
+    "./",
+    "../",
+    "../test/",
+    "../test/inputs/",
+    "../test/misc",
+    "../test/parse",
+    "../test/stuff/",
+    NULL
+};
+
 
 extern ParserState* parser_state;
 
@@ -31,9 +46,12 @@ const char* scope_name(ScopeType type) {
 void init_parser(const char* fname) {
 
     ENTER;
+
     TRACE("file name: \"%s\"", fname);
-    init_scanner(fname);
+    init_paths(dummy_path);
+    init_scanner(raw_string(find_file(fname)));
     create_parser_state();
+
     RET;
 }
 
@@ -49,13 +67,7 @@ ast_module* parse() {
     ENTER;
     ast_module* node = NULL;
 
-    if(NULL != (node = parse_module())) {
-        if(TOK_END_OF_INPUT != TTYPE) {
-            EXPECTED("end of input");
-            node = NULL;
-        }
-    }
-    else {
+    if(NULL == (node = parse_module())) {
         show_syntax("module cannot be empty");
     }
 

@@ -38,7 +38,6 @@ ast_module* parse_module() {
             node->list = list;
             finalize_token_queue();
             close_file();
-            advance_token();
             TRACE("end of file");
             break;
         }
@@ -77,7 +76,6 @@ ast_module_item* parse_module_item() {
         node = CREATE_AST_NODE(AST_module_item, ast_module_item);
         node->nterm = nterm;
         node->scope = get_scope();
-        finalize_token_queue();
     }
     else {
         // returning NULL, but no error.... yet...
@@ -120,7 +118,6 @@ ast_namespace_item* parse_namespace_item() {
         node = CREATE_AST_NODE(AST_namespace_item, ast_namespace_item);
         node->nterm = nterm;
         node->scope = get_scope();
-        finalize_token_queue();
     }
     else {
         // returning NULL, but no error.... yet...
@@ -184,7 +181,7 @@ ast_namespace_definition* parse_namespace_definition() {
             }
         }
         else {
-            EXPECTED("a SYMBOL");
+            EXPECTED("+++ a SYMBOL");
             node = NULL;
         }
     }
@@ -221,8 +218,6 @@ ast_class_item* parse_class_item() {
         node = CREATE_AST_NODE(AST_module_item, ast_class_item);
         node->nterm = nterm;
         node->scope = get_scope();
-        TRACE_TERM(get_token());
-        finalize_token_queue();
         TRACE_TERM(get_token());
     }
     else {

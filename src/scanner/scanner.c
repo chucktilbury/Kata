@@ -27,12 +27,12 @@
 #include <assert.h>
 
 #include "scanner.h"
-//#include "keyword.h"
 #include "tokens.h"
 #include "fileio.h"
 #include "except.h"
 #include "strings.h"
 #include "memory.h"
+#include "trace.h"
 
 static Token token;
 
@@ -681,18 +681,6 @@ static void finish_token() {
 }
 
 /**
- * @brief Allocate the data structures that the scanner uses. This function
- * must be called before any characters are scanned.
- */
-void init_scanner(const char* fname) {
-
-    memset(&token, 0, sizeof(Token));
-    token.str = create_string(NULL);
-
-    open_file(fname);
-}
-
-/**
  * @brief This function reads a token from the input stream and returns in
  * in a pointer to a global static Token data structure. When the token is
  * read, a deep copy is performed to preserve the value. This keeps us from
@@ -755,6 +743,21 @@ Token* scan_token() {
 
     finish_token();
     return &token;
+}
+
+/**
+ * @brief Allocate the data structures that the scanner uses. This function
+ * must be called before any characters are scanned.
+ */
+void init_scanner(const char* fname) {
+
+    ENTER;
+    memset(&token, 0, sizeof(Token));
+    token.str = create_string(NULL);
+
+    open_file(fname);
+    append_token(scan_token());
+    RET;
 }
 
 /*

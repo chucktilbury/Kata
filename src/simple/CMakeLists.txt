@@ -10,11 +10,11 @@ add_executable(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     pthread
-    misc
     parse
     scan
     ast
     pass
+    misc
     gc
 )
 

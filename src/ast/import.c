@@ -17,7 +17,7 @@
  * @brief
  *
  *  import_statement
- *      = 'import' formatted_string 'as' SYMBOL
+ *      = 'import' SYMBOL ('as' SYMBOL)?
  *
  * @param node
  *
@@ -28,6 +28,10 @@ void traverse_import_statement(ast_import_statement* node, PassFunc pre, PassFun
 
     ENTER;
     AST_CALLBACK(pre, node);
+
+    TRACE_TERM(node->name);
+    TRACE_TERM(node->mod);
+    traverse_module(node->module, pre, post);
 
     AST_CALLBACK(post, node);
     RET;

@@ -236,7 +236,6 @@ ast_function_declaration* parse_function_declaration() {
     int state = 0;
     bool finished = false;
 
-    PUSH_TRACE_STATE(false);
     while(!finished) {
         switch(state) {
             case 0:
@@ -338,7 +337,6 @@ ast_function_declaration* parse_function_declaration() {
         }
     }
 
-    POP_TRACE_STATE();
     RETV(node);
 }
 

@@ -107,7 +107,7 @@ start_definition
 # program.
 #
 import_statement
-    = 'import' formatted_strg AS SYMBOL
+    = 'import' SYMBOL ('as' SYMBOL)?
 
 #####################
 #

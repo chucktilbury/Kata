@@ -25,10 +25,12 @@ ParserState* parser_state = NULL;
  */
 void set_scope(ScopeType scope) {
 
+    ENTER;
     ScopeType* node = peek_link_list(parser_state->scope_stack);
     assert(node != NULL);   // should never happen
 
     *node = scope;
+    RET;
 }
 
 /**
@@ -39,10 +41,13 @@ void set_scope(ScopeType scope) {
  */
 void push_scope(ScopeType scope) {
 
+    ENTER;
     ScopeType* node = _ALLOC_T(ScopeType);
     *node = scope;
 
+    TRACE("scope: %d", scope);
     push_link_list(parser_state->scope_stack, node);
+    RET;
 }
 
 /**
@@ -53,10 +58,11 @@ void push_scope(ScopeType scope) {
  */
 ScopeType pop_scope() {
 
+    ENTER;
     ScopeType* node = pop_link_list(parser_state->scope_stack);
     assert(node != NULL);
 
-    return *node;
+    RETV(*node);
 }
 
 /**
@@ -67,10 +73,11 @@ ScopeType pop_scope() {
  */
 ScopeType get_scope() {
 
+    ENTER;
     ScopeType* node = peek_link_list(parser_state->scope_stack);
     assert(node != NULL);
 
-    return *node;
+    RETV(*node);
 }
 
 /**
@@ -81,6 +88,7 @@ ScopeType get_scope() {
  */
 ParserState* create_parser_state() {
 
+    ENTER;
     parser_state = _ALLOC_T(ParserState);
 
     parser_state->scope_stack = create_link_list();
@@ -91,26 +99,32 @@ ParserState* create_parser_state() {
 
     parser_state->is_import = false;
 
-    return parser_state;
+    RETV(parser_state);
 }
 
 void push_name(String* name) {
 
+    ENTER;
+    TRACE("name: %s", name->buffer);
     push_link_list(parser_state->name_stack, name);
+    RET;
 }
 
 String* pop_name() {
 
-    return pop_link_list(parser_state->name_stack);
+    ENTER;
+    RETV(pop_link_list(parser_state->name_stack));
 }
 
 String* get_name() {
 
-    return peek_link_list(parser_state->name_stack);
+    ENTER;
+    RETV(peek_link_list(parser_state->name_stack));
 }
 
 String* get_compound_name() {
 
+    ENTER;
     String* str = create_string(NULL);
     String* sptr;
     StrList* lptr = create_string_list();
@@ -121,10 +135,19 @@ String* get_compound_name() {
 
     mark = NULL;
     while(NULL != (sptr = iter_link_list(lptr, &mark))) {
+        TRACE("segment: %s", sptr->buffer);
         add_string_Str(str, sptr);
         add_string_char(str, '.');
     }
 
-    return str;
+    TRACE("compound name: \"%s\"", str->buffer);
+    RETV(str);
+}
+
+void set_import_state(bool val) {
+
+    ENTER;
+    parser_state->is_import = val;
+    RET;
 }
 

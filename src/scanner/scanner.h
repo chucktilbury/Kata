@@ -144,5 +144,8 @@ void init_scanner(const char* fname);
 
 // void print_token(Token* tok);
 void dump_token_queue();
+void append_token(Token* tok);
+void push_token_queue();
+void pop_token_queue();
 
 #endif /* __SCANNER_H__ */
