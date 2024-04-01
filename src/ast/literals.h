@@ -81,7 +81,7 @@ typedef struct _ast_type_name_list_ {
 
 /**
  * This node type is created when an error is detected. It's just a
- * place holder and no emitter passes can be taken. There is no grammer
+ * place holder and no emitter passes can be taken. There is no grammar
  * rule to represent.
  */
 typedef struct _ast_error_ {

@@ -10,8 +10,8 @@
  */
 #include "util.h"
 //#include "scanner.h"
-#include "parse.h"
 #include "ast.h"
+#include "parse.h"
 #include "trace.h"
 
 int main(int argc, char** argv) {

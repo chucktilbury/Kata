@@ -7,9 +7,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "memory.h"
-#include "link_list.h"
 #include "command_line.h"
+#include "link_list.h"
+#include "memory.h"
 
 // Individual command line item.
 typedef struct {
@@ -98,7 +98,7 @@ static void show_help(Cmd* ptr) {
 
     printf("use: %s ", ptr->fname);
     void* mark = NULL;
-    int len = 0;
+    int len    = 0;
     while(NULL != (ci = iterate_ci_list(ptr->table, &mark))) {
         if(strlen(ci->parm) > 0)
             printf("[%s] ", ci->parm);

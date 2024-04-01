@@ -162,7 +162,7 @@ ast_namespace_definition* parse_namespace_definition() {
                     if(NULL != (nterm = (ast_node*)parse_namespace_item()))
                         append_link_list(node->list, nterm);
                     else if(TOK_CCBRACE == TTYPE) {
-                        TRACE("return here: %s", raw_string(get_compound_name()));
+                        TRACE("scope before return: %s", raw_string(get_compound_name()));
                         advance_token();
                         pop_scope();
                         pop_name();
@@ -284,6 +284,7 @@ ast_class_definition* parse_class_definition() {
                     if(NULL != (nterm = (ast_node*)parse_class_item()))
                         append_link_list(node->list, nterm);
                     else if(TOK_CCBRACE == TTYPE) {
+                        TRACE("scope before return: %s", raw_string(get_compound_name()));
                         pop_scope();
                         pop_name();
                         advance_token();
@@ -376,3 +377,4 @@ ast_class_var_declaration* parse_class_var_declaration() {
 
     RETV(node);
 }
+

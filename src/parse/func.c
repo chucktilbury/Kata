@@ -69,7 +69,7 @@ ast_function_reference* parse_function_reference() {
                 node->name = name;
                 node->inp = inp;
                 node->outp = outp;
-                finalize_token_queue();
+                //finalize_token_queue();
                 finished = true;
                 break;
 
@@ -138,7 +138,7 @@ ast_create_reference* parse_create_reference() {
                 node = CREATE_AST_NODE(AST_create_reference, ast_create_reference);
                 node->name = name;
                 node->inp = inp;
-                finalize_token_queue();
+                //finalize_token_queue();
                 finished = true;
                 break;
 
@@ -196,7 +196,7 @@ ast_destroy_reference* parse_destroy_reference() {
                 // finished parsing
                 node = CREATE_AST_NODE(AST_destroy_reference, ast_destroy_reference);
                 node->name = name;
-                finalize_token_queue();
+                //finalize_token_queue();
                 finished = true;
                 break;
 
@@ -315,7 +315,7 @@ ast_function_declaration* parse_function_declaration() {
                 node->is_virtual = is_virtual;
                 node->inputs = inputs;
                 node->outputs = outputs;
-                finalize_token_queue();
+                //finalize_token_queue();
                 break;
 
             case 101:
@@ -414,7 +414,7 @@ ast_create_declaration* parse_create_declaration() {
                 node = CREATE_AST_NODE(AST_create_declaration, ast_create_declaration);
                 node->is_virtual = is_virtual;
                 node->inputs = inputs;
-                finalize_token_queue();
+                //finalize_token_queue();
                 break;
 
             case 101:
@@ -498,7 +498,7 @@ ast_destroy_declaration* parse_destroy_declaration() {
                 finished = true;
                 node = CREATE_AST_NODE(AST_destroy_declaration, ast_destroy_declaration);
                 node->is_virtual = is_virtual;
-                finalize_token_queue();
+                //finalize_token_queue();
                 break;
 
             case 101:
@@ -617,7 +617,7 @@ ast_function_definition* parse_function_definition() {
                 node->inputs = inputs;
                 node->outputs = outputs;
                 node->body = body;
-                finalize_token_queue();
+                //finalize_token_queue();
                 break;
 
             case 101:
@@ -705,7 +705,7 @@ ast_create_name* parse_create_name() {
                 finished = true;
                 node = CREATE_AST_NODE(AST_create_name, ast_create_name);
                 node->list = list;
-                finalize_token_queue();
+                //finalize_token_queue();
                 break;
 
             case 101:
@@ -793,7 +793,7 @@ ast_destroy_name* parse_destroy_name() {
                 finished = true;
                 node = CREATE_AST_NODE(AST_destroy_name, ast_destroy_name);
                 node->list = list;
-                finalize_token_queue();
+                //finalize_token_queue();
                 break;
 
             case 101:
@@ -900,7 +900,7 @@ ast_create_definition* parse_create_definition() {
                 node->name = name;
                 node->inputs = inputs;
                 node->body = body;
-                finalize_token_queue();
+                //finalize_token_queue();
                 break;
 
             case 101:
@@ -994,7 +994,7 @@ ast_destroy_definition* parse_destroy_definition() {
                 node->is_virtual = is_virtual;
                 node->name = name;
                 node->body = body;
-                finalize_token_queue();
+                //finalize_token_queue();
                 break;
 
             case 101:
@@ -1068,7 +1068,7 @@ ast_function_body* parse_function_body() {
                 finished = true;
                 node = CREATE_AST_NODE(AST_function_body, ast_function_body);
                 node->list = list;
-                finalize_token_queue();
+                //finalize_token_queue();
                 break;
 
             case 101:
@@ -1147,7 +1147,7 @@ ast_start_function* parse_start_function() {
                 finished = true;
                 node = CREATE_AST_NODE(AST_start_function, ast_start_function);
                 node->body = body;
-                finalize_token_queue();
+                //finalize_token_queue();
                 break;
 
             case 101:
@@ -1196,14 +1196,28 @@ ast_function_assignment* parse_function_assignment() {
         switch(state) {
             case 0:
                 // compound reference or not a match
+                if(NULL != (name = parse_compound_reference()))
+                    state = 1;
+                else 
+                    state = 101;
                 break;
 
             case 1:
                 // type name list or not a match
+                if(NULL != (inp = parse_type_name_list()))
+                    state = 2;
+                else 
+                    state = 101;
                 break;
 
             case 2:
                 // type name list or an error
+                if(NULL != (outp = parse_type_name_list()))
+                    state = 100;
+                else {
+                    EXPECTED("a function signature");
+                    state = 102;
+                }
                 break;
 
             case 100:
@@ -1213,7 +1227,7 @@ ast_function_assignment* parse_function_assignment() {
                 node->name = name;
                 node->inp = inp;
                 node->outp = outp;
-                finalize_token_queue();
+                //finalize_token_queue();
                 break;
 
             case 101:

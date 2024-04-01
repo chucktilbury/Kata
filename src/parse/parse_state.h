@@ -43,5 +43,6 @@ String* pop_name();
 String* get_name();
 String* get_compound_name();
 void set_import_state(bool val);
+const char* scope_name(ScopeType type);
 
 #endif /* __PARSE_STATE_H__ */

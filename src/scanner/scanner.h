@@ -21,7 +21,7 @@
  */
 #include "tokens.h"
 
-#define TTYPE    (token_type(get_token()))
+#define TTYPE (token_type(get_token()))
 
 /**
  * @brief Open a file for the scanner to read from. Files are expected to be
@@ -76,7 +76,7 @@ Token* advance_token();
 /**
  * @brief Mark this token as having been used to compose a rule.
  */
-//void finalize_token();
+// void finalize_token();
 
 /**
  * @brief Reset the head of the token queue to the first token that has not
@@ -132,7 +132,7 @@ void init_scanner(const char* fname);
  * @param type
  * @return const char*
  */
-//const char* tok_to_str(TokenType type);
+// const char* tok_to_str(TokenType type);
 
 /**
  * @brief This function literally discards the entire token queue. This

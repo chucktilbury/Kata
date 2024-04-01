@@ -120,6 +120,5 @@ ast_import_statement* parse_import_statement();
 // parse.c
 void init_parser(const char* fname);
 ast_module* parse();
-const char* scope_name(ScopeType type);
 
 #endif /* __PARSE_H__ */

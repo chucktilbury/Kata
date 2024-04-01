@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
     add_cmd(cmd, "", "file", "Name of file to compile.", NULL, CMD_REQD | CMD_STR);
     parse_cmd_line(cmd, argc, argv);
 
-    //dump_cmd_line(cmd);
+    // dump_cmd_line(cmd);
 
     init_parser(get_cmd_raw(cmd, "file"));
 

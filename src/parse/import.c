@@ -39,6 +39,7 @@ static ast_module* handle_import(Token* mod, Token* name) {
     set_import_state(true);
     module = parse_module();
     set_import_state(false);
+    TRACE("scope before return: %s", raw_string(get_compound_name()));
 
     // pop the scope and name
     pop_scope();

@@ -14,11 +14,11 @@
  */
 #include <assert.h>
 
+#include "fileio.h"
 #include "link_list.h"
-#include "trace.h"
 #include "memory.h"
 #include "scanner.h"
-#include "fileio.h"
+#include "trace.h"
 
 extern Token* scan_token();
 static unsigned serial = 0;
@@ -36,7 +36,7 @@ typedef struct {
     TokQueueItem* tail;
 } TokQueue;
 
-//static TokQueue* tqueue = NULL;
+// static TokQueue* tqueue = NULL;
 static LinkList* tqueue_stack = NULL;
 
 /**
@@ -198,7 +198,7 @@ void finalize_token_queue() {
     ENTER;
 
     TokQueue* tqueue = peek_link_list(tqueue_stack);
-    tqueue->head = tqueue->crnt;
+    tqueue->head     = tqueue->crnt;
 
     RET;
 }
@@ -253,4 +253,3 @@ void dump_token_queue() {
         fputc('\n', stdout);
     }
 }
-

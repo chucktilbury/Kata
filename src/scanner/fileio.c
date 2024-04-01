@@ -20,9 +20,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "memory.h"
-#include "fileio.h"
 #include "errors.h"
+#include "fileio.h"
+#include "memory.h"
 #include "sstrings.h"
 #include "trace.h"
 
@@ -66,8 +66,7 @@ void push_input_file(const char* fname) {
     TRACE("input file: %s", fname);
     FILE* fp = fopen(fname, "r");
     if(fp == NULL)
-        fatal_error("File Error: cannot open input file: %s: %s\n", fname,
-              strerror(errno));
+        fatal_error("File Error: cannot open input file: %s: %s\n", fname, strerror(errno));
 
     struct _file_ptr_* ptr = _ALLOC_T(struct _file_ptr_);
     ptr->fp                = fp;

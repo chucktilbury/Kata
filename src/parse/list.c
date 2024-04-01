@@ -443,7 +443,23 @@ ast_array_reference* parse_array_reference() {
     while(!finished) {
         switch(state) {
             case 0:
-                // 'do' or not a match
+                // SYMBOL or not a match
+                if(TOK_SYMBOL == TTYPE) {
+                    advance_token();
+                    symbol = get_token();
+                    state = 1;
+                }
+                else 
+                    state = 101;
+                break;
+
+            case 1:
+                // must be an array param list or not a match
+                if(NULL != (param = parse_array_param_list())) {
+                    state = 100;
+                }
+                else 
+                    state = 101;
                 break;
 
             case 100:

@@ -16,6 +16,19 @@
 
 ParserState* parser_state = NULL;
 
+/**
+ * @brief Return the printable name for a scope enum.
+ * 
+ * @param type 
+ * @return const char* 
+ */
+const char* scope_name(ScopeType type) {
+
+    return (type == SCOPE_PUB)? "PUBLIC":
+            (type == SCOPE_PRIV)? "PRIVATE":
+            (type == SCOPE_PROT)? "PROTECTED": "UNKNOWN" ;
+
+}
 
 /**
  * @brief Set the scope object
@@ -29,6 +42,7 @@ void set_scope(ScopeType scope) {
     ScopeType* node = peek_link_list(parser_state->scope_stack);
     assert(node != NULL);   // should never happen
 
+    TRACE("scope: %s", scope_name(scope));
     *node = scope;
     RET;
 }
@@ -45,7 +59,7 @@ void push_scope(ScopeType scope) {
     ScopeType* node = _ALLOC_T(ScopeType);
     *node = scope;
 
-    TRACE("scope: %d", scope);
+    TRACE("scope: %s", scope_name(scope));
     push_link_list(parser_state->scope_stack, node);
     RET;
 }
@@ -124,7 +138,6 @@ String* get_name() {
 
 String* get_compound_name() {
 
-    ENTER;
     String* str = create_string(NULL);
     String* sptr;
     StrList* lptr = create_string_list();
@@ -135,13 +148,11 @@ String* get_compound_name() {
 
     mark = NULL;
     while(NULL != (sptr = iter_link_list(lptr, &mark))) {
-        TRACE("segment: %s", sptr->buffer);
         add_string_Str(str, sptr);
         add_string_char(str, '.');
     }
 
-    TRACE("compound name: \"%s\"", str->buffer);
-    RETV(str);
+    return str;
 }
 
 void set_import_state(bool val) {
