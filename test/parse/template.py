@@ -130,7 +130,7 @@ dir_list = {
     "loop": loop_list,
     "module": module_list,
     "strg": strg_list,
-    "var": var_list}
+    "vars": var_list}
 
 
 def clean_dirs() :
