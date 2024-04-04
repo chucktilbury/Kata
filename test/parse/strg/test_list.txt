@@ -1,0 +1,6 @@
+# this is a list of classes of tests.
+
+string_literal:r
+string_expr_item:r
+string_expr:r
+formatted_strg:r

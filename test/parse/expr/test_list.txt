@@ -1,0 +1,9 @@
+# this is a list of classes of tests.
+
+expression:r
+expr_primary:r
+expression_list:r
+assignment_item:r
+assignment:r
+cast_statement:r
+operator:r

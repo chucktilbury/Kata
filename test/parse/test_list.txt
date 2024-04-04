@@ -1,0 +1,16 @@
+# this is the list of groups of tests.
+
+compound:r
+except:r
+expr:r
+flow:r
+func:r
+func_body:r
+import:r
+list:r
+literals:r
+loop:r
+module:r
+strg:r
+var:r
+

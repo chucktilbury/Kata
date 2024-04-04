@@ -1,0 +1,5 @@
+# this is a list of test types.
+
+correct:r # tests with correct syntax
+errors:r # tests with syntax errors in them
+

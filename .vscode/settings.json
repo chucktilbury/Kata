@@ -42,6 +42,7 @@
         "strg",
         "struct",
         "symb",
+        "tdir",
         "tqueue",
         "Wextra"
     ]

@@ -1,0 +1,9 @@
+# this is a list of classes of tests.
+
+module:r
+module_item:r
+namespace_item:r
+namespace_definition:r
+class_item:r
+class_definition:r
+class_var_declaration:r

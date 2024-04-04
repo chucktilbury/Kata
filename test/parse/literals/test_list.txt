@@ -1,0 +1,7 @@
+# this is a list of classes of tests.
+
+scope_operator:r
+literal_type_name:r
+literal_value:r
+type_name:r
+type_name_list:r

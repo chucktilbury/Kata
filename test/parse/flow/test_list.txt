@@ -1,0 +1,9 @@
+# this is a list of classes of tests.
+
+if_clause:r
+else_clause_item:r
+else_clause:r
+switch_clause:r
+case_clause:r
+default_clause:r
+case_body:r

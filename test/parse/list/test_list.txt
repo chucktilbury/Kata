@@ -1,0 +1,8 @@
+# this is a list of classes of tests.
+
+list_init:r
+dict_init_element:r
+dict_init:r
+array_param:r
+array_param_list:r
+array_reference:r

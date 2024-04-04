@@ -1,0 +1,5 @@
+# this is a list of classes of tests.
+
+var_decl:r
+var_decl_list:r
+var_definition:r

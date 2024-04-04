@@ -1,0 +1,16 @@
+# this is a list of classes of tests.
+
+function_reference:r
+create_reference:r
+destroy_reference:r
+function_declaration:r
+create_declaration:r
+destroy_declaration:r
+function_definition:r
+create_name:r
+destroy_name:r
+create_definition:r
+destroy_definition:r
+function_body:r
+start_function:r
+function_assignment:r
