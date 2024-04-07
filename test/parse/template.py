@@ -9,7 +9,7 @@
 ############################################################
 
 print("A wise person will reflect and investigate before typing.")
-#exit(1)
+exit(1)
 
 
 import shutil, sys, os
