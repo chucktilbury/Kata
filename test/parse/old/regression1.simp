@@ -1,0 +1,10 @@
+
+namespace test {
+
+    nothing func() {
+        if(x == y) {
+            obj.member = value.func(1).value
+            v = func(1)
+        }
+    }
+}

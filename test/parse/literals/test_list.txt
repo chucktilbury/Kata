@@ -1,7 +1,7 @@
 # this is a list of classes of tests.
 
-scope_operator:r
-literal_type_name:r
-literal_value:r
-type_name:r
-type_name_list:r
+scope_operator:run
+literal_type_name:run
+literal_value:run
+type_name:run
+type_name_list:run

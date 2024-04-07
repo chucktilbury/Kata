@@ -1,0 +1,68 @@
+/*
+ * Simple test to see if the parser is generally working.
+ */
+namespace fake_name {
+//
+/*
+ * This line generates an error because an IDENTIFIER is returned by the
+ * scanner instead of a TYPEDEF_NAME. If the symbol table was implemented, then
+ * this would probably work.
+ *
+extern FILE* yyin;
+ *
+ */
+
+// change the grammar so that this is the only syntax accepted.
+// struct is the only way to define a type.
+// Allow func declaration in struct.
+struct name {
+    int fart
+    int name
+    ctor(int a, uint b)
+    dtor
+}
+
+
+int main(int argc, string list argv) {
+
+{
+    if(argc < 2) {
+        fprintf(stderr, "Need an input file\n");
+        return(1);
+    }
+    else(int(x)) {{func();}
+    }
+    else {}
+}
+    x = n1.n2(x, y, z)().n3[3];
+    yyin = fopen(argv[1], "r"(123, a, b, (x)) );
+    if(yyin == NULL) {
+        fprintf(stderr, "Cannot open input file: {0}"(strerror(errno)));
+        return( 1);
+    }
+
+    switch(x) {
+        case (123) {}
+        case (y){}
+        case (m) {}
+        default {}
+    }
+
+    do {
+    yyparse()
+    fclose(yyin) } while()
+
+    return(0)
+}
+
+nothing some_func(int list v, const string str, lkjg x) {
+    int num = 123;
+}
+
+nothing name.namex() {}
+
+asd.eert.ctor(int a, string b, float x) {}
+ert.rt.dtor {}
+}
+
+import "some-name"(a, b, c);

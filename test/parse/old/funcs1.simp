@@ -1,0 +1,46 @@
+
+;
+; This tests that generic function definition syntax works. The code it
+; ideomatic, if contrived.
+;
+
+namespace name {
+
+    num something
+    num list something =  [1, 2, 3]
+    num something = 12 /23 * eighty
+    num something = num@"when pigs fly"
+
+struct func_test1 {
+
+    public num func1();
+    public list func2(num p1, num p2);
+};
+
+string func_test1.func2(num p1, num p2) {
+
+    string str = system.make_string(p1, p2);
+    return str;
+}
+
+// function bodies cannot be blank
+num func_test1.func1() {
+
+    // Since func2 is defined in func_test1, it is local to this scope.
+    string var1 = func2(12 * (2 + 1), 123);
+    return system.make_num(var1);
+}}
+
+// Entry is the equivalent of "main" in C. It does not accept any parameters.
+// Things like argc and argv are retrieved as global variables.
+//
+// Entry() must be in the root namespace.
+entry {
+
+    num nargs = system.argc;
+    string list args = system.argv;
+
+    // do the things
+    num var = func_test1.func1();
+    exit var;
+}

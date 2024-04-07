@@ -1,5 +1,3 @@
-# this is a list of test types.
+# this is a list of actual tests.
 
-correct:r # tests with correct syntax
-errors:r # tests with syntax errors in them
-
+dummy_test:skip # tests with correct syntax

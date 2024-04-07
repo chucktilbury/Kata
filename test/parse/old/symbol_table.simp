@@ -1,0 +1,81 @@
+
+/*
+ * This test requires that the symbol table be working.
+ */
+
+import "symbol_data"
+
+namespace symbol_table
+{
+
+    struct symbol_table_t {
+        // unexpected IDENTIFIER, which should be a TYPEDEF_NAME because the
+        // symbol table is not implemented.
+        symbol_table_t left
+        symbol_table_t right
+        string name
+        symbol_data.symb_data data
+    }
+
+    symbol_table_t root = nothing
+
+    // returns nothing if symbol is not found
+    symbol_data locate(string name, symbol_table_t tab) {
+        if(tab == nothing) {
+            return nothing
+        }
+        else {
+            if(name < tab.name) {
+                return locate(name, tab.left)
+            }
+            else(name > tab.name) {
+                return locate(name, tab.right)
+            }
+            else {
+                return data
+            }
+        }
+        // symantic check needed if all paths have a return on them
+    }
+
+    bool insert(string name, symbol_data data, symbol_table_t tab) {
+        if(tab == nothing) {
+            return false // symbol not found
+        }
+        else {
+            if(name < tab.name) {
+                if(tab.left == nothing) {
+                    tab.left = symbol_table_t(name, data)
+                    return true
+                }
+                else {
+                    return insert(name, data, tab.left)
+                }
+            }
+            else(name > tab.name) {
+                if(tab.right == nothing) {
+                    tab.right = symbol_table_t(name, data)
+                    return true
+                }
+                else {
+                    return insert(name, data, tab.right)
+                }
+            }
+            else {
+                return false // symbol already exists.
+            }
+        }
+    }
+
+    /*
+     * Public interface
+     */
+    public bool add(string name, symbol_data data) {
+        return bool insert(name, data, root)
+    }
+
+    public symbol_data find(string name) {
+        return locate(name, root);
+    }
+
+}

@@ -9,7 +9,7 @@
 ############################################################
 
 print("A wise person will reflect and investigate before typing.")
-exit(1)
+#exit(1)
 
 
 import shutil, sys, os
@@ -157,28 +157,21 @@ def make_dirs():
         root_fp.write("# this is the list of groups of tests.\n\n")
 
         for item in dir_list:
-            root_fp.write(item+":r\n")
+            root_fp.write(item+":run\n")
             os.mkdir(item)
 
             with open(os.path.join(item, "test_list.txt"), "w") as branch_fp:
                 branch_fp.write("# this is a list of classes of tests.\n\n")
                 for name in dir_list[item] :
-                    branch_fp.write(name+":r\n")
+                    branch_fp.write(name+":run\n")
                     bdir = os.path.join(item, name)
                     os.mkdir(bdir)
 
                     with open(os.path.join(bdir, "test_list.txt"), "w") as tfp :
-                        tfp.write("# this is a list of test types.\n\n")
-                        tfp.write("correct:r # tests with correct syntax\n")
-                        tfp.write("errors:r # tests with syntax errors in them\n\n")
-
-                    xdir = os.path.join(bdir, "correct")
-                    os.mkdir(xdir)
-                    with open(os.path.join(xdir, "test_list.txt"), "w") as tfp :
                         tfp.write("# this is a list of actual tests.\n\n")
-                        tfp.write("dummy_test:r # temporary marker for use in dev\n")
+                        tfp.write("dummy_test:run # tests with correct syntax\n")
 
-                    tdir = os.path.join(xdir, "tests")
+                    tdir = os.path.join(bdir, "tests")
                     os.mkdir(tdir)
                     with open(os.path.join(tdir, "dummy_test.simp"), "w") as tfp :
                         tfp.write(";-----------------------------------------\n"
@@ -186,30 +179,10 @@ def make_dirs():
                                   ";-----------------------------------------\n\n"
                                   "public\n\n")
 
-                    tdir = os.path.join(xdir, "results")
+                    tdir = os.path.join(bdir, "results")
                     os.mkdir(tdir)
                     with open(os.path.join(tdir, "dummy_test.res"), "w") as tfp :
                         pass
-
-                    xdir = os.path.join(bdir, "errors")
-                    os.mkdir(xdir)
-                    with open(os.path.join(xdir, "test_list.txt"), "w") as tfp :
-                        tfp.write("# this is a list of actual tests.\n\n")
-                        tfp.write("dummy_test:r # temporary marker for use in dev\n")
-
-                    tdir = os.path.join(xdir, "tests")
-                    os.mkdir(tdir)
-                    with open(os.path.join(tdir, "dummy_test.simp"), "w") as tfp :
-                        tfp.write(";-----------------------------------------\n"
-                                  "; this is a dummy test for development.\n"
-                                  ";-----------------------------------------\n\n"
-                                  "public\n\n")
-
-                    tdir = os.path.join(xdir, "results")
-                    os.mkdir(tdir)
-                    with open(os.path.join(tdir, "dummy_test.res"), "w") as tfp :
-                        pass
-
 
         root_fp.write("\n")
 

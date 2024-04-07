@@ -1,0 +1,10 @@
+;--------------------------
+; Imported file
+;---------------------------
+
+namespace zork {
+
+    class plart {
+        var dict plart
+    }
+}

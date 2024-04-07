@@ -45,5 +45,6 @@
         "tdir",
         "tqueue",
         "Wextra"
-    ]
+    ],
+    "cmake.configureOnOpen": false
 }

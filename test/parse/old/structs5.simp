@@ -1,0 +1,28 @@
+
+/*
+ * Test struct with function declarations that return a list.
+ */
+
+namespace x {
+struct test_list_func {
+
+    int list name20();
+    uint list name21();
+    float list name22();
+    string list name23();
+    int list name24(int arg1);
+    uint list name25(int arg1);
+    float list name26(int arg1);
+    string list name27(int arg1);
+    int list name28(int arg1, string arg2);
+    uint list name29(int arg1, string arg2);
+    float list name30(int arg1, string arg2);
+    string list name31(int arg1, string arg2);
+    int list name32(int arg1, string arg2, float arg3);
+    uint list name33(int arg1, string arg2, float arg3);
+    float list name34(int arg1, string arg2, float arg3);
+    string list name35(int arg1, string arg2, float arg3);
+
+};
+
+}

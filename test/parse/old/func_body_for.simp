@@ -1,0 +1,23 @@
+;----------------------------------------
+;
+; Test the for(){} loop syntax sanity.
+;
+;----------------------------------------
+
+nothing func() {
+
+    sapdoodle()
+
+    ; loop forever
+    for() { for() { for () { for {}}}}
+
+    for(asd in some_func()) {}
+
+    ; The variable is assigned the result of the expression. If the result of
+    ; the expression evaluates to false or zero ((double)(0.0)) then the for
+    ; loop exits. The break and continue keywords operate as expected.
+    for(qwe in gubbers != 0) {
+        gubbers = gubbers - 1
+        do_things(qwe)
+    }
+}

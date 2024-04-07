@@ -1,0 +1,30 @@
+;-----------------------------
+;
+; Test the syntax for the switch/case construct.
+;
+;----------------------
+
+compound.name func() {
+
+    switch(asdf) {
+        case(12) {
+            switch(qwe) {
+                case('strings are okay') {
+                }
+                default {
+                    while {
+                        do_things()
+                    }
+                }
+            }
+        }
+        default {
+            if(things.are.broken) {
+                handle_brokness(things.are.broken)
+            }
+        }
+        ; uncomment this for syntax error
+        ;case(12) {
+        ;}
+    }
+}

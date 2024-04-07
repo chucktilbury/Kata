@@ -1,5 +1,5 @@
+# this is a list of classes of tests.
 
-var_decl
-var_decl_list
-var_definition
-
+var_decl:run
+var_decl_list:run
+var_definition:run

@@ -1,0 +1,38 @@
+
+/*
+ * Return a list of prime numbers up to the limit.
+ */
+
+// user-defined function to check prime number
+bool checkPrimeNumber(int n) {
+
+    int j = 2
+    int flag = true
+
+    while(j <= n / 2) {
+        if (n % j == 0) {
+            flag = false
+            break
+        }
+        j += 1
+    }
+
+    return flag;
+}
+
+entry {
+
+    int n1 = 0
+    int n2 = 20
+    int i = n1 + 1
+    int flag
+
+    while(i < n2) {
+
+        if(checkPrimeNumber(i)) {
+            system.print(i)
+        }
+
+        i += 1
+    }
+}

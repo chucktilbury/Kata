@@ -1,0 +1,29 @@
+
+/*
+ * Find the greatest common denominator between 2 integers.
+ */
+namespace name {
+int do_gcd(int n1, int n2) {
+
+    system.print("Greatest common denomonator of: ", n1, n2)
+
+    while(n1 != n2) {
+
+        if(n1 > n2) {
+            n1 = n1 - n2
+        }
+        else {
+            n2 = n2 - n1
+        }
+    }
+
+    return n1
+}
+}
+
+entry {
+
+    system.print(do_gcd(50, 40))
+    system.print(do_gcd(153, 88))
+    system.print(do_gcd(18, 47))
+}

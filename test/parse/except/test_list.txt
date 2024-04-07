@@ -1,6 +1,6 @@
 # this is a list of classes of tests.
 
-try_clause:r
-except_clause_mid:r
-except_clause_final:r
-except_clause:r
+try_clause:run
+except_clause_mid:run
+except_clause_final:run
+except_clause:run

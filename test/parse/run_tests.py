@@ -1,12 +1,15 @@
+#!/usr/bin/env python3
 # This is the test driver for the parser tests.
 import os, sys
 import shutil
 from pprint import pprint as prt
 
 num_run = 0
+num_pass = 0
 num_skip = 0
 num_error = 0
 num_fail = 0
+
 
 def read_line(fp) :
     '''
@@ -36,69 +39,98 @@ def read_test_list(dir_name) :
     return lst
 
 def read_master_list() :
-
+    '''
+    Read all of the tests in from the test_list.txt files.
+    '''
     lst = {}
     dir = os.getcwd()
     lst = read_test_list(dir)
 
     for x in lst :
-        #print('x', x)
+        # path with the group name
         d = os.path.join(dir, x['name'])
-        x['class'] = read_test_list(d)
+        x['group'] = read_test_list(d)
+        
+        for y in x['group'] :
+            p = os.path.join(d, y['name'])
+            y['dir'] = p
+            y['tests'] = read_test_list(p)
 
-        for y in x['class'] :
-            #print("y", y)
-            y['dir'] = os.path.join(dir, d, y['name'])
-            p = os.path.join(y['dir'], 'correct')
-            y['correct'] = read_test_list(p)
-
-        for y in x['class'] :
-            #print("y", y)
-            p = os.path.join(dir, d, y['name'], 'errors')
-            y['errors'] = read_test_list(p)
-
+    #prt(lst)
+    #exit(1)
     return lst
 
-def run_test(name) :
-    '''
-    Run the specified test
-    '''
-    print(name)
+def exec_test(name) :
+    sys.stdout.write("(PASS)\n")
+
+def run_test(tst, dir) :
+    global num_pass, num_fail, num_error
+    tname = os.path.join(dir, 'tests', tst['name']+'.simp')
+    if os.path.isfile(tname) :
+        num_pass += 1
+        sys.stdout.write("(RUN) ")
+        exec_test(tname)
+    else :
+        num_error += 1
+        sys.stdout.write("(ERROR) (not found)\n")
+
+def run_tests(lst) :
+    global num_run, num_skip
+    for item in lst['tests'] :
+        if item['status'] == 'run' :
+            num_run += 1
+            sys.stdout.write("\t\t'%s' -- "%(item['name']))
+            run_test(item, lst['dir'])
+        else :
+            num_skip += 1
+            sys.stdout.write("\t\t'%s' -- (SKIP)\n"%(item['name']))
 
 
+def skip_tests(lst) :
+    global num_skip
+    for item in lst['tests'] :
+        sys.stdout.write("\t\t'%s' -- (SKIP)\n"%(item['name']))
+        num_skip += 1
 
+def run_group(lst) :
+    for item in lst:
+        if item['status'] == 'run' :
+            sys.stdout.write("\t'%s' -- (RUN)\n"%(item['name']))
+            run_tests(item)
+        else :
+            sys.stdout.write("\t'%s' -- (SKIP)\n"%(item['name']))
+            skip_tests(item)
+
+def skip_group(lst) :
+    for item in lst:
+        sys.stdout.write("\t'%s' -- (SKIP)\n"%(item['name']))
+        skip_tests(item['tests'])    
+      
 def runner(master) :
     '''
-    Run all tests that are marked with an 'r'.
+    Run all tests that are marked with 'run'. The run flag is used to switch 
+    whether a test is attempted or skipped. If the group is marked as skip, 
+    all of the classes and lower branches are also disabled. This is so that 
+    the test is counted whether it is run or skipped.
     '''
-
-    global num_run, num_skip
     for item in master :
-
-        if item['status'].lower() == 'r' :
-            for cls in item['class'] :
-                if cls['status'].lower() == 'r' :
-
-                    for tst in cls['correct'] :
-                        run_test(os.path.join(cls['dir'], 'correct', tst['name']))
-                        num_run += 1
-
-                    for tst in cls['errors'] :
-                        run_test(os.path.join(cls['dir'], 'errors', tst['name']))
-                        num_run += 1
-                else :
-                    print("skip class:", cls['name'])
-                    num_skip += len(cls['correct'])
-                    num_skip += len(cls['errors'])
-
+        sys.stdout.write("\n'%s' -- "%(item['name']))
+        if item['status'] == 'run' :
+            sys.stdout.write("(RUN)\n")
+            run_group(item['group'])
         else :
-            print("skip group:", item['name'])
-            num_skip += len(item['class']['correct'])
-            num_skip += len(item['class']['errors'])
-
-
+            sys.stdout.write("(SKIP)\n")
+            skip_group(item['group'])
 
 if __name__ == "__main__" :
+    
+    lst = read_master_list()
+    runner(lst)
+    print("run:", num_run, 
+          "-- pass:", num_pass, 
+          "-- fail:", num_fail, 
+          "-- skip:", num_skip,
+          "-- errors:", num_error)
 
-    runner(read_master_list())
-    print("run:", num_run, "skip:", num_skip)
+    #prt(lst)
+

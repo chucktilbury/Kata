@@ -1,6 +1,6 @@
 # this is a list of classes of tests.
 
-compound_name:r
-compound_name_list:r
-compound_ref_item:r
-compound_reference:r
+compound_name:run
+compound_name_list:run
+compound_ref_item:run
+compound_reference:run

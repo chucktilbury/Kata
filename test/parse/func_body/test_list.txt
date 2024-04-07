@@ -1,13 +1,13 @@
 # this is a list of classes of tests.
 
-function_body_element:r
-break_statement:r
-continue_statement:r
-trace_statement:r
-inline_statement:r
-yield_statement:r
-type_statement:r
-exit_statement:r
-print_statement:r
-return_statement:r
-raise_statement:r
+function_body_element:run
+break_statement:run
+continue_statement:run
+trace_statement:run
+inline_statement:run
+yield_statement:run
+type_statement:run
+exit_statement:run
+print_statement:run
+return_statement:run
+raise_statement:run

@@ -1,0 +1,36 @@
+
+/*
+ * Verify that the uninitialzed variable creation syntax works in a
+ * function definition.
+ */
+namespace name {
+struct test_var_creation {
+
+    public nothing var_create();
+};
+
+nothing var_create() {
+
+    int var1;
+    uint var2;
+    bool var3;
+    float var4;
+    string var5;
+    some_name var6;
+    // some.name var6; compound names do not name a type
+
+    int list var1;
+    uint list var2;
+    bool list var3;
+    float list var4;
+    string list var5;
+    some_name list var6;
+
+    int dict var1;
+    uint dict var2;
+    bool dict var3;
+    float dict var4;
+    string dict var5;
+    some_name dict var6;
+}
+}

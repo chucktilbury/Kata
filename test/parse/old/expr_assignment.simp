@@ -1,0 +1,21 @@
+;*******************************
+;
+; Test that various expressions can assign to various variables.
+;
+; ===============================
+
+num some_func() {
+    num asd1 = 10
+    num asd2 = 10 + 10
+    num asd3 = -10 -10
+    num asd4 = name1.name2.name3 + asd * wer
+    num asd5 = func90() + 10
+    num asd6 = func1.func2.func3() / 10 + (asd2 + asd3 + asd4)
+    num asd7 = asd[12]['asd'][asd.sdf.fgh[10]]
+    num asd8 = asdf['asd'][12]
+    list asd9 = [1, 2, 3, 4]
+    dict asd10 = ['asd':123, 'sdf':qwe.ert.ytu]
+    dict asd10 = ['asd':[1, 2, 3,4], 'sdf':qwe.ert.ytu]
+
+    return (123 + 321 * asd.wer.tyu)
+}
