@@ -36,22 +36,29 @@ String* find_file(const char* name) {
     String* p;
     void* mark = NULL;
 
-    while(NULL != (p = iter_link_list(paths, &mark))) {
-        memset(temp, 0, sizeof(temp));
-        strncpy(temp, raw_string(p), sizeof(temp));
-        strncat(temp, name, sizeof(temp)-strlen(temp)-strlen(name)-1);
+    TRACE("trying: %s", name);
+    if(NULL != realpath(name, tmp_buf)) {
+        TRACE("found: %s", tmp_buf);
+        RETV(create_string(tmp_buf));
+    }
+    else {
+        while(NULL != (p = iter_link_list(paths, &mark))) {
+            memset(temp, 0, sizeof(temp));
+            strncpy(temp, raw_string(p), sizeof(temp));
+            strncat(temp, name, sizeof(temp)-strlen(temp)-strlen(name)-1);
 
-        TRACE("trying: %s", temp);
-        if(NULL != realpath(temp, tmp_buf)) {
-            TRACE("found: %s", tmp_buf);
-            RETV(create_string(tmp_buf));
-        }
-        else {
-            // try appending the ".simp"
-            strncat(temp, ".simp", sizeof(temp)-strlen(temp)-strlen(".simp")-1);
+            TRACE("trying: %s", temp);
             if(NULL != realpath(temp, tmp_buf)) {
                 TRACE("found: %s", tmp_buf);
                 RETV(create_string(tmp_buf));
+            }
+            else {
+                // try appending the ".simp"
+                strncat(temp, ".simp", sizeof(temp)-strlen(temp)-strlen(".simp")-1);
+                if(NULL != realpath(temp, tmp_buf)) {
+                    TRACE("found: %s", tmp_buf);
+                    RETV(create_string(tmp_buf));
+                }
             }
         }
     }

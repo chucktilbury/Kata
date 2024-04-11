@@ -8,7 +8,7 @@
 #
 ############################################################
 
-print("A wise person will reflect and investigate before typing.")
+print("A wise person will investigate and reflect before typing.")
 exit(1)
 
 
@@ -169,19 +169,18 @@ def make_dirs():
 
                     with open(os.path.join(bdir, "test_list.txt"), "w") as tfp :
                         tfp.write("# this is a list of actual tests.\n\n")
-                        tfp.write("dummy_test:run # tests with correct syntax\n")
+                        tfp.write("dummy_test:run\n")
 
-                    tdir = os.path.join(bdir, "tests")
-                    os.mkdir(tdir)
-                    with open(os.path.join(tdir, "dummy_test.simp"), "w") as tfp :
+                    with open(os.path.join(bdir, "dummy_test.simp"), "w") as tfp :
                         tfp.write(";-----------------------------------------\n"
                                   "; this is a dummy test for development.\n"
                                   ";-----------------------------------------\n\n"
                                   "public\n\n")
 
-                    tdir = os.path.join(bdir, "results")
-                    os.mkdir(tdir)
-                    with open(os.path.join(tdir, "dummy_test.res"), "w") as tfp :
+                    with open(os.path.join(bdir, "dummy_test.stdout"), "w") as tfp :
+                        pass
+
+                    with open(os.path.join(bdir, "dummy_test.stderr"), "w") as tfp :
                         pass
 
         root_fp.write("\n")

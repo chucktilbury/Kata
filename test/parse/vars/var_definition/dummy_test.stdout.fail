@@ -1,0 +1,3 @@
+difference line: 30
+RETURN(create_string(tmp_buf)): find_file(): (PTR)
+RETURN(create_string(tmp_buf)): find_file()
