@@ -60,6 +60,10 @@ static void scan_unsigned() {
 
     int ch = get_char();
 
+    // add the 'x' to the string
+    add_string_char(token.str, ch);
+    ch = consume_char();
+
     while(true) {
         if(isxdigit(ch)) {
             add_string_char(token.str, ch);

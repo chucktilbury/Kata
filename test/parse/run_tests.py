@@ -113,7 +113,7 @@ def run_test(comp, tst, dir) :
                                 fp.write(line.strip()+'\n')
                                 fp.write(temp_file[idx].strip()+'\n')
                                 break;
-                num_fail == 1
+                num_fail += 1
                 sys.stdout.write('(FAIL) (file size)\n')
                 return
             else :
@@ -236,7 +236,7 @@ if __name__ == "__main__" :
 
     lst = read_master_list()
     runner(comp, lst)
-    print("total:", num_tests,
+    print("\ntotal:", num_tests,
           "-- run:", num_run, 
           "-- pass:", num_pass, 
           "-- fail:", num_fail, 

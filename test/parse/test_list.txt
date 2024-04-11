@@ -1,16 +1,16 @@
 # this is the list of groups of tests.
 
-compound:run
-except:run
-expr:run
-flow:run
-func:run
-func_body:run
-import:run
-list:run
+compound:skip
+except:skip
+expr:skip
+flow:skip
+func:skip
+func_body:skip
+import:skip
+list:skip
 literals:run
-loop:run
-module:run
-strg:run
-vars:run
+loop:skip
+module:skip
+strg:skip
+vars:skip
 

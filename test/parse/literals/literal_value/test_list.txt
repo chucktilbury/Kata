@@ -1,3 +1,10 @@
-# this is a list of actual tests.
+# Literal value test tests.
 
-dummy_test:run
+float:run
+err1_float:run
+err2_float:run
+err3_float:run
+err4_float:run
+signed:run
+unsigned:run
+bool:run

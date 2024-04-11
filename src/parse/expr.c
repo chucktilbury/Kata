@@ -535,6 +535,7 @@ ast_expression* parse_expression() {
     int pcount = 0;
     bool finished = false;
 
+    flag = true;
     while(!finished) {
         switch(state) {
             case 0:

@@ -1,0 +1,1584 @@
+TRACE: main(): push trace state: true
+ENTER: main(): 
+    ENTER: init_parser(): 
+        TRACE: init_parser(): file name: "/home/chuck/Src/Kata/test/parse/literals/literal_value/unsigned.k"
+        ENTER: init_paths(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ./
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/inputs/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/misc/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/parse/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/stuff/
+            RETURN: add_path(): 
+        RETURN: init_paths(): 
+        ENTER: find_file(): 
+            TRACE: find_file(): trying: /home/chuck/Src/Kata/test/parse/literals/literal_value/unsigned.k
+            TRACE: find_file(): found: /home/chuck/Src/Kata/test/parse/literals/literal_value/unsigned.k
+        RETURN(create_string(tmp_buf)): find_file()
+        ENTER: init_scanner(): 
+            ENTER: open_file(): 
+                ENTER: push_input_file(): 
+                    TRACE: push_input_file(): input file: /home/chuck/Src/Kata/test/parse/literals/literal_value/unsigned.k
+                RETURN: push_input_file(): 
+            RETURN: open_file(): 
+        RETURN: init_scanner(): 
+        ENTER: create_parser_state(): 
+            ENTER: push_scope(): 
+                TRACE: push_scope(): scope: PRIVATE
+            RETURN: push_scope(): 
+            ENTER: push_name(): 
+                TRACE: push_name(): name: root
+            RETURN: push_name(): 
+        RETURN(parser_state): create_parser_state()
+    RETURN: init_parser(): 
+    TRACE: main(): --------------------------------------------
+    TRACE: main(): Begin Parse
+    ENTER: parse(): 
+        ENTER: parse_module(): 
+            ENTER: parse_module_item(): 
+                ENTER: post_token_queue(): 
+                RETURN((void*)tqueue->crnt): post_token_queue()
+                ENTER: parse_namespace_item(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    ENTER: parse_scope_operator(): 
+                    RETURN(node): parse_scope_operator()
+                    ENTER: parse_namespace_definition(): 
+                    RETURN(node): parse_namespace_definition()
+                    ENTER: parse_class_definition(): 
+                    RETURN(node): parse_class_definition()
+                    ENTER: parse_function_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_function_definition()
+                    ENTER: parse_create_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_create_definition()
+                    ENTER: parse_destroy_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_destroy_definition()
+                    ENTER: parse_var_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_var_decl(): 
+                            ENTER: parse_type_name(): 
+                                ENTER: parse_literal_type_name(): 
+                                    TERM: parse_literal_type_name(): unsigned: "unsigned": 14: 13: "unsigned.k"
+                                    ENTER: advance_token(): 
+                                    RETURN(tqueue->crnt->tok): advance_token()
+                                RETURN(node): parse_literal_type_name()
+                                TERM: parse_type_name(): symbol: "some_name": 14: 23: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_type_name()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                            ENTER: advance_token(): 
+                            RETURN(tqueue->crnt->tok): advance_token()
+                        RETURN(node): parse_var_decl()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_assignment_item(): 
+                            ENTER: post_token_queue(): 
+                            RETURN((void*)tqueue->crnt): post_token_queue()
+                            ENTER: parse_expression(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                        TERM: parse_literal_value(): literal unsigned: "0x0": 14: 29: "unsigned.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token()
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: finalize_token_queue(): 
+                                    RETURN: finalize_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 8, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 1, stack: 0, queue: 1
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: parse_compound_reference(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue()
+                                        ENTER: parse_compound_ref_item(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue()
+                                            ENTER: parse_array_reference(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_array_reference()
+                                            ENTER: reset_token_queue(): 
+                                            RETURN: reset_token_queue(): 
+                                        RETURN(node): parse_compound_ref_item()
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_compound_reference()
+                                    ENTER: reset_token_queue(): 
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+                                TERM: parse_expression(): var: "var": 15: 4: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_expression()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                        RETURN(node): parse_assignment_item()
+                        ENTER: finalize_token_queue(): 
+                        RETURN: finalize_token_queue(): 
+                    RETURN(node): parse_var_definition()
+                    ENTER: get_scope(): 
+                    RETURN(*node): get_scope()
+                RETURN(node): parse_namespace_item()
+                ENTER: get_scope(): 
+                RETURN(*node): get_scope()
+            RETURN(node): parse_module_item()
+            ENTER: parse_module_item(): 
+                ENTER: post_token_queue(): 
+                RETURN((void*)tqueue->crnt): post_token_queue()
+                ENTER: parse_namespace_item(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    ENTER: parse_scope_operator(): 
+                    RETURN(node): parse_scope_operator()
+                    ENTER: parse_namespace_definition(): 
+                    RETURN(node): parse_namespace_definition()
+                    ENTER: parse_class_definition(): 
+                    RETURN(node): parse_class_definition()
+                    ENTER: parse_function_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_function_definition()
+                    ENTER: parse_create_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_create_definition()
+                    ENTER: parse_destroy_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_destroy_definition()
+                    ENTER: parse_var_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_var_decl(): 
+                            ENTER: parse_type_name(): 
+                                ENTER: parse_literal_type_name(): 
+                                    TERM: parse_literal_type_name(): unsigned: "unsigned": 15: 13: "unsigned.k"
+                                    ENTER: advance_token(): 
+                                    RETURN(tqueue->crnt->tok): advance_token()
+                                RETURN(node): parse_literal_type_name()
+                                TERM: parse_type_name(): symbol: "some_name": 15: 23: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_type_name()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                            ENTER: advance_token(): 
+                            RETURN(tqueue->crnt->tok): advance_token()
+                        RETURN(node): parse_var_decl()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_assignment_item(): 
+                            ENTER: post_token_queue(): 
+                            RETURN((void*)tqueue->crnt): post_token_queue()
+                            ENTER: parse_expression(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                        TERM: parse_literal_value(): literal unsigned: "0X0": 15: 29: "unsigned.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token()
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: finalize_token_queue(): 
+                                    RETURN: finalize_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 8, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 1, stack: 0, queue: 1
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: parse_compound_reference(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue()
+                                        ENTER: parse_compound_ref_item(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue()
+                                            ENTER: parse_array_reference(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_array_reference()
+                                            ENTER: reset_token_queue(): 
+                                            RETURN: reset_token_queue(): 
+                                        RETURN(node): parse_compound_ref_item()
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_compound_reference()
+                                    ENTER: reset_token_queue(): 
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+                                TERM: parse_expression(): var: "var": 16: 4: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_expression()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                        RETURN(node): parse_assignment_item()
+                        ENTER: finalize_token_queue(): 
+                        RETURN: finalize_token_queue(): 
+                    RETURN(node): parse_var_definition()
+                    ENTER: get_scope(): 
+                    RETURN(*node): get_scope()
+                RETURN(node): parse_namespace_item()
+                ENTER: get_scope(): 
+                RETURN(*node): get_scope()
+            RETURN(node): parse_module_item()
+            ENTER: parse_module_item(): 
+                ENTER: post_token_queue(): 
+                RETURN((void*)tqueue->crnt): post_token_queue()
+                ENTER: parse_namespace_item(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    ENTER: parse_scope_operator(): 
+                    RETURN(node): parse_scope_operator()
+                    ENTER: parse_namespace_definition(): 
+                    RETURN(node): parse_namespace_definition()
+                    ENTER: parse_class_definition(): 
+                    RETURN(node): parse_class_definition()
+                    ENTER: parse_function_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_function_definition()
+                    ENTER: parse_create_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_create_definition()
+                    ENTER: parse_destroy_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_destroy_definition()
+                    ENTER: parse_var_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_var_decl(): 
+                            ENTER: parse_type_name(): 
+                                ENTER: parse_literal_type_name(): 
+                                    TERM: parse_literal_type_name(): unsigned: "unsigned": 16: 13: "unsigned.k"
+                                    ENTER: advance_token(): 
+                                    RETURN(tqueue->crnt->tok): advance_token()
+                                RETURN(node): parse_literal_type_name()
+                                TERM: parse_type_name(): symbol: "some_name": 16: 23: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_type_name()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                            ENTER: advance_token(): 
+                            RETURN(tqueue->crnt->tok): advance_token()
+                        RETURN(node): parse_var_decl()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_assignment_item(): 
+                            ENTER: post_token_queue(): 
+                            RETURN((void*)tqueue->crnt): post_token_queue()
+                            ENTER: parse_expression(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                        TERM: parse_literal_value(): literal unsigned: "0x01": 16: 30: "unsigned.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token()
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: finalize_token_queue(): 
+                                    RETURN: finalize_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 8, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 1, stack: 0, queue: 1
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: parse_compound_reference(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue()
+                                        ENTER: parse_compound_ref_item(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue()
+                                            ENTER: parse_array_reference(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_array_reference()
+                                            ENTER: reset_token_queue(): 
+                                            RETURN: reset_token_queue(): 
+                                        RETURN(node): parse_compound_ref_item()
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_compound_reference()
+                                    ENTER: reset_token_queue(): 
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+                                TERM: parse_expression(): var: "var": 17: 4: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_expression()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                        RETURN(node): parse_assignment_item()
+                        ENTER: finalize_token_queue(): 
+                        RETURN: finalize_token_queue(): 
+                    RETURN(node): parse_var_definition()
+                    ENTER: get_scope(): 
+                    RETURN(*node): get_scope()
+                RETURN(node): parse_namespace_item()
+                ENTER: get_scope(): 
+                RETURN(*node): get_scope()
+            RETURN(node): parse_module_item()
+            ENTER: parse_module_item(): 
+                ENTER: post_token_queue(): 
+                RETURN((void*)tqueue->crnt): post_token_queue()
+                ENTER: parse_namespace_item(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    ENTER: parse_scope_operator(): 
+                    RETURN(node): parse_scope_operator()
+                    ENTER: parse_namespace_definition(): 
+                    RETURN(node): parse_namespace_definition()
+                    ENTER: parse_class_definition(): 
+                    RETURN(node): parse_class_definition()
+                    ENTER: parse_function_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_function_definition()
+                    ENTER: parse_create_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_create_definition()
+                    ENTER: parse_destroy_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_destroy_definition()
+                    ENTER: parse_var_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_var_decl(): 
+                            ENTER: parse_type_name(): 
+                                ENTER: parse_literal_type_name(): 
+                                    TERM: parse_literal_type_name(): unsigned: "unsigned": 17: 13: "unsigned.k"
+                                    ENTER: advance_token(): 
+                                    RETURN(tqueue->crnt->tok): advance_token()
+                                RETURN(node): parse_literal_type_name()
+                                TERM: parse_type_name(): symbol: "some_name": 17: 23: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_type_name()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                            ENTER: advance_token(): 
+                            RETURN(tqueue->crnt->tok): advance_token()
+                        RETURN(node): parse_var_decl()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_assignment_item(): 
+                            ENTER: post_token_queue(): 
+                            RETURN((void*)tqueue->crnt): post_token_queue()
+                            ENTER: parse_expression(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                        TERM: parse_literal_value(): literal unsigned: "0x0000": 17: 32: "unsigned.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token()
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: finalize_token_queue(): 
+                                    RETURN: finalize_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 8, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 1, stack: 0, queue: 1
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: parse_compound_reference(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue()
+                                        ENTER: parse_compound_ref_item(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue()
+                                            ENTER: parse_array_reference(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_array_reference()
+                                            ENTER: reset_token_queue(): 
+                                            RETURN: reset_token_queue(): 
+                                        RETURN(node): parse_compound_ref_item()
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_compound_reference()
+                                    ENTER: reset_token_queue(): 
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+                                TERM: parse_expression(): var: "var": 18: 4: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_expression()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                        RETURN(node): parse_assignment_item()
+                        ENTER: finalize_token_queue(): 
+                        RETURN: finalize_token_queue(): 
+                    RETURN(node): parse_var_definition()
+                    ENTER: get_scope(): 
+                    RETURN(*node): get_scope()
+                RETURN(node): parse_namespace_item()
+                ENTER: get_scope(): 
+                RETURN(*node): get_scope()
+            RETURN(node): parse_module_item()
+            ENTER: parse_module_item(): 
+                ENTER: post_token_queue(): 
+                RETURN((void*)tqueue->crnt): post_token_queue()
+                ENTER: parse_namespace_item(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    ENTER: parse_scope_operator(): 
+                    RETURN(node): parse_scope_operator()
+                    ENTER: parse_namespace_definition(): 
+                    RETURN(node): parse_namespace_definition()
+                    ENTER: parse_class_definition(): 
+                    RETURN(node): parse_class_definition()
+                    ENTER: parse_function_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_function_definition()
+                    ENTER: parse_create_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_create_definition()
+                    ENTER: parse_destroy_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_destroy_definition()
+                    ENTER: parse_var_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_var_decl(): 
+                            ENTER: parse_type_name(): 
+                                ENTER: parse_literal_type_name(): 
+                                    TERM: parse_literal_type_name(): unsigned: "unsigned": 18: 13: "unsigned.k"
+                                    ENTER: advance_token(): 
+                                    RETURN(tqueue->crnt->tok): advance_token()
+                                RETURN(node): parse_literal_type_name()
+                                TERM: parse_type_name(): symbol: "some_name": 18: 23: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_type_name()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                            ENTER: advance_token(): 
+                            RETURN(tqueue->crnt->tok): advance_token()
+                        RETURN(node): parse_var_decl()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_assignment_item(): 
+                            ENTER: post_token_queue(): 
+                            RETURN((void*)tqueue->crnt): post_token_queue()
+                            ENTER: parse_expression(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                        TERM: parse_literal_value(): literal unsigned: "0xaBc0": 18: 32: "unsigned.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token()
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: finalize_token_queue(): 
+                                    RETURN: finalize_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 8, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 1, stack: 0, queue: 1
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: parse_compound_reference(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue()
+                                        ENTER: parse_compound_ref_item(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue()
+                                            ENTER: parse_array_reference(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_array_reference()
+                                            ENTER: reset_token_queue(): 
+                                            RETURN: reset_token_queue(): 
+                                        RETURN(node): parse_compound_ref_item()
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_compound_reference()
+                                    ENTER: reset_token_queue(): 
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+                                TERM: parse_expression(): var: "var": 19: 4: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_expression()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                        RETURN(node): parse_assignment_item()
+                        ENTER: finalize_token_queue(): 
+                        RETURN: finalize_token_queue(): 
+                    RETURN(node): parse_var_definition()
+                    ENTER: get_scope(): 
+                    RETURN(*node): get_scope()
+                RETURN(node): parse_namespace_item()
+                ENTER: get_scope(): 
+                RETURN(*node): get_scope()
+            RETURN(node): parse_module_item()
+            ENTER: parse_module_item(): 
+                ENTER: post_token_queue(): 
+                RETURN((void*)tqueue->crnt): post_token_queue()
+                ENTER: parse_namespace_item(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    ENTER: parse_scope_operator(): 
+                    RETURN(node): parse_scope_operator()
+                    ENTER: parse_namespace_definition(): 
+                    RETURN(node): parse_namespace_definition()
+                    ENTER: parse_class_definition(): 
+                    RETURN(node): parse_class_definition()
+                    ENTER: parse_function_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_function_definition()
+                    ENTER: parse_create_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_create_definition()
+                    ENTER: parse_destroy_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_destroy_definition()
+                    ENTER: parse_var_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_var_decl(): 
+                            ENTER: parse_type_name(): 
+                                ENTER: parse_literal_type_name(): 
+                                    TERM: parse_literal_type_name(): unsigned: "unsigned": 19: 13: "unsigned.k"
+                                    ENTER: advance_token(): 
+                                    RETURN(tqueue->crnt->tok): advance_token()
+                                RETURN(node): parse_literal_type_name()
+                                TERM: parse_type_name(): symbol: "some_name": 19: 23: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_type_name()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                            ENTER: advance_token(): 
+                            RETURN(tqueue->crnt->tok): advance_token()
+                        RETURN(node): parse_var_decl()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_assignment_item(): 
+                            ENTER: post_token_queue(): 
+                            RETURN((void*)tqueue->crnt): post_token_queue()
+                            ENTER: parse_expression(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                        TERM: parse_literal_value(): literal unsigned: "0x0123": 19: 32: "unsigned.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token()
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: finalize_token_queue(): 
+                                    RETURN: finalize_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 8, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 1, stack: 0, queue: 1
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: parse_compound_reference(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue()
+                                        ENTER: parse_compound_ref_item(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue()
+                                            ENTER: parse_array_reference(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_array_reference()
+                                            ENTER: reset_token_queue(): 
+                                            RETURN: reset_token_queue(): 
+                                        RETURN(node): parse_compound_ref_item()
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_compound_reference()
+                                    ENTER: reset_token_queue(): 
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+                                TERM: parse_expression(): var: "var": 20: 4: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_expression()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                        RETURN(node): parse_assignment_item()
+                        ENTER: finalize_token_queue(): 
+                        RETURN: finalize_token_queue(): 
+                    RETURN(node): parse_var_definition()
+                    ENTER: get_scope(): 
+                    RETURN(*node): get_scope()
+                RETURN(node): parse_namespace_item()
+                ENTER: get_scope(): 
+                RETURN(*node): get_scope()
+            RETURN(node): parse_module_item()
+            ENTER: parse_module_item(): 
+                ENTER: post_token_queue(): 
+                RETURN((void*)tqueue->crnt): post_token_queue()
+                ENTER: parse_namespace_item(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    ENTER: parse_scope_operator(): 
+                    RETURN(node): parse_scope_operator()
+                    ENTER: parse_namespace_definition(): 
+                    RETURN(node): parse_namespace_definition()
+                    ENTER: parse_class_definition(): 
+                    RETURN(node): parse_class_definition()
+                    ENTER: parse_function_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_function_definition()
+                    ENTER: parse_create_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_create_definition()
+                    ENTER: parse_destroy_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_destroy_definition()
+                    ENTER: parse_var_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_var_decl(): 
+                            ENTER: parse_type_name(): 
+                                ENTER: parse_literal_type_name(): 
+                                    TERM: parse_literal_type_name(): unsigned: "unsigned": 20: 13: "unsigned.k"
+                                    ENTER: advance_token(): 
+                                    RETURN(tqueue->crnt->tok): advance_token()
+                                RETURN(node): parse_literal_type_name()
+                                TERM: parse_type_name(): symbol: "some_name": 20: 23: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_type_name()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                            ENTER: advance_token(): 
+                            RETURN(tqueue->crnt->tok): advance_token()
+                        RETURN(node): parse_var_decl()
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token()
+                        ENTER: parse_assignment_item(): 
+                            ENTER: post_token_queue(): 
+                            RETURN((void*)tqueue->crnt): post_token_queue()
+                            ENTER: parse_expression(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                        TERM: parse_literal_value(): literal unsigned: "0xabcdef12": 20: 36: "unsigned.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token()
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: finalize_token_queue(): 
+                                    RETURN: finalize_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 8, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 1, stack: 0, queue: 1
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator()
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue()
+                                    ENTER: parse_literal_value(): 
+                                    RETURN(node): parse_literal_value()
+                                    ENTER: parse_compound_reference(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue()
+                                        ENTER: parse_compound_ref_item(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue()
+                                            ENTER: parse_array_reference(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue()
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_array_reference()
+                                            ENTER: reset_token_queue(): 
+                                            RETURN: reset_token_queue(): 
+                                        RETURN(node): parse_compound_ref_item()
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_compound_reference()
+                                    ENTER: reset_token_queue(): 
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_expr_primary()
+                                TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+                                TERM: parse_expression(): end of file: "": 21: 1: "unsigned.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_expression()
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                        RETURN(node): parse_assignment_item()
+                        ENTER: finalize_token_queue(): 
+                        RETURN: finalize_token_queue(): 
+                    RETURN(node): parse_var_definition()
+                    ENTER: get_scope(): 
+                    RETURN(*node): get_scope()
+                RETURN(node): parse_namespace_item()
+                ENTER: get_scope(): 
+                RETURN(*node): get_scope()
+            RETURN(node): parse_module_item()
+            ENTER: parse_module_item(): 
+                ENTER: post_token_queue(): 
+                RETURN((void*)tqueue->crnt): post_token_queue()
+                ENTER: parse_namespace_item(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    ENTER: parse_scope_operator(): 
+                    RETURN(node): parse_scope_operator()
+                    ENTER: parse_namespace_definition(): 
+                    RETURN(node): parse_namespace_definition()
+                    ENTER: parse_class_definition(): 
+                    RETURN(node): parse_class_definition()
+                    ENTER: parse_function_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_function_definition()
+                    ENTER: parse_create_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_create_definition()
+                    ENTER: parse_destroy_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_destroy_definition()
+                    ENTER: parse_var_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_var_definition()
+                    ENTER: reset_token_queue(): 
+                    RETURN: reset_token_queue(): 
+                RETURN(node): parse_namespace_item()
+                ENTER: parse_import_statement(): 
+                RETURN(node): parse_import_statement()
+                ENTER: parse_start_function(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    ENTER: reset_token_queue(): 
+                    RETURN: reset_token_queue(): 
+                RETURN(node): parse_start_function()
+                ENTER: reset_token_queue(): 
+                RETURN: reset_token_queue(): 
+            RETURN(node): parse_module_item()
+            ENTER: finalize_token_queue(): 
+            RETURN: finalize_token_queue(): 
+            ENTER: close_file(): 
+                ENTER: pop_input_file(): 
+                RETURN: pop_input_file(): 
+            RETURN: close_file(): 
+            TRACE: parse_module(): end of file
+        RETURN(node): parse_module()
+    RETURN(node): parse()
+    TRACE: main(): End Parse
+    TRACE: main(): --------------------------------------------
+    TRACE: main(): set trace state: true
+    TRACE: main(): Begin Traverse
+    ENTER: traverse_ast(): 
+        ENTER: pre_test_pass_func(): 
+            TRACE: pre_test_pass_func(): node type: module(3000)
+        RETURN: pre_test_pass_func(): 
+        ENTER: traverse_module(): 
+            ENTER: pre_test_pass_func(): 
+                TRACE: pre_test_pass_func(): node type: module(3000)
+            RETURN: pre_test_pass_func(): 
+            ENTER: traverse_module_item(): 
+                ENTER: pre_test_pass_func(): 
+                    TRACE: pre_test_pass_func(): node type: module_item(3001)
+                RETURN: pre_test_pass_func(): 
+                TRACE: traverse_module_item(): SCOPE: PRIVATE
+                ENTER: traverse_namespace_item(): 
+                    ENTER: pre_test_pass_func(): 
+                        TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: pre_test_pass_func(): 
+                    TRACE: traverse_namespace_item(): SCOPE: PRIVATE
+                    ENTER: traverse_var_definition(): 
+                        ENTER: pre_test_pass_func(): 
+                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                        RETURN: pre_test_pass_func(): 
+                        ENTER: traverse_var_decl(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_type_name(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: type_name(3012)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_literal_type_name(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: pre_test_pass_func(): 
+                                    TERM: traverse_literal_type_name(): unsigned: "unsigned": 14: 13: "unsigned.k"
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_literal_type_name(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: type_name(3012)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_type_name(): 
+                            TRACE: traverse_var_decl(): is_const: false
+                            TERM: traverse_var_decl(): symbol: "some_name": 14: 23: "unsigned.k"
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_var_decl(): 
+                        TRACE: traverse_var_definition(): is_assigned: true
+                        ENTER: traverse_assignment_item(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_expression(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: expression(3038)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_expr_primary(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: pre_test_pass_func(): 
+                                    ENTER: traverse_literal_value(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: pre_test_pass_func(): 
+                                        TERM: traverse_literal_value(): literal unsigned: "0x0": 14: 29: "unsigned.k"
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_literal_value(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_expr_primary(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: expression(3038)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_expression(): 
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_assignment_item(): 
+                        ENTER: post_test_pass_func(): 
+                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                        RETURN: post_test_pass_func(): 
+                    RETURN: traverse_var_definition(): 
+                    ENTER: post_test_pass_func(): 
+                        TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: post_test_pass_func(): 
+                RETURN: traverse_namespace_item(): 
+                ENTER: post_test_pass_func(): 
+                    TRACE: post_test_pass_func(): node type: module_item(3001)
+                RETURN: post_test_pass_func(): 
+            RETURN: traverse_module_item(): 
+            ENTER: traverse_module_item(): 
+                ENTER: pre_test_pass_func(): 
+                    TRACE: pre_test_pass_func(): node type: module_item(3001)
+                RETURN: pre_test_pass_func(): 
+                TRACE: traverse_module_item(): SCOPE: PRIVATE
+                ENTER: traverse_namespace_item(): 
+                    ENTER: pre_test_pass_func(): 
+                        TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: pre_test_pass_func(): 
+                    TRACE: traverse_namespace_item(): SCOPE: PRIVATE
+                    ENTER: traverse_var_definition(): 
+                        ENTER: pre_test_pass_func(): 
+                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                        RETURN: pre_test_pass_func(): 
+                        ENTER: traverse_var_decl(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_type_name(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: type_name(3012)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_literal_type_name(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: pre_test_pass_func(): 
+                                    TERM: traverse_literal_type_name(): unsigned: "unsigned": 15: 13: "unsigned.k"
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_literal_type_name(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: type_name(3012)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_type_name(): 
+                            TRACE: traverse_var_decl(): is_const: false
+                            TERM: traverse_var_decl(): symbol: "some_name": 15: 23: "unsigned.k"
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_var_decl(): 
+                        TRACE: traverse_var_definition(): is_assigned: true
+                        ENTER: traverse_assignment_item(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_expression(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: expression(3038)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_expr_primary(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: pre_test_pass_func(): 
+                                    ENTER: traverse_literal_value(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: pre_test_pass_func(): 
+                                        TERM: traverse_literal_value(): literal unsigned: "0X0": 15: 29: "unsigned.k"
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_literal_value(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_expr_primary(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: expression(3038)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_expression(): 
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_assignment_item(): 
+                        ENTER: post_test_pass_func(): 
+                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                        RETURN: post_test_pass_func(): 
+                    RETURN: traverse_var_definition(): 
+                    ENTER: post_test_pass_func(): 
+                        TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: post_test_pass_func(): 
+                RETURN: traverse_namespace_item(): 
+                ENTER: post_test_pass_func(): 
+                    TRACE: post_test_pass_func(): node type: module_item(3001)
+                RETURN: post_test_pass_func(): 
+            RETURN: traverse_module_item(): 
+            ENTER: traverse_module_item(): 
+                ENTER: pre_test_pass_func(): 
+                    TRACE: pre_test_pass_func(): node type: module_item(3001)
+                RETURN: pre_test_pass_func(): 
+                TRACE: traverse_module_item(): SCOPE: PRIVATE
+                ENTER: traverse_namespace_item(): 
+                    ENTER: pre_test_pass_func(): 
+                        TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: pre_test_pass_func(): 
+                    TRACE: traverse_namespace_item(): SCOPE: PRIVATE
+                    ENTER: traverse_var_definition(): 
+                        ENTER: pre_test_pass_func(): 
+                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                        RETURN: pre_test_pass_func(): 
+                        ENTER: traverse_var_decl(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_type_name(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: type_name(3012)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_literal_type_name(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: pre_test_pass_func(): 
+                                    TERM: traverse_literal_type_name(): unsigned: "unsigned": 16: 13: "unsigned.k"
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_literal_type_name(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: type_name(3012)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_type_name(): 
+                            TRACE: traverse_var_decl(): is_const: false
+                            TERM: traverse_var_decl(): symbol: "some_name": 16: 23: "unsigned.k"
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_var_decl(): 
+                        TRACE: traverse_var_definition(): is_assigned: true
+                        ENTER: traverse_assignment_item(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_expression(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: expression(3038)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_expr_primary(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: pre_test_pass_func(): 
+                                    ENTER: traverse_literal_value(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: pre_test_pass_func(): 
+                                        TERM: traverse_literal_value(): literal unsigned: "0x01": 16: 30: "unsigned.k"
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_literal_value(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_expr_primary(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: expression(3038)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_expression(): 
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_assignment_item(): 
+                        ENTER: post_test_pass_func(): 
+                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                        RETURN: post_test_pass_func(): 
+                    RETURN: traverse_var_definition(): 
+                    ENTER: post_test_pass_func(): 
+                        TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: post_test_pass_func(): 
+                RETURN: traverse_namespace_item(): 
+                ENTER: post_test_pass_func(): 
+                    TRACE: post_test_pass_func(): node type: module_item(3001)
+                RETURN: post_test_pass_func(): 
+            RETURN: traverse_module_item(): 
+            ENTER: traverse_module_item(): 
+                ENTER: pre_test_pass_func(): 
+                    TRACE: pre_test_pass_func(): node type: module_item(3001)
+                RETURN: pre_test_pass_func(): 
+                TRACE: traverse_module_item(): SCOPE: PRIVATE
+                ENTER: traverse_namespace_item(): 
+                    ENTER: pre_test_pass_func(): 
+                        TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: pre_test_pass_func(): 
+                    TRACE: traverse_namespace_item(): SCOPE: PRIVATE
+                    ENTER: traverse_var_definition(): 
+                        ENTER: pre_test_pass_func(): 
+                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                        RETURN: pre_test_pass_func(): 
+                        ENTER: traverse_var_decl(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_type_name(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: type_name(3012)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_literal_type_name(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: pre_test_pass_func(): 
+                                    TERM: traverse_literal_type_name(): unsigned: "unsigned": 17: 13: "unsigned.k"
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_literal_type_name(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: type_name(3012)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_type_name(): 
+                            TRACE: traverse_var_decl(): is_const: false
+                            TERM: traverse_var_decl(): symbol: "some_name": 17: 23: "unsigned.k"
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_var_decl(): 
+                        TRACE: traverse_var_definition(): is_assigned: true
+                        ENTER: traverse_assignment_item(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_expression(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: expression(3038)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_expr_primary(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: pre_test_pass_func(): 
+                                    ENTER: traverse_literal_value(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: pre_test_pass_func(): 
+                                        TERM: traverse_literal_value(): literal unsigned: "0x0000": 17: 32: "unsigned.k"
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_literal_value(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_expr_primary(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: expression(3038)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_expression(): 
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_assignment_item(): 
+                        ENTER: post_test_pass_func(): 
+                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                        RETURN: post_test_pass_func(): 
+                    RETURN: traverse_var_definition(): 
+                    ENTER: post_test_pass_func(): 
+                        TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: post_test_pass_func(): 
+                RETURN: traverse_namespace_item(): 
+                ENTER: post_test_pass_func(): 
+                    TRACE: post_test_pass_func(): node type: module_item(3001)
+                RETURN: post_test_pass_func(): 
+            RETURN: traverse_module_item(): 
+            ENTER: traverse_module_item(): 
+                ENTER: pre_test_pass_func(): 
+                    TRACE: pre_test_pass_func(): node type: module_item(3001)
+                RETURN: pre_test_pass_func(): 
+                TRACE: traverse_module_item(): SCOPE: PRIVATE
+                ENTER: traverse_namespace_item(): 
+                    ENTER: pre_test_pass_func(): 
+                        TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: pre_test_pass_func(): 
+                    TRACE: traverse_namespace_item(): SCOPE: PRIVATE
+                    ENTER: traverse_var_definition(): 
+                        ENTER: pre_test_pass_func(): 
+                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                        RETURN: pre_test_pass_func(): 
+                        ENTER: traverse_var_decl(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_type_name(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: type_name(3012)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_literal_type_name(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: pre_test_pass_func(): 
+                                    TERM: traverse_literal_type_name(): unsigned: "unsigned": 18: 13: "unsigned.k"
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_literal_type_name(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: type_name(3012)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_type_name(): 
+                            TRACE: traverse_var_decl(): is_const: false
+                            TERM: traverse_var_decl(): symbol: "some_name": 18: 23: "unsigned.k"
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_var_decl(): 
+                        TRACE: traverse_var_definition(): is_assigned: true
+                        ENTER: traverse_assignment_item(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_expression(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: expression(3038)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_expr_primary(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: pre_test_pass_func(): 
+                                    ENTER: traverse_literal_value(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: pre_test_pass_func(): 
+                                        TERM: traverse_literal_value(): literal unsigned: "0xaBc0": 18: 32: "unsigned.k"
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_literal_value(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_expr_primary(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: expression(3038)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_expression(): 
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_assignment_item(): 
+                        ENTER: post_test_pass_func(): 
+                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                        RETURN: post_test_pass_func(): 
+                    RETURN: traverse_var_definition(): 
+                    ENTER: post_test_pass_func(): 
+                        TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: post_test_pass_func(): 
+                RETURN: traverse_namespace_item(): 
+                ENTER: post_test_pass_func(): 
+                    TRACE: post_test_pass_func(): node type: module_item(3001)
+                RETURN: post_test_pass_func(): 
+            RETURN: traverse_module_item(): 
+            ENTER: traverse_module_item(): 
+                ENTER: pre_test_pass_func(): 
+                    TRACE: pre_test_pass_func(): node type: module_item(3001)
+                RETURN: pre_test_pass_func(): 
+                TRACE: traverse_module_item(): SCOPE: PRIVATE
+                ENTER: traverse_namespace_item(): 
+                    ENTER: pre_test_pass_func(): 
+                        TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: pre_test_pass_func(): 
+                    TRACE: traverse_namespace_item(): SCOPE: PRIVATE
+                    ENTER: traverse_var_definition(): 
+                        ENTER: pre_test_pass_func(): 
+                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                        RETURN: pre_test_pass_func(): 
+                        ENTER: traverse_var_decl(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_type_name(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: type_name(3012)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_literal_type_name(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: pre_test_pass_func(): 
+                                    TERM: traverse_literal_type_name(): unsigned: "unsigned": 19: 13: "unsigned.k"
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_literal_type_name(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: type_name(3012)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_type_name(): 
+                            TRACE: traverse_var_decl(): is_const: false
+                            TERM: traverse_var_decl(): symbol: "some_name": 19: 23: "unsigned.k"
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_var_decl(): 
+                        TRACE: traverse_var_definition(): is_assigned: true
+                        ENTER: traverse_assignment_item(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_expression(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: expression(3038)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_expr_primary(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: pre_test_pass_func(): 
+                                    ENTER: traverse_literal_value(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: pre_test_pass_func(): 
+                                        TERM: traverse_literal_value(): literal unsigned: "0x0123": 19: 32: "unsigned.k"
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_literal_value(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_expr_primary(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: expression(3038)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_expression(): 
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_assignment_item(): 
+                        ENTER: post_test_pass_func(): 
+                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                        RETURN: post_test_pass_func(): 
+                    RETURN: traverse_var_definition(): 
+                    ENTER: post_test_pass_func(): 
+                        TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: post_test_pass_func(): 
+                RETURN: traverse_namespace_item(): 
+                ENTER: post_test_pass_func(): 
+                    TRACE: post_test_pass_func(): node type: module_item(3001)
+                RETURN: post_test_pass_func(): 
+            RETURN: traverse_module_item(): 
+            ENTER: traverse_module_item(): 
+                ENTER: pre_test_pass_func(): 
+                    TRACE: pre_test_pass_func(): node type: module_item(3001)
+                RETURN: pre_test_pass_func(): 
+                TRACE: traverse_module_item(): SCOPE: PRIVATE
+                ENTER: traverse_namespace_item(): 
+                    ENTER: pre_test_pass_func(): 
+                        TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: pre_test_pass_func(): 
+                    TRACE: traverse_namespace_item(): SCOPE: PRIVATE
+                    ENTER: traverse_var_definition(): 
+                        ENTER: pre_test_pass_func(): 
+                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                        RETURN: pre_test_pass_func(): 
+                        ENTER: traverse_var_decl(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_type_name(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: type_name(3012)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_literal_type_name(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: pre_test_pass_func(): 
+                                    TERM: traverse_literal_type_name(): unsigned: "unsigned": 20: 13: "unsigned.k"
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: literal_type_name(3010)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_literal_type_name(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: type_name(3012)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_type_name(): 
+                            TRACE: traverse_var_decl(): is_const: false
+                            TERM: traverse_var_decl(): symbol: "some_name": 20: 23: "unsigned.k"
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_var_decl(): 
+                        TRACE: traverse_var_definition(): is_assigned: true
+                        ENTER: traverse_assignment_item(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: pre_test_pass_func(): 
+                            ENTER: traverse_expression(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: expression(3038)
+                                RETURN: pre_test_pass_func(): 
+                                ENTER: traverse_expr_primary(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: pre_test_pass_func(): 
+                                    ENTER: traverse_literal_value(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: pre_test_pass_func(): 
+                                        TERM: traverse_literal_value(): literal unsigned: "0xabcdef12": 20: 36: "unsigned.k"
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: literal_value(3011)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_literal_value(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: expr_primary(3039)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_expr_primary(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: expression(3038)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_expression(): 
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: assignment_item(3041)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_assignment_item(): 
+                        ENTER: post_test_pass_func(): 
+                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                        RETURN: post_test_pass_func(): 
+                    RETURN: traverse_var_definition(): 
+                    ENTER: post_test_pass_func(): 
+                        TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: post_test_pass_func(): 
+                RETURN: traverse_namespace_item(): 
+                ENTER: post_test_pass_func(): 
+                    TRACE: post_test_pass_func(): node type: module_item(3001)
+                RETURN: post_test_pass_func(): 
+            RETURN: traverse_module_item(): 
+            ENTER: post_test_pass_func(): 
+                TRACE: post_test_pass_func(): node type: module(3000)
+            RETURN: post_test_pass_func(): 
+            ENTER: post_test_pass_func(): 
+                TRACE: post_test_pass_func(): node type: module(3000)
+            RETURN: post_test_pass_func(): 
+        RETURN: traverse_module(): 
+        ENTER: post_test_pass_func(): 
+            TRACE: post_test_pass_func(): node type: module(3000)
+        RETURN: post_test_pass_func(): 
+    RETURN: traverse_ast(): 
+    TRACE: main(): End Traverse
+    TRACE: main(): --------------------------------------------
