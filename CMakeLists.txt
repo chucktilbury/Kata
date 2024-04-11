@@ -26,8 +26,8 @@ file(GLOB_RECURSE format_xxfiles
     ${PROJECT_SOURCE_DIR}/src/scanner/*.h
     ${PROJECT_SOURCE_DIR}/src/simple/*.c
     ${PROJECT_SOURCE_DIR}/src/simple/*.h
-    ${PROJECT_SOURCE_DIR}/src/util/*.c
-    ${PROJECT_SOURCE_DIR}/src/util/*.h
+    ${PROJECT_SOURCE_DIR}/src/misc/*.c
+    ${PROJECT_SOURCE_DIR}/src/misc/*.h
     ${PROJECT_SOURCE_DIR}/test/*.c
     ${PROJECT_SOURCE_DIR}/test/*.h
 )

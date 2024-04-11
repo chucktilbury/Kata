@@ -1,10 +1,10 @@
 #include <assert.h>
+#include <ctype.h>
 #include <stdarg.h>
 #include <string.h>
-#include <ctype.h>
 
-#include "sstrings.h"
 #include "memory.h"
+#include "sstrings.h"
 
 /**
  * @brief Append a string to a buffer
@@ -16,8 +16,8 @@
  */
 static void append_string(String* ptr, const char* buffer, size_t size) {
 
-    if(ptr->len+(int)size > ptr->cap) {
-        while(ptr->len+(int)size > ptr->cap)
+    if(ptr->len + (int)size > ptr->cap) {
+        while(ptr->len + (int)size > ptr->cap)
             ptr->cap <<= 1;
         ptr->buffer = _REALLOC(ptr->buffer, ptr->cap);
     }
@@ -60,8 +60,8 @@ String* join_string_list(StrList* lst, const char* str) {
 String* create_string(const char* str) {
 
     String* ptr = _ALLOC_T(String);
-    ptr->len = 0;
-    ptr->cap = 0x01 << 3;
+    ptr->len    = 0;
+    ptr->cap    = 0x01 << 3;
     ptr->buffer = _ALLOC(ptr->cap);
 
     if(str != NULL)
@@ -245,7 +245,7 @@ void truncate_string(String* str, int index) {
 
     if(index < str->len) {
         str->buffer[index] = 0;
-        str->len = index;
+        str->len           = index;
     }
     // else fail silently
 }
@@ -383,7 +383,7 @@ void destroy_string_list(StrList* lst) {
  *
  */
 void add_string_list(StrList* lst, String* str) {
-    //printf("add list: %s\n", str->buffer);
+    // printf("add list: %s\n", str->buffer);
     append_link_list(lst, str);
 }
 
@@ -407,7 +407,7 @@ String* iterate_string_list(StrList* ptr, void** mark) {
  *
  */
 void push_string_list(StrList* lst, String* str) {
-    //printf("push list: %s\n", str->buffer);
+    // printf("push list: %s\n", str->buffer);
     push_link_list(lst, copy_string(str));
 }
 
@@ -420,8 +420,8 @@ void push_string_list(StrList* lst, String* str) {
  */
 String* peek_string_list(StrList* lst) {
 
-    //printf("peek list: %s\n", (const char*)lst->first->data);
-    //printf("peek list: %s\n", (const char*)lst->last->data);
+    // printf("peek list: %s\n", (const char*)lst->first->data);
+    // printf("peek list: %s\n", (const char*)lst->last->data);
     return peek_link_list(lst);
 }
 

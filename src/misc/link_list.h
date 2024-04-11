@@ -38,6 +38,6 @@ void* iter_link_list(LinkList* ll, void** post);
 int len_link_list(LinkList* ll);
 
 #define LLFOR(l, v, p) \
-    for((v)=iter_link_list((l),&(p));(v)!=NULL;(v)=iter_link_list((l),&(p)))
+    for((v) = iter_link_list((l), &(p)); (v) != NULL; (v) = iter_link_list((l), &(p)))
 
 #endif /* __LINK_LIST_H__ */

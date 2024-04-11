@@ -11,8 +11,8 @@
 #include <stdlib.h>
 
 #include "errors.h"
-#include "scanner.h"
 #include "fileio.h"
+#include "scanner.h"
 
 #include <stdarg.h>
 

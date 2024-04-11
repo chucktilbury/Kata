@@ -8,8 +8,8 @@
  * @date 03-29-2024
  * @copyright Copyright (c) 2024
  */
-#include <stdio.h>
 #include "except.h"
+#include <stdio.h>
 
 // define a home for the global state.
 _ExceptionState _exception_state = { NULL, NULL, NULL, NULL, 0 };

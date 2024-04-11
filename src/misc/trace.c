@@ -10,15 +10,15 @@
  */
 #include <assert.h>
 
-#include "memory.h"
 #include "link_list.h"
+#include "memory.h"
 
 #include "ast.h"
 #include "scanner.h"
 #include "trace.h"
 
-int trace_count           = 0;
-const int trace_increment = 4;
+int trace_count             = 0;
+const int trace_increment   = 4;
 LinkList* trace_state_stack = NULL;
 
 void push_trace_state(bool state) {
@@ -27,7 +27,7 @@ void push_trace_state(bool state) {
         trace_state_stack = create_link_list();
 
     bool* node = _ALLOC_T(bool);
-    *node = state;
+    *node      = state;
 
     push_link_list(trace_state_stack, node);
 }
@@ -71,8 +71,8 @@ void print_terminal(void* ptr) {
     assert(ptr != NULL);
     Token* tok = (Token*)ptr;
 
-    printf("%s: \"%s\": %d: %d: \"%s\"", tok_to_str(tok),
-           raw_string(tok->str), tok->line_no, tok->col_no, tok->fname);
+    printf("%s: \"%s\": %d: %d: \"%s\"", tok_to_str(tok), raw_string(tok->str),
+           tok->line_no, tok->col_no, tok->fname);
 }
 
 void print_nonterminal(void* ptr) {

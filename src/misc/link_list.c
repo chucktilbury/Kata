@@ -8,13 +8,13 @@
  * @date 03-28-2024
  * @copyright Copyright (c) 2024
  */
-#include <stdio.h>
-#include <stdbool.h>
 #include <assert.h>
+#include <stdbool.h>
+#include <stdio.h>
 
-#include "memory.h"
-#include "link_list.h"
 #include "errors.h"
+#include "link_list.h"
+#include "memory.h"
 
 /**
  * @brief Create a link list object
@@ -24,11 +24,11 @@
  */
 LinkList* create_link_list() {
 
-    LinkList* lst = _ALLOC_T(LinkList);
-    lst->first = NULL;
-    lst->last = NULL;
+    LinkList* lst   = _ALLOC_T(LinkList);
+    lst->first      = NULL;
+    lst->last       = NULL;
     lst->is_changed = true;
-    lst->length = 0;
+    lst->length     = 0;
 
     return lst;
 }
@@ -57,17 +57,16 @@ void append_link_list(LinkList* lst, void* data) {
     assert(data != NULL);
 
     LinkListElem* elem = _ALLOC_T(LinkListElem);
-    elem->data = data;
+    elem->data         = data;
 
     if(lst->last == NULL)
         lst->first = elem;
     else
         lst->last->next = elem;
 
-    lst->last = elem;
+    lst->last       = elem;
     lst->is_changed = true;
-    lst->length ++;
-
+    lst->length++;
 }
 
 /**
@@ -83,7 +82,7 @@ void prepend_link_list(LinkList* lst, void* data) {
     assert(data != NULL);
 
     LinkListElem* elem = _ALLOC_T(LinkListElem);
-    elem->data = data;
+    elem->data         = data;
 
     if(lst->first == NULL)
         lst->last = elem;
@@ -91,7 +90,7 @@ void prepend_link_list(LinkList* lst, void* data) {
     lst->first = elem;
 
     lst->is_changed = true;
-    lst->length ++;
+    lst->length++;
 }
 
 /**
@@ -113,9 +112,9 @@ void* iter_link_list(LinkList* lst, void** post) {
     LinkListElem* crnt = (LinkListElem*)(*post);
 
     if(crnt == NULL) {
-        crnt = lst->first;
+        crnt            = lst->first;
         lst->is_changed = false;
-        *post = crnt;
+        *post           = crnt;
         if(crnt != NULL)
             return crnt->data;
     }
@@ -168,14 +167,14 @@ void* pop_link_list(LinkList* lst) {
     void* data = NULL;
 
     if(lst->first != NULL) {
-        data = lst->first->data;
+        data       = lst->first->data;
         lst->first = lst->first->next;
     }
     else {
         lst->last = NULL;
     }
 
-    lst->length --;
+    lst->length--;
     return data;
 }
 
@@ -252,8 +251,8 @@ void print_list(LinkList* lst) {
     const char* str;
 
     printf("\n------------\n");
-    //for(str = iter_link_list(lst, &post); str != NULL; str = iter_link_list(lst, &post))
-    //LLFOR(lst, str, post)
+    // for(str = iter_link_list(lst, &post); str != NULL; str =
+    // iter_link_list(lst, &post)) LLFOR(lst, str, post)
     while(NULL != (str = iter_link_list(lst, &post)))
         printf("string: %s\n", str);
 }
@@ -296,4 +295,3 @@ int main() {
 }
 
 #endif
-

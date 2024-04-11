@@ -11,8 +11,8 @@
 #ifndef __STRINGS_H__
 #define __STRINGS_H__
 
-#include <stdio.h>
 #include "link_list.h"
+#include <stdio.h>
 
 typedef struct {
     unsigned char* buffer;

@@ -8,16 +8,16 @@
  * @date 03-31-2024
  * @copyright Copyright (c) 2024
  */
-#include <stdlib.h>
-#include <linux/limits.h>
 #include <errno.h>
-#include <string.h>
+#include <linux/limits.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
 
+#include "errors.h"
 #include "link_list.h"
 #include "sstrings.h"
 #include "trace.h"
-#include "errors.h"
 
 static LinkList* paths;
 
@@ -45,7 +45,7 @@ String* find_file(const char* name) {
         while(NULL != (p = iter_link_list(paths, &mark))) {
             memset(temp, 0, sizeof(temp));
             strncpy(temp, raw_string(p), sizeof(temp));
-            strncat(temp, name, sizeof(temp)-strlen(temp)-strlen(name)-1);
+            strncat(temp, name, sizeof(temp) - strlen(temp) - strlen(name) - 1);
 
             TRACE("trying: %s", temp);
             if(NULL != realpath(temp, tmp_buf)) {
@@ -54,7 +54,7 @@ String* find_file(const char* name) {
             }
             else {
                 // try appending the ".simp"
-                strncat(temp, ".simp", sizeof(temp)-strlen(temp)-strlen(".simp")-1);
+                strncat(temp, ".simp", sizeof(temp) - strlen(temp) - strlen(".simp") - 1);
                 if(NULL != realpath(temp, tmp_buf)) {
                     TRACE("found: %s", tmp_buf);
                     RETV(create_string(tmp_buf));
@@ -79,8 +79,8 @@ void add_path(const char* name) {
 
     // make sure that it has a '/' on the end.
     char* ptr = strrchr(buffer, '/');
-    if(*(ptr+1) != '\0')
-        strncat(buffer, "/", sizeof(buffer) - (strlen(buffer)+1));
+    if(*(ptr + 1) != '\0')
+        strncat(buffer, "/", sizeof(buffer) - (strlen(buffer) + 1));
 
     TRACE("%s", buffer);
     append_link_list(paths, create_string(buffer));
@@ -97,4 +97,3 @@ void init_paths(const char** names) {
 
     RET;
 }
-

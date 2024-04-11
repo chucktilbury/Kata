@@ -17,8 +17,9 @@ void fatal_error(const char* fmt, ...);
 int get_num_errors();
 int get_num_warnings();
 
-#define EXPECTED(s) do { \
-    show_syntax("expected %s but got %s", \
-        (s), tok_to_str(get_token())); } while(false)
+#define EXPECTED(s)                                                          \
+    do {                                                                     \
+        show_syntax("expected %s but got %s", (s), tok_to_str(get_token())); \
+    } while(false)
 
 #endif /* __ERRORS_H__ */
