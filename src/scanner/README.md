@@ -1,5 +1,5 @@
 # SCANNER
-This is the complete scanner for the Simple language, including tests. Look at ``keywords.c`` for a complete list of keywords.
+This is the complete scanner for the Kata language, including tests. Look at ``keywords.c`` for a complete list of keywords.
 
 * Keywords are not case-sensitive.
 * This scanner does not return single character tokens, it only returns fully developed tokens with a type and the string that created it.

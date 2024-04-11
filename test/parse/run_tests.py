@@ -73,7 +73,7 @@ def run_test(comp, tst, dir) :
     '''
     global num_error, num_pass, num_fail
 
-    tname = os.path.join(dir, tst['name']+'.simp')
+    tname = os.path.join(dir, tst['name']+'.k')
     oname = os.path.join(dir, tst['name']+'.stdout')
     ename = os.path.join(dir, tst['name']+'.stderr')
 
@@ -226,7 +226,7 @@ def find_compiler() :
     '''
     Locate the compiler and return the fully qualified location.
     '''
-    s = '../../bin/simple'
+    s = '../../bin/kata'
     return os.path.abspath(s)
 
 

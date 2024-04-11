@@ -7,7 +7,7 @@
  * strings. Also symbols and operators such as "!=" and "==". It is
  * designed to be easy to change to match different requirements. The
  * scanner that is implemented here is intended to scan the tokens as they
- * are defined for the Simple programming language. See the header file for
+ * are defined for the Kata programming language. See the header file for
  * more information.
  *
  * In addition to the operators and keywords (which are defined as strings
@@ -143,7 +143,7 @@ static void scan_mantissa() {
 }
 
 /**
- * @brief All numbers in Simple are floating point with an optional
+ * @brief All numbers in Kata are floating point with an optional
  * mantissa and exponent. Any string that strtod() recognizes is valid. If
  * the first character is a '0' then it must be followed by a '.' or a
  * non-digit. Leading '0' in a number is a syntax error.

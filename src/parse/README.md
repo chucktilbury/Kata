@@ -1,4 +1,4 @@
-# Simple Parser
+# Kata Parser
 This is a hand-written recursive decent parser. It outputs an Abstract Semantic Tree. This document is mostly about the format of the AST. Note that I did not call it an abstract syntax tree. That's because the tree captures the semantics of the input and not the syntax. The syntax that was represented by the input is thrown away because it's not needed to output the actual program.
 
 An AST node is actually a pointer to a hash table, whos functionality is defined in the ``util`` submodule. This approach sacrifices memory efficiency and some speed for a more general use model. There are about 50 non-terminal symbols and about 40 terminals. Otherwise, a separate data structure would need to be defined for each one. Since this is a hand-written parser, simplifying the data structures is beneficial.

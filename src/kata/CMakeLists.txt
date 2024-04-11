@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
-project(simple)
+project(kata)
 
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 add_executable(${PROJECT_NAME}
     command_line.c
-    simple.c
+    kata.c
 )
 
 target_link_libraries(${PROJECT_NAME}

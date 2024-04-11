@@ -54,7 +54,7 @@ String* find_file(const char* name) {
             }
             else {
                 // try appending the ".simp"
-                strncat(temp, ".simp", sizeof(temp) - strlen(temp) - strlen(".simp") - 1);
+                strncat(temp, ".k", sizeof(temp) - strlen(temp) - strlen(".k") - 1);
                 if(NULL != realpath(temp, tmp_buf)) {
                     TRACE("found: %s", tmp_buf);
                     RETV(create_string(tmp_buf));

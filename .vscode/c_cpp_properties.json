@@ -10,7 +10,6 @@
                 "${workspaceFolder}/src/parse",
                 "${workspaceFolder}/src/scanner",
                 "${workspaceFolder}/src/misc",
-                "${workspaceFolder}/src/util",
                 "${workspaceFolder}/src/pass",
                 "${workspaceFolder}/**"
             ],

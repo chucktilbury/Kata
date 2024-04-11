@@ -9,7 +9,7 @@
 ############################################################
 
 print("A wise person will investigate and reflect before typing.")
-exit(1)
+#exit(1)
 
 
 import shutil, sys, os
@@ -146,9 +146,9 @@ def clean_dirs() :
 
 def touch_dummy(dir) :
 
-    d = os.path.join(dir, "dummy_test.simp")
+    d = os.path.join(dir, "dummy_test.k")
     fp = open(d, "w")
-    fp.write("; dummy_test.simp\n\n")
+    fp.write("; dummy_test.k\n\n")
     fp.close()
 
 def make_dirs():
@@ -171,7 +171,7 @@ def make_dirs():
                         tfp.write("# this is a list of actual tests.\n\n")
                         tfp.write("dummy_test:run\n")
 
-                    with open(os.path.join(bdir, "dummy_test.simp"), "w") as tfp :
+                    with open(os.path.join(bdir, "dummy_test.k"), "w") as tfp :
                         tfp.write(";-----------------------------------------\n"
                                   "; this is a dummy test for development.\n"
                                   ";-----------------------------------------\n\n"

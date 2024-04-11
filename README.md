@@ -29,7 +29,7 @@ Features that are specifically not supported.
 * Multiple inheritance.
 * Monkey patching.
 
-This multi-pass compiler accepts Simple source code and outputs C source code. The output should be compilable by any modern ANSI C compiler. The output is not really intended to be human readable, but the #line directives are used to aid debugging. The generated code favors efficiency over readability. The goal is that there should be no way for the compiler to output incorrect code. All semantic errors are caught before emitting any output, except for the inline functionality. No checking or parsing is done on that whatsoever.
+This multi-pass compiler accepts Kata source code and outputs C source code. The output should be compilable by any modern ANSI C compiler. The output is not really intended to be human readable, but the #line directives are used to aid debugging. The generated code favors efficiency over readability. The goal is that there should be no way for the compiler to output incorrect code. All semantic errors are caught before emitting any output, except for the inline functionality. No checking or parsing is done on that whatsoever.
 
 # This repo
 (assuming you know how to use github)
@@ -48,7 +48,7 @@ This is the complete and updated grammar for **Kata**:
 #####################
 #
 # This is a simplified grammar that is based upon BNF. It is intended to
-# illustrate the physical syntax of the Simple programming language. It
+# illustrate the physical syntax of the Kata programming language. It
 # is not expected that this grammar will change very much. This is not
 # intended to be a "regular" grammar. There are several conflicts that include
 # a big one between a compound_name and a compound_reference. This is most
@@ -180,7 +180,7 @@ type_name_list
 
 #####################
 #
-# Most strings in Simple are presented as formatted. There is no need to call
+# Most strings in Kata are presented as formatted. There is no need to call
 # a function to format a string. Strings that are enclosed in double-quotes
 # have escape characters interpreted, included hex characters. Single quote
 # strings are absolute literals. Strings can span multiple lines. Double quote
@@ -375,7 +375,7 @@ compound_name_list
 #####################
 #
 # A compound reference must name a variable that is suitable to have a value
-# assigned to it. Note that unlike other languages, Simple does not allow
+# assigned to it. Note that unlike other languages, Kata does not allow
 # function references in a compound reference.
 #
 compound_ref_item
@@ -504,7 +504,7 @@ namespace_definition
 #
 # A class definition contains a list of class items. It accepts a single
 # optional parameter and the '()' around the parameter is optional. Also
-# the items in the class are optional. In the Simple language, a class can
+# the items in the class are optional. In the Kata language, a class can
 # only be declared once, and declaring an empty class prevents it from
 # being declared elsewhere.
 #

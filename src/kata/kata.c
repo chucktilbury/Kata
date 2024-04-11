@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
     PUSH_TRACE_STATE(true);
     ENTER;
 
-    CmdLine cmd = create_cmd_line("The Simple programming language");
+    CmdLine cmd = create_cmd_line("The Kata programming language");
     add_cmd(cmd, "", "file", "Name of file to compile.", NULL, CMD_REQD | CMD_STR);
     parse_cmd_line(cmd, argc, argv);
 
