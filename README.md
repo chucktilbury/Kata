@@ -1,5 +1,5 @@
-# Simple
-The Simple programming language.
+# Kata
+The **Kata** programming language.
 
 This is a very simple object-oriented programming language compiler which is written in C. It's a fun hobby project. See the grammar below. It's pretty complete and I am actively working on a parser and AST for it. (January, 2024)
 
@@ -42,7 +42,7 @@ This requires an ANSI C compiler, cmake, graphiz, and doxygen. No other librarie
 I would also welcome some help. Compilers are such a slog....
 
 # Grammar
-This is the complete and updated grammar for Simple:
+This is the complete and updated grammar for **Kata**:
 ```
 
 #####################
