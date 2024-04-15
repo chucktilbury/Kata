@@ -18,6 +18,7 @@ target_compile_options(${PROJECT_NAME}
         -Wextra
         -Wpedantic
         -DUSE_GC
+        -I${PROJECT_SOURCE_DIR}/../gc/include
         -I${PROJECT_SOURCE_DIR}/../util
         -I${PROJECT_SOURCE_DIR}/../scanner
         -I${PROJECT_SOURCE_DIR}/../parse
