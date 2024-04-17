@@ -696,8 +696,9 @@ ast_create_name* parse_create_name() {
                     state = 100;
                 }
                 else {
-                    EXPECTED("a SYMBOL or 'create'");
-                    state = 102;
+                    //EXPECTED("a SYMBOL or 'create'");
+                    //state = 102;
+                    state = 101;
                 }
                 break;
 
@@ -784,8 +785,9 @@ ast_destroy_name* parse_destroy_name() {
                     state = 100;
                 }
                 else {
-                    EXPECTED("a SYMBOL or 'destroy'");
-                    state = 102;
+                    //EXPECTED("a SYMBOL or 'destroy'");
+                    //state = 102;
+                    state = 101;
                 }
                 break;
 
@@ -1136,7 +1138,7 @@ ast_start_function* parse_start_function() {
 
             case 2:
                 // must be function body or an error
-                if(NULL != (body = parse_function_body())) {
+                if(NULL == (body = parse_function_body())) {
                     EXPECTED("function body");
                     state = 102;
                 }

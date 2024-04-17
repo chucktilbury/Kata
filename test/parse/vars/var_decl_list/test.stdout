@@ -220,6 +220,8 @@ ENTER: main():
                                 ENTER: parse_for_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_for_clause(): state = 0
+                                    TRACE: parse_for_clause(): state = 101
                                     ENTER: reset_token_queue(): 
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
@@ -447,6 +449,8 @@ ENTER: main():
                                 ENTER: parse_for_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_for_clause(): state = 0
+                                    TRACE: parse_for_clause(): state = 101
                                     ENTER: reset_token_queue(): 
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
@@ -678,6 +682,8 @@ ENTER: main():
                                 ENTER: parse_for_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_for_clause(): state = 0
+                                    TRACE: parse_for_clause(): state = 101
                                     ENTER: reset_token_queue(): 
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
@@ -905,6 +911,8 @@ ENTER: main():
                                 ENTER: parse_for_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_for_clause(): state = 0
+                                    TRACE: parse_for_clause(): state = 101
                                     ENTER: reset_token_queue(): 
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
@@ -1175,6 +1183,8 @@ ENTER: main():
                                 ENTER: parse_for_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_for_clause(): state = 0
+                                    TRACE: parse_for_clause(): state = 101
                                     ENTER: reset_token_queue(): 
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
@@ -1438,6 +1448,8 @@ ENTER: main():
                                 ENTER: parse_for_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_for_clause(): state = 0
+                                    TRACE: parse_for_clause(): state = 101
                                     ENTER: reset_token_queue(): 
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
@@ -1693,6 +1705,8 @@ ENTER: main():
                                 ENTER: parse_for_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_for_clause(): state = 0
+                                    TRACE: parse_for_clause(): state = 101
                                     ENTER: reset_token_queue(): 
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)

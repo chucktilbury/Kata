@@ -1,3 +1,7 @@
 # this is a list of actual tests.
 
-dummy_test:run
+empty:run
+nested:run
+items:run
+noname:run
+nobody:run

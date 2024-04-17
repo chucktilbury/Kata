@@ -1,0 +1,3 @@
+Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/noname.k: 5: 8: expected a SYMBOL but got {
+Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/noname.k: 5: 8: expected module item or end of file but got class
+Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/noname.k: 5: 8: module cannot be empty

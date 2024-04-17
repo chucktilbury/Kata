@@ -1,3 +1,12 @@
 # this is a list of actual tests.
 
-dummy_test:run
+class_decl:run
+nest_error:run
+fdef_error:run
+item_error1:run
+item_error2:run
+class_content:run
+noname:run
+nobody:run
+nobody1:run
+nobody2:run

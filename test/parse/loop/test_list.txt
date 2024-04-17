@@ -1,6 +1,5 @@
 # this is a list of classes of tests.
 
-while_definition:run
 while_clause:run
 do_clause:run
 for_clause:run

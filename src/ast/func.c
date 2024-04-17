@@ -295,11 +295,14 @@ void traverse_function_body(ast_function_body* node, PassFunc pre, PassFunc post
 
     ENTER;
     AST_CALLBACK(pre, node);
-
-    ast_function_body_element* elem;
-    void* mark = NULL;
-    while(NULL != (elem = iter_link_list(node->list, &mark)))
-        traverse_function_body_element(elem, pre, post);
+    if(node->list != NULL) {
+        ast_function_body_element* elem;
+        void* mark = NULL;
+        while(NULL != (elem = iter_link_list(node->list, &mark)))
+            traverse_function_body_element(elem, pre, post);
+    }
+    else 
+        TRACE("no function body");
 
     AST_CALLBACK(post, node);
     RET;

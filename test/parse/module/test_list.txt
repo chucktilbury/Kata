@@ -1,9 +1,5 @@
 # this is a list of classes of tests.
 
 module:run
-module_item:run
-namespace_item:run
 namespace_definition:run
-class_item:run
 class_definition:run
-class_var_declaration:run

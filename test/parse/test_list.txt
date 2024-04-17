@@ -9,7 +9,7 @@ func_body:skip
 import:skip
 list:skip
 literals:run
-loop:skip
-module:skip
+loop:run
+module:run
 strg:run
 vars:run

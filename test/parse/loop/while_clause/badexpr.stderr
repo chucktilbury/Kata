@@ -1,0 +1,5 @@
+Syntax: /home/chuck/Src/Kata/test/parse/loop/while_clause/badexpr.k: 7: 15: expected an expression or a ')' but got dict
+Syntax: /home/chuck/Src/Kata/test/parse/loop/while_clause/badexpr.k: 7: 15: expected function body element but got while
+Syntax: /home/chuck/Src/Kata/test/parse/loop/while_clause/badexpr.k: 7: 15: expected function body but got while
+Syntax: /home/chuck/Src/Kata/test/parse/loop/while_clause/badexpr.k: 7: 15: expected module item or end of file but got func
+Syntax: /home/chuck/Src/Kata/test/parse/loop/while_clause/badexpr.k: 7: 15: module cannot be empty

@@ -1,0 +1,3 @@
+Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/nest_error.k: 7: 10: expected class item or a '}' but got class
+Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/nest_error.k: 7: 10: expected module item or end of file but got class
+Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/nest_error.k: 7: 10: module cannot be empty

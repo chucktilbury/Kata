@@ -733,7 +733,7 @@ do_clause
 # or a bool. Note that casting is allowed.
 #
 for_clause
-    = 'for' ( '(' (type_name)? SYMBOL 'in' expression ')' )?
+    = 'for' ( '(' ( (type_name)? SYMBOL 'in' expression )? ')' )?
             function_body
 
 #####################

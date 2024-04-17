@@ -259,7 +259,7 @@ ast_do_clause* parse_do_clause() {
  * @brief
  *
  *  for_clause
- *      = 'for' ( '(' (type_name)? SYMBOL 'in' expression ')' )?
+ *      = 'for' ( '(' ( (type_name)? SYMBOL 'in' expression )? ')' )?
  *              function_body
  *
  * @return ast_for_clause*
@@ -281,68 +281,60 @@ ast_for_clause* parse_for_clause() {
     while(!finished) {
         switch(state) {
             case 0:
-                // 'for' or no match
+                // If not a 'for' then not a match
+                TRACE("state = %d", state);
                 if(TOK_FOR == TTYPE) {
-                    advance_token();
                     state = 1;
+                    advance_token();
                 }
-                else
+                else 
                     state = 101;
                 break;
 
             case 1:
-                // could be a '(' or a function body
+                // must be a '(' or a function body or an error
+                TRACE("state = %d", state);
                 if(TOK_OPAREN == TTYPE) {
-                    advance_token();
                     state = 2;
+                    advance_token();
                 }
-                else
-                    state = 3;
+                else if(NULL != (body = parse_function_body())) {
+                    state = 100;
+                }
+                else {
+                    EXPECTED("a '(' or a function body");
+                    state = 102;
+                }
                 break;
 
             case 2:
-                // could be a type name, a SYMBOL or a ')', else error
+                // can be a ')', a type name, or a symbol, else error
+                TRACE("state = %d", state);
                 if(TOK_CPAREN == TTYPE) {
+                    state = 7;
                     advance_token();
-                    state = 3;
                 }
-                else if(NULL != (type = parse_type_name()))
-                    state = 5;
                 else if(TOK_SYMBOL == TTYPE) {
+                    state = 4;
                     symbol = get_token();
                     advance_token();
-                    state = 6;
+                }
+                else if(NULL != (type = parse_type_name())) {
+                    state = 3;
+                }
+                else {
+                    EXPECTED("a ')', a type name, or a SYMBOL");
+                    state = 102;
                 }
                 break;
 
             case 3:
-                // must be a function body or error
-                if(NULL != (body = parse_function_body()))
-                    state = 100;
-                else {
-                    EXPECTED("a function body");
-                    state = 102;
-                }
-                break;
-
-            case 4:
-                // must be a ')' or an error
-                if(TOK_CPAREN == TTYPE) {
-                    advance_token();
-                    state = 3;
-                }
-                else {
-                    EXPECTED("a ')'");
-                    state = 102;
-                }
-                break;
-
-            case 5:
-                // must be a symbol or an error
+                // must be a SYMBOL or an error
+                TRACE("state = %d", state);
                 if(TOK_SYMBOL == TTYPE) {
+                    state = 4;
                     symbol = get_token();
                     advance_token();
-                    state = 6;
                 }
                 else {
                     EXPECTED("a SYMBOL");
@@ -350,11 +342,12 @@ ast_for_clause* parse_for_clause() {
                 }
                 break;
 
-            case 6:
-                // must be an 'in' keyword or error
+            case 4:
+                // must be an 'in' token or an error
+                TRACE("state = %d", state);
                 if(TOK_IN == TTYPE) {
+                    state = 5;
                     advance_token();
-                    state = 7;
                 }
                 else {
                     EXPECTED("the 'in' keyword");
@@ -362,18 +355,44 @@ ast_for_clause* parse_for_clause() {
                 }
                 break;
 
-            case 7:
-                // must be an expression or error
-                if(NULL != (expr = parse_expression()))
-                    state = 4;
+            case 5:
+                // must be an expression or an error
+                TRACE("state = %d", state);
+                if(NULL != (expr = parse_expression())) 
+                    state = 6;
                 else {
                     EXPECTED("an expression");
                     state = 102;
                 }
                 break;
 
+            case 6:
+                // must be a ')' or an error
+                TRACE("state = %d", state);
+                if(TOK_CPAREN == TTYPE) {
+                    state = 7;
+                    advance_token();
+                }
+                else {
+                    EXPECTED("a ')'");
+                    state = 102;
+                }
+                break;
+
+            case 7:
+                // must be a function body or an error
+                TRACE("state = %d", state);
+                if(NULL != (body = parse_function_body())) 
+                    state = 100;
+                else {
+                    EXPECTED("a function body");
+                    state = 102;
+                }
+                break;
+
             case 100:
                 // completed parse
+                TRACE("state = %d", state);
                 node = CREATE_AST_NODE(AST_for_clause, ast_for_clause);
                 node->symbol = symbol;
                 node->type = type;
@@ -384,12 +403,14 @@ ast_for_clause* parse_for_clause() {
 
             case 101:
                 // not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;
@@ -398,6 +419,127 @@ ast_for_clause* parse_for_clause() {
                 fatal_error("unhandled state in %s: %d", __func__, state);
         }
     }
+
+    // while(!finished) {
+    //     switch(state) {
+    //         case 0:
+    //             // 'for' or no match
+    //             if(TOK_FOR == TTYPE) {
+    //                 advance_token();
+    //                 state = 1;
+    //             }
+    //             else
+    //                 state = 101;
+    //             break;
+
+    //         case 1:
+    //             // could be a '(' or a function body
+    //             if(TOK_OPAREN == TTYPE) {
+    //                 advance_token();
+    //                 state = 2;
+    //             }
+    //             else
+    //                 state = 3;
+    //             break;
+
+    //         case 2:
+    //             // could be a type name, a SYMBOL or a ')', else error
+    //             if(TOK_CPAREN == TTYPE) {
+    //                 advance_token();
+    //                 state = 3;
+    //             }
+    //             else if(NULL != (type = parse_type_name()))
+    //                 state = 5;
+    //             else if(TOK_SYMBOL == TTYPE) {
+    //                 symbol = get_token();
+    //                 advance_token();
+    //                 state = 6;
+    //             }
+    //             break;
+
+    //         case 3:
+    //             // must be a function body or error
+    //             if(NULL != (body = parse_function_body()))
+    //                 state = 100;
+    //             else {
+    //                 EXPECTED("a function body");
+    //                 state = 102;
+    //             }
+    //             break;
+
+    //         case 4:
+    //             // must be a ')' or an error
+    //             if(TOK_CPAREN == TTYPE) {
+    //                 advance_token();
+    //                 state = 3;
+    //             }
+    //             else {
+    //                 EXPECTED("a ')'");
+    //                 state = 102;
+    //             }
+    //             break;
+
+    //         case 5:
+    //             // must be a symbol or an error
+    //             if(TOK_SYMBOL == TTYPE) {
+    //                 symbol = get_token();
+    //                 advance_token();
+    //                 state = 6;
+    //             }
+    //             else {
+    //                 EXPECTED("a SYMBOL");
+    //                 state = 102;
+    //             }
+    //             break;
+
+    //         case 6:
+    //             // must be an 'in' keyword or error
+    //             if(TOK_IN == TTYPE) {
+    //                 advance_token();
+    //                 state = 7;
+    //             }
+    //             else {
+    //                 EXPECTED("the 'in' keyword");
+    //                 state = 102;
+    //             }
+    //             break;
+
+    //         case 7:
+    //             // must be an expression or error
+    //             if(NULL != (expr = parse_expression()))
+    //                 state = 4;
+    //             else {
+    //                 EXPECTED("an expression");
+    //                 state = 102;
+    //             }
+    //             break;
+
+    //         case 100:
+    //             // completed parse
+    //             node = CREATE_AST_NODE(AST_for_clause, ast_for_clause);
+    //             node->symbol = symbol;
+    //             node->type = type;
+    //             node->expr = expr;
+    //             node->body = body;
+    //             finished = true;
+    //             break;
+
+    //         case 101:
+    //             // not a match
+    //             reset_token_queue(post);
+    //             finished = true;
+    //             break;
+
+    //         case 102:
+    //             // error
+    //             node = NULL;
+    //             finished = true;
+    //             break;
+
+    //         default:
+    //             fatal_error("unhandled state in %s: %d", __func__, state);
+    //     }
+    // }
 
     RETV(node);
 }

@@ -1,0 +1,5 @@
+Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/nobody.k: 7: 13: expected a function body but got while
+Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/nobody.k: 7: 13: expected function body element but got do
+Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/nobody.k: 7: 13: expected function body but got do
+Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/nobody.k: 7: 13: expected module item or end of file but got func
+Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/nobody.k: 7: 13: module cannot be empty

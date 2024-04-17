@@ -1,0 +1,3 @@
+Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/nobody2.k: 6: 1: expected a '{' but got end of file
+Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/nobody2.k: 6: 1: expected module item or end of file but got class
+Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/nobody2.k: 6: 1: module cannot be empty

@@ -1,0 +1,1522 @@
+TRACE: main(): push trace state: true
+ENTER: main(): 
+    ENTER: init_parser(): 
+        TRACE: init_parser(): file name: "/home/chuck/Src/Kata/test/parse/module/namespace_definition/nested.k"
+        ENTER: init_paths(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ./
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/inputs/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/misc/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/parse/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/stuff/
+            RETURN: add_path(): 
+        RETURN: init_paths(): 
+        ENTER: find_file(): 
+            TRACE: find_file(): trying: /home/chuck/Src/Kata/test/parse/module/namespace_definition/nested.k
+            TRACE: find_file(): found: /home/chuck/Src/Kata/test/parse/module/namespace_definition/nested.k
+        RETURN(create_string(tmp_buf)): find_file() - (!NULL)
+        ENTER: init_scanner(): 
+            ENTER: open_file(): 
+                ENTER: push_input_file(): 
+                    TRACE: push_input_file(): input file: /home/chuck/Src/Kata/test/parse/module/namespace_definition/nested.k
+                RETURN: push_input_file(): 
+            RETURN: open_file(): 
+        RETURN: init_scanner(): 
+        ENTER: create_parser_state(): 
+            ENTER: push_scope(): 
+                TRACE: push_scope(): scope: PRIVATE
+            RETURN: push_scope(): 
+            ENTER: push_name(): 
+                TRACE: push_name(): name: root
+            RETURN: push_name(): 
+        RETURN(parser_state): create_parser_state() - (!NULL)
+    RETURN: init_parser(): 
+    TRACE: main(): --------------------------------------------
+    TRACE: main(): Begin Parse
+    ENTER: parse(): 
+        ENTER: parse_module(): 
+            ENTER: parse_module_item(): 
+                ENTER: post_token_queue(): 
+                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                ENTER: parse_namespace_item(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                    ENTER: parse_scope_operator(): 
+                    RETURN(node): parse_scope_operator() - (NULL)
+                    ENTER: parse_namespace_definition(): 
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        ENTER: get_scope(): 
+                        RETURN(*node): get_scope() - (!NULL)
+                        ENTER: push_scope(): 
+                            TRACE: push_scope(): scope: PRIVATE
+                        RETURN: push_scope(): 
+                        TERM: parse_namespace_definition(): symbol: "name": 5: 15: "nested.k"
+                        ENTER: push_name(): 
+                            TRACE: push_name(): name: name
+                        RETURN: push_name(): 
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        ENTER: parse_namespace_item(): 
+                            ENTER: post_token_queue(): 
+                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                            ENTER: parse_scope_operator(): 
+                                TERM: parse_scope_operator(): public: "public": 6: 11: "nested.k"
+                                ENTER: set_scope(): 
+                                    TRACE: set_scope(): scope: PUBLIC
+                                RETURN: set_scope(): 
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            RETURN(node): parse_scope_operator() - (!NULL)
+                            ENTER: get_scope(): 
+                            RETURN(*node): get_scope() - (NULL)
+                        RETURN(node): parse_namespace_item() - (!NULL)
+                        ENTER: parse_namespace_item(): 
+                            ENTER: post_token_queue(): 
+                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                            ENTER: parse_scope_operator(): 
+                            RETURN(node): parse_scope_operator() - (NULL)
+                            ENTER: parse_namespace_definition(): 
+                            RETURN(node): parse_namespace_definition() - (NULL)
+                            ENTER: parse_class_definition(): 
+                                ENTER: get_scope(): 
+                                RETURN(*node): get_scope() - (NULL)
+                                ENTER: push_scope(): 
+                                    TRACE: push_scope(): scope: PRIVATE
+                                RETURN: push_scope(): 
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: push_name(): 
+                                    TRACE: push_name(): name: name
+                                RETURN: push_name(): 
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: parse_type_name(): 
+                                    ENTER: parse_literal_type_name(): 
+                                    RETURN(node): parse_literal_type_name() - (NULL)
+                                    ENTER: parse_compound_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TERM: parse_compound_name(): symbol: "some": 8: 21: "nested.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        TERM: parse_compound_name(): symbol: "name": 8: 26: "nested.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    RETURN(node): parse_compound_name() - (!NULL)
+                                    TERM: parse_type_name(): ): ")": 8: 27: "nested.k"
+                                    ENTER: finalize_token_queue(): 
+                                    RETURN: finalize_token_queue(): 
+                                RETURN(node): parse_type_name() - (!NULL)
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: parse_class_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_scope_operator(): 
+                                        TERM: parse_scope_operator(): public: "public": 9: 15: "nested.k"
+                                        ENTER: set_scope(): 
+                                            TRACE: set_scope(): scope: PUBLIC
+                                        RETURN: set_scope(): 
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    RETURN(node): parse_scope_operator() - (!NULL)
+                                    ENTER: get_scope(): 
+                                    RETURN(*node): get_scope() - (NULL)
+                                    TERM: parse_class_item(): var: "var": 10: 12: "nested.k"
+                                RETURN(node): parse_class_item() - (!NULL)
+                                ENTER: parse_class_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_scope_operator(): 
+                                    RETURN(node): parse_scope_operator() - (NULL)
+                                    ENTER: parse_destroy_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_declaration() - (NULL)
+                                    ENTER: parse_create_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_declaration() - (NULL)
+                                    ENTER: parse_function_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_function_declaration(): state: 0
+                                        TRACE: parse_function_declaration(): state: 101
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_function_declaration() - (NULL)
+                                    ENTER: parse_class_var_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        ENTER: parse_var_decl(): 
+                                            ENTER: parse_type_name(): 
+                                                ENTER: parse_literal_type_name(): 
+                                                RETURN(node): parse_literal_type_name() - (NULL)
+                                                ENTER: parse_compound_name(): 
+                                                    ENTER: post_token_queue(): 
+                                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                    TERM: parse_compound_name(): symbol: "some": 10: 17: "nested.k"
+                                                    ENTER: advance_token(): 
+                                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    ENTER: advance_token(): 
+                                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    TERM: parse_compound_name(): symbol: "name": 10: 22: "nested.k"
+                                                    ENTER: advance_token(): 
+                                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                RETURN(node): parse_compound_name() - (!NULL)
+                                                TERM: parse_type_name(): symbol: "name": 10: 27: "nested.k"
+                                                ENTER: finalize_token_queue(): 
+                                                RETURN: finalize_token_queue(): 
+                                            RETURN(node): parse_type_name() - (!NULL)
+                                            ENTER: finalize_token_queue(): 
+                                            RETURN: finalize_token_queue(): 
+                                            ENTER: advance_token(): 
+                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        RETURN(node): parse_var_decl() - (!NULL)
+                                    RETURN(node): parse_class_var_declaration() - (!NULL)
+                                    ENTER: get_scope(): 
+                                    RETURN(*node): get_scope() - (NULL)
+                                    TERM: parse_class_item(): func: "func": 11: 13: "nested.k"
+                                RETURN(node): parse_class_item() - (!NULL)
+                                ENTER: parse_class_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_scope_operator(): 
+                                    RETURN(node): parse_scope_operator() - (NULL)
+                                    ENTER: parse_destroy_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_declaration() - (NULL)
+                                    ENTER: parse_create_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_declaration() - (NULL)
+                                    ENTER: parse_function_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_function_declaration(): state: 0
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        TRACE: parse_function_declaration(): state: 1
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        TERM: parse_function_declaration(): symbol: "a_name": 11: 20: "nested.k"
+                                        TRACE: parse_function_declaration(): state: 2
+                                        ENTER: parse_type_name_list(): 
+                                            ENTER: advance_token(): 
+                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            ENTER: parse_type_name(): 
+                                                ENTER: parse_literal_type_name(): 
+                                                RETURN(node): parse_literal_type_name() - (NULL)
+                                                ENTER: parse_compound_name(): 
+                                                    ENTER: post_token_queue(): 
+                                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                    ENTER: reset_token_queue(): 
+                                                    RETURN: reset_token_queue(): 
+                                                RETURN(node): parse_compound_name() - (NULL)
+                                            RETURN(node): parse_type_name() - (NULL)
+                                            ENTER: advance_token(): 
+                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            ENTER: finalize_token_queue(): 
+                                            RETURN: finalize_token_queue(): 
+                                        RETURN(node): parse_type_name_list() - (!NULL)
+                                        TRACE: parse_function_declaration(): state: 3
+                                        ENTER: parse_type_name_list(): 
+                                            ENTER: advance_token(): 
+                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            ENTER: parse_type_name(): 
+                                                ENTER: parse_literal_type_name(): 
+                                                RETURN(node): parse_literal_type_name() - (NULL)
+                                                ENTER: parse_compound_name(): 
+                                                    ENTER: post_token_queue(): 
+                                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                    ENTER: reset_token_queue(): 
+                                                    RETURN: reset_token_queue(): 
+                                                RETURN(node): parse_compound_name() - (NULL)
+                                            RETURN(node): parse_type_name() - (NULL)
+                                            ENTER: advance_token(): 
+                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            ENTER: finalize_token_queue(): 
+                                            RETURN: finalize_token_queue(): 
+                                        RETURN(node): parse_type_name_list() - (!NULL)
+                                        TRACE: parse_function_declaration(): state: 100
+                                    RETURN(node): parse_function_declaration() - (!NULL)
+                                    ENTER: get_scope(): 
+                                    RETURN(*node): get_scope() - (NULL)
+                                    TERM: parse_class_item(): }: "}": 12: 6: "nested.k"
+                                RETURN(node): parse_class_item() - (!NULL)
+                                ENTER: parse_class_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_scope_operator(): 
+                                    RETURN(node): parse_scope_operator() - (NULL)
+                                    ENTER: parse_destroy_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_declaration() - (NULL)
+                                    ENTER: parse_create_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_declaration() - (NULL)
+                                    ENTER: parse_function_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_function_declaration(): state: 0
+                                        TRACE: parse_function_declaration(): state: 101
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_function_declaration() - (NULL)
+                                    ENTER: parse_class_var_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_class_var_declaration() - (NULL)
+                                    TERM: parse_class_item(): }: "}": 12: 6: "nested.k"
+                                    ENTER: reset_token_queue(): 
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_class_item() - (NULL)
+                                TRACE: parse_class_definition(): scope before return: root.name.name.
+                                ENTER: pop_scope(): 
+                                RETURN(*node): pop_scope() - (NULL)
+                                ENTER: pop_name(): 
+                                RETURN(pop_link_list(parser_state->name_stack)): pop_name() - (!NULL)
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            RETURN(node): parse_class_definition() - (!NULL)
+                            ENTER: get_scope(): 
+                            RETURN(*node): get_scope() - (NULL)
+                        RETURN(node): parse_namespace_item() - (!NULL)
+                        ENTER: parse_namespace_item(): 
+                            ENTER: post_token_queue(): 
+                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                            ENTER: parse_scope_operator(): 
+                            RETURN(node): parse_scope_operator() - (NULL)
+                            ENTER: parse_namespace_definition(): 
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: get_scope(): 
+                                RETURN(*node): get_scope() - (NULL)
+                                ENTER: push_scope(): 
+                                    TRACE: push_scope(): scope: PRIVATE
+                                RETURN: push_scope(): 
+                                TERM: parse_namespace_definition(): symbol: "name": 14: 19: "nested.k"
+                                ENTER: push_name(): 
+                                    TRACE: push_name(): name: name
+                                RETURN: push_name(): 
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: parse_namespace_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_scope_operator(): 
+                                        TERM: parse_scope_operator(): public: "public": 15: 15: "nested.k"
+                                        ENTER: set_scope(): 
+                                            TRACE: set_scope(): scope: PUBLIC
+                                        RETURN: set_scope(): 
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    RETURN(node): parse_scope_operator() - (!NULL)
+                                    ENTER: get_scope(): 
+                                    RETURN(*node): get_scope() - (NULL)
+                                RETURN(node): parse_namespace_item() - (!NULL)
+                                ENTER: parse_namespace_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_scope_operator(): 
+                                    RETURN(node): parse_scope_operator() - (NULL)
+                                    ENTER: parse_namespace_definition(): 
+                                    RETURN(node): parse_namespace_definition() - (NULL)
+                                    ENTER: parse_class_definition(): 
+                                        ENTER: get_scope(): 
+                                        RETURN(*node): get_scope() - (NULL)
+                                        ENTER: push_scope(): 
+                                            TRACE: push_scope(): scope: PRIVATE
+                                        RETURN: push_scope(): 
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        ENTER: push_name(): 
+                                            TRACE: push_name(): name: name
+                                        RETURN: push_name(): 
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        ENTER: parse_type_name(): 
+                                            ENTER: parse_literal_type_name(): 
+                                            RETURN(node): parse_literal_type_name() - (NULL)
+                                            ENTER: parse_compound_name(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                TERM: parse_compound_name(): symbol: "some": 17: 25: "nested.k"
+                                                ENTER: advance_token(): 
+                                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                ENTER: advance_token(): 
+                                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                TERM: parse_compound_name(): symbol: "name": 17: 30: "nested.k"
+                                                ENTER: advance_token(): 
+                                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            RETURN(node): parse_compound_name() - (!NULL)
+                                            TERM: parse_type_name(): ): ")": 17: 31: "nested.k"
+                                            ENTER: finalize_token_queue(): 
+                                            RETURN: finalize_token_queue(): 
+                                        RETURN(node): parse_type_name() - (!NULL)
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        ENTER: parse_class_item(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            ENTER: parse_scope_operator(): 
+                                                TERM: parse_scope_operator(): public: "public": 18: 19: "nested.k"
+                                                ENTER: set_scope(): 
+                                                    TRACE: set_scope(): scope: PUBLIC
+                                                RETURN: set_scope(): 
+                                                ENTER: advance_token(): 
+                                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            RETURN(node): parse_scope_operator() - (!NULL)
+                                            ENTER: get_scope(): 
+                                            RETURN(*node): get_scope() - (NULL)
+                                            TERM: parse_class_item(): var: "var": 19: 16: "nested.k"
+                                        RETURN(node): parse_class_item() - (!NULL)
+                                        ENTER: parse_class_item(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            ENTER: parse_scope_operator(): 
+                                            RETURN(node): parse_scope_operator() - (NULL)
+                                            ENTER: parse_destroy_declaration(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_destroy_declaration() - (NULL)
+                                            ENTER: parse_create_declaration(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_create_declaration() - (NULL)
+                                            ENTER: parse_function_declaration(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                TRACE: parse_function_declaration(): state: 0
+                                                TRACE: parse_function_declaration(): state: 101
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_function_declaration() - (NULL)
+                                            ENTER: parse_class_var_declaration(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                ENTER: advance_token(): 
+                                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                ENTER: parse_var_decl(): 
+                                                    ENTER: parse_type_name(): 
+                                                        ENTER: parse_literal_type_name(): 
+                                                        RETURN(node): parse_literal_type_name() - (NULL)
+                                                        ENTER: parse_compound_name(): 
+                                                            ENTER: post_token_queue(): 
+                                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                            TERM: parse_compound_name(): symbol: "some": 19: 21: "nested.k"
+                                                            ENTER: advance_token(): 
+                                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                            ENTER: advance_token(): 
+                                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                            TERM: parse_compound_name(): symbol: "name": 19: 26: "nested.k"
+                                                            ENTER: advance_token(): 
+                                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                        RETURN(node): parse_compound_name() - (!NULL)
+                                                        TERM: parse_type_name(): symbol: "name": 19: 31: "nested.k"
+                                                        ENTER: finalize_token_queue(): 
+                                                        RETURN: finalize_token_queue(): 
+                                                    RETURN(node): parse_type_name() - (!NULL)
+                                                    ENTER: finalize_token_queue(): 
+                                                    RETURN: finalize_token_queue(): 
+                                                    ENTER: advance_token(): 
+                                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                RETURN(node): parse_var_decl() - (!NULL)
+                                            RETURN(node): parse_class_var_declaration() - (!NULL)
+                                            ENTER: get_scope(): 
+                                            RETURN(*node): get_scope() - (NULL)
+                                            TERM: parse_class_item(): func: "func": 20: 17: "nested.k"
+                                        RETURN(node): parse_class_item() - (!NULL)
+                                        ENTER: parse_class_item(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            ENTER: parse_scope_operator(): 
+                                            RETURN(node): parse_scope_operator() - (NULL)
+                                            ENTER: parse_destroy_declaration(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                ENTER: advance_token(): 
+                                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_destroy_declaration() - (NULL)
+                                            ENTER: parse_create_declaration(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                ENTER: advance_token(): 
+                                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_create_declaration() - (NULL)
+                                            ENTER: parse_function_declaration(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                TRACE: parse_function_declaration(): state: 0
+                                                ENTER: advance_token(): 
+                                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                TRACE: parse_function_declaration(): state: 1
+                                                ENTER: advance_token(): 
+                                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                TERM: parse_function_declaration(): symbol: "a_name": 20: 24: "nested.k"
+                                                TRACE: parse_function_declaration(): state: 2
+                                                ENTER: parse_type_name_list(): 
+                                                    ENTER: advance_token(): 
+                                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    ENTER: parse_type_name(): 
+                                                        ENTER: parse_literal_type_name(): 
+                                                        RETURN(node): parse_literal_type_name() - (NULL)
+                                                        ENTER: parse_compound_name(): 
+                                                            ENTER: post_token_queue(): 
+                                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                            ENTER: reset_token_queue(): 
+                                                            RETURN: reset_token_queue(): 
+                                                        RETURN(node): parse_compound_name() - (NULL)
+                                                    RETURN(node): parse_type_name() - (NULL)
+                                                    ENTER: advance_token(): 
+                                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    ENTER: finalize_token_queue(): 
+                                                    RETURN: finalize_token_queue(): 
+                                                RETURN(node): parse_type_name_list() - (!NULL)
+                                                TRACE: parse_function_declaration(): state: 3
+                                                ENTER: parse_type_name_list(): 
+                                                    ENTER: advance_token(): 
+                                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    ENTER: parse_type_name(): 
+                                                        ENTER: parse_literal_type_name(): 
+                                                        RETURN(node): parse_literal_type_name() - (NULL)
+                                                        ENTER: parse_compound_name(): 
+                                                            ENTER: post_token_queue(): 
+                                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                            ENTER: reset_token_queue(): 
+                                                            RETURN: reset_token_queue(): 
+                                                        RETURN(node): parse_compound_name() - (NULL)
+                                                    RETURN(node): parse_type_name() - (NULL)
+                                                    ENTER: advance_token(): 
+                                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    ENTER: finalize_token_queue(): 
+                                                    RETURN: finalize_token_queue(): 
+                                                RETURN(node): parse_type_name_list() - (!NULL)
+                                                TRACE: parse_function_declaration(): state: 100
+                                            RETURN(node): parse_function_declaration() - (!NULL)
+                                            ENTER: get_scope(): 
+                                            RETURN(*node): get_scope() - (NULL)
+                                            TERM: parse_class_item(): }: "}": 21: 10: "nested.k"
+                                        RETURN(node): parse_class_item() - (!NULL)
+                                        ENTER: parse_class_item(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            ENTER: parse_scope_operator(): 
+                                            RETURN(node): parse_scope_operator() - (NULL)
+                                            ENTER: parse_destroy_declaration(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_destroy_declaration() - (NULL)
+                                            ENTER: parse_create_declaration(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_create_declaration() - (NULL)
+                                            ENTER: parse_function_declaration(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                TRACE: parse_function_declaration(): state: 0
+                                                TRACE: parse_function_declaration(): state: 101
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_function_declaration() - (NULL)
+                                            ENTER: parse_class_var_declaration(): 
+                                                ENTER: post_token_queue(): 
+                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                ENTER: reset_token_queue(): 
+                                                RETURN: reset_token_queue(): 
+                                            RETURN(node): parse_class_var_declaration() - (NULL)
+                                            TERM: parse_class_item(): }: "}": 21: 10: "nested.k"
+                                            ENTER: reset_token_queue(): 
+                                            RETURN: reset_token_queue(): 
+                                        RETURN(node): parse_class_item() - (NULL)
+                                        TRACE: parse_class_definition(): scope before return: root.name.name.
+                                        ENTER: pop_scope(): 
+                                        RETURN(*node): pop_scope() - (NULL)
+                                        ENTER: pop_name(): 
+                                        RETURN(pop_link_list(parser_state->name_stack)): pop_name() - (!NULL)
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    RETURN(node): parse_class_definition() - (!NULL)
+                                    ENTER: get_scope(): 
+                                    RETURN(*node): get_scope() - (NULL)
+                                RETURN(node): parse_namespace_item() - (!NULL)
+                                ENTER: parse_namespace_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_scope_operator(): 
+                                    RETURN(node): parse_scope_operator() - (NULL)
+                                    ENTER: parse_namespace_definition(): 
+                                    RETURN(node): parse_namespace_definition() - (NULL)
+                                    ENTER: parse_class_definition(): 
+                                    RETURN(node): parse_class_definition() - (NULL)
+                                    ENTER: parse_function_definition(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_function_definition() - (NULL)
+                                    ENTER: parse_create_definition(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_definition() - (NULL)
+                                    ENTER: parse_destroy_definition(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_definition() - (NULL)
+                                    ENTER: parse_var_definition(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_var_definition() - (NULL)
+                                    ENTER: reset_token_queue(): 
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_namespace_item() - (NULL)
+                                TRACE: parse_namespace_definition(): scope before return: root.
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: pop_scope(): 
+                                RETURN(*node): pop_scope() - (NULL)
+                                ENTER: pop_name(): 
+                                RETURN(pop_link_list(parser_state->name_stack)): pop_name() - (!NULL)
+                            RETURN(node): parse_namespace_definition() - (!NULL)
+                            ENTER: get_scope(): 
+                            RETURN(*node): get_scope() - (NULL)
+                        RETURN(node): parse_namespace_item() - (!NULL)
+                        ENTER: parse_namespace_item(): 
+                            ENTER: post_token_queue(): 
+                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                            ENTER: parse_scope_operator(): 
+                            RETURN(node): parse_scope_operator() - (NULL)
+                            ENTER: parse_namespace_definition(): 
+                            RETURN(node): parse_namespace_definition() - (NULL)
+                            ENTER: parse_class_definition(): 
+                                ENTER: get_scope(): 
+                                RETURN(*node): get_scope() - (NULL)
+                                ENTER: push_scope(): 
+                                    TRACE: push_scope(): scope: PRIVATE
+                                RETURN: push_scope(): 
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: push_name(): 
+                                    TRACE: push_name(): name: name
+                                RETURN: push_name(): 
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: parse_type_name(): 
+                                    ENTER: parse_literal_type_name(): 
+                                    RETURN(node): parse_literal_type_name() - (NULL)
+                                    ENTER: parse_compound_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TERM: parse_compound_name(): symbol: "some": 24: 21: "nested.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        TERM: parse_compound_name(): symbol: "name": 24: 26: "nested.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    RETURN(node): parse_compound_name() - (!NULL)
+                                    TERM: parse_type_name(): ): ")": 24: 27: "nested.k"
+                                    ENTER: finalize_token_queue(): 
+                                    RETURN: finalize_token_queue(): 
+                                RETURN(node): parse_type_name() - (!NULL)
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: parse_class_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_scope_operator(): 
+                                        TERM: parse_scope_operator(): public: "public": 25: 15: "nested.k"
+                                        ENTER: set_scope(): 
+                                            TRACE: set_scope(): scope: PUBLIC
+                                        RETURN: set_scope(): 
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    RETURN(node): parse_scope_operator() - (!NULL)
+                                    ENTER: get_scope(): 
+                                    RETURN(*node): get_scope() - (NULL)
+                                    TERM: parse_class_item(): var: "var": 26: 12: "nested.k"
+                                RETURN(node): parse_class_item() - (!NULL)
+                                ENTER: parse_class_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_scope_operator(): 
+                                    RETURN(node): parse_scope_operator() - (NULL)
+                                    ENTER: parse_destroy_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_declaration() - (NULL)
+                                    ENTER: parse_create_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_declaration() - (NULL)
+                                    ENTER: parse_function_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_function_declaration(): state: 0
+                                        TRACE: parse_function_declaration(): state: 101
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_function_declaration() - (NULL)
+                                    ENTER: parse_class_var_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        ENTER: parse_var_decl(): 
+                                            ENTER: parse_type_name(): 
+                                                ENTER: parse_literal_type_name(): 
+                                                RETURN(node): parse_literal_type_name() - (NULL)
+                                                ENTER: parse_compound_name(): 
+                                                    ENTER: post_token_queue(): 
+                                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                    TERM: parse_compound_name(): symbol: "some": 26: 17: "nested.k"
+                                                    ENTER: advance_token(): 
+                                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    ENTER: advance_token(): 
+                                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    TERM: parse_compound_name(): symbol: "name": 26: 22: "nested.k"
+                                                    ENTER: advance_token(): 
+                                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                RETURN(node): parse_compound_name() - (!NULL)
+                                                TERM: parse_type_name(): symbol: "name": 26: 27: "nested.k"
+                                                ENTER: finalize_token_queue(): 
+                                                RETURN: finalize_token_queue(): 
+                                            RETURN(node): parse_type_name() - (!NULL)
+                                            ENTER: finalize_token_queue(): 
+                                            RETURN: finalize_token_queue(): 
+                                            ENTER: advance_token(): 
+                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        RETURN(node): parse_var_decl() - (!NULL)
+                                    RETURN(node): parse_class_var_declaration() - (!NULL)
+                                    ENTER: get_scope(): 
+                                    RETURN(*node): get_scope() - (NULL)
+                                    TERM: parse_class_item(): func: "func": 27: 13: "nested.k"
+                                RETURN(node): parse_class_item() - (!NULL)
+                                ENTER: parse_class_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_scope_operator(): 
+                                    RETURN(node): parse_scope_operator() - (NULL)
+                                    ENTER: parse_destroy_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_declaration() - (NULL)
+                                    ENTER: parse_create_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_declaration() - (NULL)
+                                    ENTER: parse_function_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_function_declaration(): state: 0
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        TRACE: parse_function_declaration(): state: 1
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        TERM: parse_function_declaration(): symbol: "a_name": 27: 20: "nested.k"
+                                        TRACE: parse_function_declaration(): state: 2
+                                        ENTER: parse_type_name_list(): 
+                                            ENTER: advance_token(): 
+                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            ENTER: parse_type_name(): 
+                                                ENTER: parse_literal_type_name(): 
+                                                RETURN(node): parse_literal_type_name() - (NULL)
+                                                ENTER: parse_compound_name(): 
+                                                    ENTER: post_token_queue(): 
+                                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                    ENTER: reset_token_queue(): 
+                                                    RETURN: reset_token_queue(): 
+                                                RETURN(node): parse_compound_name() - (NULL)
+                                            RETURN(node): parse_type_name() - (NULL)
+                                            ENTER: advance_token(): 
+                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            ENTER: finalize_token_queue(): 
+                                            RETURN: finalize_token_queue(): 
+                                        RETURN(node): parse_type_name_list() - (!NULL)
+                                        TRACE: parse_function_declaration(): state: 3
+                                        ENTER: parse_type_name_list(): 
+                                            ENTER: advance_token(): 
+                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            ENTER: parse_type_name(): 
+                                                ENTER: parse_literal_type_name(): 
+                                                RETURN(node): parse_literal_type_name() - (NULL)
+                                                ENTER: parse_compound_name(): 
+                                                    ENTER: post_token_queue(): 
+                                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                    ENTER: reset_token_queue(): 
+                                                    RETURN: reset_token_queue(): 
+                                                RETURN(node): parse_compound_name() - (NULL)
+                                            RETURN(node): parse_type_name() - (NULL)
+                                            ENTER: advance_token(): 
+                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            ENTER: finalize_token_queue(): 
+                                            RETURN: finalize_token_queue(): 
+                                        RETURN(node): parse_type_name_list() - (!NULL)
+                                        TRACE: parse_function_declaration(): state: 100
+                                    RETURN(node): parse_function_declaration() - (!NULL)
+                                    ENTER: get_scope(): 
+                                    RETURN(*node): get_scope() - (NULL)
+                                    TERM: parse_class_item(): }: "}": 28: 6: "nested.k"
+                                RETURN(node): parse_class_item() - (!NULL)
+                                ENTER: parse_class_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_scope_operator(): 
+                                    RETURN(node): parse_scope_operator() - (NULL)
+                                    ENTER: parse_destroy_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_declaration() - (NULL)
+                                    ENTER: parse_create_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_declaration() - (NULL)
+                                    ENTER: parse_function_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_function_declaration(): state: 0
+                                        TRACE: parse_function_declaration(): state: 101
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_function_declaration() - (NULL)
+                                    ENTER: parse_class_var_declaration(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_class_var_declaration() - (NULL)
+                                    TERM: parse_class_item(): }: "}": 28: 6: "nested.k"
+                                    ENTER: reset_token_queue(): 
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_class_item() - (NULL)
+                                TRACE: parse_class_definition(): scope before return: name.
+                                ENTER: pop_scope(): 
+                                RETURN(*node): pop_scope() - (NULL)
+                                ENTER: pop_name(): 
+                                RETURN(pop_link_list(parser_state->name_stack)): pop_name() - (!NULL)
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            RETURN(node): parse_class_definition() - (!NULL)
+                            ENTER: get_scope(): 
+                            RETURN(*node): get_scope() - (NULL)
+                        RETURN(node): parse_namespace_item() - (!NULL)
+                        ENTER: parse_namespace_item(): 
+                            ENTER: post_token_queue(): 
+                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                            ENTER: parse_scope_operator(): 
+                            RETURN(node): parse_scope_operator() - (NULL)
+                            ENTER: parse_namespace_definition(): 
+                            RETURN(node): parse_namespace_definition() - (NULL)
+                            ENTER: parse_class_definition(): 
+                            RETURN(node): parse_class_definition() - (NULL)
+                            ENTER: parse_function_definition(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                ENTER: reset_token_queue(): 
+                                RETURN: reset_token_queue(): 
+                            RETURN(node): parse_function_definition() - (NULL)
+                            ENTER: parse_create_definition(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                ENTER: reset_token_queue(): 
+                                RETURN: reset_token_queue(): 
+                            RETURN(node): parse_create_definition() - (NULL)
+                            ENTER: parse_destroy_definition(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                ENTER: reset_token_queue(): 
+                                RETURN: reset_token_queue(): 
+                            RETURN(node): parse_destroy_definition() - (NULL)
+                            ENTER: parse_var_definition(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                ENTER: reset_token_queue(): 
+                                RETURN: reset_token_queue(): 
+                            RETURN(node): parse_var_definition() - (NULL)
+                            ENTER: reset_token_queue(): 
+                            RETURN: reset_token_queue(): 
+                        RETURN(node): parse_namespace_item() - (NULL)
+                        TRACE: parse_namespace_definition(): scope before return: 
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        ENTER: pop_scope(): 
+                        RETURN(*node): pop_scope() - (NULL)
+                        ENTER: pop_name(): 
+                        RETURN(pop_link_list(parser_state->name_stack)): pop_name() - (NULL)
+                    RETURN(node): parse_namespace_definition() - (!NULL)
+                    ENTER: get_scope(): 
+                    RETURN(*node): get_scope() - (!NULL)
+                RETURN(node): parse_namespace_item() - (!NULL)
+                ENTER: get_scope(): 
+                RETURN(*node): get_scope() - (!NULL)
+            RETURN(node): parse_module_item() - (!NULL)
+            ENTER: parse_module_item(): 
+                ENTER: post_token_queue(): 
+                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                ENTER: parse_namespace_item(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                    ENTER: parse_scope_operator(): 
+                    RETURN(node): parse_scope_operator() - (NULL)
+                    ENTER: parse_namespace_definition(): 
+                    RETURN(node): parse_namespace_definition() - (NULL)
+                    ENTER: parse_class_definition(): 
+                    RETURN(node): parse_class_definition() - (NULL)
+                    ENTER: parse_function_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_function_definition() - (NULL)
+                    ENTER: parse_create_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_create_definition() - (NULL)
+                    ENTER: parse_destroy_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_destroy_definition() - (NULL)
+                    ENTER: parse_var_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        ENTER: reset_token_queue(): 
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_var_definition() - (NULL)
+                    ENTER: reset_token_queue(): 
+                    RETURN: reset_token_queue(): 
+                RETURN(node): parse_namespace_item() - (NULL)
+                ENTER: parse_import_statement(): 
+                RETURN(node): parse_import_statement() - (NULL)
+                ENTER: parse_start_function(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                    ENTER: reset_token_queue(): 
+                    RETURN: reset_token_queue(): 
+                RETURN(node): parse_start_function() - (NULL)
+                ENTER: reset_token_queue(): 
+                RETURN: reset_token_queue(): 
+            RETURN(node): parse_module_item() - (NULL)
+            ENTER: finalize_token_queue(): 
+            RETURN: finalize_token_queue(): 
+            ENTER: close_file(): 
+                ENTER: pop_input_file(): 
+                RETURN: pop_input_file(): 
+            RETURN: close_file(): 
+            TRACE: parse_module(): end of file
+        RETURN(node): parse_module() - (!NULL)
+    RETURN(node): parse() - (!NULL)
+    TRACE: main(): End Parse
+    TRACE: main(): --------------------------------------------
+    TRACE: main(): set trace state: true
+    TRACE: main(): Begin Traverse
+    ENTER: traverse_ast(): 
+        ENTER: pre_test_pass_func(): 
+            TRACE: pre_test_pass_func(): node type: module(3000)
+        RETURN: pre_test_pass_func(): 
+        ENTER: traverse_module(): 
+            ENTER: pre_test_pass_func(): 
+                TRACE: pre_test_pass_func(): node type: module(3000)
+            RETURN: pre_test_pass_func(): 
+            ENTER: traverse_module_item(): 
+                ENTER: pre_test_pass_func(): 
+                    TRACE: pre_test_pass_func(): node type: module_item(3001)
+                RETURN: pre_test_pass_func(): 
+                TRACE: traverse_module_item(): SCOPE: PRIVATE
+                ENTER: traverse_namespace_item(): 
+                    ENTER: pre_test_pass_func(): 
+                        TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: pre_test_pass_func(): 
+                    TRACE: traverse_namespace_item(): SCOPE: PRIVATE
+                    ENTER: traverse_namespace_definition(): 
+                        ENTER: pre_test_pass_func(): 
+                            TRACE: pre_test_pass_func(): node type: namespace_definition(3003)
+                        RETURN: pre_test_pass_func(): 
+                        TRACE: traverse_namespace_definition(): NAME: name
+                        TRACE: traverse_namespace_definition(): SCOPE: PRIVATE
+                        ENTER: traverse_namespace_item(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                            RETURN: pre_test_pass_func(): 
+                            TRACE: traverse_namespace_item(): SCOPE: PUBLIC
+                            ENTER: traverse_scope_operator(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: scope_operator(3009)
+                                RETURN: pre_test_pass_func(): 
+                                TERM: traverse_scope_operator(): public: "public": 6: 11: "nested.k"
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: scope_operator(3009)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_scope_operator(): 
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_namespace_item(): 
+                        ENTER: traverse_namespace_item(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                            RETURN: pre_test_pass_func(): 
+                            TRACE: traverse_namespace_item(): SCOPE: PUBLIC
+                            ENTER: traverse_class_definition(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: class_definition(3005)
+                                RETURN: pre_test_pass_func(): 
+                                TRACE: traverse_class_definition(): NAME: name
+                                TRACE: traverse_class_definition(): SCOPE: PUBLIC
+                                ENTER: traverse_type_name(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: type_name(3012)
+                                    RETURN: pre_test_pass_func(): 
+                                    ENTER: traverse_compound_name(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: compound_name(3006)
+                                        RETURN: pre_test_pass_func(): 
+                                        TRACE: traverse_compound_name(): raw_name: some.name
+                                        TERM: traverse_compound_name(): symbol: "some": 8: 21: "nested.k"
+                                        TERM: traverse_compound_name(): symbol: "name": 8: 26: "nested.k"
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: compound_name(3006)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_compound_name(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: type_name(3012)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_type_name(): 
+                                ENTER: traverse_class_item(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: module_item(3001)
+                                    RETURN: pre_test_pass_func(): 
+                                    TRACE: traverse_class_item(): SCOPE: PUBLIC
+                                    ENTER: traverse_scope_operator(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: scope_operator(3009)
+                                        RETURN: pre_test_pass_func(): 
+                                        TERM: traverse_scope_operator(): public: "public": 9: 15: "nested.k"
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: scope_operator(3009)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_scope_operator(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: module_item(3001)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_class_item(): 
+                                ENTER: traverse_class_item(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: module_item(3001)
+                                    RETURN: pre_test_pass_func(): 
+                                    TRACE: traverse_class_item(): SCOPE: PUBLIC
+                                    ENTER: traverse_class_var_declaration(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                        RETURN: pre_test_pass_func(): 
+                                        ENTER: traverse_var_decl(): 
+                                            ENTER: pre_test_pass_func(): 
+                                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                            RETURN: pre_test_pass_func(): 
+                                            ENTER: traverse_type_name(): 
+                                                ENTER: pre_test_pass_func(): 
+                                                    TRACE: pre_test_pass_func(): node type: type_name(3012)
+                                                RETURN: pre_test_pass_func(): 
+                                                ENTER: traverse_compound_name(): 
+                                                    ENTER: pre_test_pass_func(): 
+                                                        TRACE: pre_test_pass_func(): node type: compound_name(3006)
+                                                    RETURN: pre_test_pass_func(): 
+                                                    TRACE: traverse_compound_name(): raw_name: some.name
+                                                    TERM: traverse_compound_name(): symbol: "some": 10: 17: "nested.k"
+                                                    TERM: traverse_compound_name(): symbol: "name": 10: 22: "nested.k"
+                                                    ENTER: post_test_pass_func(): 
+                                                        TRACE: post_test_pass_func(): node type: compound_name(3006)
+                                                    RETURN: post_test_pass_func(): 
+                                                RETURN: traverse_compound_name(): 
+                                                ENTER: post_test_pass_func(): 
+                                                    TRACE: post_test_pass_func(): node type: type_name(3012)
+                                                RETURN: post_test_pass_func(): 
+                                            RETURN: traverse_type_name(): 
+                                            TRACE: traverse_var_decl(): is_const: false
+                                            TERM: traverse_var_decl(): symbol: "name": 10: 27: "nested.k"
+                                            ENTER: post_test_pass_func(): 
+                                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                            RETURN: post_test_pass_func(): 
+                                        RETURN: traverse_var_decl(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                        RETURN: pre_test_pass_func(): 
+                                    RETURN: traverse_class_var_declaration(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: module_item(3001)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_class_item(): 
+                                ENTER: traverse_class_item(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: module_item(3001)
+                                    RETURN: pre_test_pass_func(): 
+                                    TRACE: traverse_class_item(): SCOPE: PUBLIC
+                                    ENTER: traverse_function_declaration(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: function_declaration(3028)
+                                        RETURN: pre_test_pass_func(): 
+                                        TRACE: traverse_function_declaration(): is_virtual: false
+                                        TERM: traverse_function_declaration(): symbol: "a_name": 11: 20: "nested.k"
+                                        ENTER: traverse_type_name_list(): 
+                                            ENTER: dummy_function(): 
+                                                TRACE: dummy_function(): dummy function
+                                            RETURN: dummy_function(): 
+                                            ENTER: dummy_function(): 
+                                                TRACE: dummy_function(): dummy function
+                                            RETURN: dummy_function(): 
+                                        RETURN: traverse_type_name_list(): 
+                                        ENTER: traverse_type_name_list(): 
+                                            ENTER: dummy_function(): 
+                                                TRACE: dummy_function(): dummy function
+                                            RETURN: dummy_function(): 
+                                            ENTER: dummy_function(): 
+                                                TRACE: dummy_function(): dummy function
+                                            RETURN: dummy_function(): 
+                                        RETURN: traverse_type_name_list(): 
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: function_declaration(3028)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_function_declaration(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: module_item(3001)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_class_item(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: class_definition(3005)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_class_definition(): 
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_namespace_item(): 
+                        ENTER: traverse_namespace_item(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                            RETURN: pre_test_pass_func(): 
+                            TRACE: traverse_namespace_item(): SCOPE: PUBLIC
+                            ENTER: traverse_namespace_definition(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: namespace_definition(3003)
+                                RETURN: pre_test_pass_func(): 
+                                TRACE: traverse_namespace_definition(): NAME: name
+                                TRACE: traverse_namespace_definition(): SCOPE: PUBLIC
+                                ENTER: traverse_namespace_item(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                                    RETURN: pre_test_pass_func(): 
+                                    TRACE: traverse_namespace_item(): SCOPE: PUBLIC
+                                    ENTER: traverse_scope_operator(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: scope_operator(3009)
+                                        RETURN: pre_test_pass_func(): 
+                                        TERM: traverse_scope_operator(): public: "public": 15: 15: "nested.k"
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: scope_operator(3009)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_scope_operator(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_namespace_item(): 
+                                ENTER: traverse_namespace_item(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                                    RETURN: pre_test_pass_func(): 
+                                    TRACE: traverse_namespace_item(): SCOPE: PUBLIC
+                                    ENTER: traverse_class_definition(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: class_definition(3005)
+                                        RETURN: pre_test_pass_func(): 
+                                        TRACE: traverse_class_definition(): NAME: name
+                                        TRACE: traverse_class_definition(): SCOPE: PUBLIC
+                                        ENTER: traverse_type_name(): 
+                                            ENTER: pre_test_pass_func(): 
+                                                TRACE: pre_test_pass_func(): node type: type_name(3012)
+                                            RETURN: pre_test_pass_func(): 
+                                            ENTER: traverse_compound_name(): 
+                                                ENTER: pre_test_pass_func(): 
+                                                    TRACE: pre_test_pass_func(): node type: compound_name(3006)
+                                                RETURN: pre_test_pass_func(): 
+                                                TRACE: traverse_compound_name(): raw_name: some.name
+                                                TERM: traverse_compound_name(): symbol: "some": 17: 25: "nested.k"
+                                                TERM: traverse_compound_name(): symbol: "name": 17: 30: "nested.k"
+                                                ENTER: post_test_pass_func(): 
+                                                    TRACE: post_test_pass_func(): node type: compound_name(3006)
+                                                RETURN: post_test_pass_func(): 
+                                            RETURN: traverse_compound_name(): 
+                                            ENTER: post_test_pass_func(): 
+                                                TRACE: post_test_pass_func(): node type: type_name(3012)
+                                            RETURN: post_test_pass_func(): 
+                                        RETURN: traverse_type_name(): 
+                                        ENTER: traverse_class_item(): 
+                                            ENTER: pre_test_pass_func(): 
+                                                TRACE: pre_test_pass_func(): node type: module_item(3001)
+                                            RETURN: pre_test_pass_func(): 
+                                            TRACE: traverse_class_item(): SCOPE: PUBLIC
+                                            ENTER: traverse_scope_operator(): 
+                                                ENTER: pre_test_pass_func(): 
+                                                    TRACE: pre_test_pass_func(): node type: scope_operator(3009)
+                                                RETURN: pre_test_pass_func(): 
+                                                TERM: traverse_scope_operator(): public: "public": 18: 19: "nested.k"
+                                                ENTER: post_test_pass_func(): 
+                                                    TRACE: post_test_pass_func(): node type: scope_operator(3009)
+                                                RETURN: post_test_pass_func(): 
+                                            RETURN: traverse_scope_operator(): 
+                                            ENTER: post_test_pass_func(): 
+                                                TRACE: post_test_pass_func(): node type: module_item(3001)
+                                            RETURN: post_test_pass_func(): 
+                                        RETURN: traverse_class_item(): 
+                                        ENTER: traverse_class_item(): 
+                                            ENTER: pre_test_pass_func(): 
+                                                TRACE: pre_test_pass_func(): node type: module_item(3001)
+                                            RETURN: pre_test_pass_func(): 
+                                            TRACE: traverse_class_item(): SCOPE: PUBLIC
+                                            ENTER: traverse_class_var_declaration(): 
+                                                ENTER: pre_test_pass_func(): 
+                                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                                RETURN: pre_test_pass_func(): 
+                                                ENTER: traverse_var_decl(): 
+                                                    ENTER: pre_test_pass_func(): 
+                                                        TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                                    RETURN: pre_test_pass_func(): 
+                                                    ENTER: traverse_type_name(): 
+                                                        ENTER: pre_test_pass_func(): 
+                                                            TRACE: pre_test_pass_func(): node type: type_name(3012)
+                                                        RETURN: pre_test_pass_func(): 
+                                                        ENTER: traverse_compound_name(): 
+                                                            ENTER: pre_test_pass_func(): 
+                                                                TRACE: pre_test_pass_func(): node type: compound_name(3006)
+                                                            RETURN: pre_test_pass_func(): 
+                                                            TRACE: traverse_compound_name(): raw_name: some.name
+                                                            TERM: traverse_compound_name(): symbol: "some": 19: 21: "nested.k"
+                                                            TERM: traverse_compound_name(): symbol: "name": 19: 26: "nested.k"
+                                                            ENTER: post_test_pass_func(): 
+                                                                TRACE: post_test_pass_func(): node type: compound_name(3006)
+                                                            RETURN: post_test_pass_func(): 
+                                                        RETURN: traverse_compound_name(): 
+                                                        ENTER: post_test_pass_func(): 
+                                                            TRACE: post_test_pass_func(): node type: type_name(3012)
+                                                        RETURN: post_test_pass_func(): 
+                                                    RETURN: traverse_type_name(): 
+                                                    TRACE: traverse_var_decl(): is_const: false
+                                                    TERM: traverse_var_decl(): symbol: "name": 19: 31: "nested.k"
+                                                    ENTER: post_test_pass_func(): 
+                                                        TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                                    RETURN: post_test_pass_func(): 
+                                                RETURN: traverse_var_decl(): 
+                                                ENTER: pre_test_pass_func(): 
+                                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                                RETURN: pre_test_pass_func(): 
+                                            RETURN: traverse_class_var_declaration(): 
+                                            ENTER: post_test_pass_func(): 
+                                                TRACE: post_test_pass_func(): node type: module_item(3001)
+                                            RETURN: post_test_pass_func(): 
+                                        RETURN: traverse_class_item(): 
+                                        ENTER: traverse_class_item(): 
+                                            ENTER: pre_test_pass_func(): 
+                                                TRACE: pre_test_pass_func(): node type: module_item(3001)
+                                            RETURN: pre_test_pass_func(): 
+                                            TRACE: traverse_class_item(): SCOPE: PUBLIC
+                                            ENTER: traverse_function_declaration(): 
+                                                ENTER: pre_test_pass_func(): 
+                                                    TRACE: pre_test_pass_func(): node type: function_declaration(3028)
+                                                RETURN: pre_test_pass_func(): 
+                                                TRACE: traverse_function_declaration(): is_virtual: false
+                                                TERM: traverse_function_declaration(): symbol: "a_name": 20: 24: "nested.k"
+                                                ENTER: traverse_type_name_list(): 
+                                                    ENTER: dummy_function(): 
+                                                        TRACE: dummy_function(): dummy function
+                                                    RETURN: dummy_function(): 
+                                                    ENTER: dummy_function(): 
+                                                        TRACE: dummy_function(): dummy function
+                                                    RETURN: dummy_function(): 
+                                                RETURN: traverse_type_name_list(): 
+                                                ENTER: traverse_type_name_list(): 
+                                                    ENTER: dummy_function(): 
+                                                        TRACE: dummy_function(): dummy function
+                                                    RETURN: dummy_function(): 
+                                                    ENTER: dummy_function(): 
+                                                        TRACE: dummy_function(): dummy function
+                                                    RETURN: dummy_function(): 
+                                                RETURN: traverse_type_name_list(): 
+                                                ENTER: post_test_pass_func(): 
+                                                    TRACE: post_test_pass_func(): node type: function_declaration(3028)
+                                                RETURN: post_test_pass_func(): 
+                                            RETURN: traverse_function_declaration(): 
+                                            ENTER: post_test_pass_func(): 
+                                                TRACE: post_test_pass_func(): node type: module_item(3001)
+                                            RETURN: post_test_pass_func(): 
+                                        RETURN: traverse_class_item(): 
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: class_definition(3005)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_class_definition(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_namespace_item(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: namespace_definition(3003)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_namespace_definition(): 
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_namespace_item(): 
+                        ENTER: traverse_namespace_item(): 
+                            ENTER: pre_test_pass_func(): 
+                                TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+                            RETURN: pre_test_pass_func(): 
+                            TRACE: traverse_namespace_item(): SCOPE: PUBLIC
+                            ENTER: traverse_class_definition(): 
+                                ENTER: pre_test_pass_func(): 
+                                    TRACE: pre_test_pass_func(): node type: class_definition(3005)
+                                RETURN: pre_test_pass_func(): 
+                                TRACE: traverse_class_definition(): NAME: name
+                                TRACE: traverse_class_definition(): SCOPE: PUBLIC
+                                ENTER: traverse_type_name(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: type_name(3012)
+                                    RETURN: pre_test_pass_func(): 
+                                    ENTER: traverse_compound_name(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: compound_name(3006)
+                                        RETURN: pre_test_pass_func(): 
+                                        TRACE: traverse_compound_name(): raw_name: some.name
+                                        TERM: traverse_compound_name(): symbol: "some": 24: 21: "nested.k"
+                                        TERM: traverse_compound_name(): symbol: "name": 24: 26: "nested.k"
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: compound_name(3006)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_compound_name(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: type_name(3012)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_type_name(): 
+                                ENTER: traverse_class_item(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: module_item(3001)
+                                    RETURN: pre_test_pass_func(): 
+                                    TRACE: traverse_class_item(): SCOPE: PUBLIC
+                                    ENTER: traverse_scope_operator(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: scope_operator(3009)
+                                        RETURN: pre_test_pass_func(): 
+                                        TERM: traverse_scope_operator(): public: "public": 25: 15: "nested.k"
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: scope_operator(3009)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_scope_operator(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: module_item(3001)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_class_item(): 
+                                ENTER: traverse_class_item(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: module_item(3001)
+                                    RETURN: pre_test_pass_func(): 
+                                    TRACE: traverse_class_item(): SCOPE: PUBLIC
+                                    ENTER: traverse_class_var_declaration(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                        RETURN: pre_test_pass_func(): 
+                                        ENTER: traverse_var_decl(): 
+                                            ENTER: pre_test_pass_func(): 
+                                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                            RETURN: pre_test_pass_func(): 
+                                            ENTER: traverse_type_name(): 
+                                                ENTER: pre_test_pass_func(): 
+                                                    TRACE: pre_test_pass_func(): node type: type_name(3012)
+                                                RETURN: pre_test_pass_func(): 
+                                                ENTER: traverse_compound_name(): 
+                                                    ENTER: pre_test_pass_func(): 
+                                                        TRACE: pre_test_pass_func(): node type: compound_name(3006)
+                                                    RETURN: pre_test_pass_func(): 
+                                                    TRACE: traverse_compound_name(): raw_name: some.name
+                                                    TERM: traverse_compound_name(): symbol: "some": 26: 17: "nested.k"
+                                                    TERM: traverse_compound_name(): symbol: "name": 26: 22: "nested.k"
+                                                    ENTER: post_test_pass_func(): 
+                                                        TRACE: post_test_pass_func(): node type: compound_name(3006)
+                                                    RETURN: post_test_pass_func(): 
+                                                RETURN: traverse_compound_name(): 
+                                                ENTER: post_test_pass_func(): 
+                                                    TRACE: post_test_pass_func(): node type: type_name(3012)
+                                                RETURN: post_test_pass_func(): 
+                                            RETURN: traverse_type_name(): 
+                                            TRACE: traverse_var_decl(): is_const: false
+                                            TERM: traverse_var_decl(): symbol: "name": 26: 27: "nested.k"
+                                            ENTER: post_test_pass_func(): 
+                                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                            RETURN: post_test_pass_func(): 
+                                        RETURN: traverse_var_decl(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                        RETURN: pre_test_pass_func(): 
+                                    RETURN: traverse_class_var_declaration(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: module_item(3001)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_class_item(): 
+                                ENTER: traverse_class_item(): 
+                                    ENTER: pre_test_pass_func(): 
+                                        TRACE: pre_test_pass_func(): node type: module_item(3001)
+                                    RETURN: pre_test_pass_func(): 
+                                    TRACE: traverse_class_item(): SCOPE: PUBLIC
+                                    ENTER: traverse_function_declaration(): 
+                                        ENTER: pre_test_pass_func(): 
+                                            TRACE: pre_test_pass_func(): node type: function_declaration(3028)
+                                        RETURN: pre_test_pass_func(): 
+                                        TRACE: traverse_function_declaration(): is_virtual: false
+                                        TERM: traverse_function_declaration(): symbol: "a_name": 27: 20: "nested.k"
+                                        ENTER: traverse_type_name_list(): 
+                                            ENTER: dummy_function(): 
+                                                TRACE: dummy_function(): dummy function
+                                            RETURN: dummy_function(): 
+                                            ENTER: dummy_function(): 
+                                                TRACE: dummy_function(): dummy function
+                                            RETURN: dummy_function(): 
+                                        RETURN: traverse_type_name_list(): 
+                                        ENTER: traverse_type_name_list(): 
+                                            ENTER: dummy_function(): 
+                                                TRACE: dummy_function(): dummy function
+                                            RETURN: dummy_function(): 
+                                            ENTER: dummy_function(): 
+                                                TRACE: dummy_function(): dummy function
+                                            RETURN: dummy_function(): 
+                                        RETURN: traverse_type_name_list(): 
+                                        ENTER: post_test_pass_func(): 
+                                            TRACE: post_test_pass_func(): node type: function_declaration(3028)
+                                        RETURN: post_test_pass_func(): 
+                                    RETURN: traverse_function_declaration(): 
+                                    ENTER: post_test_pass_func(): 
+                                        TRACE: post_test_pass_func(): node type: module_item(3001)
+                                    RETURN: post_test_pass_func(): 
+                                RETURN: traverse_class_item(): 
+                                ENTER: post_test_pass_func(): 
+                                    TRACE: post_test_pass_func(): node type: class_definition(3005)
+                                RETURN: post_test_pass_func(): 
+                            RETURN: traverse_class_definition(): 
+                            ENTER: post_test_pass_func(): 
+                                TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                            RETURN: post_test_pass_func(): 
+                        RETURN: traverse_namespace_item(): 
+                        ENTER: post_test_pass_func(): 
+                            TRACE: post_test_pass_func(): node type: namespace_definition(3003)
+                        RETURN: post_test_pass_func(): 
+                    RETURN: traverse_namespace_definition(): 
+                    ENTER: post_test_pass_func(): 
+                        TRACE: post_test_pass_func(): node type: namespace_item(3002)
+                    RETURN: post_test_pass_func(): 
+                RETURN: traverse_namespace_item(): 
+                ENTER: post_test_pass_func(): 
+                    TRACE: post_test_pass_func(): node type: module_item(3001)
+                RETURN: post_test_pass_func(): 
+            RETURN: traverse_module_item(): 
+            ENTER: post_test_pass_func(): 
+                TRACE: post_test_pass_func(): node type: module(3000)
+            RETURN: post_test_pass_func(): 
+            ENTER: post_test_pass_func(): 
+                TRACE: post_test_pass_func(): node type: module(3000)
+            RETURN: post_test_pass_func(): 
+        RETURN: traverse_module(): 
+        ENTER: post_test_pass_func(): 
+            TRACE: post_test_pass_func(): node type: module(3000)
+        RETURN: post_test_pass_func(): 
+    RETURN: traverse_ast(): 
+    TRACE: main(): End Traverse
+    TRACE: main(): --------------------------------------------
