@@ -400,7 +400,7 @@ ast_expression_list* parse_expression_list() {
  *      = expression
  *      / list_init
  *      / dict_init
- *      / string_expr
+ *      / string_literal
  *      / cast_statement
  *      / function_assignment
  *
@@ -417,7 +417,7 @@ ast_assignment_item* parse_assignment_item() {
     if((NULL != (nterm = (ast_node*)parse_expression())) ||
             (NULL != (nterm = (ast_node*)parse_list_init())) ||
             (NULL != (nterm = (ast_node*)parse_dict_init())) ||
-            (NULL != (nterm = (ast_node*)parse_string_expr())) ||
+            (NULL != (nterm = (ast_node*)parse_string_literal())) ||
             (NULL != (nterm = (ast_node*)parse_cast_statement())) ||
             (NULL != (nterm = (ast_node*)parse_function_assignment()))) {
 

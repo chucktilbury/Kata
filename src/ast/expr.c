@@ -139,7 +139,9 @@ void traverse_expr_primary(ast_expr_primary* node, PassFunc pre, PassFunc post) 
 }
 
 /**
- * @brief
+ * @brief The parser correctly treats this as optional in some circumstances. 
+ * When that happens, the expression list is returned as NULL, so this 
+ * function must handle that possibility.
  *
  *  expression_list
  *      = '(' (expression ( ',' expression )*)? ')'
@@ -149,18 +151,19 @@ void traverse_expr_primary(ast_expr_primary* node, PassFunc pre, PassFunc post) 
  */
 void traverse_expression_list(ast_expression_list* node, PassFunc pre, PassFunc post) {
 
-    assert(node != NULL);
+    //assert(node != NULL);
 
     ENTER;
-    AST_CALLBACK(pre, node);
+    if(node != NULL) {
+        AST_CALLBACK(pre, node);
 
-    ast_node* nterm;
+        ast_node* nterm;
+        void* mark = NULL;
+        while(NULL != (nterm = iter_link_list(node->list, &mark)))
+            traverse_expression((ast_expression*)nterm, pre, post);
 
-    void* mark = NULL;
-    while(NULL != (nterm = iter_link_list(node->list, &mark)))
-        traverse_expression((ast_expression*)nterm, pre, post);
-
-    AST_CALLBACK(post, node);
+        AST_CALLBACK(post, node);
+    }
     RET;
 }
 
@@ -195,8 +198,8 @@ void traverse_assignment_item(ast_assignment_item* node, PassFunc pre, PassFunc 
         case AST_dict_init:
             traverse_dict_init((ast_dict_init*)node->nterm, pre, post);
             break;
-        case AST_string_expr:
-            traverse_string_expr((ast_string_expr*)node->nterm, pre, post);
+        case AST_string_literal:
+            traverse_string_literal((ast_string_literal*)node->nterm, pre, post);
             break;
         case AST_cast_statement:
             traverse_cast_statement((ast_cast_statement*)node->nterm, pre, post);

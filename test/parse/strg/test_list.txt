@@ -1,6 +1,4 @@
 # this is a list of classes of tests.
 
 string_literal:run
-string_expr_item:run
-string_expr:run
 formatted_strg:run

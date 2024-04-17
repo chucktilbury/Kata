@@ -36,10 +36,10 @@ ast_literal_value* parse_literal_value();
 ast_type_name* parse_type_name();
 ast_type_name_list* parse_type_name_list();
 
-// string.c
+// strg.c
 ast_string_literal* parse_string_literal();
 ast_string_expr_item* parse_string_expr_item();
-ast_string_expr* parse_string_expr();
+ast_string_expr_list* parse_string_expr_list();
 ast_formatted_strg* parse_formatted_strg();
 
 // vars.c

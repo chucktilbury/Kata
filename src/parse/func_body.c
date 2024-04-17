@@ -95,7 +95,7 @@ ast_break_statement* parse_break_statement() {
     ENTER;
     ast_break_statement* node = NULL;
 
-    if(TOK_BREAK != TTYPE) {
+    if(TOK_BREAK == TTYPE) {
         advance_token();
         node = CREATE_AST_NODE(AST_break_statement, ast_break_statement);
     }
@@ -391,5 +391,3 @@ ast_raise_statement* parse_raise_statement() {
 
     RETV(node);
 }
-
-

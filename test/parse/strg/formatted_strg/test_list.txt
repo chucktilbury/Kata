@@ -1,3 +1,6 @@
 # this is a list of actual tests.
-
-dummy_test:run
+invalid_args:run
+empty_args:run
+no_args:run
+with_args:run
+invalid_str:run

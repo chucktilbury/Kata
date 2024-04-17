@@ -28,7 +28,7 @@ ENTER: main():
         ENTER: find_file(): 
             TRACE: find_file(): trying: /home/chuck/Src/Kata/test/parse/literals/scope_operator/test.k
             TRACE: find_file(): found: /home/chuck/Src/Kata/test/parse/literals/scope_operator/test.k
-        RETURN(create_string(tmp_buf)): find_file()
+        RETURN(create_string(tmp_buf)): find_file() - (!NULL)
         ENTER: init_scanner(): 
             ENTER: open_file(): 
                 ENTER: push_input_file(): 
@@ -43,7 +43,7 @@ ENTER: main():
             ENTER: push_name(): 
                 TRACE: push_name(): name: root
             RETURN: push_name(): 
-        RETURN(parser_state): create_parser_state()
+        RETURN(parser_state): create_parser_state() - (!NULL)
     RETURN: init_parser(): 
     TRACE: main(): --------------------------------------------
     TRACE: main(): Begin Parse
@@ -51,114 +51,114 @@ ENTER: main():
         ENTER: parse_module(): 
             ENTER: parse_module_item(): 
                 ENTER: post_token_queue(): 
-                RETURN((void*)tqueue->crnt): post_token_queue()
+                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                 ENTER: parse_namespace_item(): 
                     ENTER: post_token_queue(): 
-                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                     ENTER: parse_scope_operator(): 
                         TERM: parse_scope_operator(): public: "public": 6: 7: "test.k"
                         ENTER: set_scope(): 
                             TRACE: set_scope(): scope: PUBLIC
                         RETURN: set_scope(): 
                         ENTER: advance_token(): 
-                        RETURN(tqueue->crnt->tok): advance_token()
-                    RETURN(node): parse_scope_operator()
+                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                    RETURN(node): parse_scope_operator() - (!NULL)
                     ENTER: get_scope(): 
-                    RETURN(*node): get_scope()
-                RETURN(node): parse_namespace_item()
+                    RETURN(*node): get_scope() - (NULL)
+                RETURN(node): parse_namespace_item() - (!NULL)
                 ENTER: get_scope(): 
-                RETURN(*node): get_scope()
-            RETURN(node): parse_module_item()
+                RETURN(*node): get_scope() - (NULL)
+            RETURN(node): parse_module_item() - (!NULL)
             ENTER: parse_module_item(): 
                 ENTER: post_token_queue(): 
-                RETURN((void*)tqueue->crnt): post_token_queue()
+                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                 ENTER: parse_namespace_item(): 
                     ENTER: post_token_queue(): 
-                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                     ENTER: parse_scope_operator(): 
                         TERM: parse_scope_operator(): private: "private": 7: 8: "test.k"
                         ENTER: set_scope(): 
                             TRACE: set_scope(): scope: PRIVATE
                         RETURN: set_scope(): 
                         ENTER: advance_token(): 
-                        RETURN(tqueue->crnt->tok): advance_token()
-                    RETURN(node): parse_scope_operator()
+                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                    RETURN(node): parse_scope_operator() - (!NULL)
                     ENTER: get_scope(): 
-                    RETURN(*node): get_scope()
-                RETURN(node): parse_namespace_item()
+                    RETURN(*node): get_scope() - (!NULL)
+                RETURN(node): parse_namespace_item() - (!NULL)
                 ENTER: get_scope(): 
-                RETURN(*node): get_scope()
-            RETURN(node): parse_module_item()
+                RETURN(*node): get_scope() - (!NULL)
+            RETURN(node): parse_module_item() - (!NULL)
             ENTER: parse_module_item(): 
                 ENTER: post_token_queue(): 
-                RETURN((void*)tqueue->crnt): post_token_queue()
+                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                 ENTER: parse_namespace_item(): 
                     ENTER: post_token_queue(): 
-                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                     ENTER: parse_scope_operator(): 
                         TERM: parse_scope_operator(): protected: "protected": 8: 10: "test.k"
                         ENTER: set_scope(): 
                             TRACE: set_scope(): scope: PROTECTED
                         RETURN: set_scope(): 
                         ENTER: advance_token(): 
-                        RETURN(tqueue->crnt->tok): advance_token()
-                    RETURN(node): parse_scope_operator()
+                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                    RETURN(node): parse_scope_operator() - (!NULL)
                     ENTER: get_scope(): 
-                    RETURN(*node): get_scope()
-                RETURN(node): parse_namespace_item()
+                    RETURN(*node): get_scope() - (!NULL)
+                RETURN(node): parse_namespace_item() - (!NULL)
                 ENTER: get_scope(): 
-                RETURN(*node): get_scope()
-            RETURN(node): parse_module_item()
+                RETURN(*node): get_scope() - (!NULL)
+            RETURN(node): parse_module_item() - (!NULL)
             ENTER: parse_module_item(): 
                 ENTER: post_token_queue(): 
-                RETURN((void*)tqueue->crnt): post_token_queue()
+                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                 ENTER: parse_namespace_item(): 
                     ENTER: post_token_queue(): 
-                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                     ENTER: parse_scope_operator(): 
-                    RETURN(node): parse_scope_operator()
+                    RETURN(node): parse_scope_operator() - (NULL)
                     ENTER: parse_namespace_definition(): 
-                    RETURN(node): parse_namespace_definition()
+                    RETURN(node): parse_namespace_definition() - (NULL)
                     ENTER: parse_class_definition(): 
-                    RETURN(node): parse_class_definition()
+                    RETURN(node): parse_class_definition() - (NULL)
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
-                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
                         RETURN: reset_token_queue(): 
-                    RETURN(node): parse_function_definition()
+                    RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
-                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
                         RETURN: reset_token_queue(): 
-                    RETURN(node): parse_create_definition()
+                    RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
-                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
                         RETURN: reset_token_queue(): 
-                    RETURN(node): parse_destroy_definition()
+                    RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
                         ENTER: post_token_queue(): 
-                        RETURN((void*)tqueue->crnt): post_token_queue()
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
                         RETURN: reset_token_queue(): 
-                    RETURN(node): parse_var_definition()
+                    RETURN(node): parse_var_definition() - (NULL)
                     ENTER: reset_token_queue(): 
                     RETURN: reset_token_queue(): 
-                RETURN(node): parse_namespace_item()
+                RETURN(node): parse_namespace_item() - (NULL)
                 ENTER: parse_import_statement(): 
-                RETURN(node): parse_import_statement()
+                RETURN(node): parse_import_statement() - (NULL)
                 ENTER: parse_start_function(): 
                     ENTER: post_token_queue(): 
-                    RETURN((void*)tqueue->crnt): post_token_queue()
+                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                     ENTER: reset_token_queue(): 
                     RETURN: reset_token_queue(): 
-                RETURN(node): parse_start_function()
+                RETURN(node): parse_start_function() - (NULL)
                 ENTER: reset_token_queue(): 
                 RETURN: reset_token_queue(): 
-            RETURN(node): parse_module_item()
+            RETURN(node): parse_module_item() - (NULL)
             ENTER: finalize_token_queue(): 
             RETURN: finalize_token_queue(): 
             ENTER: close_file(): 
@@ -166,8 +166,8 @@ ENTER: main():
                 RETURN: pop_input_file(): 
             RETURN: close_file(): 
             TRACE: parse_module(): end of file
-        RETURN(node): parse_module()
-    RETURN(node): parse()
+        RETURN(node): parse_module() - (!NULL)
+    RETURN(node): parse() - (!NULL)
     TRACE: main(): End Parse
     TRACE: main(): --------------------------------------------
     TRACE: main(): set trace state: true

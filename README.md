@@ -196,7 +196,7 @@ type_name_list
 # 'string {} some'(1+2) ; produce format ignored warning
 #
 formatted_strg
-    = LITERAL_DSTRG (expression_list)?
+    = LITERAL_DSTRG ( string_expr_list )?
 
 #####################
 #
@@ -220,8 +220,8 @@ string_expr_item
 #
 # This is a way to concatenate strings with various types of objects.
 #
-string_expr
-    = string_expr_item ( '+' string_expr_item )*
+string_expr_list
+    = '(' string_expr_item ( ',' string_expr_item )* ')'
 
 #####################
 #
@@ -264,7 +264,7 @@ assignment_item
     = expression
     / list_init
     / dict_init
-    / string_expr
+    / string_literal
     / cast_statement
     / function_assignment
 
@@ -311,7 +311,7 @@ dict_init
 # Array parameter for an array reference.
 #
 array_param
-    = '[' ( expression / string_expression ) ']'
+    = '[' ( expression / string_literal ) ']'
 
 #####################
 #

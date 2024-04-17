@@ -1,0 +1,2 @@
+Syntax: /home/chuck/Src/Kata/test/parse/literals/literal_value/err3_float.k: 5: 25: expected module item or end of file but got literal float
+Syntax: /home/chuck/Src/Kata/test/parse/literals/literal_value/err3_float.k: 5: 25: module cannot be empty

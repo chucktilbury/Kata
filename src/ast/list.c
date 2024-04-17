@@ -107,8 +107,8 @@ void traverse_array_param(ast_array_param* node, PassFunc pre, PassFunc post) {
         case AST_expression:
             traverse_expression((ast_expression*)node->nterm, pre, post);
             break;
-        case AST_string_expr:
-            traverse_string_expr((ast_string_expr*)node->nterm, pre, post);
+        case AST_string_expr_list:
+            traverse_string_expr_list((ast_string_expr_list*)node->nterm, pre, post);
             break;
         default:
             fatal_error("unexpected state in %s: %d", __func__, ast_node_type(node->nterm));

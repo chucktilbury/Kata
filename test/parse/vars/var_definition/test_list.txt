@@ -1,3 +1,5 @@
 # this is a list of actual tests.
 
-dummy_test:run
+test:run
+err1_test:run
+err2_test:run

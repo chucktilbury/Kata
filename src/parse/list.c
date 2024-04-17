@@ -273,7 +273,7 @@ ast_dict_init* parse_dict_init() {
  * @brief
  *
  *  array_param
- *      = '[' ( expression / string_expression ) ']'
+ *      = '[' ( expression / formatted_strg ) ']'
  *
  * @return ast_array_param*
  *
@@ -302,7 +302,7 @@ ast_array_param* parse_array_param() {
 
             case 1:
                 // must be an expression or a string_expression or an error
-                if((NULL != (nterm = (ast_node*)parse_string_expr())) ||
+                if((NULL != (nterm = (ast_node*)parse_formatted_strg())) ||
                         (NULL != (nterm = (ast_node*)parse_expression()))) {
                     state = 2;
                 }

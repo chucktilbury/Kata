@@ -28,7 +28,7 @@ typedef enum {
     AST_formatted_strg,
     AST_string_literal,
     AST_string_expr_item,
-    AST_string_expr,
+    AST_string_expr_list,
     AST_var_decl,
     AST_var_decl_list,
     AST_var_definition,

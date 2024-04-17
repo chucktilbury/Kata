@@ -30,6 +30,7 @@ ast_var_decl* parse_var_decl() {
     if(TOK_CONST == TTYPE) {
         is_const = true;
         advance_token();
+        TRACE("got the CONST");
     }
 
     ast_type_name* nterm;
@@ -209,6 +210,3 @@ ast_var_definition* parse_var_definition() {
 
     RETV(node);
 }
-
-
-

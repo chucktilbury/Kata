@@ -218,7 +218,8 @@ ast_destroy_reference* parse_destroy_reference() {
  * @brief
  *
  *  function_declaration
- *      = ('func' / 'function') ('virtual')? SYMBOL type_name_list type_name_list
+ *      = ('func' / 'function') ('virtual')?
+ *          SYMBOL type_name_list type_name_list
  *
  * @return ast_function_declaration*
  *
@@ -1069,6 +1070,7 @@ ast_function_body* parse_function_body() {
                 node = CREATE_AST_NODE(AST_function_body, ast_function_body);
                 node->list = list;
                 //finalize_token_queue();
+                finished = true;
                 break;
 
             case 101:
@@ -1198,7 +1200,7 @@ ast_function_assignment* parse_function_assignment() {
                 // compound reference or not a match
                 if(NULL != (name = parse_compound_reference()))
                     state = 1;
-                else 
+                else
                     state = 101;
                 break;
 
@@ -1206,7 +1208,7 @@ ast_function_assignment* parse_function_assignment() {
                 // type name list or not a match
                 if(NULL != (inp = parse_type_name_list()))
                     state = 2;
-                else 
+                else
                     state = 101;
                 break;
 
@@ -1250,4 +1252,3 @@ ast_function_assignment* parse_function_assignment() {
 
     RETV(node);
 }
-

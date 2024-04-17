@@ -7,4 +7,5 @@ err3_float:run
 err4_float:run
 signed:run
 unsigned:run
+err_unsigned:run
 bool:run

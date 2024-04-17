@@ -31,7 +31,7 @@ void traverse_formatted_strg(ast_formatted_strg* node, PassFunc pre, PassFunc po
     AST_CALLBACK(pre, node);
 
     TRACE_TERM(node->str);
-    traverse_expression_list(node->exprs, pre, post);
+    traverse_string_expr_list(node->exprs, pre, post);
 
     AST_CALLBACK(post, node);
     RET;
@@ -102,27 +102,28 @@ void traverse_string_expr_item(ast_string_expr_item* node, PassFunc pre, PassFun
 /**
  * @brief
  *
- *  string_expr
- *      = string_expr_item ( '+' string_expr_item )*
+ *  string_expr_list
+ *      = '(' string_expr_item ( ',' string_expr_item )* ')'
  *
  * @param node
  *
  */
-void traverse_string_expr(ast_string_expr* node, PassFunc pre, PassFunc post) {
-
-    assert(node != NULL);
+void traverse_string_expr_list(ast_string_expr_list* node, PassFunc pre, PassFunc post) {
 
     ENTER;
-    AST_CALLBACK(pre, node);
+    // It's possible that there is no expr list following the string
+    if(node != NULL) {
+        AST_CALLBACK(pre, node);
 
-    ast_string_expr_item* item;
+        ast_string_expr_item* item;
 
-    TRACE("num expr items: %d", len_link_list(node->list));
-    void* mark = NULL;
-    while(NULL != (item = (ast_string_expr_item*)iter_link_list(node->list, &mark)))
-        traverse_string_expr_item(item, pre, post);
+        TRACE("num expr items: %d", len_link_list(node->list));
+        void* mark = NULL;
+        while(NULL != (item = (ast_string_expr_item*)iter_link_list(node->list, &mark)))
+            traverse_string_expr_item(item, pre, post);
 
-    AST_CALLBACK(post, node);
+        AST_CALLBACK(post, node);
+    }
     RET;
 }
 

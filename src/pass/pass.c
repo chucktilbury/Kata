@@ -80,7 +80,7 @@ void pre_test_pass(ast_node* node) {
     (type == AST_formatted_strg)? pre_test_pass_func(node, AST_formatted_strg) :
     (type == AST_string_literal)? pre_test_pass_func(node, AST_string_literal) :
     (type == AST_string_expr_item)? pre_test_pass_func(node, AST_string_expr_item) :
-    (type == AST_string_expr)? pre_test_pass_func(node, AST_string_expr) :
+    (type == AST_string_expr_list)? pre_test_pass_func(node, AST_string_expr_list) :
     (type == AST_var_decl)? pre_test_pass_func(node, AST_var_decl) :
     (type == AST_var_decl_list)? pre_test_pass_func(node, AST_var_decl_list) :
     (type == AST_var_definition)? pre_test_pass_func(node, AST_var_definition) :
@@ -164,7 +164,7 @@ void post_test_pass(ast_node* node) {
     (type == AST_formatted_strg)? post_test_pass_func(node, AST_formatted_strg) :
     (type == AST_string_literal)? post_test_pass_func(node, AST_string_literal) :
     (type == AST_string_expr_item)? post_test_pass_func(node, AST_string_expr_item) :
-    (type == AST_string_expr)? post_test_pass_func(node, AST_string_expr) :
+    (type == AST_string_expr_list)? post_test_pass_func(node, AST_string_expr_list) :
     (type == AST_var_decl)? post_test_pass_func(node, AST_var_decl) :
     (type == AST_var_decl_list)? post_test_pass_func(node, AST_var_decl_list) :
     (type == AST_var_definition)? post_test_pass_func(node, AST_var_definition) :

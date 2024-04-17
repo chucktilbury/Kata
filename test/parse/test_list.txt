@@ -11,6 +11,5 @@ list:skip
 literals:run
 loop:skip
 module:skip
-strg:skip
-vars:skip
-
+strg:run
+vars:run

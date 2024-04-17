@@ -78,21 +78,23 @@ ast_string_expr_item* parse_string_expr_item() {
     RETV(node);
 }
 
+// TODO: Make production match grammar
 /**
  * @brief
  *
- *  string_expr
- *      = string_expr_item ( '+' string_expr_item )*
+ *  string_expr_list
+ *      = '(' string_expr_item ( ',' string_expr_item )* ')'
  *
  * @return ast_string_expr*
  *
  */
-ast_string_expr* parse_string_expr() {
+ast_string_expr_list* parse_string_expr_list() {
 
     ENTER;
-    ast_string_expr* node = NULL;
+    ast_string_expr_list* node = NULL;
     ast_node* nterm;
     LinkList* list = create_link_list();
+
     int state = 0;
     bool finished = false;
     void* post = post_token_queue();
@@ -100,62 +102,86 @@ ast_string_expr* parse_string_expr() {
     while(!finished) {
         switch(state) {
             case 0:
-                // first entry must be a string expr item or no error
-                if(NULL != (nterm = (ast_node*)parse_string_expr_item())) {
-                    append_link_list(list, nterm);
-                    state = 2;
+                // if not a '(' then it's not a str expr list
+                TRACE("state: %d", state);
+                if(TOK_OPAREN == TTYPE) {
+                    state = 1;
+                    advance_token();
                 }
-                else
+                else 
                     state = 101;
                 break;
 
             case 1:
-                // expecting a str expr item or an error
-                if(NULL != (nterm = (ast_node*)parse_string_expr_item())) {
+                // can be an item or a ')' or error
+                TRACE("state: %d", state);
+                if(TOK_CPAREN == TTYPE) {
+                    state = 100;
+                    advance_token();
+                }
+                else if(NULL != (nterm = (ast_node*)parse_string_expr_item())) {
                     append_link_list(list, nterm);
                     state = 2;
                 }
                 else {
-                    EXPECTED("a string expression item");
+                    EXPECTED("a string format item");
                     state = 102;
                 }
                 break;
 
             case 2:
-                // expecting a '+' or something else. if it's something else,
-                // then finished parsing the string expr
-                if(TOK_ADD == TTYPE) {
-                    state = 1;
+                // must be a ',' or a ')' or error
+                TRACE("state: %d", state);
+                if(TOK_COMMA == TTYPE) {
+                    state = 3;
+                    advance_token();
+                }
+                else if(TOK_CPAREN == TTYPE) {
+                    state = 100;
                     advance_token();
                 }
                 else {
-                    state = 100;
+                    EXPECTED("a ',' or a ')'");
+                    state = 102;
+                }
+                break;
+
+            case 3:
+                // must be an item or error
+                TRACE("state: %d", state);
+                if(NULL != (nterm = (ast_node*)parse_string_expr_item()))  {
+                    append_link_list(list, nterm);
+                    state = 2;
+                }
+                else {
+                    EXPECTED("a string format item");
+                    state = 102;
                 }
                 break;
 
             case 100:
-                // finished parsing a valid expr
-                node = CREATE_AST_NODE(AST_string_expr, ast_string_expr);
+                // create the node and return it
+                TRACE("state: %d", state);
+                node = CREATE_AST_NODE(AST_string_expr_list, ast_string_expr_list);
                 node->list = list;
-                finalize_token_queue();
                 finished = true;
                 break;
 
             case 101:
-                // not a string expr, not an error, may have read tokens.
+                // not a match
+                TRACE("state: %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
-                // is an error
+                // error
+                TRACE("state: %d", state);
                 finished = true;
                 break;
-
+            
             default:
-                // should never happen.
-                fatal_error("invalid state in %s(): %d", __func__, state);
-
+                fatal_error("unknown state in %s: %d", __func__, state);
         }
     }
 
@@ -166,7 +192,7 @@ ast_string_expr* parse_string_expr() {
  * @brief
  *
  *  formatted_strg
- *      = LITERAL_DSTRG (expression_list)?
+ *      = LITERAL_DSTRG ( string_expr_list )?
  *
  * @return ast_formatted_strg*
  *
@@ -175,14 +201,14 @@ ast_formatted_strg* parse_formatted_strg() {
 
     ENTER;
     ast_formatted_strg* node = NULL;
-    ast_expression_list* nterm;
+    ast_string_expr_list* nterm;
 
     if(TOK_LITERAL_DSTR == TTYPE) {
         node = CREATE_AST_NODE(AST_formatted_strg, ast_formatted_strg);
         node->str = get_token();
         advance_token();
 
-        if(NULL != (nterm = parse_expression_list())) {
+        if(NULL != (nterm = parse_string_expr_list())) {
             node->exprs = nterm;
         }
         else
