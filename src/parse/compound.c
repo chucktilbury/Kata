@@ -50,6 +50,7 @@ ast_compound_name* parse_compound_name() {
                     state = 101;
                 }
                 break;
+
             case 1:
                 // seen a symbol, this must be a dot or something else.
                 if(TOK_DOT == token_type(tok)) {
@@ -61,6 +62,7 @@ ast_compound_name* parse_compound_name() {
                     state = 100;
                 }
                 break;
+
             case 2:
                 // must be a symbol or it's not a match (conflict with create/destroy)
                 if((TOK_CREATE == TTYPE) || (TOK_DESTROY == TTYPE))
@@ -74,8 +76,10 @@ ast_compound_name* parse_compound_name() {
                 }
                 else {
                     state = 102;
+                    EXPECTED("a SYMBOL");
                 }
                 break;
+
             case 100:
                 // is a compound name, and not an error
                 node = CREATE_AST_NODE(AST_compound_name, ast_compound_name);
@@ -84,17 +88,19 @@ ast_compound_name* parse_compound_name() {
                 //finalize_token_queue();
                 finished = true;
                 break;
+
             case 101:
                 // not a compound symbol, not an error
                 reset_token_queue(post);
                 finished = true;
                 break;
+
             case 102:
                 // not a compound name, and is an error
-                EXPECTED("a SYMBOL os a '.'");
                 finished = true;
                 node = NULL;
                 break;
+
             default:
                 fatal_error("unknown state number in %s: %d", __func__, state);
         }
@@ -126,6 +132,8 @@ ast_compound_name_list* parse_compound_name_list() {
         switch(state) {
             case 0:
                 // must start with a '(' or not a list
+                TRACE("state = %d", state);
+                TRACE_TERM(get_token());
                 if(TOK_OPAREN == TTYPE) {
                     advance_token();
                     state = 1;
@@ -136,6 +144,8 @@ ast_compound_name_list* parse_compound_name_list() {
 
             case 1:
                 // must be a compound name or a ')'
+                TRACE("state = %d", state);
+                TRACE_TERM(get_token());
                 if(NULL != (nterm = parse_compound_name())) {
                     append_link_list(list, nterm);
                     state = 2;
@@ -151,12 +161,14 @@ ast_compound_name_list* parse_compound_name_list() {
                 break;
 
             case 2:
-                // must be a ',' or a ')'
+                // must be a ',' or a ')' or an error
+                TRACE("state = %d", state);
+                TRACE_TERM(get_token());
                 if(TOK_COMMA == TTYPE) {
                     advance_token();
                     state = 3;
                 }
-                if(TOK_CPAREN == TTYPE) {
+                else if(TOK_CPAREN == TTYPE) {
                     advance_token();
                     state = 100;
                 }
@@ -168,6 +180,8 @@ ast_compound_name_list* parse_compound_name_list() {
 
             case 3:
                 // must be a compound name or it's an error
+                TRACE("state = %d", state);
+                TRACE_TERM(get_token());
                 if(NULL != (nterm = parse_compound_name())) {
                     append_link_list(list, nterm);
                     state = 2;
@@ -180,6 +194,7 @@ ast_compound_name_list* parse_compound_name_list() {
 
             case 100:
                 // complete non-terminal parsed
+                TRACE("state = %d", state);
                 node = CREATE_AST_NODE(AST_compound_name_list, ast_compound_name_list);
                 node->list = list;
                 finished = true;
@@ -187,11 +202,13 @@ ast_compound_name_list* parse_compound_name_list() {
 
             case 101:
                 // not a match, not an error
+                TRACE("state = %d", state);
                 finished = true;
                 break;
 
             case 102:
                 // is an error.
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;

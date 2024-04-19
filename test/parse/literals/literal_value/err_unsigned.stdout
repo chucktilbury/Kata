@@ -144,6 +144,8 @@ ENTER: main():
                             ENTER: parse_list_init(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                TRACE: parse_list_init(): state = 0
+                                TRACE: parse_list_init(): state = 101
                                 ENTER: reset_token_queue(): 
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_list_init() - (NULL)

@@ -12,6 +12,7 @@
 #include "parse.h"
 #include "scanner.h"
 
+#if 0
 // This is used to detect unary operators. If it is true, and an operator is
 // found then it could be unary. Only the '!' and the '-' can be unary, all
 // others are errors if the flag is set.
@@ -211,6 +212,7 @@ ast_operator* parse_operator() {
 
     RETV(node);
 }
+#endif
 
 /**
  * @brief
@@ -250,6 +252,7 @@ ast_cast_statement* parse_cast_statement() {
     RETV(node);
 }
 
+#if 0
 /**
  * @brief
  *
@@ -280,6 +283,7 @@ ast_expr_primary* parse_expr_primary() {
 
     RETV(node);
 }
+#endif
 
 /**
  * @brief
@@ -431,12 +435,13 @@ ast_assignment_item* parse_assignment_item() {
     RETV(node);
 }
 
+// TODO: make production match the grammar.
 /**
  * @brief
  *
  *  assignment
- *      = compound_reference '=' assignment_item
- *      / compound_reference '+=' assignment_item
+ *      = compound_reference '=' ( assignment_item / compound_reference )
+ *      / compound_reference '+=' expression
  *      / compound_reference '-=' expression
  *      / compound_reference '*=' expression
  *      / compound_reference '/=' expression
@@ -449,55 +454,108 @@ ast_assignment* parse_assignment() {
 
     ENTER;
     ast_assignment* node = NULL;
-    ast_compound_reference* cref;
-    ast_node* nterm;
+    ast_compound_reference* lhs;
+    ast_node* rhs;
+    Token* oper;
+
+    bool finished = false;
+    int state  = 0;
     void* post = post_token_queue();
 
-    if(NULL != (cref = parse_compound_reference())) {
-        Token* tok = get_token();
-        switch(token_type(tok)) {
-            case TOK_SUB_ASSIGN:
-            case TOK_MUL_ASSIGN:
-            case TOK_DIV_ASSIGN:
-            case TOK_MOD_ASSIGN:
-                if(NULL != (nterm = (ast_node*)parse_expression())) {
-                    node = CREATE_AST_NODE(AST_assignment, ast_assignment);
-                    node->lhs = cref;
-                    node->rhs = nterm;
-                    node->oper = tok;
-                    advance_token();
-                    finalize_token_queue();
-                }
+    while(!finished) {
+        switch(state) {
+            case 0:
+                // must be a compound reference or not a match
+                TRACE("state = %d", state);
+                if(NULL != (lhs = parse_compound_reference()))
+                    state = 1;
                 else
+                    state = 101;
+                break;
+
+            case 1:
+                // must be an operator
+                TRACE("state = %d", state);
+                switch(TTYPE) {
+                    case TOK_ASSIGN:
+                        state = 2;
+                        oper = get_token();
+                        advance_token();
+                        break;
+                    case TOK_ADD_ASSIGN:
+                    case TOK_SUB_ASSIGN:
+                    case TOK_MUL_ASSIGN:
+                    case TOK_DIV_ASSIGN:
+                    case TOK_MOD_ASSIGN:
+                        state = 3;
+                        oper = get_token();
+                        advance_token();
+                        break;
+                    default:
+                        EXPECTED("assign or arithmetic assign");
+                        state = 102;
+                        break;
+                }
+                break;
+
+            case 2:
+                // can be assignment_item, or a compound_reference, else error
+                TRACE("state = %d", state);
+                if((NULL != (rhs = (ast_node*)parse_assignment_item())) ||
+                        (NULL != (rhs = (ast_node*)parse_compound_reference()))) 
+                    state = 100;
+                else {
+                    EXPECTED("an assignment item or a compound reference");
+                    state = 102;
+                }
+                break;
+
+            case 3:
+                // must be an expression or an error
+                TRACE("state = %d", state);
+                if(NULL == (rhs = (ast_node*)parse_expression()))
+                    state = 100;
+                else { 
                     EXPECTED("an expression");
-                break;
-            case TOK_ADD_ASSIGN:
-            case TOK_ASSIGN:
-                if(NULL != (nterm = (ast_node*)parse_assignment_item())) {
-                    node = CREATE_AST_NODE(AST_assignment, ast_assignment);
-                    node->lhs = cref;
-                    node->rhs = nterm;
-                    node->oper = tok;
-                    advance_token();
-                    finalize_token_queue();
+                    state = 102;
                 }
-                else
-                    EXPECTED("an assignment item");
                 break;
-            default:
-                // another rule might match
+
+            case 100:
+                // production complete
+                TRACE("state = %d", state);
+                node = CREATE_AST_NODE(AST_assignment, ast_assignment);
+                node->oper = oper;
+                node->lhs = lhs;
+                node->rhs = rhs;
+                finished = true;
+                break;
+
+            case 101:
+                // not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
-                RETV(NULL);
+                finished = true;
+                break;
+
+            case 102:
+                // error return
+                TRACE("state = %d", state);
+                finished = true;
+                break;
+
+            default:
+                fatal_error("unknown state in %s: %d", __func__, state);
         }
     }
-    else
-        reset_token_queue(post);
 
     RETV(node);
 }
 
+#if 0
 /**
- * @brief
+ * @brief This implements a shunting yard algorithm, but it's broken. The actual expression
+ * parser is moved to another module.
  *
  *  expression
  *      = expr_and 'or' expr_or
@@ -713,3 +771,4 @@ ast_expression* parse_expression() {
 
     RETV(node);
 }
+#endif

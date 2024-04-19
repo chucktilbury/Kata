@@ -1,5 +1,6 @@
 # TODO list
 
+* Add a test that uses '()' in a formatted string expression list.
 * Error recovery needs to consume tokens to prevent multiple nonsense errors.
 * Simple assignment as in "name = name" appears to not be a function_body_item.
 * The include file_find needs a way to add paths to it at runtime.

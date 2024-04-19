@@ -595,8 +595,8 @@ function_body
 # except for the '+=' operator, which can concatenate a string.
 #
 assignment
-    = compound_reference '=' assignment_item
-    / compound_reference '+=' assignment_item
+    = compound_reference '=' ( assignment_item / compound_reference )
+    / compound_reference '+=' expression
     / compound_reference '-=' expression
     / compound_reference '*=' expression
     / compound_reference '/=' expression

@@ -178,6 +178,7 @@ ENTER: main():
                                 ENTER: parse_assignment(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_assignment(): state = 0
                                     ENTER: parse_compound_reference(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -196,6 +197,7 @@ ENTER: main():
                                         ENTER: reset_token_queue(): 
                                         RETURN: reset_token_queue(): 
                                     RETURN(node): parse_compound_reference() - (NULL)
+                                    TRACE: parse_assignment(): state = 101
                                     ENTER: reset_token_queue(): 
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_assignment() - (NULL)
@@ -289,6 +291,7 @@ ENTER: main():
                                             ENTER: parse_assignment(): 
                                                 ENTER: post_token_queue(): 
                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                TRACE: parse_assignment(): state = 0
                                                 ENTER: parse_compound_reference(): 
                                                     ENTER: post_token_queue(): 
                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -307,6 +310,7 @@ ENTER: main():
                                                     ENTER: reset_token_queue(): 
                                                     RETURN: reset_token_queue(): 
                                                 RETURN(node): parse_compound_reference() - (NULL)
+                                                TRACE: parse_assignment(): state = 101
                                                 ENTER: reset_token_queue(): 
                                                 RETURN: reset_token_queue(): 
                                             RETURN(node): parse_assignment() - (NULL)
@@ -437,6 +441,7 @@ ENTER: main():
                                 ENTER: parse_assignment(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_assignment(): state = 0
                                     ENTER: parse_compound_reference(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -455,6 +460,7 @@ ENTER: main():
                                         ENTER: reset_token_queue(): 
                                         RETURN: reset_token_queue(): 
                                     RETURN(node): parse_compound_reference() - (NULL)
+                                    TRACE: parse_assignment(): state = 101
                                     ENTER: reset_token_queue(): 
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_assignment() - (NULL)
@@ -554,6 +560,7 @@ ENTER: main():
                                             ENTER: parse_assignment(): 
                                                 ENTER: post_token_queue(): 
                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                TRACE: parse_assignment(): state = 0
                                                 ENTER: parse_compound_reference(): 
                                                     ENTER: post_token_queue(): 
                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -572,6 +579,7 @@ ENTER: main():
                                                     ENTER: reset_token_queue(): 
                                                     RETURN: reset_token_queue(): 
                                                 RETURN(node): parse_compound_reference() - (NULL)
+                                                TRACE: parse_assignment(): state = 101
                                                 ENTER: reset_token_queue(): 
                                                 RETURN: reset_token_queue(): 
                                             RETURN(node): parse_assignment() - (NULL)
@@ -702,6 +710,7 @@ ENTER: main():
                                 ENTER: parse_assignment(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_assignment(): state = 0
                                     ENTER: parse_compound_reference(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -720,6 +729,7 @@ ENTER: main():
                                         ENTER: reset_token_queue(): 
                                         RETURN: reset_token_queue(): 
                                     RETURN(node): parse_compound_reference() - (NULL)
+                                    TRACE: parse_assignment(): state = 101
                                     ENTER: reset_token_queue(): 
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_assignment() - (NULL)
@@ -887,6 +897,7 @@ ENTER: main():
                                             ENTER: parse_assignment(): 
                                                 ENTER: post_token_queue(): 
                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                TRACE: parse_assignment(): state = 0
                                                 ENTER: parse_compound_reference(): 
                                                     ENTER: post_token_queue(): 
                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -905,6 +916,7 @@ ENTER: main():
                                                     ENTER: reset_token_queue(): 
                                                     RETURN: reset_token_queue(): 
                                                 RETURN(node): parse_compound_reference() - (NULL)
+                                                TRACE: parse_assignment(): state = 101
                                                 ENTER: reset_token_queue(): 
                                                 RETURN: reset_token_queue(): 
                                             RETURN(node): parse_assignment() - (NULL)
@@ -1035,6 +1047,7 @@ ENTER: main():
                                 ENTER: parse_assignment(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_assignment(): state = 0
                                     ENTER: parse_compound_reference(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1053,6 +1066,7 @@ ENTER: main():
                                         ENTER: reset_token_queue(): 
                                         RETURN: reset_token_queue(): 
                                     RETURN(node): parse_compound_reference() - (NULL)
+                                    TRACE: parse_assignment(): state = 101
                                     ENTER: reset_token_queue(): 
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_assignment() - (NULL)
@@ -1231,6 +1245,7 @@ ENTER: main():
                                             ENTER: parse_assignment(): 
                                                 ENTER: post_token_queue(): 
                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                TRACE: parse_assignment(): state = 0
                                                 ENTER: parse_compound_reference(): 
                                                     ENTER: post_token_queue(): 
                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1249,6 +1264,7 @@ ENTER: main():
                                                     ENTER: reset_token_queue(): 
                                                     RETURN: reset_token_queue(): 
                                                 RETURN(node): parse_compound_reference() - (NULL)
+                                                TRACE: parse_assignment(): state = 101
                                                 ENTER: reset_token_queue(): 
                                                 RETURN: reset_token_queue(): 
                                             RETURN(node): parse_assignment() - (NULL)
@@ -1379,6 +1395,7 @@ ENTER: main():
                                 ENTER: parse_assignment(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_assignment(): state = 0
                                     ENTER: parse_compound_reference(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1397,6 +1414,7 @@ ENTER: main():
                                         ENTER: reset_token_queue(): 
                                         RETURN: reset_token_queue(): 
                                     RETURN(node): parse_compound_reference() - (NULL)
+                                    TRACE: parse_assignment(): state = 101
                                     ENTER: reset_token_queue(): 
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_assignment() - (NULL)

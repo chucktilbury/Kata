@@ -114,7 +114,7 @@ typedef struct _ast_assignment_item_ {
  *  NOTE: support the += for arrays
  *
  *  assignment
- *      = compound_reference '=' assignment_item
+ *      = compound_reference '=' ( assignment_item / compound_reference )
  *      / compound_reference '+=' expression
  *      / compound_reference '-=' expression
  *      / compound_reference '*=' expression

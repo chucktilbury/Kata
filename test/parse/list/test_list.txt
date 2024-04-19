@@ -1,8 +1,5 @@
 # this is a list of classes of tests.
 
 list_init:run
-dict_init_element:run
 dict_init:run
-array_param:run
-array_param_list:run
 array_reference:run

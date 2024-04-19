@@ -85,13 +85,15 @@ ast_return_statement* parse_return_statement();
 ast_raise_statement* parse_raise_statement();
 
 // expr.c
-ast_expression* parse_expression();
-ast_expr_primary* parse_expr_primary();
 ast_expression_list* parse_expression_list();
 ast_assignment_item* parse_assignment_item();
 ast_assignment* parse_assignment();
 ast_cast_statement* parse_cast_statement();
+
+// expression.c
 ast_operator* parse_operator();
+ast_expression* parse_expression();
+ast_expr_primary* parse_expr_primary();
 
 // loop.c
 ast_while_definition* parse_while_definition();

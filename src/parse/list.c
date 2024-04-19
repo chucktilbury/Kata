@@ -36,6 +36,7 @@ ast_list_init* parse_list_init() {
         switch(state) {
             case 0:
                 // '[' or not a match
+                TRACE("state = %d", state);
                 if(TOK_OSBRACE == TTYPE) {
                     advance_token();
                     state = 1;
@@ -46,6 +47,7 @@ ast_list_init* parse_list_init() {
 
             case 1:
                 // at least one assignment item is required
+                TRACE("state = %d", state);
                 if(NULL != (nterm = parse_assignment_item())) {
                     append_link_list(list, nterm);
                     state = 2;
@@ -58,6 +60,7 @@ ast_list_init* parse_list_init() {
 
             case 2:
                 // a ',' or a ']' or error
+                TRACE("state = %d", state);
                 if(TOK_COMMA == TTYPE) {
                     advance_token();
                     state = 1;
@@ -74,6 +77,7 @@ ast_list_init* parse_list_init() {
 
             case 100:
                 // completed parse
+                TRACE("state = %d", state);
                 node = CREATE_AST_NODE(AST_list_init, ast_list_init);
                 node->list = list;
                 finished = true;
@@ -81,12 +85,14 @@ ast_list_init* parse_list_init() {
 
             case 101:
                 // not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;

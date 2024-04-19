@@ -1,3 +1,4 @@
 # this is a list of actual tests.
 
-dummy_test:run
+basic:run
+baddot:run

@@ -11,6 +11,7 @@ add_library(${PROJECT_NAME} STATIC
     compound.c
     except.c
     expr.c
+    expression.c
     flow.c
     func_body.c
     func.c

@@ -207,6 +207,9 @@ void traverse_assignment_item(ast_assignment_item* node, PassFunc pre, PassFunc 
         case AST_function_assignment:
             traverse_function_assignment((ast_function_assignment*)node->nterm, pre, post);
             break;
+        case AST_compound_reference:
+            traverse_compound_reference((ast_compound_reference*)node->nterm, pre, post);
+            break;
         default:
             fatal_error("unexpected node type in %s: %d",
                     __func__, ast_node_type(node->nterm));
@@ -220,8 +223,8 @@ void traverse_assignment_item(ast_assignment_item* node, PassFunc pre, PassFunc 
  * @brief
  *
  *  assignment
- *      = compound_reference '=' assignment_item
- *      / compound_reference '+=' assignment_item
+ *      = compound_reference '=' ( assignment_item / compound_reference )
+ *      / compound_reference '+=' expression
  *      / compound_reference '-=' expression
  *      / compound_reference '*=' expression
  *      / compound_reference '/=' expression

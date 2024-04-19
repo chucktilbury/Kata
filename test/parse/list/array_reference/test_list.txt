@@ -1,3 +1,11 @@
 # this is a list of actual tests.
-
-dummy_test:run
+#
+#   array_param
+#       = '[' ( expression / formatted_strg ) ']'
+#
+#   array_param_list
+#       = array_param (array_param)*
+#
+#   array_reference
+#       = SYMBOL array_param_list
+#

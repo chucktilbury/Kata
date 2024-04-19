@@ -1,0 +1,5 @@
+Syntax: /home/chuck/Src/Kata/test/parse/list/list_init/basic.k: 8: 47: expected a ',' or a ']' but got [
+Syntax: /home/chuck/Src/Kata/test/parse/list/list_init/basic.k: 8: 48: expected a dictionary init element but got literal signed
+Syntax: /home/chuck/Src/Kata/test/parse/list/list_init/basic.k: 8: 48: expected an assignment item but got [
+Syntax: /home/chuck/Src/Kata/test/parse/list/list_init/basic.k: 8: 48: expected module item or end of file but got var
+Syntax: /home/chuck/Src/Kata/test/parse/list/list_init/basic.k: 8: 48: module cannot be empty
