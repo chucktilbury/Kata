@@ -12,7 +12,6 @@
 #include "parse.h"
 #include "scanner.h"
 
-#if 0
 // This is used to detect unary operators. If it is true, and an operator is
 // found then it could be unary. Only the '!' and the '-' can be unary, all
 // others are errors if the flag is set.
@@ -212,7 +211,7 @@ ast_operator* parse_operator() {
 
     RETV(node);
 }
-#endif
+
 
 /**
  * @brief
@@ -252,7 +251,7 @@ ast_cast_statement* parse_cast_statement() {
     RETV(node);
 }
 
-#if 0
+
 /**
  * @brief
  *
@@ -283,7 +282,7 @@ ast_expr_primary* parse_expr_primary() {
 
     RETV(node);
 }
-#endif
+
 
 /**
  * @brief
@@ -552,7 +551,7 @@ ast_assignment* parse_assignment() {
     RETV(node);
 }
 
-#if 0
+
 /**
  * @brief This implements a shunting yard algorithm, but it's broken. The actual expression
  * parser is moved to another module.
@@ -597,8 +596,8 @@ ast_expression* parse_expression() {
     while(!finished) {
         switch(state) {
             case 0:
-                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 // entry point; make sure it's an expression
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 if(NULL != (nterm = (ast_node*)parse_operator())) {
                     switch(token_type(((ast_operator*)nterm)->tok)) {
                         case TOK_CPAREN:
@@ -633,8 +632,8 @@ ast_expression* parse_expression() {
 
             case 2:
             case 3: {
-                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                     // handle an operator
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                     TokenType type = token_type(((ast_operator*)nterm)->tok);
                     switch(type) {
                         case TOK_OPAREN:
@@ -665,6 +664,7 @@ ast_expression* parse_expression() {
                 }
                 break;
 
+            // Actual shunting yard algo starts here
             case 4:
                 // operator is an open paren
                 push_link_list(stack, nterm);
@@ -672,8 +672,8 @@ ast_expression* parse_expression() {
                 break;
 
             case 5:
-                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 // operator is close paren
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 state = 1;
                 while(true) {
                     ast_operator* op = (ast_operator*)pop_link_list(stack);
@@ -692,8 +692,8 @@ ast_expression* parse_expression() {
                 break;
 
             case 6:
-                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 // operator is left assoc
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 TRACE("left assoc");
                 while(peek_link_list(stack) != NULL &&
                         (get_prec(token_type(((ast_operator*)peek_link_list(stack))->tok))) >=
@@ -706,9 +706,9 @@ ast_expression* parse_expression() {
                 break;
 
             case 7:
+                // operator is right assoc
                 TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 TRACE("right assoc");
-                // operator it right assoc
                 while(peek_link_list(stack) != NULL &&
                         (get_prec(token_type(((ast_operator*)peek_link_list(stack))->tok))) >
                         (get_prec(token_type(((ast_operator*)nterm)->tok)))) {
@@ -720,8 +720,8 @@ ast_expression* parse_expression() {
                 break;
 
             case 8:
-                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 // handle a primary
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 append_link_list(queue, nterm);
                 state = 1;
                 break;
@@ -771,4 +771,4 @@ ast_expression* parse_expression() {
 
     RETV(node);
 }
-#endif
+

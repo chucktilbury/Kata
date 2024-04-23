@@ -18,7 +18,7 @@ target_compile_options(${PROJECT_NAME}
         -DUSE_GC
         -I${PROJECT_SOURCE_DIR}
         -I${PROJECT_SOURCE_DIR}/../util
-        -I${PROJECT_SOURCE_DIR}/../misc
+        -I${PROJECT_SOURCE_DIR}/../common
         -I${PROJECT_SOURCE_DIR}/../ast
         -I${PROJECT_SOURCE_DIR}/../scanner
         -I${PROJECT_SOURCE_DIR}/../pass
