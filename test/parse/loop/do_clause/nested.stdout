@@ -470,6 +470,7 @@ ENTER: main():
                                                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                                                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
                                                                                 ENTER: parse_operator(): 
+                                                                                    TERM: parse_operator(): ): ")": 10: 23: "nested.k"
                                                                                 RETURN(node): parse_operator() - (!NULL)
                                                                                 TRACE: parse_expression(): state: 101, stack: 0, queue: 0
                                                                                 ENTER: reset_token_queue(): 
@@ -690,17 +691,17 @@ ENTER: main():
                                                                         ENTER: finalize_token_queue(): 
                                                                         RETURN: finalize_token_queue(): 
                                                                     RETURN(node): parse_expr_primary() - (!NULL)
-                                                                    TRACE: parse_expression(): state: 8, stack: 0, queue: 0
-                                                                    TRACE: parse_expression(): state: 1, stack: 0, queue: 1
+                                                                    TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+                                                                    TRACE: parse_expression(): state: 3, stack: 0, queue: 1
                                                                     ENTER: parse_operator(): 
                                                                         TERM: parse_operator(): !=: "!=": 11: 33: "nested.k"
                                                                     RETURN(node): parse_operator() - (!NULL)
-                                                                    TRACE: parse_expression(): state: 3, stack: 0, queue: 1
+                                                                    TRACE: parse_expression(): state: 4, stack: 0, queue: 1
                                                                     ENTER: advance_token(): 
                                                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
-                                                                    TRACE: parse_expression(): state: 6, stack: 0, queue: 1
+                                                                    TRACE: parse_expression(): state: 52, stack: 0, queue: 1
                                                                     TRACE: parse_expression(): left assoc
-                                                                    TRACE: parse_expression(): state: 1, stack: 1, queue: 1
+                                                                    TRACE: parse_expression(): state: 5, stack: 1, queue: 1
                                                                     ENTER: parse_operator(): 
                                                                     RETURN(node): parse_operator() - (NULL)
                                                                     ENTER: parse_expr_primary(): 
@@ -714,11 +715,12 @@ ENTER: main():
                                                                         ENTER: finalize_token_queue(): 
                                                                         RETURN: finalize_token_queue(): 
                                                                     RETURN(node): parse_expr_primary() - (!NULL)
-                                                                    TRACE: parse_expression(): state: 8, stack: 1, queue: 1
-                                                                    TRACE: parse_expression(): state: 1, stack: 1, queue: 2
-                                                                    ENTER: parse_operator(): 
-                                                                    RETURN(node): parse_operator() - (!NULL)
+                                                                    TRACE: parse_expression(): state: 54, stack: 1, queue: 1
                                                                     TRACE: parse_expression(): state: 3, stack: 1, queue: 2
+                                                                    ENTER: parse_operator(): 
+                                                                        TERM: parse_operator(): ): ")": 11: 39: "nested.k"
+                                                                    RETURN(node): parse_operator() - (!NULL)
+                                                                    TRACE: parse_expression(): state: 4, stack: 1, queue: 2
                                                                     TRACE: parse_expression(): state: 100, stack: 1, queue: 2, pcount: -1
                                                                     TERM: parse_expression(): ): ")": 11: 39: "nested.k"
                                                                     ENTER: finalize_token_queue(): 
@@ -888,6 +890,7 @@ ENTER: main():
                                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                                         TRACE: parse_expression(): state: 0, stack: 0, queue: 0
                                                         ENTER: parse_operator(): 
+                                                            TERM: parse_operator(): ): ")": 12: 19: "nested.k"
                                                         RETURN(node): parse_operator() - (!NULL)
                                                         TRACE: parse_expression(): state: 101, stack: 0, queue: 0
                                                         ENTER: reset_token_queue(): 

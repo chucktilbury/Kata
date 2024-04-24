@@ -1178,36 +1178,10 @@ ENTER: main():
                                     ENTER: finalize_token_queue(): 
                                     RETURN: finalize_token_queue(): 
                                 RETURN(node): parse_expr_primary() - (!NULL)
-                                TRACE: parse_expression(): state: 8, stack: 0, queue: 0
-                                TRACE: parse_expression(): state: 1, stack: 0, queue: 1
+                                TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 3, stack: 0, queue: 1
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
-                                ENTER: parse_expr_primary(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_literal_value(): 
-                                    RETURN(node): parse_literal_value() - (NULL)
-                                    ENTER: parse_compound_reference(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: parse_compound_ref_item(): 
-                                            ENTER: post_token_queue(): 
-                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                            ENTER: parse_array_reference(): 
-                                                ENTER: post_token_queue(): 
-                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                                ENTER: reset_token_queue(): 
-                                                RETURN: reset_token_queue(): 
-                                            RETURN(node): parse_array_reference() - (NULL)
-                                            ENTER: reset_token_queue(): 
-                                            RETURN: reset_token_queue(): 
-                                        RETURN(node): parse_compound_ref_item() - (NULL)
-                                        ENTER: reset_token_queue(): 
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_compound_reference() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_expr_primary() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 30: 4: "items.k"
                                 ENTER: finalize_token_queue(): 

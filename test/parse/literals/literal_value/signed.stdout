@@ -122,36 +122,10 @@ ENTER: main():
                                     ENTER: finalize_token_queue(): 
                                     RETURN: finalize_token_queue(): 
                                 RETURN(node): parse_expr_primary() - (!NULL)
-                                TRACE: parse_expression(): state: 8, stack: 0, queue: 0
-                                TRACE: parse_expression(): state: 1, stack: 0, queue: 1
+                                TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 3, stack: 0, queue: 1
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
-                                ENTER: parse_expr_primary(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_literal_value(): 
-                                    RETURN(node): parse_literal_value() - (NULL)
-                                    ENTER: parse_compound_reference(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: parse_compound_ref_item(): 
-                                            ENTER: post_token_queue(): 
-                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                            ENTER: parse_array_reference(): 
-                                                ENTER: post_token_queue(): 
-                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                                ENTER: reset_token_queue(): 
-                                                RETURN: reset_token_queue(): 
-                                            RETURN(node): parse_array_reference() - (NULL)
-                                            ENTER: reset_token_queue(): 
-                                            RETURN: reset_token_queue(): 
-                                        RETURN(node): parse_compound_ref_item() - (NULL)
-                                        ENTER: reset_token_queue(): 
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_compound_reference() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_expr_primary() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 15: 4: "signed.k"
                                 ENTER: finalize_token_queue(): 
@@ -242,36 +216,10 @@ ENTER: main():
                                     ENTER: finalize_token_queue(): 
                                     RETURN: finalize_token_queue(): 
                                 RETURN(node): parse_expr_primary() - (!NULL)
-                                TRACE: parse_expression(): state: 8, stack: 0, queue: 0
-                                TRACE: parse_expression(): state: 1, stack: 0, queue: 1
+                                TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 3, stack: 0, queue: 1
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
-                                ENTER: parse_expr_primary(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_literal_value(): 
-                                    RETURN(node): parse_literal_value() - (NULL)
-                                    ENTER: parse_compound_reference(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: parse_compound_ref_item(): 
-                                            ENTER: post_token_queue(): 
-                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                            ENTER: parse_array_reference(): 
-                                                ENTER: post_token_queue(): 
-                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                                ENTER: reset_token_queue(): 
-                                                RETURN: reset_token_queue(): 
-                                            RETURN(node): parse_array_reference() - (NULL)
-                                            ENTER: reset_token_queue(): 
-                                            RETURN: reset_token_queue(): 
-                                        RETURN(node): parse_compound_ref_item() - (NULL)
-                                        ENTER: reset_token_queue(): 
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_compound_reference() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_expr_primary() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 16: 4: "signed.k"
                                 ENTER: finalize_token_queue(): 
@@ -362,36 +310,10 @@ ENTER: main():
                                     ENTER: finalize_token_queue(): 
                                     RETURN: finalize_token_queue(): 
                                 RETURN(node): parse_expr_primary() - (!NULL)
-                                TRACE: parse_expression(): state: 8, stack: 0, queue: 0
-                                TRACE: parse_expression(): state: 1, stack: 0, queue: 1
+                                TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 3, stack: 0, queue: 1
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
-                                ENTER: parse_expr_primary(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_literal_value(): 
-                                    RETURN(node): parse_literal_value() - (NULL)
-                                    ENTER: parse_compound_reference(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: parse_compound_ref_item(): 
-                                            ENTER: post_token_queue(): 
-                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                            ENTER: parse_array_reference(): 
-                                                ENTER: post_token_queue(): 
-                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                                ENTER: reset_token_queue(): 
-                                                RETURN: reset_token_queue(): 
-                                            RETURN(node): parse_array_reference() - (NULL)
-                                            ENTER: reset_token_queue(): 
-                                            RETURN: reset_token_queue(): 
-                                        RETURN(node): parse_compound_ref_item() - (NULL)
-                                        ENTER: reset_token_queue(): 
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_compound_reference() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_expr_primary() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 17: 4: "signed.k"
                                 ENTER: finalize_token_queue(): 
@@ -482,36 +404,10 @@ ENTER: main():
                                     ENTER: finalize_token_queue(): 
                                     RETURN: finalize_token_queue(): 
                                 RETURN(node): parse_expr_primary() - (!NULL)
-                                TRACE: parse_expression(): state: 8, stack: 0, queue: 0
-                                TRACE: parse_expression(): state: 1, stack: 0, queue: 1
+                                TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 3, stack: 0, queue: 1
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
-                                ENTER: parse_expr_primary(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_literal_value(): 
-                                    RETURN(node): parse_literal_value() - (NULL)
-                                    ENTER: parse_compound_reference(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: parse_compound_ref_item(): 
-                                            ENTER: post_token_queue(): 
-                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                            ENTER: parse_array_reference(): 
-                                                ENTER: post_token_queue(): 
-                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                                ENTER: reset_token_queue(): 
-                                                RETURN: reset_token_queue(): 
-                                            RETURN(node): parse_array_reference() - (NULL)
-                                            ENTER: reset_token_queue(): 
-                                            RETURN: reset_token_queue(): 
-                                        RETURN(node): parse_compound_ref_item() - (NULL)
-                                        ENTER: reset_token_queue(): 
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_compound_reference() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_expr_primary() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 19: 4: "signed.k"
                                 ENTER: finalize_token_queue(): 
@@ -590,13 +486,14 @@ ENTER: main():
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
                                 ENTER: parse_operator(): 
+                                    TERM: parse_operator(): -: "-": 19: 25: "signed.k"
                                 RETURN(node): parse_operator() - (!NULL)
-                                TRACE: parse_expression(): state: 3, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 4, stack: 0, queue: 0
                                 ENTER: advance_token(): 
                                 RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
-                                TRACE: parse_expression(): state: 7, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 53, stack: 0, queue: 0
                                 TRACE: parse_expression(): right assoc
-                                TRACE: parse_expression(): state: 1, stack: 1, queue: 0
+                                TRACE: parse_expression(): state: 5, stack: 1, queue: 0
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -610,36 +507,10 @@ ENTER: main():
                                     ENTER: finalize_token_queue(): 
                                     RETURN: finalize_token_queue(): 
                                 RETURN(node): parse_expr_primary() - (!NULL)
-                                TRACE: parse_expression(): state: 8, stack: 1, queue: 0
-                                TRACE: parse_expression(): state: 1, stack: 1, queue: 1
+                                TRACE: parse_expression(): state: 54, stack: 1, queue: 0
+                                TRACE: parse_expression(): state: 3, stack: 1, queue: 1
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
-                                ENTER: parse_expr_primary(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_literal_value(): 
-                                    RETURN(node): parse_literal_value() - (NULL)
-                                    ENTER: parse_compound_reference(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: parse_compound_ref_item(): 
-                                            ENTER: post_token_queue(): 
-                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                            ENTER: parse_array_reference(): 
-                                                ENTER: post_token_queue(): 
-                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                                ENTER: reset_token_queue(): 
-                                                RETURN: reset_token_queue(): 
-                                            RETURN(node): parse_array_reference() - (NULL)
-                                            ENTER: reset_token_queue(): 
-                                            RETURN: reset_token_queue(): 
-                                        RETURN(node): parse_compound_ref_item() - (NULL)
-                                        ENTER: reset_token_queue(): 
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_compound_reference() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_expr_primary() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 1, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 20: 4: "signed.k"
                                 ENTER: finalize_token_queue(): 
@@ -718,13 +589,14 @@ ENTER: main():
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
                                 ENTER: parse_operator(): 
+                                    TERM: parse_operator(): -: "-": 20: 25: "signed.k"
                                 RETURN(node): parse_operator() - (!NULL)
-                                TRACE: parse_expression(): state: 3, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 4, stack: 0, queue: 0
                                 ENTER: advance_token(): 
                                 RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
-                                TRACE: parse_expression(): state: 7, stack: 0, queue: 0
+                                TRACE: parse_expression(): state: 53, stack: 0, queue: 0
                                 TRACE: parse_expression(): right assoc
-                                TRACE: parse_expression(): state: 1, stack: 1, queue: 0
+                                TRACE: parse_expression(): state: 5, stack: 1, queue: 0
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -738,36 +610,10 @@ ENTER: main():
                                     ENTER: finalize_token_queue(): 
                                     RETURN: finalize_token_queue(): 
                                 RETURN(node): parse_expr_primary() - (!NULL)
-                                TRACE: parse_expression(): state: 8, stack: 1, queue: 0
-                                TRACE: parse_expression(): state: 1, stack: 1, queue: 1
+                                TRACE: parse_expression(): state: 54, stack: 1, queue: 0
+                                TRACE: parse_expression(): state: 3, stack: 1, queue: 1
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
-                                ENTER: parse_expr_primary(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_literal_value(): 
-                                    RETURN(node): parse_literal_value() - (NULL)
-                                    ENTER: parse_compound_reference(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: parse_compound_ref_item(): 
-                                            ENTER: post_token_queue(): 
-                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                            ENTER: parse_array_reference(): 
-                                                ENTER: post_token_queue(): 
-                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                                ENTER: reset_token_queue(): 
-                                                RETURN: reset_token_queue(): 
-                                            RETURN(node): parse_array_reference() - (NULL)
-                                            ENTER: reset_token_queue(): 
-                                            RETURN: reset_token_queue(): 
-                                        RETURN(node): parse_compound_ref_item() - (NULL)
-                                        ENTER: reset_token_queue(): 
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_compound_reference() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_expr_primary() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 1, queue: 1, pcount: 0
                                 TERM: parse_expression(): end of file: "": 20: 33: "signed.k"
                                 ENTER: finalize_token_queue(): 

@@ -155,6 +155,7 @@ ENTER: main():
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                             TRACE: parse_expression(): state: 0, stack: 0, queue: 0
                                             ENTER: parse_operator(): 
+                                                TERM: parse_operator(): ): ")": 7: 15: "extracomma.k"
                                             RETURN(node): parse_operator() - (!NULL)
                                             TRACE: parse_expression(): state: 101, stack: 0, queue: 0
                                             ENTER: reset_token_queue(): 

@@ -20,7 +20,7 @@ static bool flag = true;
 // Boolean expressions take precedence over arithmetic. Any boolean
 // operator in the expression causes the whole expression to be a boolean,
 // no matter what else is in it.
-static int get_oper_type(TokenType type, TokenType crnt) {
+static int set_expr_type(TokenType type, TokenType crnt) {
 
     switch(type) {
         case TOK_OR:
@@ -152,7 +152,6 @@ ast_operator* parse_operator() {
         case TOK_EQU:
         case TOK_NEQU:
         case TOK_ADD:
-        case TOK_ASSIGN:
         case TOK_DIV:
         case TOK_MUL:
         case TOK_MOD:
@@ -171,6 +170,7 @@ ast_operator* parse_operator() {
 
         case TOK_SUB:
             // the '-' can be unary
+            TRACE_TERM(get_token());
             node = CREATE_AST_NODE(AST_operator, ast_operator);
             node->tok = tok;
             if(flag)
@@ -181,6 +181,7 @@ ast_operator* parse_operator() {
 
         case TOK_NOT:
             // the '!' or 'not' must be unary
+            TRACE_TERM(get_token());
             if(flag) {
                 node = CREATE_AST_NODE(AST_operator, ast_operator);
                 node->tok = tok;
@@ -192,6 +193,7 @@ ast_operator* parse_operator() {
             break;
 
         case TOK_OPAREN:
+            TRACE_TERM(get_token());
             node = CREATE_AST_NODE(AST_operator, ast_operator);
             node->tok = tok;
             //advance_token();
@@ -199,6 +201,7 @@ ast_operator* parse_operator() {
             break;
 
         case TOK_CPAREN:
+            TRACE_TERM(get_token());
             node = CREATE_AST_NODE(AST_operator, ast_operator);
             node->tok = tok;
             //advance_token();
@@ -606,84 +609,119 @@ ast_expression* parse_expression() {
                         case TOK_NOT:
                         case TOK_UNARY_MINUS:
                         case TOK_OPAREN:
-                            state = 3;
+                            state = 4; // begins with a unary oper or a oparen
                             break;
                         default:
-                            show_syntax("the %s operator cannot be unary", tok_to_str(((ast_operator*)nterm)->tok));
+                            SYNTAX("the '%s' operator cannot be unary", tok_to_str(((ast_operator*)nterm)->tok));
                             state = 102;
                     }
                 }
                 else if (NULL != (nterm = (ast_node*)parse_expr_primary()))
-                    state = 8;
+                    state = 54; // begins with an actual value
                 else
-                    state = 101;
+                    state = 101; // Else it's not recognized as an expression. No error.
                 break;
 
             case 1:
+                // must have an operator or a primary, else end of parse
                 TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
-                // must have a primary or a unary
                 if(NULL != (nterm = (ast_node*)parse_operator()))
-                    state = 3;
+                    state = 4; // dispatch the operator
                 else if (NULL != (nterm = (ast_node*)parse_expr_primary()))
-                    state = 8;
+                    state = 54;
                 else
                     state = 100;
                 break;
 
             case 2:
-            case 3: {
-                    // handle an operator
+                // must be a primary after an operator, or an error
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
+                if (NULL != (nterm = (ast_node*)parse_expr_primary()))
+                    state = 54;
+                else {
+                    EXPECTED("a primary expression");
+                    state = 102;
+                }
+                break;
+
+            case 3:
+                // Must have an operator after a primary, else end of parse
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
+                if(NULL != (nterm = (ast_node*)parse_operator()))
+                    state = 4; // dispatch the operator
+                else 
+                    state = 100;
+                break;
+
+            case 4: {
+                    // dispatch an operator
                 TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                     TokenType type = token_type(((ast_operator*)nterm)->tok);
                     switch(type) {
                         case TOK_OPAREN:
                             advance_token();
-                            state = 4;
+                            state = 50;
                             pcount++;
                             break;
                         case TOK_CPAREN:
                             pcount--;
                             if(pcount >= 0) {
                                 advance_token();
-                                state = 5;
+                                state = 51;
                             }
+                            // not an error because of ( 2*(4+3)). The 
+                            // first oparen is not part of the expression,
+                            // but the thing that uses it.
                             else if(pcount < 0)
                                 state = 100;
-                            //state = 5;
                             break;
                         default:
                             advance_token();
                             if(get_assoc(type))
-                                state = 6;
+                                state = 52;
                             else
-                                state = 7;
+                                state = 53;
                             break;
                     }
 
-                    expr_type = get_oper_type(type, expr_type);
+                    expr_type = set_expr_type(type, expr_type);
+                }
+                break;
+
+            case 5:
+                // must have an operator or a primary, else an error
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
+                if(NULL != (nterm = (ast_node*)parse_operator()))
+                    state = 4; // dispatch the operator
+                else if (NULL != (nterm = (ast_node*)parse_expr_primary()))
+                    state = 54;
+                else {
+                    EXPECTED("an operator or a primary expression");
+                    state = 102;
                 }
                 break;
 
             // Actual shunting yard algo starts here
-            case 4:
+            case 50:
                 // operator is an open paren
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 push_link_list(stack, nterm);
-                state = 1;
+                state = 5; // must be a primary, or an operaotr, or an error
                 break;
 
-            case 5:
+            case 51:
                 // operator is close paren
                 TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
-                state = 1;
+                state = 3; // must have an operator
                 while(true) {
                     ast_operator* op = (ast_operator*)pop_link_list(stack);
                     if(NULL == op) {
-                        show_syntax("imbalanced parens in expression");
+                        SYNTAX("imbalanced parens in expression");
                         state = 102;
                         break;
                     }
                     else if(TOK_OPAREN == token_type(op->tok)) {
-                        state = 1;
+                        state = 1; // must have an operator, or a primary, or end of parse
                         break;
                     }
                     else
@@ -691,7 +729,7 @@ ast_expression* parse_expression() {
                 }
                 break;
 
-            case 6:
+            case 52:
                 // operator is left assoc
                 TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 TRACE("left assoc");
@@ -702,10 +740,10 @@ ast_expression* parse_expression() {
                     append_link_list(queue, pop_link_list(stack));
                 }
                 push_link_list(stack, nterm);
-                state = 1;
+                state = 5; // must have a primary or an error
                 break;
 
-            case 7:
+            case 53:
                 // operator is right assoc
                 TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 TRACE("right assoc");
@@ -716,22 +754,24 @@ ast_expression* parse_expression() {
                     append_link_list(queue, pop_link_list(stack));
                 }
                 push_link_list(stack, nterm);
-                state = 1;
+                state = 5; // must have a primary or an error
                 break;
 
-            case 8:
+            case 54:
                 // handle a primary
                 TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 append_link_list(queue, nterm);
-                state = 1;
+                state = 3; // must be operator or end of parse
                 break;
 
+            // exit routines. All of these cause the super-loop to exit.
             case 100:
+                // Finished parsing the production
                 TRACE("state: %d, stack: %d, queue: %d, pcount: %d",
                         state, len_link_list(stack), len_link_list(queue), pcount);
                 TRACE_TERM(get_token());
                 if(pcount > 0) {
-                    show_syntax("imbalanced parentheses in expression");
+                    SYNTAX("imbalanced parentheses in expression");
                     state = 102;
                 }
                 else {
@@ -748,15 +788,15 @@ ast_expression* parse_expression() {
                 break;
 
             case 101:
-                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 // not an expression, not an error;
+                TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
-                TRACE("state: %d", state);
                 // exit on a syntax error;
+                TRACE("state: %d", state);
                 node = NULL;
                 finished = true;
                 break;
