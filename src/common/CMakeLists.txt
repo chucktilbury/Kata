@@ -25,7 +25,8 @@ target_compile_options(${PROJECT_NAME}
         -I${PROJECT_SOURCE_DIR}/../ast
         -I${PROJECT_SOURCE_DIR}/../pass
         -I${PROJECT_SOURCE_DIR}
-        -I${CMAKE_CURRENT_BINARY_DIR}/../scanner
+        -I${CMAKE_CURRENT_BINARY_DIR}/../tokens
+        -I${CMAKE_CURRENT_BINARY_DIR}
         $<$<CONFIG:DEBUG>:-g >
         $<$<CONFIG:DEBUG>:-DMEMORY_DEBUG >
         $<$<CONFIG:DEBUG>:-DUSE_TRACE >

@@ -29,12 +29,9 @@
  *      / switch_clause
  *      / break_statement
  *      / continue_statement
- *      / trace_statement
  *      / inline_statement
  *      / yield_statement
  *      / type_statement
- *      / exit_statement
- *      / print_statement
  *      / return_statement
  *      / raise_statement
  *      / function_body
@@ -62,12 +59,9 @@ ast_function_body_element* parse_function_body_element() {
             (NULL != (nterm = (ast_node*)parse_switch_clause())) ||
             (NULL != (nterm = (ast_node*)parse_break_statement())) ||
             (NULL != (nterm = (ast_node*)parse_continue_statement())) ||
-            (NULL != (nterm = (ast_node*)parse_trace_statement())) ||
             (NULL != (nterm = (ast_node*)parse_inline_statement())) ||
             (NULL != (nterm = (ast_node*)parse_yield_statement())) ||
             (NULL != (nterm = (ast_node*)parse_type_statement())) ||
-            (NULL != (nterm = (ast_node*)parse_exit_statement())) ||
-            (NULL != (nterm = (ast_node*)parse_print_statement())) ||
             (NULL != (nterm = (ast_node*)parse_return_statement())) ||
             (NULL != (nterm = (ast_node*)parse_raise_statement())) ||
             (NULL != (nterm = (ast_node*)parse_function_body()))) {
@@ -120,28 +114,6 @@ ast_continue_statement* parse_continue_statement() {
     if(TOK_CONTINUE == TTYPE) {
         advance_token();
         node = CREATE_AST_NODE(AST_continue_statement, ast_continue_statement);
-    }
-
-    RETV(node);
-}
-
-/**
- * @brief
- *
- *  trace_statement
- *      = 'trace'
- *
- * @return ast_trace_statement*
- *
- */
-ast_trace_statement* parse_trace_statement() {
-
-    ENTER;
-    ast_trace_statement* node = NULL;
-
-    if(TOK_TRACE == TTYPE) {
-        advance_token();
-        node = CREATE_AST_NODE(AST_trace_statement, ast_trace_statement);
     }
 
     RETV(node);
@@ -241,69 +213,6 @@ ast_type_statement* parse_type_statement() {
         }
         else
             EXPECTED("a '('");
-    }
-
-    RETV(node);
-}
-
-/**
- * @brief
- *
- *  exit_statement
- *      = 'exit' '(' ( expression )? ')
- *
- * @return ast_exit_statement*
- *
- */
-ast_exit_statement* parse_exit_statement() {
-
-    ENTER;
-    ast_exit_statement* node = NULL;
-    ast_expression* expr;
-
-    if(TOK_EXIT == TTYPE) {
-        advance_token();
-        if(TOK_OPAREN == TTYPE) {
-            advance_token();
-            expr = parse_expression(); // optional
-            if(TOK_OPAREN == TTYPE) {
-                advance_token();
-            }
-            else {
-                EXPECTED("a ')'");
-                RETV(NULL);
-            }
-        }
-        else {
-            EXPECTED("a '('");
-            RETV(NULL);
-        }
-
-        node = CREATE_AST_NODE(AST_exit_statement, ast_exit_statement);
-        node->expr = expr;
-    }
-
-    RETV(node);
-}
-
-/**
- * @brief
- *
- *  print_statement
- *      = 'print' ( expression_list )?
- *
- * @return ast_print_statement*
- *
- */
-ast_print_statement* parse_print_statement() {
-
-    ENTER;
-    ast_print_statement* node = NULL;
-
-    if(TOK_PRINT == TTYPE) {
-        advance_token();
-        node = CREATE_AST_NODE(AST_print_statement, ast_print_statement);
-        node->elst = parse_expression_list(); // optional
     }
 
     RETV(node);

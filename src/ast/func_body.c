@@ -35,8 +35,6 @@
  *      / inline_statement
  *      / yield_statement
  *      / type_statement
- *      / exit_statement
- *      / print_statement
  *      / return_statement
  *      / raise_statement
  *      / function_body
@@ -91,9 +89,6 @@ void traverse_function_body_element(ast_function_body_element* node, PassFunc pr
         case AST_continue_statement:
             traverse_continue_statement((ast_continue_statement*)node->nterm, pre, post);
             break;
-        case AST_trace_statement:
-            traverse_trace_statement((ast_trace_statement*)node->nterm, pre, post);
-            break;
         case AST_inline_statement:
             traverse_inline_statement((ast_inline_statement*)node->nterm, pre, post);
             break;
@@ -102,12 +97,6 @@ void traverse_function_body_element(ast_function_body_element* node, PassFunc pr
             break;
         case AST_type_statement:
             traverse_type_statement((ast_type_statement*)node->nterm, pre, post);
-            break;
-        case AST_exit_statement:
-            traverse_exit_statement((ast_exit_statement*)node->nterm, pre, post);
-            break;
-        case AST_print_statement:
-            traverse_print_statement((ast_print_statement*)node->nterm, pre, post);
             break;
         case AST_return_statement:
             traverse_return_statement((ast_return_statement*)node->nterm, pre, post);
@@ -157,26 +146,6 @@ void traverse_break_statement(ast_break_statement* node, PassFunc pre, PassFunc 
  *
  */
 void traverse_continue_statement(ast_continue_statement* node, PassFunc pre, PassFunc post) {
-
-    assert(node != NULL);
-
-    ENTER;
-    AST_CALLBACK(pre, node);
-
-    AST_CALLBACK(post, node);
-    RET;
-}
-
-/**
- * @brief
- *
- *  trace_statement
- *      = 'trace'
- *
- * @param node
- *
- */
-void traverse_trace_statement(ast_trace_statement* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
 
@@ -248,50 +217,6 @@ void traverse_type_statement(ast_type_statement* node, PassFunc pre, PassFunc po
     AST_CALLBACK(pre, node);
 
     traverse_compound_reference(node->ref, pre, post);
-
-    AST_CALLBACK(post, node);
-    RET;
-}
-
-/**
- * @brief
- *
- *  exit_statement
- *      = 'exit' '(' ( expression )? ')
- *
- * @param node
- *
- */
-void traverse_exit_statement(ast_exit_statement* node, PassFunc pre, PassFunc post) {
-
-    assert(node != NULL);
-
-    ENTER;
-    AST_CALLBACK(pre, node);
-
-    traverse_expression(node->expr, pre, post);
-
-    AST_CALLBACK(post, node);
-    RET;
-}
-
-/**
- * @brief
- *
- *  print_statement
- *      = 'print' ( expression_list )?
- *
- * @param node
- *
- */
-void traverse_print_statement(ast_print_statement* node, PassFunc pre, PassFunc post) {
-
-    assert(node != NULL);
-
-    ENTER;
-    AST_CALLBACK(pre, node);
-
-    traverse_expression_list(node->elst, pre, post);
 
     AST_CALLBACK(post, node);
     RET;

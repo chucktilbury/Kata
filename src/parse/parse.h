@@ -75,12 +75,9 @@ ast_function_assignment* parse_function_assignment();
 ast_function_body_element* parse_function_body_element();
 ast_break_statement* parse_break_statement();
 ast_continue_statement* parse_continue_statement();
-ast_trace_statement* parse_trace_statement();
 ast_inline_statement* parse_inline_statement();
 ast_yield_statement* parse_yield_statement();
 ast_type_statement* parse_type_statement();
-ast_exit_statement* parse_exit_statement();
-ast_print_statement* parse_print_statement();
 ast_return_statement* parse_return_statement();
 ast_raise_statement* parse_raise_statement();
 

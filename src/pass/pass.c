@@ -125,12 +125,9 @@ void pre_test_pass(ast_node* node) {
     (type == AST_except_clause)? pre_test_pass_func(node, AST_except_clause) :
     (type == AST_break_statement)? pre_test_pass_func(node, AST_break_statement) :
     (type == AST_continue_statement)? pre_test_pass_func(node, AST_continue_statement) :
-    (type == AST_trace_statement)? pre_test_pass_func(node, AST_trace_statement) :
     (type == AST_inline_statement)? pre_test_pass_func(node, AST_inline_statement) :
     (type == AST_yield_statement)? pre_test_pass_func(node, AST_yield_statement) :
     (type == AST_type_statement)? pre_test_pass_func(node, AST_type_statement) :
-    (type == AST_exit_statement)? pre_test_pass_func(node, AST_exit_statement) :
-    (type == AST_print_statement)? pre_test_pass_func(node, AST_print_statement) :
     (type == AST_return_statement)? pre_test_pass_func(node, AST_return_statement) :
     (type == AST_raise_statement)? pre_test_pass_func(node, AST_raise_statement) :
     (type == AST_start_function)? pre_test_pass_func(node, AST_start_function) :
@@ -209,12 +206,9 @@ void post_test_pass(ast_node* node) {
     (type == AST_except_clause)? post_test_pass_func(node, AST_except_clause) :
     (type == AST_break_statement)? post_test_pass_func(node, AST_break_statement) :
     (type == AST_continue_statement)? post_test_pass_func(node, AST_continue_statement) :
-    (type == AST_trace_statement)? post_test_pass_func(node, AST_trace_statement) :
     (type == AST_inline_statement)? post_test_pass_func(node, AST_inline_statement) :
     (type == AST_yield_statement)? post_test_pass_func(node, AST_yield_statement) :
     (type == AST_type_statement)? post_test_pass_func(node, AST_type_statement) :
-    (type == AST_exit_statement)? post_test_pass_func(node, AST_exit_statement) :
-    (type == AST_print_statement)? post_test_pass_func(node, AST_print_statement) :
     (type == AST_return_statement)? post_test_pass_func(node, AST_return_statement) :
     (type == AST_raise_statement)? post_test_pass_func(node, AST_raise_statement) :
     (type == AST_start_function)? post_test_pass_func(node, AST_start_function) :

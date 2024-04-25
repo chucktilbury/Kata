@@ -26,12 +26,9 @@
  *      / switch_clause
  *      / break_statement
  *      / continue_statement
- *      / trace_statement
  *      / inline_statement
  *      / yield_statement
  *      / type_statement
- *      / exit_statement
- *      / print_statement
  *      / return_statement
  *      / raise_statement
  *      / function_body
@@ -56,14 +53,6 @@ typedef struct _ast_break_statement_ {
 typedef struct _ast_continue_statement_ {
     ast_node node;
 } ast_continue_statement;
-
-/**
- *  trace_statement
- *      = 'trace'
- */
-typedef struct _ast_trace_statement_ {
-    ast_node node;
-} ast_trace_statement;
 
 /**
  *  inline_statement
@@ -93,24 +82,6 @@ typedef struct _ast_type_statement_ {
 } ast_type_statement;
 
 /**
- *  exit_statement
- *      = 'exit' '(' ( expression )? ')
- */
-typedef struct _ast_exit_statement_ {
-    ast_node node;
-    struct _ast_expression_* expr;
-} ast_exit_statement;
-
-/**
- *  print_statement
- *      = 'print' ( expression_list )?
- */
-typedef struct _ast_print_statement_ {
-    ast_node node;
-    struct _ast_expression_list_* elst;
-} ast_print_statement;
-
-/**
  *  return_statement
  *      = 'return' ( '(' ( expression )? ')' )?
  */
@@ -132,12 +103,9 @@ typedef struct _ast_raise_statement_ {
 void traverse_function_body_element(ast_function_body_element* node, PassFunc pre, PassFunc post);
 void traverse_break_statement(ast_break_statement* node, PassFunc pre, PassFunc post);
 void traverse_continue_statement(ast_continue_statement* node, PassFunc pre, PassFunc post);
-void traverse_trace_statement(ast_trace_statement* node, PassFunc pre, PassFunc post);
 void traverse_inline_statement(ast_inline_statement* node, PassFunc pre, PassFunc post);
 void traverse_yield_statement(ast_yield_statement* node, PassFunc pre, PassFunc post);
 void traverse_type_statement(ast_type_statement* node, PassFunc pre, PassFunc post);
-void traverse_exit_statement(ast_exit_statement* node, PassFunc pre, PassFunc post);
-void traverse_print_statement(ast_print_statement* node, PassFunc pre, PassFunc post);
 void traverse_return_statement(ast_return_statement* node, PassFunc pre, PassFunc post);
 void traverse_raise_statement(ast_raise_statement* node, PassFunc pre, PassFunc post);
 

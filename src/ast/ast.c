@@ -102,12 +102,9 @@ const char* nterm_to_str(ast_node* node) {
         (type == AST_except_clause)? "except_clause" :
         (type == AST_break_statement)? "break_statement" :
         (type == AST_continue_statement)? "continue_statement" :
-        (type == AST_trace_statement)? "trace_statement" :
         (type == AST_inline_statement)? "inline_statement" :
         (type == AST_yield_statement)? "yield_statement" :
         (type == AST_type_statement)? "type_statement" :
-        (type == AST_exit_statement)? "exit_statement" :
-        (type == AST_print_statement)? "print_statement" :
         (type == AST_return_statement)? "return_statement" :
         (type == AST_raise_statement)? "raise_statement" :
         (type == AST_start_function)? "start_function" :
