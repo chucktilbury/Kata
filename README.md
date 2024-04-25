@@ -1,6 +1,6 @@
 # Kata
 The **Kata** programming language.
-
+[Alt text](docs/samurai.jpeg)
 This is a very simple object-oriented programming language compiler which is written in C. It's a fun hobby project. See the grammar below. It's pretty complete and I am actively working on a parser and AST for it. (January, 2024)
 
 The language is a synthesis or Python and C. It has the object model of Python but shares a lot of syntax with both C and C++.
@@ -620,12 +620,9 @@ function_body_element
     / switch_clause
     / break_statement
     / continue_statement
-    / trace_statement
     / inline_statement
     / yield_statement
     / type_statement
-    / exit_statement
-    / print_statement
     / return_statement
     / raise_statement
     / function_body
@@ -645,12 +642,6 @@ continue_statement
 #####################
 #
 #
-trace_statement
-    = 'trace'
-
-#####################
-#
-#
 inline_statement
     = 'inline' '{' RAW_TEXT '}'
 
@@ -665,18 +656,6 @@ yield_statement
 #
 type_statement
     = 'type' '(' compound_reference ')'
-
-#####################
-#
-#
-exit_statement
-    = 'exit' '(' ( expression )? ')
-
-#####################
-#
-#
-print_statement
-    = 'print' ( expression_list )?
 
 #####################
 #
