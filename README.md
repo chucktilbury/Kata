@@ -1,6 +1,8 @@
 # Kata
 The **Kata** programming language.
-[Alt text](docs/samurai.jpeg)
+
+![Alt text](./docs/samurai.jpeg)
+
 This is a very simple object-oriented programming language compiler which is written in C. It's a fun hobby project. See the grammar below. It's pretty complete and I am actively working on a parser and AST for it. (January, 2024)
 
 The language is a synthesis or Python and C. It has the object model of Python but shares a lot of syntax with both C and C++.
