@@ -1759,7 +1759,7 @@ ENTER: main():
                             TRACE: traverse_class_item(): SCOPE: PRIVATE
                             ENTER: traverse_class_var_declaration(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3075)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_var_decl(): 
                                     ENTER: pre_test_pass_func(): 
@@ -1792,7 +1792,7 @@ ENTER: main():
                                     RETURN: post_test_pass_func(): 
                                 RETURN: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3075)
                                 RETURN: pre_test_pass_func(): 
                             RETURN: traverse_class_var_declaration(): 
                             ENTER: post_test_pass_func(): 
@@ -1806,7 +1806,7 @@ ENTER: main():
                             TRACE: traverse_class_item(): SCOPE: PRIVATE
                             ENTER: traverse_class_var_declaration(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3075)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_var_decl(): 
                                     ENTER: pre_test_pass_func(): 
@@ -1836,7 +1836,7 @@ ENTER: main():
                                     RETURN: post_test_pass_func(): 
                                 RETURN: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3075)
                                 RETURN: pre_test_pass_func(): 
                             RETURN: traverse_class_var_declaration(): 
                             ENTER: post_test_pass_func(): 
@@ -1850,7 +1850,7 @@ ENTER: main():
                             TRACE: traverse_class_item(): SCOPE: PRIVATE
                             ENTER: traverse_class_var_declaration(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3075)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_var_decl(): 
                                     ENTER: pre_test_pass_func(): 
@@ -1880,7 +1880,7 @@ ENTER: main():
                                     RETURN: post_test_pass_func(): 
                                 RETURN: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3075)
                                 RETURN: pre_test_pass_func(): 
                             RETURN: traverse_class_var_declaration(): 
                             ENTER: post_test_pass_func(): 
@@ -2134,7 +2134,7 @@ ENTER: main():
                             TRACE: traverse_class_item(): SCOPE: PRIVATE
                             ENTER: traverse_class_var_declaration(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3075)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_var_decl(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2167,7 +2167,7 @@ ENTER: main():
                                     RETURN: post_test_pass_func(): 
                                 RETURN: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3075)
                                 RETURN: pre_test_pass_func(): 
                             RETURN: traverse_class_var_declaration(): 
                             ENTER: post_test_pass_func(): 
@@ -2181,7 +2181,7 @@ ENTER: main():
                             TRACE: traverse_class_item(): SCOPE: PRIVATE
                             ENTER: traverse_class_var_declaration(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3075)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_var_decl(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2211,7 +2211,7 @@ ENTER: main():
                                     RETURN: post_test_pass_func(): 
                                 RETURN: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3075)
                                 RETURN: pre_test_pass_func(): 
                             RETURN: traverse_class_var_declaration(): 
                             ENTER: post_test_pass_func(): 
@@ -2243,7 +2243,7 @@ ENTER: main():
                             TRACE: traverse_class_item(): SCOPE: PROTECTED
                             ENTER: traverse_class_var_declaration(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3075)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_var_decl(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2273,7 +2273,7 @@ ENTER: main():
                                     RETURN: post_test_pass_func(): 
                                 RETURN: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3078)
+                                    TRACE: pre_test_pass_func(): node type: class_var_declaration(3075)
                                 RETURN: pre_test_pass_func(): 
                             RETURN: traverse_class_var_declaration(): 
                             ENTER: post_test_pass_func(): 

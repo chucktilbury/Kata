@@ -856,18 +856,12 @@ ENTER: main():
                                                                                 RETURN(node): parse_break_statement() - (NULL)
                                                                                 ENTER: parse_continue_statement(): 
                                                                                 RETURN(node): parse_continue_statement() - (NULL)
-                                                                                ENTER: parse_trace_statement(): 
-                                                                                RETURN(node): parse_trace_statement() - (NULL)
                                                                                 ENTER: parse_inline_statement(): 
                                                                                 RETURN(node): parse_inline_statement() - (NULL)
                                                                                 ENTER: parse_yield_statement(): 
                                                                                 RETURN(node): parse_yield_statement() - (NULL)
                                                                                 ENTER: parse_type_statement(): 
                                                                                 RETURN(node): parse_type_statement() - (NULL)
-                                                                                ENTER: parse_exit_statement(): 
-                                                                                RETURN(node): parse_exit_statement() - (NULL)
-                                                                                ENTER: parse_print_statement(): 
-                                                                                RETURN(node): parse_print_statement() - (NULL)
                                                                                 ENTER: parse_return_statement(): 
                                                                                 RETURN(node): parse_return_statement() - (NULL)
                                                                                 ENTER: parse_raise_statement(): 
@@ -1006,18 +1000,12 @@ ENTER: main():
                                                                     RETURN(node): parse_break_statement() - (NULL)
                                                                     ENTER: parse_continue_statement(): 
                                                                     RETURN(node): parse_continue_statement() - (NULL)
-                                                                    ENTER: parse_trace_statement(): 
-                                                                    RETURN(node): parse_trace_statement() - (NULL)
                                                                     ENTER: parse_inline_statement(): 
                                                                     RETURN(node): parse_inline_statement() - (NULL)
                                                                     ENTER: parse_yield_statement(): 
                                                                     RETURN(node): parse_yield_statement() - (NULL)
                                                                     ENTER: parse_type_statement(): 
                                                                     RETURN(node): parse_type_statement() - (NULL)
-                                                                    ENTER: parse_exit_statement(): 
-                                                                    RETURN(node): parse_exit_statement() - (NULL)
-                                                                    ENTER: parse_print_statement(): 
-                                                                    RETURN(node): parse_print_statement() - (NULL)
                                                                     ENTER: parse_return_statement(): 
                                                                     RETURN(node): parse_return_statement() - (NULL)
                                                                     ENTER: parse_raise_statement(): 
@@ -1156,18 +1144,12 @@ ENTER: main():
                                                         RETURN(node): parse_break_statement() - (NULL)
                                                         ENTER: parse_continue_statement(): 
                                                         RETURN(node): parse_continue_statement() - (NULL)
-                                                        ENTER: parse_trace_statement(): 
-                                                        RETURN(node): parse_trace_statement() - (NULL)
                                                         ENTER: parse_inline_statement(): 
                                                         RETURN(node): parse_inline_statement() - (NULL)
                                                         ENTER: parse_yield_statement(): 
                                                         RETURN(node): parse_yield_statement() - (NULL)
                                                         ENTER: parse_type_statement(): 
                                                         RETURN(node): parse_type_statement() - (NULL)
-                                                        ENTER: parse_exit_statement(): 
-                                                        RETURN(node): parse_exit_statement() - (NULL)
-                                                        ENTER: parse_print_statement(): 
-                                                        RETURN(node): parse_print_statement() - (NULL)
                                                         ENTER: parse_return_statement(): 
                                                         RETURN(node): parse_return_statement() - (NULL)
                                                         ENTER: parse_raise_statement(): 
@@ -1306,18 +1288,12 @@ ENTER: main():
                                             RETURN(node): parse_break_statement() - (NULL)
                                             ENTER: parse_continue_statement(): 
                                             RETURN(node): parse_continue_statement() - (NULL)
-                                            ENTER: parse_trace_statement(): 
-                                            RETURN(node): parse_trace_statement() - (NULL)
                                             ENTER: parse_inline_statement(): 
                                             RETURN(node): parse_inline_statement() - (NULL)
                                             ENTER: parse_yield_statement(): 
                                             RETURN(node): parse_yield_statement() - (NULL)
                                             ENTER: parse_type_statement(): 
                                             RETURN(node): parse_type_statement() - (NULL)
-                                            ENTER: parse_exit_statement(): 
-                                            RETURN(node): parse_exit_statement() - (NULL)
-                                            ENTER: parse_print_statement(): 
-                                            RETURN(node): parse_print_statement() - (NULL)
                                             ENTER: parse_return_statement(): 
                                             RETURN(node): parse_return_statement() - (NULL)
                                             ENTER: parse_raise_statement(): 
@@ -1456,18 +1432,12 @@ ENTER: main():
                                 RETURN(node): parse_break_statement() - (NULL)
                                 ENTER: parse_continue_statement(): 
                                 RETURN(node): parse_continue_statement() - (NULL)
-                                ENTER: parse_trace_statement(): 
-                                RETURN(node): parse_trace_statement() - (NULL)
                                 ENTER: parse_inline_statement(): 
                                 RETURN(node): parse_inline_statement() - (NULL)
                                 ENTER: parse_yield_statement(): 
                                 RETURN(node): parse_yield_statement() - (NULL)
                                 ENTER: parse_type_statement(): 
                                 RETURN(node): parse_type_statement() - (NULL)
-                                ENTER: parse_exit_statement(): 
-                                RETURN(node): parse_exit_statement() - (NULL)
-                                ENTER: parse_print_statement(): 
-                                RETURN(node): parse_print_statement() - (NULL)
                                 ENTER: parse_return_statement(): 
                                 RETURN(node): parse_return_statement() - (NULL)
                                 ENTER: parse_raise_statement(): 
@@ -1695,11 +1665,11 @@ ENTER: main():
                                                                 RETURN: traverse_expr_primary(): 
                                                                 ENTER: traverse_operator(): 
                                                                     ENTER: pre_test_pass_func(): 
-                                                                        TRACE: pre_test_pass_func(): node type: operator(3071)
+                                                                        TRACE: pre_test_pass_func(): node type: operator(3068)
                                                                     RETURN: pre_test_pass_func(): 
                                                                     TERM: traverse_operator(): !=: "!=": 10: 39: "nested.k"
                                                                     ENTER: post_test_pass_func(): 
-                                                                        TRACE: post_test_pass_func(): node type: operator(3071)
+                                                                        TRACE: post_test_pass_func(): node type: operator(3068)
                                                                     RETURN: post_test_pass_func(): 
                                                                 RETURN: traverse_operator(): 
                                                                 ENTER: post_test_pass_func(): 
@@ -1784,11 +1754,11 @@ ENTER: main():
                                                                             RETURN: traverse_expr_primary(): 
                                                                             ENTER: traverse_operator(): 
                                                                                 ENTER: pre_test_pass_func(): 
-                                                                                    TRACE: pre_test_pass_func(): node type: operator(3071)
+                                                                                    TRACE: pre_test_pass_func(): node type: operator(3068)
                                                                                 RETURN: pre_test_pass_func(): 
                                                                                 TERM: traverse_operator(): !=: "!=": 11: 50: "nested.k"
                                                                                 ENTER: post_test_pass_func(): 
-                                                                                    TRACE: post_test_pass_func(): node type: operator(3071)
+                                                                                    TRACE: post_test_pass_func(): node type: operator(3068)
                                                                                 RETURN: post_test_pass_func(): 
                                                                             RETURN: traverse_operator(): 
                                                                             ENTER: post_test_pass_func(): 

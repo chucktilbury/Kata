@@ -1,5 +1,5 @@
 ;------------------------------------------------------------------------------
-; this is a dummy test for development.
+; this tests that floats are properly recognized.
 ;
 ;   var_definition
 ;       = ( 'var' / 'variable' ) var_decl ( '=' assignment_item )?

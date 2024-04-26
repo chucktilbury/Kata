@@ -72,7 +72,7 @@ function dbg {
 
 #export PATH=$_CROSS_PATH:$_CROSS_LOC/$_CROSS_TARGET/bin:$PATH
 
-export PATH=$_PROJECT_LOC:$_PROJECT_LOC/bin:$_PROJECT_LOC/utils:$PATH
+export PATH=$_PROJECT_LOC:$_PROJECT_LOC/bin:$_PROJECT_LOC/utils:$_PROJECT_LOC/test/scripts:$PATH
 export _RUNTIME=$_PROJECT_LOC/src/runtime
 
 PS1='\[\e[0;31m\]$_PROJECT_NAME($_BUILD_TYPE):\[\e[0m\]'$PS1

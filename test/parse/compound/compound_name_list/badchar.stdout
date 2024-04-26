@@ -305,18 +305,12 @@ symbol: "name": 7: 30: "badchar.k"
                                 RETURN(node): parse_break_statement() - (NULL)
                                 ENTER: parse_continue_statement(): 
                                 RETURN(node): parse_continue_statement() - (NULL)
-                                ENTER: parse_trace_statement(): 
-                                RETURN(node): parse_trace_statement() - (NULL)
                                 ENTER: parse_inline_statement(): 
                                 RETURN(node): parse_inline_statement() - (NULL)
                                 ENTER: parse_yield_statement(): 
                                 RETURN(node): parse_yield_statement() - (NULL)
                                 ENTER: parse_type_statement(): 
                                 RETURN(node): parse_type_statement() - (NULL)
-                                ENTER: parse_exit_statement(): 
-                                RETURN(node): parse_exit_statement() - (NULL)
-                                ENTER: parse_print_statement(): 
-                                RETURN(node): parse_print_statement() - (NULL)
                                 ENTER: parse_return_statement(): 
                                 RETURN(node): parse_return_statement() - (NULL)
                                 ENTER: parse_raise_statement(): 
