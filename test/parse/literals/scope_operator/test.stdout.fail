@@ -1,3 +1,0 @@
-difference line: 30
-RETURN(create_string(tmp_buf)): find_file() - (!NULL)
-RETURN(create_string(tmp_buf)): find_file()

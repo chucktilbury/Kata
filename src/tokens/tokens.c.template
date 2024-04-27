@@ -1,0 +1,63 @@
+/* This file is generated with a script. Do not edit. */
+#include <assert.h>
+#include "tokens.h"
+
+KeywordList keyword_list[] = {
+%s
+};
+
+const int num_keywords = (sizeof(keyword_list) / sizeof(KeywordList));
+
+const char* tok_to_str(Token* tok) {
+    
+    assert(tok != NULL);
+
+    return        
+        /* keywords */
+%s
+
+        /* other tokens */
+        (tok->type == TOK_END_OF_FILE)? "end of file":
+        (tok->type == TOK_END_OF_INPUT)? "end of input":
+        (tok->type == TOK_ERROR)? "error":
+        (tok->type == TOK_LORE)? "<=":
+        (tok->type == TOK_GORE)? ">=":
+        (tok->type == TOK_EQU)? "==":
+        (tok->type == TOK_NEQU)? "!=":
+        (tok->type == TOK_OR)? "or":
+        (tok->type == TOK_AND)? "and":
+        (tok->type == TOK_NOT)? "not":
+        (tok->type == TOK_ADD_ASSIGN)? "+=":
+        (tok->type == TOK_SUB_ASSIGN)? "-=":
+        (tok->type == TOK_MUL_ASSIGN)? "*=":
+        (tok->type == TOK_DIV_ASSIGN)? "/=":
+        (tok->type == TOK_MOD_ASSIGN)? "%%=":
+        (tok->type == TOK_ADD)? "+":
+        (tok->type == TOK_SUB)? "-":
+        (tok->type == TOK_ASSIGN)? "=":
+        (tok->type == TOK_DIV)? "/":
+        (tok->type == TOK_MUL)? "*":
+        (tok->type == TOK_MOD)? "%%":
+        (tok->type == TOK_OPAREN)? "(":
+        (tok->type == TOK_CPAREN)? ")":
+        (tok->type == TOK_OCBRACE)? "{":
+        (tok->type == TOK_CCBRACE)? "}":
+        (tok->type == TOK_OSBRACE)? "[":
+        (tok->type == TOK_CSBRACE)? "]":
+        (tok->type == TOK_COMMA)? ",":
+        (tok->type == TOK_DOT)? ".":
+        (tok->type == TOK_OPBRACE)? "<":
+        (tok->type == TOK_CPBRACE)? ">":
+        (tok->type == TOK_COLON)? ":":
+        (tok->type == TOK_CARAT)? "^":
+        (tok->type == TOK_AMPER)? "&":
+        (tok->type == TOK_LITERAL_FLOAT)? "literal float":
+        (tok->type == TOK_LITERAL_SIGNED)? "literal signed":
+        (tok->type == TOK_LITERAL_UNSIGNED)? "literal unsigned":
+        (tok->type == TOK_LITERAL_DSTR)? "literal dstrg":
+        (tok->type == TOK_LITERAL_SSTR)? "literal sstrg":
+        (tok->type == TOK_SYMBOL)? "symbol":
+        (tok->type == TOK_UNARY_MINUS)? "unary minus": "UNKNOWN";
+}
+
+
