@@ -10,9 +10,9 @@
  */
 #include <assert.h>
 
-#include "trace.h"
 #include "ast.h"
 #include "errors.h"
+#include "trace.h"
 
 /**
  * @brief
@@ -165,5 +165,3 @@ void traverse_array_reference(ast_array_reference* node, PassFunc pre, PassFunc 
     AST_CALLBACK(post, node);
     RET;
 }
-
-

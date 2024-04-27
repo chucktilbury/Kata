@@ -10,9 +10,9 @@
  */
 #include <assert.h>
 
-#include "trace.h"
 #include "ast.h"
 #include "errors.h"
+#include "trace.h"
 
 /**
  * @brief
@@ -219,5 +219,3 @@ void traverse_case_body(ast_case_body* node, PassFunc pre, PassFunc post) {
     AST_CALLBACK(post, node);
     RET;
 }
-
-

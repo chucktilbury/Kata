@@ -19,8 +19,8 @@
  */
 typedef struct _ast_import_statement_ {
     ast_node node;
-    Token* name; // optional alternative name
-    Token* mod; // module to import
+    Token* name;                 // optional alternative name
+    Token* mod;                  // module to import
     struct _ast_module_* module; // imported module
 } ast_import_statement;
 

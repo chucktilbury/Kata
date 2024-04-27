@@ -11,7 +11,7 @@
 #define __AST_H__
 
 typedef enum {
-    AST_FIRST = 3000,
+    AST_FIRST  = 3000,
     AST_module = AST_FIRST,
     AST_module_item,
     AST_namespace_item,
@@ -88,7 +88,7 @@ typedef enum {
     AST_compound_name_list,
     AST_array_param_list,
     AST_class_var_declaration,
-    AST_LAST,   // number of non-terminals in the list
+    AST_LAST, // number of non-terminals in the list
 } AstType;
 
 #include <stdbool.h>
@@ -100,23 +100,23 @@ typedef struct _ast_node_ {
 
 #include "scanner.h"
 // #include "trace.h"
-#include "pass.h"
 #include "parse_state.h"
+#include "pass.h"
 // #include "link_list.h"
 
-#include "module.h"
 #include "compound.h"
-#include "literals.h"
-#include "strg.h"
-#include "vars.h"
-#include "list.h"
+#include "except.h"
+#include "expr.h"
+#include "flow.h"
 #include "func.h"
 #include "func_body.h"
-#include "expr.h"
-#include "loop.h"
-#include "flow.h"
-#include "except.h"
 #include "import.h"
+#include "list.h"
+#include "literals.h"
+#include "loop.h"
+#include "module.h"
+#include "strg.h"
+#include "vars.h"
 
 // public interface
 void traverse_ast(ast_module* node, PassFunc pre, PassFunc post);
@@ -125,9 +125,12 @@ const char* nterm_to_str(ast_node* node);
 ast_node* create_ast_node(AstType type, size_t size);
 
 // hide the icky syntax
-#define AST_CALLBACK(f, n) do { if(NULL != (f)) (*(f))((ast_node*)(n)); } while(false)
+#define AST_CALLBACK(f, n)          \
+    do {                            \
+        if(NULL != (f))             \
+            (*(f))((ast_node*)(n)); \
+    } while(false)
 #define CREATE_AST_NODE(t, n) (n*)create_ast_node((t), sizeof(n))
 #define TRAVERSE_ERROR AST_FIRST
 
 #endif /* __AST_H__ */
-

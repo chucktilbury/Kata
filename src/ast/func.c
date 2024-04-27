@@ -10,8 +10,8 @@
  */
 #include <assert.h>
 
-#include "trace.h"
 #include "ast.h"
+#include "trace.h"
 
 /**
  * @brief
@@ -92,7 +92,7 @@ void traverse_function_declaration(ast_function_declaration* node, PassFunc pre,
     ENTER;
     AST_CALLBACK(pre, node);
 
-    TRACE("is_virtual: %s", (node->is_virtual)? "true": "false");
+    TRACE("is_virtual: %s", (node->is_virtual) ? "true" : "false");
     TRACE_TERM(node->name);
     traverse_type_name_list(node->inputs, pre, post);
     traverse_type_name_list(node->outputs, pre, post);
@@ -118,7 +118,7 @@ void traverse_create_declaration(ast_create_declaration* node, PassFunc pre, Pas
     ENTER;
     AST_CALLBACK(pre, node);
 
-    TRACE("is_virtual: %s", (node->is_virtual)? "true": "false");
+    TRACE("is_virtual: %s", (node->is_virtual) ? "true" : "false");
     traverse_type_name_list(node->inputs, pre, post);
 
     AST_CALLBACK(post, node);
@@ -142,7 +142,7 @@ void traverse_destroy_declaration(ast_destroy_declaration* node, PassFunc pre, P
     ENTER;
     AST_CALLBACK(pre, node);
 
-    TRACE("is_virtual: %s", (node->is_virtual)? "true": "false");
+    TRACE("is_virtual: %s", (node->is_virtual) ? "true" : "false");
 
     AST_CALLBACK(post, node);
     RET;
@@ -166,7 +166,7 @@ void traverse_function_definition(ast_function_definition* node, PassFunc pre, P
     ENTER;
     AST_CALLBACK(pre, node);
 
-    TRACE("is_virtual: %s", (node->is_virtual)? "true": "false");
+    TRACE("is_virtual: %s", (node->is_virtual) ? "true" : "false");
     traverse_compound_name(node->name, pre, post);
     traverse_var_decl_list(node->inputs, pre, post);
     traverse_var_decl_list(node->outputs, pre, post);
@@ -245,7 +245,7 @@ void traverse_create_definition(ast_create_definition* node, PassFunc pre, PassF
     ENTER;
     AST_CALLBACK(pre, node);
 
-    TRACE("is_virtual: %s", (node->is_virtual)? "true": "false");
+    TRACE("is_virtual: %s", (node->is_virtual) ? "true" : "false");
     traverse_create_name(node->name, pre, post);
     traverse_var_decl_list(node->inputs, pre, post);
     traverse_function_body(node->body, pre, post);
@@ -271,7 +271,7 @@ void traverse_destroy_definition(ast_destroy_definition* node, PassFunc pre, Pas
     ENTER;
     AST_CALLBACK(pre, node);
 
-    TRACE("is_virtual: %s", (node->is_virtual)? "true": "false");
+    TRACE("is_virtual: %s", (node->is_virtual) ? "true" : "false");
     traverse_destroy_name(node->name, pre, post);
     traverse_function_body(node->body, pre, post);
 
@@ -301,7 +301,7 @@ void traverse_function_body(ast_function_body* node, PassFunc pre, PassFunc post
         while(NULL != (elem = iter_link_list(node->list, &mark)))
             traverse_function_body_element(elem, pre, post);
     }
-    else 
+    else
         TRACE("no function body");
 
     AST_CALLBACK(post, node);
@@ -349,4 +349,3 @@ void traverse_function_assignment(ast_function_assignment* node, PassFunc pre, P
     AST_CALLBACK(post, node);
     RET;
 }
-

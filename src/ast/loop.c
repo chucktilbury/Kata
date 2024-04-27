@@ -10,8 +10,8 @@
  */
 #include <assert.h>
 
-#include "trace.h"
 #include "ast.h"
+#include "trace.h"
 
 /**
  * @brief
@@ -121,5 +121,3 @@ void traverse_for_clause(ast_for_clause* node, PassFunc pre, PassFunc post) {
     AST_CALLBACK(post, node);
     RET;
 }
-
-

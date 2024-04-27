@@ -10,9 +10,9 @@
  */
 #include <assert.h>
 
+#include "ast.h"
 #include "link_list.h"
 #include "trace.h"
-#include "ast.h"
 
 /**
  * @brief
@@ -111,4 +111,3 @@ void traverse_except_clause(ast_except_clause* node, PassFunc pre, PassFunc post
     AST_CALLBACK(post, node);
     RET;
 }
-

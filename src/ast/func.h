@@ -91,7 +91,7 @@ typedef struct _ast_function_definition_ {
  *
  *  ctor_name
  *      = SYMBOL ('.' SYMBOL)? '.' 'create'
-*/
+ */
 typedef struct _ast_create_name_ {
     ast_node node;
     LinkList* list;
@@ -102,7 +102,7 @@ typedef struct _ast_create_name_ {
  *
  *  dtor_name
  *      = SYMBOL ('.' SYMBOL)? '.' 'destroy'
-*/
+ */
 typedef struct _ast_destroy_name_ {
     ast_node node;
     LinkList* list;

@@ -10,9 +10,9 @@
  */
 #include <assert.h>
 
-#include "trace.h"
 #include "ast.h"
 #include "errors.h"
+#include "trace.h"
 
 /**
  * @brief
@@ -266,5 +266,3 @@ void traverse_raise_statement(ast_raise_statement* node, PassFunc pre, PassFunc 
     AST_CALLBACK(post, node);
     RET;
 }
-
-

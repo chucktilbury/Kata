@@ -10,10 +10,10 @@
  */
 #include <assert.h>
 
-#include "link_list.h"
-#include "trace.h"
 #include "ast.h"
 #include "errors.h"
+#include "link_list.h"
+#include "trace.h"
 
 /**
  * @brief
@@ -37,7 +37,8 @@ void traverse_expression(ast_expression* node, PassFunc pre, PassFunc post) {
             else if(AST_operator == ast_node_type(nterm))
                 traverse_operator((ast_operator*)nterm, pre, post);
             else
-                fatal_error("expected a primary or operator, but got %s", nterm_to_str(nterm));
+                fatal_error("expected a primary or operator, but got %s",
+                            nterm_to_str(nterm));
         }
     }
 
@@ -139,8 +140,8 @@ void traverse_expr_primary(ast_expr_primary* node, PassFunc pre, PassFunc post) 
 }
 
 /**
- * @brief The parser correctly treats this as optional in some circumstances. 
- * When that happens, the expression list is returned as NULL, so this 
+ * @brief The parser correctly treats this as optional in some circumstances.
+ * When that happens, the expression list is returned as NULL, so this
  * function must handle that possibility.
  *
  *  expression_list
@@ -151,7 +152,7 @@ void traverse_expr_primary(ast_expr_primary* node, PassFunc pre, PassFunc post) 
  */
 void traverse_expression_list(ast_expression_list* node, PassFunc pre, PassFunc post) {
 
-    //assert(node != NULL);
+    // assert(node != NULL);
 
     ENTER;
     if(node != NULL) {
@@ -211,8 +212,8 @@ void traverse_assignment_item(ast_assignment_item* node, PassFunc pre, PassFunc 
             traverse_compound_reference((ast_compound_reference*)node->nterm, pre, post);
             break;
         default:
-            fatal_error("unexpected node type in %s: %d",
-                    __func__, ast_node_type(node->nterm));
+            fatal_error("unexpected node type in %s: %d", __func__,
+                        ast_node_type(node->nterm));
     }
 
     AST_CALLBACK(post, node);
@@ -247,5 +248,3 @@ void traverse_assignment(ast_assignment* node, PassFunc pre, PassFunc post) {
     AST_CALLBACK(post, node);
     RET;
 }
-
-

@@ -10,10 +10,10 @@
  */
 #include <assert.h>
 
-#include "link_list.h"
-#include "trace.h"
 #include "ast.h"
 #include "errors.h"
+#include "link_list.h"
+#include "trace.h"
 
 
 /**
@@ -121,4 +121,3 @@ void traverse_compound_reference(ast_compound_reference* node, PassFunc pre, Pas
     AST_CALLBACK(post, node);
     RET;
 }
-

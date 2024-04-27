@@ -10,9 +10,9 @@
  */
 #include <assert.h>
 
+#include "ast.h"
 #include "link_list.h"
 #include "trace.h"
-#include "ast.h"
 
 /**
  * @brief
@@ -31,7 +31,7 @@ void traverse_var_decl(ast_var_decl* node, PassFunc pre, PassFunc post) {
     AST_CALLBACK(pre, node);
 
     traverse_type_name(node->type, pre, post);
-    TRACE("is_const: %s", node->is_const? "true": "false");
+    TRACE("is_const: %s", node->is_const ? "true" : "false");
     TRACE_TERM(node->name);
 
     AST_CALLBACK(post, node);
@@ -81,11 +81,10 @@ void traverse_var_definition(ast_var_definition* node, PassFunc pre, PassFunc po
     AST_CALLBACK(pre, node);
 
     traverse_var_decl(node->type, pre, post);
-    TRACE("is_assigned: %s", node->is_assigned? "true": "false");
+    TRACE("is_assigned: %s", node->is_assigned ? "true" : "false");
     if(node->is_assigned)
         traverse_assignment_item(node->item, pre, post);
 
     AST_CALLBACK(post, node);
     RET;
 }
-

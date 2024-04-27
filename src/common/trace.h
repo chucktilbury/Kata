@@ -65,11 +65,11 @@ void print_terminal(void* ptr);
         if(peek_trace_state()) {                      \
             trace_count -= trace_increment;           \
             PAD;                                      \
-            printf("RETURN(%s): %s()", #v, __func__);                          \
-            if((void*)(v) == (void*)0)                                         \
-                printf(" - (NULL)");                                           \
-            else                                                               \
-                printf(" - (!NULL)");                                          \
+            printf("RETURN(%s): %s()", #v, __func__); \
+            if((void*)(v) == (void*)0)                \
+                printf(" - (NULL)");                  \
+            else                                      \
+                printf(" - (!NULL)");                 \
             CAP;                                      \
         }                                             \
         return (v);                                   \

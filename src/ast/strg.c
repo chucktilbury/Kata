@@ -10,9 +10,9 @@
  */
 #include <assert.h>
 
-#include "trace.h"
 #include "ast.h"
 #include "errors.h"
+#include "trace.h"
 
 /**
  * @brief
@@ -91,8 +91,8 @@ void traverse_string_expr_item(ast_string_expr_item* node, PassFunc pre, PassFun
             traverse_literal_value((ast_literal_value*)node->nterm, pre, post);
             break;
         default:
-            fatal_error("unexpected node type in %s: %d",
-                        __func__, ast_node_type(node->nterm));
+            fatal_error("unexpected node type in %s: %d", __func__,
+                        ast_node_type(node->nterm));
     }
 
     AST_CALLBACK(post, node);
@@ -126,5 +126,3 @@ void traverse_string_expr_list(ast_string_expr_list* node, PassFunc pre, PassFun
     }
     RET;
 }
-
-

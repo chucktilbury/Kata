@@ -10,8 +10,8 @@
  */
 #include <assert.h>
 
-#include "trace.h"
 #include "ast.h"
+#include "trace.h"
 
 /**
  * @brief

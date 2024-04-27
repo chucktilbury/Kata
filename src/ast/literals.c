@@ -10,9 +10,9 @@
  */
 #include <assert.h>
 
-#include "trace.h"
 #include "ast.h"
 #include "errors.h"
+#include "trace.h"
 
 /**
  * @brief
@@ -118,7 +118,8 @@ void traverse_type_name(ast_type_name* node, PassFunc pre, PassFunc post) {
             traverse_compound_name((ast_compound_name*)node->nterm, pre, post);
             break;
         default:
-            fatal_error("unexpected node type in %s: %s", __func__, nterm_to_str(node->nterm));
+            fatal_error("unexpected node type in %s: %s", __func__,
+                        nterm_to_str(node->nterm));
     }
 
     AST_CALLBACK(post, node);
@@ -162,4 +163,3 @@ void traverse_error(ast_error* node, PassFunc pre, PassFunc post) {
     AST_CALLBACK(post, node);
     RET;
 }
-

@@ -10,10 +10,10 @@
  */
 #include <assert.h>
 
-#include "trace.h"
-#include "link_list.h"
 #include "ast.h"
 #include "errors.h"
+#include "link_list.h"
+#include "trace.h"
 
 const char* scope_name(ScopeType type);
 
@@ -76,8 +76,8 @@ void traverse_module_item(ast_module_item* node, PassFunc pre, PassFunc post) {
             traverse_start_function((ast_start_function*)node->nterm, pre, post);
             break;
         default:
-            fatal_error("unexpected node type in %s: %d",
-                    __func__, ast_node_type(node->nterm));
+            fatal_error("unexpected node type in %s: %d", __func__,
+                        ast_node_type(node->nterm));
     }
 
     AST_CALLBACK(post, node);
@@ -130,8 +130,8 @@ void traverse_namespace_item(ast_namespace_item* node, PassFunc pre, PassFunc po
             traverse_var_definition((ast_var_definition*)node->nterm, pre, post);
             break;
         default:
-            fatal_error("unexpected node type in %s: %d",
-                    __func__, ast_node_type(node->nterm));
+            fatal_error("unexpected node type in %s: %d", __func__,
+                        ast_node_type(node->nterm));
     }
 
     AST_CALLBACK(post, node);
@@ -192,7 +192,8 @@ void traverse_class_item(ast_class_item* node, PassFunc pre, PassFunc post) {
             traverse_scope_operator((ast_scope_operator*)node->nterm, pre, post);
             break;
         case AST_class_var_declaration:
-            traverse_class_var_declaration((ast_class_var_declaration*)node->nterm, pre, post);
+            traverse_class_var_declaration((ast_class_var_declaration*)node->nterm,
+                                           pre, post);
             break;
         case AST_function_declaration:
             traverse_function_declaration((ast_function_declaration*)node->nterm, pre, post);
@@ -204,8 +205,8 @@ void traverse_class_item(ast_class_item* node, PassFunc pre, PassFunc post) {
             traverse_destroy_declaration((ast_destroy_declaration*)node->nterm, pre, post);
             break;
         default:
-            fatal_error("unexpected node type in %s: %d",
-                    __func__, ast_node_type(node->nterm));
+            fatal_error("unexpected node type in %s: %d", __func__,
+                        ast_node_type(node->nterm));
     }
 
     AST_CALLBACK(post, node);
