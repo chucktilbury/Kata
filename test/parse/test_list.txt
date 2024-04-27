@@ -1,5 +1,6 @@
 # this is the list of groups of tests.
 
+compound:run
 literals:run
 loop:run
 module:run
@@ -12,4 +13,4 @@ func:skip
 func_body:skip
 import:skip
 list:run
-compound:run
+

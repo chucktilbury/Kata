@@ -35,12 +35,10 @@ file(GLOB_RECURSE format_xxfiles
 add_custom_target(format
     COMMENT "Format the source code"
     COMMAND clang-format --verbose -i ${format_xxfiles}
-    #WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src
 )
 
 add_custom_target(test
     COMMENT "Build the test programs"
     COMMAND echo ${PROJECT_SOURCE_DIR}/test
     COMMAND make -C test
-    #WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
 )
