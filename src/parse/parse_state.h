@@ -31,6 +31,7 @@ typedef struct {
     LinkList* scope_stack;
     LinkList* name_stack;
     bool is_import;
+    bool in_recovery;
 } ParserState;
 
 ParserState* create_parser_state();
@@ -42,7 +43,11 @@ void push_name(String* name);
 String* pop_name();
 String* get_name();
 String* get_compound_name();
-void set_import_state(bool val);
 const char* scope_name(ScopeType type);
+
+void set_import_state(bool val);
+bool get_import_state();
+void set_recovery_state(bool state);
+bool get_recovery_state();
 
 #endif /* __PARSE_STATE_H__ */

@@ -59,5 +59,8 @@
         "Weiser",
         "Wextra"
     ],
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "files.associations": {
+        "exception.h": "c"
+    }
 }

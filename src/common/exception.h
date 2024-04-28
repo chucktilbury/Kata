@@ -16,10 +16,12 @@
  * @date 03-29-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef __EXCEPT_H__
-#define __EXCEPT_H__
+#ifndef __EXCEPTION_H__
+#define __EXCEPTION_H__
 
 #include <setjmp.h>
+#include <string.h>
+#include "memory.h"
 
 typedef struct _exception_stack_ {
     jmp_buf jmp;
@@ -119,4 +121,4 @@ typedef enum {
 } UTIL_EXCEPTIONS;
 
 
-#endif /* __EXCEPT_H__ */
+#endif /* __EXCEPTION_H__ */

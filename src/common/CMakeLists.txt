@@ -10,6 +10,7 @@ add_library(${PROJECT_NAME} STATIC
     trace.c
     sstrings.c
     paths.c
+    exception.c
 )
 
 target_compile_options(${PROJECT_NAME}

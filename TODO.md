@@ -11,6 +11,8 @@
 * When the scanner receives a float with the format of 123.123.123, then it correctly scans the float and then returns the '.' as the next token. However, the parser does not produce a correct error in that case.
 * Scanner incorrectly sees a number such as "123..123" as a float, when it should flag an error. and stop scanning at the first '.'
 * Scanner incorrectly sees a number such as "123." as a float, when it should flag an error. and stop scanning at the first '.'
+* Need a way to add path entries at build time so that imports can be located.
+* Need a way to reset the parser to start over after errors.
 
 
 

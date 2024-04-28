@@ -10,17 +10,23 @@
 #include "ast.h"
 #include "memory.h"
 #include "trace.h"
+#include "errors.h"
 
 void traverse_ast(ast_module* node, PassFunc pre, PassFunc post) {
 
     ENTER;
-    if(node != NULL) {
-        AST_CALLBACK(pre, node);
-        traverse_module(node, pre, post);
-        AST_CALLBACK(post, node);
+    if(0 == get_num_errors()) {
+        if(node != NULL) {
+            AST_CALLBACK(pre, node);
+            traverse_module(node, pre, post);
+            AST_CALLBACK(post, node);
+        }
+        else {
+            TRACE("no ast present");
+        }
     }
     else {
-        TRACE("no ast present");
+        TRACE("do not traverse with errors");
     }
     RET;
 }

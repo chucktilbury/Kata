@@ -19,6 +19,7 @@
 #include "memory.h"
 #include "scanner.h"
 #include "trace.h"
+#include "parse_state.h"
 
 extern Token* scan_token();
 static unsigned serial = 0;
@@ -203,6 +204,19 @@ void finalize_token_queue() {
     RET;
 }
 
+void kill_token_queue() {
+
+    ENTER;
+
+    TokQueue* tqueue = peek_link_list(tqueue_stack);
+    tqueue->head = NULL;
+    tqueue->crnt = NULL;
+    tqueue->tail = NULL;
+    append_token(scan_token());
+
+    RET;
+}
+
 /**
  * @brief Grab the current queue pointer so that it can be reset when the
  * crnt pointer moves as a result of parsing the line. This is used in
@@ -232,11 +246,13 @@ void reset_token_queue(void* post) {
 
     ENTER;
 
-    TokQueue* tqueue = peek_link_list(tqueue_stack);
-    assert(tqueue != NULL);
+    if(!get_recovery_state()) {
+        TRACE("recover the queue");
+        TokQueue* tqueue = peek_link_list(tqueue_stack);
+        assert(tqueue != NULL);
 
-    tqueue->crnt = (TokQueueItem*)post;
-
+        tqueue->crnt = (TokQueueItem*)post;
+    }
     RET;
 }
 
@@ -246,8 +262,6 @@ void dump_token_queue() {
     assert(tqueue != NULL);
     assert(tqueue->head != NULL);
 
-    // Token* tok;
-    // for(tok = iterate_token_queue(&mark); tok != NULL; tok = iterate_token_queue(&mark)) {
     for(TokQueueItem* crnt = tqueue->head; crnt != NULL; crnt = crnt->next) {
         print_terminal(crnt->tok);
         fputc('\n', stdout);

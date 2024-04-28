@@ -120,4 +120,6 @@ ast_import_statement* parse_import_statement();
 void init_parser(const char* fname);
 ast_module* parse();
 
+#define PARSER_SYNTAX_ERROR 1000
+
 #endif /* __PARSE_H__ */

@@ -162,3 +162,21 @@ void set_import_state(bool val) {
     RET;
 }
 
+bool get_import_state() {
+
+    ENTER;
+    RETV(parser_state->is_import);
+}
+
+void set_recovery_state(bool state) {
+
+    ENTER;
+    parser_state->in_recovery = state;
+    RET;
+}
+
+bool get_recovery_state() {
+
+    ENTER;
+    RETV(parser_state->in_recovery);
+}

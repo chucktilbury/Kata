@@ -13,28 +13,71 @@
 #include "errors.h"
 #include "fileio.h"
 #include "scanner.h"
+#include "trace.h"
 
 #include <stdarg.h>
 
 static int num_errors   = 0;
 static int num_warnings = 0;
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
+#pragma GCC diagnostic ignored "-Wimplicit-fallthrough="
 /*
- * Recover from a syntax error. This discards the current token queue and
- * reads five new tokens.
- *
- * TODO: This should search for the end of a block or a keyword where parsing
- * can resume and errors caused by the one that this is showing has been
- * skipped.
+ * Recover from a syntax error. This discards tokens until it's reasonably 
+ * possible to resume parsing. 
+ * 
  */
 static void recover_error() {
 
-    dump_token_queue();
-    // discard_token_queue();
-    // for(int i = 0; i < 5; i++)
-    //     advance_token();
-    // reset_token_queue();
+    ENTER;
+
+    //dump_token_queue();
+
+    bool finished = false;
+    while(!finished) {
+        TRACE_TERM(get_token());
+        switch(TTYPE) {
+            case TOK_CPAREN:
+            case TOK_CCBRACE:
+            case TOK_CSBRACE:
+                // consume the token and continue
+                advance_token();
+                finished = true;
+                break;
+            case TOK_OPAREN:
+            case TOK_OCBRACE:
+            case TOK_OSBRACE:
+                // continue parsing from where the error occoured
+                finished = true;
+                break;
+            case TOK_FUNC:
+            case TOK_FUNCTION:
+            case TOK_VAR:
+            case TOK_VARIABLE:
+            case TOK_CLASS:
+            case TOK_NAMESPACE:
+            case TOK_IMPORT:
+            case TOK_END_OF_FILE:
+            case TOK_END_OF_INPUT:
+                // break
+                finished = true;
+                break;
+            default:
+                // simply consume the current token.
+                advance_token();
+                break;
+        }
+    }
+
+    kill_token_queue();
+    set_recovery_state(true);
+    
+    //dump_token_queue();
+
+    RET;
 }
+#pragma GCC diagnostic pop
 
 /**
  * @brief Abort the program.

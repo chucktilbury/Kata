@@ -12,6 +12,7 @@
 #include "parse.h"
 #include "scanner.h"
 #include "paths.h"
+#include "exception.h"
 
 // this is a temporary path for development otherwise, this would be received
 // from configurations.
@@ -60,8 +61,9 @@ ast_module* parse() {
     ast_module* node = NULL;
 
     if(NULL == (node = parse_module())) {
-        show_syntax("module cannot be empty");
+        show_warning("module is empty");
     }
 
     RETV(node);
 }
+
