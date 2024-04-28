@@ -272,13 +272,18 @@ ast_expr_primary* parse_expr_primary() {
     ast_node* nterm;
     void* post = post_token_queue();
 
-    if((NULL != (nterm = (ast_node*)parse_literal_value())) ||
-            (NULL != (nterm = (ast_node*)parse_compound_reference()))) {
-
+    if(NULL != (nterm = (ast_node*)parse_literal_value())) {
+        TRACE("literal value");
+        TRACE_TERM(get_token());
         node = CREATE_AST_NODE(AST_expr_primary, ast_expr_primary);
         node->nterm = nterm;
         flag = false;
-        finalize_token_queue();
+    }
+    else if (NULL != (nterm = (ast_node*)parse_compound_reference())) {
+        TRACE("compound reference");
+        node = CREATE_AST_NODE(AST_expr_primary, ast_expr_primary);
+        node->nterm = nterm;
+        flag = false;
     }
     else
         reset_token_queue(post);
@@ -405,7 +410,6 @@ ast_expression_list* parse_expression_list() {
  *  assignment_item
  *      = expression
  *      / list_init
- *      / dict_init
  *      / string_literal
  *      / cast_statement
  *      / function_assignment
@@ -420,16 +424,16 @@ ast_assignment_item* parse_assignment_item() {
     ast_node* nterm;
     void* post = post_token_queue();
 
-    if((NULL != (nterm = (ast_node*)parse_expression())) ||
-            (NULL != (nterm = (ast_node*)parse_list_init())) ||
-            (NULL != (nterm = (ast_node*)parse_dict_init())) ||
-            (NULL != (nterm = (ast_node*)parse_string_literal())) ||
-            (NULL != (nterm = (ast_node*)parse_cast_statement())) ||
-            (NULL != (nterm = (ast_node*)parse_function_assignment()))) {
+    if(
+        (NULL != (nterm = (ast_node*)parse_expression())) ||
+        (NULL != (nterm = (ast_node*)parse_list_init())) ||
+        (NULL != (nterm = (ast_node*)parse_string_literal())) ||
+        (NULL != (nterm = (ast_node*)parse_cast_statement())) ||
+        (NULL != (nterm = (ast_node*)parse_function_assignment()))) {
 
         node = CREATE_AST_NODE(AST_assignment_item, ast_assignment_item);
         node->nterm = nterm;
-        finalize_token_queue();
+        //finalize_token_queue();
     }
     else
         reset_token_queue(post);
@@ -601,6 +605,7 @@ ast_expression* parse_expression() {
             case 0:
                 // entry point; make sure it's an expression
                 TRACE("state: %d, stack: %d, queue: %d", state, len_link_list(stack), len_link_list(queue));
+                TRACE_TERM(get_token());
                 if(NULL != (nterm = (ast_node*)parse_operator())) {
                     switch(token_type(((ast_operator*)nterm)->tok)) {
                         case TOK_CPAREN:
@@ -782,7 +787,7 @@ ast_expression* parse_expression() {
                     node = CREATE_AST_NODE(AST_expression, ast_expression);
                     node->list = queue;
                     node->expr_type = expr_type;
-                    finalize_token_queue();
+                    //finalize_token_queue();
                     finished = true;
                 }
                 break;

@@ -3,7 +3,8 @@
  *
  * @brief For a list init, it must contain either list init items or dict 
  * init items. Rather than make the 2 different ones dependent on each other,
- * they are combined into a list init production.
+ * they are combined into a list init production. This does not change the 
+ * grammar, it only changes the way the parser is implemented.
  *
  * @author Charles Tilbury (chucktilbury@gmail.com)
  * @version 0.0
@@ -19,7 +20,6 @@
  *
  *  list_init
  *      = '[' assignment_item ( ',' assignment_item )* ']'
- *      / '[' dict_init_element ( ',' dict_init_element )* ']'
  *
  * @return ast_list_init*
  *
@@ -28,7 +28,7 @@ ast_list_init* parse_list_init() {
 
     ENTER;
     ast_list_init* node = NULL;
-    ast_node* nterm;
+    ast_assignment_item* nterm;
     LinkList* list = create_link_list();
 
     bool finished = false;
@@ -45,94 +45,41 @@ ast_list_init* parse_list_init() {
                     state = 1;
                 }
                 else
-                    state = 102;
+                    state = 101;
                 break;
 
             case 1:
-                // at least one assignment item is required. determine if it's 
-                // a list or a dictionary
+                // at least one assignment item is required
                 TRACE("state = %d", state);
-                if(NULL != (nterm = (ast_node*)parse_dict_init_element())) {
+                if(NULL != (nterm = parse_assignment_item())) {
                     append_link_list(list, nterm);
-                    state = 5;
-                }
-                else if(NULL != (nterm = (ast_node*)parse_assignment_item())) {
-                    append_link_list(list, nterm);
-                    state = 3;
+                    state = 2;
                 }
                 else {
-                    EXPECTED("an assignment item or a dict element");
-                    state = 103;
+                    EXPECTED("an assignment item");
+                    state = 102;
                 }
                 break;
 
             case 2:
-                // at least one assignment item is required. determine if it's 
-                // a list or a dictionary
-                TRACE("state = %d", state);
-                if(NULL != (nterm = (ast_node*)parse_assignment_item())) {
-                    append_link_list(list, nterm);
-                    state = 3;
-                }
-                else {
-                    EXPECTED("an assignment item");
-                    state = 103;
-                }
-                break;
-
-            case 3:
-                // a ',' or a ']' or error in the context of a list init
+                // a ',' or a ']' or error
                 TRACE("state = %d", state);
                 if(TOK_COMMA == TTYPE) {
                     advance_token();
-                    state = 2;
+                    state = 1;
                 }
                 else if(TOK_CSBRACE == TTYPE) {
                     advance_token();
                     state = 100;
                 }
                 else {
-                    if(TOK_COLON == TTYPE)
-                        SYNTAX("expected a list init item but got a dict init item");
-                    else
-                        EXPECTED("a ',' or a ']'");
-                    state = 103;
-                }
-                break;
-
-            case 4:
-                // at least one assignment item is required. determine if it's 
-                // a list or a dictionary
-                TRACE("state = %d", state);
-                if(NULL != (nterm = (ast_node*)parse_dict_init_element())) {
-                    append_link_list(list, nterm);
-                    state = 5;
-                }
-                else {
-                    EXPECTED("a dict element");
-                    state = 103;
-                }
-                break;
-
-            case 5:
-                // a ',' or a ']' or error in the context of a dict init
-                TRACE("state = %d", state);
-                if(TOK_COMMA == TTYPE) {
-                    advance_token();
-                    state = 4;
-                }
-                else if(TOK_CSBRACE == TTYPE) {
-                    advance_token();
-                    state = 101;
-                }
-                else {
                     EXPECTED("a ',' or a ']'");
-                    state = 103;
+                    state = 102;
                 }
                 break;
 
             case 100:
-                // completed parse for list init
+                // completed parse
                 TRACE("state = %d", state);
                 node = CREATE_AST_NODE(AST_list_init, ast_list_init);
                 node->list = list;
@@ -140,21 +87,13 @@ ast_list_init* parse_list_init() {
                 break;
 
             case 101:
-                // completed parse for dict init
-                TRACE("state = %d", state);
-                node = (ast_list_init*)CREATE_AST_NODE(AST_dict_init, ast_dict_init);
-                node->list = list;
-                finished = true;
-                break;
-
-            case 102:
                 // not a match
                 TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
-            case 103:
+            case 102:
                 // error
                 TRACE("state = %d", state);
                 node = NULL;
@@ -259,98 +198,99 @@ ast_dict_init_element* parse_dict_init_element() {
     RETV(node);
 }
 
-// /**
-//  * @brief
-//  *
-//  *  dict_init
-//  *
-//  * @return ast_dict_init*
-//  *
-//  */
-// ast_dict_init* parse_dict_init() {
+/**
+ * @brief
+ *
+ *  dict_init
+ *      = '[' dict_init_element ( ',' dict_init_element )* ']'
+ *
+ * @return ast_dict_init*
+ *
+ */
+ast_dict_init* parse_dict_init() {
 
-//     ENTER;
-//     ast_dict_init* node = NULL;
-//     ast_dict_init_element* nterm;
-//     LinkList* list = create_link_list();
+    ENTER;
+    ast_dict_init* node = NULL;
+    ast_dict_init_element* nterm;
+    LinkList* list = create_link_list();
 
-//     bool finished = false;
-//     int state = 0;
-//     void* post = post_token_queue();
+    bool finished = false;
+    int state = 0;
+    void* post = post_token_queue();
 
-//     while(!finished) {
-//         switch(state) {
-//             case 0:
-//                 // '[' or no match
-//                 TRACE("state = %d", state);
-//                 if(TOK_OSBRACE == TTYPE) {
-//                     advance_token();
-//                     state = 1;
-//                 }
-//                 else
-//                     state = 101;
-//                 break;
+    while(!finished) {
+        switch(state) {
+            case 0:
+                // '[' or no match
+                TRACE("state = %d", state);
+                if(TOK_OSBRACE == TTYPE) {
+                    advance_token();
+                    state = 1;
+                }
+                else
+                    state = 101;
+                break;
 
-//             case 1:
-//                 // must be a dict element or error
-//                 TRACE("state = %d", state);
-//                 if(NULL != (nterm = parse_dict_init_element())) {
-//                     append_link_list(list, nterm);
-//                     state = 2;
-//                 }
-//                 else {
-//                     EXPECTED("a dictionary init element");
-//                     state = 102;
-//                 }
-//                 break;
+            case 1:
+                // must be a dict element or error
+                TRACE("state = %d", state);
+                if(NULL != (nterm = parse_dict_init_element())) {
+                    append_link_list(list, nterm);
+                    state = 2;
+                }
+                else {
+                    EXPECTED("a dictionary init element");
+                    state = 102;
+                }
+                break;
 
-//             case 2:
-//                 // a ',' or a ']' or an error
-//                 TRACE("state = %d", state);
-//                 TRACE_TERM(get_token());
-//                 if(TOK_COMMA == TTYPE) {
-//                     advance_token();
-//                     state = 1;
-//                 }
-//                 else if(TOK_CSBRACE == TTYPE) {
-//                     advance_token();
-//                     state = 100;
-//                 }
-//                 else {
-//                     EXPECTED("a ',' or a ']'");
-//                     state = 102;
-//                 }
-//                 break;
+            case 2:
+                // a ',' or a ']' or an error
+                TRACE("state = %d", state);
+                TRACE_TERM(get_token());
+                if(TOK_COMMA == TTYPE) {
+                    advance_token();
+                    state = 1;
+                }
+                else if(TOK_CSBRACE == TTYPE) {
+                    advance_token();
+                    state = 100;
+                }
+                else {
+                    EXPECTED("a ',' or a ']'");
+                    state = 102;
+                }
+                break;
 
-//             case 100:
-//                 // completed parse
-//                 TRACE("state = %d", state);
-//                 node = CREATE_AST_NODE(AST_dict_init, ast_dict_init);
-//                 node->list = list;
-//                 finished = true;
-//                 break;
+            case 100:
+                // completed parse
+                TRACE("state = %d", state);
+                node = CREATE_AST_NODE(AST_dict_init, ast_dict_init);
+                node->list = list;
+                finished = true;
+                break;
 
-//             case 101:
-//                 // not a match
-//                 TRACE("state = %d", state);
-//                 reset_token_queue(post);
-//                 finished = true;
-//                 break;
+            case 101:
+                // not a match
+                TRACE("state = %d", state);
+                reset_token_queue(post);
+                finished = true;
+                break;
 
-//             case 102:
-//                 // error
-//                 TRACE("state = %d", state);
-//                 node = NULL;
-//                 finished = true;
-//                 break;
+            case 102:
+                // error
+                TRACE("state = %d", state);
+                node = NULL;
+                finished = true;
+                break;
 
-//             default:
-//                 fatal_error("unhandled state in %s: %d", __func__, state);
-//         }
-//     }
+            default:
+                fatal_error("unhandled state in %s: %d", __func__, state);
+        }
+    }
 
-//     RETV(node);
-// }
+    RETV(node);
+}
 
 /**
  * @brief

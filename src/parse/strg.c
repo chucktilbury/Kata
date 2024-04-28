@@ -30,12 +30,15 @@ ast_string_literal* parse_string_literal() {
     void* post = post_token_queue();
 
     if(TOK_LITERAL_SSTR == TTYPE) {
+        TRACE("sstr");
+        TRACE_TERM(get_token());
         node = CREATE_AST_NODE(AST_string_literal, ast_string_literal);
         node->literal = get_token();
         node->fmt = NULL;
         advance_token();
     }
     else if(NULL != (fstr = parse_formatted_strg())) {
+        TRACE("formatted str");
         node = CREATE_AST_NODE(AST_string_literal, ast_string_literal);
         node->literal = NULL;
         node->fmt = fstr;

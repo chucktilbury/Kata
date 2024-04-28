@@ -265,7 +265,6 @@ function_assignment
 assignment_item
     = expression
     / list_init
-    / dict_init
     / string_literal
     / cast_statement
     / function_assignment
@@ -280,6 +279,14 @@ var_definition
 
 #####################
 #
+# Dictionary initializer is a literal string, followed by a ':', followed by
+# a assignment item.
+#
+dict_init_element
+    = ( LITERAL_DSTRG / LITERAL_SSTRG ) ':' assignment_item
+
+#####################
+#
 # A list init is used to initialize a list at the time that the program starts
 # up. A list initialization looks like this:
 #
@@ -289,24 +296,7 @@ var_definition
 #
 list_init
     = '[' assignment_item ( ',' assignment_item )* ']'
-
-#####################
-#
-# Dictionary initializer is a literal string, followed by a ':', followed by
-# a assignment item.
-#
-dict_init_element
-    = ( LITERAL_DSTRG / LITERAL_SSTRG ) ':' assignment_item
-
-#####################
-#
-# A dictionary initializer
-#
-# Examples:
-# ["qwe":[1,2,3], "asd":some.compound.name, "zxc":["qwe":different.key]]
-#
-dict_init
-    = '[' dict_init_element ( ',' dict_init_element )* ']'
+    / '[' dict_init_element ( ',' dict_init_element )* ']'
 
 #####################
 #

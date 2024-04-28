@@ -236,18 +236,19 @@ ast_compound_ref_item* parse_compound_ref_item() {
     Token* tok = get_token();
     void* post = post_token_queue();
 
-    if(TOK_SYMBOL == token_type(tok)) {
+    if(NULL != (nterm = parse_array_reference())) {
+        TRACE("array reference");
+        node = CREATE_AST_NODE(AST_compound_ref_item, ast_compound_ref_item);
+        node->token = NULL;
+        node->nterm = (ast_node*)nterm;
+    }
+    else if(TOK_SYMBOL == token_type(tok)) {
+        TRACE("symbol");
         node = CREATE_AST_NODE(AST_compound_ref_item, ast_compound_ref_item);
         TRACE_TERM(tok);
         node->token = tok;
         node->nterm = NULL;
         advance_token();
-    }
-    else if(NULL != (nterm = parse_array_reference())) {
-        node = CREATE_AST_NODE(AST_compound_ref_item, ast_compound_ref_item);
-        node->token = NULL;
-        node->nterm = (ast_node*)nterm;
-        finalize_token_queue();
     }
     else {
         reset_token_queue(post);

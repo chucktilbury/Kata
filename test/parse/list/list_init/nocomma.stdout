@@ -109,6 +109,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): [: "[": 5: 18: "nocomma.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -125,6 +126,8 @@ ENTER: main():
                                             ENTER: parse_array_reference(): 
                                                 ENTER: post_token_queue(): 
                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                TRACE: parse_array_reference(): state = 0
+                                                TRACE: parse_array_reference(): state = 101
                                                 ENTER: reset_token_queue(): 
                                                 RETURN: reset_token_queue(): 
                                             RETURN(node): parse_array_reference() - (NULL)
@@ -148,6 +151,14 @@ ENTER: main():
                                 ENTER: advance_token(): 
                                 RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                 TRACE: parse_list_init(): state = 1
+                                ENTER: parse_dict_init_element(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_dict_init_element(): state = 0
+                                    TRACE: parse_dict_init_element(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_dict_init_element() - (NULL)
                                 ENTER: parse_assignment_item(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -155,6 +166,7 @@ ENTER: main():
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                         TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                        TERM: parse_expression(): literal signed: "123": 5: 21: "nocomma.k"
                                         ENTER: parse_operator(): 
                                         RETURN(node): parse_operator() - (NULL)
                                         ENTER: parse_expr_primary(): 
@@ -165,8 +177,8 @@ ENTER: main():
                                                 ENTER: advance_token(): 
                                                 RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                             RETURN(node): parse_literal_value() - (!NULL)
-                                            ENTER: finalize_token_queue(): 
-                                            RETURN: finalize_token_queue(): 
+                                            TRACE: parse_expr_primary(): literal value
+                                            TERM: parse_expr_primary(): literal signed: "123": 5: 25: "nocomma.k"
                                         RETURN(node): parse_expr_primary() - (!NULL)
                                         TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                         TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -174,22 +186,16 @@ ENTER: main():
                                         RETURN(node): parse_operator() - (NULL)
                                         TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                         TERM: parse_expression(): literal signed: "123": 5: 25: "nocomma.k"
-                                        ENTER: finalize_token_queue(): 
-                                        RETURN: finalize_token_queue(): 
                                     RETURN(node): parse_expression() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
                                 RETURN(node): parse_assignment_item() - (!NULL)
-                                TRACE: parse_list_init(): state = 2
+                                TRACE: parse_list_init(): state = 3
+symbol: "name": 5: 14: "nocomma.k"
+=: "=": 5: 16: "nocomma.k"
+[: "[": 5: 18: "nocomma.k"
+literal signed: "123": 5: 21: "nocomma.k"
 literal signed: "123": 5: 25: "nocomma.k"
-                                TRACE: parse_list_init(): state = 102
+                                TRACE: parse_list_init(): state = 103
                             RETURN(node): parse_list_init() - (NULL)
-                            ENTER: parse_dict_init(): 
-                                ENTER: post_token_queue(): 
-                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                ENTER: reset_token_queue(): 
-                                RETURN: reset_token_queue(): 
-                            RETURN(node): parse_dict_init() - (NULL)
                             ENTER: parse_string_literal(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -226,6 +232,8 @@ literal signed: "123": 5: 25: "nocomma.k"
                                         ENTER: parse_array_reference(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_array_reference(): state = 0
+                                            TRACE: parse_array_reference(): state = 101
                                             ENTER: reset_token_queue(): 
                                             RETURN: reset_token_queue(): 
                                         RETURN(node): parse_array_reference() - (NULL)
@@ -241,6 +249,10 @@ literal signed: "123": 5: 25: "nocomma.k"
                             ENTER: reset_token_queue(): 
                             RETURN: reset_token_queue(): 
                         RETURN(node): parse_assignment_item() - (NULL)
+symbol: "name": 5: 14: "nocomma.k"
+=: "=": 5: 16: "nocomma.k"
+[: "[": 5: 18: "nocomma.k"
+literal signed: "123": 5: 21: "nocomma.k"
 literal signed: "123": 5: 25: "nocomma.k"
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 

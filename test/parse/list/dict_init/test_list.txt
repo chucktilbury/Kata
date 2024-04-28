@@ -6,3 +6,11 @@
 #   dict_init
 #       = '[' dict_init_element ( ',' dict_init_element )* ']'
 #
+
+basic:run
+basic1:run
+mixed:run
+mixed1:run
+nocomma:run
+badcomma:run
+noclose:run
