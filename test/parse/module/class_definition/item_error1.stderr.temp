@@ -1,0 +1,3 @@
+Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/item_error1.k: 8: 15: expected class item or a '}' but got func
+Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/item_error1.k: 9: 2: expected module item or end of file but got }
+Warning: /home/chuck/Src/Kata/test/parse/module/class_definition/item_error1.k: 10: 1: module is empty

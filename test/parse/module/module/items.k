@@ -29,6 +29,7 @@ func destroy_name.destroy {}
 var some.darn.name name = 123.123
 var float name
 
-import empty as name
+; test this in the import test directory
+; import empty as name
 
 func start {}

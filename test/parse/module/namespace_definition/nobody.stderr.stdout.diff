@@ -1,0 +1,3 @@
+2,3d1
+< Syntax: /home/chuck/Src/Kata/test/parse/module/namespace_definition/nobody.k: 8: 12: expected module item or end of file but got symbol
+< Warning: /home/chuck/Src/Kata/test/parse/module/namespace_definition/nobody.k: 9: 1: module is empty

@@ -1,0 +1,198 @@
+74,80c74,140
+<                         ENTER: recover_error(): 
+<                             TERM: recover_error(): var: "var": 8: 4: "nobody.k"
+<                             ENTER: kill_token_queue(): 
+<                             RETURN: kill_token_queue(): 
+<                             ENTER: set_recovery_state(): 
+<                             RETURN: set_recovery_state(): 
+<                         RETURN: recover_error(): 
+---
+> namespace: "namespace": 5: 10: "nobody.k"
+> symbol: "name": 5: 15: "nobody.k"
+> var: "var": 8: 4: "nobody.k"
+>                     RETURN(node): parse_namespace_definition() - (NULL)
+>                     ENTER: parse_class_definition(): 
+>                     RETURN(node): parse_class_definition() - (NULL)
+>                     ENTER: parse_function_definition(): 
+>                         ENTER: post_token_queue(): 
+>                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                         ENTER: reset_token_queue(): 
+>                         RETURN: reset_token_queue(): 
+>                     RETURN(node): parse_function_definition() - (NULL)
+>                     ENTER: parse_create_definition(): 
+>                         ENTER: post_token_queue(): 
+>                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                         ENTER: reset_token_queue(): 
+>                         RETURN: reset_token_queue(): 
+>                     RETURN(node): parse_create_definition() - (NULL)
+>                     ENTER: parse_destroy_definition(): 
+>                         ENTER: post_token_queue(): 
+>                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                         ENTER: reset_token_queue(): 
+>                         RETURN: reset_token_queue(): 
+>                     RETURN(node): parse_destroy_definition() - (NULL)
+>                     ENTER: parse_var_definition(): 
+>                         ENTER: post_token_queue(): 
+>                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                         ENTER: advance_token(): 
+>                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+>                         ENTER: parse_var_decl(): 
+>                             ENTER: parse_type_name(): 
+>                                 ENTER: parse_literal_type_name(): 
+>                                 RETURN(node): parse_literal_type_name() - (NULL)
+>                                 ENTER: parse_compound_name(): 
+>                                     ENTER: post_token_queue(): 
+>                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                     TERM: parse_compound_name(): symbol: "testing": 8: 12: "nobody.k"
+>                                     ENTER: advance_token(): 
+>                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+>                                 RETURN(node): parse_compound_name() - (!NULL)
+>                                 TERM: parse_type_name(): symbol: "name": 8: 17: "nobody.k"
+>                                 ENTER: finalize_token_queue(): 
+>                                 RETURN: finalize_token_queue(): 
+>                             RETURN(node): parse_type_name() - (!NULL)
+>                             ENTER: finalize_token_queue(): 
+>                             RETURN: finalize_token_queue(): 
+>                             ENTER: advance_token(): 
+>                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+>                         RETURN(node): parse_var_decl() - (!NULL)
+>                         ENTER: finalize_token_queue(): 
+>                         RETURN: finalize_token_queue(): 
+>                     RETURN(node): parse_var_definition() - (!NULL)
+>                     ENTER: get_scope(): 
+>                     RETURN(*node): get_scope() - (!NULL)
+>                 RETURN(node): parse_namespace_item() - (!NULL)
+>                 ENTER: get_scope(): 
+>                 RETURN(*node): get_scope() - (!NULL)
+>             RETURN(node): parse_module_item() - (!NULL)
+>             ENTER: parse_module_item(): 
+>                 ENTER: post_token_queue(): 
+>                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                 ENTER: parse_namespace_item(): 
+>                     ENTER: post_token_queue(): 
+>                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                     ENTER: parse_scope_operator(): 
+>                     RETURN(node): parse_scope_operator() - (NULL)
+>                     ENTER: parse_namespace_definition(): 
+88,89d147
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+96,97d153
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+104,105d159
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+112,113d165
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+117,118d168
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+127,128d176
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+132,133d179
+<                     ENTER: get_recovery_state(): 
+<                     RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+136,150c182,190
+<             ENTER: recover_error(): 
+<                 TERM: recover_error(): symbol: "testing": 8: 12: "nobody.k"
+<                 ENTER: advance_token(): 
+<                 RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+<                 TERM: recover_error(): symbol: "name": 8: 17: "nobody.k"
+<                 ENTER: advance_token(): 
+<                 RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+<                 TERM: recover_error(): end of file: "": 9: 1: "nobody.k"
+<                 ENTER: kill_token_queue(): 
+<                 RETURN: kill_token_queue(): 
+<                 ENTER: set_recovery_state(): 
+<                 RETURN: set_recovery_state(): 
+<             RETURN: recover_error(): 
+<         RETURN(node): parse_module() - (NULL)
+<     RETURN(node): parse() - (NULL)
+---
+>             ENTER: finalize_token_queue(): 
+>             RETURN: finalize_token_queue(): 
+>             ENTER: close_file(): 
+>                 ENTER: pop_input_file(): 
+>                 RETURN: pop_input_file(): 
+>             RETURN: close_file(): 
+>             TRACE: parse_module(): end of file
+>         RETURN(node): parse_module() - (!NULL)
+>     RETURN(node): parse() - (!NULL)
+156c196,267
+<         TRACE: traverse_ast(): do not traverse with errors
+---
+>         ENTER: pre_test_pass_func(): 
+>             TRACE: pre_test_pass_func(): node type: module(3000)
+>         RETURN: pre_test_pass_func(): 
+>         ENTER: traverse_module(): 
+>             ENTER: pre_test_pass_func(): 
+>                 TRACE: pre_test_pass_func(): node type: module(3000)
+>             RETURN: pre_test_pass_func(): 
+>             ENTER: traverse_module_item(): 
+>                 ENTER: pre_test_pass_func(): 
+>                     TRACE: pre_test_pass_func(): node type: module_item(3001)
+>                 RETURN: pre_test_pass_func(): 
+>                 TRACE: traverse_module_item(): SCOPE: PRIVATE
+>                 ENTER: traverse_namespace_item(): 
+>                     ENTER: pre_test_pass_func(): 
+>                         TRACE: pre_test_pass_func(): node type: namespace_item(3002)
+>                     RETURN: pre_test_pass_func(): 
+>                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
+>                     ENTER: traverse_var_definition(): 
+>                         ENTER: pre_test_pass_func(): 
+>                             TRACE: pre_test_pass_func(): node type: var_definition(3019)
+>                         RETURN: pre_test_pass_func(): 
+>                         ENTER: traverse_var_decl(): 
+>                             ENTER: pre_test_pass_func(): 
+>                                 TRACE: pre_test_pass_func(): node type: var_decl(3017)
+>                             RETURN: pre_test_pass_func(): 
+>                             ENTER: traverse_type_name(): 
+>                                 ENTER: pre_test_pass_func(): 
+>                                     TRACE: pre_test_pass_func(): node type: type_name(3012)
+>                                 RETURN: pre_test_pass_func(): 
+>                                 ENTER: traverse_compound_name(): 
+>                                     ENTER: pre_test_pass_func(): 
+>                                         TRACE: pre_test_pass_func(): node type: compound_name(3006)
+>                                     RETURN: pre_test_pass_func(): 
+>                                     TRACE: traverse_compound_name(): raw_name: testing
+>                                     TERM: traverse_compound_name(): symbol: "testing": 8: 12: "nobody.k"
+>                                     ENTER: post_test_pass_func(): 
+>                                         TRACE: post_test_pass_func(): node type: compound_name(3006)
+>                                     RETURN: post_test_pass_func(): 
+>                                 RETURN: traverse_compound_name(): 
+>                                 ENTER: post_test_pass_func(): 
+>                                     TRACE: post_test_pass_func(): node type: type_name(3012)
+>                                 RETURN: post_test_pass_func(): 
+>                             RETURN: traverse_type_name(): 
+>                             TRACE: traverse_var_decl(): is_const: false
+>                             TERM: traverse_var_decl(): symbol: "name": 8: 17: "nobody.k"
+>                             ENTER: post_test_pass_func(): 
+>                                 TRACE: post_test_pass_func(): node type: var_decl(3017)
+>                             RETURN: post_test_pass_func(): 
+>                         RETURN: traverse_var_decl(): 
+>                         TRACE: traverse_var_definition(): is_assigned: false
+>                         ENTER: post_test_pass_func(): 
+>                             TRACE: post_test_pass_func(): node type: var_definition(3019)
+>                         RETURN: post_test_pass_func(): 
+>                     RETURN: traverse_var_definition(): 
+>                     ENTER: post_test_pass_func(): 
+>                         TRACE: post_test_pass_func(): node type: namespace_item(3002)
+>                     RETURN: post_test_pass_func(): 
+>                 RETURN: traverse_namespace_item(): 
+>                 ENTER: post_test_pass_func(): 
+>                     TRACE: post_test_pass_func(): node type: module_item(3001)
+>                 RETURN: post_test_pass_func(): 
+>             RETURN: traverse_module_item(): 
+>             ENTER: post_test_pass_func(): 
+>                 TRACE: post_test_pass_func(): node type: module(3000)
+>             RETURN: post_test_pass_func(): 
+>             ENTER: post_test_pass_func(): 
+>                 TRACE: post_test_pass_func(): node type: module(3000)
+>             RETURN: post_test_pass_func(): 
+>         RETURN: traverse_module(): 
+>         ENTER: post_test_pass_func(): 
+>             TRACE: post_test_pass_func(): node type: module(3000)
+>         RETURN: post_test_pass_func(): 

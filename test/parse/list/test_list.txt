@@ -1,5 +1,6 @@
 # this is a list of classes of tests.
 
+verbosity:8
 list_init:run
 dict_init:run
 array_reference:run

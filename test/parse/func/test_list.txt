@@ -1,5 +1,6 @@
 # this is a list of classes of tests.
 
+verbosity:8
 function_reference:run
 create_reference:run
 destroy_reference:run

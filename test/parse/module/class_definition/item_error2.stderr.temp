@@ -1,0 +1,3 @@
+Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/item_error2.k: 8: 14: expected class item or a '}' but got namespace
+Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/item_error2.k: 8: 19: expected module item or end of file but got symbol
+Warning: /home/chuck/Src/Kata/test/parse/module/class_definition/item_error2.k: 10: 6: module is empty

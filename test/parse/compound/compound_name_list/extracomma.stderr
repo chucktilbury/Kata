@@ -1,6 +1,4 @@
 Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/extracomma.k: 7: 32: expected a compound name but got ,
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/extracomma.k: 7: 32: expected an optional list of names but got ,
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/extracomma.k: 7: 32: expected function body element but got symbol
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/extracomma.k: 7: 32: expected function body but got symbol
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/extracomma.k: 7: 32: expected module item or end of file but got func
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/extracomma.k: 7: 32: module cannot be empty
+Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/extracomma.k: 9: 1: expected an optional list of names but got end of file
+Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/extracomma.k: 9: 1: expected function body element but got end of file
+Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/extracomma.k: 9: 1: expected function body but got end of file

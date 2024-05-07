@@ -1,0 +1,6 @@
+2,3c2,3
+< Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/nest_error.k: 7: 15: expected module item or end of file but got symbol
+< Warning: /home/chuck/Src/Kata/test/parse/module/class_definition/nest_error.k: 9: 6: module is empty
+---
+> Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/nest_error.k: 7: 10: expected module item or end of file but got class
+> Syntax: /home/chuck/Src/Kata/test/parse/module/class_definition/nest_error.k: 7: 10: module cannot be empty

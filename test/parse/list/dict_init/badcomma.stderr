@@ -1,4 +1,2 @@
 Syntax: /home/chuck/Src/Kata/test/parse/list/dict_init/badcomma.k: 5: 29: expected a ',' or a ']' but got symbol
-Syntax: /home/chuck/Src/Kata/test/parse/list/dict_init/badcomma.k: 5: 35: expected an assignment item but got [
-Syntax: /home/chuck/Src/Kata/test/parse/list/dict_init/badcomma.k: 5: 35: expected module item or end of file but got var
-Syntax: /home/chuck/Src/Kata/test/parse/list/dict_init/badcomma.k: 5: 35: module cannot be empty
+Syntax: /home/chuck/Src/Kata/test/parse/list/dict_init/badcomma.k: 5: 40: expected an assignment item but got end of file

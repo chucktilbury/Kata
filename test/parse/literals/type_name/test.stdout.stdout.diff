@@ -1,0 +1,59 @@
+68,70d67
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+77,79d73
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+86,88d79
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+161,163d151
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+170,172d157
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+179,181d163
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+188,190d169
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+194,196d172
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                         TRACE: reset_token_queue(): recover the queue
+205,207d180
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                         TRACE: reset_token_queue(): recover the queue
+211,213d183
+<                     ENTER: get_recovery_state(): 
+<                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                     TRACE: reset_token_queue(): recover the queue
+216,225c186
+<             ENTER: recover_error(): 
+<                 TERM: recover_error(): const: "const": 12: 6: "test.k"
+<                 ENTER: advance_token(): 
+<                 RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+<                 TERM: recover_error(): var: "var": 12: 10: "test.k"
+<                 ENTER: kill_token_queue(): 
+<                 RETURN: kill_token_queue(): 
+<                 ENTER: set_recovery_state(): 
+<                 RETURN: set_recovery_state(): 
+<             RETURN: recover_error(): 
+---
+> const: "const": 12: 6: "test.k"
+226a188
+> const: "const": 12: 6: "test.k"
+233c195
+<         TRACE: traverse_ast(): do not traverse with errors
+---
+>         TRACE: traverse_ast(): no ast present

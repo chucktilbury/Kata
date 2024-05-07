@@ -1,0 +1,53 @@
+98,104c98,99
+<                         ENTER: recover_error(): 
+<                             TERM: recover_error(): end of file: "": 6: 1: "nobody1.k"
+<                             ENTER: kill_token_queue(): 
+<                             RETURN: kill_token_queue(): 
+<                             ENTER: set_recovery_state(): 
+<                             RETURN: set_recovery_state(): 
+<                         RETURN: recover_error(): 
+---
+> ): ")": 5: 27: "nobody1.k"
+> end of file: "": 6: 1: "nobody1.k"
+110,111d104
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+118,119d110
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+126,127d116
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+134,135d122
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+139,140d125
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+149,150d133
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+154,155d136
+<                     ENTER: get_recovery_state(): 
+<                     RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+158,166c139,144
+<             ENTER: finalize_token_queue(): 
+<             RETURN: finalize_token_queue(): 
+<             ENTER: close_file(): 
+<                 ENTER: pop_input_file(): 
+<                 RETURN: pop_input_file(): 
+<             RETURN: close_file(): 
+<             TRACE: parse_module(): end of file
+<         RETURN(node): parse_module() - (!NULL)
+<     RETURN(node): parse() - (!NULL)
+---
+> ): ")": 5: 27: "nobody1.k"
+> end of file: "": 6: 1: "nobody1.k"
+>         RETURN(node): parse_module() - (NULL)
+> ): ")": 5: 27: "nobody1.k"
+> end of file: "": 6: 1: "nobody1.k"
+>     RETURN(node): parse() - (NULL)
+172c150
+<         TRACE: traverse_ast(): do not traverse with errors
+---
+>         TRACE: traverse_ast(): no ast present

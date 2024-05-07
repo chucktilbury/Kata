@@ -1,7 +1,4 @@
 Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 7: 37: expected a ',' or a ')' but got symbol
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 7: 37: expected an optional list of names but got symbol
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 7: 38: expected assign or arithmetic assign but got ,
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 7: 38: expected function body element but got symbol
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 7: 38: expected function body but got symbol
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 7: 38: expected module item or end of file but got func
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 7: 38: module cannot be empty
+Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 9: 1: expected an optional list of names but got end of file
+Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 9: 1: expected function body element but got end of file
+Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 9: 1: expected function body but got end of file

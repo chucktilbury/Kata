@@ -9,3 +9,6 @@
 #   array_reference
 #       = SYMBOL array_param_list
 #
+basic:run
+badsubs:run
+regress:run

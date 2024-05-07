@@ -1,0 +1,28 @@
+128,130d127
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+137,139d133
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+146,148d139
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+155,157d145
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+161,163d148
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                         TRACE: reset_token_queue(): recover the queue
+172,174d156
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                         TRACE: reset_token_queue(): recover the queue
+178,180d159
+<                     ENTER: get_recovery_state(): 
+<                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                     TRACE: reset_token_queue(): recover the queue

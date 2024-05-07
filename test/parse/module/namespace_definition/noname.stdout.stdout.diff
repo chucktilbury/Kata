@@ -1,0 +1,52 @@
+68,74c68,69
+<                         ENTER: recover_error(): 
+<                             TERM: recover_error(): {: "{": 5: 12: "noname.k"
+<                             ENTER: kill_token_queue(): 
+<                             RETURN: kill_token_queue(): 
+<                             ENTER: set_recovery_state(): 
+<                             RETURN: set_recovery_state(): 
+<                         RETURN: recover_error(): 
+---
+> namespace: "namespace": 5: 10: "noname.k"
+> {: "{": 5: 12: "noname.k"
+82,83d76
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+90,91d82
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+98,99d88
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+106,107d94
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+111,112d97
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+121,122d105
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+126,127d108
+<                     ENTER: get_recovery_state(): 
+<                     RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+130,138c111,112
+<             ENTER: recover_error(): 
+<                 TERM: recover_error(): }: "}": 5: 13: "noname.k"
+<                 ENTER: advance_token(): 
+<                 RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+<                 ENTER: kill_token_queue(): 
+<                 RETURN: kill_token_queue(): 
+<                 ENTER: set_recovery_state(): 
+<                 RETURN: set_recovery_state(): 
+<             RETURN: recover_error(): 
+---
+> namespace: "namespace": 5: 10: "noname.k"
+> {: "{": 5: 12: "noname.k"
+139a114,115
+> namespace: "namespace": 5: 10: "noname.k"
+> {: "{": 5: 12: "noname.k"
+146c122
+<         TRACE: traverse_ast(): do not traverse with errors
+---
+>         TRACE: traverse_ast(): no ast present

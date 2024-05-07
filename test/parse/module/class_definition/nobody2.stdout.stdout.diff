@@ -1,0 +1,66 @@
+84,86d83
+<                                     ENTER: get_recovery_state(): 
+<                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                     TRACE: reset_token_queue(): recover the queue
+92,98c89,93
+<                         ENTER: recover_error(): 
+<                             TERM: recover_error(): end of file: "": 6: 1: "nobody2.k"
+<                             ENTER: kill_token_queue(): 
+<                             RETURN: kill_token_queue(): 
+<                             ENTER: set_recovery_state(): 
+<                             RETURN: set_recovery_state(): 
+<                         RETURN: recover_error(): 
+---
+> class: "class": 5: 6: "nobody2.k"
+> symbol: "name": 5: 11: "nobody2.k"
+> (: "(": 5: 13: "nobody2.k"
+> ): ")": 5: 14: "nobody2.k"
+> end of file: "": 6: 1: "nobody2.k"
+104,105d98
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+112,113d104
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+120,121d110
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+128,129d116
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+133,134d119
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+143,144d127
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+148,149d130
+<                     ENTER: get_recovery_state(): 
+<                     RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+152,160c133,144
+<             ENTER: finalize_token_queue(): 
+<             RETURN: finalize_token_queue(): 
+<             ENTER: close_file(): 
+<                 ENTER: pop_input_file(): 
+<                 RETURN: pop_input_file(): 
+<             RETURN: close_file(): 
+<             TRACE: parse_module(): end of file
+<         RETURN(node): parse_module() - (!NULL)
+<     RETURN(node): parse() - (!NULL)
+---
+> class: "class": 5: 6: "nobody2.k"
+> symbol: "name": 5: 11: "nobody2.k"
+> (: "(": 5: 13: "nobody2.k"
+> ): ")": 5: 14: "nobody2.k"
+> end of file: "": 6: 1: "nobody2.k"
+>         RETURN(node): parse_module() - (NULL)
+> class: "class": 5: 6: "nobody2.k"
+> symbol: "name": 5: 11: "nobody2.k"
+> (: "(": 5: 13: "nobody2.k"
+> ): ")": 5: 14: "nobody2.k"
+> end of file: "": 6: 1: "nobody2.k"
+>     RETURN(node): parse() - (NULL)
+166c150
+<         TRACE: traverse_ast(): do not traverse with errors
+---
+>         TRACE: traverse_ast(): no ast present

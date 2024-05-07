@@ -1,3 +1,1 @@
 Syntax: /home/chuck/Src/Kata/test/parse/vars/var_decl/err2_test.k: 5: 12: expected a variable declaration but got literal float
-Syntax: /home/chuck/Src/Kata/test/parse/vars/var_decl/err2_test.k: 5: 12: expected module item or end of file but got var
-Syntax: /home/chuck/Src/Kata/test/parse/vars/var_decl/err2_test.k: 5: 12: module cannot be empty

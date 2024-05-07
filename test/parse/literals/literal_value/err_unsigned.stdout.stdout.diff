@@ -1,0 +1,133 @@
+68,70d67
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+77,79d73
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+86,88d79
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                             TRACE: reset_token_queue(): recover the queue
+121d111
+<                                 TERM: parse_expression(): error: ": malformed hex number, expected hex digit, space or operator": 5: 28: "err_unsigned.k"
+138,139d127
+<                                                 TRACE: parse_array_reference(): state = 0
+<                                                 TRACE: parse_array_reference(): state = 101
+141,143d128
+<                                                     ENTER: get_recovery_state(): 
+<                                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                     TRACE: reset_token_queue(): recover the queue
+147,149d131
+<                                                 ENTER: get_recovery_state(): 
+<                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                 TRACE: reset_token_queue(): recover the queue
+153,155d134
+<                                             ENTER: get_recovery_state(): 
+<                                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                             TRACE: reset_token_queue(): recover the queue
+159,161d137
+<                                         ENTER: get_recovery_state(): 
+<                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                         TRACE: reset_token_queue(): recover the queue
+166,168d141
+<                                     ENTER: get_recovery_state(): 
+<                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                     TRACE: reset_token_queue(): recover the queue
+175c148
+<                                 TRACE: parse_list_init(): state = 102
+---
+>                                 TRACE: parse_list_init(): state = 101
+177,179d149
+<                                     ENTER: get_recovery_state(): 
+<                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                     TRACE: reset_token_queue(): recover the queue
+181a152,157
+>                             ENTER: parse_dict_init(): 
+>                                 ENTER: post_token_queue(): 
+>                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                 ENTER: reset_token_queue(): 
+>                                 RETURN: reset_token_queue(): 
+>                             RETURN(node): parse_dict_init() - (NULL)
+188,190d163
+<                                     ENTER: get_recovery_state(): 
+<                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                     TRACE: reset_token_queue(): recover the queue
+203,205d175
+<                                             ENTER: get_recovery_state(): 
+<                                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                             TRACE: reset_token_queue(): recover the queue
+210,212d179
+<                                     ENTER: get_recovery_state(): 
+<                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                     TRACE: reset_token_queue(): recover the queue
+227,228d193
+<                                             TRACE: parse_array_reference(): state = 0
+<                                             TRACE: parse_array_reference(): state = 101
+230,232d194
+<                                                 ENTER: get_recovery_state(): 
+<                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                 TRACE: reset_token_queue(): recover the queue
+236,238d197
+<                                             ENTER: get_recovery_state(): 
+<                                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                             TRACE: reset_token_queue(): recover the queue
+242,244d200
+<                                         ENTER: get_recovery_state(): 
+<                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                         TRACE: reset_token_queue(): recover the queue
+248,250d203
+<                                     ENTER: get_recovery_state(): 
+<                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                     TRACE: reset_token_queue(): recover the queue
+254,256d206
+<                                 ENTER: get_recovery_state(): 
+<                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                 TRACE: reset_token_queue(): recover the queue
+259,271c209,211
+<                         ENTER: recover_error(): 
+<                             TERM: recover_error(): error: ": malformed hex number, expected hex digit, space or operator": 5: 28: "err_unsigned.k"
+<                             ENTER: advance_token(): 
+<                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+<                             TERM: recover_error(): symbol: "x123": 5: 32: "err_unsigned.k"
+<                             ENTER: advance_token(): 
+<                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+<                             TERM: recover_error(): end of file: "": 6: 1: "err_unsigned.k"
+<                             ENTER: kill_token_queue(): 
+<                             RETURN: kill_token_queue(): 
+<                             ENTER: set_recovery_state(): 
+<                             RETURN: set_recovery_state(): 
+<                         RETURN: recover_error(): 
+---
+> symbol: "some_name": 5: 23: "err_unsigned.k"
+> =: "=": 5: 25: "err_unsigned.k"
+> error: ": malformed hex number, expected hex digit, space or operator": 5: 28: "err_unsigned.k"
+276,277d215
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+286,287d223
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+291,292d226
+<                     ENTER: get_recovery_state(): 
+<                     RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+295,303c229,232
+<             ENTER: finalize_token_queue(): 
+<             RETURN: finalize_token_queue(): 
+<             ENTER: close_file(): 
+<                 ENTER: pop_input_file(): 
+<                 RETURN: pop_input_file(): 
+<             RETURN: close_file(): 
+<             TRACE: parse_module(): end of file
+<         RETURN(node): parse_module() - (!NULL)
+<     RETURN(node): parse() - (!NULL)
+---
+> error: ": malformed hex number, expected hex digit, space or operator": 5: 28: "err_unsigned.k"
+>         RETURN(node): parse_module() - (NULL)
+> error: ": malformed hex number, expected hex digit, space or operator": 5: 28: "err_unsigned.k"
+>     RETURN(node): parse() - (NULL)
+309c238
+<         TRACE: traverse_ast(): do not traverse with errors
+---
+>         TRACE: traverse_ast(): no ast present

@@ -65,18 +65,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -129,19 +138,34 @@ ENTER: main():
                                                 TRACE: parse_array_reference(): state = 0
                                                 TRACE: parse_array_reference(): state = 101
                                                 ENTER: reset_token_queue(): 
+                                                    ENTER: get_recovery_state(): 
+                                                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                                    TRACE: reset_token_queue(): recover the queue
                                                 RETURN: reset_token_queue(): 
                                             RETURN(node): parse_array_reference() - (NULL)
                                             ENTER: reset_token_queue(): 
+                                                ENTER: get_recovery_state(): 
+                                                RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                                TRACE: reset_token_queue(): recover the queue
                                             RETURN: reset_token_queue(): 
                                         RETURN(node): parse_compound_ref_item() - (NULL)
                                         ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
                                         RETURN: reset_token_queue(): 
                                     RETURN(node): parse_compound_reference() - (NULL)
                                     ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_expr_primary() - (NULL)
                                 TRACE: parse_expression(): state: 101, stack: 0, queue: 0
                                 ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                    TRACE: reset_token_queue(): recover the queue
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_expression() - (NULL)
                             ENTER: parse_list_init(): 
@@ -238,17 +262,13 @@ ENTER: main():
                                     TRACE: parse_dict_init_element(): state = 100
                                 RETURN(node): parse_dict_init_element() - (!NULL)
                                 TRACE: parse_list_init(): state = 5
-symbol: "name": 5: 14: "noclose.k"
-=: "=": 5: 16: "noclose.k"
-[: "[": 5: 18: "noclose.k"
-literal sstrg: "asd": 5: 23: "noclose.k"
-:: ":": 5: 24: "noclose.k"
-literal signed: "123": 5: 27: "noclose.k"
-,: ",": 5: 28: "noclose.k"
-literal sstrg: "asd": 5: 34: "noclose.k"
-:: ":": 5: 35: "noclose.k"
-literal signed: "123": 5: 38: "noclose.k"
-var: "var": 6: 4: "noclose.k"
+                                ENTER: recover_error(): 
+                                    TERM: recover_error(): var: "var": 6: 4: "noclose.k"
+                                    ENTER: kill_token_queue(): 
+                                    RETURN: kill_token_queue(): 
+                                    ENTER: set_recovery_state(): 
+                                    RETURN: set_recovery_state(): 
+                                RETURN: recover_error(): 
                                 TRACE: parse_list_init(): state = 103
                             RETURN(node): parse_list_init() - (NULL)
                             ENTER: parse_string_literal(): 
@@ -257,6 +277,8 @@ var: "var": 6: 4: "noclose.k"
                                 ENTER: parse_formatted_strg(): 
                                 RETURN(node): parse_formatted_strg() - (NULL)
                                 ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_string_literal() - (NULL)
                             ENTER: parse_cast_statement(): 
@@ -268,11 +290,17 @@ var: "var": 6: 4: "noclose.k"
                                     ENTER: parse_compound_name(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_compound_name() - (NULL)
-                                RETURN(node): parse_type_name() - (NULL)
+                                        TERM: parse_compound_name(): symbol: "stuff": 6: 10: "noclose.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    RETURN(node): parse_compound_name() - (!NULL)
+                                    TERM: parse_type_name(): end of file: "": 8: 1: "noclose.k"
+                                    ENTER: finalize_token_queue(): 
+                                    RETURN: finalize_token_queue(): 
+                                RETURN(node): parse_type_name() - (!NULL)
                                 ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_cast_statement() - (NULL)
                             ENTER: parse_function_assignment(): 
@@ -290,35 +318,43 @@ var: "var": 6: 4: "noclose.k"
                                             TRACE: parse_array_reference(): state = 0
                                             TRACE: parse_array_reference(): state = 101
                                             ENTER: reset_token_queue(): 
+                                                ENTER: get_recovery_state(): 
+                                                RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                                             RETURN: reset_token_queue(): 
                                         RETURN(node): parse_array_reference() - (NULL)
                                         ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                                         RETURN: reset_token_queue(): 
                                     RETURN(node): parse_compound_ref_item() - (NULL)
                                     ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_compound_reference() - (NULL)
                                 ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_function_assignment() - (NULL)
                             ENTER: reset_token_queue(): 
+                                ENTER: get_recovery_state(): 
+                                RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                             RETURN: reset_token_queue(): 
                         RETURN(node): parse_assignment_item() - (NULL)
-symbol: "name": 5: 14: "noclose.k"
-=: "=": 5: 16: "noclose.k"
-[: "[": 5: 18: "noclose.k"
-literal sstrg: "asd": 5: 23: "noclose.k"
-:: ":": 5: 24: "noclose.k"
-literal signed: "123": 5: 27: "noclose.k"
-,: ",": 5: 28: "noclose.k"
-literal sstrg: "asd": 5: 34: "noclose.k"
-:: ":": 5: 35: "noclose.k"
-literal signed: "123": 5: 38: "noclose.k"
-var: "var": 6: 4: "noclose.k"
+                        ENTER: recover_error(): 
+                            TERM: recover_error(): end of file: "": 8: 1: "noclose.k"
+                            ENTER: kill_token_queue(): 
+                            RETURN: kill_token_queue(): 
+                            ENTER: set_recovery_state(): 
+                            RETURN: set_recovery_state(): 
+                        RETURN: recover_error(): 
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
                     RETURN(node): parse_var_definition() - (NULL)
                     ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                     RETURN: reset_token_queue(): 
                 RETURN(node): parse_namespace_item() - (NULL)
                 ENTER: parse_import_statement(): 
@@ -327,37 +363,30 @@ var: "var": 6: 4: "noclose.k"
                     ENTER: post_token_queue(): 
                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                     ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                     RETURN: reset_token_queue(): 
                 RETURN(node): parse_start_function() - (NULL)
                 ENTER: reset_token_queue(): 
+                    ENTER: get_recovery_state(): 
+                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                 RETURN: reset_token_queue(): 
             RETURN(node): parse_module_item() - (NULL)
-[: "[": 5: 18: "noclose.k"
-literal sstrg: "asd": 5: 23: "noclose.k"
-:: ":": 5: 24: "noclose.k"
-literal signed: "123": 5: 27: "noclose.k"
-,: ",": 5: 28: "noclose.k"
-literal sstrg: "asd": 5: 34: "noclose.k"
-:: ":": 5: 35: "noclose.k"
-literal signed: "123": 5: 38: "noclose.k"
-var: "var": 6: 4: "noclose.k"
-        RETURN(node): parse_module() - (NULL)
-[: "[": 5: 18: "noclose.k"
-literal sstrg: "asd": 5: 23: "noclose.k"
-:: ":": 5: 24: "noclose.k"
-literal signed: "123": 5: 27: "noclose.k"
-,: ",": 5: 28: "noclose.k"
-literal sstrg: "asd": 5: 34: "noclose.k"
-:: ":": 5: 35: "noclose.k"
-literal signed: "123": 5: 38: "noclose.k"
-var: "var": 6: 4: "noclose.k"
-    RETURN(node): parse() - (NULL)
+            ENTER: finalize_token_queue(): 
+            RETURN: finalize_token_queue(): 
+            ENTER: close_file(): 
+                ENTER: pop_input_file(): 
+                RETURN: pop_input_file(): 
+            RETURN: close_file(): 
+            TRACE: parse_module(): end of file
+        RETURN(node): parse_module() - (!NULL)
+    RETURN(node): parse() - (!NULL)
     TRACE: main(): End Parse
     TRACE: main(): --------------------------------------------
     TRACE: main(): set trace state: true
     TRACE: main(): Begin Traverse
     ENTER: traverse_ast(): 
-        TRACE: traverse_ast(): no ast present
+        TRACE: traverse_ast(): do not traverse with errors
     RETURN: traverse_ast(): 
     TRACE: main(): End Traverse
     TRACE: main(): --------------------------------------------

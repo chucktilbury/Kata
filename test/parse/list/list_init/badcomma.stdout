@@ -65,18 +65,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -129,19 +138,34 @@ ENTER: main():
                                                 TRACE: parse_array_reference(): state = 0
                                                 TRACE: parse_array_reference(): state = 101
                                                 ENTER: reset_token_queue(): 
+                                                    ENTER: get_recovery_state(): 
+                                                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                                    TRACE: reset_token_queue(): recover the queue
                                                 RETURN: reset_token_queue(): 
                                             RETURN(node): parse_array_reference() - (NULL)
                                             ENTER: reset_token_queue(): 
+                                                ENTER: get_recovery_state(): 
+                                                RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                                TRACE: reset_token_queue(): recover the queue
                                             RETURN: reset_token_queue(): 
                                         RETURN(node): parse_compound_ref_item() - (NULL)
                                         ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
                                         RETURN: reset_token_queue(): 
                                     RETURN(node): parse_compound_reference() - (NULL)
                                     ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_expr_primary() - (NULL)
                                 TRACE: parse_expression(): state: 101, stack: 0, queue: 0
                                 ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                    TRACE: reset_token_queue(): recover the queue
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_expression() - (NULL)
                             ENTER: parse_list_init(): 
@@ -157,6 +181,9 @@ ENTER: main():
                                     TRACE: parse_dict_init_element(): state = 0
                                     TRACE: parse_dict_init_element(): state = 101
                                     ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_dict_init_element() - (NULL)
                                 ENTER: parse_assignment_item(): 
@@ -189,11 +216,27 @@ ENTER: main():
                                     RETURN(node): parse_expression() - (!NULL)
                                 RETURN(node): parse_assignment_item() - (!NULL)
                                 TRACE: parse_list_init(): state = 3
-symbol: "name": 5: 14: "badcomma.k"
-=: "=": 5: 16: "badcomma.k"
-[: "[": 5: 18: "badcomma.k"
-literal signed: "123": 5: 21: "badcomma.k"
-symbol: "x": 5: 23: "badcomma.k"
+                                ENTER: recover_error(): 
+                                    TERM: recover_error(): symbol: "x": 5: 23: "badcomma.k"
+                                    ENTER: advance_token(): 
+                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TERM: recover_error(): literal signed: "123": 5: 27: "badcomma.k"
+                                    ENTER: advance_token(): 
+                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TERM: recover_error(): ,: ",": 5: 28: "badcomma.k"
+                                    ENTER: advance_token(): 
+                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TERM: recover_error(): literal signed: "123": 5: 32: "badcomma.k"
+                                    ENTER: advance_token(): 
+                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TERM: recover_error(): ]: "]": 5: 33: "badcomma.k"
+                                    ENTER: advance_token(): 
+                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    ENTER: kill_token_queue(): 
+                                    RETURN: kill_token_queue(): 
+                                    ENTER: set_recovery_state(): 
+                                    RETURN: set_recovery_state(): 
+                                RETURN: recover_error(): 
                                 TRACE: parse_list_init(): state = 103
                             RETURN(node): parse_list_init() - (NULL)
                             ENTER: parse_string_literal(): 
@@ -202,6 +245,8 @@ symbol: "x": 5: 23: "badcomma.k"
                                 ENTER: parse_formatted_strg(): 
                                 RETURN(node): parse_formatted_strg() - (NULL)
                                 ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_string_literal() - (NULL)
                             ENTER: parse_cast_statement(): 
@@ -213,15 +258,15 @@ symbol: "x": 5: 23: "badcomma.k"
                                     ENTER: parse_compound_name(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        TERM: parse_compound_name(): symbol: "x": 5: 23: "badcomma.k"
-                                        ENTER: advance_token(): 
-                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
-                                    RETURN(node): parse_compound_name() - (!NULL)
-                                    TERM: parse_type_name(): literal signed: "123": 5: 27: "badcomma.k"
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
-                                RETURN(node): parse_type_name() - (!NULL)
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_compound_name() - (NULL)
+                                RETURN(node): parse_type_name() - (NULL)
                                 ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_cast_statement() - (NULL)
                             ENTER: parse_function_assignment(): 
@@ -237,50 +282,45 @@ symbol: "x": 5: 23: "badcomma.k"
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                             TRACE: parse_array_reference(): state = 0
-                                            ENTER: advance_token(): 
-                                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
-                                            TRACE: parse_array_reference(): state = 1
-                                            ENTER: parse_array_param_list(): 
-                                                ENTER: post_token_queue(): 
-                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                                TRACE: parse_array_param_list(): state = 0
-                                                ENTER: parse_array_param(): 
-                                                    ENTER: post_token_queue(): 
-                                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                                    TRACE: parse_array_param(): state = 0
-                                                    TRACE: parse_array_param(): state = 101
-                                                    ENTER: reset_token_queue(): 
-                                                    RETURN: reset_token_queue(): 
-                                                RETURN(node): parse_array_param() - (NULL)
-                                                TRACE: parse_array_param_list(): state = 101
-                                                ENTER: reset_token_queue(): 
-                                                RETURN: reset_token_queue(): 
-                                            RETURN(node): parse_array_param_list() - (NULL)
                                             TRACE: parse_array_reference(): state = 101
                                             ENTER: reset_token_queue(): 
+                                                ENTER: get_recovery_state(): 
+                                                RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                                             RETURN: reset_token_queue(): 
                                         RETURN(node): parse_array_reference() - (NULL)
-                                        TRACE: parse_compound_ref_item(): symbol
-                                        TERM: parse_compound_ref_item(): symbol: "x": 5: 23: "badcomma.k"
-                                        ENTER: advance_token(): 
-                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
-                                    RETURN(node): parse_compound_ref_item() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
-                                RETURN(node): parse_compound_reference() - (!NULL)
-                                ENTER: parse_type_name_list(): 
-                                RETURN(node): parse_type_name_list() - (NULL)
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_compound_ref_item() - (NULL)
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_compound_reference() - (NULL)
                                 ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_function_assignment() - (NULL)
                             ENTER: reset_token_queue(): 
+                                ENTER: get_recovery_state(): 
+                                RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                             RETURN: reset_token_queue(): 
                         RETURN(node): parse_assignment_item() - (NULL)
-literal signed: "123": 5: 27: "badcomma.k"
+                        ENTER: recover_error(): 
+                            TERM: recover_error(): end of file: "": 6: 1: "badcomma.k"
+                            ENTER: kill_token_queue(): 
+                            RETURN: kill_token_queue(): 
+                            ENTER: set_recovery_state(): 
+                            RETURN: set_recovery_state(): 
+                        RETURN: recover_error(): 
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
                     RETURN(node): parse_var_definition() - (NULL)
                     ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                     RETURN: reset_token_queue(): 
                 RETURN(node): parse_namespace_item() - (NULL)
                 ENTER: parse_import_statement(): 
@@ -289,27 +329,30 @@ literal signed: "123": 5: 27: "badcomma.k"
                     ENTER: post_token_queue(): 
                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                     ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                     RETURN: reset_token_queue(): 
                 RETURN(node): parse_start_function() - (NULL)
                 ENTER: reset_token_queue(): 
+                    ENTER: get_recovery_state(): 
+                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                 RETURN: reset_token_queue(): 
             RETURN(node): parse_module_item() - (NULL)
-[: "[": 5: 18: "badcomma.k"
-literal signed: "123": 5: 21: "badcomma.k"
-symbol: "x": 5: 23: "badcomma.k"
-literal signed: "123": 5: 27: "badcomma.k"
-        RETURN(node): parse_module() - (NULL)
-[: "[": 5: 18: "badcomma.k"
-literal signed: "123": 5: 21: "badcomma.k"
-symbol: "x": 5: 23: "badcomma.k"
-literal signed: "123": 5: 27: "badcomma.k"
-    RETURN(node): parse() - (NULL)
+            ENTER: finalize_token_queue(): 
+            RETURN: finalize_token_queue(): 
+            ENTER: close_file(): 
+                ENTER: pop_input_file(): 
+                RETURN: pop_input_file(): 
+            RETURN: close_file(): 
+            TRACE: parse_module(): end of file
+        RETURN(node): parse_module() - (!NULL)
+    RETURN(node): parse() - (!NULL)
     TRACE: main(): End Parse
     TRACE: main(): --------------------------------------------
     TRACE: main(): set trace state: true
     TRACE: main(): Begin Traverse
     ENTER: traverse_ast(): 
-        TRACE: traverse_ast(): no ast present
+        TRACE: traverse_ast(): do not traverse with errors
     RETURN: traverse_ast(): 
     TRACE: main(): End Traverse
     TRACE: main(): --------------------------------------------

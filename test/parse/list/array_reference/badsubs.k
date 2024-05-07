@@ -1,5 +1,8 @@
 ;-------------------------------------------------------------------------------
-; Be sure an empty namespace is correct syntax.
+; Test bad subscript
 ;-------------------------------------------------------------------------------
 
-namespace name {}
+func name () () {
+
+    name = name[dict]
+}

@@ -94,31 +94,62 @@ ENTER: main():
                                 ENTER: advance_token(): 
                                 RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                             RETURN(node): parse_var_decl() - (!NULL)
-symbol: "num": 5: 25: "err1_test.k"
-*: "*": 5: 27: "err1_test.k"
+                            ENTER: recover_error(): 
+                                TERM: recover_error(): *: "*": 5: 27: "err1_test.k"
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                TERM: recover_error(): symbol: "some_compound_name": 5: 46: "err1_test.k"
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                TERM: recover_error(): symbol: "some_name": 5: 56: "err1_test.k"
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                TERM: recover_error(): ): ")": 5: 57: "err1_test.k"
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                ENTER: kill_token_queue(): 
+                                RETURN: kill_token_queue(): 
+                                ENTER: set_recovery_state(): 
+                                RETURN: set_recovery_state(): 
+                            RETURN: recover_error(): 
                         RETURN(node): parse_var_decl_list() - (NULL)
-symbol: "num": 5: 25: "err1_test.k"
-*: "*": 5: 27: "err1_test.k"
+                        ENTER: recover_error(): 
+                            TERM: recover_error(): ): ")": 5: 59: "err1_test.k"
+                            ENTER: advance_token(): 
+                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            ENTER: kill_token_queue(): 
+                            RETURN: kill_token_queue(): 
+                            ENTER: set_recovery_state(): 
+                            RETURN: set_recovery_state(): 
+                        RETURN: recover_error(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_var_definition() - (NULL)
                     ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                     RETURN: reset_token_queue(): 
                 RETURN(node): parse_namespace_item() - (NULL)
                 ENTER: parse_import_statement(): 
@@ -126,26 +157,31 @@ symbol: "num": 5: 25: "err1_test.k"
                 ENTER: parse_start_function(): 
                     ENTER: post_token_queue(): 
                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                    ENTER: advance_token(): 
-                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                     ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                     RETURN: reset_token_queue(): 
                 RETURN(node): parse_start_function() - (NULL)
                 ENTER: reset_token_queue(): 
+                    ENTER: get_recovery_state(): 
+                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                 RETURN: reset_token_queue(): 
             RETURN(node): parse_module_item() - (NULL)
-symbol: "num": 5: 25: "err1_test.k"
-*: "*": 5: 27: "err1_test.k"
-        RETURN(node): parse_module() - (NULL)
-symbol: "num": 5: 25: "err1_test.k"
-*: "*": 5: 27: "err1_test.k"
-    RETURN(node): parse() - (NULL)
+            ENTER: finalize_token_queue(): 
+            RETURN: finalize_token_queue(): 
+            ENTER: close_file(): 
+                ENTER: pop_input_file(): 
+                RETURN: pop_input_file(): 
+            RETURN: close_file(): 
+            TRACE: parse_module(): end of file
+        RETURN(node): parse_module() - (!NULL)
+    RETURN(node): parse() - (!NULL)
     TRACE: main(): End Parse
     TRACE: main(): --------------------------------------------
     TRACE: main(): set trace state: true
     TRACE: main(): Begin Traverse
     ENTER: traverse_ast(): 
-        TRACE: traverse_ast(): no ast present
+        TRACE: traverse_ast(): do not traverse with errors
     RETURN: traverse_ast(): 
     TRACE: main(): End Traverse
     TRACE: main(): --------------------------------------------

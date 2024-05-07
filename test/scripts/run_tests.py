@@ -5,240 +5,340 @@ import subprocess
 from pprint import pprint as prt
 import traceback
 
-num_run = 0
-num_pass = 0
-num_skip = 0
-num_error = 0
-num_fail = 0
-num_tests = 0
+class Stack:
 
+    def __init__(self, value=None):
+        self.stack = []
+        if not value is None:
+            self.stack.append(value)
 
-def read_line(fp) :
+    def push(self, value):
+        #print('PUSH(%d)'%(value))
+        self.stack.append(value)
+
+    def pop(self):
+        #print('POP()')
+        return self.stack.pop()
+    
+    def peek(self):
+        return self.stack[-1]
+    
+class Message:
+
+    def __init__(self, level=10, stream=sys.stderr, increment=4):
+        self.verbosity = Stack(value=int(level))
+        self.stream = stream
+        self.count = 0
+        self.increment = increment
+
+    def write(self, level, msg):
+        if self.verbosity.peek() >= level:
+            if msg[0] != ' ':
+                self.stream.write(' '*self.count + msg)
+            else:
+                self.stream.write(msg)
+
+    def push(self, level):
+        self.verbosity.push(level)
+
+    def pop(self):
+        return self.verbosity.pop()
+    
+    def peek(self):
+        return self.verbosity.peek()
+
+    def add_count(self):
+        self.count += self.increment
+
+    def sub_count(self):
+        self.count -= self.increment
+
+    def get_count(self):
+        return self.count
+
+class Compiler:
     '''
-    Read a line from the test list and skip comments and blank lines. This
-    returns None when the file is ended.
+    Manage the compiler.
     '''
-    for line in fp :
-        lst = line.split("#")
-        line = lst[0].strip()
-        if len(line) > 0 :
-            yield line
 
-def read_test_list(dir_name) :
-    '''
-    This creates the master test dictionary. It is created from reading the
-    test_list.txt files that appear in the directories associated with the
-    different parser productions. Returns a list of the lines that were
-    processed.
-    '''
-    fname = os.path.join(dir_name, "test_list.txt")
-    lst = []
-    with open(fname, "r") as fp :
-        for line in read_line(fp) :
-            x = line.split(":")
-            lst.append({'name':x[0], 'status':x[1]})
+    def __init__(self):
+        '''
+        Find the compiler and get it ready to run tests.
+        '''
+        self.comp_name = self.find_compiler()
+        self.msg = Message()
 
-    return lst
+    def find_compiler(self):
+        '''
+        Stub
+        '''
+        return 'kata'
+    
+    def run(self, name):
+        '''
+        Run the compiler and catch errors that relate to it. Return a string 
+        that describes the result. If the string is 'OK' then there was no 
+        error. Any other string describes the error that happened.
+        '''
+        oname = name+'.stdout'
+        ename = name+'.stderr'
 
-def read_master_list() :
-    '''
-    Read all of the tests in from the test_list.txt files.
-    '''
-    lst = {}
-    dir = os.getcwd()
-    lst = read_test_list(dir)
+        # verify that the test inputs exist
+        if not os.path.isfile(name+'.k'):
+            return "the test file '%s' does not exist"%(name+'.k')
+        # create the temp files if they don't exist
+        if not os.path.isfile(oname): 
+            with open(oname, 'w') as fp:
+                pass
+        if not os.path.isfile(ename):
+            with open(ename, 'w') as fp:
+                pass
 
-    for x in lst :
-        # path with the group name
-        d = os.path.join(dir, x['name'])
-        x['group'] = read_test_list(d)
-        
-        for y in x['group'] :
-            p = os.path.join(d, y['name'])
-            y['dir'] = p
-            y['tests'] = read_test_list(p)
-
-    #prt(lst)
-    #exit(1)
-    return lst
-
-def run_test(comp, tst, dir) :
-    '''
-    Execute the compiler with the specified source code. Then write the result 
-    to temp files. Then compare the content of the temp files to the existing 
-    result files. Leading and trailing whitespace it stripped and a line-by 
-    line string compare takes place. If the files are not the same, then the 
-    first line is reported as an error and the test fails. When a test fails, 
-    then the temp files are not deleted, but if the test passes then they are.
-    '''
-    global num_error, num_pass, num_fail
-
-    tname = os.path.join(dir, tst['name']+'.k')
-    oname = os.path.join(dir, tst['name']+'.stdout')
-    ename = os.path.join(dir, tst['name']+'.stderr')
-
-    # verify that the test inputs exist
-    if os.path.isfile(tname) and os.path.isfile(oname) and os.path.isfile(ename) :
         try :
             # call the compiler
             ofh = open(oname+'.temp', 'w')
             efh = open(ename+'.temp', 'w')
-            pr = subprocess.run([comp, tname], text=True, stdout=ofh, stderr=efh)
+            pr = subprocess.run([self.comp_name, name+'.k'], text=True, stdout=ofh, stderr=efh)
             ofh.close()
             efh.close()
-        except Exception :
-            num_error += 1
-            with open(os.path.join(dir, tst['name']+".error"), "w") as fp :
+            if pr.returncode != 0:
+                return "compiler returned error code %d"%(pr.returncode)
+            
+        except Exception as e:
+            with open(os.path.join(dir, name+".error"), "w") as fp :
                 fp.write(traceback.format_exc())
-            sys.stdout.write('(ERROR) (exec)\n')
-
-        # compare the stdout streams
-        try :
-            with open(oname, 'r') as fp :
-                existing_file = fp.readlines()
-            with open(oname+'.temp', 'r') as fp :
-                temp_file = fp.readlines() 
-
-            if len(existing_file) != len(temp_file) :
-                with open(os.path.join(dir, tst['name']+".stdout.fail"), "w") as fp :
-                    fp.write("file lengths differ\n")
-                    if len(existing_file) == 0 :
-                        fp.write("%s: zero length\n"%(oname))
-                    elif len(temp_file) == 0 :
-                        fp.write("%s: zero length\n\n"%(oname+'.temp'))
-                    else :
-                        for idx, line in enumerate(existing_file[0:min(len(existing_file), len(temp_file))]) :
-                            if line.strip() != temp_file[idx].strip() :
-                                fp.write("difference line: %d\n"%(idx))
-                                fp.write(line.strip()+'\n')
-                                fp.write(temp_file[idx].strip()+'\n')
-                                break;
-                num_fail += 1
-                sys.stdout.write('(FAIL) (file size)\n')
-                return
-            else :
-                for idx, line in enumerate(existing_file) :
-                    if line.strip() != temp_file[idx].strip() :
-                        with open(os.path.join(dir, tst['name']+".stdout.fail"), "w") as fp :
-                            fp.write("difference line: %d\n"%(idx))
-                            fp.write(line.strip()+'\n')
-                            fp.write(temp_file[idx].strip()+'\n')
-                            num_fail += 1
-                            sys.stdout.write('(FAIL) (line number %d)\n'%(idx))
-                            return;
-        except Exception:
-            num_error += 1
-            with open(os.path.join(dir, tst['name']+".error"), "w") as fp :
-                fp.write(traceback.format_exc())
-            sys.stdout.write('(ERROR) (exec)\n')
-
-        # compare the stderr streams
-        try :
-            with open(ename, 'r') as fp :
-                existing_file = fp.readlines()
-            with open(ename+'.temp', 'r') as fp :
-                temp_file = fp.readlines() 
-
-            for idx, line in enumerate(existing_file[0:min(len(existing_file), len(temp_file))]) :
-                if line.strip() != temp_file[idx].strip() :
-                    with open(os.path.join(dir, tst['name']+".stderr.error"), "w") as fp :
-                        fp.write("difference line: %d"%(idx))
-                        fp.write(line.strip()+'\n')
-                        fp.write(temp_file[idx].strip()+'\n')
-                        num_fail += 1
-                        sys.stdout.write('(FAIL) (line number %d)\n'%(idx))
-                        return;
-        except Exception:
-            num_error += 1
-            with open(os.path.join(dir, tst['name']+".error"), "w") as fp :
-                fp.write(traceback.format_exc())
-            sys.stdout.write('(ERROR) (exec)\n')
-
-        num_pass += 1
-        sys.stdout.write('(PASS)\n')
-        os.unlink(oname+'.temp')
-        os.unlink(ename+'.temp')
-
-    else :
-        num_error += 1
-        sys.stdout.write("(ERROR) (not found)\n")
-
-def run_tests(comp, lst) :
-    '''
-    Run the list of tests for this sub-group.
-    '''
-    global num_tests, num_run, num_skip
+            return str(e)
+        
+        return "OK"
     
-    for item in lst['tests'] :
-        num_tests += 1
-        if item['status'] == 'run' :
-            num_run += 1
-            sys.stdout.write("\t\t'%s' -- "%(item['name']))
-            run_test(comp, item, lst['dir'])
+    def clean(self, name):
+        '''
+        Clean up the files created bu the run method.
+        '''
+        os.remove(name+".stderr.temp")
+        os.remove(name+".stdout.temp")
+        
+class Compare:
+    '''
+    Compare the test output to the validated output
+    '''
+
+    def __init__(self):
+        self.msg = Message()
+
+    def run(self, name):
+        '''
+        Compare the files with the given name using the system diff utiltity.
+        If the two files are the same, then return zero, else if they are 
+        different then return a non-zero number.
+
+        Input name is like 'test.stdout'
+
+        Returns:
+        0 = files compare properly
+        1 = files are different
+        2 = error such as files not found
+        '''
+        try :
+            # call the diff util
+            oname = name+'.stdout.diff'
+            ename = name+'.stderr.diff'
+            ofh = open(oname, 'w')
+            efh = open(ename, 'w')
+            pr = subprocess.run(['diff', '-wBa', name+".temp", name], text=True, stdout=ofh, stderr=efh)
+            ofh.close()
+            efh.close()
+            return pr.returncode
+            
+        except Exception as e:
+            with open(os.path.join(dir, name+".error"), "w") as fp :
+                fp.write(traceback.format_exc())
+            return -1
+        
+    def clean(self, name):
+        '''
+        Clean up the files created by the comapre method.
+        '''
+        os.remove(name+".stdout.diff")
+        os.remove(name+".stderr.diff")
+
+class TestSpec :
+
+    def __init__(self, level=10): 
+        '''
+        Open the input file and read it as a test spec.
+        '''
+        self.num_run = 0
+        self.num_pass = 0
+        self.num_skip = 0
+        self.num_error = 0
+        self.num_fail = 0
+        self.num_tests = 0
+        self.msg = Message()
+        self.compiler = Compiler()
+        self.compare = Compare()
+        self.spec = self.read_spec(os.path.realpath(os.getcwd()), 'run')
+
+    def report(self):
+        self.msg.write(1, "\n\nREPORT: tests: %d, run: %d, skip: %d, pass: %d, fail: %d, errors: %d\n\n"%(
+            self.num_tests, self.num_run, self.num_skip, self.num_pass, self.num_fail, self.num_error))
+
+    def read_spec(self, dirname, action) :
+        '''
+        Recursively read the spec files and store them in a dict such that 
+        skipped tests are propigated in the tree.
+        '''
+        with open(os.path.join(dirname, "test_list.txt"), "r") as fp:
+            lines = fp.readlines()
+
+        spec = {}
+        spec['dirname'] = dirname
+        for num, line in enumerate(lines):
+            s = line.split("#")
+            s = s[0].strip()
+            if len(s) <= 0:
+                continue
+
+            x = s.split(":")
+            if x[0] == "verbosity":
+                if x[1].isdigit():
+                    spec['verbosity'] = int(x[1])
+                    if spec['verbosity'] > 10 or spec['verbosity'] < 0:
+                        self.msg.write(0, "ERROR: %s: %d: verbosity value must between 0 and 10\n"%(
+                            os.path.join(dirname, "test_list.txt"), num+1))
+                        exit(1)
+                else:
+                    self.msg.write(0, "ERROR: %s: %d: verbosity must be a number\n"%(
+                        os.path.join(dirname, "test_list.txt"), num+1))
+                    exit(1)
+            else:
+                if x[1].lower() != 'skip' and x[1].lower() != 'run':
+                    self.msg.write(0, "ERROR: %s: %d: valid test name values are 'run' and 'skip'\n"%(
+                        os.path.join(dirname, "test_list.txt"), num+1))
+                    exit(1)
+
+                spec[x[0]] = {}
+                newdir = os.path.join(dirname, x[0])
+                if action.lower() == 'run' and x[1].lower() == 'run':
+                    if os.path.isdir(newdir):
+                        spec[x[0]]['type'] = 'dir'
+                        spec[x[0]]['tests'] = self.read_spec(newdir, 'run')
+                        spec[x[0]]['action'] = 'run'
+                    else:
+                        spec[x[0]]['type'] = 'file'
+                        spec[x[0]]['action'] = 'run'
+                elif action.lower() == 'skip' or x[1].lower() == 'skip':
+                    if os.path.isdir(newdir):
+                        spec[x[0]]['type'] = 'dir'
+                        spec[x[0]]['tests'] = self.read_spec(newdir, 'skip')
+                        spec[x[0]]['action'] = 'skip'
+                    else:
+                        spec[x[0]]['type'] = 'file'
+                        spec[x[0]]['action'] = 'skip'
+
+        return spec
+
+    def get_spec(self):
+        '''
+        Return the test spec that was read form the disk.
+        '''
+        return self.spec
+    
+    def run(self): 
+        '''
+        Run the tests that are given in the spec
+        '''
+        self.run_dir(self.spec)
+
+    def run_dir(self, spec):
+        '''
+        Recurse a directory where tests may be found.
+        '''
+        verbo = self.msg.peek()
+        for item in spec:
+            if item == 'dirname':
+                dname = spec['dirname']
+            elif item == 'verbosity':
+                verbo = spec['verbosity']
+            else:
+                self.msg.push(verbo)
+
+                if spec[item]['type'] == 'file':
+                    self.run_test(item, dname, spec[item])
+                elif spec[item]['type'] == 'dir':
+                    if self.msg.get_count() == 0:
+                        self.msg.write(8, "\n")
+
+                    if self.msg.peek() > 8:
+                        self.msg.write(8, "GROUP: %s\n"%(os.path.join(dname, item)))
+                    else:
+                        self.msg.write(8, "GROUP: %s\n"%(item))
+
+                    self.msg.add_count()
+                    self.run_dir(spec[item]['tests'])
+                    self.msg.sub_count()
+
+                self.msg.pop()
+
+    def run_test(self, name, dirname, spec):
+        '''
+        Filter tests to be run or skipped and update the statistics.
+        '''
+        self.num_tests += 1
+        if spec['action'] == 'run':
+            self.msg.write(8, "TEST: %s: RUN"%(name))
+            self.num_run += 1
+            self.runner(name, dirname)
         else :
-            num_skip += 1
-            sys.stdout.write("\t\t'%s' -- (SKIP)\n"%(item['name']))
+            self.msg.write(8, "TEST: %s: SKIP\n"%(name))
+            self.num_skip += 1
 
+    def runner(self, name, dirname):
+        '''
+        Actually perform the actions to run a test.
+        '''
+        flag = 'PASS'
+        pname = os.path.join(dirname, name)
+        s = self.compiler.run(pname)
+        if 'OK' == s:
+            n = pname+".stdout"
+            v = self.compare.run(n)
+            if v == 0:
+                self.compare.clean(n)
+            elif v == 1:
+                flag = 'FAIL'
+            elif v > 1 or v < 0:
+                flag = None
+                self.msg.write(8, " ERROR compare %s\n"%(n))
+                self.num_error += 1
 
-def skip_tests(lst) :
-    '''
-    Skip the list of tests for this sub-group
-    '''
-    global num_skip, num_tests
+            n = pname+".stderr"
+            v = self.compare.run(n)
+            if v == 0:
+                self.compare.clean(n)
+            elif v == 1:
+                flag = 'FAIL'
+            elif v > 1 or v < 0:
+                flag = None
+                self.msg.write(8, " ERROR compare %s\n"%(n))
+                self.num_error += 1
 
-    for item in lst['tests'] :
-        #print(item)
-        sys.stdout.write("\t\t'%s' -- (SKIP)\n"%(item['name']))
-        num_skip += 1
-        num_tests += 1
+            if flag == 'PASS':
+                self.compiler.clean(pname)
+                self.msg.write(8, " PASS\n")
+                self.num_pass += 1
+            elif flag == 'FAIL':
+                self.msg.write(8, " FAIL\n")
+                self.num_fail += 1
 
-def run_group(comp, lst) :
-    for item in lst:
-        if item['status'] == 'run' :
-            sys.stdout.write("\t'%s' -- (RUN)\n"%(item['name']))
-            run_tests(comp, item)
-        else :
-            sys.stdout.write("\t'%s' -- (SKIP)\n"%(item['name']))
-            skip_tests(item)
-
-def skip_group(lst) :
-    for item in lst:
-        sys.stdout.write("\t'%s' -- (SKIP)\n"%(item['name']))
-        skip_tests(item)    
-      
-def runner(comp, master) :
-    '''
-    Run all tests that are marked with 'run'. The run flag is used to switch 
-    whether a test is attempted or skipped. If the group is marked as skip, 
-    all of the classes and lower branches are also disabled. This is so that 
-    the test is counted whether it is run or skipped.
-    '''
-    for item in master :
-        sys.stdout.write("\n'%s' -- "%(item['name']))
-        if item['status'] == 'run' :
-            sys.stdout.write("(RUN)\n")
-            run_group(comp, item['group'])
-        else :
-            sys.stdout.write("(SKIP)\n")
-            skip_group(item['group'])
-
-def find_compiler() :
-    '''
-    Locate the compiler and return the fully qualified location.
-    '''
-    s = '../../bin/kata'
-    return os.path.abspath(s)
-
+        else:
+            self.msg.write(8, " ERROR (%s)\n"%(s))
+            self.num_error += 1
 
 if __name__ == "__main__" :
-    
-    comp = find_compiler()
 
-    lst = read_master_list()
-    runner(comp, lst)
-    print("\ntotal:", num_tests,
-          "-- run:", num_run, 
-          "-- pass:", num_pass, 
-          "-- fail:", num_fail, 
-          "-- skip:", num_skip,
-          "-- errors:", num_error)
+    spec = TestSpec()
+    spec.run()
+    spec.report()
+    #prt(spec.get_spec())
+

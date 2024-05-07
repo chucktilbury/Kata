@@ -47,10 +47,10 @@ ast_function_body_element* parse_function_body_element() {
     void* post = post_token_queue();
 
     if((NULL != (nterm = (ast_node*)parse_var_definition())) ||
+            (NULL != (nterm = (ast_node*)parse_assignment())) ||
             (NULL != (nterm = (ast_node*)parse_function_reference())) ||
             (NULL != (nterm = (ast_node*)parse_create_reference())) ||
             (NULL != (nterm = (ast_node*)parse_destroy_reference())) ||
-            (NULL != (nterm = (ast_node*)parse_assignment())) ||
             (NULL != (nterm = (ast_node*)parse_while_clause())) ||
             (NULL != (nterm = (ast_node*)parse_do_clause())) ||
             (NULL != (nterm = (ast_node*)parse_for_clause())) ||

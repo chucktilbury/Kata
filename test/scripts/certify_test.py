@@ -21,4 +21,15 @@ for name in sys.argv[1:] :
     if os.path.isfile(name+".stderr.fail") :
         os.remove(name+".stderr.fail")
 
+    if os.path.isfile(name+".stdout.stderr.diff"):
+        os.remove(name+".stdout.stderr.diff")
+
+    if os.path.isfile(name+".stdout.stdout.diff"):
+        os.remove(name+".stdout.stdout.diff")
+
+    if os.path.isfile(name+".stderr.stderr.diff"):
+        os.remove(name+".stderr.stderr.diff")
+
+    if os.path.isfile(name+".stderr.stdout.diff"):
+        os.remove(name+".stderr.stdout.diff")
 

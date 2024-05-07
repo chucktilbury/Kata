@@ -1,2 +1,2 @@
 Syntax: /home/chuck/Src/Kata/test/parse/strg/formatted_strg/invalid_str.k: 7: 43: expected module item or end of file but got (
-Syntax: /home/chuck/Src/Kata/test/parse/strg/formatted_strg/invalid_str.k: 7: 43: module cannot be empty
+Warning: /home/chuck/Src/Kata/test/parse/strg/formatted_strg/invalid_str.k: 7: 44: module is empty

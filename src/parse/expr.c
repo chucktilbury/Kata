@@ -498,8 +498,9 @@ ast_assignment* parse_assignment() {
                         advance_token();
                         break;
                     default:
-                        EXPECTED("assign or arithmetic assign");
-                        state = 102;
+                        state = 101; // not an assignemnt
+                        // EXPECTED("assign or arithmetic assign");
+                        // state = 102;
                         break;
                 }
                 break;

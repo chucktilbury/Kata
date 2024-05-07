@@ -1,0 +1,8 @@
+2,3c2,5
+< Syntax: /home/chuck/Src/Kata/test/parse/loop/for_clause/badexpr.k: 9: 2: expected module item or end of file but got }
+< Warning: /home/chuck/Src/Kata/test/parse/loop/for_clause/badexpr.k: 10: 1: module is empty
+---
+> Syntax: /home/chuck/Src/Kata/test/parse/loop/for_clause/badexpr.k: 6: 23: expected function body element but got for
+> Syntax: /home/chuck/Src/Kata/test/parse/loop/for_clause/badexpr.k: 6: 23: expected function body but got for
+> Syntax: /home/chuck/Src/Kata/test/parse/loop/for_clause/badexpr.k: 6: 23: expected module item or end of file but got func
+> Syntax: /home/chuck/Src/Kata/test/parse/loop/for_clause/badexpr.k: 6: 23: module cannot be empty

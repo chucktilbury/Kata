@@ -1,0 +1,114 @@
+86,88d85
+<                                     ENTER: get_recovery_state(): 
+<                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                     TRACE: reset_token_queue(): recover the queue
+95,97d91
+<                                     ENTER: get_recovery_state(): 
+<                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                     TRACE: reset_token_queue(): recover the queue
+106,108d99
+<                                     ENTER: get_recovery_state(): 
+<                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                     TRACE: reset_token_queue(): recover the queue
+162,164d152
+<                                     ENTER: get_recovery_state(): 
+<                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                     TRACE: reset_token_queue(): recover the queue
+173,175d160
+<                                     ENTER: get_recovery_state(): 
+<                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                     TRACE: reset_token_queue(): recover the queue
+187,189d171
+<                                     ENTER: get_recovery_state(): 
+<                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                     TRACE: reset_token_queue(): recover the queue
+196,198d177
+<                                     ENTER: get_recovery_state(): 
+<                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                     TRACE: reset_token_queue(): recover the queue
+203,205d181
+<                                 ENTER: get_recovery_state(): 
+<                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                 TRACE: reset_token_queue(): recover the queue
+208,214c184,186
+<                         ENTER: recover_error(): 
+<                             TERM: recover_error(): func: "func": 8: 9: "item_error1.k"
+<                             ENTER: kill_token_queue(): 
+<                             RETURN: kill_token_queue(): 
+<                             ENTER: set_recovery_state(): 
+<                             RETURN: set_recovery_state(): 
+<                         RETURN: recover_error(): 
+---
+> symbol: "name": 7: 32: "item_error1.k"
+> func: "func": 8: 9: "item_error1.k"
+> start: "start": 8: 15: "item_error1.k"
+218a191,198
+>                         ENTER: advance_token(): 
+>                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+>                         ENTER: parse_compound_name(): 
+>                             ENTER: post_token_queue(): 
+>                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                             ENTER: reset_token_queue(): 
+>                             RETURN: reset_token_queue(): 
+>                         RETURN(node): parse_compound_name() - (NULL)
+220,221d199
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+226a205,212
+>                         ENTER: advance_token(): 
+>                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+>                         ENTER: parse_create_name(): 
+>                             ENTER: post_token_queue(): 
+>                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                             ENTER: reset_token_queue(): 
+>                             RETURN: reset_token_queue(): 
+>                         RETURN(node): parse_create_name() - (NULL)
+228,229d213
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+234a219,226
+>                         ENTER: advance_token(): 
+>                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+>                         ENTER: parse_destroy_name(): 
+>                             ENTER: post_token_queue(): 
+>                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                             ENTER: reset_token_queue(): 
+>                             RETURN: reset_token_queue(): 
+>                         RETURN(node): parse_destroy_name() - (NULL)
+236,237d227
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+244,245d233
+<                             ENTER: get_recovery_state(): 
+<                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+249,250d236
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+259,260d244
+<                         ENTER: get_recovery_state(): 
+<                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+264,265d247
+<                     ENTER: get_recovery_state(): 
+<                     RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+268,276c250,252
+<             ENTER: recover_error(): 
+<                 TERM: recover_error(): }: "}": 9: 2: "item_error1.k"
+<                 ENTER: advance_token(): 
+<                 RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+<                 ENTER: kill_token_queue(): 
+<                 RETURN: kill_token_queue(): 
+<                 ENTER: set_recovery_state(): 
+<                 RETURN: set_recovery_state(): 
+<             RETURN: recover_error(): 
+---
+> symbol: "name": 7: 32: "item_error1.k"
+> func: "func": 8: 9: "item_error1.k"
+> start: "start": 8: 15: "item_error1.k"
+277a254,256
+> symbol: "name": 7: 32: "item_error1.k"
+> func: "func": 8: 9: "item_error1.k"
+> start: "start": 8: 15: "item_error1.k"
+284c263
+<         TRACE: traverse_ast(): do not traverse with errors
+---
+>         TRACE: traverse_ast(): no ast present

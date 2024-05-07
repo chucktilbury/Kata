@@ -1,6 +1,7 @@
 # this is the list of groups of tests.
 
-compound:run
+verbosity:8
+
 literals:run
 loop:run
 module:run
@@ -12,5 +13,6 @@ flow:run
 func:run
 func_body:run
 import:run
+compound:run
 list:run
 
