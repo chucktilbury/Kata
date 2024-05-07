@@ -30,23 +30,26 @@ class Message:
         self.stream = stream
         self.count = 0
         self.increment = increment
-        self.fh = open(name, "w")
+        self.name = name
+        # delete the previous report file
+        if os.path.isfile(name):
+            os.remove(name)
 
-    def __del__(self):
-        self.fh.close()
+    def write_report(self, level, msg):
+        if msg[0] != ' ':
+            with open(self.name, 'a') as fh:
+                fh.write("(%d) %s%s"%(level, ' '*self.count, msg))
+        else:
+            with open(self.name, 'a') as fh:
+                fh.write("%s"%(msg))
 
     def write(self, level, msg):
-        if msg[0] != ' ':
-            self.fh.write("(%d) %s%s"%(level, ' '*self.count, msg))
-        else:
-            self.fh.write("%s"%(msg))
-
         if self.verbosity.peek() >= level:
             if msg[0] != ' ':
                 self.stream.write(' '*self.count + msg)
             else:
                 self.stream.write(msg)
-
+        self.write_report(level, msg)
         
 
     def push(self, level):
@@ -175,26 +178,19 @@ class Compare:
 
 class TestSpec :
 
-    def __init__(self, level=10): 
+    def __init__(self, directory=None, level=10): 
         '''
         Open the input file and read it as a test spec.
         '''
-        self.num_run = 0
-        self.num_pass = 0
-        self.num_skip = 0
-        self.num_error = 0
-        self.num_fail = 0
-        self.num_tests = 0
-        self.msg = Message("report.txt")
-        self.compiler = Compiler()
-        self.compare = Compare()
-        self.spec = self.read_spec(os.path.realpath(os.getcwd()), 'run')
+        self.msg = Message(name="report.txt", level=level)
+        self.directory = directory
 
-    def report(self):
-        s = "REPORT: tests: %d, run: %d, skip: %d, pass: %d, fail: %d, errors: %d\n"%(
-            self.num_tests, self.num_run, self.num_skip, 
-            self.num_pass, self.num_fail, self.num_error)
-        self.msg.write(1, s)
+        if self.directory is None:
+            self.directory = os.path.realpath(os.getcwd())
+        else:
+            self.directory = os.path.realpath(self.directory)
+        
+        self.spec = self.read_spec(self.directory, 'run')
 
     def read_spec(self, dirname, action) :
         '''
@@ -257,13 +253,33 @@ class TestSpec :
         '''
         return self.spec
     
+class TestRun:
+
+    def __init__(self, spec, verbosity=10, rname='report.txt'):
+        self.num_run = 0
+        self.num_pass = 0
+        self.num_skip = 0
+        self.num_error = 0
+        self.num_fail = 0
+        self.num_tests = 0
+        self.msg = Message(name=rname, level=verbosity)
+        self.compiler = Compiler()
+        self.compare = Compare()
+        self.spec = spec
+
+    def report(self):
+        s = "REPORT: tests: %d, run: %d, skip: %d, pass: %d, fail: %d, errors: %d\n"%(
+            self.num_tests, self.num_run, self.num_skip, 
+            self.num_pass, self.num_fail, self.num_error)
+        self.msg.write(1, s)
+
     def run(self): 
         '''
         Run the tests that are given in the spec
         '''
-        self.run_dir(self.spec)
+        self._run_dir(self.spec)
 
-    def run_dir(self, spec):
+    def _run_dir(self, spec):
         '''
         Recurse a directory where tests may be found.
         '''
@@ -277,7 +293,7 @@ class TestSpec :
                 self.msg.push(verbo)
 
                 if spec[item]['type'] == 'file':
-                    self.run_test(item, dname, spec[item])
+                    self._run_test(item, dname, spec[item])
                 elif spec[item]['type'] == 'dir':
                     if self.msg.get_count() == 0:
                         self.msg.write(8, "\n")
@@ -288,12 +304,12 @@ class TestSpec :
                         self.msg.write(8, "GROUP: %s\n"%(item))
 
                     self.msg.add_count()
-                    self.run_dir(spec[item]['tests'])
+                    self._run_dir(spec[item]['tests'])
                     self.msg.sub_count()
 
                 self.msg.pop()
 
-    def run_test(self, name, dirname, spec):
+    def _run_test(self, name, dirname, spec):
         '''
         Filter tests to be run or skipped and update the statistics.
         '''
@@ -301,12 +317,12 @@ class TestSpec :
         if spec['action'] == 'run':
             self.msg.write(8, "TEST: %s: RUN"%(name))
             self.num_run += 1
-            self.runner(name, dirname)
+            self._runner(name, dirname)
         else :
             self.msg.write(8, "TEST: %s: SKIP\n"%(name))
             self.num_skip += 1
 
-    def runner(self, name, dirname):
+    def _runner(self, name, dirname):
         '''
         Actually perform the actions to run a test.
         '''
@@ -348,10 +364,9 @@ class TestSpec :
             self.msg.write(8, " ERROR (%s)\n"%(s))
             self.num_error += 1
 
+
 if __name__ == "__main__" :
 
-    spec = TestSpec()
-    spec.run()
-    spec.report()
-    #prt(spec.get_spec())
-
+    runner = TestRun(TestSpec().get_spec())
+    runner.run()
+    runner.report()
