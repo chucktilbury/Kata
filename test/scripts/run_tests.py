@@ -25,18 +25,29 @@ class Stack:
     
 class Message:
 
-    def __init__(self, level=10, stream=sys.stderr, increment=4):
+    def __init__(self, name="report.txt", level=10, stream=sys.stderr, increment=4):
         self.verbosity = Stack(value=int(level))
         self.stream = stream
         self.count = 0
         self.increment = increment
+        self.fh = open(name, "w")
+
+    def __del__(self):
+        self.fh.close()
 
     def write(self, level, msg):
+        if msg[0] != ' ':
+            self.fh.write("(%d) %s%s"%(level, ' '*self.count, msg))
+        else:
+            self.fh.write("%s"%(msg))
+
         if self.verbosity.peek() >= level:
             if msg[0] != ' ':
                 self.stream.write(' '*self.count + msg)
             else:
                 self.stream.write(msg)
+
+        
 
     def push(self, level):
         self.verbosity.push(level)
@@ -174,14 +185,16 @@ class TestSpec :
         self.num_error = 0
         self.num_fail = 0
         self.num_tests = 0
-        self.msg = Message()
+        self.msg = Message("report.txt")
         self.compiler = Compiler()
         self.compare = Compare()
         self.spec = self.read_spec(os.path.realpath(os.getcwd()), 'run')
 
     def report(self):
-        self.msg.write(1, "\n\nREPORT: tests: %d, run: %d, skip: %d, pass: %d, fail: %d, errors: %d\n\n"%(
-            self.num_tests, self.num_run, self.num_skip, self.num_pass, self.num_fail, self.num_error))
+        s = "REPORT: tests: %d, run: %d, skip: %d, pass: %d, fail: %d, errors: %d\n"%(
+            self.num_tests, self.num_run, self.num_skip, 
+            self.num_pass, self.num_fail, self.num_error)
+        self.msg.write(1, s)
 
     def read_spec(self, dirname, action) :
         '''

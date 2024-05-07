@@ -1,6 +1,6 @@
 # this is the list of groups of tests.
 
-verbosity:8
+verbosity:5
 
 literals:run
 loop:run

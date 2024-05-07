@@ -1,6 +1,5 @@
 # this is a list of classes of tests.
 
-verbosity:8
 module:run
 namespace_definition:run
 class_definition:run

@@ -1,6 +1,5 @@
 # this is a list of classes of tests.
 
-verbosity:8
 compound_name:run
 compound_name_list:run
 compound_ref_item:run
