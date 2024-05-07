@@ -146,16 +146,17 @@ ast_else_clause* parse_else_clause() {
     ast_else_clause* node = NULL;
     ast_else_clause_item* nterm;
     LinkList* list = create_link_list();
-    void* post = post_token_queue();
 
     bool finished = false;
     int state = 0;
+    void* post = post_token_queue();
 
     while(!finished) {
         switch(state) {
             case 0:
                 // initial needs to be absent, or a mid, or a final, else none
-                if(NULL == (nterm = parse_else_clause_item())) {
+                TRACE("state = %d", state);
+                if(NULL != (nterm = parse_else_clause_item())) {
                     if(AST_else_clause_mid == ast_node_type(nterm)) {
                         append_link_list(list, nterm);
                         state = 1;
@@ -174,7 +175,8 @@ ast_else_clause* parse_else_clause() {
 
             case 1:
                 // initial needs to be absent, or a mid, or a final, else one or more
-                if(NULL == (nterm = parse_else_clause_item())) {
+                TRACE("state = %d", state);
+                if(NULL != (nterm = parse_else_clause_item())) {
                     if(AST_else_clause_mid == ast_node_type(nterm)) {
                         append_link_list(list, nterm);
                         // state is still 1
@@ -193,6 +195,7 @@ ast_else_clause* parse_else_clause() {
 
             case 100:
                 // returning a valid
+                TRACE("state = %d", state);
                 node = CREATE_AST_NODE(AST_else_clause, ast_else_clause);
                 node->list = list;
                 finished = true;
@@ -200,12 +203,14 @@ ast_else_clause* parse_else_clause() {
 
             case 101:
                 // not found, no error
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error seen
+                TRACE("state = %d", state);
                 finished = true;
                 break;
 

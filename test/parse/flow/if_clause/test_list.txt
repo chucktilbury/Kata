@@ -1,3 +1,11 @@
 # this is a list of actual tests.
 
-#dummy_test:run
+basic:run
+else:run
+else_final:run
+nested_if:run
+nested_else:run
+else_multi:run
+else_multi_final:run
+err_if_final:run
+err_else_final:run

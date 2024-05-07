@@ -32,7 +32,8 @@ void traverse_if_clause(ast_if_clause* node, PassFunc pre, PassFunc post) {
 
     traverse_expression(node->expr, pre, post);
     traverse_function_body(node->fbod, pre, post);
-    traverse_else_clause(node->eclaus, pre, post);
+    if(NULL != node->eclaus)
+        traverse_else_clause(node->eclaus, pre, post);
 
     AST_CALLBACK(post, node);
     RET;

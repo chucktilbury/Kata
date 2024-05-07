@@ -1,9 +1,4 @@
 # this is a list of classes of tests.
 
 if_clause:run
-else_clause_item:run
-else_clause:run
 switch_clause:run
-case_clause:run
-default_clause:run
-case_body:run
