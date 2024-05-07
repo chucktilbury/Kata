@@ -1,3 +1,0 @@
-1a2,3
-> Syntax: /home/chuck/Src/Kata/test/parse/literals/literal_value/err_unsigned.k: 5: 28: expected module item or end of file but got var
-> Syntax: /home/chuck/Src/Kata/test/parse/literals/literal_value/err_unsigned.k: 5: 28: module cannot be empty

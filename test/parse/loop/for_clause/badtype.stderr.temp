@@ -1,3 +1,0 @@
-Syntax: /home/chuck/Src/Kata/test/parse/loop/for_clause/badtype.k: 6: 14: expected a ')', a type name, or a SYMBOL but got literal signed
-Syntax: /home/chuck/Src/Kata/test/parse/loop/for_clause/badtype.k: 9: 2: expected module item or end of file but got }
-Warning: /home/chuck/Src/Kata/test/parse/loop/for_clause/badtype.k: 10: 1: module is empty

@@ -1,6 +1,0 @@
-2,3c2,3
-< Syntax: /home/chuck/Src/Kata/test/parse/module/namespace_definition/noname.k: 5: 13: expected module item or end of file but got }
-< Warning: /home/chuck/Src/Kata/test/parse/module/namespace_definition/noname.k: 6: 1: module is empty
----
-> Syntax: /home/chuck/Src/Kata/test/parse/module/namespace_definition/noname.k: 5: 12: expected module item or end of file but got namespace
-> Syntax: /home/chuck/Src/Kata/test/parse/module/namespace_definition/noname.k: 5: 12: module cannot be empty

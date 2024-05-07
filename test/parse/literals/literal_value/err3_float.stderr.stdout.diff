@@ -1,4 +1,0 @@
-2c2
-< Warning: /home/chuck/Src/Kata/test/parse/literals/literal_value/err3_float.k: 6: 1: module is empty
----
-> Syntax: /home/chuck/Src/Kata/test/parse/literals/literal_value/err3_float.k: 5: 25: module cannot be empty

@@ -65,18 +65,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -109,6 +118,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): error: ": malformed hex number, expected hex digit, space or operator": 5: 28: "err_unsigned.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -125,42 +135,59 @@ ENTER: main():
                                             ENTER: parse_array_reference(): 
                                                 ENTER: post_token_queue(): 
                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                TRACE: parse_array_reference(): state = 0
+                                                TRACE: parse_array_reference(): state = 101
                                                 ENTER: reset_token_queue(): 
+                                                    ENTER: get_recovery_state(): 
+                                                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                                    TRACE: reset_token_queue(): recover the queue
                                                 RETURN: reset_token_queue(): 
                                             RETURN(node): parse_array_reference() - (NULL)
                                             ENTER: reset_token_queue(): 
+                                                ENTER: get_recovery_state(): 
+                                                RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                                TRACE: reset_token_queue(): recover the queue
                                             RETURN: reset_token_queue(): 
                                         RETURN(node): parse_compound_ref_item() - (NULL)
                                         ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
                                         RETURN: reset_token_queue(): 
                                     RETURN(node): parse_compound_reference() - (NULL)
                                     ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_expr_primary() - (NULL)
                                 TRACE: parse_expression(): state: 101, stack: 0, queue: 0
                                 ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                    TRACE: reset_token_queue(): recover the queue
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_expression() - (NULL)
                             ENTER: parse_list_init(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_list_init(): state = 0
-                                TRACE: parse_list_init(): state = 101
+                                TRACE: parse_list_init(): state = 102
                                 ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                    TRACE: reset_token_queue(): recover the queue
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_list_init() - (NULL)
-                            ENTER: parse_dict_init(): 
-                                ENTER: post_token_queue(): 
-                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                ENTER: reset_token_queue(): 
-                                RETURN: reset_token_queue(): 
-                            RETURN(node): parse_dict_init() - (NULL)
                             ENTER: parse_string_literal(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 ENTER: parse_formatted_strg(): 
                                 RETURN(node): parse_formatted_strg() - (NULL)
                                 ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                    TRACE: reset_token_queue(): recover the queue
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_string_literal() - (NULL)
                             ENTER: parse_cast_statement(): 
@@ -173,10 +200,16 @@ ENTER: main():
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                         ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
                                         RETURN: reset_token_queue(): 
                                     RETURN(node): parse_compound_name() - (NULL)
                                 RETURN(node): parse_type_name() - (NULL)
                                 ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                    TRACE: reset_token_queue(): recover the queue
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_cast_statement() - (NULL)
                             ENTER: parse_function_assignment(): 
@@ -191,28 +224,57 @@ ENTER: main():
                                         ENTER: parse_array_reference(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_array_reference(): state = 0
+                                            TRACE: parse_array_reference(): state = 101
                                             ENTER: reset_token_queue(): 
+                                                ENTER: get_recovery_state(): 
+                                                RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                                TRACE: reset_token_queue(): recover the queue
                                             RETURN: reset_token_queue(): 
                                         RETURN(node): parse_array_reference() - (NULL)
                                         ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
                                         RETURN: reset_token_queue(): 
                                     RETURN(node): parse_compound_ref_item() - (NULL)
                                     ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_compound_reference() - (NULL)
                                 ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                    TRACE: reset_token_queue(): recover the queue
                                 RETURN: reset_token_queue(): 
                             RETURN(node): parse_function_assignment() - (NULL)
                             ENTER: reset_token_queue(): 
+                                ENTER: get_recovery_state(): 
+                                RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                TRACE: reset_token_queue(): recover the queue
                             RETURN: reset_token_queue(): 
                         RETURN(node): parse_assignment_item() - (NULL)
-symbol: "some_name": 5: 23: "err_unsigned.k"
-=: "=": 5: 25: "err_unsigned.k"
-error: ": malformed hex number, expected hex digit, space or operator": 5: 28: "err_unsigned.k"
+                        ENTER: recover_error(): 
+                            TERM: recover_error(): error: ": malformed hex number, expected hex digit, space or operator": 5: 28: "err_unsigned.k"
+                            ENTER: advance_token(): 
+                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TERM: recover_error(): symbol: "x123": 5: 32: "err_unsigned.k"
+                            ENTER: advance_token(): 
+                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TERM: recover_error(): end of file: "": 6: 1: "err_unsigned.k"
+                            ENTER: kill_token_queue(): 
+                            RETURN: kill_token_queue(): 
+                            ENTER: set_recovery_state(): 
+                            RETURN: set_recovery_state(): 
+                        RETURN: recover_error(): 
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
                     RETURN(node): parse_var_definition() - (NULL)
                     ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                     RETURN: reset_token_queue(): 
                 RETURN(node): parse_namespace_item() - (NULL)
                 ENTER: parse_import_statement(): 
@@ -221,21 +283,30 @@ error: ": malformed hex number, expected hex digit, space or operator": 5: 28: "
                     ENTER: post_token_queue(): 
                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                     ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                     RETURN: reset_token_queue(): 
                 RETURN(node): parse_start_function() - (NULL)
                 ENTER: reset_token_queue(): 
+                    ENTER: get_recovery_state(): 
+                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                 RETURN: reset_token_queue(): 
             RETURN(node): parse_module_item() - (NULL)
-error: ": malformed hex number, expected hex digit, space or operator": 5: 28: "err_unsigned.k"
-        RETURN(node): parse_module() - (NULL)
-error: ": malformed hex number, expected hex digit, space or operator": 5: 28: "err_unsigned.k"
-    RETURN(node): parse() - (NULL)
+            ENTER: finalize_token_queue(): 
+            RETURN: finalize_token_queue(): 
+            ENTER: close_file(): 
+                ENTER: pop_input_file(): 
+                RETURN: pop_input_file(): 
+            RETURN: close_file(): 
+            TRACE: parse_module(): end of file
+        RETURN(node): parse_module() - (!NULL)
+    RETURN(node): parse() - (!NULL)
     TRACE: main(): End Parse
     TRACE: main(): --------------------------------------------
     TRACE: main(): set trace state: true
     TRACE: main(): Begin Traverse
     ENTER: traverse_ast(): 
-        TRACE: traverse_ast(): no ast present
+        TRACE: traverse_ast(): do not traverse with errors
     RETURN: traverse_ast(): 
     TRACE: main(): End Traverse
     TRACE: main(): --------------------------------------------

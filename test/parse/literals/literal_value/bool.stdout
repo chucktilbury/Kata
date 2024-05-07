@@ -65,18 +65,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -109,6 +118,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): true: "True": 16: 29: "bool.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -119,8 +129,8 @@ ENTER: main():
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                     RETURN(node): parse_literal_value() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
+                                    TRACE: parse_expr_primary(): literal value
+                                    TERM: parse_expr_primary(): var: "var": 17: 4: "bool.k"
                                 RETURN(node): parse_expr_primary() - (!NULL)
                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -128,11 +138,7 @@ ENTER: main():
                                 RETURN(node): parse_operator() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 17: 4: "bool.k"
-                                ENTER: finalize_token_queue(): 
-                                RETURN: finalize_token_queue(): 
                             RETURN(node): parse_expression() - (!NULL)
-                            ENTER: finalize_token_queue(): 
-                            RETURN: finalize_token_queue(): 
                         RETURN(node): parse_assignment_item() - (!NULL)
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
@@ -159,18 +165,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -203,6 +218,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): true: "TrUe": 17: 29: "bool.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -213,8 +229,8 @@ ENTER: main():
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                     RETURN(node): parse_literal_value() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
+                                    TRACE: parse_expr_primary(): literal value
+                                    TERM: parse_expr_primary(): var: "var": 18: 4: "bool.k"
                                 RETURN(node): parse_expr_primary() - (!NULL)
                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -222,11 +238,7 @@ ENTER: main():
                                 RETURN(node): parse_operator() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 18: 4: "bool.k"
-                                ENTER: finalize_token_queue(): 
-                                RETURN: finalize_token_queue(): 
                             RETURN(node): parse_expression() - (!NULL)
-                            ENTER: finalize_token_queue(): 
-                            RETURN: finalize_token_queue(): 
                         RETURN(node): parse_assignment_item() - (!NULL)
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
@@ -253,18 +265,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -297,6 +318,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): true: "true": 18: 29: "bool.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -307,8 +329,8 @@ ENTER: main():
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                     RETURN(node): parse_literal_value() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
+                                    TRACE: parse_expr_primary(): literal value
+                                    TERM: parse_expr_primary(): var: "var": 19: 4: "bool.k"
                                 RETURN(node): parse_expr_primary() - (!NULL)
                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -316,11 +338,7 @@ ENTER: main():
                                 RETURN(node): parse_operator() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 19: 4: "bool.k"
-                                ENTER: finalize_token_queue(): 
-                                RETURN: finalize_token_queue(): 
                             RETURN(node): parse_expression() - (!NULL)
-                            ENTER: finalize_token_queue(): 
-                            RETURN: finalize_token_queue(): 
                         RETURN(node): parse_assignment_item() - (!NULL)
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
@@ -347,18 +365,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -391,6 +418,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): true: "TRUE": 19: 29: "bool.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -401,8 +429,8 @@ ENTER: main():
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                     RETURN(node): parse_literal_value() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
+                                    TRACE: parse_expr_primary(): literal value
+                                    TERM: parse_expr_primary(): var: "var": 20: 4: "bool.k"
                                 RETURN(node): parse_expr_primary() - (!NULL)
                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -410,11 +438,7 @@ ENTER: main():
                                 RETURN(node): parse_operator() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 20: 4: "bool.k"
-                                ENTER: finalize_token_queue(): 
-                                RETURN: finalize_token_queue(): 
                             RETURN(node): parse_expression() - (!NULL)
-                            ENTER: finalize_token_queue(): 
-                            RETURN: finalize_token_queue(): 
                         RETURN(node): parse_assignment_item() - (!NULL)
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
@@ -441,18 +465,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -485,6 +518,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): on: "On": 20: 27: "bool.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -495,8 +529,8 @@ ENTER: main():
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                     RETURN(node): parse_literal_value() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
+                                    TRACE: parse_expr_primary(): literal value
+                                    TERM: parse_expr_primary(): var: "var": 21: 4: "bool.k"
                                 RETURN(node): parse_expr_primary() - (!NULL)
                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -504,11 +538,7 @@ ENTER: main():
                                 RETURN(node): parse_operator() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 21: 4: "bool.k"
-                                ENTER: finalize_token_queue(): 
-                                RETURN: finalize_token_queue(): 
                             RETURN(node): parse_expression() - (!NULL)
-                            ENTER: finalize_token_queue(): 
-                            RETURN: finalize_token_queue(): 
                         RETURN(node): parse_assignment_item() - (!NULL)
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
@@ -535,18 +565,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -579,6 +618,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): on: "ON": 21: 27: "bool.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -589,8 +629,8 @@ ENTER: main():
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                     RETURN(node): parse_literal_value() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
+                                    TRACE: parse_expr_primary(): literal value
+                                    TERM: parse_expr_primary(): var: "var": 22: 4: "bool.k"
                                 RETURN(node): parse_expr_primary() - (!NULL)
                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -598,11 +638,7 @@ ENTER: main():
                                 RETURN(node): parse_operator() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 22: 4: "bool.k"
-                                ENTER: finalize_token_queue(): 
-                                RETURN: finalize_token_queue(): 
                             RETURN(node): parse_expression() - (!NULL)
-                            ENTER: finalize_token_queue(): 
-                            RETURN: finalize_token_queue(): 
                         RETURN(node): parse_assignment_item() - (!NULL)
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
@@ -629,18 +665,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -673,6 +718,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): false: "False": 22: 30: "bool.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -683,8 +729,8 @@ ENTER: main():
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                     RETURN(node): parse_literal_value() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
+                                    TRACE: parse_expr_primary(): literal value
+                                    TERM: parse_expr_primary(): var: "var": 23: 4: "bool.k"
                                 RETURN(node): parse_expr_primary() - (!NULL)
                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -692,11 +738,7 @@ ENTER: main():
                                 RETURN(node): parse_operator() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 23: 4: "bool.k"
-                                ENTER: finalize_token_queue(): 
-                                RETURN: finalize_token_queue(): 
                             RETURN(node): parse_expression() - (!NULL)
-                            ENTER: finalize_token_queue(): 
-                            RETURN: finalize_token_queue(): 
                         RETURN(node): parse_assignment_item() - (!NULL)
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
@@ -723,18 +765,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -767,6 +818,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): false: "FaLsE": 23: 30: "bool.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -777,8 +829,8 @@ ENTER: main():
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                     RETURN(node): parse_literal_value() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
+                                    TRACE: parse_expr_primary(): literal value
+                                    TERM: parse_expr_primary(): var: "var": 24: 4: "bool.k"
                                 RETURN(node): parse_expr_primary() - (!NULL)
                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -786,11 +838,7 @@ ENTER: main():
                                 RETURN(node): parse_operator() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 24: 4: "bool.k"
-                                ENTER: finalize_token_queue(): 
-                                RETURN: finalize_token_queue(): 
                             RETURN(node): parse_expression() - (!NULL)
-                            ENTER: finalize_token_queue(): 
-                            RETURN: finalize_token_queue(): 
                         RETURN(node): parse_assignment_item() - (!NULL)
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
@@ -817,18 +865,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -861,6 +918,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): false: "false": 24: 30: "bool.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -871,8 +929,8 @@ ENTER: main():
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                     RETURN(node): parse_literal_value() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
+                                    TRACE: parse_expr_primary(): literal value
+                                    TERM: parse_expr_primary(): var: "var": 25: 4: "bool.k"
                                 RETURN(node): parse_expr_primary() - (!NULL)
                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -880,11 +938,7 @@ ENTER: main():
                                 RETURN(node): parse_operator() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 25: 4: "bool.k"
-                                ENTER: finalize_token_queue(): 
-                                RETURN: finalize_token_queue(): 
                             RETURN(node): parse_expression() - (!NULL)
-                            ENTER: finalize_token_queue(): 
-                            RETURN: finalize_token_queue(): 
                         RETURN(node): parse_assignment_item() - (!NULL)
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
@@ -911,18 +965,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -955,6 +1018,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): false: "FALSE": 25: 30: "bool.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -965,8 +1029,8 @@ ENTER: main():
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                     RETURN(node): parse_literal_value() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
+                                    TRACE: parse_expr_primary(): literal value
+                                    TERM: parse_expr_primary(): var: "var": 26: 4: "bool.k"
                                 RETURN(node): parse_expr_primary() - (!NULL)
                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -974,11 +1038,7 @@ ENTER: main():
                                 RETURN(node): parse_operator() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 26: 4: "bool.k"
-                                ENTER: finalize_token_queue(): 
-                                RETURN: finalize_token_queue(): 
                             RETURN(node): parse_expression() - (!NULL)
-                            ENTER: finalize_token_queue(): 
-                            RETURN: finalize_token_queue(): 
                         RETURN(node): parse_assignment_item() - (!NULL)
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
@@ -1005,18 +1065,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -1049,6 +1118,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): off: "Off": 26: 28: "bool.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -1059,8 +1129,8 @@ ENTER: main():
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                     RETURN(node): parse_literal_value() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
+                                    TRACE: parse_expr_primary(): literal value
+                                    TERM: parse_expr_primary(): var: "var": 27: 4: "bool.k"
                                 RETURN(node): parse_expr_primary() - (!NULL)
                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -1068,11 +1138,7 @@ ENTER: main():
                                 RETURN(node): parse_operator() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 27: 4: "bool.k"
-                                ENTER: finalize_token_queue(): 
-                                RETURN: finalize_token_queue(): 
                             RETURN(node): parse_expression() - (!NULL)
-                            ENTER: finalize_token_queue(): 
-                            RETURN: finalize_token_queue(): 
                         RETURN(node): parse_assignment_item() - (!NULL)
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
@@ -1099,18 +1165,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -1143,6 +1218,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): off: "OFF": 27: 28: "bool.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -1153,8 +1229,8 @@ ENTER: main():
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                     RETURN(node): parse_literal_value() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
+                                    TRACE: parse_expr_primary(): literal value
+                                    TERM: parse_expr_primary(): var: "var": 28: 4: "bool.k"
                                 RETURN(node): parse_expr_primary() - (!NULL)
                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -1162,11 +1238,7 @@ ENTER: main():
                                 RETURN(node): parse_operator() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): var: "var": 28: 4: "bool.k"
-                                ENTER: finalize_token_queue(): 
-                                RETURN: finalize_token_queue(): 
                             RETURN(node): parse_expression() - (!NULL)
-                            ENTER: finalize_token_queue(): 
-                            RETURN: finalize_token_queue(): 
                         RETURN(node): parse_assignment_item() - (!NULL)
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
@@ -1193,18 +1265,27 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
@@ -1237,6 +1318,7 @@ ENTER: main():
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                                 TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): off: "OfF": 28: 28: "bool.k"
                                 ENTER: parse_operator(): 
                                 RETURN(node): parse_operator() - (NULL)
                                 ENTER: parse_expr_primary(): 
@@ -1247,8 +1329,8 @@ ENTER: main():
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                     RETURN(node): parse_literal_value() - (!NULL)
-                                    ENTER: finalize_token_queue(): 
-                                    RETURN: finalize_token_queue(): 
+                                    TRACE: parse_expr_primary(): literal value
+                                    TERM: parse_expr_primary(): end of file: "": 30: 1: "bool.k"
                                 RETURN(node): parse_expr_primary() - (!NULL)
                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
@@ -1256,11 +1338,7 @@ ENTER: main():
                                 RETURN(node): parse_operator() - (NULL)
                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
                                 TERM: parse_expression(): end of file: "": 30: 1: "bool.k"
-                                ENTER: finalize_token_queue(): 
-                                RETURN: finalize_token_queue(): 
                             RETURN(node): parse_expression() - (!NULL)
-                            ENTER: finalize_token_queue(): 
-                            RETURN: finalize_token_queue(): 
                         RETURN(node): parse_assignment_item() - (!NULL)
                         ENTER: finalize_token_queue(): 
                         RETURN: finalize_token_queue(): 
@@ -1287,27 +1365,42 @@ ENTER: main():
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_var_definition() - (NULL)
                     ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                        TRACE: reset_token_queue(): recover the queue
                     RETURN: reset_token_queue(): 
                 RETURN(node): parse_namespace_item() - (NULL)
                 ENTER: parse_import_statement(): 
@@ -1316,9 +1409,15 @@ ENTER: main():
                     ENTER: post_token_queue(): 
                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                     ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                        TRACE: reset_token_queue(): recover the queue
                     RETURN: reset_token_queue(): 
                 RETURN(node): parse_start_function() - (NULL)
                 ENTER: reset_token_queue(): 
+                    ENTER: get_recovery_state(): 
+                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                    TRACE: reset_token_queue(): recover the queue
                 RETURN: reset_token_queue(): 
             RETURN(node): parse_module_item() - (NULL)
             ENTER: finalize_token_queue(): 

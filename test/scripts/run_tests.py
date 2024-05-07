@@ -128,7 +128,7 @@ class Compare:
 
     def run(self, name):
         '''
-        Compare the files with the given name using the system diff utiltity.
+        Compare the files with the given name using the system diff utility.
         If the two files are the same, then return zero, else if they are 
         different then return a non-zero number.
 
@@ -157,7 +157,7 @@ class Compare:
         
     def clean(self, name):
         '''
-        Clean up the files created by the comapre method.
+        Clean up the files created by the compare method.
         '''
         os.remove(name+".stdout.diff")
         os.remove(name+".stderr.diff")
@@ -186,7 +186,7 @@ class TestSpec :
     def read_spec(self, dirname, action) :
         '''
         Recursively read the spec files and store them in a dict such that 
-        skipped tests are propigated in the tree.
+        skipped tests are propagated in the tree.
         '''
         with open(os.path.join(dirname, "test_list.txt"), "r") as fp:
             lines = fp.readlines()

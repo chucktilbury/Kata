@@ -1,8 +1,0 @@
-2,3c2,5
-< Syntax: /home/chuck/Src/Kata/test/parse/loop/while_clause/nobody.k: 9: 1: expected function body element but got end of file
-< Syntax: /home/chuck/Src/Kata/test/parse/loop/while_clause/nobody.k: 9: 1: expected function body but got end of file
----
-> Syntax: /home/chuck/Src/Kata/test/parse/loop/while_clause/nobody.k: 8: 2: expected function body element but got while
-> Syntax: /home/chuck/Src/Kata/test/parse/loop/while_clause/nobody.k: 8: 2: expected function body but got while
-> Syntax: /home/chuck/Src/Kata/test/parse/loop/while_clause/nobody.k: 8: 2: expected module item or end of file but got func
-> Syntax: /home/chuck/Src/Kata/test/parse/loop/while_clause/nobody.k: 8: 2: module cannot be empty

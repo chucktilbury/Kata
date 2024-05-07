@@ -95,34 +95,49 @@ ENTER: main():
                         RETURN(node): parse_type_name() - (!NULL)
                         ENTER: advance_token(): 
                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
-): ")": 5: 27: "nobody1.k"
-end of file: "": 6: 1: "nobody1.k"
+                        ENTER: recover_error(): 
+                            TERM: recover_error(): end of file: "": 6: 1: "nobody1.k"
+                            ENTER: kill_token_queue(): 
+                            RETURN: kill_token_queue(): 
+                            ENTER: set_recovery_state(): 
+                            RETURN: set_recovery_state(): 
+                        RETURN: recover_error(): 
                     RETURN(node): parse_class_definition() - (NULL)
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_create_definition() - (NULL)
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_destroy_definition() - (NULL)
                     ENTER: parse_var_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                         ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                         RETURN: reset_token_queue(): 
                     RETURN(node): parse_var_definition() - (NULL)
                     ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                     RETURN: reset_token_queue(): 
                 RETURN(node): parse_namespace_item() - (NULL)
                 ENTER: parse_import_statement(): 
@@ -131,23 +146,30 @@ end of file: "": 6: 1: "nobody1.k"
                     ENTER: post_token_queue(): 
                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
                     ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                     RETURN: reset_token_queue(): 
                 RETURN(node): parse_start_function() - (NULL)
                 ENTER: reset_token_queue(): 
+                    ENTER: get_recovery_state(): 
+                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                 RETURN: reset_token_queue(): 
             RETURN(node): parse_module_item() - (NULL)
-): ")": 5: 27: "nobody1.k"
-end of file: "": 6: 1: "nobody1.k"
-        RETURN(node): parse_module() - (NULL)
-): ")": 5: 27: "nobody1.k"
-end of file: "": 6: 1: "nobody1.k"
-    RETURN(node): parse() - (NULL)
+            ENTER: finalize_token_queue(): 
+            RETURN: finalize_token_queue(): 
+            ENTER: close_file(): 
+                ENTER: pop_input_file(): 
+                RETURN: pop_input_file(): 
+            RETURN: close_file(): 
+            TRACE: parse_module(): end of file
+        RETURN(node): parse_module() - (!NULL)
+    RETURN(node): parse() - (!NULL)
     TRACE: main(): End Parse
     TRACE: main(): --------------------------------------------
     TRACE: main(): set trace state: true
     TRACE: main(): Begin Traverse
     ENTER: traverse_ast(): 
-        TRACE: traverse_ast(): no ast present
+        TRACE: traverse_ast(): do not traverse with errors
     RETURN: traverse_ast(): 
     TRACE: main(): End Traverse
     TRACE: main(): --------------------------------------------

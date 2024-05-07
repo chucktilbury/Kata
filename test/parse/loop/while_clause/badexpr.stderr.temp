@@ -1,3 +1,0 @@
-Syntax: /home/chuck/Src/Kata/test/parse/loop/while_clause/badexpr.k: 7: 15: expected an expression or a ')' but got dict
-Syntax: /home/chuck/Src/Kata/test/parse/loop/while_clause/badexpr.k: 8: 2: expected module item or end of file but got }
-Warning: /home/chuck/Src/Kata/test/parse/loop/while_clause/badexpr.k: 9: 1: module is empty

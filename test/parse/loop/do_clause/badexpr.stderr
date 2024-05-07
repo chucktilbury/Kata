@@ -1,6 +1,4 @@
 Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/badexpr.k: 7: 21: expected an expression or a ')' but got dict
-Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/badexpr.k: 7: 21: expected a while keyword but got dict
-Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/badexpr.k: 7: 21: expected function body element but got do
-Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/badexpr.k: 7: 21: expected function body but got do
-Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/badexpr.k: 7: 21: expected module item or end of file but got func
-Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/badexpr.k: 7: 21: module cannot be empty
+Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/badexpr.k: 9: 1: expected a while keyword but got end of file
+Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/badexpr.k: 9: 1: expected function body element but got end of file
+Syntax: /home/chuck/Src/Kata/test/parse/loop/do_clause/badexpr.k: 9: 1: expected function body but got end of file
