@@ -100,18 +100,13 @@ ast_for_clause* parse_for_clause();
 
 // flow.c
 ast_if_clause* parse_if_clause();
-ast_else_clause_item* parse_else_clause_item();
+ast_elif_clause* parse_elif_clause();
 ast_else_clause* parse_else_clause();
-ast_switch_clause* parse_switch_clause();
-ast_case_clause* parse_case_clause();
-ast_default_clause* parse_default_clause();
-ast_case_body* parse_case_body();
 
 // except.c
 ast_try_clause* parse_try_clause();
-ast_except_clause_mid* parse_except_clause_mid();
-ast_except_clause_final* parse_except_clause_final();
 ast_except_clause* parse_except_clause();
+ast_final_clause* parse_final_clause();
 
 // import.c
 ast_import_statement* parse_import_statement();

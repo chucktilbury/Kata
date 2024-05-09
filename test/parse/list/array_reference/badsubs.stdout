@@ -187,8 +187,6 @@ ENTER: main():
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                         RETURN(node): parse_compound_ref_item() - (!NULL)
-                                        ENTER: finalize_token_queue(): 
-                                        RETURN: finalize_token_queue(): 
                                     RETURN(node): parse_compound_reference() - (!NULL)
                                     TRACE: parse_assignment(): state = 1
                                     ENTER: advance_token(): 
@@ -329,8 +327,6 @@ ENTER: main():
                                                         ENTER: advance_token(): 
                                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                                     RETURN(node): parse_compound_ref_item() - (!NULL)
-                                                    ENTER: finalize_token_queue(): 
-                                                    RETURN: finalize_token_queue(): 
                                                 RETURN(node): parse_compound_reference() - (!NULL)
                                                 TRACE: parse_expr_primary(): compound reference
                                             RETURN(node): parse_expr_primary() - (!NULL)
@@ -493,11 +489,25 @@ ENTER: main():
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
                                 ENTER: parse_if_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_if_clause(): state = 0
+                                    TRACE: parse_if_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_if_clause() - (NULL)
                                 ENTER: parse_try_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_try_clause(): state = 0
+                                    TRACE: parse_try_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_try_clause() - (NULL)
-                                ENTER: parse_switch_clause(): 
-                                RETURN(node): parse_switch_clause() - (NULL)
                                 ENTER: parse_break_statement(): 
                                 RETURN(node): parse_break_statement() - (NULL)
                                 ENTER: parse_continue_statement(): 

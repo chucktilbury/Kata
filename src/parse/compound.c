@@ -314,7 +314,7 @@ ast_compound_reference* parse_compound_reference() {
                 // finished, not an error, return the node
                 node = CREATE_AST_NODE(AST_compound_reference, ast_compound_reference);
                 node->list = list;
-                finalize_token_queue();
+                //finalize_token_queue();
                 finished = true;
                 break;
             case 101:

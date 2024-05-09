@@ -1,6 +1,16 @@
 # this is a list of classes of tests.
 
-try_clause:run
-except_clause_mid:run
-except_clause_final:run
-except_clause:run
+basic_try:run
+basic_final:run
+basic_except:run
+nested_try:run
+nested_final:run
+nested_except:run
+err_no_try_body:run
+err_no_except_body:run
+err_no_final_body:run
+err_bad_except_parms1:run
+err_bad_except_parms2:run
+err_bad_except_parms3:run
+err_bad_final_parms1:run
+err_bad_final_parms2:run

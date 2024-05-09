@@ -18,7 +18,7 @@
  * @brief
  *
  *  try_clause
- *      = 'try' function_body except_clause
+ *      = 'try' function_body ( except_clause )* ( final_clause )?
  *
  * @param node
  *
@@ -31,7 +31,17 @@ void traverse_try_clause(ast_try_clause* node, PassFunc pre, PassFunc post) {
     AST_CALLBACK(pre, node);
 
     traverse_function_body(node->fbod, pre, post);
-    traverse_except_clause(node->ecla, pre, post);
+
+    void* mark = NULL;
+    ast_except_clause* ecl;
+
+    if(NULL != node->except_list) {
+        while(NULL != (ecl = iter_link_list(node->except_list, &mark)))
+            traverse_except_clause(ecl, pre, post);
+    }
+
+    if(NULL != node->final)
+        traverse_final_clause(node->final, pre, post);
 
     AST_CALLBACK(post, node);
     RET;
@@ -40,13 +50,13 @@ void traverse_try_clause(ast_try_clause* node, PassFunc pre, PassFunc post) {
 /**
  * @brief
  *
- *  except_clause_mid
+ *  except_clause
  *      = 'except' '(' SYMBOL ',' SYMBOL ')' function_body
  *
  * @param node
  *
  */
-void traverse_except_clause_mid(ast_except_clause_mid* node, PassFunc pre, PassFunc post) {
+void traverse_except_clause(ast_except_clause* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
 
@@ -64,13 +74,13 @@ void traverse_except_clause_mid(ast_except_clause_mid* node, PassFunc pre, PassF
 /**
  * @brief
  *
- *  except_clause_final
- *      = 'except' '(' 'any' ',' SYMBOL ')' function_body
+ *  final_clause
+ *      = 'final' '(' SYMBOL ')' function_body
  *
  * @param node
  *
  */
-void traverse_except_clause_final(ast_except_clause_final* node, PassFunc pre, PassFunc post) {
+void traverse_final_clause(ast_final_clause* node, PassFunc pre, PassFunc post) {
 
     assert(node != NULL);
 
@@ -84,30 +94,3 @@ void traverse_except_clause_final(ast_except_clause_final* node, PassFunc pre, P
     RET;
 }
 
-/**
- * @brief
- *
- *  except_clause
- *      = ( except_clause_mid )+ ( except_clause_final )?
- *      / except_clause_final
- *
- * @param node
- *
- */
-void traverse_except_clause(ast_except_clause* node, PassFunc pre, PassFunc post) {
-
-    assert(node != NULL);
-
-    ENTER;
-    AST_CALLBACK(pre, node);
-    ast_except_clause_mid* mid;
-
-    void* mark = NULL;
-    while(NULL != (mid = iter_link_list(node->list, &mark)))
-        traverse_except_clause_mid(mid, pre, post);
-    if(node->fin != NULL)
-        traverse_except_clause_final(node->fin, pre, post);
-
-    AST_CALLBACK(post, node);
-    RET;
-}

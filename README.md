@@ -720,29 +720,21 @@ for_clause
 # the else_clause is optional.
 #
 if_clause
-    = 'if' '(' expression ')' function_body else_clause
+    = 'if' '(' expression ')' function_body ( elif_clause )* ( else_clause )?
 
 #####################
 #
 # Else clause with a required expression.
 #
-else_clause_mid
-    = 'else' '(' expression ')' function_body
+elif_clause
+    = 'elif' '(' expression ')' function_body
 
 #####################
 #
 # Else clause with a blank or missing expression must be last.
 #
-else_clause_final
-    = 'else' ( '(' ')' )? function_body
-
-#####################
-#
-# Actual else clause list definition. Zero or more mid clauses and zero or one
-# final clauses. Note that a stand-alone if() is syntactically correct.
-#
 else_clause
-    = ( else_clause_mid )* ( else_clause_final )?
+    = 'else' function_body
 
 #####################
 #
@@ -753,7 +745,7 @@ else_clause
 # location. One or more except clauses can be present.
 #
 try_clause
-    = 'try' function_body except_clause
+    = 'try' function_body ( except_clause )* ( final_clause )?
 
 #####################
 #
@@ -763,7 +755,7 @@ try_clause
 # exception, the exception type should be 'any' and the error message is
 # propagated as expected.
 #
-except_clause_mid
+except_clause
     = 'except' '(' SYMBOL ',' SYMBOL ')' function_body
 
 #####################
@@ -771,65 +763,7 @@ except_clause_mid
 # The final clause matches any exception, but it must be the last one that
 # appears in the list of clauses.
 #
-except_clause_final
-    = 'except' '(' 'any' ',' SYMBOL ')' function_body
-
-#####################
-#
-# The except clause must have at least one element, but that element could be a
-# mid or a final. There may be any number of mid clauses. A final clause must
-# be the last one. If there are no middle except clauses then the final one is
-# required. In other words, at least one except clause is required and if there
-# is an "any" except clause, then it needs to be the last one to be
-# syntactically correct.
-#
-except_clause
-    = ( except_clause_mid )+ ( except_clause_final )?
-    / except_clause_final
-
-#####################
-#
-# The switch/case construct is similar to the one in C except that it accepts
-# strings as well as numbers.
-#
-switch_clause
-    = 'switch' '(' compound_reference ')' case_body
-
-#####################
-#
-# Case item so that the data structures can line up.
-#
-case_item
-    = literal_value
-    / LITERAL_DSTR
-    / LITERAL_SSTR
-
-#####################
-#
-# A case clause must have a literal value or a data reference that was
-# declared as CONST. First the match is made against the type that appears in
-# the switch clause. If the type does not match, then the case cannot match.
-# There is an exception in that a signed and an unsigned are considered to be
-# the same type for a case clause.
-#
-case_clause
-    = 'case' '(' case_item ')' function_body
-
-#####################
-#
-# The default clause is the last thing if it's present. If none of the cases
-# match, then the default clause is matched and executed. If the default clause
-# is not present and none of the cases match, then the switch is not executed.
-#
-default_clause
-    = 'default' function_body
-
-#####################
-#
-# The actual case body definition is similar to C. One or more 'case' clauses
-# followed by exactly one optional 'default' clause.
-#
-case_body
-    = '{' ( case_clause_list )+ ( default_clause )? '}'
+final_clause
+    = 'final' '(' SYMBOL ')' function_body
 
 ```

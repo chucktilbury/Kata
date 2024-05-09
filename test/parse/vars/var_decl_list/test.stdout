@@ -289,11 +289,27 @@ ENTER: main():
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
                                 ENTER: parse_if_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_if_clause(): state = 0
+                                    TRACE: parse_if_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_if_clause() - (NULL)
                                 ENTER: parse_try_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_try_clause(): state = 0
+                                    TRACE: parse_try_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_try_clause() - (NULL)
-                                ENTER: parse_switch_clause(): 
-                                RETURN(node): parse_switch_clause() - (NULL)
                                 ENTER: parse_break_statement(): 
                                 RETURN(node): parse_break_statement() - (NULL)
                                 ENTER: parse_continue_statement(): 
@@ -575,11 +591,27 @@ ENTER: main():
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
                                 ENTER: parse_if_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_if_clause(): state = 0
+                                    TRACE: parse_if_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_if_clause() - (NULL)
                                 ENTER: parse_try_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_try_clause(): state = 0
+                                    TRACE: parse_try_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_try_clause() - (NULL)
-                                ENTER: parse_switch_clause(): 
-                                RETURN(node): parse_switch_clause() - (NULL)
                                 ENTER: parse_break_statement(): 
                                 RETURN(node): parse_break_statement() - (NULL)
                                 ENTER: parse_continue_statement(): 
@@ -865,11 +897,27 @@ ENTER: main():
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
                                 ENTER: parse_if_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_if_clause(): state = 0
+                                    TRACE: parse_if_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_if_clause() - (NULL)
                                 ENTER: parse_try_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_try_clause(): state = 0
+                                    TRACE: parse_try_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_try_clause() - (NULL)
-                                ENTER: parse_switch_clause(): 
-                                RETURN(node): parse_switch_clause() - (NULL)
                                 ENTER: parse_break_statement(): 
                                 RETURN(node): parse_break_statement() - (NULL)
                                 ENTER: parse_continue_statement(): 
@@ -1151,11 +1199,27 @@ ENTER: main():
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
                                 ENTER: parse_if_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_if_clause(): state = 0
+                                    TRACE: parse_if_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_if_clause() - (NULL)
                                 ENTER: parse_try_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_try_clause(): state = 0
+                                    TRACE: parse_try_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_try_clause() - (NULL)
-                                ENTER: parse_switch_clause(): 
-                                RETURN(node): parse_switch_clause() - (NULL)
                                 ENTER: parse_break_statement(): 
                                 RETURN(node): parse_break_statement() - (NULL)
                                 ENTER: parse_continue_statement(): 
@@ -1480,11 +1544,27 @@ ENTER: main():
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
                                 ENTER: parse_if_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_if_clause(): state = 0
+                                    TRACE: parse_if_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_if_clause() - (NULL)
                                 ENTER: parse_try_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_try_clause(): state = 0
+                                    TRACE: parse_try_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_try_clause() - (NULL)
-                                ENTER: parse_switch_clause(): 
-                                RETURN(node): parse_switch_clause() - (NULL)
                                 ENTER: parse_break_statement(): 
                                 RETURN(node): parse_break_statement() - (NULL)
                                 ENTER: parse_continue_statement(): 
@@ -1802,11 +1882,27 @@ ENTER: main():
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
                                 ENTER: parse_if_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_if_clause(): state = 0
+                                    TRACE: parse_if_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_if_clause() - (NULL)
                                 ENTER: parse_try_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_try_clause(): state = 0
+                                    TRACE: parse_try_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_try_clause() - (NULL)
-                                ENTER: parse_switch_clause(): 
-                                RETURN(node): parse_switch_clause() - (NULL)
                                 ENTER: parse_break_statement(): 
                                 RETURN(node): parse_break_statement() - (NULL)
                                 ENTER: parse_continue_statement(): 
@@ -2116,11 +2212,27 @@ ENTER: main():
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_for_clause() - (NULL)
                                 ENTER: parse_if_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_if_clause(): state = 0
+                                    TRACE: parse_if_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_if_clause() - (NULL)
                                 ENTER: parse_try_clause(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_try_clause(): state = 0
+                                    TRACE: parse_try_clause(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_try_clause() - (NULL)
-                                ENTER: parse_switch_clause(): 
-                                RETURN(node): parse_switch_clause() - (NULL)
                                 ENTER: parse_break_statement(): 
                                 RETURN(node): parse_break_statement() - (NULL)
                                 ENTER: parse_continue_statement(): 

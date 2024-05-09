@@ -26,7 +26,6 @@
  *      / for_clause
  *      / if_clause
  *      / try_clause
- *      / switch_clause
  *      / break_statement
  *      / continue_statement
  *      / inline_statement
@@ -56,7 +55,6 @@ ast_function_body_element* parse_function_body_element() {
             (NULL != (nterm = (ast_node*)parse_for_clause())) ||
             (NULL != (nterm = (ast_node*)parse_if_clause())) ||
             (NULL != (nterm = (ast_node*)parse_try_clause())) ||
-            (NULL != (nterm = (ast_node*)parse_switch_clause())) ||
             (NULL != (nterm = (ast_node*)parse_break_statement())) ||
             (NULL != (nterm = (ast_node*)parse_continue_statement())) ||
             (NULL != (nterm = (ast_node*)parse_inline_statement())) ||

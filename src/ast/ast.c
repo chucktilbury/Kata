@@ -98,16 +98,10 @@ const char* nterm_to_str(ast_node* node) {
                     (type == AST_do_clause)           ? "do_clause" :
                     (type == AST_for_clause)          ? "for_clause" :
                     (type == AST_if_clause)           ? "if_clause" :
-                    (type == AST_else_clause_mid)     ? "else_clause_mid" :
-                    (type == AST_else_clause_final)   ? "else_clause_final" :
                     (type == AST_else_clause)         ? "else_clause" :
-                    (type == AST_switch_clause)       ? "switch_clause" :
-                    (type == AST_case_clause)         ? "case_clause" :
-                    (type == AST_default_clause)      ? "default_clause" :
-                    (type == AST_case_body)           ? "case_body" :
+                    (type == AST_elif_clause)         ? "elif_clause" :
+                    (type == AST_final_clause)        ? "final_clause" :
                     (type == AST_try_clause)          ? "try_clause" :
-                    (type == AST_except_clause_mid)   ? "except_clause_mid" :
-                    (type == AST_except_clause_final) ? "except_clause_final" :
                     (type == AST_except_clause)       ? "except_clause" :
                     (type == AST_break_statement)     ? "break_statement" :
                     (type == AST_continue_statement)  ? "continue_statement" :

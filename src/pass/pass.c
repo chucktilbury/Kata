@@ -112,16 +112,10 @@ void pre_test_pass(ast_node* node) {
     (type == AST_do_clause)? pre_test_pass_func(node, AST_do_clause) :
     (type == AST_for_clause)? pre_test_pass_func(node, AST_for_clause) :
     (type == AST_if_clause)? pre_test_pass_func(node, AST_if_clause) :
-    (type == AST_else_clause_mid)? pre_test_pass_func(node, AST_else_clause_mid) :
-    (type == AST_else_clause_final)? pre_test_pass_func(node, AST_else_clause_final) :
+    (type == AST_elif_clause)? pre_test_pass_func(node, AST_elif_clause) :
     (type == AST_else_clause)? pre_test_pass_func(node, AST_else_clause) :
-    (type == AST_switch_clause)? pre_test_pass_func(node, AST_switch_clause) :
-    (type == AST_case_clause)? pre_test_pass_func(node, AST_case_clause) :
-    (type == AST_default_clause)? pre_test_pass_func(node, AST_default_clause) :
-    (type == AST_case_body)? pre_test_pass_func(node, AST_case_body) :
     (type == AST_try_clause)? pre_test_pass_func(node, AST_try_clause) :
-    (type == AST_except_clause_mid)? pre_test_pass_func(node, AST_except_clause_mid) :
-    (type == AST_except_clause_final)? pre_test_pass_func(node, AST_except_clause_final) :
+    (type == AST_final_clause)? pre_test_pass_func(node, AST_final_clause) :
     (type == AST_except_clause)? pre_test_pass_func(node, AST_except_clause) :
     (type == AST_break_statement)? pre_test_pass_func(node, AST_break_statement) :
     (type == AST_continue_statement)? pre_test_pass_func(node, AST_continue_statement) :
@@ -193,17 +187,11 @@ void post_test_pass(ast_node* node) {
     (type == AST_do_clause)? post_test_pass_func(node, AST_do_clause) :
     (type == AST_for_clause)? post_test_pass_func(node, AST_for_clause) :
     (type == AST_if_clause)? post_test_pass_func(node, AST_if_clause) :
-    (type == AST_else_clause_mid)? post_test_pass_func(node, AST_else_clause_mid) :
-    (type == AST_else_clause_final)? post_test_pass_func(node, AST_else_clause_final) :
     (type == AST_else_clause)? post_test_pass_func(node, AST_else_clause) :
-    (type == AST_switch_clause)? post_test_pass_func(node, AST_switch_clause) :
-    (type == AST_case_clause)? post_test_pass_func(node, AST_case_clause) :
-    (type == AST_default_clause)? post_test_pass_func(node, AST_default_clause) :
-    (type == AST_case_body)? post_test_pass_func(node, AST_case_body) :
+    (type == AST_elif_clause)? post_test_pass_func(node, AST_elif_clause) :
     (type == AST_try_clause)? post_test_pass_func(node, AST_try_clause) :
-    (type == AST_except_clause_mid)? post_test_pass_func(node, AST_except_clause_mid) :
-    (type == AST_except_clause_final)? post_test_pass_func(node, AST_except_clause_final) :
     (type == AST_except_clause)? post_test_pass_func(node, AST_except_clause) :
+    (type == AST_final_clause)? post_test_pass_func(node, AST_final_clause) :
     (type == AST_break_statement)? post_test_pass_func(node, AST_break_statement) :
     (type == AST_continue_statement)? post_test_pass_func(node, AST_continue_statement) :
     (type == AST_inline_statement)? post_test_pass_func(node, AST_inline_statement) :

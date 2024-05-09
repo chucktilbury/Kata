@@ -80,9 +80,6 @@ void traverse_function_body_element(ast_function_body_element* node, PassFunc pr
         case AST_try_clause:
             traverse_try_clause((ast_try_clause*)node->nterm, pre, post);
             break;
-        case AST_switch_clause:
-            traverse_switch_clause((ast_switch_clause*)node->nterm, pre, post);
-            break;
         case AST_break_statement:
             traverse_break_statement((ast_break_statement*)node->nterm, pre, post);
             break;

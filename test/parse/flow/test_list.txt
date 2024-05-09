@@ -1,4 +1,16 @@
-# this is a list of classes of tests.
+# this is a list of actual tests.
 
-if_clause:run
-switch_clause:run
+basic_if:run
+basic_elif:run
+basic_else:run
+nested_if:run
+nested_elif:run
+nested_else:run
+err_if_no_paren:run
+err_if_bad_expr:run
+err_if_no_body:run
+err_elif_no_paren:run
+err_elif_bad_expr:run
+err_elif_no_body:run
+err_else_expr:run
+err_else_no_body:run

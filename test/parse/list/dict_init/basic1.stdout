@@ -283,8 +283,6 @@ ENTER: main():
                                                         RETURN(node): parse_array_reference() - (!NULL)
                                                         TRACE: parse_compound_ref_item(): array reference
                                                     RETURN(node): parse_compound_ref_item() - (!NULL)
-                                                    ENTER: finalize_token_queue(): 
-                                                    RETURN: finalize_token_queue(): 
                                                 RETURN(node): parse_compound_reference() - (!NULL)
                                                 TRACE: parse_expr_primary(): compound reference
                                             RETURN(node): parse_expr_primary() - (!NULL)
@@ -474,8 +472,6 @@ ENTER: main():
                                                         ENTER: advance_token(): 
                                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                                                     RETURN(node): parse_compound_ref_item() - (!NULL)
-                                                    ENTER: finalize_token_queue(): 
-                                                    RETURN: finalize_token_queue(): 
                                                 RETURN(node): parse_compound_reference() - (!NULL)
                                                 TRACE: parse_expr_primary(): compound reference
                                             RETURN(node): parse_expr_primary() - (!NULL)

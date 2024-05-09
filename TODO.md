@@ -1,5 +1,9 @@
 # TODO list
 
+* var declaration missing from function body
+* Improve error message where final else is not the last one.
+* Change if/else to be if/else/final
+* Change switch/case/default to be switch/case/final and delete the 'default' keyword
 * Add a test that uses '()' in a formatted string expression list.
 * Error recovery needs to consume tokens to prevent multiple nonsense errors.
 * Simple assignment as in "name = name" appears to not be a function_body_item.

@@ -1176,11 +1176,11 @@ ENTER: main():
                                 RETURN: traverse_expr_primary(): 
                                 ENTER: traverse_operator(): 
                                     ENTER: pre_test_pass_func(): 
-                                        TRACE: pre_test_pass_func(): node type: operator(3068)
+                                        TRACE: pre_test_pass_func(): node type: operator(3062)
                                     RETURN: pre_test_pass_func(): 
                                     TERM: traverse_operator(): unary minus: "-": 19: 25: "signed.k"
                                     ENTER: post_test_pass_func(): 
-                                        TRACE: post_test_pass_func(): node type: operator(3068)
+                                        TRACE: post_test_pass_func(): node type: operator(3062)
                                     RETURN: post_test_pass_func(): 
                                 RETURN: traverse_operator(): 
                                 ENTER: post_test_pass_func(): 
@@ -1272,11 +1272,11 @@ ENTER: main():
                                 RETURN: traverse_expr_primary(): 
                                 ENTER: traverse_operator(): 
                                     ENTER: pre_test_pass_func(): 
-                                        TRACE: pre_test_pass_func(): node type: operator(3068)
+                                        TRACE: pre_test_pass_func(): node type: operator(3062)
                                     RETURN: pre_test_pass_func(): 
                                     TERM: traverse_operator(): unary minus: "-": 20: 25: "signed.k"
                                     ENTER: post_test_pass_func(): 
-                                        TRACE: post_test_pass_func(): node type: operator(3068)
+                                        TRACE: post_test_pass_func(): node type: operator(3062)
                                     RETURN: post_test_pass_func(): 
                                 RETURN: traverse_operator(): 
                                 ENTER: post_test_pass_func(): 

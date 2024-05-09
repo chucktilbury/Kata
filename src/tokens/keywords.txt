@@ -1,15 +1,14 @@
 break
-case
 continue
 const
-default
+final
 import
 do
 else
+elif
 for
 if
 return
-switch
 while
 in
 as
