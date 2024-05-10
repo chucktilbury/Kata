@@ -410,7 +410,6 @@ ast_expression_list* parse_expression_list() {
  *  assignment_item
  *      = expression
  *      / list_init
- *      / string_literal
  *      / cast_statement
  *      / function_assignment
  *
@@ -427,7 +426,6 @@ ast_assignment_item* parse_assignment_item() {
     if(
         (NULL != (nterm = (ast_node*)parse_expression())) ||
         (NULL != (nterm = (ast_node*)parse_list_init())) ||
-        (NULL != (nterm = (ast_node*)parse_string_literal())) ||
         (NULL != (nterm = (ast_node*)parse_cast_statement())) ||
         (NULL != (nterm = (ast_node*)parse_function_assignment()))) {
 
@@ -520,7 +518,7 @@ ast_assignment* parse_assignment() {
             case 3:
                 // must be an expression or an error
                 TRACE("state = %d", state);
-                if(NULL == (rhs = (ast_node*)parse_expression()))
+                if(NULL != (rhs = (ast_node*)parse_expression()))
                     state = 100;
                 else { 
                     EXPECTED("an expression");

@@ -27,8 +27,6 @@ typedef enum {
     AST_type_name,
     AST_formatted_strg,
     AST_string_literal,
-    AST_string_expr_item,
-    AST_string_expr_list,
     AST_var_decl,
     AST_var_decl_list,
     AST_var_definition,
@@ -82,6 +80,8 @@ typedef enum {
     AST_compound_name_list,
     AST_array_param_list,
     AST_class_var_declaration,
+    AST_print_statement,
+    AST_trace_statement,
     AST_LAST, // number of non-terminals in the list
 } AstType;
 

@@ -76,6 +76,7 @@ void traverse_literal_type_name(ast_literal_type_name* node, PassFunc pre, PassF
  *      / LITERAL_UNSIGNED
  *      / LITERAL_SIGNED
  *      / LITERAL_BOOL
+ *      / string_literal
  *
  * @param node
  *
@@ -87,7 +88,10 @@ void traverse_literal_value(ast_literal_value* node, PassFunc pre, PassFunc post
     ENTER;
     AST_CALLBACK(pre, node);
 
-    TRACE_TERM(node->token);
+    if(node->token != NULL)
+        TRACE_TERM(node->token);
+    else
+        traverse_string_literal(node->str, pre, post);
 
     AST_CALLBACK(post, node);
     RET;

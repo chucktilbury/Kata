@@ -1,0 +1,229 @@
+(8) 
+(8) GROUP: /home/chuck/Src/Kata/test/parse/import
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/import/import_statement
+(8) 
+(8) GROUP: /home/chuck/Src/Kata/test/parse/compound
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/compound/compound_name
+(8)         TEST: basic: RUN FAIL
+(8)         TEST: baddot: RUN PASS
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/compound/compound_name_list
+(8)         TEST: basic: RUN FAIL
+(8)         TEST: nocomma: RUN FAIL
+(8)         TEST: extracomma: RUN FAIL
+(8)         TEST: badchar: RUN FAIL
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/compound/compound_reference
+(8)         TEST: symbols: RUN FAIL
+(8)         TEST: arrays: RUN FAIL
+(8)         TEST: mixed: RUN FAIL
+(8) 
+(8) GROUP: /home/chuck/Src/Kata/test/parse/list
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/list/list_init
+(8)         TEST: basic: RUN FAIL
+(8)         TEST: nocomma: RUN FAIL
+(8)         TEST: badcomma: RUN FAIL
+(8)         TEST: badclosure: RUN FAIL
+(8)         TEST: wrongclosure: RUN FAIL
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/list/dict_init
+(8)         TEST: basic: RUN FAIL
+(8)         TEST: basic1: RUN FAIL
+(8)         TEST: mixed: RUN FAIL
+(8)         TEST: mixed1: RUN FAIL
+(8)         TEST: nocomma: RUN FAIL
+(8)         TEST: badcomma: RUN FAIL
+(8)         TEST: noclose: RUN FAIL
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/list/array_reference
+(8)         TEST: basic: RUN FAIL
+(8)         TEST: badsubs: RUN FAIL
+(8)         TEST: regress: RUN FAIL
+(8) 
+(8) GROUP: /home/chuck/Src/Kata/test/parse/literals
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/literals/scope_operator
+(8)         TEST: test: RUN PASS
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/literals/literal_type_name
+(8)         TEST: test: RUN FAIL
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/literals/literal_value
+(8)         TEST: float: RUN FAIL
+(8)         TEST: err1_float: RUN FAIL
+(8)         TEST: err2_float: RUN FAIL
+(8)         TEST: err3_float: RUN FAIL
+(8)         TEST: err4_float: RUN FAIL
+(8)         TEST: signed: RUN FAIL
+(8)         TEST: unsigned: RUN FAIL
+(8)         TEST: err_unsigned: RUN FAIL
+(8)         TEST: bool: RUN FAIL
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/literals/type_name
+(8)         TEST: test: RUN FAIL
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/literals/type_name_list
+(8)         TEST: test: RUN FAIL
+(8) 
+(8) GROUP: /home/chuck/Src/Kata/test/parse/loop
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/loop/while_clause
+(8)         TEST: nobody: RUN FAIL
+(8)         TEST: badexpr: RUN FAIL
+(8)         TEST: basic: RUN FAIL
+(8)         TEST: nested: RUN FAIL
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/loop/do_clause
+(8)         TEST: basic: RUN FAIL
+(8)         TEST: nested: RUN FAIL
+(8)         TEST: badexpr: RUN FAIL
+(8)         TEST: nobody: RUN FAIL
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/loop/for_clause
+(8)         TEST: basic: RUN FAIL
+(8)         TEST: nested: RUN FAIL
+(8)         TEST: badsym: RUN FAIL
+(8)         TEST: badtype: RUN FAIL
+(8)         TEST: noin: RUN FAIL
+(8)         TEST: badexpr: RUN FAIL
+(8)         TEST: nobody: RUN PASS
+(8) 
+(8) GROUP: /home/chuck/Src/Kata/test/parse/module
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/module/module
+(8)         TEST: items: RUN FAIL
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/module/namespace_definition
+(8)         TEST: empty: RUN PASS
+(8)         TEST: nested: RUN FAIL
+(8)         TEST: items: RUN FAIL
+(8)         TEST: noname: RUN PASS
+(8)         TEST: nobody: RUN PASS
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/module/class_definition
+(8)         TEST: class_decl: RUN PASS
+(8)         TEST: nest_error: RUN PASS
+(8)         TEST: fdef_error: RUN PASS
+(8)         TEST: item_error1: RUN PASS
+(8)         TEST: item_error2: RUN PASS
+(8)         TEST: class_content: RUN FAIL
+(8)         TEST: noname: RUN PASS
+(8)         TEST: nobody: RUN PASS
+(8)         TEST: nobody1: RUN PASS
+(8)         TEST: nobody2: RUN PASS
+(8) 
+(8) GROUP: /home/chuck/Src/Kata/test/parse/strg
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/strg/string_literal
+(8)         TEST: test: RUN FAIL
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/strg/formatted_strg
+(8)         TEST: invalid_args: RUN FAIL
+(8)         TEST: empty_args: RUN FAIL
+(8)         TEST: no_args: RUN FAIL
+(8)         TEST: with_args: RUN FAIL
+(8)         TEST: invalid_str: RUN FAIL
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/strg/string_expr
+(8)         TEST: strg_add: RUN PASS
+(8)         TEST: strg_equal: RUN FAIL
+(8)         TEST: strg_not_equal: RUN FAIL
+(8)         TEST: strg_assign_add: RUN FAIL
+(8) 
+(8) GROUP: /home/chuck/Src/Kata/test/parse/vars
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/vars/var_decl
+(8)         TEST: test: RUN FAIL
+(8)         TEST: err1_test: RUN FAIL
+(8)         TEST: err2_test: RUN PASS
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/vars/var_decl_list
+(8)         TEST: test: RUN FAIL
+(8)         TEST: err1_test: RUN PASS
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/vars/var_definition
+(8)         TEST: test: RUN FAIL
+(8)         TEST: err1_test: RUN FAIL
+(8)         TEST: err2_test: RUN PASS
+(8) 
+(8) GROUP: /home/chuck/Src/Kata/test/parse/except
+(8)     TEST: basic_try: RUN FAIL
+(8)     TEST: basic_final: RUN FAIL
+(8)     TEST: basic_except: RUN FAIL
+(8)     TEST: nested_try: RUN FAIL
+(8)     TEST: nested_final: RUN FAIL
+(8)     TEST: nested_except: RUN FAIL
+(8)     TEST: err_no_try_body: RUN FAIL
+(8)     TEST: err_no_except_body: RUN FAIL
+(8)     TEST: err_no_final_body: RUN FAIL
+(8)     TEST: err_bad_except_parms1: RUN FAIL
+(8)     TEST: err_bad_except_parms2: RUN FAIL
+(8)     TEST: err_bad_except_parms3: RUN FAIL
+(8)     TEST: err_bad_final_parms1: RUN FAIL
+(8)     TEST: err_bad_final_parms2: RUN FAIL
+(8) 
+(8) GROUP: /home/chuck/Src/Kata/test/parse/flow
+(8)     TEST: basic_if: RUN FAIL
+(8)     TEST: basic_elif: RUN FAIL
+(8)     TEST: basic_else: RUN FAIL
+(8)     TEST: nested_if: RUN FAIL
+(8)     TEST: nested_elif: RUN FAIL
+(8)     TEST: nested_else: RUN FAIL
+(8)     TEST: err_if_no_paren: RUN FAIL
+(8)     TEST: err_if_bad_expr: RUN FAIL
+(8)     TEST: err_if_no_body: RUN FAIL
+(8)     TEST: err_elif_no_paren: RUN FAIL
+(8)     TEST: err_elif_bad_expr: RUN FAIL
+(8)     TEST: err_elif_no_body: RUN FAIL
+(8)     TEST: err_else_expr: RUN FAIL
+(8)     TEST: err_else_no_body: RUN FAIL
+(8) 
+(8) GROUP: /home/chuck/Src/Kata/test/parse/expr
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/expr/expression
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/expr/expression_list
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/expr/assignment
+(8)     GROUP: /home/chuck/Src/Kata/test/parse/expr/cast_statement
+(8) 
+(8) GROUP: /home/chuck/Src/Kata/test/parse/func
+(8)     TEST: create_ref: RUN FAIL
+(8)     TEST: destroy_ref: RUN FAIL
+(8)     TEST: create_def: RUN FAIL
+(8)     TEST: destroy_def: RUN FAIL
+(8)     TEST: func_assign: RUN FAIL
+(8)     TEST: func_decl: RUN FAIL
+(8)     TEST: func_def: RUN FAIL
+(8)     TEST: start_def: RUN FAIL
+(8)     TEST: create_decl: RUN FAIL
+(8)     TEST: destroy_decl: RUN FAIL
+(8)     TEST: err_create_ref_parms: RUN FAIL
+(8)     TEST: err_destroy_ref_parms: RUN FAIL
+(8)     TEST: err_create_def_parms: RUN FAIL
+(8)     TEST: err_destroy_def_parms: RUN FAIL
+(8)     TEST: err_func_decl_parms: RUN FAIL
+(8)     TEST: err_start_def_parms: RUN FAIL
+(8)     TEST: err_start_ref: RUN FAIL
+(8)     TEST: err_create_decl_parms: RUN FAIL
+(8)     TEST: err_destroy_decl_parms: RUN FAIL
+(8) 
+(8) GROUP: /home/chuck/Src/Kata/test/parse/func_body
+(8)     TEST: break: RUN FAIL
+(8)     TEST: continue: RUN FAIL
+(8)     TEST: exit: RUN FAIL
+(8)     TEST: inline: RUN FAIL
+(8)     TEST: raise: RUN FAIL
+(8)     TEST: return: RUN FAIL
+(8)     TEST: type: RUN FAIL
+(8)     TEST: yield: RUN FAIL
+(8)     TEST: var_def: RUN FAIL
+(8)     TEST: assignment: RUN FAIL
+(8)     TEST: func_ref: RUN FAIL
+(8)     TEST: destroy_ref: RUN FAIL
+(8)     TEST: create_ref: RUN FAIL
+(8)     TEST: while: RUN FAIL
+(8)     TEST: do: RUN FAIL
+(8)     TEST: for: RUN FAIL
+(8)     TEST: if: RUN FAIL
+(8)     TEST: try: RUN FAIL
+(8)     TEST: nested: RUN FAIL
+(8)     TEST: err_exit_parms: RUN FAIL
+(8)     TEST: err_inline_body: RUN FAIL
+(8)     TEST: err_raise_parms1: RUN FAIL
+(8)     TEST: err_raise_parms2: RUN FAIL
+(8)     TEST: return1: RUN FAIL
+(8)     TEST: err_type_parms: RUN FAIL
+(8)     TEST: err_yield_parms: RUN FAIL
+(8)     TEST: err_var_def_assign: RUN FAIL
+(8)     TEST: err_assign_expr1: RUN FAIL
+(8)     TEST: err_assign_expr2: RUN FAIL
+(8)     TEST: err_func_ref_parms1: RUN FAIL
+(8)     TEST: err_func_ref_parms2: RUN FAIL
+(8)     TEST: err_func_ref_parms3: RUN FAIL
+(8)     TEST: err_destroy_ref_parms1: RUN FAIL
+(8)     TEST: err_destroy_ref_parms2: RUN FAIL
+(8)     TEST: err_create_ref_parms1: RUN FAIL
+(8)     TEST: err_create_ref_parms: RUN FAIL
+(8)     TEST: err_create_ref_parms3: RUN FAIL
+(8)     TEST: print: RUN FAIL
+(8)     TEST: trace: RUN FAIL
+(8)     TEST: err_trace1: RUN FAIL
+(8)     TEST: err_trace2: RUN FAIL
+(1) REPORT: tests: 174, run: 174, skip: 0, pass: 19, fail: 155, errors: 0

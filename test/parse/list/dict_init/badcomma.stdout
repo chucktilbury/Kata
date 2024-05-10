@@ -129,26 +129,20 @@ ENTER: main():
                                     ENTER: parse_compound_reference(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_compound_reference(): state = 0
                                         ENTER: parse_compound_ref_item(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                            ENTER: parse_array_reference(): 
-                                                ENTER: post_token_queue(): 
-                                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                                TRACE: parse_array_reference(): state = 0
-                                                TRACE: parse_array_reference(): state = 101
-                                                ENTER: reset_token_queue(): 
-                                                    ENTER: get_recovery_state(): 
-                                                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                                    TRACE: reset_token_queue(): recover the queue
-                                                RETURN: reset_token_queue(): 
-                                            RETURN(node): parse_array_reference() - (NULL)
+                                            TRACE: parse_compound_ref_item(): state = 0
+                                            TERM: parse_compound_ref_item(): [: "[": 5: 18: "badcomma.k"
+                                            TRACE: parse_compound_ref_item(): state = 101
                                             ENTER: reset_token_queue(): 
                                                 ENTER: get_recovery_state(): 
                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                                 TRACE: reset_token_queue(): recover the queue
                                             RETURN: reset_token_queue(): 
                                         RETURN(node): parse_compound_ref_item() - (NULL)
+                                        TRACE: parse_compound_reference(): state = 101
                                         ENTER: reset_token_queue(): 
                                             ENTER: get_recovery_state(): 
                                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -259,6 +253,8 @@ ENTER: main():
                                     ENTER: parse_compound_name(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_compound_name(): state = 0
+                                        TRACE: parse_compound_name(): state = 101
                                         ENTER: reset_token_queue(): 
                                             ENTER: get_recovery_state(): 
                                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
@@ -276,24 +272,19 @@ ENTER: main():
                                 ENTER: parse_compound_reference(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_compound_reference(): state = 0
                                     ENTER: parse_compound_ref_item(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: parse_array_reference(): 
-                                            ENTER: post_token_queue(): 
-                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                            TRACE: parse_array_reference(): state = 0
-                                            TRACE: parse_array_reference(): state = 101
-                                            ENTER: reset_token_queue(): 
-                                                ENTER: get_recovery_state(): 
-                                                RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
-                                            RETURN: reset_token_queue(): 
-                                        RETURN(node): parse_array_reference() - (NULL)
+                                        TRACE: parse_compound_ref_item(): state = 0
+                                        TERM: parse_compound_ref_item(): end of file: "": 5: 40: "badcomma.k"
+                                        TRACE: parse_compound_ref_item(): state = 101
                                         ENTER: reset_token_queue(): 
                                             ENTER: get_recovery_state(): 
                                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
                                         RETURN: reset_token_queue(): 
                                     RETURN(node): parse_compound_ref_item() - (NULL)
+                                    TRACE: parse_compound_reference(): state = 101
                                     ENTER: reset_token_queue(): 
                                         ENTER: get_recovery_state(): 
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)

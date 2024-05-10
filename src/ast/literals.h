@@ -48,10 +48,12 @@ typedef struct _ast_literal_type_name_ {
  *      / LITERAL_UNSIGNED
  *      / LITERAL_SIGNED
  *      / LITERAL_BOOL
+ *      / string_literal
  */
 typedef struct _ast_literal_value_ {
     ast_node node;
     Token* token;
+    struct _ast_string_literal_* str;
     union {
         double fnum;
         uint64_t unum;

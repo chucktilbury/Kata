@@ -11,6 +11,11 @@
 
 ### Improvements
 
+* String expressions such as ``strg == strg``, ``strg != strg``, ``strg = strg + strg``, and ``strg += strg``
+* String expressions and other expressions cannot mix??
+  * If this is a semantic question then strgs need to be added to the ``primary_expression`` productions.
+* Do not allow spaces around a '.' in a compound name or reference.
+
 #### Error messages
 * var declaration missing from function body
 * Add a test that uses '()' in a formatted string expression list.

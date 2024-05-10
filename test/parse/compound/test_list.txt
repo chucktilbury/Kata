@@ -2,5 +2,4 @@
 
 compound_name:run
 compound_name_list:run
-compound_ref_item:run
 compound_reference:run

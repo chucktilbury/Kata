@@ -100,21 +100,28 @@ ENTER: main():
                                 ENTER: parse_compound_name(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 0
                                     TERM: parse_compound_name(): symbol: "this": 5: 9: "baddot.k"
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 1
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 2
                                     TERM: parse_compound_name(): symbol: "is": 5: 12: "baddot.k"
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 1
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 2
                                     TERM: parse_compound_name(): symbol: "a": 5: 14: "baddot.k"
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 1
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 2
                                     ENTER: recover_error(): 
                                         TERM: recover_error(): .: ".": 5: 16: "baddot.k"
                                         ENTER: advance_token(): 
@@ -137,6 +144,7 @@ ENTER: main():
                                         ENTER: set_recovery_state(): 
                                         RETURN: set_recovery_state(): 
                                     RETURN: recover_error(): 
+                                    TRACE: parse_compound_name(): state = 102
                                 RETURN(node): parse_compound_name() - (NULL)
                             RETURN(node): parse_type_name() - (NULL)
                         RETURN(node): parse_var_decl() - (NULL)

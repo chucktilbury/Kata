@@ -63,8 +63,6 @@ const char* nterm_to_str(ast_node* node) {
                     (type == AST_type_name)          ? "type_name" :
                     (type == AST_formatted_strg)     ? "formatted_strg" :
                     (type == AST_string_literal)     ? "string_literal" :
-                    (type == AST_string_expr_item)   ? "string_expr_item" :
-                    (type == AST_string_expr_list)   ? "string_expr_list" :
                     (type == AST_var_decl)           ? "var_decl" :
                     (type == AST_var_decl_list)      ? "var_decl_list" :
                     (type == AST_var_definition)     ? "var_definition" :

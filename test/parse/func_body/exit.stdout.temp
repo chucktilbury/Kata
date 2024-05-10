@@ -1,0 +1,156 @@
+TRACE: main(): push trace state: true
+ENTER: main(): 
+    ENTER: init_parser(): 
+        TRACE: init_parser(): file name: "/home/chuck/Src/Kata/test/parse/func_body/exit.k"
+        ENTER: init_paths(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ./
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/inputs/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/misc/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/parse/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/stuff/
+            RETURN: add_path(): 
+        RETURN: init_paths(): 
+        ENTER: find_file(): 
+            TRACE: find_file(): trying: /home/chuck/Src/Kata/test/parse/func_body/exit.k
+            TRACE: find_file(): found: /home/chuck/Src/Kata/test/parse/func_body/exit.k
+        RETURN(create_string(tmp_buf)): find_file() - (!NULL)
+        ENTER: init_scanner(): 
+            ENTER: open_file(): 
+                ENTER: push_input_file(): 
+                    TRACE: push_input_file(): input file: /home/chuck/Src/Kata/test/parse/func_body/exit.k
+                RETURN: push_input_file(): 
+            RETURN: open_file(): 
+        RETURN: init_scanner(): 
+        ENTER: create_parser_state(): 
+            ENTER: push_scope(): 
+                TRACE: push_scope(): scope: PRIVATE
+            RETURN: push_scope(): 
+            ENTER: push_name(): 
+                TRACE: push_name(): name: root
+            RETURN: push_name(): 
+        RETURN(parser_state): create_parser_state() - (!NULL)
+    RETURN: init_parser(): 
+    TRACE: main(): --------------------------------------------
+    TRACE: main(): Begin Parse
+    ENTER: parse(): 
+        ENTER: parse_module(): 
+            ENTER: parse_module_item(): 
+                ENTER: post_token_queue(): 
+                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                ENTER: parse_namespace_item(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                    ENTER: parse_scope_operator(): 
+                    RETURN(node): parse_scope_operator() - (NULL)
+                    ENTER: parse_namespace_definition(): 
+                    RETURN(node): parse_namespace_definition() - (NULL)
+                    ENTER: parse_class_definition(): 
+                    RETURN(node): parse_class_definition() - (NULL)
+                    ENTER: parse_function_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_function_definition() - (NULL)
+                    ENTER: parse_create_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_create_definition() - (NULL)
+                    ENTER: parse_destroy_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_destroy_definition() - (NULL)
+                    ENTER: parse_var_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_var_definition() - (NULL)
+                    ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                        TRACE: reset_token_queue(): recover the queue
+                    RETURN: reset_token_queue(): 
+                RETURN(node): parse_namespace_item() - (NULL)
+                ENTER: parse_import_statement(): 
+                RETURN(node): parse_import_statement() - (NULL)
+                ENTER: parse_start_function(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                    ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                        TRACE: reset_token_queue(): recover the queue
+                    RETURN: reset_token_queue(): 
+                RETURN(node): parse_start_function() - (NULL)
+                ENTER: reset_token_queue(): 
+                    ENTER: get_recovery_state(): 
+                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                    TRACE: reset_token_queue(): recover the queue
+                RETURN: reset_token_queue(): 
+            RETURN(node): parse_module_item() - (NULL)
+            ENTER: finalize_token_queue(): 
+            RETURN: finalize_token_queue(): 
+            ENTER: close_file(): 
+                ENTER: pop_input_file(): 
+                RETURN: pop_input_file(): 
+            RETURN: close_file(): 
+            TRACE: parse_module(): end of file
+        RETURN(node): parse_module() - (!NULL)
+    RETURN(node): parse() - (!NULL)
+    TRACE: main(): End Parse
+    TRACE: main(): --------------------------------------------
+    TRACE: main(): set trace state: true
+    TRACE: main(): Begin Traverse
+    ENTER: traverse_ast(): 
+        ENTER: pre_test_pass_func(): 
+            TRACE: pre_test_pass_func(): node type: module(3000)
+        RETURN: pre_test_pass_func(): 
+        ENTER: traverse_module(): 
+            ENTER: pre_test_pass_func(): 
+                TRACE: pre_test_pass_func(): node type: module(3000)
+            RETURN: pre_test_pass_func(): 
+            ENTER: post_test_pass_func(): 
+                TRACE: post_test_pass_func(): node type: module(3000)
+            RETURN: post_test_pass_func(): 
+            ENTER: post_test_pass_func(): 
+                TRACE: post_test_pass_func(): node type: module(3000)
+            RETURN: post_test_pass_func(): 
+        RETURN: traverse_module(): 
+        ENTER: post_test_pass_func(): 
+            TRACE: post_test_pass_func(): node type: module(3000)
+        RETURN: post_test_pass_func(): 
+    RETURN: traverse_ast(): 
+    TRACE: main(): End Traverse
+    TRACE: main(): --------------------------------------------

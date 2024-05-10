@@ -1,0 +1,2 @@
+Syntax: /home/chuck/Src/Kata/test/parse/list/dict_init/mixed1.k: 5: 29: expected a list init item but got a dict init item
+Syntax: /home/chuck/Src/Kata/test/parse/list/dict_init/mixed1.k: 5: 33: expected an assignment item but got end of file

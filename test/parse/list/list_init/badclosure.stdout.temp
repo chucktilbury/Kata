@@ -1,0 +1,394 @@
+TRACE: main(): push trace state: true
+ENTER: main(): 
+    ENTER: init_parser(): 
+        TRACE: init_parser(): file name: "/home/chuck/Src/Kata/test/parse/list/list_init/badclosure.k"
+        ENTER: init_paths(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ./
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/inputs/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/misc/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/parse/
+            RETURN: add_path(): 
+            ENTER: add_path(): 
+                TRACE: add_path(): ../test/stuff/
+            RETURN: add_path(): 
+        RETURN: init_paths(): 
+        ENTER: find_file(): 
+            TRACE: find_file(): trying: /home/chuck/Src/Kata/test/parse/list/list_init/badclosure.k
+            TRACE: find_file(): found: /home/chuck/Src/Kata/test/parse/list/list_init/badclosure.k
+        RETURN(create_string(tmp_buf)): find_file() - (!NULL)
+        ENTER: init_scanner(): 
+            ENTER: open_file(): 
+                ENTER: push_input_file(): 
+                    TRACE: push_input_file(): input file: /home/chuck/Src/Kata/test/parse/list/list_init/badclosure.k
+                RETURN: push_input_file(): 
+            RETURN: open_file(): 
+        RETURN: init_scanner(): 
+        ENTER: create_parser_state(): 
+            ENTER: push_scope(): 
+                TRACE: push_scope(): scope: PRIVATE
+            RETURN: push_scope(): 
+            ENTER: push_name(): 
+                TRACE: push_name(): name: root
+            RETURN: push_name(): 
+        RETURN(parser_state): create_parser_state() - (!NULL)
+    RETURN: init_parser(): 
+    TRACE: main(): --------------------------------------------
+    TRACE: main(): Begin Parse
+    ENTER: parse(): 
+        ENTER: parse_module(): 
+            ENTER: parse_module_item(): 
+                ENTER: post_token_queue(): 
+                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                ENTER: parse_namespace_item(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                    ENTER: parse_scope_operator(): 
+                    RETURN(node): parse_scope_operator() - (NULL)
+                    ENTER: parse_namespace_definition(): 
+                    RETURN(node): parse_namespace_definition() - (NULL)
+                    ENTER: parse_class_definition(): 
+                    RETURN(node): parse_class_definition() - (NULL)
+                    ENTER: parse_function_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_function_definition() - (NULL)
+                    ENTER: parse_create_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_create_definition() - (NULL)
+                    ENTER: parse_destroy_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        ENTER: reset_token_queue(): 
+                            ENTER: get_recovery_state(): 
+                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                            TRACE: reset_token_queue(): recover the queue
+                        RETURN: reset_token_queue(): 
+                    RETURN(node): parse_destroy_definition() - (NULL)
+                    ENTER: parse_var_definition(): 
+                        ENTER: post_token_queue(): 
+                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        ENTER: parse_var_decl(): 
+                            ENTER: parse_type_name(): 
+                                ENTER: parse_literal_type_name(): 
+                                    TERM: parse_literal_type_name(): list: "list": 5: 9: "badclosure.k"
+                                    ENTER: advance_token(): 
+                                    RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                RETURN(node): parse_literal_type_name() - (!NULL)
+                                TERM: parse_type_name(): symbol: "name": 5: 14: "badclosure.k"
+                                ENTER: finalize_token_queue(): 
+                                RETURN: finalize_token_queue(): 
+                            RETURN(node): parse_type_name() - (!NULL)
+                            ENTER: finalize_token_queue(): 
+                            RETURN: finalize_token_queue(): 
+                            ENTER: advance_token(): 
+                            RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        RETURN(node): parse_var_decl() - (!NULL)
+                        ENTER: advance_token(): 
+                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        ENTER: parse_assignment_item(): 
+                            ENTER: post_token_queue(): 
+                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                            ENTER: parse_expression(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                TERM: parse_expression(): [: "[": 5: 18: "badclosure.k"
+                                ENTER: parse_operator(): 
+                                RETURN(node): parse_operator() - (NULL)
+                                ENTER: parse_expr_primary(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_literal_value(): 
+                                        ENTER: parse_string_literal(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            ENTER: parse_formatted_strg(): 
+                                            RETURN(node): parse_formatted_strg() - (NULL)
+                                            ENTER: reset_token_queue(): 
+                                                ENTER: get_recovery_state(): 
+                                                RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                                TRACE: reset_token_queue(): recover the queue
+                                            RETURN: reset_token_queue(): 
+                                        RETURN(node): parse_string_literal() - (NULL)
+                                    RETURN(node): parse_literal_value() - (NULL)
+                                    ENTER: parse_compound_reference(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_compound_reference(): state = 0
+                                        ENTER: parse_compound_ref_item(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_ref_item(): state = 0
+                                            TERM: parse_compound_ref_item(): [: "[": 5: 18: "badclosure.k"
+                                            TRACE: parse_compound_ref_item(): state = 101
+                                            ENTER: reset_token_queue(): 
+                                                ENTER: get_recovery_state(): 
+                                                RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                                TRACE: reset_token_queue(): recover the queue
+                                            RETURN: reset_token_queue(): 
+                                        RETURN(node): parse_compound_ref_item() - (NULL)
+                                        TRACE: parse_compound_reference(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_compound_reference() - (NULL)
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_expr_primary() - (NULL)
+                                TRACE: parse_expression(): state: 101, stack: 0, queue: 0
+                                ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                    TRACE: reset_token_queue(): recover the queue
+                                RETURN: reset_token_queue(): 
+                            RETURN(node): parse_expression() - (NULL)
+                            ENTER: parse_list_init(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                TRACE: parse_list_init(): state = 0
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                TRACE: parse_list_init(): state = 1
+                                ENTER: parse_dict_init_element(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_dict_init_element(): state = 0
+                                    TRACE: parse_dict_init_element(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_dict_init_element() - (NULL)
+                                ENTER: parse_assignment_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_expression(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                        TERM: parse_expression(): literal signed: "123": 5: 21: "badclosure.k"
+                                        ENTER: parse_operator(): 
+                                        RETURN(node): parse_operator() - (NULL)
+                                        ENTER: parse_expr_primary(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            ENTER: parse_literal_value(): 
+                                                TERM: parse_literal_value(): literal signed: "123": 5: 21: "badclosure.k"
+                                                ENTER: advance_token(): 
+                                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            RETURN(node): parse_literal_value() - (!NULL)
+                                            TRACE: parse_expr_primary(): literal value
+                                            TERM: parse_expr_primary(): ,: ",": 5: 22: "badclosure.k"
+                                        RETURN(node): parse_expr_primary() - (!NULL)
+                                        TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+                                        TRACE: parse_expression(): state: 3, stack: 0, queue: 1
+                                        ENTER: parse_operator(): 
+                                        RETURN(node): parse_operator() - (NULL)
+                                        TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+                                        TERM: parse_expression(): ,: ",": 5: 22: "badclosure.k"
+                                    RETURN(node): parse_expression() - (!NULL)
+                                RETURN(node): parse_assignment_item() - (!NULL)
+                                TRACE: parse_list_init(): state = 3
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                TRACE: parse_list_init(): state = 2
+                                ENTER: parse_assignment_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_expression(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                        TERM: parse_expression(): literal signed: "123": 5: 26: "badclosure.k"
+                                        ENTER: parse_operator(): 
+                                        RETURN(node): parse_operator() - (NULL)
+                                        ENTER: parse_expr_primary(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            ENTER: parse_literal_value(): 
+                                                TERM: parse_literal_value(): literal signed: "123": 5: 26: "badclosure.k"
+                                                ENTER: advance_token(): 
+                                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            RETURN(node): parse_literal_value() - (!NULL)
+                                            TRACE: parse_expr_primary(): literal value
+                                            TERM: parse_expr_primary(): ,: ",": 5: 27: "badclosure.k"
+                                        RETURN(node): parse_expr_primary() - (!NULL)
+                                        TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+                                        TRACE: parse_expression(): state: 3, stack: 0, queue: 1
+                                        ENTER: parse_operator(): 
+                                        RETURN(node): parse_operator() - (NULL)
+                                        TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+                                        TERM: parse_expression(): ,: ",": 5: 27: "badclosure.k"
+                                    RETURN(node): parse_expression() - (!NULL)
+                                RETURN(node): parse_assignment_item() - (!NULL)
+                                TRACE: parse_list_init(): state = 3
+                                ENTER: advance_token(): 
+                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                TRACE: parse_list_init(): state = 2
+                                ENTER: parse_assignment_item(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    ENTER: parse_expression(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+                                        TERM: parse_expression(): literal signed: "123": 5: 31: "badclosure.k"
+                                        ENTER: parse_operator(): 
+                                        RETURN(node): parse_operator() - (NULL)
+                                        ENTER: parse_expr_primary(): 
+                                            ENTER: post_token_queue(): 
+                                            RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            ENTER: parse_literal_value(): 
+                                                TERM: parse_literal_value(): literal signed: "123": 5: 31: "badclosure.k"
+                                                ENTER: advance_token(): 
+                                                RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            RETURN(node): parse_literal_value() - (!NULL)
+                                            TRACE: parse_expr_primary(): literal value
+                                            TERM: parse_expr_primary(): var: "var": 6: 4: "badclosure.k"
+                                        RETURN(node): parse_expr_primary() - (!NULL)
+                                        TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+                                        TRACE: parse_expression(): state: 3, stack: 0, queue: 1
+                                        ENTER: parse_operator(): 
+                                        RETURN(node): parse_operator() - (NULL)
+                                        TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+                                        TERM: parse_expression(): var: "var": 6: 4: "badclosure.k"
+                                    RETURN(node): parse_expression() - (!NULL)
+                                RETURN(node): parse_assignment_item() - (!NULL)
+                                TRACE: parse_list_init(): state = 3
+                                ENTER: recover_error(): 
+                                    TERM: recover_error(): var: "var": 6: 4: "badclosure.k"
+                                    ENTER: kill_token_queue(): 
+                                    RETURN: kill_token_queue(): 
+                                    ENTER: set_recovery_state(): 
+                                    RETURN: set_recovery_state(): 
+                                RETURN: recover_error(): 
+                                TRACE: parse_list_init(): state = 103
+                            RETURN(node): parse_list_init() - (NULL)
+                            ENTER: parse_cast_statement(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                ENTER: parse_type_name(): 
+                                    ENTER: parse_literal_type_name(): 
+                                        TERM: parse_literal_type_name(): list: "list": 6: 9: "badclosure.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    RETURN(node): parse_literal_type_name() - (!NULL)
+                                    TERM: parse_type_name(): symbol: "name": 6: 14: "badclosure.k"
+                                    ENTER: finalize_token_queue(): 
+                                    RETURN: finalize_token_queue(): 
+                                RETURN(node): parse_type_name() - (!NULL)
+                                ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+                                RETURN: reset_token_queue(): 
+                            RETURN(node): parse_cast_statement() - (NULL)
+                            ENTER: parse_function_assignment(): 
+                                ENTER: post_token_queue(): 
+                                RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                ENTER: parse_compound_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_compound_reference(): state = 0
+                                    ENTER: parse_compound_ref_item(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_compound_ref_item(): state = 0
+                                        TERM: parse_compound_ref_item(): symbol: "name": 6: 14: "badclosure.k"
+                                        ENTER: advance_token(): 
+                                        RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        TRACE: parse_compound_ref_item(): state = 1
+                                        TRACE: parse_compound_ref_item(): state = 100
+                                    RETURN(node): parse_compound_ref_item() - (!NULL)
+                                    TRACE: parse_compound_reference(): state = 1
+                                    TRACE: parse_compound_reference(): state = 100
+                                RETURN(node): parse_compound_reference() - (!NULL)
+                                ENTER: parse_type_name_list(): 
+                                RETURN(node): parse_type_name_list() - (NULL)
+                                ENTER: reset_token_queue(): 
+                                    ENTER: get_recovery_state(): 
+                                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+                                RETURN: reset_token_queue(): 
+                            RETURN(node): parse_function_assignment() - (NULL)
+                            ENTER: reset_token_queue(): 
+                                ENTER: get_recovery_state(): 
+                                RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+                            RETURN: reset_token_queue(): 
+                        RETURN(node): parse_assignment_item() - (NULL)
+                        ENTER: recover_error(): 
+                            TERM: recover_error(): end of file: "": 7: 1: "badclosure.k"
+                            ENTER: kill_token_queue(): 
+                            RETURN: kill_token_queue(): 
+                            ENTER: set_recovery_state(): 
+                            RETURN: set_recovery_state(): 
+                        RETURN: recover_error(): 
+                    RETURN(node): parse_var_definition() - (NULL)
+                    ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+                    RETURN: reset_token_queue(): 
+                RETURN(node): parse_namespace_item() - (NULL)
+                ENTER: parse_import_statement(): 
+                RETURN(node): parse_import_statement() - (NULL)
+                ENTER: parse_start_function(): 
+                    ENTER: post_token_queue(): 
+                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                    ENTER: reset_token_queue(): 
+                        ENTER: get_recovery_state(): 
+                        RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+                    RETURN: reset_token_queue(): 
+                RETURN(node): parse_start_function() - (NULL)
+                ENTER: reset_token_queue(): 
+                    ENTER: get_recovery_state(): 
+                    RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+                RETURN: reset_token_queue(): 
+            RETURN(node): parse_module_item() - (NULL)
+            ENTER: finalize_token_queue(): 
+            RETURN: finalize_token_queue(): 
+            ENTER: close_file(): 
+                ENTER: pop_input_file(): 
+                RETURN: pop_input_file(): 
+            RETURN: close_file(): 
+            TRACE: parse_module(): end of file
+        RETURN(node): parse_module() - (!NULL)
+    RETURN(node): parse() - (!NULL)
+    TRACE: main(): End Parse
+    TRACE: main(): --------------------------------------------
+    TRACE: main(): set trace state: true
+    TRACE: main(): Begin Traverse
+    ENTER: traverse_ast(): 
+        TRACE: traverse_ast(): do not traverse with errors
+    RETURN: traverse_ast(): 
+    TRACE: main(): End Traverse
+    TRACE: main(): --------------------------------------------

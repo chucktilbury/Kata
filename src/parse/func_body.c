@@ -62,7 +62,9 @@ ast_function_body_element* parse_function_body_element() {
             (NULL != (nterm = (ast_node*)parse_type_statement())) ||
             (NULL != (nterm = (ast_node*)parse_return_statement())) ||
             (NULL != (nterm = (ast_node*)parse_raise_statement())) ||
-            (NULL != (nterm = (ast_node*)parse_function_body()))) {
+            (NULL != (nterm = (ast_node*)parse_function_body())) ||
+            (NULL != (nterm = (ast_node*)parse_print_statement())) ||
+            (NULL != (nterm = (ast_node*)parse_trace_statement()))) {
 
         node = CREATE_AST_NODE(AST_function_body_element, ast_function_body_element);
         node->nterm = nterm;
@@ -294,6 +296,173 @@ ast_raise_statement* parse_raise_statement() {
         }
         else
             EXPECTED("a '('");
+    }
+
+    RETV(node);
+}
+
+/**
+ * @brief 
+ * 
+ *  trace_statement
+ *      = 'trace' '(' string_literal ')'
+ * 
+ * @return ast_trace_statement* 
+ */
+ast_trace_statement* parse_trace_statement() {
+
+    ENTER;
+    ast_trace_statement* node = NULL;
+    ast_string_literal* str;
+
+    bool finished = false;
+    int state = 0;
+    void* post = post_token_queue();
+
+    while(!finished) {
+        switch(state) {
+            case 0:
+                // trace or not a match
+                TRACE("state = %d", state);
+                if(TOK_TRACE == TTYPE) {
+                    advance_token();
+                    state = 1;
+                }
+                else
+                    state = 101;
+                break;
+
+            case 1:
+                // open paren or error
+                TRACE("state = %d", state);
+                if(TOK_OPAREN == TTYPE) {
+                    advance_token();
+                    state = 2;
+                }
+                else {
+                    EXPECTED("a '('");
+                    state = 102;
+                }
+                break;
+
+            case 2:
+                // string literal or error
+                TRACE("state = %d", state);
+                if(NULL == (str = parse_string_literal())) {
+                    EXPECTED("a string literal");
+                    state = 102;
+                }
+                else
+                    state = 3;
+                break;
+
+            case 3:
+                // close paren or error
+                TRACE("state = %d", state);
+                if(TOK_CPAREN == TTYPE) {
+                    advance_token();
+                    state = 100;
+                }
+                else {
+                    EXPECTED("a ')'");
+                    state = 102;
+                }
+                break;
+
+            case 100:
+                // finished parsing
+                TRACE("state = %d", state);
+                node = CREATE_AST_NODE(AST_trace_statement, ast_trace_statement);
+                node->str = str;
+                finished = true;
+                break;
+
+            case 101:
+                // not a match
+                TRACE("state = %d", state);
+                reset_token_queue(post);
+                finished = true;
+                break;
+
+            case 102:
+                // error
+                TRACE("state = %d", state);
+                finished = true;
+                break;
+
+            default:
+                TRACE("state = %d", state);
+                fatal_error("unexpected state in %s: %d", __func__, state);
+        }
+    }
+
+    RETV(node);
+}
+
+
+/**
+ * @brief 
+ * 
+ *  print_statement
+ *      = 'print' (expression_list)?
+ * 
+ * @return ast_print_statement* 
+ */
+ast_print_statement* parse_print_statement() {
+
+    ENTER;
+    ast_print_statement* node = NULL;
+    ast_expression_list* elist;
+
+    bool finished = false;
+    int state = 0;
+    void* post = post_token_queue();
+
+    while(!finished) {
+        switch(state) {
+            case 0:
+                // print token or not a match
+                TRACE("state = %d", state);
+                if(TOK_PRINT == TTYPE) {
+                    advance_token();
+                    state = 1;
+                }
+                else 
+                    state = 101;
+                break;
+
+            case 1:
+                // optional expression list
+                TRACE("state = %d", state);
+                elist = parse_expression_list();
+                state = 100;
+                break;
+
+            case 100:
+                // finished parsing
+                TRACE("state = %d", state);
+                node = CREATE_AST_NODE(AST_print_statement, ast_print_statement);
+                node->elist = elist;
+                finished = true;
+                break;
+
+            case 101:
+                // not a match
+                TRACE("state = %d", state);
+                reset_token_queue(post);
+                finished = true;
+                break;
+
+            case 102:
+                // error
+                TRACE("state = %d", state);
+                finished = true;
+                break;
+
+            default:
+                TRACE("state = %d", state);
+                fatal_error("unexpected state in %s: %d", __func__, state);
+        }
     }
 
     RETV(node);

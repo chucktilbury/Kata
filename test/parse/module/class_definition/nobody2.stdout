@@ -80,6 +80,8 @@ ENTER: main():
                             ENTER: parse_compound_name(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                TRACE: parse_compound_name(): state = 0
+                                TRACE: parse_compound_name(): state = 101
                                 ENTER: reset_token_queue(): 
                                     ENTER: get_recovery_state(): 
                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)

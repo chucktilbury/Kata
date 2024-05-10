@@ -424,6 +424,7 @@ ast_array_param_list* parse_array_param_list() {
     RETV(node);
 }
 
+#if 0
 /**
  * @brief
  *
@@ -498,5 +499,5 @@ ast_array_reference* parse_array_reference() {
 
     RETV(node);
 }
-
+#endif
 

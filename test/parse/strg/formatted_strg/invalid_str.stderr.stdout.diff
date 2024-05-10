@@ -1,0 +1,6 @@
+1,2c1,2
+< Syntax: /home/chuck/Src/Kata/test/parse/strg/formatted_strg/invalid_str.k: 7: 45: imbalanced parentheses in expression
+< Syntax: /home/chuck/Src/Kata/test/parse/strg/formatted_strg/invalid_str.k: 8: 1: expected an assignment item but got end of file
+---
+> Syntax: /home/chuck/Src/Kata/test/parse/strg/formatted_strg/invalid_str.k: 7: 43: expected module item or end of file but got (
+> Warning: /home/chuck/Src/Kata/test/parse/strg/formatted_strg/invalid_str.k: 7: 44: module is empty

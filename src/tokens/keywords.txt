@@ -48,3 +48,5 @@ function
 func
 var
 variable
+print
+trace

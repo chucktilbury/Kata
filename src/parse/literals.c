@@ -90,6 +90,7 @@ ast_literal_type_name* parse_literal_type_name() {
     RETV(node);
 }
 
+// TODO: Make funciton match production
 /**
  * @brief These are used in arithmetic expressions.
  *
@@ -98,6 +99,7 @@ ast_literal_type_name* parse_literal_type_name() {
  *      / LITERAL_UNSIGNED
  *      / LITERAL_SIGNED
  *      / LITERAL_BOOL
+ *      / string_literal
  *
  * @return ast_literal_value*
  *
@@ -107,6 +109,7 @@ ast_literal_value* parse_literal_value() {
     ENTER;
     ast_literal_value* node = NULL;
     TokenType ttype = token_type(get_token());
+    ast_string_literal* str;
 
     if((TOK_LITERAL_FLOAT == ttype) ||
             (TOK_LITERAL_UNSIGNED == ttype) ||
@@ -119,6 +122,7 @@ ast_literal_value* parse_literal_value() {
         TRACE_TERM(get_token());
         node = CREATE_AST_NODE(AST_literal_value, ast_literal_value);
         node->token = get_token();
+        node->str = NULL;
         advance_token();
 
         switch(ttype) {
@@ -144,6 +148,13 @@ ast_literal_value* parse_literal_value() {
                 fatal_error("invalid token type in %s(): %d", __func__, ttype);
         }
     }
+    else if(NULL != (str = parse_string_literal())) {
+        TRACE("string literal");
+        node = CREATE_AST_NODE(AST_literal_value, ast_literal_value);
+        node->token = NULL;
+        node->str = str;
+    }
+    // else not a match
 
     RETV(node);
 }

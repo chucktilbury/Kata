@@ -1,0 +1,357 @@
+307,317d306
+<                                                 ENTER: parse_string_literal(): 
+<                                                     ENTER: post_token_queue(): 
+<                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                                     ENTER: parse_formatted_strg(): 
+<                                                     RETURN(node): parse_formatted_strg() - (NULL)
+<                                                     ENTER: reset_token_queue(): 
+<                                                         ENTER: get_recovery_state(): 
+<                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                         TRACE: reset_token_queue(): recover the queue
+<                                                     RETURN: reset_token_queue(): 
+<                                                 RETURN(node): parse_string_literal() - (NULL)
+660,681d648
+<                                             ENTER: parse_print_statement(): 
+<                                                 ENTER: post_token_queue(): 
+<                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                                 TRACE: parse_print_statement(): state = 0
+<                                                 TRACE: parse_print_statement(): state = 101
+<                                                 ENTER: reset_token_queue(): 
+<                                                     ENTER: get_recovery_state(): 
+<                                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                     TRACE: reset_token_queue(): recover the queue
+<                                                 RETURN: reset_token_queue(): 
+<                                             RETURN(node): parse_print_statement() - (NULL)
+<                                             ENTER: parse_trace_statement(): 
+<                                                 ENTER: post_token_queue(): 
+<                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                                 TRACE: parse_trace_statement(): state = 0
+<                                                 TRACE: parse_trace_statement(): state = 101
+<                                                 ENTER: reset_token_queue(): 
+<                                                     ENTER: get_recovery_state(): 
+<                                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                     TRACE: reset_token_queue(): recover the queue
+<                                                 RETURN: reset_token_queue(): 
+<                                             RETURN(node): parse_trace_statement() - (NULL)
+732,742d698
+<                                                     ENTER: parse_string_literal(): 
+<                                                         ENTER: post_token_queue(): 
+<                                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                                         ENTER: parse_formatted_strg(): 
+<                                                         RETURN(node): parse_formatted_strg() - (NULL)
+<                                                         ENTER: reset_token_queue(): 
+<                                                             ENTER: get_recovery_state(): 
+<                                                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                             TRACE: reset_token_queue(): recover the queue
+<                                                         RETURN: reset_token_queue(): 
+<                                                     RETURN(node): parse_string_literal() - (NULL)
+1037,1058d992
+<                                                 ENTER: parse_print_statement(): 
+<                                                     ENTER: post_token_queue(): 
+<                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                                     TRACE: parse_print_statement(): state = 0
+<                                                     TRACE: parse_print_statement(): state = 101
+<                                                     ENTER: reset_token_queue(): 
+<                                                         ENTER: get_recovery_state(): 
+<                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                         TRACE: reset_token_queue(): recover the queue
+<                                                     RETURN: reset_token_queue(): 
+<                                                 RETURN(node): parse_print_statement() - (NULL)
+<                                                 ENTER: parse_trace_statement(): 
+<                                                     ENTER: post_token_queue(): 
+<                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                                     TRACE: parse_trace_statement(): state = 0
+<                                                     TRACE: parse_trace_statement(): state = 101
+<                                                     ENTER: reset_token_queue(): 
+<                                                         ENTER: get_recovery_state(): 
+<                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                         TRACE: reset_token_queue(): recover the queue
+<                                                     RETURN: reset_token_queue(): 
+<                                                 RETURN(node): parse_trace_statement() - (NULL)
+1393,1414d1326
+<                                                 ENTER: parse_print_statement(): 
+<                                                     ENTER: post_token_queue(): 
+<                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                                     TRACE: parse_print_statement(): state = 0
+<                                                     TRACE: parse_print_statement(): state = 101
+<                                                     ENTER: reset_token_queue(): 
+<                                                         ENTER: get_recovery_state(): 
+<                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                         TRACE: reset_token_queue(): recover the queue
+<                                                     RETURN: reset_token_queue(): 
+<                                                 RETURN(node): parse_print_statement() - (NULL)
+<                                                 ENTER: parse_trace_statement(): 
+<                                                     ENTER: post_token_queue(): 
+<                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                                     TRACE: parse_trace_statement(): state = 0
+<                                                     TRACE: parse_trace_statement(): state = 101
+<                                                     ENTER: reset_token_queue(): 
+<                                                         ENTER: get_recovery_state(): 
+<                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                         TRACE: reset_token_queue(): recover the queue
+<                                                     RETURN: reset_token_queue(): 
+<                                                 RETURN(node): parse_trace_statement() - (NULL)
+1626,1647d1537
+<                                 ENTER: parse_print_statement(): 
+<                                     ENTER: post_token_queue(): 
+<                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                     TRACE: parse_print_statement(): state = 0
+<                                     TRACE: parse_print_statement(): state = 101
+<                                     ENTER: reset_token_queue(): 
+<                                         ENTER: get_recovery_state(): 
+<                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                         TRACE: reset_token_queue(): recover the queue
+<                                     RETURN: reset_token_queue(): 
+<                                 RETURN(node): parse_print_statement() - (NULL)
+<                                 ENTER: parse_trace_statement(): 
+<                                     ENTER: post_token_queue(): 
+<                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                     TRACE: parse_trace_statement(): state = 0
+<                                     TRACE: parse_trace_statement(): state = 101
+<                                     ENTER: reset_token_queue(): 
+<                                         ENTER: get_recovery_state(): 
+<                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                         TRACE: reset_token_queue(): recover the queue
+<                                     RETURN: reset_token_queue(): 
+<                                 RETURN(node): parse_trace_statement() - (NULL)
+1768c1658
+<                             TRACE: pre_test_pass_func(): node type: function_definition(3029)
+---
+>                             TRACE: pre_test_pass_func(): node type: function_definition(3031)
+1783c1673
+<                                 TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
+---
+>                                 TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+1786c1676
+<                                 TRACE: post_test_pass_func(): node type: var_decl_list(3016)
+---
+>                                 TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+1791c1681
+<                                 TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
+---
+>                                 TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+1794c1684
+<                                 TRACE: post_test_pass_func(): node type: var_decl_list(3016)
+---
+>                                 TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+1799c1689
+<                                 TRACE: pre_test_pass_func(): node type: function_body(3034)
+---
+>                                 TRACE: pre_test_pass_func(): node type: function_body(3036)
+1803c1693
+<                                     TRACE: pre_test_pass_func(): node type: function_body_element(3035)
+---
+>                                     TRACE: pre_test_pass_func(): node type: function_body_element(3037)
+1807c1697
+<                                         TRACE: pre_test_pass_func(): node type: if_clause(3045)
+---
+>                                         TRACE: pre_test_pass_func(): node type: if_clause(3047)
+1811c1701
+<                                             TRACE: pre_test_pass_func(): node type: expression(3036)
+---
+>                                             TRACE: pre_test_pass_func(): node type: expression(3038)
+1813,1814d1702
+<                                         TRACE: traverse_expression(): operand type: 0
+<                                         TRACE: traverse_expression(): expression type: 0
+1817c1705
+<                                                 TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                 TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+1846c1734
+<                                                 TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                 TRACE: post_test_pass_func(): node type: expr_primary(3039)
+1851c1739
+<                                                 TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                 TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+1863c1751
+<                                                 TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                 TRACE: post_test_pass_func(): node type: expr_primary(3039)
+1868c1756
+<                                                 TRACE: pre_test_pass_func(): node type: operator(3060)
+---
+>                                                 TRACE: pre_test_pass_func(): node type: operator(3062)
+1872c1760
+<                                                 TRACE: post_test_pass_func(): node type: operator(3060)
+---
+>                                                 TRACE: post_test_pass_func(): node type: operator(3062)
+1876c1764
+<                                             TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                             TRACE: post_test_pass_func(): node type: expression(3038)
+1881c1769
+<                                             TRACE: pre_test_pass_func(): node type: function_body(3034)
+---
+>                                             TRACE: pre_test_pass_func(): node type: function_body(3036)
+1885c1773
+<                                                 TRACE: pre_test_pass_func(): node type: function_body_element(3035)
+---
+>                                                 TRACE: pre_test_pass_func(): node type: function_body_element(3037)
+1889c1777
+<                                                     TRACE: pre_test_pass_func(): node type: assignment(3040)
+---
+>                                                     TRACE: pre_test_pass_func(): node type: assignment(3042)
+1911c1799
+<                                                         TRACE: pre_test_pass_func(): node type: assignment_item(3039)
+---
+>                                                         TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+1915c1803
+<                                                             TRACE: pre_test_pass_func(): node type: expression(3036)
+---
+>                                                             TRACE: pre_test_pass_func(): node type: expression(3038)
+1917,1918d1804
+<                                                         TRACE: traverse_expression(): operand type: 0
+<                                                         TRACE: traverse_expression(): expression type: 0
+1921c1807
+<                                                                 TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                                 TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+1933c1819
+<                                                                 TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                                 TRACE: post_test_pass_func(): node type: expr_primary(3039)
+1937c1823
+<                                                             TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                                             TRACE: post_test_pass_func(): node type: expression(3038)
+1941c1827
+<                                                         TRACE: post_test_pass_func(): node type: assignment_item(3039)
+---
+>                                                         TRACE: post_test_pass_func(): node type: assignment_item(3041)
+1945c1831
+<                                                     TRACE: post_test_pass_func(): node type: assignment(3040)
+---
+>                                                     TRACE: post_test_pass_func(): node type: assignment(3042)
+1949c1835
+<                                                 TRACE: post_test_pass_func(): node type: function_body_element(3035)
+---
+>                                                 TRACE: post_test_pass_func(): node type: function_body_element(3037)
+1953c1839
+<                                             TRACE: post_test_pass_func(): node type: function_body(3034)
+---
+>                                             TRACE: post_test_pass_func(): node type: function_body(3036)
+1958c1844
+<                                             TRACE: pre_test_pass_func(): node type: elif_clause(3047)
+---
+>                                             TRACE: pre_test_pass_func(): node type: elif_clause(3049)
+1962c1848
+<                                                 TRACE: pre_test_pass_func(): node type: expression(3036)
+---
+>                                                 TRACE: pre_test_pass_func(): node type: expression(3038)
+1964,1965d1849
+<                                             TRACE: traverse_expression(): operand type: 0
+<                                             TRACE: traverse_expression(): expression type: 0
+1968c1852
+<                                                     TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                     TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+1988c1872
+<                                                     TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                     TRACE: post_test_pass_func(): node type: expr_primary(3039)
+1993c1877
+<                                                     TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                     TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+2005c1889
+<                                                     TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                     TRACE: post_test_pass_func(): node type: expr_primary(3039)
+2010c1894
+<                                                     TRACE: pre_test_pass_func(): node type: operator(3060)
+---
+>                                                     TRACE: pre_test_pass_func(): node type: operator(3062)
+2014c1898
+<                                                     TRACE: post_test_pass_func(): node type: operator(3060)
+---
+>                                                     TRACE: post_test_pass_func(): node type: operator(3062)
+2019c1903
+<                                                     TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                     TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+2031c1915
+<                                                     TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                     TRACE: post_test_pass_func(): node type: expr_primary(3039)
+2036c1920
+<                                                     TRACE: pre_test_pass_func(): node type: operator(3060)
+---
+>                                                     TRACE: pre_test_pass_func(): node type: operator(3062)
+2040c1924
+<                                                     TRACE: post_test_pass_func(): node type: operator(3060)
+---
+>                                                     TRACE: post_test_pass_func(): node type: operator(3062)
+2044c1928
+<                                                 TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                                 TRACE: post_test_pass_func(): node type: expression(3038)
+2049c1933
+<                                                 TRACE: pre_test_pass_func(): node type: function_body(3034)
+---
+>                                                 TRACE: pre_test_pass_func(): node type: function_body(3036)
+2052c1936
+<                                                 TRACE: post_test_pass_func(): node type: function_body(3034)
+---
+>                                                 TRACE: post_test_pass_func(): node type: function_body(3036)
+2056c1940
+<                                             TRACE: post_test_pass_func(): node type: elif_clause(3047)
+---
+>                                             TRACE: post_test_pass_func(): node type: elif_clause(3049)
+2061c1945
+<                                             TRACE: pre_test_pass_func(): node type: else_clause(3046)
+---
+>                                             TRACE: pre_test_pass_func(): node type: else_clause(3048)
+2065c1949
+<                                                 TRACE: pre_test_pass_func(): node type: function_body(3034)
+---
+>                                                 TRACE: pre_test_pass_func(): node type: function_body(3036)
+2069c1953
+<                                                     TRACE: pre_test_pass_func(): node type: function_body_element(3035)
+---
+>                                                     TRACE: pre_test_pass_func(): node type: function_body_element(3037)
+2073c1957
+<                                                         TRACE: pre_test_pass_func(): node type: function_reference(3023)
+---
+>                                                         TRACE: pre_test_pass_func(): node type: function_reference(3025)
+2094c1978
+<                                                             TRACE: pre_test_pass_func(): node type: expression_list(3038)
+---
+>                                                             TRACE: pre_test_pass_func(): node type: expression_list(3040)
+2097c1981
+<                                                             TRACE: post_test_pass_func(): node type: expression_list(3038)
+---
+>                                                             TRACE: post_test_pass_func(): node type: expression_list(3040)
+2109c1993
+<                                                         TRACE: post_test_pass_func(): node type: function_reference(3023)
+---
+>                                                         TRACE: post_test_pass_func(): node type: function_reference(3025)
+2113c1997
+<                                                     TRACE: post_test_pass_func(): node type: function_body_element(3035)
+---
+>                                                     TRACE: post_test_pass_func(): node type: function_body_element(3037)
+2117c2001
+<                                                 TRACE: post_test_pass_func(): node type: function_body(3034)
+---
+>                                                 TRACE: post_test_pass_func(): node type: function_body(3036)
+2121c2005
+<                                             TRACE: post_test_pass_func(): node type: else_clause(3046)
+---
+>                                             TRACE: post_test_pass_func(): node type: else_clause(3048)
+2125c2009
+<                                         TRACE: post_test_pass_func(): node type: if_clause(3045)
+---
+>                                         TRACE: post_test_pass_func(): node type: if_clause(3047)
+2129c2013
+<                                     TRACE: post_test_pass_func(): node type: function_body_element(3035)
+---
+>                                     TRACE: post_test_pass_func(): node type: function_body_element(3037)
+2133c2017
+<                                 TRACE: post_test_pass_func(): node type: function_body(3034)
+---
+>                                 TRACE: post_test_pass_func(): node type: function_body(3036)
+2137c2021
+<                             TRACE: post_test_pass_func(): node type: function_definition(3029)
+---
+>                             TRACE: post_test_pass_func(): node type: function_definition(3031)

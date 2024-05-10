@@ -100,29 +100,40 @@ ENTER: main():
                                 ENTER: parse_compound_name(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 0
                                     TERM: parse_compound_name(): symbol: "this": 5: 9: "basic.k"
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 1
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 2
                                     TERM: parse_compound_name(): symbol: "is": 5: 12: "basic.k"
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 1
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 2
                                     TERM: parse_compound_name(): symbol: "a": 5: 14: "basic.k"
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 1
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 2
                                     TERM: parse_compound_name(): symbol: "compound": 5: 23: "basic.k"
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 1
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 2
                                     TERM: parse_compound_name(): symbol: "name": 5: 28: "basic.k"
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 1
+                                    TRACE: parse_compound_name(): state = 100
                                 RETURN(node): parse_compound_name() - (!NULL)
                                 TERM: parse_type_name(): symbol: "var_name": 5: 37: "basic.k"
                                 ENTER: finalize_token_queue(): 

@@ -1,18 +1,18 @@
 # this is the list of groups of tests.
 
-verbosity:5
+verbosity:10
 
+import:run
+compound:run
+list:run
 literals:run
 loop:run
 module:run
 strg:run
 vars:run
 except:run
-expr:run
 flow:run
+expr:run
 func:run
 func_body:run
-import:run
-compound:run
-list:run
 

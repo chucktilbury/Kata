@@ -33,13 +33,12 @@ typedef struct _ast_compound_name_list_ {
 
 /**
  *  compound_ref_item
- *      = SYMBOL
- *      / array_reference
+ *      = SYMBOL ( array_param_list )?
  */
 typedef struct _ast_compound_ref_item_ {
     ast_node node;
-    Token* token;
-    ast_node* nterm;
+    Token* symb;
+    struct _ast_array_param_list_* apar;
 } ast_compound_ref_item;
 
 /**

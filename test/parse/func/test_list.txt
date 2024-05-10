@@ -1,16 +1,23 @@
 # this is a list of classes of tests.
 
-function_reference:run
-create_reference:run
-destroy_reference:run
-function_declaration:run
-create_declaration:run
-destroy_declaration:run
-function_definition:run
-create_name:run
-destroy_name:run
-create_definition:run
-destroy_definition:run
-function_body:run
-start_function:run
-function_assignment:run
+create_ref:run
+destroy_ref:run
+create_def:run
+destroy_def:run
+func_assign:run
+func_decl:run
+func_def:run
+start_def:run
+create_decl:run
+destroy_decl:run
+func_decl:run
+err_create_ref_parms:run
+err_destroy_ref_parms:run
+err_create_def_parms:run
+err_destroy_def_parms:run
+err_func_decl_parms:run
+err_start_def_parms:run
+err_start_ref:run
+err_create_decl_parms:run
+err_destroy_decl_parms:run
+err_func_decl_parms:run

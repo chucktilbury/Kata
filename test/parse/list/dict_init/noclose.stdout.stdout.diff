@@ -1,0 +1,26 @@
+128,138d127
+<                                         ENTER: parse_string_literal(): 
+<                                             ENTER: post_token_queue(): 
+<                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                             ENTER: parse_formatted_strg(): 
+<                                             RETURN(node): parse_formatted_strg() - (NULL)
+<                                             ENTER: reset_token_queue(): 
+<                                                 ENTER: get_recovery_state(): 
+<                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                 TRACE: reset_token_queue(): recover the queue
+<                                             RETURN: reset_token_queue(): 
+<                                         RETURN(node): parse_string_literal() - (NULL)
+278a268,277
+>                             ENTER: parse_string_literal(): 
+>                                 ENTER: post_token_queue(): 
+>                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                 ENTER: parse_formatted_strg(): 
+>                                 RETURN(node): parse_formatted_strg() - (NULL)
+>                                 ENTER: reset_token_queue(): 
+>                                     ENTER: get_recovery_state(): 
+>                                     RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+>                                 RETURN: reset_token_queue(): 
+>                             RETURN(node): parse_string_literal() - (NULL)
+344a344,345
+>                         ENTER: finalize_token_queue(): 
+>                         RETURN: finalize_token_queue(): 

@@ -1,0 +1,3 @@
+Syntax: /home/chuck/Src/Kata/test/parse/except/err_no_final_body.k: 11: 14: expected a function body but got symbol
+Syntax: /home/chuck/Src/Kata/test/parse/except/err_no_final_body.k: 14: 1: expected function body element but got end of file
+Syntax: /home/chuck/Src/Kata/test/parse/except/err_no_final_body.k: 14: 1: expected function body but got end of file

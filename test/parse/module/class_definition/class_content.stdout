@@ -255,6 +255,8 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
+                                            TRACE: parse_compound_name(): state = 101
                                             ENTER: reset_token_queue(): 
                                                 ENTER: get_recovery_state(): 
                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -277,6 +279,8 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
+                                            TRACE: parse_compound_name(): state = 101
                                             ENTER: reset_token_queue(): 
                                                 ENTER: get_recovery_state(): 
                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -366,14 +370,19 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
                                             TERM: parse_compound_name(): symbol: "some": 13: 35: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 2
                                             TERM: parse_compound_name(): symbol: "compound": 13: 44: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
+                                            TRACE: parse_compound_name(): state = 100
                                         RETURN(node): parse_compound_name() - (!NULL)
                                         TERM: parse_type_name(): ): ")": 13: 45: "class_content.k"
                                         ENTER: finalize_token_queue(): 
@@ -394,6 +403,8 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
+                                            TRACE: parse_compound_name(): state = 101
                                             ENTER: reset_token_queue(): 
                                                 ENTER: get_recovery_state(): 
                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -459,6 +470,8 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
+                                            TRACE: parse_compound_name(): state = 101
                                             ENTER: reset_token_queue(): 
                                                 ENTER: get_recovery_state(): 
                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -481,9 +494,12 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
                                             TERM: parse_compound_name(): symbol: "some_name": 14: 27: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
+                                            TRACE: parse_compound_name(): state = 100
                                         RETURN(node): parse_compound_name() - (!NULL)
                                         TERM: parse_type_name(): ): ")": 14: 28: "class_content.k"
                                         ENTER: finalize_token_queue(): 
@@ -635,19 +651,26 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
                                             TERM: parse_compound_name(): symbol: "some": 18: 13: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 2
                                             TERM: parse_compound_name(): symbol: "compound": 18: 22: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 2
                                             TERM: parse_compound_name(): symbol: "name": 18: 27: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
+                                            TRACE: parse_compound_name(): state = 100
                                         RETURN(node): parse_compound_name() - (!NULL)
                                         TERM: parse_type_name(): symbol: "name1": 18: 33: "class_content.k"
                                         ENTER: finalize_token_queue(): 
@@ -937,6 +960,8 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
+                                            TRACE: parse_compound_name(): state = 101
                                             ENTER: reset_token_queue(): 
                                                 ENTER: get_recovery_state(): 
                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -959,6 +984,8 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
+                                            TRACE: parse_compound_name(): state = 101
                                             ENTER: reset_token_queue(): 
                                                 ENTER: get_recovery_state(): 
                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -1048,14 +1075,19 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
                                             TERM: parse_compound_name(): symbol: "some": 26: 35: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 2
                                             TERM: parse_compound_name(): symbol: "compound": 26: 44: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
+                                            TRACE: parse_compound_name(): state = 100
                                         RETURN(node): parse_compound_name() - (!NULL)
                                         TERM: parse_type_name(): ): ")": 26: 45: "class_content.k"
                                         ENTER: finalize_token_queue(): 
@@ -1076,6 +1108,8 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
+                                            TRACE: parse_compound_name(): state = 101
                                             ENTER: reset_token_queue(): 
                                                 ENTER: get_recovery_state(): 
                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -1156,6 +1190,8 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
+                                            TRACE: parse_compound_name(): state = 101
                                             ENTER: reset_token_queue(): 
                                                 ENTER: get_recovery_state(): 
                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -1178,9 +1214,12 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
                                             TERM: parse_compound_name(): symbol: "some_name": 28: 27: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
+                                            TRACE: parse_compound_name(): state = 100
                                         RETURN(node): parse_compound_name() - (!NULL)
                                         TERM: parse_type_name(): ): ")": 28: 28: "class_content.k"
                                         ENTER: finalize_token_queue(): 
@@ -1243,19 +1282,26 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
                                             TERM: parse_compound_name(): symbol: "some": 29: 13: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 2
                                             TERM: parse_compound_name(): symbol: "compound": 29: 22: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 2
                                             TERM: parse_compound_name(): symbol: "name": 29: 27: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
+                                            TRACE: parse_compound_name(): state = 100
                                         RETURN(node): parse_compound_name() - (!NULL)
                                         TERM: parse_type_name(): symbol: "name1": 29: 33: "class_content.k"
                                         ENTER: finalize_token_queue(): 
@@ -1441,9 +1487,12 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
                                             TERM: parse_compound_name(): symbol: "asdf": 33: 21: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
+                                            TRACE: parse_compound_name(): state = 100
                                         RETURN(node): parse_compound_name() - (!NULL)
                                         TERM: parse_type_name(): ,: ",": 33: 22: "class_content.k"
                                         ENTER: finalize_token_queue(): 
@@ -1457,9 +1506,12 @@ ENTER: main():
                                         ENTER: parse_compound_name(): 
                                             ENTER: post_token_queue(): 
                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 0
                                             TERM: parse_compound_name(): symbol: "qwer": 33: 27: "class_content.k"
                                             ENTER: advance_token(): 
                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                            TRACE: parse_compound_name(): state = 1
+                                            TRACE: parse_compound_name(): state = 100
                                         RETURN(node): parse_compound_name() - (!NULL)
                                         TERM: parse_type_name(): ): ")": 33: 28: "class_content.k"
                                         ENTER: finalize_token_queue(): 

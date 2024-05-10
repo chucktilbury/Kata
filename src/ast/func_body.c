@@ -101,6 +101,12 @@ void traverse_function_body_element(ast_function_body_element* node, PassFunc pr
         case AST_raise_statement:
             traverse_raise_statement((ast_raise_statement*)node->nterm, pre, post);
             break;
+        case AST_trace_statement:
+            traverse_trace_statement((ast_trace_statement*)node->nterm, pre, post);
+            break;
+        case AST_print_statement:
+            traverse_print_statement((ast_print_statement*)node->nterm, pre, post);
+            break;
         case AST_function_body:
             traverse_function_body((ast_function_body*)node->nterm, pre, post);
             break;
@@ -259,6 +265,52 @@ void traverse_raise_statement(ast_raise_statement* node, PassFunc pre, PassFunc 
 
     TRACE_TERM(node->symb);
     traverse_formatted_strg(node->str, pre, post);
+
+    AST_CALLBACK(post, node);
+    RET;
+}
+
+/**
+ * @brief 
+ * 
+ *  trace_statement
+ *      = 'trace' '(' string_literal ')'
+ * 
+ * @param node 
+ * @param pre 
+ * @param post 
+ */
+void traverse_trace_statement(ast_trace_statement* node, PassFunc pre, PassFunc post) {
+
+    assert(node != NULL);
+
+    ENTER;
+    AST_CALLBACK(pre, node);
+
+    traverse_string_literal(node->str, pre, post);
+
+    AST_CALLBACK(post, node);
+    RET;
+}
+
+/**
+ * @brief 
+ * 
+ *  print_statement
+ *      = 'print' ( expression_list )?
+ * 
+ * @param node 
+ * @param pre 
+ * @param post 
+ */
+void traverse_print_statement(ast_print_statement* node, PassFunc pre, PassFunc post) {
+
+    assert(node != NULL);
+
+    ENTER;
+    AST_CALLBACK(pre, node);
+
+    traverse_expression_list(node->elist, pre, post);
 
     AST_CALLBACK(post, node);
     RET;

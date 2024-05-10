@@ -1,0 +1,176 @@
+128,138d127
+<                                         ENTER: parse_string_literal(): 
+<                                             ENTER: post_token_queue(): 
+<                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                             ENTER: parse_formatted_strg(): 
+<                                             RETURN(node): parse_formatted_strg() - (NULL)
+<                                             ENTER: reset_token_queue(): 
+<                                                 ENTER: get_recovery_state(): 
+<                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                 TRACE: reset_token_queue(): recover the queue
+<                                             RETURN: reset_token_queue(): 
+<                                         RETURN(node): parse_string_literal() - (NULL)
+207,217d195
+<                                                     ENTER: parse_string_literal(): 
+<                                                         ENTER: post_token_queue(): 
+<                                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                                         ENTER: parse_formatted_strg(): 
+<                                                         RETURN(node): parse_formatted_strg() - (NULL)
+<                                                         ENTER: reset_token_queue(): 
+<                                                             ENTER: get_recovery_state(): 
+<                                                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                             TRACE: reset_token_queue(): recover the queue
+<                                                         RETURN: reset_token_queue(): 
+<                                                     RETURN(node): parse_string_literal() - (NULL)
+342,352d319
+<                                                     ENTER: parse_string_literal(): 
+<                                                         ENTER: post_token_queue(): 
+<                                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                                         ENTER: parse_formatted_strg(): 
+<                                                         RETURN(node): parse_formatted_strg() - (NULL)
+<                                                         ENTER: reset_token_queue(): 
+<                                                             ENTER: get_recovery_state(): 
+<                                                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                             TRACE: reset_token_queue(): recover the queue
+<                                                         RETURN: reset_token_queue(): 
+<                                                     RETURN(node): parse_string_literal() - (NULL)
+454a422,423
+>                         ENTER: finalize_token_queue(): 
+>                         RETURN: finalize_token_queue(): 
+566c535
+<                             TRACE: pre_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: pre_test_pass_func(): node type: var_definition(3019)
+570c539
+<                                 TRACE: pre_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: pre_test_pass_func(): node type: var_decl(3017)
+592c561
+<                                 TRACE: post_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: post_test_pass_func(): node type: var_decl(3017)
+598c567
+<                                 TRACE: pre_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+602c571
+<                                     TRACE: pre_test_pass_func(): node type: dict_init(3020)
+---
+>                                     TRACE: pre_test_pass_func(): node type: dict_init(3022)
+606c575
+<                                         TRACE: pre_test_pass_func(): node type: dict_init_element(3019)
+---
+>                                         TRACE: pre_test_pass_func(): node type: dict_init_element(3021)
+611c580
+<                                             TRACE: pre_test_pass_func(): node type: assignment_item(3039)
+---
+>                                             TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+615c584
+<                                                 TRACE: pre_test_pass_func(): node type: expression(3036)
+---
+>                                                 TRACE: pre_test_pass_func(): node type: expression(3038)
+617,618d585
+<                                             TRACE: traverse_expression(): operand type: 0
+<                                             TRACE: traverse_expression(): expression type: 0
+621c588
+<                                                     TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                     TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+638c605
+<                                                                     TRACE: pre_test_pass_func(): node type: array_param(3021)
+---
+>                                                                     TRACE: pre_test_pass_func(): node type: array_param(3023)
+642c609
+<                                                                         TRACE: pre_test_pass_func(): node type: expression(3036)
+---
+>                                                                         TRACE: pre_test_pass_func(): node type: expression(3038)
+644,645d610
+<                                                                     TRACE: traverse_expression(): operand type: 0
+<                                                                     TRACE: traverse_expression(): expression type: 0
+648c613
+<                                                                             TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                                             TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+660c625
+<                                                                             TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                                             TRACE: post_test_pass_func(): node type: expr_primary(3039)
+664c629
+<                                                                         TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                                                         TRACE: post_test_pass_func(): node type: expression(3038)
+668c633
+<                                                                     TRACE: post_test_pass_func(): node type: array_param(3021)
+---
+>                                                                     TRACE: post_test_pass_func(): node type: array_param(3023)
+684c649
+<                                                     TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                     TRACE: post_test_pass_func(): node type: expr_primary(3039)
+688c653
+<                                                 TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                                 TRACE: post_test_pass_func(): node type: expression(3038)
+692c657
+<                                             TRACE: post_test_pass_func(): node type: assignment_item(3039)
+---
+>                                             TRACE: post_test_pass_func(): node type: assignment_item(3041)
+696c661
+<                                         TRACE: post_test_pass_func(): node type: dict_init_element(3019)
+---
+>                                         TRACE: post_test_pass_func(): node type: dict_init_element(3021)
+701c666
+<                                         TRACE: pre_test_pass_func(): node type: dict_init_element(3019)
+---
+>                                         TRACE: pre_test_pass_func(): node type: dict_init_element(3021)
+706c671
+<                                             TRACE: pre_test_pass_func(): node type: assignment_item(3039)
+---
+>                                             TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+710c675
+<                                                 TRACE: pre_test_pass_func(): node type: expression(3036)
+---
+>                                                 TRACE: pre_test_pass_func(): node type: expression(3038)
+712,713d676
+<                                             TRACE: traverse_expression(): operand type: 0
+<                                             TRACE: traverse_expression(): expression type: 0
+716c679
+<                                                     TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                     TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+742c705
+<                                                                     TRACE: pre_test_pass_func(): node type: array_param(3021)
+---
+>                                                                     TRACE: pre_test_pass_func(): node type: array_param(3023)
+754c717
+<                                                                     TRACE: post_test_pass_func(): node type: array_param(3021)
+---
+>                                                                     TRACE: post_test_pass_func(): node type: array_param(3023)
+779c742
+<                                                     TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                     TRACE: post_test_pass_func(): node type: expr_primary(3039)
+783c746
+<                                                 TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                                 TRACE: post_test_pass_func(): node type: expression(3038)
+787c750
+<                                             TRACE: post_test_pass_func(): node type: assignment_item(3039)
+---
+>                                             TRACE: post_test_pass_func(): node type: assignment_item(3041)
+791c754
+<                                         TRACE: post_test_pass_func(): node type: dict_init_element(3019)
+---
+>                                         TRACE: post_test_pass_func(): node type: dict_init_element(3021)
+795c758
+<                                     TRACE: post_test_pass_func(): node type: dict_init(3020)
+---
+>                                     TRACE: post_test_pass_func(): node type: dict_init(3022)
+799c762
+<                                 TRACE: post_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: post_test_pass_func(): node type: assignment_item(3041)
+803c766
+<                             TRACE: post_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: post_test_pass_func(): node type: var_definition(3019)

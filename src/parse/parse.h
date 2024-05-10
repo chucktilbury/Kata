@@ -38,8 +38,6 @@ ast_type_name_list* parse_type_name_list();
 
 // strg.c
 ast_string_literal* parse_string_literal();
-ast_string_expr_item* parse_string_expr_item();
-ast_string_expr_list* parse_string_expr_list();
 ast_formatted_strg* parse_formatted_strg();
 
 // vars.c
@@ -80,6 +78,8 @@ ast_yield_statement* parse_yield_statement();
 ast_type_statement* parse_type_statement();
 ast_return_statement* parse_return_statement();
 ast_raise_statement* parse_raise_statement();
+ast_trace_statement* parse_trace_statement();
+ast_print_statement* parse_print_statement();
 
 // expr.c
 ast_expression_list* parse_expression_list();

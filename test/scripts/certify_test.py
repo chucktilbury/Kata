@@ -6,7 +6,12 @@ if len(sys.argv) < 2:
     print('need a file name\n')
     exit(1)
 
-for name in sys.argv[1:] :
+for item in sys.argv[1:] :
+    
+    # strip the ext if it exists
+    name = os.path.splitext(item)[0]
+    print("cert:", name)
+
     if os.path.isfile(name+".stdout.temp") :
         os.remove(name+".stdout")
         os.rename(name+".stdout.temp", name+".stdout")
@@ -33,3 +38,5 @@ for name in sys.argv[1:] :
     if os.path.isfile(name+".stderr.stdout.diff"):
         os.remove(name+".stderr.stdout.diff")
 
+if os.path.isfile("report.txt"):
+    os.remove("report.txt")

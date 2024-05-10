@@ -1,0 +1,120 @@
+359a360,407
+>                                                             RETURN(node): parse_literal_value() - (NULL)
+>                                                             ENTER: parse_compound_reference(): 
+>                                                                 ENTER: post_token_queue(): 
+>                                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                                                 TRACE: parse_compound_reference(): state = 0
+>                                                                 ENTER: parse_compound_ref_item(): 
+>                                                                     ENTER: post_token_queue(): 
+>                                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                                                     TRACE: parse_compound_ref_item(): state = 0
+>                                                                     TERM: parse_compound_ref_item(): literal dstrg: "string": 8: 25: "err_bad_except_parms3.k"
+>                                                                     TRACE: parse_compound_ref_item(): state = 101
+>                                                                     ENTER: reset_token_queue(): 
+>                                                                         ENTER: get_recovery_state(): 
+>                                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                                         TRACE: reset_token_queue(): recover the queue
+>                                                                     RETURN: reset_token_queue(): 
+>                                                                 RETURN(node): parse_compound_ref_item() - (NULL)
+>                                                                 TRACE: parse_compound_reference(): state = 101
+>                                                                 ENTER: reset_token_queue(): 
+>                                                                     ENTER: get_recovery_state(): 
+>                                                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                                     TRACE: reset_token_queue(): recover the queue
+>                                                                 RETURN: reset_token_queue(): 
+>                                                             RETURN(node): parse_compound_reference() - (NULL)
+>                                                             ENTER: reset_token_queue(): 
+>                                                                 ENTER: get_recovery_state(): 
+>                                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                                 TRACE: reset_token_queue(): recover the queue
+>                                                             RETURN: reset_token_queue(): 
+>                                                         RETURN(node): parse_expr_primary() - (NULL)
+>                                                         TRACE: parse_expression(): state: 101, stack: 0, queue: 0
+>                                                         ENTER: reset_token_queue(): 
+>                                                             ENTER: get_recovery_state(): 
+>                                                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                             TRACE: reset_token_queue(): recover the queue
+>                                                         RETURN: reset_token_queue(): 
+>                                                     RETURN(node): parse_expression() - (NULL)
+>                                                     ENTER: parse_list_init(): 
+>                                                         ENTER: post_token_queue(): 
+>                                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                                         TRACE: parse_list_init(): state = 0
+>                                                         TRACE: parse_list_init(): state = 102
+>                                                         ENTER: reset_token_queue(): 
+>                                                             ENTER: get_recovery_state(): 
+>                                                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                             TRACE: reset_token_queue(): recover the queue
+>                                                         RETURN: reset_token_queue(): 
+>                                                     RETURN(node): parse_list_init() - (NULL)
+366c414
+<                                                                         ENTER: parse_expression_list(): 
+---
+>                                                             ENTER: parse_string_expr_list(): 
+369,370c417,418
+<                                                                             TRACE: parse_expression_list(): state: 0, len: 0
+<                                                                             TRACE: parse_expression_list(): state: 101, len: 0
+---
+>                                                                 TRACE: parse_string_expr_list(): state: 0
+>                                                                 TRACE: parse_string_expr_list(): state: 101
+376c424
+<                                                                         RETURN(node): parse_expression_list() - (NULL)
+---
+>                                                             RETURN(node): parse_string_expr_list() - (NULL)
+380,391d427
+<                                                                 TRACE: parse_literal_value(): string literal
+<                                                             RETURN(node): parse_literal_value() - (!NULL)
+<                                                             TRACE: parse_expr_primary(): literal value
+<                                                             TERM: parse_expr_primary(): }: "}": 9: 6: "err_bad_except_parms3.k"
+<                                                         RETURN(node): parse_expr_primary() - (!NULL)
+<                                                         TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+<                                                         TRACE: parse_expression(): state: 3, stack: 0, queue: 1
+<                                                         ENTER: parse_operator(): 
+<                                                         RETURN(node): parse_operator() - (NULL)
+<                                                         TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+<                                                         TERM: parse_expression(): }: "}": 9: 6: "err_bad_except_parms3.k"
+<                                                     RETURN(node): parse_expression() - (!NULL)
+593,614d628
+<                                             ENTER: parse_print_statement(): 
+<                                                 ENTER: post_token_queue(): 
+<                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                                 TRACE: parse_print_statement(): state = 0
+<                                                 TRACE: parse_print_statement(): state = 101
+<                                                 ENTER: reset_token_queue(): 
+<                                                     ENTER: get_recovery_state(): 
+<                                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                     TRACE: reset_token_queue(): recover the queue
+<                                                 RETURN: reset_token_queue(): 
+<                                             RETURN(node): parse_print_statement() - (NULL)
+<                                             ENTER: parse_trace_statement(): 
+<                                                 ENTER: post_token_queue(): 
+<                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                                 TRACE: parse_trace_statement(): state = 0
+<                                                 TRACE: parse_trace_statement(): state = 101
+<                                                 ENTER: reset_token_queue(): 
+<                                                     ENTER: get_recovery_state(): 
+<                                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                     TRACE: reset_token_queue(): recover the queue
+<                                                 RETURN: reset_token_queue(): 
+<                                             RETURN(node): parse_trace_statement() - (NULL)
+907,926d920
+<                                 ENTER: parse_print_statement(): 
+<                                     ENTER: post_token_queue(): 
+<                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                     TRACE: parse_print_statement(): state = 0
+<                                     TRACE: parse_print_statement(): state = 101
+<                                     ENTER: reset_token_queue(): 
+<                                         ENTER: get_recovery_state(): 
+<                                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+<                                     RETURN: reset_token_queue(): 
+<                                 RETURN(node): parse_print_statement() - (NULL)
+<                                 ENTER: parse_trace_statement(): 
+<                                     ENTER: post_token_queue(): 
+<                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                     TRACE: parse_trace_statement(): state = 0
+<                                     TRACE: parse_trace_statement(): state = 101
+<                                     ENTER: reset_token_queue(): 
+<                                         ENTER: get_recovery_state(): 
+<                                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+<                                     RETURN: reset_token_queue(): 
+<                                 RETURN(node): parse_trace_statement() - (NULL)

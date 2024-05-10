@@ -1,0 +1,530 @@
+127a128,175
+>                                     RETURN(node): parse_literal_value() - (NULL)
+>                                     ENTER: parse_compound_reference(): 
+>                                         ENTER: post_token_queue(): 
+>                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                         TRACE: parse_compound_reference(): state = 0
+>                                         ENTER: parse_compound_ref_item(): 
+>                                             ENTER: post_token_queue(): 
+>                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                             TRACE: parse_compound_ref_item(): state = 0
+>                                             TERM: parse_compound_ref_item(): literal sstrg: "this is a string": 5: 42: "with_args.k"
+>                                             TRACE: parse_compound_ref_item(): state = 101
+>                                             ENTER: reset_token_queue(): 
+>                                                 ENTER: get_recovery_state(): 
+>                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                 TRACE: reset_token_queue(): recover the queue
+>                                             RETURN: reset_token_queue(): 
+>                                         RETURN(node): parse_compound_ref_item() - (NULL)
+>                                         TRACE: parse_compound_reference(): state = 101
+>                                         ENTER: reset_token_queue(): 
+>                                             ENTER: get_recovery_state(): 
+>                                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                             TRACE: reset_token_queue(): recover the queue
+>                                         RETURN: reset_token_queue(): 
+>                                     RETURN(node): parse_compound_reference() - (NULL)
+>                                     ENTER: reset_token_queue(): 
+>                                         ENTER: get_recovery_state(): 
+>                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                         TRACE: reset_token_queue(): recover the queue
+>                                     RETURN: reset_token_queue(): 
+>                                 RETURN(node): parse_expr_primary() - (NULL)
+>                                 TRACE: parse_expression(): state: 101, stack: 0, queue: 0
+>                                 ENTER: reset_token_queue(): 
+>                                     ENTER: get_recovery_state(): 
+>                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                     TRACE: reset_token_queue(): recover the queue
+>                                 RETURN: reset_token_queue(): 
+>                             RETURN(node): parse_expression() - (NULL)
+>                             ENTER: parse_list_init(): 
+>                                 ENTER: post_token_queue(): 
+>                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                 TRACE: parse_list_init(): state = 0
+>                                 TRACE: parse_list_init(): state = 102
+>                                 ENTER: reset_token_queue(): 
+>                                     ENTER: get_recovery_state(): 
+>                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                     TRACE: reset_token_queue(): recover the queue
+>                                 RETURN: reset_token_queue(): 
+>                             RETURN(node): parse_list_init() - (NULL)
+136,147d183
+<                                         TRACE: parse_literal_value(): string literal
+<                                     RETURN(node): parse_literal_value() - (!NULL)
+<                                     TRACE: parse_expr_primary(): literal value
+<                                     TERM: parse_expr_primary(): var: "var": 6: 4: "with_args.k"
+<                                 RETURN(node): parse_expr_primary() - (!NULL)
+<                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+<                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
+<                                 ENTER: parse_operator(): 
+<                                 RETURN(node): parse_operator() - (NULL)
+<                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+<                                 TERM: parse_expression(): var: "var": 6: 4: "with_args.k"
+<                             RETURN(node): parse_expression() - (!NULL)
+148a185,186
+>                         ENTER: finalize_token_queue(): 
+>                         RETURN: finalize_token_queue(): 
+231a270,317
+>                                     RETURN(node): parse_literal_value() - (NULL)
+>                                     ENTER: parse_compound_reference(): 
+>                                         ENTER: post_token_queue(): 
+>                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                         TRACE: parse_compound_reference(): state = 0
+>                                         ENTER: parse_compound_ref_item(): 
+>                                             ENTER: post_token_queue(): 
+>                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                             TRACE: parse_compound_ref_item(): state = 0
+>                                             TERM: parse_compound_ref_item(): literal dstrg: "this is a string": 6: 42: "with_args.k"
+>                                             TRACE: parse_compound_ref_item(): state = 101
+>                                             ENTER: reset_token_queue(): 
+>                                                 ENTER: get_recovery_state(): 
+>                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                 TRACE: reset_token_queue(): recover the queue
+>                                             RETURN: reset_token_queue(): 
+>                                         RETURN(node): parse_compound_ref_item() - (NULL)
+>                                         TRACE: parse_compound_reference(): state = 101
+>                                         ENTER: reset_token_queue(): 
+>                                             ENTER: get_recovery_state(): 
+>                                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                             TRACE: reset_token_queue(): recover the queue
+>                                         RETURN: reset_token_queue(): 
+>                                     RETURN(node): parse_compound_reference() - (NULL)
+>                                     ENTER: reset_token_queue(): 
+>                                         ENTER: get_recovery_state(): 
+>                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                         TRACE: reset_token_queue(): recover the queue
+>                                     RETURN: reset_token_queue(): 
+>                                 RETURN(node): parse_expr_primary() - (NULL)
+>                                 TRACE: parse_expression(): state: 101, stack: 0, queue: 0
+>                                 ENTER: reset_token_queue(): 
+>                                     ENTER: get_recovery_state(): 
+>                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                     TRACE: reset_token_queue(): recover the queue
+>                                 RETURN: reset_token_queue(): 
+>                             RETURN(node): parse_expression() - (NULL)
+>                             ENTER: parse_list_init(): 
+>                                 ENTER: post_token_queue(): 
+>                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                 TRACE: parse_list_init(): state = 0
+>                                 TRACE: parse_list_init(): state = 102
+>                                 ENTER: reset_token_queue(): 
+>                                     ENTER: get_recovery_state(): 
+>                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                     TRACE: reset_token_queue(): recover the queue
+>                                 RETURN: reset_token_queue(): 
+>                             RETURN(node): parse_list_init() - (NULL)
+238c324
+<                                                 ENTER: parse_expression_list(): 
+---
+>                                     ENTER: parse_string_expr_list(): 
+241c327
+<                                                     TRACE: parse_expression_list(): state: 0, len: 0
+---
+>                                         TRACE: parse_string_expr_list(): state: 0
+244,245c330,331
+<                                                     TRACE: parse_expression_list(): state: 1, len: 0
+<                                                     ENTER: parse_expression(): 
+---
+>                                         TRACE: parse_string_expr_list(): state: 1
+>                                         ENTER: parse_string_expr_item(): 
+248,252c334,345
+<                                                         TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+<                                                         TERM: parse_expression(): literal signed: "1": 6: 44: "with_args.k"
+<                                                         ENTER: parse_operator(): 
+<                                                         RETURN(node): parse_operator() - (NULL)
+<                                                         ENTER: parse_expr_primary(): 
+---
+>                                             ENTER: parse_string_literal(): 
+>                                                 ENTER: post_token_queue(): 
+>                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                                 ENTER: parse_formatted_strg(): 
+>                                                 RETURN(node): parse_formatted_strg() - (NULL)
+>                                                 ENTER: reset_token_queue(): 
+>                                                     ENTER: get_recovery_state(): 
+>                                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                     TRACE: reset_token_queue(): recover the queue
+>                                                 RETURN: reset_token_queue(): 
+>                                             RETURN(node): parse_string_literal() - (NULL)
+>                                             ENTER: parse_compound_reference(): 
+254a348,367
+>                                                 TRACE: parse_compound_reference(): state = 0
+>                                                 ENTER: parse_compound_ref_item(): 
+>                                                     ENTER: post_token_queue(): 
+>                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                                     TRACE: parse_compound_ref_item(): state = 0
+>                                                     TERM: parse_compound_ref_item(): literal signed: "1": 6: 44: "with_args.k"
+>                                                     TRACE: parse_compound_ref_item(): state = 101
+>                                                     ENTER: reset_token_queue(): 
+>                                                         ENTER: get_recovery_state(): 
+>                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                         TRACE: reset_token_queue(): recover the queue
+>                                                     RETURN: reset_token_queue(): 
+>                                                 RETURN(node): parse_compound_ref_item() - (NULL)
+>                                                 TRACE: parse_compound_reference(): state = 101
+>                                                 ENTER: reset_token_queue(): 
+>                                                     ENTER: get_recovery_state(): 
+>                                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                     TRACE: reset_token_queue(): recover the queue
+>                                                 RETURN: reset_token_queue(): 
+>                                             RETURN(node): parse_compound_reference() - (NULL)
+260,271c373,376
+<                                                             TRACE: parse_expr_primary(): literal value
+<                                                             TERM: parse_expr_primary(): ,: ",": 6: 45: "with_args.k"
+<                                                         RETURN(node): parse_expr_primary() - (!NULL)
+<                                                         TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+<                                                         TRACE: parse_expression(): state: 3, stack: 0, queue: 1
+<                                                         ENTER: parse_operator(): 
+<                                                         RETURN(node): parse_operator() - (NULL)
+<                                                         TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+<                                                         TERM: parse_expression(): ,: ",": 6: 45: "with_args.k"
+<                                                     RETURN(node): parse_expression() - (!NULL)
+<                                                     TRACE: parse_expression_list(): state: 2, len: 1
+<                                                     TERM: parse_expression_list(): ,: ",": 6: 45: "with_args.k"
+---
+>                                             ENTER: finalize_token_queue(): 
+>                                             RETURN: finalize_token_queue(): 
+>                                         RETURN(node): parse_string_expr_item() - (!NULL)
+>                                         TRACE: parse_string_expr_list(): state: 2
+274,275c379,380
+<                                                     TRACE: parse_expression_list(): state: 3, len: 1
+<                                                     ENTER: parse_expression(): 
+---
+>                                         TRACE: parse_string_expr_list(): state: 3
+>                                         ENTER: parse_string_expr_item(): 
+278,282c383
+<                                                         TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+<                                                         TERM: parse_expression(): literal signed: "2": 6: 47: "with_args.k"
+<                                                         ENTER: parse_operator(): 
+<                                                         RETURN(node): parse_operator() - (NULL)
+<                                                         ENTER: parse_expr_primary(): 
+---
+>                                             ENTER: parse_string_literal(): 
+284a386,416
+>                                                 ENTER: parse_formatted_strg(): 
+>                                                 RETURN(node): parse_formatted_strg() - (NULL)
+>                                                 ENTER: reset_token_queue(): 
+>                                                     ENTER: get_recovery_state(): 
+>                                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                     TRACE: reset_token_queue(): recover the queue
+>                                                 RETURN: reset_token_queue(): 
+>                                             RETURN(node): parse_string_literal() - (NULL)
+>                                             ENTER: parse_compound_reference(): 
+>                                                 ENTER: post_token_queue(): 
+>                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                                 TRACE: parse_compound_reference(): state = 0
+>                                                 ENTER: parse_compound_ref_item(): 
+>                                                     ENTER: post_token_queue(): 
+>                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                                     TRACE: parse_compound_ref_item(): state = 0
+>                                                     TERM: parse_compound_ref_item(): literal signed: "2": 6: 47: "with_args.k"
+>                                                     TRACE: parse_compound_ref_item(): state = 101
+>                                                     ENTER: reset_token_queue(): 
+>                                                         ENTER: get_recovery_state(): 
+>                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                         TRACE: reset_token_queue(): recover the queue
+>                                                     RETURN: reset_token_queue(): 
+>                                                 RETURN(node): parse_compound_ref_item() - (NULL)
+>                                                 TRACE: parse_compound_reference(): state = 101
+>                                                 ENTER: reset_token_queue(): 
+>                                                     ENTER: get_recovery_state(): 
+>                                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                     TRACE: reset_token_queue(): recover the queue
+>                                                 RETURN: reset_token_queue(): 
+>                                             RETURN(node): parse_compound_reference() - (NULL)
+290,301c422,425
+<                                                             TRACE: parse_expr_primary(): literal value
+<                                                             TERM: parse_expr_primary(): ,: ",": 6: 48: "with_args.k"
+<                                                         RETURN(node): parse_expr_primary() - (!NULL)
+<                                                         TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+<                                                         TRACE: parse_expression(): state: 3, stack: 0, queue: 1
+<                                                         ENTER: parse_operator(): 
+<                                                         RETURN(node): parse_operator() - (NULL)
+<                                                         TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+<                                                         TERM: parse_expression(): ,: ",": 6: 48: "with_args.k"
+<                                                     RETURN(node): parse_expression() - (!NULL)
+<                                                     TRACE: parse_expression_list(): state: 2, len: 2
+<                                                     TERM: parse_expression_list(): ,: ",": 6: 48: "with_args.k"
+---
+>                                             ENTER: finalize_token_queue(): 
+>                                             RETURN: finalize_token_queue(): 
+>                                         RETURN(node): parse_string_expr_item() - (!NULL)
+>                                         TRACE: parse_string_expr_list(): state: 2
+304,305c428,429
+<                                                     TRACE: parse_expression_list(): state: 3, len: 2
+<                                                     ENTER: parse_expression(): 
+---
+>                                         TRACE: parse_string_expr_list(): state: 3
+>                                         ENTER: parse_string_expr_item(): 
+308,312c432,447
+<                                                         TRACE: parse_expression(): state: 0, stack: 0, queue: 0
+<                                                         TERM: parse_expression(): literal signed: "3": 6: 50: "with_args.k"
+<                                                         ENTER: parse_operator(): 
+<                                                         RETURN(node): parse_operator() - (NULL)
+<                                                         ENTER: parse_expr_primary(): 
+---
+>                                             ENTER: parse_string_literal(): 
+>                                                 ENTER: post_token_queue(): 
+>                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                                 ENTER: parse_formatted_strg(): 
+>                                                 RETURN(node): parse_formatted_strg() - (NULL)
+>                                                 ENTER: reset_token_queue(): 
+>                                                     ENTER: get_recovery_state(): 
+>                                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                     TRACE: reset_token_queue(): recover the queue
+>                                                 RETURN: reset_token_queue(): 
+>                                             RETURN(node): parse_string_literal() - (NULL)
+>                                             ENTER: parse_compound_reference(): 
+>                                                 ENTER: post_token_queue(): 
+>                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                                 TRACE: parse_compound_reference(): state = 0
+>                                                 ENTER: parse_compound_ref_item(): 
+314a450,465
+>                                                     TRACE: parse_compound_ref_item(): state = 0
+>                                                     TERM: parse_compound_ref_item(): literal signed: "3": 6: 50: "with_args.k"
+>                                                     TRACE: parse_compound_ref_item(): state = 101
+>                                                     ENTER: reset_token_queue(): 
+>                                                         ENTER: get_recovery_state(): 
+>                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                         TRACE: reset_token_queue(): recover the queue
+>                                                     RETURN: reset_token_queue(): 
+>                                                 RETURN(node): parse_compound_ref_item() - (NULL)
+>                                                 TRACE: parse_compound_reference(): state = 101
+>                                                 ENTER: reset_token_queue(): 
+>                                                     ENTER: get_recovery_state(): 
+>                                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                     TRACE: reset_token_queue(): recover the queue
+>                                                 RETURN: reset_token_queue(): 
+>                                             RETURN(node): parse_compound_reference() - (NULL)
+320,336d470
+<                                                             TRACE: parse_expr_primary(): literal value
+<                                                             TERM: parse_expr_primary(): ): ")": 6: 51: "with_args.k"
+<                                                         RETURN(node): parse_expr_primary() - (!NULL)
+<                                                         TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+<                                                         TRACE: parse_expression(): state: 3, stack: 0, queue: 1
+<                                                         ENTER: parse_operator(): 
+<                                                             TERM: parse_operator(): ): ")": 6: 51: "with_args.k"
+<                                                         RETURN(node): parse_operator() - (!NULL)
+<                                                         TRACE: parse_expression(): state: 4, stack: 0, queue: 1
+<                                                         TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: -1
+<                                                         TERM: parse_expression(): ): ")": 6: 51: "with_args.k"
+<                                                     RETURN(node): parse_expression() - (!NULL)
+<                                                     TRACE: parse_expression_list(): state: 2, len: 3
+<                                                     TERM: parse_expression_list(): ): ")": 6: 51: "with_args.k"
+<                                                     ENTER: advance_token(): 
+<                                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+<                                                     TRACE: parse_expression_list(): state: 100, len: 3, pcount: 0
+339c473,478
+<                                                 RETURN(node): parse_expression_list() - (!NULL)
+---
+>                                         RETURN(node): parse_string_expr_item() - (!NULL)
+>                                         TRACE: parse_string_expr_list(): state: 2
+>                                         ENTER: advance_token(): 
+>                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+>                                         TRACE: parse_string_expr_list(): state: 100
+>                                     RETURN(node): parse_string_expr_list() - (!NULL)
+343,354d481
+<                                         TRACE: parse_literal_value(): string literal
+<                                     RETURN(node): parse_literal_value() - (!NULL)
+<                                     TRACE: parse_expr_primary(): literal value
+<                                     TERM: parse_expr_primary(): end of file: "": 10: 1: "with_args.k"
+<                                 RETURN(node): parse_expr_primary() - (!NULL)
+<                                 TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+<                                 TRACE: parse_expression(): state: 3, stack: 0, queue: 1
+<                                 ENTER: parse_operator(): 
+<                                 RETURN(node): parse_operator() - (NULL)
+<                                 TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+<                                 TERM: parse_expression(): end of file: "": 10: 1: "with_args.k"
+<                             RETURN(node): parse_expression() - (!NULL)
+355a483,484
+>                         ENTER: finalize_token_queue(): 
+>                         RETURN: finalize_token_queue(): 
+467c596
+<                             TRACE: pre_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: pre_test_pass_func(): node type: var_definition(3019)
+471c600
+<                                 TRACE: pre_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: pre_test_pass_func(): node type: var_decl(3017)
+493c622
+<                                 TRACE: post_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: post_test_pass_func(): node type: var_decl(3017)
+499,513c628
+<                                 TRACE: pre_test_pass_func(): node type: assignment_item(3039)
+<                             RETURN: pre_test_pass_func(): 
+<                             ENTER: traverse_expression(): 
+<                                 ENTER: pre_test_pass_func(): 
+<                                     TRACE: pre_test_pass_func(): node type: expression(3036)
+<                                 RETURN: pre_test_pass_func(): 
+<                                 TRACE: traverse_expression(): operand type: 0
+<                                 TRACE: traverse_expression(): expression type: 0
+<                                 ENTER: traverse_expr_primary(): 
+<                                     ENTER: pre_test_pass_func(): 
+<                                         TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+<                                     RETURN: pre_test_pass_func(): 
+<                                     ENTER: traverse_literal_value(): 
+<                                         ENTER: pre_test_pass_func(): 
+<                                             TRACE: pre_test_pass_func(): node type: literal_value(3011)
+---
+>                                 TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+525,537c640
+<                                             TRACE: post_test_pass_func(): node type: literal_value(3011)
+<                                         RETURN: post_test_pass_func(): 
+<                                     RETURN: traverse_literal_value(): 
+<                                     ENTER: post_test_pass_func(): 
+<                                         TRACE: post_test_pass_func(): node type: expr_primary(3037)
+<                                     RETURN: post_test_pass_func(): 
+<                                 RETURN: traverse_expr_primary(): 
+<                                 ENTER: post_test_pass_func(): 
+<                                     TRACE: post_test_pass_func(): node type: expression(3036)
+<                                 RETURN: post_test_pass_func(): 
+<                             RETURN: traverse_expression(): 
+<                             ENTER: post_test_pass_func(): 
+<                                 TRACE: post_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: post_test_pass_func(): node type: assignment_item(3041)
+541c644
+<                             TRACE: post_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: post_test_pass_func(): node type: var_definition(3019)
+564c667
+<                             TRACE: pre_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: pre_test_pass_func(): node type: var_definition(3019)
+568c671
+<                                 TRACE: pre_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: pre_test_pass_func(): node type: var_decl(3017)
+590c693
+<                                 TRACE: post_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: post_test_pass_func(): node type: var_decl(3017)
+596,610c699
+<                                 TRACE: pre_test_pass_func(): node type: assignment_item(3039)
+<                             RETURN: pre_test_pass_func(): 
+<                             ENTER: traverse_expression(): 
+<                                 ENTER: pre_test_pass_func(): 
+<                                     TRACE: pre_test_pass_func(): node type: expression(3036)
+<                                 RETURN: pre_test_pass_func(): 
+<                                 TRACE: traverse_expression(): operand type: 0
+<                                 TRACE: traverse_expression(): expression type: 0
+<                                 ENTER: traverse_expr_primary(): 
+<                                     ENTER: pre_test_pass_func(): 
+<                                         TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+<                                     RETURN: pre_test_pass_func(): 
+<                                     ENTER: traverse_literal_value(): 
+<                                         ENTER: pre_test_pass_func(): 
+<                                             TRACE: pre_test_pass_func(): node type: literal_value(3011)
+---
+>                                 TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+621,625c710
+<                                                 ENTER: traverse_expression_list(): 
+<                                                     ENTER: pre_test_pass_func(): 
+<                                                         TRACE: pre_test_pass_func(): node type: expression_list(3038)
+<                                                     RETURN: pre_test_pass_func(): 
+<                                                     ENTER: traverse_expression(): 
+---
+>                                     ENTER: traverse_string_expr_list(): 
+627c712
+<                                                             TRACE: pre_test_pass_func(): node type: expression(3036)
+---
+>                                             TRACE: pre_test_pass_func(): node type: string_expr_list(3016)
+629,631c714,715
+<                                                         TRACE: traverse_expression(): operand type: 0
+<                                                         TRACE: traverse_expression(): expression type: 0
+<                                                         ENTER: traverse_expr_primary(): 
+---
+>                                         TRACE: traverse_string_expr_list(): num expr items: 3
+>                                         ENTER: traverse_string_expr_item(): 
+633c717
+<                                                                 TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                 TRACE: pre_test_pass_func(): node type: string_expr_item(3015)
+645c729
+<                                                                 TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                 TRACE: post_test_pass_func(): node type: string_expr_item(3015)
+647,658c731,732
+<                                                         RETURN: traverse_expr_primary(): 
+<                                                         ENTER: post_test_pass_func(): 
+<                                                             TRACE: post_test_pass_func(): node type: expression(3036)
+<                                                         RETURN: post_test_pass_func(): 
+<                                                     RETURN: traverse_expression(): 
+<                                                     ENTER: traverse_expression(): 
+<                                                         ENTER: pre_test_pass_func(): 
+<                                                             TRACE: pre_test_pass_func(): node type: expression(3036)
+<                                                         RETURN: pre_test_pass_func(): 
+<                                                         TRACE: traverse_expression(): operand type: 0
+<                                                         TRACE: traverse_expression(): expression type: 0
+<                                                         ENTER: traverse_expr_primary(): 
+---
+>                                         RETURN: traverse_string_expr_item(): 
+>                                         ENTER: traverse_string_expr_item(): 
+660c734
+<                                                                 TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                 TRACE: pre_test_pass_func(): node type: string_expr_item(3015)
+672,676c746
+<                                                                 TRACE: post_test_pass_func(): node type: expr_primary(3037)
+<                                                             RETURN: post_test_pass_func(): 
+<                                                         RETURN: traverse_expr_primary(): 
+<                                                         ENTER: post_test_pass_func(): 
+<                                                             TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                                 TRACE: post_test_pass_func(): node type: string_expr_item(3015)
+678,679c748,749
+<                                                     RETURN: traverse_expression(): 
+<                                                     ENTER: traverse_expression(): 
+---
+>                                         RETURN: traverse_string_expr_item(): 
+>                                         ENTER: traverse_string_expr_item(): 
+681,687c751
+<                                                             TRACE: pre_test_pass_func(): node type: expression(3036)
+<                                                         RETURN: pre_test_pass_func(): 
+<                                                         TRACE: traverse_expression(): operand type: 0
+<                                                         TRACE: traverse_expression(): expression type: 0
+<                                                         ENTER: traverse_expr_primary(): 
+<                                                             ENTER: pre_test_pass_func(): 
+<                                                                 TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                                 TRACE: pre_test_pass_func(): node type: string_expr_item(3015)
+699,703c763
+<                                                                 TRACE: post_test_pass_func(): node type: expr_primary(3037)
+<                                                             RETURN: post_test_pass_func(): 
+<                                                         RETURN: traverse_expr_primary(): 
+<                                                         ENTER: post_test_pass_func(): 
+<                                                             TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                                 TRACE: post_test_pass_func(): node type: string_expr_item(3015)
+705c765
+<                                                     RETURN: traverse_expression(): 
+---
+>                                         RETURN: traverse_string_expr_item(): 
+707c767
+<                                                         TRACE: post_test_pass_func(): node type: expression_list(3038)
+---
+>                                             TRACE: post_test_pass_func(): node type: string_expr_list(3016)
+709c769
+<                                                 RETURN: traverse_expression_list(): 
+---
+>                                     RETURN: traverse_string_expr_list(): 
+719,731c779
+<                                             TRACE: post_test_pass_func(): node type: literal_value(3011)
+<                                         RETURN: post_test_pass_func(): 
+<                                     RETURN: traverse_literal_value(): 
+<                                     ENTER: post_test_pass_func(): 
+<                                         TRACE: post_test_pass_func(): node type: expr_primary(3037)
+<                                     RETURN: post_test_pass_func(): 
+<                                 RETURN: traverse_expr_primary(): 
+<                                 ENTER: post_test_pass_func(): 
+<                                     TRACE: post_test_pass_func(): node type: expression(3036)
+<                                 RETURN: post_test_pass_func(): 
+<                             RETURN: traverse_expression(): 
+<                             ENTER: post_test_pass_func(): 
+<                                 TRACE: post_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: post_test_pass_func(): node type: assignment_item(3041)
+735c783
+<                             TRACE: post_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: post_test_pass_func(): node type: var_definition(3019)

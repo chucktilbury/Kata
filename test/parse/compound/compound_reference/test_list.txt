@@ -1,1 +1,4 @@
 # this is a list of actual tests.
+symbols:run
+arrays:run
+mixed:run

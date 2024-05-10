@@ -1,0 +1,88 @@
+128,138d127
+<                                         ENTER: parse_string_literal(): 
+<                                             ENTER: post_token_queue(): 
+<                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+<                                             ENTER: parse_formatted_strg(): 
+<                                             RETURN(node): parse_formatted_strg() - (NULL)
+<                                             ENTER: reset_token_queue(): 
+<                                                 ENTER: get_recovery_state(): 
+<                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+<                                                 TRACE: reset_token_queue(): recover the queue
+<                                             RETURN: reset_token_queue(): 
+<                                         RETURN(node): parse_string_literal() - (NULL)
+240a230,277
+>                                             RETURN(node): parse_literal_value() - (NULL)
+>                                             ENTER: parse_compound_reference(): 
+>                                                 ENTER: post_token_queue(): 
+>                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                                 TRACE: parse_compound_reference(): state = 0
+>                                                 ENTER: parse_compound_ref_item(): 
+>                                                     ENTER: post_token_queue(): 
+>                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                                     TRACE: parse_compound_ref_item(): state = 0
+>                                                     TERM: parse_compound_ref_item(): literal sstrg: "asd": 5: 28: "mixed1.k"
+>                                                     TRACE: parse_compound_ref_item(): state = 101
+>                                                     ENTER: reset_token_queue(): 
+>                                                         ENTER: get_recovery_state(): 
+>                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                         TRACE: reset_token_queue(): recover the queue
+>                                                     RETURN: reset_token_queue(): 
+>                                                 RETURN(node): parse_compound_ref_item() - (NULL)
+>                                                 TRACE: parse_compound_reference(): state = 101
+>                                                 ENTER: reset_token_queue(): 
+>                                                     ENTER: get_recovery_state(): 
+>                                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                     TRACE: reset_token_queue(): recover the queue
+>                                                 RETURN: reset_token_queue(): 
+>                                             RETURN(node): parse_compound_reference() - (NULL)
+>                                             ENTER: reset_token_queue(): 
+>                                                 ENTER: get_recovery_state(): 
+>                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                                 TRACE: reset_token_queue(): recover the queue
+>                                             RETURN: reset_token_queue(): 
+>                                         RETURN(node): parse_expr_primary() - (NULL)
+>                                         TRACE: parse_expression(): state: 101, stack: 0, queue: 0
+>                                         ENTER: reset_token_queue(): 
+>                                             ENTER: get_recovery_state(): 
+>                                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                             TRACE: reset_token_queue(): recover the queue
+>                                         RETURN: reset_token_queue(): 
+>                                     RETURN(node): parse_expression() - (NULL)
+>                                     ENTER: parse_list_init(): 
+>                                         ENTER: post_token_queue(): 
+>                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                         TRACE: parse_list_init(): state = 0
+>                                         TRACE: parse_list_init(): state = 102
+>                                         ENTER: reset_token_queue(): 
+>                                             ENTER: get_recovery_state(): 
+>                                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+>                                             TRACE: reset_token_queue(): recover the queue
+>                                         RETURN: reset_token_queue(): 
+>                                     RETURN(node): parse_list_init() - (NULL)
+249,260d285
+<                                                 TRACE: parse_literal_value(): string literal
+<                                             RETURN(node): parse_literal_value() - (!NULL)
+<                                             TRACE: parse_expr_primary(): literal value
+<                                             TERM: parse_expr_primary(): :: ":": 5: 29: "mixed1.k"
+<                                         RETURN(node): parse_expr_primary() - (!NULL)
+<                                         TRACE: parse_expression(): state: 54, stack: 0, queue: 0
+<                                         TRACE: parse_expression(): state: 3, stack: 0, queue: 1
+<                                         ENTER: parse_operator(): 
+<                                         RETURN(node): parse_operator() - (NULL)
+<                                         TRACE: parse_expression(): state: 100, stack: 0, queue: 1, pcount: 0
+<                                         TERM: parse_expression(): :: ":": 5: 29: "mixed1.k"
+<                                     RETURN(node): parse_expression() - (!NULL)
+279a305,314
+>                             ENTER: parse_string_literal(): 
+>                                 ENTER: post_token_queue(): 
+>                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+>                                 ENTER: parse_formatted_strg(): 
+>                                 RETURN(node): parse_formatted_strg() - (NULL)
+>                                 ENTER: reset_token_queue(): 
+>                                     ENTER: get_recovery_state(): 
+>                                     RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
+>                                 RETURN: reset_token_queue(): 
+>                             RETURN(node): parse_string_literal() - (NULL)
+342a378,379
+>                         ENTER: finalize_token_queue(): 
+>                         RETURN: finalize_token_queue(): 

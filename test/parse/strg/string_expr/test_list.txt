@@ -1,0 +1,6 @@
+# None of these tests check for errors because errors are either symantic or 
+# checked by the expression tests.
+strg_add:run
+strg_equal:run
+strg_not_equal:run
+strg_assign_add:run

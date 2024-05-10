@@ -1,0 +1,292 @@
+142a143,144
+>                         ENTER: finalize_token_queue(): 
+>                         RETURN: finalize_token_queue(): 
+240a243,244
+>                         ENTER: finalize_token_queue(): 
+>                         RETURN: finalize_token_queue(): 
+338a343,344
+>                         ENTER: finalize_token_queue(): 
+>                         RETURN: finalize_token_queue(): 
+436a443,444
+>                         ENTER: finalize_token_queue(): 
+>                         RETURN: finalize_token_queue(): 
+543a552,553
+>                         ENTER: finalize_token_queue(): 
+>                         RETURN: finalize_token_queue(): 
+650a661,662
+>                         ENTER: finalize_token_queue(): 
+>                         RETURN: finalize_token_queue(): 
+762c774
+<                             TRACE: pre_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: pre_test_pass_func(): node type: var_definition(3019)
+766c778
+<                                 TRACE: pre_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: pre_test_pass_func(): node type: var_decl(3017)
+788c800
+<                                 TRACE: post_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: post_test_pass_func(): node type: var_decl(3017)
+794c806
+<                                 TRACE: pre_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+798c810
+<                                     TRACE: pre_test_pass_func(): node type: expression(3036)
+---
+>                                     TRACE: pre_test_pass_func(): node type: expression(3038)
+800,801d811
+<                                 TRACE: traverse_expression(): operand type: 0
+<                                 TRACE: traverse_expression(): expression type: 0
+804c814
+<                                         TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                         TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+816c826
+<                                         TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                         TRACE: post_test_pass_func(): node type: expr_primary(3039)
+820c830
+<                                     TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                     TRACE: post_test_pass_func(): node type: expression(3038)
+824c834
+<                                 TRACE: post_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: post_test_pass_func(): node type: assignment_item(3041)
+828c838
+<                             TRACE: post_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: post_test_pass_func(): node type: var_definition(3019)
+851c861
+<                             TRACE: pre_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: pre_test_pass_func(): node type: var_definition(3019)
+855c865
+<                                 TRACE: pre_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: pre_test_pass_func(): node type: var_decl(3017)
+877c887
+<                                 TRACE: post_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: post_test_pass_func(): node type: var_decl(3017)
+883c893
+<                                 TRACE: pre_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+887c897
+<                                     TRACE: pre_test_pass_func(): node type: expression(3036)
+---
+>                                     TRACE: pre_test_pass_func(): node type: expression(3038)
+889,890d898
+<                                 TRACE: traverse_expression(): operand type: 0
+<                                 TRACE: traverse_expression(): expression type: 0
+893c901
+<                                         TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                         TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+905c913
+<                                         TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                         TRACE: post_test_pass_func(): node type: expr_primary(3039)
+909c917
+<                                     TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                     TRACE: post_test_pass_func(): node type: expression(3038)
+913c921
+<                                 TRACE: post_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: post_test_pass_func(): node type: assignment_item(3041)
+917c925
+<                             TRACE: post_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: post_test_pass_func(): node type: var_definition(3019)
+940c948
+<                             TRACE: pre_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: pre_test_pass_func(): node type: var_definition(3019)
+944c952
+<                                 TRACE: pre_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: pre_test_pass_func(): node type: var_decl(3017)
+966c974
+<                                 TRACE: post_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: post_test_pass_func(): node type: var_decl(3017)
+972c980
+<                                 TRACE: pre_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+976c984
+<                                     TRACE: pre_test_pass_func(): node type: expression(3036)
+---
+>                                     TRACE: pre_test_pass_func(): node type: expression(3038)
+978,979d985
+<                                 TRACE: traverse_expression(): operand type: 0
+<                                 TRACE: traverse_expression(): expression type: 0
+982c988
+<                                         TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                         TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+994c1000
+<                                         TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                         TRACE: post_test_pass_func(): node type: expr_primary(3039)
+998c1004
+<                                     TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                     TRACE: post_test_pass_func(): node type: expression(3038)
+1002c1008
+<                                 TRACE: post_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: post_test_pass_func(): node type: assignment_item(3041)
+1006c1012
+<                             TRACE: post_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: post_test_pass_func(): node type: var_definition(3019)
+1029c1035
+<                             TRACE: pre_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: pre_test_pass_func(): node type: var_definition(3019)
+1033c1039
+<                                 TRACE: pre_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: pre_test_pass_func(): node type: var_decl(3017)
+1055c1061
+<                                 TRACE: post_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: post_test_pass_func(): node type: var_decl(3017)
+1061c1067
+<                                 TRACE: pre_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+1065c1071
+<                                     TRACE: pre_test_pass_func(): node type: expression(3036)
+---
+>                                     TRACE: pre_test_pass_func(): node type: expression(3038)
+1067,1068d1072
+<                                 TRACE: traverse_expression(): operand type: 0
+<                                 TRACE: traverse_expression(): expression type: 0
+1071c1075
+<                                         TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                         TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+1083c1087
+<                                         TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                         TRACE: post_test_pass_func(): node type: expr_primary(3039)
+1087c1091
+<                                     TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                     TRACE: post_test_pass_func(): node type: expression(3038)
+1091c1095
+<                                 TRACE: post_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: post_test_pass_func(): node type: assignment_item(3041)
+1095c1099
+<                             TRACE: post_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: post_test_pass_func(): node type: var_definition(3019)
+1118c1122
+<                             TRACE: pre_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: pre_test_pass_func(): node type: var_definition(3019)
+1122c1126
+<                                 TRACE: pre_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: pre_test_pass_func(): node type: var_decl(3017)
+1144c1148
+<                                 TRACE: post_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: post_test_pass_func(): node type: var_decl(3017)
+1150c1154
+<                                 TRACE: pre_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+1154c1158
+<                                     TRACE: pre_test_pass_func(): node type: expression(3036)
+---
+>                                     TRACE: pre_test_pass_func(): node type: expression(3038)
+1156,1157d1159
+<                                 TRACE: traverse_expression(): operand type: 0
+<                                 TRACE: traverse_expression(): expression type: 2
+1160c1162
+<                                         TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                         TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+1172c1174
+<                                         TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                         TRACE: post_test_pass_func(): node type: expr_primary(3039)
+1177c1179
+<                                         TRACE: pre_test_pass_func(): node type: operator(3060)
+---
+>                                         TRACE: pre_test_pass_func(): node type: operator(3062)
+1181c1183
+<                                         TRACE: post_test_pass_func(): node type: operator(3060)
+---
+>                                         TRACE: post_test_pass_func(): node type: operator(3062)
+1185c1187
+<                                     TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                     TRACE: post_test_pass_func(): node type: expression(3038)
+1189c1191
+<                                 TRACE: post_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: post_test_pass_func(): node type: assignment_item(3041)
+1193c1195
+<                             TRACE: post_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: post_test_pass_func(): node type: var_definition(3019)
+1216c1218
+<                             TRACE: pre_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: pre_test_pass_func(): node type: var_definition(3019)
+1220c1222
+<                                 TRACE: pre_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: pre_test_pass_func(): node type: var_decl(3017)
+1242c1244
+<                                 TRACE: post_test_pass_func(): node type: var_decl(3015)
+---
+>                                 TRACE: post_test_pass_func(): node type: var_decl(3017)
+1248c1250
+<                                 TRACE: pre_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: pre_test_pass_func(): node type: assignment_item(3041)
+1252c1254
+<                                     TRACE: pre_test_pass_func(): node type: expression(3036)
+---
+>                                     TRACE: pre_test_pass_func(): node type: expression(3038)
+1254,1255d1255
+<                                 TRACE: traverse_expression(): operand type: 0
+<                                 TRACE: traverse_expression(): expression type: 2
+1258c1258
+<                                         TRACE: pre_test_pass_func(): node type: expr_primary(3037)
+---
+>                                         TRACE: pre_test_pass_func(): node type: expr_primary(3039)
+1270c1270
+<                                         TRACE: post_test_pass_func(): node type: expr_primary(3037)
+---
+>                                         TRACE: post_test_pass_func(): node type: expr_primary(3039)
+1275c1275
+<                                         TRACE: pre_test_pass_func(): node type: operator(3060)
+---
+>                                         TRACE: pre_test_pass_func(): node type: operator(3062)
+1279c1279
+<                                         TRACE: post_test_pass_func(): node type: operator(3060)
+---
+>                                         TRACE: post_test_pass_func(): node type: operator(3062)
+1283c1283
+<                                     TRACE: post_test_pass_func(): node type: expression(3036)
+---
+>                                     TRACE: post_test_pass_func(): node type: expression(3038)
+1287c1287
+<                                 TRACE: post_test_pass_func(): node type: assignment_item(3039)
+---
+>                                 TRACE: post_test_pass_func(): node type: assignment_item(3041)
+1291c1291
+<                             TRACE: post_test_pass_func(): node type: var_definition(3017)
+---
+>                             TRACE: post_test_pass_func(): node type: var_definition(3019)

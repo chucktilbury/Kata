@@ -72,8 +72,7 @@ void traverse_compound_name_list(ast_compound_name_list* node, PassFunc pre, Pas
  * @brief
  *
  *  compound_ref_item
- *      = SYMBOL
- *      / array_reference
+ *      = SYMBOL ( array_param_list )?
  *
  * @param node
  *
@@ -85,12 +84,9 @@ void traverse_compound_ref_item(ast_compound_ref_item* node, PassFunc pre, PassF
     ENTER;
     AST_CALLBACK(pre, node);
 
-    if(node->token != NULL)
-        TRACE_TERM(node->token);
-    else if(node->nterm != NULL)
-        traverse_array_reference((ast_array_reference*)node->nterm, pre, post);
-    else
-        fatal_error("invalid compound reference item");
+    TRACE_TERM(node->symb);
+    if(node->apar != NULL)
+        traverse_array_param_list((ast_array_param_list*)node->apar, pre, post);
 
     AST_CALLBACK(post, node);
     RET;

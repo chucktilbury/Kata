@@ -244,9 +244,12 @@ ENTER: main():
                                 ENTER: parse_compound_name(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 0
                                     TERM: parse_compound_name(): symbol: "some_compound_name": 14: 29: "test.k"
                                     ENTER: advance_token(): 
                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                    TRACE: parse_compound_name(): state = 1
+                                    TRACE: parse_compound_name(): state = 100
                                 RETURN(node): parse_compound_name() - (!NULL)
                                 TERM: parse_type_name(): symbol: "some_name": 14: 39: "test.k"
                                 ENTER: finalize_token_queue(): 

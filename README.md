@@ -198,7 +198,7 @@ type_name_list
 # 'string {} some'(1+2) ; produce format ignored warning
 #
 formatted_strg
-    = LITERAL_DSTRG ( string_expr_list )?
+    = LITERAL_DSTRG ( expression_list )?
 
 #####################
 #
@@ -211,22 +211,6 @@ string_literal
 
 #####################
 #
-# Items that can be in a string expression.
-#
-string_expr_item
-    = string_literal
-    / compound_reference
-    / literal_value
-
-#####################
-#
-# This is a way to concatenate strings with various types of objects.
-#
-string_expr_list
-    = '(' string_expr_item ( ',' string_expr_item )* ')'
-
-#####################
-#
 # All numbers are doubles
 # A bool is "true" or "false" keywords.
 #
@@ -235,6 +219,7 @@ literal_value
     / LITERAL_UNSIGNED
     / LITERAL_SIGNED
     / LITERAL_BOOL
+    / string_literal
 
 #####################
 #
@@ -265,7 +250,6 @@ function_assignment
 assignment_item
     = expression
     / list_init
-    / string_literal
     / cast_statement
     / function_assignment
 
@@ -617,6 +601,8 @@ function_body_element
     / type_statement
     / return_statement
     / raise_statement
+    / trace_statement
+    / print_statement
     / function_body
 
 #####################
@@ -659,7 +645,19 @@ return_statement
 #
 #
 raise_statement
-    = 'raise' '(' SYMBOL ',' formatted_strg ')'
+    = 'raise' '(' SYMBOL ',' string_literal ')'
+
+#####################
+#
+#
+trace_statement
+    = 'trace' '(' string_literal ')'
+
+#####################
+#
+#
+print_statement
+    = 'print' ( expression_list )?
 
 #####################
 #

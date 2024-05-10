@@ -195,8 +195,6 @@ ast_var_definition* parse_var_definition() {
                     node = NULL;
                 }
             }
-
-            finalize_token_queue();
         }
         else {
             // nope

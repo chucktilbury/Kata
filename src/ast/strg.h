@@ -18,7 +18,7 @@
 typedef struct _ast_formatted_strg_ {
     ast_node node;
     Token* str;
-    struct _ast_string_expr_list_* exprs;
+    struct _ast_expression_list_* exprs;
 } ast_formatted_strg;
 
 /**
@@ -32,31 +32,9 @@ typedef struct _ast_string_literal_ {
     struct _ast_formatted_strg_* fmt;
 } ast_string_literal;
 
-/**
- *  string_expr_item
- *      = string_literal
- *      / compound_reference
- *      / literal_value
- */
-typedef struct _ast_string_expr_item_ {
-    ast_node node;
-    ast_node* nterm;
-} ast_string_expr_item;
-
-/**
- *  string_expr_list
- *      = '(' string_expr_item ( ',' string_expr_item )* ')'
- */
-typedef struct _ast_string_expr_list_ {
-    ast_node node;
-    LinkList* list;
-} ast_string_expr_list;
-
 
 void traverse_formatted_strg(ast_formatted_strg* node, PassFunc pre, PassFunc post);
 void traverse_string_literal(ast_string_literal* node, PassFunc pre, PassFunc post);
-void traverse_string_expr_item(ast_string_expr_item* node, PassFunc pre, PassFunc post);
-void traverse_string_expr_list(ast_string_expr_list* node, PassFunc pre, PassFunc post);
 
 
 #endif /* __STRG_H__ */

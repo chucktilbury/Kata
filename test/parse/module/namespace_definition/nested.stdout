@@ -115,14 +115,19 @@ ENTER: main():
                                     ENTER: parse_compound_name(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_compound_name(): state = 0
                                         TERM: parse_compound_name(): symbol: "some": 8: 21: "nested.k"
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        TRACE: parse_compound_name(): state = 1
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        TRACE: parse_compound_name(): state = 2
                                         TERM: parse_compound_name(): symbol: "name": 8: 26: "nested.k"
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        TRACE: parse_compound_name(): state = 1
+                                        TRACE: parse_compound_name(): state = 100
                                     RETURN(node): parse_compound_name() - (!NULL)
                                     TERM: parse_type_name(): ): ")": 8: 27: "nested.k"
                                     ENTER: finalize_token_queue(): 
@@ -193,14 +198,19 @@ ENTER: main():
                                                 ENTER: parse_compound_name(): 
                                                     ENTER: post_token_queue(): 
                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                    TRACE: parse_compound_name(): state = 0
                                                     TERM: parse_compound_name(): symbol: "some": 10: 17: "nested.k"
                                                     ENTER: advance_token(): 
                                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    TRACE: parse_compound_name(): state = 1
                                                     ENTER: advance_token(): 
                                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    TRACE: parse_compound_name(): state = 2
                                                     TERM: parse_compound_name(): symbol: "name": 10: 22: "nested.k"
                                                     ENTER: advance_token(): 
                                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    TRACE: parse_compound_name(): state = 1
+                                                    TRACE: parse_compound_name(): state = 100
                                                 RETURN(node): parse_compound_name() - (!NULL)
                                                 TERM: parse_type_name(): symbol: "name": 10: 27: "nested.k"
                                                 ENTER: finalize_token_queue(): 
@@ -263,6 +273,8 @@ ENTER: main():
                                                 ENTER: parse_compound_name(): 
                                                     ENTER: post_token_queue(): 
                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                    TRACE: parse_compound_name(): state = 0
+                                                    TRACE: parse_compound_name(): state = 101
                                                     ENTER: reset_token_queue(): 
                                                         ENTER: get_recovery_state(): 
                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -285,6 +297,8 @@ ENTER: main():
                                                 ENTER: parse_compound_name(): 
                                                     ENTER: post_token_queue(): 
                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                    TRACE: parse_compound_name(): state = 0
+                                                    TRACE: parse_compound_name(): state = 101
                                                     ENTER: reset_token_queue(): 
                                                         ENTER: get_recovery_state(): 
                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -427,14 +441,19 @@ ENTER: main():
                                             ENTER: parse_compound_name(): 
                                                 ENTER: post_token_queue(): 
                                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                TRACE: parse_compound_name(): state = 0
                                                 TERM: parse_compound_name(): symbol: "some": 17: 25: "nested.k"
                                                 ENTER: advance_token(): 
                                                 RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                TRACE: parse_compound_name(): state = 1
                                                 ENTER: advance_token(): 
                                                 RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                TRACE: parse_compound_name(): state = 2
                                                 TERM: parse_compound_name(): symbol: "name": 17: 30: "nested.k"
                                                 ENTER: advance_token(): 
                                                 RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                TRACE: parse_compound_name(): state = 1
+                                                TRACE: parse_compound_name(): state = 100
                                             RETURN(node): parse_compound_name() - (!NULL)
                                             TERM: parse_type_name(): ): ")": 17: 31: "nested.k"
                                             ENTER: finalize_token_queue(): 
@@ -505,14 +524,19 @@ ENTER: main():
                                                         ENTER: parse_compound_name(): 
                                                             ENTER: post_token_queue(): 
                                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                            TRACE: parse_compound_name(): state = 0
                                                             TERM: parse_compound_name(): symbol: "some": 19: 21: "nested.k"
                                                             ENTER: advance_token(): 
                                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                            TRACE: parse_compound_name(): state = 1
                                                             ENTER: advance_token(): 
                                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                            TRACE: parse_compound_name(): state = 2
                                                             TERM: parse_compound_name(): symbol: "name": 19: 26: "nested.k"
                                                             ENTER: advance_token(): 
                                                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                            TRACE: parse_compound_name(): state = 1
+                                                            TRACE: parse_compound_name(): state = 100
                                                         RETURN(node): parse_compound_name() - (!NULL)
                                                         TERM: parse_type_name(): symbol: "name": 19: 31: "nested.k"
                                                         ENTER: finalize_token_queue(): 
@@ -575,6 +599,8 @@ ENTER: main():
                                                         ENTER: parse_compound_name(): 
                                                             ENTER: post_token_queue(): 
                                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                            TRACE: parse_compound_name(): state = 0
+                                                            TRACE: parse_compound_name(): state = 101
                                                             ENTER: reset_token_queue(): 
                                                                 ENTER: get_recovery_state(): 
                                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -597,6 +623,8 @@ ENTER: main():
                                                         ENTER: parse_compound_name(): 
                                                             ENTER: post_token_queue(): 
                                                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                            TRACE: parse_compound_name(): state = 0
+                                                            TRACE: parse_compound_name(): state = 101
                                                             ENTER: reset_token_queue(): 
                                                                 ENTER: get_recovery_state(): 
                                                                 RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -766,14 +794,19 @@ ENTER: main():
                                     ENTER: parse_compound_name(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_compound_name(): state = 0
                                         TERM: parse_compound_name(): symbol: "some": 24: 21: "nested.k"
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        TRACE: parse_compound_name(): state = 1
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        TRACE: parse_compound_name(): state = 2
                                         TERM: parse_compound_name(): symbol: "name": 24: 26: "nested.k"
                                         ENTER: advance_token(): 
                                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                        TRACE: parse_compound_name(): state = 1
+                                        TRACE: parse_compound_name(): state = 100
                                     RETURN(node): parse_compound_name() - (!NULL)
                                     TERM: parse_type_name(): ): ")": 24: 27: "nested.k"
                                     ENTER: finalize_token_queue(): 
@@ -844,14 +877,19 @@ ENTER: main():
                                                 ENTER: parse_compound_name(): 
                                                     ENTER: post_token_queue(): 
                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                    TRACE: parse_compound_name(): state = 0
                                                     TERM: parse_compound_name(): symbol: "some": 26: 17: "nested.k"
                                                     ENTER: advance_token(): 
                                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    TRACE: parse_compound_name(): state = 1
                                                     ENTER: advance_token(): 
                                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    TRACE: parse_compound_name(): state = 2
                                                     TERM: parse_compound_name(): symbol: "name": 26: 22: "nested.k"
                                                     ENTER: advance_token(): 
                                                     RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                                                    TRACE: parse_compound_name(): state = 1
+                                                    TRACE: parse_compound_name(): state = 100
                                                 RETURN(node): parse_compound_name() - (!NULL)
                                                 TERM: parse_type_name(): symbol: "name": 26: 27: "nested.k"
                                                 ENTER: finalize_token_queue(): 
@@ -914,6 +952,8 @@ ENTER: main():
                                                 ENTER: parse_compound_name(): 
                                                     ENTER: post_token_queue(): 
                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                    TRACE: parse_compound_name(): state = 0
+                                                    TRACE: parse_compound_name(): state = 101
                                                     ENTER: reset_token_queue(): 
                                                         ENTER: get_recovery_state(): 
                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -936,6 +976,8 @@ ENTER: main():
                                                 ENTER: parse_compound_name(): 
                                                     ENTER: post_token_queue(): 
                                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                                    TRACE: parse_compound_name(): state = 0
+                                                    TRACE: parse_compound_name(): state = 101
                                                     ENTER: reset_token_queue(): 
                                                         ENTER: get_recovery_state(): 
                                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)

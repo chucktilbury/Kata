@@ -2,3 +2,4 @@
 
 string_literal:run
 formatted_strg:run
+string_expr:run

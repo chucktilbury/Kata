@@ -38,7 +38,8 @@
 typedef struct _ast_expression_ {
     ast_node node;
     LinkList* list;
-    int expr_type;
+    int expr_type;  // the type of the expression result
+    int operand_type; // the type of operand that is being operated upon
 } ast_expression;
 
 /**
@@ -102,7 +103,6 @@ typedef struct _ast_expression_list_ {
  *      = expression
  *      / list_init
  *      / dict_init
- *      / string_expr
  *      / function_assignment
  */
 typedef struct _ast_assignment_item_ {

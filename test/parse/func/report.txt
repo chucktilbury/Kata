@@ -1,0 +1,20 @@
+(8) TEST: create_ref: RUN FAIL
+(8) TEST: destroy_ref: RUN FAIL
+(8) TEST: create_def: RUN FAIL
+(8) TEST: destroy_def: RUN FAIL
+(8) TEST: func_assign: RUN FAIL
+(8) TEST: func_decl: RUN FAIL
+(8) TEST: func_def: RUN FAIL
+(8) TEST: start_def: RUN FAIL
+(8) TEST: create_decl: RUN FAIL
+(8) TEST: destroy_decl: RUN FAIL
+(8) TEST: err_create_ref_parms: RUN FAIL
+(8) TEST: err_destroy_ref_parms: RUN FAIL
+(8) TEST: err_create_def_parms: RUN FAIL
+(8) TEST: err_destroy_def_parms: RUN FAIL
+(8) TEST: err_func_decl_parms: RUN FAIL
+(8) TEST: err_start_def_parms: RUN FAIL
+(8) TEST: err_start_ref: RUN FAIL
+(8) TEST: err_create_decl_parms: RUN FAIL
+(8) TEST: err_destroy_decl_parms: RUN FAIL
+(1) REPORT: tests: 19, run: 19, skip: 0, pass: 0, fail: 19, errors: 0

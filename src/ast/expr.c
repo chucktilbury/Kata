@@ -29,6 +29,8 @@ void traverse_expression(ast_expression* node, PassFunc pre, PassFunc post) {
     AST_CALLBACK(pre, node);
     ast_node* nterm;
 
+    TRACE("operand type: %d", node->operand_type);
+    TRACE("expression type: %d", node->expr_type);
     if(node->list != NULL) {
         void* mark = NULL;
         while(NULL != (nterm = iter_link_list(node->list, &mark))) {
@@ -175,7 +177,6 @@ void traverse_expression_list(ast_expression_list* node, PassFunc pre, PassFunc 
  *      = expression
  *      / list_init
  *      / dict_init
- *      / string_expr
  *      / cast_statement
  *      / function_assignment
  *
@@ -198,9 +199,6 @@ void traverse_assignment_item(ast_assignment_item* node, PassFunc pre, PassFunc 
             break;
         case AST_dict_init:
             traverse_dict_init((ast_dict_init*)node->nterm, pre, post);
-            break;
-        case AST_string_literal:
-            traverse_string_literal((ast_string_literal*)node->nterm, pre, post);
             break;
         case AST_cast_statement:
             traverse_cast_statement((ast_cast_statement*)node->nterm, pre, post);
@@ -243,7 +241,20 @@ void traverse_assignment(ast_assignment* node, PassFunc pre, PassFunc post) {
 
     traverse_compound_reference(node->lhs, pre, post);
     TRACE_TERM(node->oper);
-    traverse_assignment_item((ast_assignment_item*)node->rhs, pre, post);
+    switch(ast_node_type(node->rhs)) {
+        case AST_assignment_item:
+            traverse_assignment_item((ast_assignment_item*)node->rhs, pre, post);
+            break;
+        case AST_expression:
+            traverse_expression((ast_expression*)node->rhs, pre, post);
+            break;
+        case AST_compound_reference:
+            traverse_compound_reference((ast_compound_reference*)node->rhs, pre, post);
+            break;
+        default:
+            fatal_error("unexpected node type in %s: %d", __func__,
+                        ast_node_type(node->rhs));
+    }
 
     AST_CALLBACK(post, node);
     RET;
