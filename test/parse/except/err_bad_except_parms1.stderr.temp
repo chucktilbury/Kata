@@ -1,3 +1,0 @@
-Syntax: /home/chuck/Src/Kata/test/parse/except/err_bad_except_parms1.k: 10: 21: expected a ',' but got .
-Syntax: /home/chuck/Src/Kata/test/parse/except/err_bad_except_parms1.k: 13: 2: expected module item or end of file but got }
-Warning: /home/chuck/Src/Kata/test/parse/except/err_bad_except_parms1.k: 13: 2: module is empty

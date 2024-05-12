@@ -67,7 +67,6 @@ typedef enum {
     AST_continue_statement,
     AST_inline_statement,
     AST_yield_statement,
-    AST_type_statement,
     AST_return_statement,
     AST_raise_statement,
     AST_start_function,
@@ -82,6 +81,7 @@ typedef enum {
     AST_class_var_declaration,
     AST_print_statement,
     AST_trace_statement,
+    AST_exit_statement,
     AST_LAST, // number of non-terminals in the list
 } AstType;
 

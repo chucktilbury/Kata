@@ -1,4 +1,0 @@
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 7: 37: expected a ',' or a ')' but got symbol
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 9: 1: expected an optional list of names but got end of file
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 9: 1: expected function body element but got end of file
-Syntax: /home/chuck/Src/Kata/test/parse/compound/compound_name_list/nocomma.k: 9: 1: expected function body but got end of file

@@ -1,2 +1,0 @@
-Syntax: /home/chuck/Src/Kata/test/parse/list/dict_init/nocomma.k: 5: 33: expected a ',' or a ']' but got literal sstrg
-Syntax: /home/chuck/Src/Kata/test/parse/list/dict_init/nocomma.k: 5: 38: expected an assignment item but got end of file

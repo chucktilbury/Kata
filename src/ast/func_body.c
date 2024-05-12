@@ -92,8 +92,8 @@ void traverse_function_body_element(ast_function_body_element* node, PassFunc pr
         case AST_yield_statement:
             traverse_yield_statement((ast_yield_statement*)node->nterm, pre, post);
             break;
-        case AST_type_statement:
-            traverse_type_statement((ast_type_statement*)node->nterm, pre, post);
+        case AST_exit_statement:
+            traverse_exit_statement((ast_exit_statement*)node->nterm, pre, post);
             break;
         case AST_return_statement:
             traverse_return_statement((ast_return_statement*)node->nterm, pre, post);
@@ -241,8 +241,6 @@ void traverse_return_statement(ast_return_statement* node, PassFunc pre, PassFun
     ENTER;
     AST_CALLBACK(pre, node);
 
-    traverse_expression(node->expr, pre, post);
-
     AST_CALLBACK(post, node);
     RET;
 }
@@ -315,3 +313,27 @@ void traverse_print_statement(ast_print_statement* node, PassFunc pre, PassFunc 
     AST_CALLBACK(post, node);
     RET;
 }
+
+/**
+ * @brief
+ *
+ *  exit_statement
+ *      = 'exit' '(' expression ')'
+ *
+ * @param node
+ * @param pre
+ * @param post
+ */
+void traverse_exit_statement(ast_exit_statement* node, PassFunc pre, PassFunc post) {
+
+    assert(node != NULL);
+
+    ENTER;
+    AST_CALLBACK(pre, node);
+
+    traverse_expression(node->expr, pre, post);
+
+    AST_CALLBACK(post, node);
+    RET;
+}
+

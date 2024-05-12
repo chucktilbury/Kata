@@ -1,2 +1,0 @@
-Syntax: /home/chuck/Src/Kata/test/parse/list/dict_init/badcomma.k: 5: 29: expected a ',' or a ']' but got symbol
-Syntax: /home/chuck/Src/Kata/test/parse/list/dict_init/badcomma.k: 5: 40: expected an assignment item but got end of file

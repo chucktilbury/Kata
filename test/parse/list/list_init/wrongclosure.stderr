@@ -1,2 +1,2 @@
-Syntax: /home/chuck/Src/Kata/test/parse/list/list_init/wrongclosure.k: 5: 22: imbalanced parentheses in expression
+Syntax: /home/chuck/Src/Kata/test/parse/list/list_init/wrongclosure.k: 5: 22: expected a ')' but got ,
 Syntax: /home/chuck/Src/Kata/test/parse/list/list_init/wrongclosure.k: 6: 1: expected an assignment item but got end of file

@@ -64,8 +64,10 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
                         ENTER: advance_token(): 
                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        TRACE: parse_function_definition(): state = 1
                         ENTER: parse_compound_name(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -76,6 +78,7 @@ ENTER: main():
                             TRACE: parse_compound_name(): state = 1
                             TRACE: parse_compound_name(): state = 100
                         RETURN(node): parse_compound_name() - (!NULL)
+                        TRACE: parse_function_definition(): state = 2
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -125,10 +128,13 @@ ENTER: main():
                             ENTER: set_recovery_state(): 
                             RETURN: set_recovery_state(): 
                         RETURN: recover_error(): 
+                        TRACE: parse_function_definition(): state = 102
                     RETURN(node): parse_function_definition() - (NULL)
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_create_definition(): state = 0
+                        TRACE: parse_create_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
@@ -137,6 +143,8 @@ ENTER: main():
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_destroy_definition(): state = 0
+                        TRACE: parse_destroy_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)
@@ -160,6 +168,8 @@ ENTER: main():
                 ENTER: parse_start_function(): 
                     ENTER: post_token_queue(): 
                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                    TRACE: parse_start_function(): state = 0
+                    TRACE: parse_start_function(): state = 101
                     ENTER: reset_token_queue(): 
                         ENTER: get_recovery_state(): 
                         RETURN(parser_state->in_recovery): get_recovery_state() - (!NULL)

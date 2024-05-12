@@ -80,6 +80,7 @@ ast_return_statement* parse_return_statement();
 ast_raise_statement* parse_raise_statement();
 ast_trace_statement* parse_trace_statement();
 ast_print_statement* parse_print_statement();
+ast_exit_statement* parse_exit_statement();
 
 // expr.c
 ast_expression_list* parse_expression_list();

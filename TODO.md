@@ -6,8 +6,11 @@
 * When the scanner receives a float with the format of 123.123.123, then it correctly scans the float and then returns the '.' as the next token. However, the parser does not produce a correct error in that case.
 * Scanner incorrectly sees a number such as "123..123" as a float, when it should flag an error. and stop scanning at the first '.'
 * Scanner incorrectly sees a number such as "123." as a float, when it should flag an error. and stop scanning at the first '.'
+
 * **important** Improve error messages when a error token is received by the parser from the scanner. 
   * Example, when an invalid unsigned is scanned, such as 0xx123.
+  * go through the scanner and map every instance of an TOK_ERROR return into the parser.
+    * See func_body.inline for example
 
 ### Improvements
 

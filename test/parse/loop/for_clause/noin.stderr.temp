@@ -1,3 +1,0 @@
-Syntax: /home/chuck/Src/Kata/test/parse/loop/for_clause/noin.k: 7: 20: expected the 'in' keyword but got symbol
-Syntax: /home/chuck/Src/Kata/test/parse/loop/for_clause/noin.k: 8: 2: expected module item or end of file but got }
-Warning: /home/chuck/Src/Kata/test/parse/loop/for_clause/noin.k: 9: 1: module is empty

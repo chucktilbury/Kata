@@ -64,6 +64,8 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
+                        TRACE: parse_function_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -73,6 +75,8 @@ ENTER: main():
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_create_definition(): state = 0
+                        TRACE: parse_create_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -82,6 +86,8 @@ ENTER: main():
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_destroy_definition(): state = 0
+                        TRACE: parse_destroy_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -109,8 +115,6 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl() - (!NULL)
-                        ENTER: finalize_token_queue(): 
-                        RETURN: finalize_token_queue(): 
                     RETURN(node): parse_var_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -133,6 +137,8 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
+                        TRACE: parse_function_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -142,6 +148,8 @@ ENTER: main():
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_create_definition(): state = 0
+                        TRACE: parse_create_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -151,6 +159,8 @@ ENTER: main():
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_destroy_definition(): state = 0
+                        TRACE: parse_destroy_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -178,8 +188,6 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl() - (!NULL)
-                        ENTER: finalize_token_queue(): 
-                        RETURN: finalize_token_queue(): 
                     RETURN(node): parse_var_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -202,6 +210,8 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
+                        TRACE: parse_function_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -211,6 +221,8 @@ ENTER: main():
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_create_definition(): state = 0
+                        TRACE: parse_create_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -220,6 +232,8 @@ ENTER: main():
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_destroy_definition(): state = 0
+                        TRACE: parse_destroy_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -247,8 +261,6 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl() - (!NULL)
-                        ENTER: finalize_token_queue(): 
-                        RETURN: finalize_token_queue(): 
                     RETURN(node): parse_var_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -271,6 +283,8 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
+                        TRACE: parse_function_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -280,6 +294,8 @@ ENTER: main():
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_create_definition(): state = 0
+                        TRACE: parse_create_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -289,6 +305,8 @@ ENTER: main():
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_destroy_definition(): state = 0
+                        TRACE: parse_destroy_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -316,8 +334,6 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl() - (!NULL)
-                        ENTER: finalize_token_queue(): 
-                        RETURN: finalize_token_queue(): 
                     RETURN(node): parse_var_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -340,6 +356,8 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
+                        TRACE: parse_function_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -349,6 +367,8 @@ ENTER: main():
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_create_definition(): state = 0
+                        TRACE: parse_create_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -358,6 +378,8 @@ ENTER: main():
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_destroy_definition(): state = 0
+                        TRACE: parse_destroy_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -385,8 +407,6 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl() - (!NULL)
-                        ENTER: finalize_token_queue(): 
-                        RETURN: finalize_token_queue(): 
                     RETURN(node): parse_var_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -409,6 +429,8 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
+                        TRACE: parse_function_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -418,6 +440,8 @@ ENTER: main():
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_create_definition(): state = 0
+                        TRACE: parse_create_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -427,6 +451,8 @@ ENTER: main():
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_destroy_definition(): state = 0
+                        TRACE: parse_destroy_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -454,8 +480,6 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl() - (!NULL)
-                        ENTER: finalize_token_queue(): 
-                        RETURN: finalize_token_queue(): 
                     RETURN(node): parse_var_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -478,6 +502,8 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
+                        TRACE: parse_function_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -487,6 +513,8 @@ ENTER: main():
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_create_definition(): state = 0
+                        TRACE: parse_create_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -496,6 +524,8 @@ ENTER: main():
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_destroy_definition(): state = 0
+                        TRACE: parse_destroy_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -523,8 +553,6 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl() - (!NULL)
-                        ENTER: finalize_token_queue(): 
-                        RETURN: finalize_token_queue(): 
                     RETURN(node): parse_var_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -547,6 +575,8 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
+                        TRACE: parse_function_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -556,6 +586,8 @@ ENTER: main():
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_create_definition(): state = 0
+                        TRACE: parse_create_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -565,6 +597,8 @@ ENTER: main():
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_destroy_definition(): state = 0
+                        TRACE: parse_destroy_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -592,8 +626,6 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl() - (!NULL)
-                        ENTER: finalize_token_queue(): 
-                        RETURN: finalize_token_queue(): 
                     RETURN(node): parse_var_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -616,6 +648,8 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
+                        TRACE: parse_function_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -625,6 +659,8 @@ ENTER: main():
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_create_definition(): state = 0
+                        TRACE: parse_create_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -634,6 +670,8 @@ ENTER: main():
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_destroy_definition(): state = 0
+                        TRACE: parse_destroy_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -661,8 +699,6 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl() - (!NULL)
-                        ENTER: finalize_token_queue(): 
-                        RETURN: finalize_token_queue(): 
                     RETURN(node): parse_var_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -685,6 +721,8 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
+                        TRACE: parse_function_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -694,6 +732,8 @@ ENTER: main():
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_create_definition(): state = 0
+                        TRACE: parse_create_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -703,6 +743,8 @@ ENTER: main():
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_destroy_definition(): state = 0
+                        TRACE: parse_destroy_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -729,6 +771,8 @@ ENTER: main():
                 ENTER: parse_start_function(): 
                     ENTER: post_token_queue(): 
                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                    TRACE: parse_start_function(): state = 0
+                    TRACE: parse_start_function(): state = 101
                     ENTER: reset_token_queue(): 
                         ENTER: get_recovery_state(): 
                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -774,11 +818,11 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_var_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                            TRACE: pre_test_pass_func(): node type: var_definition(3017)
                         RETURN: pre_test_pass_func(): 
                         ENTER: traverse_var_decl(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                TRACE: pre_test_pass_func(): node type: var_decl(3015)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_type_name(): 
                                 ENTER: pre_test_pass_func(): 
@@ -800,12 +844,12 @@ ENTER: main():
                             TRACE: traverse_var_decl(): is_const: false
                             TERM: traverse_var_decl(): symbol: "some_name": 20: 20: "test.k"
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                TRACE: post_test_pass_func(): node type: var_decl(3015)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl(): 
                         TRACE: traverse_var_definition(): is_assigned: false
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                            TRACE: post_test_pass_func(): node type: var_definition(3017)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_var_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -828,11 +872,11 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_var_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                            TRACE: pre_test_pass_func(): node type: var_definition(3017)
                         RETURN: pre_test_pass_func(): 
                         ENTER: traverse_var_decl(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                TRACE: pre_test_pass_func(): node type: var_decl(3015)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_type_name(): 
                                 ENTER: pre_test_pass_func(): 
@@ -854,12 +898,12 @@ ENTER: main():
                             TRACE: traverse_var_decl(): is_const: false
                             TERM: traverse_var_decl(): symbol: "some_name": 21: 23: "test.k"
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                TRACE: post_test_pass_func(): node type: var_decl(3015)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl(): 
                         TRACE: traverse_var_definition(): is_assigned: false
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                            TRACE: post_test_pass_func(): node type: var_definition(3017)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_var_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -882,11 +926,11 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_var_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                            TRACE: pre_test_pass_func(): node type: var_definition(3017)
                         RETURN: pre_test_pass_func(): 
                         ENTER: traverse_var_decl(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                TRACE: pre_test_pass_func(): node type: var_decl(3015)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_type_name(): 
                                 ENTER: pre_test_pass_func(): 
@@ -908,12 +952,12 @@ ENTER: main():
                             TRACE: traverse_var_decl(): is_const: false
                             TERM: traverse_var_decl(): symbol: "some_name": 22: 21: "test.k"
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                TRACE: post_test_pass_func(): node type: var_decl(3015)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl(): 
                         TRACE: traverse_var_definition(): is_assigned: false
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                            TRACE: post_test_pass_func(): node type: var_definition(3017)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_var_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -936,11 +980,11 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_var_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                            TRACE: pre_test_pass_func(): node type: var_definition(3017)
                         RETURN: pre_test_pass_func(): 
                         ENTER: traverse_var_decl(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                TRACE: pre_test_pass_func(): node type: var_decl(3015)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_type_name(): 
                                 ENTER: pre_test_pass_func(): 
@@ -962,12 +1006,12 @@ ENTER: main():
                             TRACE: traverse_var_decl(): is_const: false
                             TERM: traverse_var_decl(): symbol: "some_name": 23: 21: "test.k"
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                TRACE: post_test_pass_func(): node type: var_decl(3015)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl(): 
                         TRACE: traverse_var_definition(): is_assigned: false
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                            TRACE: post_test_pass_func(): node type: var_definition(3017)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_var_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -990,11 +1034,11 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_var_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                            TRACE: pre_test_pass_func(): node type: var_definition(3017)
                         RETURN: pre_test_pass_func(): 
                         ENTER: traverse_var_decl(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                TRACE: pre_test_pass_func(): node type: var_decl(3015)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_type_name(): 
                                 ENTER: pre_test_pass_func(): 
@@ -1016,12 +1060,12 @@ ENTER: main():
                             TRACE: traverse_var_decl(): is_const: false
                             TERM: traverse_var_decl(): symbol: "some_name": 24: 22: "test.k"
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                TRACE: post_test_pass_func(): node type: var_decl(3015)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl(): 
                         TRACE: traverse_var_definition(): is_assigned: false
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                            TRACE: post_test_pass_func(): node type: var_definition(3017)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_var_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -1044,11 +1088,11 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_var_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                            TRACE: pre_test_pass_func(): node type: var_definition(3017)
                         RETURN: pre_test_pass_func(): 
                         ENTER: traverse_var_decl(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                TRACE: pre_test_pass_func(): node type: var_decl(3015)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_type_name(): 
                                 ENTER: pre_test_pass_func(): 
@@ -1070,12 +1114,12 @@ ENTER: main():
                             TRACE: traverse_var_decl(): is_const: false
                             TERM: traverse_var_decl(): symbol: "some_name": 25: 22: "test.k"
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                TRACE: post_test_pass_func(): node type: var_decl(3015)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl(): 
                         TRACE: traverse_var_definition(): is_assigned: false
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                            TRACE: post_test_pass_func(): node type: var_definition(3017)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_var_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -1098,11 +1142,11 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_var_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                            TRACE: pre_test_pass_func(): node type: var_definition(3017)
                         RETURN: pre_test_pass_func(): 
                         ENTER: traverse_var_decl(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                TRACE: pre_test_pass_func(): node type: var_decl(3015)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_type_name(): 
                                 ENTER: pre_test_pass_func(): 
@@ -1124,12 +1168,12 @@ ENTER: main():
                             TRACE: traverse_var_decl(): is_const: false
                             TERM: traverse_var_decl(): symbol: "some_name": 26: 19: "test.k"
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                TRACE: post_test_pass_func(): node type: var_decl(3015)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl(): 
                         TRACE: traverse_var_definition(): is_assigned: false
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                            TRACE: post_test_pass_func(): node type: var_definition(3017)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_var_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -1152,11 +1196,11 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_var_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                            TRACE: pre_test_pass_func(): node type: var_definition(3017)
                         RETURN: pre_test_pass_func(): 
                         ENTER: traverse_var_decl(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                TRACE: pre_test_pass_func(): node type: var_decl(3015)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_type_name(): 
                                 ENTER: pre_test_pass_func(): 
@@ -1178,12 +1222,12 @@ ENTER: main():
                             TRACE: traverse_var_decl(): is_const: false
                             TERM: traverse_var_decl(): symbol: "some_name": 27: 19: "test.k"
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                TRACE: post_test_pass_func(): node type: var_decl(3015)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl(): 
                         TRACE: traverse_var_definition(): is_assigned: false
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                            TRACE: post_test_pass_func(): node type: var_definition(3017)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_var_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -1206,11 +1250,11 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_var_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: var_definition(3019)
+                            TRACE: pre_test_pass_func(): node type: var_definition(3017)
                         RETURN: pre_test_pass_func(): 
                         ENTER: traverse_var_decl(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                TRACE: pre_test_pass_func(): node type: var_decl(3015)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_type_name(): 
                                 ENTER: pre_test_pass_func(): 
@@ -1232,12 +1276,12 @@ ENTER: main():
                             TRACE: traverse_var_decl(): is_const: false
                             TERM: traverse_var_decl(): symbol: "some_name": 28: 23: "test.k"
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                TRACE: post_test_pass_func(): node type: var_decl(3015)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl(): 
                         TRACE: traverse_var_definition(): is_assigned: false
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: var_definition(3019)
+                            TRACE: post_test_pass_func(): node type: var_definition(3017)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_var_definition(): 
                     ENTER: post_test_pass_func(): 

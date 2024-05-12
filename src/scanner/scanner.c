@@ -485,7 +485,7 @@ static void scan_inline_block() {
     // consume the opening '{'
     consume_char();
     // copy the characters
-    do {
+    while(true) {
         ch = get_char();
         if(ch == '{') {
             count++;
@@ -493,9 +493,16 @@ static void scan_inline_block() {
         else if(ch == '}') {
             count--;
         }
-        add_string_char(token.str, ch);
-        consume_char();
-    } while(count > 0 && ch != EOF);
+
+        if(count > 0 && ch != EOF) {
+            add_string_char(token.str, ch);
+            consume_char();
+        }
+        else {
+            consume_char();
+            break;
+        }
+    }
 
     token.type = TOK_INLINE;
 }

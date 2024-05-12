@@ -37,6 +37,7 @@ ast_function_reference* parse_function_reference() {
         switch(state) {
             case 0:
                 // compound reference required or no error
+                TRACE("state = %d", state);
                 if(NULL != (name = parse_compound_reference()))
                     state = 1;
                 else
@@ -45,6 +46,7 @@ ast_function_reference* parse_function_reference() {
 
             case 1:
                 // expression list required or error
+                TRACE("state = %d", state);
                 if(NULL != (inp = parse_expression_list()))
                     state = 2;
                 else {
@@ -55,6 +57,7 @@ ast_function_reference* parse_function_reference() {
 
             case 2:
                 // compound_name list required or error
+                TRACE("state = %d", state);
                 if(NULL != (outp = parse_compound_name_list()))
                     state = 100;
                 else {
@@ -65,6 +68,7 @@ ast_function_reference* parse_function_reference() {
 
             case 100:
                 // finished parsing the object
+                TRACE("state = %d", state);
                 node = CREATE_AST_NODE(AST_function_reference, ast_function_reference);
                 node->name = name;
                 node->inp = inp;
@@ -76,16 +80,19 @@ ast_function_reference* parse_function_reference() {
             case 101:
                 // object is no match
                 reset_token_queue(post);
+                TRACE("state = %d", state);
                 finished = true;
                 break;
 
             case 102:
                 // error parsing the object
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
@@ -117,6 +124,7 @@ ast_create_reference* parse_create_reference() {
         switch(state) {
             case 0:
                 // name or not a match
+                TRACE("state = %d", state);
                 if(NULL != (name = parse_create_name()))
                     state = 1;
                 else
@@ -125,6 +133,7 @@ ast_create_reference* parse_create_reference() {
 
             case 1:
                 // expression list or error
+                TRACE("state = %d", state);
                 if(NULL != (inp = parse_expression_list()))
                     state = 100;
                 else {
@@ -135,6 +144,7 @@ ast_create_reference* parse_create_reference() {
 
             case 100:
                 // finished parsing
+                TRACE("state = %d", state);
                 node = CREATE_AST_NODE(AST_create_reference, ast_create_reference);
                 node->name = name;
                 node->inp = inp;
@@ -144,17 +154,20 @@ ast_create_reference* parse_create_reference() {
 
             case 101:
                 // not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
@@ -186,6 +199,7 @@ ast_destroy_reference* parse_destroy_reference() {
         switch(state) {
             case 0:
                 // destroy name or not a match
+                TRACE("state = %d", state);
                 if(NULL != (name = parse_destroy_name()))
                     state = 100;
                 else
@@ -194,6 +208,7 @@ ast_destroy_reference* parse_destroy_reference() {
 
             case 100:
                 // finished parsing
+                TRACE("state = %d", state);
                 node = CREATE_AST_NODE(AST_destroy_reference, ast_destroy_reference);
                 node->name = name;
                 //finalize_token_queue();
@@ -202,11 +217,13 @@ ast_destroy_reference* parse_destroy_reference() {
 
             case 101:
                 // not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
@@ -334,6 +351,7 @@ ast_function_declaration* parse_function_declaration() {
                 break;
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
@@ -365,6 +383,7 @@ ast_create_declaration* parse_create_declaration() {
         switch(state) {
             case 0:
                 // 'function' keyword or not a match'
+                TRACE("state = %d", state);
                 if((TOK_FUNC == TTYPE) || (TOK_FUNCTION == TTYPE)) {
                     advance_token();
                     state = 1;
@@ -375,6 +394,7 @@ ast_create_declaration* parse_create_declaration() {
 
             case 1:
                 // virtual or create or not a match
+                TRACE("state = %d", state);
                 if(TOK_CREATE == TTYPE) {
                     advance_token();
                     state = 2;
@@ -391,6 +411,7 @@ ast_create_declaration* parse_create_declaration() {
 
             case 2:
                 // type name list or error
+                TRACE("state = %d", state);
                 if(NULL != (inputs = parse_type_name_list()))
                     state = 100;
                 else {
@@ -401,6 +422,7 @@ ast_create_declaration* parse_create_declaration() {
 
             case 3:
                 // must be CREATE or nt a match
+                TRACE("state = %d", state);
                 if(TOK_CREATE == TTYPE) {
                     advance_token();
                     state = 2;
@@ -411,6 +433,7 @@ ast_create_declaration* parse_create_declaration() {
 
             case 100:
                 // matching object
+                TRACE("state = %d", state);
                 finished = true;
                 node = CREATE_AST_NODE(AST_create_declaration, ast_create_declaration);
                 node->is_virtual = is_virtual;
@@ -420,17 +443,20 @@ ast_create_declaration* parse_create_declaration() {
 
             case 101:
                 // object not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
@@ -461,6 +487,7 @@ ast_destroy_declaration* parse_destroy_declaration() {
         switch(state) {
             case 0:
                 // 'function' keyword or not a match'
+                TRACE("state = %d", state);
                 if((TOK_FUNC == TTYPE) || (TOK_FUNCTION == TTYPE)) {
                     advance_token();
                     state = 1;
@@ -471,6 +498,7 @@ ast_destroy_declaration* parse_destroy_declaration() {
 
             case 1:
                 // 'destroy' keyword or not a match
+                TRACE("state = %d", state);
                 if(TOK_DESTROY == TTYPE) {
                     advance_token();
                     state = 100;
@@ -486,6 +514,7 @@ ast_destroy_declaration* parse_destroy_declaration() {
 
             case 2:
                 // DESTROY or not a match
+                TRACE("state = %d", state);
                 if(TOK_DESTROY == TTYPE) {
                     advance_token();
                     state = 100;
@@ -496,6 +525,7 @@ ast_destroy_declaration* parse_destroy_declaration() {
 
             case 100:
                 // matching object
+                TRACE("state = %d", state);
                 finished = true;
                 node = CREATE_AST_NODE(AST_destroy_declaration, ast_destroy_declaration);
                 node->is_virtual = is_virtual;
@@ -504,17 +534,20 @@ ast_destroy_declaration* parse_destroy_declaration() {
 
             case 101:
                 // object not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
@@ -550,6 +583,7 @@ ast_function_definition* parse_function_definition() {
         switch(state) {
             case 0:
                 // 'function' keyword or not a match'
+                TRACE("state = %d", state);
                 if((TOK_FUNC == TTYPE) || (TOK_FUNCTION == TTYPE)) {
                     advance_token();
                     state = 1;
@@ -560,6 +594,7 @@ ast_function_definition* parse_function_definition() {
 
             case 1:
                 // compound reference or not a match
+                TRACE("state = %d", state);
                 if(NULL != (name = parse_compound_name()))
                     state = 2;
                 else if(TOK_VIRTUAL == TTYPE) {
@@ -573,6 +608,7 @@ ast_function_definition* parse_function_definition() {
 
             case 2:
                 // var decl list or not a match
+                TRACE("state = %d", state);
                 if(NULL != (inputs = parse_var_decl_list()))
                     state = 3;
                 else {
@@ -583,6 +619,7 @@ ast_function_definition* parse_function_definition() {
 
             case 3:
                 // var decl list or an error
+                TRACE("state = %d", state);
                 if(NULL != (outputs = parse_var_decl_list()))
                     state = 4;
                 else {
@@ -593,6 +630,7 @@ ast_function_definition* parse_function_definition() {
 
             case 4:
                 // function body or error
+                TRACE("state = %d", state);
                 if(NULL != (body = parse_function_body()))
                     state = 100;
                 else {
@@ -603,6 +641,7 @@ ast_function_definition* parse_function_definition() {
 
             case 5:
                 // must be a compound name or not a match
+                TRACE("state = %d", state);
                 if(NULL != (name = parse_compound_name()))
                     state = 2;
                 else
@@ -611,6 +650,7 @@ ast_function_definition* parse_function_definition() {
 
             case 100:
                 // matching object
+                TRACE("state = %d", state);
                 finished = true;
                 node = CREATE_AST_NODE(AST_function_definition, ast_function_definition);
                 node->is_virtual = is_virtual;
@@ -623,17 +663,20 @@ ast_function_definition* parse_function_definition() {
 
             case 101:
                 // object not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
@@ -664,6 +707,7 @@ ast_create_name* parse_create_name() {
         switch(state) {
             case 0:
                 // SYMBOL or not a match
+                TRACE("state = %d", state);
                 if(TOK_SYMBOL == TTYPE) {
                     append_link_list(list, get_token());
                     advance_token();
@@ -675,6 +719,7 @@ ast_create_name* parse_create_name() {
 
             case 1:
                 // must be a '.' or not a match
+                TRACE("state = %d", state);
                 if(TOK_DOT == TTYPE) {
                     advance_token();
                     state = 2;
@@ -685,10 +730,12 @@ ast_create_name* parse_create_name() {
 
             case 2:
                 // must be a symbol or 'create' or error
+                TRACE("state = %d", state);
+                TRACE_TERM(get_token());
                 if(TOK_SYMBOL == TTYPE) {
                     append_link_list(list, get_token());
                     advance_token();
-                    state = 2;
+                    state = 1;
                 }
                 else if(TOK_CREATE == TTYPE) {
                     append_link_list(list, get_token());
@@ -704,6 +751,7 @@ ast_create_name* parse_create_name() {
 
             case 100:
                 // matching object
+                TRACE("state = %d", state);
                 finished = true;
                 node = CREATE_AST_NODE(AST_create_name, ast_create_name);
                 node->list = list;
@@ -712,17 +760,20 @@ ast_create_name* parse_create_name() {
 
             case 101:
                 // object not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
@@ -753,6 +804,7 @@ ast_destroy_name* parse_destroy_name() {
         switch(state) {
             case 0:
                 // SYMBOL or not a match
+                TRACE("state = %d", state);
                 if(TOK_SYMBOL == TTYPE) {
                     append_link_list(list, get_token());
                     advance_token();
@@ -764,6 +816,7 @@ ast_destroy_name* parse_destroy_name() {
 
             case 1:
                 // must be a '.' or not a match
+                TRACE("state = %d", state);
                 if(TOK_DOT == TTYPE) {
                     advance_token();
                     state = 2;
@@ -774,10 +827,12 @@ ast_destroy_name* parse_destroy_name() {
 
             case 2:
                 // must be a symbol or 'destroy' or error
+                TRACE("state = %d", state);
+                TRACE_TERM(get_token());
                 if(TOK_SYMBOL == TTYPE) {
                     append_link_list(list, get_token());
                     advance_token();
-                    state = 2;
+                    state = 1;
                 }
                 else if(TOK_DESTROY == TTYPE) {
                     append_link_list(list, get_token());
@@ -793,6 +848,7 @@ ast_destroy_name* parse_destroy_name() {
 
             case 100:
                 // matching object
+                TRACE("state = %d", state);
                 finished = true;
                 node = CREATE_AST_NODE(AST_destroy_name, ast_destroy_name);
                 node->list = list;
@@ -801,17 +857,20 @@ ast_destroy_name* parse_destroy_name() {
 
             case 101:
                 // object not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
@@ -846,6 +905,7 @@ ast_create_definition* parse_create_definition() {
         switch(state) {
             case 0:
                 // 'function' keyword or not a match'
+                TRACE("state = %d", state);
                 if((TOK_FUNC == TTYPE) || (TOK_FUNCTION == TTYPE)) {
                     advance_token();
                     state = 1;
@@ -856,6 +916,7 @@ ast_create_definition* parse_create_definition() {
 
             case 1:
                 // create name or 'virtual' or not a match
+                TRACE("state = %d", state);
                 if(NULL != (name = parse_create_name()))
                     state = 2;
                 else if(TOK_VIRTUAL == TTYPE) {
@@ -869,6 +930,7 @@ ast_create_definition* parse_create_definition() {
 
             case 2:
                 // var decl list or not a match
+                TRACE("state = %d", state);
                 if(NULL != (inputs = parse_var_decl_list()))
                     state = 4;
                 else {
@@ -879,6 +941,7 @@ ast_create_definition* parse_create_definition() {
 
             case 4:
                 // function body or error
+                TRACE("state = %d", state);
                 if(NULL != (body = parse_function_body()))
                     state = 100;
                 else {
@@ -889,6 +952,7 @@ ast_create_definition* parse_create_definition() {
 
             case 5:
                 // must be a create_name or not a match
+                TRACE("state = %d", state);
                 if(NULL != (name = parse_create_name()))
                     state = 2;
                 else
@@ -897,6 +961,7 @@ ast_create_definition* parse_create_definition() {
 
             case 100:
                 // matching object
+                TRACE("state = %d", state);
                 finished = true;
                 node = CREATE_AST_NODE(AST_create_definition, ast_create_definition);
                 node->is_virtual = is_virtual;
@@ -908,17 +973,20 @@ ast_create_definition* parse_create_definition() {
 
             case 101:
                 // object not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
@@ -951,6 +1019,7 @@ ast_destroy_definition* parse_destroy_definition() {
         switch(state) {
             case 0:
                 // 'function' keyword or not a match'
+                TRACE("state = %d", state);
                 if((TOK_FUNC == TTYPE) || (TOK_FUNCTION == TTYPE)) {
                     advance_token();
                     state = 1;
@@ -961,6 +1030,7 @@ ast_destroy_definition* parse_destroy_definition() {
 
             case 1:
                 // destroy_name virtual or not a match
+                TRACE("state = %d", state);
                 if(NULL != (name = parse_destroy_name()))
                     state = 2;
                 else if(TOK_VIRTUAL == TTYPE) {
@@ -974,6 +1044,7 @@ ast_destroy_definition* parse_destroy_definition() {
 
             case 2:
                 // function body or error
+                TRACE("state = %d", state);
                 if(NULL != (body = parse_function_body()))
                     state = 100;
                 else {
@@ -984,6 +1055,7 @@ ast_destroy_definition* parse_destroy_definition() {
 
             case 3:
                 // destroy_name virtual or not a match
+                TRACE("state = %d", state);
                 if(NULL != (name = parse_destroy_name()))
                     state = 2;
                 else
@@ -992,6 +1064,7 @@ ast_destroy_definition* parse_destroy_definition() {
 
             case 100:
                 // matching object
+                TRACE("state = %d", state);
                 finished = true;
                 node = CREATE_AST_NODE(AST_destroy_definition, ast_destroy_definition);
                 node->is_virtual = is_virtual;
@@ -1002,17 +1075,20 @@ ast_destroy_definition* parse_destroy_definition() {
 
             case 101:
                 // object not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
@@ -1044,6 +1120,7 @@ ast_function_body* parse_function_body() {
         switch(state) {
             case 0:
                 // must be a '{' or not a match
+                TRACE("state = %d", state);
                 if(TOK_OCBRACE == TTYPE) {
                     advance_token();
                     state = 1;
@@ -1054,6 +1131,7 @@ ast_function_body* parse_function_body() {
 
             case 1:
                 // must be a func body element or a '}' or error
+                TRACE("state = %d", state);
                 if(NULL != (nterm = parse_function_body_element()))
                     append_link_list(list, nterm); // no state change
                 else if(TOK_CCBRACE == TTYPE) {
@@ -1068,6 +1146,7 @@ ast_function_body* parse_function_body() {
 
             case 100:
                 // matching object
+                TRACE("state = %d", state);
                 finished = true;
                 node = CREATE_AST_NODE(AST_function_body, ast_function_body);
                 node->list = list;
@@ -1077,17 +1156,20 @@ ast_function_body* parse_function_body() {
 
             case 101:
                 // object not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
@@ -1118,6 +1200,7 @@ ast_start_function* parse_start_function() {
         switch(state) {
             case 0:
                 // 'function' keyword or not a match'
+                TRACE("state = %d", state);
                 if((TOK_FUNC == TTYPE) || (TOK_FUNCTION == TTYPE)) {
                     advance_token();
                     state = 1;
@@ -1128,6 +1211,7 @@ ast_start_function* parse_start_function() {
 
             case 1:
                 // must be start or not a match
+                TRACE("state = %d", state);
                 if(TOK_START == TTYPE) {
                     advance_token();
                     state = 2;
@@ -1138,6 +1222,7 @@ ast_start_function* parse_start_function() {
 
             case 2:
                 // must be function body or an error
+                TRACE("state = %d", state);
                 if(NULL == (body = parse_function_body())) {
                     EXPECTED("function body");
                     state = 102;
@@ -1148,6 +1233,7 @@ ast_start_function* parse_start_function() {
 
             case 100:
                 // matching object
+                TRACE("state = %d", state);
                 finished = true;
                 node = CREATE_AST_NODE(AST_start_function, ast_start_function);
                 node->body = body;
@@ -1156,17 +1242,20 @@ ast_start_function* parse_start_function() {
 
             case 101:
                 // object not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }
@@ -1200,6 +1289,7 @@ ast_function_assignment* parse_function_assignment() {
         switch(state) {
             case 0:
                 // compound reference or not a match
+                TRACE("state = %d", state);
                 if(NULL != (name = parse_compound_reference()))
                     state = 1;
                 else
@@ -1208,6 +1298,7 @@ ast_function_assignment* parse_function_assignment() {
 
             case 1:
                 // type name list or not a match
+                TRACE("state = %d", state);
                 if(NULL != (inp = parse_type_name_list()))
                     state = 2;
                 else
@@ -1216,6 +1307,7 @@ ast_function_assignment* parse_function_assignment() {
 
             case 2:
                 // type name list or an error
+                TRACE("state = %d", state);
                 if(NULL != (outp = parse_type_name_list()))
                     state = 100;
                 else {
@@ -1226,6 +1318,7 @@ ast_function_assignment* parse_function_assignment() {
 
             case 100:
                 // matching object
+                TRACE("state = %d", state);
                 finished = true;
                 node = CREATE_AST_NODE(AST_function_assignment, ast_function_assignment);
                 node->name = name;
@@ -1236,18 +1329,21 @@ ast_function_assignment* parse_function_assignment() {
 
             case 101:
                 // object not a match
+                TRACE("state = %d", state);
                 reset_token_queue(post);
                 finished = true;
                 break;
 
             case 102:
                 // error
+                TRACE("state = %d", state);
                 node = NULL;
                 finished = true;
                 break;
 
 
             default:
+                TRACE("state = %d", state);
                 fatal_error("unexpected state in %s: %d", __func__, state);
         }
     }

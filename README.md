@@ -639,7 +639,7 @@ type_statement
 #
 #
 return_statement
-    = 'return' ( '(' ( expression )? ')' )?
+    = 'return'
 
 #####################
 #
@@ -658,6 +658,12 @@ trace_statement
 #
 print_statement
     = 'print' ( expression_list )?
+
+#####################
+#
+#
+exit_statement
+    = 'exit' '(' expression ')'
 
 #####################
 #

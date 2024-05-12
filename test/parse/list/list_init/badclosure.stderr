@@ -1,2 +1,1 @@
 Syntax: /home/chuck/Src/Kata/test/parse/list/list_init/badclosure.k: 6: 4: expected a ',' or a ']' but got var
-Syntax: /home/chuck/Src/Kata/test/parse/list/list_init/badclosure.k: 7: 1: expected an assignment item but got end of file

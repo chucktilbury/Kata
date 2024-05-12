@@ -64,8 +64,10 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
                         ENTER: advance_token(): 
                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        TRACE: parse_function_definition(): state = 1
                         ENTER: parse_compound_name(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -76,6 +78,7 @@ ENTER: main():
                             TRACE: parse_compound_name(): state = 1
                             TRACE: parse_compound_name(): state = 100
                         RETURN(node): parse_compound_name() - (!NULL)
+                        TRACE: parse_function_definition(): state = 2
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -101,6 +104,7 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 3
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -126,14 +130,61 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 4
                         ENTER: parse_function_body(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                            TRACE: parse_function_body(): state = 0
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 1
                             ENTER: parse_function_body_element(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                ENTER: parse_create_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_create_reference(): state = 0
+                                    ENTER: parse_create_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_create_name(): state = 0
+                                        TRACE: parse_create_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_name() - (NULL)
+                                    TRACE: parse_create_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_create_reference() - (NULL)
+                                ENTER: parse_destroy_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_destroy_reference(): state = 0
+                                    ENTER: parse_destroy_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_destroy_name(): state = 0
+                                        TRACE: parse_destroy_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_name() - (NULL)
+                                    TRACE: parse_destroy_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_var_definition(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -180,6 +231,7 @@ ENTER: main():
                                 ENTER: parse_function_reference(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_reference(): state = 0
                                     ENTER: parse_compound_reference(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -208,43 +260,8 @@ ENTER: main():
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
+                                    TRACE: parse_function_reference(): state = 101
                                 RETURN(node): parse_function_reference() - (NULL)
-                                ENTER: parse_create_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_create_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_create_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_create_reference() - (NULL)
-                                ENTER: parse_destroy_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_destroy_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_destroy_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_while_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -313,21 +330,63 @@ ENTER: main():
                                 RETURN(node): parse_inline_statement() - (NULL)
                                 ENTER: parse_yield_statement(): 
                                 RETURN(node): parse_yield_statement() - (NULL)
-                                ENTER: parse_type_statement(): 
-                                RETURN(node): parse_type_statement() - (NULL)
+                                ENTER: parse_exit_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_exit_statement(): state = 0
+                                    TRACE: parse_exit_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_exit_statement() - (NULL)
                                 ENTER: parse_return_statement(): 
                                 RETURN(node): parse_return_statement() - (NULL)
                                 ENTER: parse_raise_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_raise_statement(): state = 0
+                                    TRACE: parse_raise_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_raise_statement() - (NULL)
                                 ENTER: parse_function_body(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_body(): state = 0
+                                    TRACE: parse_function_body(): state = 101
                                     ENTER: reset_token_queue(): 
                                         ENTER: get_recovery_state(): 
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_function_body() - (NULL)
+                                ENTER: parse_print_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_print_statement(): state = 0
+                                    TRACE: parse_print_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_print_statement() - (NULL)
+                                ENTER: parse_trace_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_trace_statement(): state = 0
+                                    TRACE: parse_trace_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_trace_statement() - (NULL)
                                 ENTER: reset_token_queue(): 
                                     ENTER: get_recovery_state(): 
                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -336,7 +395,9 @@ ENTER: main():
                             RETURN(node): parse_function_body_element() - (NULL)
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 100
                         RETURN(node): parse_function_body() - (!NULL)
+                        TRACE: parse_function_definition(): state = 100
                     RETURN(node): parse_function_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -359,8 +420,10 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
                         ENTER: advance_token(): 
                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        TRACE: parse_function_definition(): state = 1
                         ENTER: parse_compound_name(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -371,6 +434,7 @@ ENTER: main():
                             TRACE: parse_compound_name(): state = 1
                             TRACE: parse_compound_name(): state = 100
                         RETURN(node): parse_compound_name() - (!NULL)
+                        TRACE: parse_function_definition(): state = 2
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -395,6 +459,7 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 3
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -419,14 +484,61 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 4
                         ENTER: parse_function_body(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                            TRACE: parse_function_body(): state = 0
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 1
                             ENTER: parse_function_body_element(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                ENTER: parse_create_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_create_reference(): state = 0
+                                    ENTER: parse_create_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_create_name(): state = 0
+                                        TRACE: parse_create_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_name() - (NULL)
+                                    TRACE: parse_create_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_create_reference() - (NULL)
+                                ENTER: parse_destroy_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_destroy_reference(): state = 0
+                                    ENTER: parse_destroy_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_destroy_name(): state = 0
+                                        TRACE: parse_destroy_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_name() - (NULL)
+                                    TRACE: parse_destroy_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_var_definition(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -473,6 +585,7 @@ ENTER: main():
                                 ENTER: parse_function_reference(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_reference(): state = 0
                                     ENTER: parse_compound_reference(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -501,43 +614,8 @@ ENTER: main():
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
+                                    TRACE: parse_function_reference(): state = 101
                                 RETURN(node): parse_function_reference() - (NULL)
-                                ENTER: parse_create_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_create_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_create_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_create_reference() - (NULL)
-                                ENTER: parse_destroy_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_destroy_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_destroy_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_while_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -606,21 +684,63 @@ ENTER: main():
                                 RETURN(node): parse_inline_statement() - (NULL)
                                 ENTER: parse_yield_statement(): 
                                 RETURN(node): parse_yield_statement() - (NULL)
-                                ENTER: parse_type_statement(): 
-                                RETURN(node): parse_type_statement() - (NULL)
+                                ENTER: parse_exit_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_exit_statement(): state = 0
+                                    TRACE: parse_exit_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_exit_statement() - (NULL)
                                 ENTER: parse_return_statement(): 
                                 RETURN(node): parse_return_statement() - (NULL)
                                 ENTER: parse_raise_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_raise_statement(): state = 0
+                                    TRACE: parse_raise_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_raise_statement() - (NULL)
                                 ENTER: parse_function_body(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_body(): state = 0
+                                    TRACE: parse_function_body(): state = 101
                                     ENTER: reset_token_queue(): 
                                         ENTER: get_recovery_state(): 
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_function_body() - (NULL)
+                                ENTER: parse_print_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_print_statement(): state = 0
+                                    TRACE: parse_print_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_print_statement() - (NULL)
+                                ENTER: parse_trace_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_trace_statement(): state = 0
+                                    TRACE: parse_trace_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_trace_statement() - (NULL)
                                 ENTER: reset_token_queue(): 
                                     ENTER: get_recovery_state(): 
                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -629,7 +749,9 @@ ENTER: main():
                             RETURN(node): parse_function_body_element() - (NULL)
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 100
                         RETURN(node): parse_function_body() - (!NULL)
+                        TRACE: parse_function_definition(): state = 100
                     RETURN(node): parse_function_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -652,8 +774,10 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
                         ENTER: advance_token(): 
                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        TRACE: parse_function_definition(): state = 1
                         ENTER: parse_compound_name(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -664,6 +788,7 @@ ENTER: main():
                             TRACE: parse_compound_name(): state = 1
                             TRACE: parse_compound_name(): state = 100
                         RETURN(node): parse_compound_name() - (!NULL)
+                        TRACE: parse_function_definition(): state = 2
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -695,6 +820,7 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 3
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -719,14 +845,61 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 4
                         ENTER: parse_function_body(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                            TRACE: parse_function_body(): state = 0
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 1
                             ENTER: parse_function_body_element(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                ENTER: parse_create_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_create_reference(): state = 0
+                                    ENTER: parse_create_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_create_name(): state = 0
+                                        TRACE: parse_create_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_name() - (NULL)
+                                    TRACE: parse_create_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_create_reference() - (NULL)
+                                ENTER: parse_destroy_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_destroy_reference(): state = 0
+                                    ENTER: parse_destroy_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_destroy_name(): state = 0
+                                        TRACE: parse_destroy_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_name() - (NULL)
+                                    TRACE: parse_destroy_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_var_definition(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -773,6 +946,7 @@ ENTER: main():
                                 ENTER: parse_function_reference(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_reference(): state = 0
                                     ENTER: parse_compound_reference(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -801,43 +975,8 @@ ENTER: main():
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
+                                    TRACE: parse_function_reference(): state = 101
                                 RETURN(node): parse_function_reference() - (NULL)
-                                ENTER: parse_create_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_create_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_create_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_create_reference() - (NULL)
-                                ENTER: parse_destroy_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_destroy_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_destroy_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_while_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -906,21 +1045,63 @@ ENTER: main():
                                 RETURN(node): parse_inline_statement() - (NULL)
                                 ENTER: parse_yield_statement(): 
                                 RETURN(node): parse_yield_statement() - (NULL)
-                                ENTER: parse_type_statement(): 
-                                RETURN(node): parse_type_statement() - (NULL)
+                                ENTER: parse_exit_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_exit_statement(): state = 0
+                                    TRACE: parse_exit_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_exit_statement() - (NULL)
                                 ENTER: parse_return_statement(): 
                                 RETURN(node): parse_return_statement() - (NULL)
                                 ENTER: parse_raise_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_raise_statement(): state = 0
+                                    TRACE: parse_raise_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_raise_statement() - (NULL)
                                 ENTER: parse_function_body(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_body(): state = 0
+                                    TRACE: parse_function_body(): state = 101
                                     ENTER: reset_token_queue(): 
                                         ENTER: get_recovery_state(): 
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_function_body() - (NULL)
+                                ENTER: parse_print_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_print_statement(): state = 0
+                                    TRACE: parse_print_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_print_statement() - (NULL)
+                                ENTER: parse_trace_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_trace_statement(): state = 0
+                                    TRACE: parse_trace_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_trace_statement() - (NULL)
                                 ENTER: reset_token_queue(): 
                                     ENTER: get_recovery_state(): 
                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -929,7 +1110,9 @@ ENTER: main():
                             RETURN(node): parse_function_body_element() - (NULL)
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 100
                         RETURN(node): parse_function_body() - (!NULL)
+                        TRACE: parse_function_definition(): state = 100
                     RETURN(node): parse_function_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -952,8 +1135,10 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
                         ENTER: advance_token(): 
                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        TRACE: parse_function_definition(): state = 1
                         ENTER: parse_compound_name(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -964,6 +1149,7 @@ ENTER: main():
                             TRACE: parse_compound_name(): state = 1
                             TRACE: parse_compound_name(): state = 100
                         RETURN(node): parse_compound_name() - (!NULL)
+                        TRACE: parse_function_definition(): state = 2
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -988,6 +1174,7 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 3
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1012,14 +1199,61 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 4
                         ENTER: parse_function_body(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                            TRACE: parse_function_body(): state = 0
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 1
                             ENTER: parse_function_body_element(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                ENTER: parse_create_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_create_reference(): state = 0
+                                    ENTER: parse_create_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_create_name(): state = 0
+                                        TRACE: parse_create_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_name() - (NULL)
+                                    TRACE: parse_create_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_create_reference() - (NULL)
+                                ENTER: parse_destroy_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_destroy_reference(): state = 0
+                                    ENTER: parse_destroy_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_destroy_name(): state = 0
+                                        TRACE: parse_destroy_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_name() - (NULL)
+                                    TRACE: parse_destroy_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_var_definition(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1066,6 +1300,7 @@ ENTER: main():
                                 ENTER: parse_function_reference(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_reference(): state = 0
                                     ENTER: parse_compound_reference(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1094,43 +1329,8 @@ ENTER: main():
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
+                                    TRACE: parse_function_reference(): state = 101
                                 RETURN(node): parse_function_reference() - (NULL)
-                                ENTER: parse_create_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_create_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_create_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_create_reference() - (NULL)
-                                ENTER: parse_destroy_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_destroy_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_destroy_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_while_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1199,21 +1399,63 @@ ENTER: main():
                                 RETURN(node): parse_inline_statement() - (NULL)
                                 ENTER: parse_yield_statement(): 
                                 RETURN(node): parse_yield_statement() - (NULL)
-                                ENTER: parse_type_statement(): 
-                                RETURN(node): parse_type_statement() - (NULL)
+                                ENTER: parse_exit_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_exit_statement(): state = 0
+                                    TRACE: parse_exit_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_exit_statement() - (NULL)
                                 ENTER: parse_return_statement(): 
                                 RETURN(node): parse_return_statement() - (NULL)
                                 ENTER: parse_raise_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_raise_statement(): state = 0
+                                    TRACE: parse_raise_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_raise_statement() - (NULL)
                                 ENTER: parse_function_body(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_body(): state = 0
+                                    TRACE: parse_function_body(): state = 101
                                     ENTER: reset_token_queue(): 
                                         ENTER: get_recovery_state(): 
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_function_body() - (NULL)
+                                ENTER: parse_print_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_print_statement(): state = 0
+                                    TRACE: parse_print_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_print_statement() - (NULL)
+                                ENTER: parse_trace_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_trace_statement(): state = 0
+                                    TRACE: parse_trace_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_trace_statement() - (NULL)
                                 ENTER: reset_token_queue(): 
                                     ENTER: get_recovery_state(): 
                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -1222,7 +1464,9 @@ ENTER: main():
                             RETURN(node): parse_function_body_element() - (NULL)
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 100
                         RETURN(node): parse_function_body() - (!NULL)
+                        TRACE: parse_function_definition(): state = 100
                     RETURN(node): parse_function_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -1245,8 +1489,10 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
                         ENTER: advance_token(): 
                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        TRACE: parse_function_definition(): state = 1
                         ENTER: parse_compound_name(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1257,6 +1503,7 @@ ENTER: main():
                             TRACE: parse_compound_name(): state = 1
                             TRACE: parse_compound_name(): state = 100
                         RETURN(node): parse_compound_name() - (!NULL)
+                        TRACE: parse_function_definition(): state = 2
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1324,6 +1571,7 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 3
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1351,14 +1599,61 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 4
                         ENTER: parse_function_body(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                            TRACE: parse_function_body(): state = 0
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 1
                             ENTER: parse_function_body_element(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                ENTER: parse_create_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_create_reference(): state = 0
+                                    ENTER: parse_create_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_create_name(): state = 0
+                                        TRACE: parse_create_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_name() - (NULL)
+                                    TRACE: parse_create_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_create_reference() - (NULL)
+                                ENTER: parse_destroy_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_destroy_reference(): state = 0
+                                    ENTER: parse_destroy_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_destroy_name(): state = 0
+                                        TRACE: parse_destroy_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_name() - (NULL)
+                                    TRACE: parse_destroy_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_var_definition(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1405,6 +1700,7 @@ ENTER: main():
                                 ENTER: parse_function_reference(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_reference(): state = 0
                                     ENTER: parse_compound_reference(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1433,43 +1729,8 @@ ENTER: main():
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
+                                    TRACE: parse_function_reference(): state = 101
                                 RETURN(node): parse_function_reference() - (NULL)
-                                ENTER: parse_create_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_create_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_create_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_create_reference() - (NULL)
-                                ENTER: parse_destroy_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_destroy_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_destroy_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_while_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1538,21 +1799,63 @@ ENTER: main():
                                 RETURN(node): parse_inline_statement() - (NULL)
                                 ENTER: parse_yield_statement(): 
                                 RETURN(node): parse_yield_statement() - (NULL)
-                                ENTER: parse_type_statement(): 
-                                RETURN(node): parse_type_statement() - (NULL)
+                                ENTER: parse_exit_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_exit_statement(): state = 0
+                                    TRACE: parse_exit_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_exit_statement() - (NULL)
                                 ENTER: parse_return_statement(): 
                                 RETURN(node): parse_return_statement() - (NULL)
                                 ENTER: parse_raise_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_raise_statement(): state = 0
+                                    TRACE: parse_raise_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_raise_statement() - (NULL)
                                 ENTER: parse_function_body(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_body(): state = 0
+                                    TRACE: parse_function_body(): state = 101
                                     ENTER: reset_token_queue(): 
                                         ENTER: get_recovery_state(): 
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_function_body() - (NULL)
+                                ENTER: parse_print_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_print_statement(): state = 0
+                                    TRACE: parse_print_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_print_statement() - (NULL)
+                                ENTER: parse_trace_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_trace_statement(): state = 0
+                                    TRACE: parse_trace_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_trace_statement() - (NULL)
                                 ENTER: reset_token_queue(): 
                                     ENTER: get_recovery_state(): 
                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -1561,7 +1864,9 @@ ENTER: main():
                             RETURN(node): parse_function_body_element() - (NULL)
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 100
                         RETURN(node): parse_function_body() - (!NULL)
+                        TRACE: parse_function_definition(): state = 100
                     RETURN(node): parse_function_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -1584,8 +1889,10 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
                         ENTER: advance_token(): 
                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        TRACE: parse_function_definition(): state = 1
                         ENTER: parse_compound_name(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1596,6 +1903,7 @@ ENTER: main():
                             TRACE: parse_compound_name(): state = 1
                             TRACE: parse_compound_name(): state = 100
                         RETURN(node): parse_compound_name() - (!NULL)
+                        TRACE: parse_function_definition(): state = 2
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1620,6 +1928,7 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 3
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1680,14 +1989,61 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 4
                         ENTER: parse_function_body(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                            TRACE: parse_function_body(): state = 0
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 1
                             ENTER: parse_function_body_element(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                ENTER: parse_create_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_create_reference(): state = 0
+                                    ENTER: parse_create_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_create_name(): state = 0
+                                        TRACE: parse_create_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_name() - (NULL)
+                                    TRACE: parse_create_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_create_reference() - (NULL)
+                                ENTER: parse_destroy_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_destroy_reference(): state = 0
+                                    ENTER: parse_destroy_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_destroy_name(): state = 0
+                                        TRACE: parse_destroy_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_name() - (NULL)
+                                    TRACE: parse_destroy_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_var_definition(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1734,6 +2090,7 @@ ENTER: main():
                                 ENTER: parse_function_reference(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_reference(): state = 0
                                     ENTER: parse_compound_reference(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1762,43 +2119,8 @@ ENTER: main():
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
+                                    TRACE: parse_function_reference(): state = 101
                                 RETURN(node): parse_function_reference() - (NULL)
-                                ENTER: parse_create_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_create_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_create_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_create_reference() - (NULL)
-                                ENTER: parse_destroy_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_destroy_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_destroy_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_while_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1867,21 +2189,63 @@ ENTER: main():
                                 RETURN(node): parse_inline_statement() - (NULL)
                                 ENTER: parse_yield_statement(): 
                                 RETURN(node): parse_yield_statement() - (NULL)
-                                ENTER: parse_type_statement(): 
-                                RETURN(node): parse_type_statement() - (NULL)
+                                ENTER: parse_exit_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_exit_statement(): state = 0
+                                    TRACE: parse_exit_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_exit_statement() - (NULL)
                                 ENTER: parse_return_statement(): 
                                 RETURN(node): parse_return_statement() - (NULL)
                                 ENTER: parse_raise_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_raise_statement(): state = 0
+                                    TRACE: parse_raise_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_raise_statement() - (NULL)
                                 ENTER: parse_function_body(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_body(): state = 0
+                                    TRACE: parse_function_body(): state = 101
                                     ENTER: reset_token_queue(): 
                                         ENTER: get_recovery_state(): 
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_function_body() - (NULL)
+                                ENTER: parse_print_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_print_statement(): state = 0
+                                    TRACE: parse_print_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_print_statement() - (NULL)
+                                ENTER: parse_trace_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_trace_statement(): state = 0
+                                    TRACE: parse_trace_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_trace_statement() - (NULL)
                                 ENTER: reset_token_queue(): 
                                     ENTER: get_recovery_state(): 
                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -1890,7 +2254,9 @@ ENTER: main():
                             RETURN(node): parse_function_body_element() - (NULL)
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 100
                         RETURN(node): parse_function_body() - (!NULL)
+                        TRACE: parse_function_definition(): state = 100
                     RETURN(node): parse_function_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -1913,8 +2279,10 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
                         ENTER: advance_token(): 
                         RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                        TRACE: parse_function_definition(): state = 1
                         ENTER: parse_compound_name(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1925,6 +2293,7 @@ ENTER: main():
                             TRACE: parse_compound_name(): state = 1
                             TRACE: parse_compound_name(): state = 100
                         RETURN(node): parse_compound_name() - (!NULL)
+                        TRACE: parse_function_definition(): state = 2
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -1963,6 +2332,7 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 3
                         ENTER: parse_var_decl_list(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -2015,14 +2385,61 @@ ENTER: main():
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
                         RETURN(node): parse_var_decl_list() - (!NULL)
+                        TRACE: parse_function_definition(): state = 4
                         ENTER: parse_function_body(): 
                             ENTER: post_token_queue(): 
                             RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                            TRACE: parse_function_body(): state = 0
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 1
                             ENTER: parse_function_body_element(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                ENTER: parse_create_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_create_reference(): state = 0
+                                    ENTER: parse_create_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_create_name(): state = 0
+                                        TRACE: parse_create_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_create_name() - (NULL)
+                                    TRACE: parse_create_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_create_reference() - (NULL)
+                                ENTER: parse_destroy_reference(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_destroy_reference(): state = 0
+                                    ENTER: parse_destroy_name(): 
+                                        ENTER: post_token_queue(): 
+                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                        TRACE: parse_destroy_name(): state = 0
+                                        TRACE: parse_destroy_name(): state = 101
+                                        ENTER: reset_token_queue(): 
+                                            ENTER: get_recovery_state(): 
+                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                            TRACE: reset_token_queue(): recover the queue
+                                        RETURN: reset_token_queue(): 
+                                    RETURN(node): parse_destroy_name() - (NULL)
+                                    TRACE: parse_destroy_reference(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_var_definition(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -2069,6 +2486,7 @@ ENTER: main():
                                 ENTER: parse_function_reference(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_reference(): state = 0
                                     ENTER: parse_compound_reference(): 
                                         ENTER: post_token_queue(): 
                                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -2097,43 +2515,8 @@ ENTER: main():
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
+                                    TRACE: parse_function_reference(): state = 101
                                 RETURN(node): parse_function_reference() - (NULL)
-                                ENTER: parse_create_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_create_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_create_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_create_reference() - (NULL)
-                                ENTER: parse_destroy_reference(): 
-                                    ENTER: post_token_queue(): 
-                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                    ENTER: parse_destroy_name(): 
-                                        ENTER: post_token_queue(): 
-                                        RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
-                                        ENTER: reset_token_queue(): 
-                                            ENTER: get_recovery_state(): 
-                                            RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                            TRACE: reset_token_queue(): recover the queue
-                                        RETURN: reset_token_queue(): 
-                                    RETURN(node): parse_destroy_name() - (NULL)
-                                    ENTER: reset_token_queue(): 
-                                        ENTER: get_recovery_state(): 
-                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
-                                        TRACE: reset_token_queue(): recover the queue
-                                    RETURN: reset_token_queue(): 
-                                RETURN(node): parse_destroy_reference() - (NULL)
                                 ENTER: parse_while_clause(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
@@ -2202,21 +2585,63 @@ ENTER: main():
                                 RETURN(node): parse_inline_statement() - (NULL)
                                 ENTER: parse_yield_statement(): 
                                 RETURN(node): parse_yield_statement() - (NULL)
-                                ENTER: parse_type_statement(): 
-                                RETURN(node): parse_type_statement() - (NULL)
+                                ENTER: parse_exit_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_exit_statement(): state = 0
+                                    TRACE: parse_exit_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_exit_statement() - (NULL)
                                 ENTER: parse_return_statement(): 
                                 RETURN(node): parse_return_statement() - (NULL)
                                 ENTER: parse_raise_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_raise_statement(): state = 0
+                                    TRACE: parse_raise_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
                                 RETURN(node): parse_raise_statement() - (NULL)
                                 ENTER: parse_function_body(): 
                                     ENTER: post_token_queue(): 
                                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_function_body(): state = 0
+                                    TRACE: parse_function_body(): state = 101
                                     ENTER: reset_token_queue(): 
                                         ENTER: get_recovery_state(): 
                                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
                                         TRACE: reset_token_queue(): recover the queue
                                     RETURN: reset_token_queue(): 
                                 RETURN(node): parse_function_body() - (NULL)
+                                ENTER: parse_print_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_print_statement(): state = 0
+                                    TRACE: parse_print_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_print_statement() - (NULL)
+                                ENTER: parse_trace_statement(): 
+                                    ENTER: post_token_queue(): 
+                                    RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                    TRACE: parse_trace_statement(): state = 0
+                                    TRACE: parse_trace_statement(): state = 101
+                                    ENTER: reset_token_queue(): 
+                                        ENTER: get_recovery_state(): 
+                                        RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
+                                        TRACE: reset_token_queue(): recover the queue
+                                    RETURN: reset_token_queue(): 
+                                RETURN(node): parse_trace_statement() - (NULL)
                                 ENTER: reset_token_queue(): 
                                     ENTER: get_recovery_state(): 
                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -2225,7 +2650,9 @@ ENTER: main():
                             RETURN(node): parse_function_body_element() - (NULL)
                             ENTER: advance_token(): 
                             RETURN(tqueue->crnt->tok): advance_token() - (!NULL)
+                            TRACE: parse_function_body(): state = 100
                         RETURN(node): parse_function_body() - (!NULL)
+                        TRACE: parse_function_definition(): state = 100
                     RETURN(node): parse_function_definition() - (!NULL)
                     ENTER: get_scope(): 
                     RETURN(*node): get_scope() - (!NULL)
@@ -2248,6 +2675,8 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
+                        TRACE: parse_function_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -2257,6 +2686,8 @@ ENTER: main():
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_create_definition(): state = 0
+                        TRACE: parse_create_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -2266,6 +2697,8 @@ ENTER: main():
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_destroy_definition(): state = 0
+                        TRACE: parse_destroy_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -2292,6 +2725,8 @@ ENTER: main():
                 ENTER: parse_start_function(): 
                     ENTER: post_token_queue(): 
                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                    TRACE: parse_start_function(): state = 0
+                    TRACE: parse_start_function(): state = 101
                     ENTER: reset_token_queue(): 
                         ENTER: get_recovery_state(): 
                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -2337,7 +2772,7 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_function_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: function_definition(3031)
+                            TRACE: pre_test_pass_func(): node type: function_definition(3029)
                         RETURN: pre_test_pass_func(): 
                         TRACE: traverse_function_definition(): is_virtual: false
                         ENTER: traverse_compound_name(): 
@@ -2352,30 +2787,30 @@ ENTER: main():
                         RETURN: traverse_compound_name(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_function_body(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: function_body(3036)
+                                TRACE: pre_test_pass_func(): node type: function_body(3034)
                             RETURN: pre_test_pass_func(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: function_body(3036)
+                                TRACE: post_test_pass_func(): node type: function_body(3034)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_function_body(): 
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: function_definition(3031)
+                            TRACE: post_test_pass_func(): node type: function_definition(3029)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_function_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -2398,7 +2833,7 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_function_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: function_definition(3031)
+                            TRACE: pre_test_pass_func(): node type: function_definition(3029)
                         RETURN: pre_test_pass_func(): 
                         TRACE: traverse_function_definition(): is_virtual: false
                         ENTER: traverse_compound_name(): 
@@ -2413,11 +2848,11 @@ ENTER: main():
                         RETURN: traverse_compound_name(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2439,20 +2874,20 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "some_name": 11: 31: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2474,23 +2909,23 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "some_name": 11: 49: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_function_body(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: function_body(3036)
+                                TRACE: pre_test_pass_func(): node type: function_body(3034)
                             RETURN: pre_test_pass_func(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: function_body(3036)
+                                TRACE: post_test_pass_func(): node type: function_body(3034)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_function_body(): 
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: function_definition(3031)
+                            TRACE: post_test_pass_func(): node type: function_definition(3029)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_function_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -2513,7 +2948,7 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_function_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: function_definition(3031)
+                            TRACE: pre_test_pass_func(): node type: function_definition(3029)
                         RETURN: pre_test_pass_func(): 
                         TRACE: traverse_function_definition(): is_virtual: false
                         ENTER: traverse_compound_name(): 
@@ -2528,11 +2963,11 @@ ENTER: main():
                         RETURN: traverse_compound_name(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2555,20 +2990,20 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "some_name": 12: 30: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2590,23 +3025,23 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "some_name": 12: 46: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_function_body(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: function_body(3036)
+                                TRACE: pre_test_pass_func(): node type: function_body(3034)
                             RETURN: pre_test_pass_func(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: function_body(3036)
+                                TRACE: post_test_pass_func(): node type: function_body(3034)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_function_body(): 
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: function_definition(3031)
+                            TRACE: post_test_pass_func(): node type: function_definition(3029)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_function_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -2629,7 +3064,7 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_function_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: function_definition(3031)
+                            TRACE: pre_test_pass_func(): node type: function_definition(3029)
                         RETURN: pre_test_pass_func(): 
                         TRACE: traverse_function_definition(): is_virtual: false
                         ENTER: traverse_compound_name(): 
@@ -2644,11 +3079,11 @@ ENTER: main():
                         RETURN: traverse_compound_name(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2670,20 +3105,20 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "some_name": 13: 32: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2705,23 +3140,23 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "some_name": 13: 48: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_function_body(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: function_body(3036)
+                                TRACE: pre_test_pass_func(): node type: function_body(3034)
                             RETURN: pre_test_pass_func(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: function_body(3036)
+                                TRACE: post_test_pass_func(): node type: function_body(3034)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_function_body(): 
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: function_definition(3031)
+                            TRACE: post_test_pass_func(): node type: function_definition(3029)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_function_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -2744,7 +3179,7 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_function_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: function_definition(3031)
+                            TRACE: pre_test_pass_func(): node type: function_definition(3029)
                         RETURN: pre_test_pass_func(): 
                         TRACE: traverse_function_definition(): is_virtual: false
                         ENTER: traverse_compound_name(): 
@@ -2759,11 +3194,11 @@ ENTER: main():
                         RETURN: traverse_compound_name(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2785,12 +3220,12 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "name1": 14: 27: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2812,12 +3247,12 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "name2": 14: 41: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2840,20 +3275,20 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "name3": 14: 53: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2875,23 +3310,23 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: true
                                 TERM: traverse_var_decl(): symbol: "name4": 14: 73: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_function_body(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: function_body(3036)
+                                TRACE: pre_test_pass_func(): node type: function_body(3034)
                             RETURN: pre_test_pass_func(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: function_body(3036)
+                                TRACE: post_test_pass_func(): node type: function_body(3034)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_function_body(): 
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: function_definition(3031)
+                            TRACE: post_test_pass_func(): node type: function_definition(3029)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_function_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -2914,7 +3349,7 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_function_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: function_definition(3031)
+                            TRACE: pre_test_pass_func(): node type: function_definition(3029)
                         RETURN: pre_test_pass_func(): 
                         TRACE: traverse_function_definition(): is_virtual: false
                         ENTER: traverse_compound_name(): 
@@ -2929,11 +3364,11 @@ ENTER: main():
                         RETURN: traverse_compound_name(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2955,20 +3390,20 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "name1": 15: 27: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -2990,12 +3425,12 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "name2": 15: 41: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -3017,12 +3452,12 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "name3": 15: 55: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -3044,23 +3479,23 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "name4": 15: 71: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_function_body(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: function_body(3036)
+                                TRACE: pre_test_pass_func(): node type: function_body(3034)
                             RETURN: pre_test_pass_func(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: function_body(3036)
+                                TRACE: post_test_pass_func(): node type: function_body(3034)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_function_body(): 
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: function_definition(3031)
+                            TRACE: post_test_pass_func(): node type: function_definition(3029)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_function_definition(): 
                     ENTER: post_test_pass_func(): 
@@ -3083,7 +3518,7 @@ ENTER: main():
                     TRACE: traverse_namespace_item(): SCOPE: PRIVATE
                     ENTER: traverse_function_definition(): 
                         ENTER: pre_test_pass_func(): 
-                            TRACE: pre_test_pass_func(): node type: function_definition(3031)
+                            TRACE: pre_test_pass_func(): node type: function_definition(3029)
                         RETURN: pre_test_pass_func(): 
                         TRACE: traverse_function_definition(): is_virtual: false
                         ENTER: traverse_compound_name(): 
@@ -3098,11 +3533,11 @@ ENTER: main():
                         RETURN: traverse_compound_name(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -3126,20 +3561,20 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "name1": 16: 35: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_var_decl_list(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: pre_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: pre_test_pass_func(): 
                             ENTER: traverse_var_decl(): 
                                 ENTER: pre_test_pass_func(): 
-                                    TRACE: pre_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: pre_test_pass_func(): node type: var_decl(3015)
                                 RETURN: pre_test_pass_func(): 
                                 ENTER: traverse_type_name(): 
                                     ENTER: pre_test_pass_func(): 
@@ -3165,23 +3600,23 @@ ENTER: main():
                                 TRACE: traverse_var_decl(): is_const: false
                                 TERM: traverse_var_decl(): symbol: "name2": 16: 63: "test.k"
                                 ENTER: post_test_pass_func(): 
-                                    TRACE: post_test_pass_func(): node type: var_decl(3017)
+                                    TRACE: post_test_pass_func(): node type: var_decl(3015)
                                 RETURN: post_test_pass_func(): 
                             RETURN: traverse_var_decl(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: var_decl_list(3018)
+                                TRACE: post_test_pass_func(): node type: var_decl_list(3016)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_var_decl_list(): 
                         ENTER: traverse_function_body(): 
                             ENTER: pre_test_pass_func(): 
-                                TRACE: pre_test_pass_func(): node type: function_body(3036)
+                                TRACE: pre_test_pass_func(): node type: function_body(3034)
                             RETURN: pre_test_pass_func(): 
                             ENTER: post_test_pass_func(): 
-                                TRACE: post_test_pass_func(): node type: function_body(3036)
+                                TRACE: post_test_pass_func(): node type: function_body(3034)
                             RETURN: post_test_pass_func(): 
                         RETURN: traverse_function_body(): 
                         ENTER: post_test_pass_func(): 
-                            TRACE: post_test_pass_func(): node type: function_definition(3031)
+                            TRACE: post_test_pass_func(): node type: function_definition(3029)
                         RETURN: post_test_pass_func(): 
                     RETURN: traverse_function_definition(): 
                     ENTER: post_test_pass_func(): 

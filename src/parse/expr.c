@@ -423,11 +423,10 @@ ast_assignment_item* parse_assignment_item() {
     ast_node* nterm;
     void* post = post_token_queue();
 
-    if(
-        (NULL != (nterm = (ast_node*)parse_expression())) ||
+    if( (NULL != (nterm = (ast_node*)parse_function_assignment())) ||
         (NULL != (nterm = (ast_node*)parse_list_init())) ||
         (NULL != (nterm = (ast_node*)parse_cast_statement())) ||
-        (NULL != (nterm = (ast_node*)parse_function_assignment()))) {
+        (NULL != (nterm = (ast_node*)parse_expression()))) {
 
         node = CREATE_AST_NODE(AST_assignment_item, ast_assignment_item);
         node->nterm = nterm;
@@ -775,7 +774,8 @@ ast_expression* parse_expression() {
                         state, len_link_list(stack), len_link_list(queue), pcount);
                 TRACE_TERM(get_token());
                 if(pcount > 0) {
-                    SYNTAX("imbalanced parentheses in expression");
+                    //SYNTAX("imbalanced parentheses in expression");
+                    EXPECTED("a ')'");
                     state = 102;
                 }
                 else {

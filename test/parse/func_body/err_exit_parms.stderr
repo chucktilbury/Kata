@@ -1,0 +1,3 @@
+Syntax: /home/chuck/Src/Kata/test/parse/func_body/err_exit_parms.k: 7: 11: expected an expression but got list
+Syntax: /home/chuck/Src/Kata/test/parse/func_body/err_exit_parms.k: 9: 1: expected function body element but got end of file
+Syntax: /home/chuck/Src/Kata/test/parse/func_body/err_exit_parms.k: 9: 1: expected function body but got end of file

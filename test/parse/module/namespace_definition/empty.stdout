@@ -85,6 +85,8 @@ ENTER: main():
                             ENTER: parse_function_definition(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                TRACE: parse_function_definition(): state = 0
+                                TRACE: parse_function_definition(): state = 101
                                 ENTER: reset_token_queue(): 
                                     ENTER: get_recovery_state(): 
                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -94,6 +96,8 @@ ENTER: main():
                             ENTER: parse_create_definition(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                TRACE: parse_create_definition(): state = 0
+                                TRACE: parse_create_definition(): state = 101
                                 ENTER: reset_token_queue(): 
                                     ENTER: get_recovery_state(): 
                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -103,6 +107,8 @@ ENTER: main():
                             ENTER: parse_destroy_definition(): 
                                 ENTER: post_token_queue(): 
                                 RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                                TRACE: parse_destroy_definition(): state = 0
+                                TRACE: parse_destroy_definition(): state = 101
                                 ENTER: reset_token_queue(): 
                                     ENTER: get_recovery_state(): 
                                     RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -153,6 +159,8 @@ ENTER: main():
                     ENTER: parse_function_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_function_definition(): state = 0
+                        TRACE: parse_function_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -162,6 +170,8 @@ ENTER: main():
                     ENTER: parse_create_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_create_definition(): state = 0
+                        TRACE: parse_create_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -171,6 +181,8 @@ ENTER: main():
                     ENTER: parse_destroy_definition(): 
                         ENTER: post_token_queue(): 
                         RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                        TRACE: parse_destroy_definition(): state = 0
+                        TRACE: parse_destroy_definition(): state = 101
                         ENTER: reset_token_queue(): 
                             ENTER: get_recovery_state(): 
                             RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)
@@ -197,6 +209,8 @@ ENTER: main():
                 ENTER: parse_start_function(): 
                     ENTER: post_token_queue(): 
                     RETURN((void*)tqueue->crnt): post_token_queue() - (!NULL)
+                    TRACE: parse_start_function(): state = 0
+                    TRACE: parse_start_function(): state = 101
                     ENTER: reset_token_queue(): 
                         ENTER: get_recovery_state(): 
                         RETURN(parser_state->in_recovery): get_recovery_state() - (NULL)

@@ -50,6 +50,7 @@ typedef enum {
     TOK_LITERAL_DSTR,
     TOK_LITERAL_SSTR,
     TOK_SYMBOL,
+    TOK_RAW_TEXT,
     TOK_UNARY_MINUS,
 } TokenType;
 

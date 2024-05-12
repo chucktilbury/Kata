@@ -1,0 +1,2 @@
+Syntax: /home/chuck/Src/Kata/test/parse/func_body/err_create_ref_parms3.k: 7: 8: expected function body element but got create
+Syntax: /home/chuck/Src/Kata/test/parse/func_body/err_create_ref_parms3.k: 7: 12: expected function body but got symbol

@@ -28,9 +28,11 @@
  *      / continue_statement
  *      / inline_statement
  *      / yield_statement
- *      / type_statement
  *      / return_statement
  *      / raise_statement
+ *      / trace_statement
+ *      / print_statement
+ *      / exit_statement
  *      / function_body
  */
 typedef struct _ast_function_body_element_ {
@@ -87,7 +89,6 @@ typedef struct _ast_type_statement_ {
  */
 typedef struct _ast_return_statement_ {
     ast_node node;
-    struct _ast_expression_* expr;
 } ast_return_statement;
 
 /**
@@ -119,6 +120,15 @@ typedef struct _ast_print_statement_ {
     struct _ast_expression_list_* elist;
 } ast_print_statement;
 
+/**
+ *  exit_statement
+ *      = 'exit' '(' expression ')'
+ */
+typedef struct _ast_exit_statement_ {
+    ast_node node;
+    struct _ast_expression_* expr;
+} ast_exit_statement;
+
 void traverse_function_body_element(ast_function_body_element* node, PassFunc pre, PassFunc post);
 void traverse_break_statement(ast_break_statement* node, PassFunc pre, PassFunc post);
 void traverse_continue_statement(ast_continue_statement* node, PassFunc pre, PassFunc post);
@@ -129,6 +139,7 @@ void traverse_return_statement(ast_return_statement* node, PassFunc pre, PassFun
 void traverse_raise_statement(ast_raise_statement* node, PassFunc pre, PassFunc post);
 void traverse_trace_statement(ast_trace_statement* node, PassFunc pre, PassFunc post);
 void traverse_print_statement(ast_print_statement* node, PassFunc pre, PassFunc post);
+void traverse_exit_statement(ast_exit_statement* node, PassFunc pre, PassFunc post);
 
 
 #endif /* __FUNC_BODY_H__ */
