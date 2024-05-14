@@ -5,9 +5,8 @@ project(symbols)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
 add_library(${PROJECT_NAME} STATIC
-    scanner.c
-    tok_queue.c
-    fileio.c
+    symbols.c
+    hash.c
 )
 
 target_compile_options(${PROJECT_NAME}

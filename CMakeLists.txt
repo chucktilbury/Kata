@@ -28,6 +28,8 @@ file(GLOB_RECURSE format_xxfiles
     ${PROJECT_SOURCE_DIR}/src/kata/*.h
     ${PROJECT_SOURCE_DIR}/src/ast/*.c
     ${PROJECT_SOURCE_DIR}/src/ast/*.h
+    ${PROJECT_SOURCE_DIR}/src/symbols/*.c
+    ${PROJECT_SOURCE_DIR}/src/symbols/*.h
     ${PROJECT_SOURCE_DIR}/src/common/*.c
     ${PROJECT_SOURCE_DIR}/src/common/*.h
     ${PROJECT_SOURCE_DIR}/test/*.c
