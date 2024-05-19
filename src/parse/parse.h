@@ -7,8 +7,8 @@
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef __PARSE_H__
-#define __PARSE_H__
+#ifndef _PARSE_H_
+#define _PARSE_H_
 
 #include "ast.h"
 #include "errors.h"
@@ -118,4 +118,4 @@ ast_module* parse();
 
 #define PARSER_SYNTAX_ERROR 1000
 
-#endif /* __PARSE_H__ */
+#endif  /* _PARSE_H_ */

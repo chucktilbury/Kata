@@ -13,6 +13,7 @@
 #define _SYMBOLS_H_
 
 #include "hash.h"
+#include "context.h"
 
 typedef enum {
     ST_OK = HASH_OK,
@@ -24,6 +25,7 @@ typedef enum {
 typedef struct _symtab_node_ {
     const char* key;        // this is taken from the context
     void* ast_node;         // the AST node that this points to
+    SymContext* context;    // full context of this table entry
 } SymtabNode;
 
 SymtabResult init_symbol_table();

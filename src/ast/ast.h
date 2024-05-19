@@ -7,8 +7,8 @@
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef __AST_H__
-#define __AST_H__
+#ifndef _AST_H_
+#define _AST_H_
 
 typedef enum {
     AST_FIRST  = 3000,
@@ -127,4 +127,4 @@ ast_node* create_ast_node(AstType type, size_t size);
 #define CREATE_AST_NODE(t, n) (n*)create_ast_node((t), sizeof(n))
 #define TRAVERSE_ERROR AST_FIRST
 
-#endif /* __AST_H__ */
+#endif  /* _AST_H_ */
