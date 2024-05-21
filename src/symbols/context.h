@@ -15,22 +15,18 @@
 #include "ast.h"
 
 typedef struct {
-    ast_node* node;
-    const char* name;
-} SymContextNode;
-
-typedef struct {
-    SymContextNode* list;
+    const char** list;
     int cap;
     int len;
 } SymContext;
 
-SymContext* create_sym_context();
-void push_sym_context(const char* name, ast_node* node);
-SymContextNode* pop_sym_context();
-SymContextNode* peek_sym_context();
+SymContext* create_sym_context(const char* name);
+void push_sym_context(const char* name);
+const char* pop_sym_context();
+const char* peek_sym_context();
 SymContext* copy_sym_context(SymContext* ptr);
 const char* get_sym_context(SymContext* ptr);
-
+void add_sym_context(SymContext* ptr, const char* str);
+const char* iterate_sym_context(SymContext* ptr, int* post);
 
 #endif  /* _CONTEXT_H_ */

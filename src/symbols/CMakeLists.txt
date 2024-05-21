@@ -7,6 +7,7 @@ project(symbols)
 add_library(${PROJECT_NAME} STATIC
     symbols.c
     hash.c
+    context.c
 )
 
 target_compile_options(${PROJECT_NAME}
