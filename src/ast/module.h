@@ -7,8 +7,8 @@
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef __MODULE_H__
-#define __MODULE_H__
+#ifndef _MODULE_H_
+#define _MODULE_H_
 #include "ast.h"
 
 /**
@@ -55,6 +55,7 @@ typedef struct _ast_namespace_definition_ {
     Token* name;
     LinkList* list;
     ScopeType scope;
+    SymContext* context;
 } ast_namespace_definition;
 
 /**
@@ -90,6 +91,7 @@ typedef struct _ast_class_definition_ {
     struct _ast_type_name_* parent;
     LinkList* list;
     ScopeType scope;
+    SymContext* context;
 } ast_class_definition;
 
 void traverse_module(ast_module* node, PassFunc pre, PassFunc post);
@@ -100,4 +102,4 @@ void traverse_class_item(ast_class_item* node, PassFunc pre, PassFunc post);
 void traverse_class_definition(ast_class_definition* node, PassFunc pre, PassFunc post);
 void traverse_class_var_declaration(ast_class_var_declaration* node, PassFunc pre, PassFunc post);
 
-#endif /* __MODULE_H__ */
+#endif  /* _MODULE_H_ */

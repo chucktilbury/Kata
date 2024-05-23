@@ -13,6 +13,7 @@
 #include "scanner.h"
 #include "paths.h"
 #include "exception.h"
+#include "symbols.h"
 
 // this is a temporary path for development otherwise, this would be received
 // from configurations.
@@ -43,6 +44,8 @@ void init_parser(const char* fname) {
     TRACE("file name: \"%s\"", fname);
     init_paths(dummy_path);
     init_scanner(raw_string(find_file(fname)));
+    init_symbol_table();
+    init_global_context();
     create_parser_state();
 
     RET;

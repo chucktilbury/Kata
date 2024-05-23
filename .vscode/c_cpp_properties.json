@@ -13,7 +13,8 @@
                 "${workspaceFolder}/src/common",
                 "${workspaceFolder}/src/pass",
                 "${workspaceFolder}/src/gc/include",
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/src/symbols"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc"

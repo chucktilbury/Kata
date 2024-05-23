@@ -8,8 +8,8 @@
  * @date 03-28-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef __LINK_LIST_H__
-#define __LINK_LIST_H__
+#ifndef _LINK_LIST_H_
+#define _LINK_LIST_H_
 
 #include <stdbool.h>
 
@@ -40,4 +40,4 @@ int len_link_list(LinkList* ll);
 #define LLFOR(l, v, p) \
     for((v) = iter_link_list((l), &(p)); (v) != NULL; (v) = iter_link_list((l), &(p)))
 
-#endif /* __LINK_LIST_H__ */
+#endif  /* _LINK_LIST_H_ */

@@ -4,7 +4,8 @@ project(pass)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
 add_library(${PROJECT_NAME} STATIC
-    pass.c
+    testpass.c
+    sympass.c
 )
 
 target_compile_options(${PROJECT_NAME}

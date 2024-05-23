@@ -7,8 +7,8 @@
  * @date 02-25-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef __VARS_H__
-#define __VARS_H__
+#ifndef _VARS_H_
+#define _VARS_H_
 #include "ast.h"
 
 /**
@@ -20,6 +20,7 @@ typedef struct _ast_var_decl_ {
     bool is_const;
     struct _ast_type_name_* type;
     Token* name;
+    SymContext* context;
 } ast_var_decl;
 
 /**
@@ -47,4 +48,4 @@ void traverse_var_decl(ast_var_decl* node, PassFunc pre, PassFunc post);
 void traverse_var_decl_list(ast_var_decl_list* node, PassFunc pre, PassFunc post);
 void traverse_var_definition(ast_var_definition* node, PassFunc pre, PassFunc post);
 
-#endif /* __VARS_H__ */
+#endif  /* _VARS_H_ */

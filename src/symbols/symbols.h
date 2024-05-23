@@ -32,5 +32,6 @@ SymtabResult init_symbol_table();
 SymtabResult create_symtab_node(const char* key, void* node);
 void* find_symtab_node(const char* key);
 SymtabResult delete_symtab_node(const char* key);
+void dump_symtab();
 
 #endif  /* _SYMBOLS_H_ */

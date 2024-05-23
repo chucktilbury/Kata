@@ -8,11 +8,12 @@
  * @date 02-27-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef __PASS_H__
-#define __PASS_H__
+#ifndef _SYMPASS_H_
+#define _SYMPASS_H_
 #include "ast.h"
+#include "symbols.h"
 
-// function proto of the pass function
-typedef void (*PassFunc)(ast_node* node);
+void pre_sym_pass(ast_node* node);
+void post_sym_pass(ast_node* node);
 
-#endif /* __PASS_H__ */
+#endif  /* _SYMPASS_H_ */

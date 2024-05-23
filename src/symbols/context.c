@@ -23,6 +23,9 @@
 #include "memory.h"
 #include "context.h"
 
+#undef USE_TRACE
+#include "trace.h"
+
 static SymContext* _local_context = NULL;
 
 typedef struct {
@@ -39,16 +42,18 @@ typedef struct {
  */
 static inline void _add_str_buffer(_str_buffer* ptr, const char* str) {
 
-    size_t len = strlen(str);
+    if(str != NULL) {
+        size_t len = strlen(str);
 
-    if((ptr->len + len + 1) >= (size_t)ptr->cap) {
-        while((ptr->len + len + 1) >= (size_t)ptr->cap)
-            ptr->cap <<= 1;
-        ptr->buffer = _REALLOC_ARRAY(ptr->buffer, char, ptr->cap);
+        if((ptr->len + len + 1) >= (size_t)ptr->cap) {
+            while((ptr->len + len + 1) >= (size_t)ptr->cap)
+                ptr->cap <<= 1;
+            ptr->buffer = _REALLOC_ARRAY(ptr->buffer, char, ptr->cap);
+        }
+
+        memcpy(&ptr->buffer[ptr->len], str, len + 1);
+        ptr->len += len;
     }
-
-    memcpy(&ptr->buffer[ptr->len], str, len + 1);
-    ptr->len += len;
 }
 
 /**
@@ -80,8 +85,7 @@ static inline _str_buffer* _create_str_buffer(const char* str) {
     ptr->len = 0;
     ptr->buffer = _ALLOC_ARRAY(char, ptr->cap);
 
-    if(str != NULL)
-        _add_str_buffer(ptr, str);
+    _add_str_buffer(ptr, str);
 
     return ptr;
 }
@@ -108,6 +112,19 @@ static inline void _append_sym_context(SymContext* ptr, const char* str) {
  */
 
 /**
+ * @brief Initialize the global symbol context that is used to track the 
+ * context of definitions.
+ * 
+ */
+void init_global_context() {
+
+    ENTER;
+    if(_local_context == NULL)
+        _local_context = create_sym_context(NULL);
+    RET;
+}
+
+/**
  * @brief Allocate memory for a new sym context object and push the name on
  * the stack. If the name is NULL, then only add the AST node.
  * 
@@ -115,6 +132,7 @@ static inline void _append_sym_context(SymContext* ptr, const char* str) {
  */
 SymContext* create_sym_context(const char* name) {
 
+    ENTER;
     SymContext* ptr = _ALLOC_T(SymContext);
     ptr->cap = 0x01 << 3;
     ptr->len = 0;
@@ -123,7 +141,7 @@ SymContext* create_sym_context(const char* name) {
     if(name != NULL) 
         _append_sym_context(ptr, name);
 
-    return ptr;
+    RETV(ptr);
 }
 
 /**
@@ -135,7 +153,10 @@ SymContext* create_sym_context(const char* name) {
  */
 void push_sym_context(const char* name) {
 
+    ENTER;
+    TRACE("name: %s", name);
     _append_sym_context(_local_context, name);
+    RET;
 }
 
 /**
@@ -146,12 +167,13 @@ void push_sym_context(const char* name) {
  */
 const char* pop_sym_context() {
 
+    ENTER;
     if(_local_context->len > 0) {
         _local_context->len--;
-        return _local_context->list[_local_context->len];
+        RETV(_local_context->list[_local_context->len]);
     }
     else
-        return NULL;
+        RETV(NULL);
 }
 
 /**
@@ -161,10 +183,21 @@ const char* pop_sym_context() {
  */
 const char* peek_sym_context() {
 
+    ENTER;
     if(_local_context->len > 0) 
-        return _local_context->list[_local_context->len-1];
+        RETV(_local_context->list[_local_context->len-1]);
     else
-        return NULL;
+        RETV(NULL);
+}
+
+/**
+ * @brief Return a pointer to the root symbol context.
+ * 
+ * @return SymContext* 
+ */
+SymContext* root_sym_context() {
+
+    ENTER; RETV(_local_context);
 }
 
 /**
@@ -176,6 +209,7 @@ const char* peek_sym_context() {
  */
 SymContext* copy_sym_context(SymContext* ptr) {
 
+    ENTER;
     SymContext* ctx = create_sym_context(NULL);
 
     int i = 0;
@@ -183,7 +217,19 @@ SymContext* copy_sym_context(SymContext* ptr) {
     while(NULL != (name = iterate_sym_context(ptr, &i)))
         _append_sym_context(ctx, name);
 
-    return ctx;
+    RETV(ctx);
+}
+
+/**
+ * @brief Make a copy of the root context.
+ * 
+ * @return SymContext* 
+ */
+SymContext* copy_root_context() {
+
+    ENTER; 
+    SymContext* ctx = copy_sym_context(_local_context);
+    RETV(ctx);
 }
 
 /**
@@ -195,20 +241,19 @@ SymContext* copy_sym_context(SymContext* ptr) {
  */
 const char* get_sym_context(SymContext* ptr) {
     
+    ENTER;
     _str_buffer* buf = _create_str_buffer(NULL);
     int i = 0;
     const char* name = iterate_sym_context(ptr, &i);
 
     // build the return value
-    while(1) {
+    while(NULL != name) {
         _add_str_buffer(buf, name);
         if(NULL != (name = iterate_sym_context(ptr, &i)))
             _add_char_buffer(buf, '.');
-        else
-            break;
     }
 
-    return buf->buffer;
+    RETV(buf->buffer);
 }
 
 /**
@@ -220,6 +265,7 @@ const char* get_sym_context(SymContext* ptr) {
  */
 void add_sym_context(SymContext* ptr, const char* str) {
 
+    ENTER;
     _str_buffer* buf = _create_str_buffer(str);
     char* buffer = buf->buffer;
     char* tok;
@@ -228,6 +274,7 @@ void add_sym_context(SymContext* ptr, const char* str) {
         _append_sym_context(ptr, tok);
         buffer = NULL;
     }
+    RET;
 }
 
 /**
@@ -240,9 +287,14 @@ void add_sym_context(SymContext* ptr, const char* str) {
  */
 const char* iterate_sym_context(SymContext* ptr, int* post) {
 
-    if(ptr->len > *post) 
-        return(ptr->list[*(post)++]);
+    ENTER;
+    if(ptr->len > *post) {
+        const char* s = ptr->list[*post];
+        *post += 1;
+        TRACE("name: %s (%d)", s, *post);
+        RETV(s);
+    }
     else
-        return NULL;
+        RETV(NULL);
 }
 

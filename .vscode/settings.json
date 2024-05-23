@@ -66,6 +66,7 @@
     "cmake.configureOnOpen": false,
     "files.associations": {
         "exception.h": "c",
-        "list": "c"
+        "list": "c",
+        "module.h": "c"
     }
 }

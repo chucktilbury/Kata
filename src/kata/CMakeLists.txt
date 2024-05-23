@@ -15,6 +15,7 @@ target_link_libraries(${PROJECT_NAME}
     scan
     ast
     pass
+    symbols
     common
     gc
 )

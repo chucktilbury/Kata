@@ -21,6 +21,7 @@ target_compile_options(${PROJECT_NAME}
         -I${PROJECT_SOURCE_DIR}/../ast
         -I${PROJECT_SOURCE_DIR}/../scanner
         -I${PROJECT_SOURCE_DIR}/../pass
+        -I${PROJECT_SOURCE_DIR}/../symbols
         -I${PROJECT_SOURCE_DIR}/../parse
         -I${PROJECT_SOURCE_DIR}/../gc/include
         -I${CMAKE_CURRENT_BINARY_DIR}/../tokens

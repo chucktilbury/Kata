@@ -13,6 +13,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #include "errors.h"
 #include "link_list.h"
@@ -21,51 +22,60 @@
 
 static LinkList* paths;
 
+static inline bool is_file(const char* name) {
+
+    struct stat sb;
+    stat(name, &sb);
+    return ((sb.st_mode & S_IFMT) == S_IFREG);
+}
+
 /**
- * @brief Search the path to find the file. Return a fully qualified file name.
- *
- * @param name
- * @return const char*
- *
+ * @brief Find a real file to open using stat(). Returns the full path of 
+ * the file.
+ * 
+ * @param name 
+ * @return String* 
  */
 String* find_file(const char* name) {
 
     ENTER;
-    char temp[PATH_MAX];
+    
     char tmp_buf[PATH_MAX];
-    String* p;
-    void* mark = NULL;
+    char temp[PATH_MAX];
 
     TRACE("trying: %s", name);
-    if(NULL != realpath(name, tmp_buf)) {
+    if(is_file(name)) {
+        realpath(name, tmp_buf);
         TRACE("found: %s", tmp_buf);
         RETV(create_string(tmp_buf));
     }
     else {
+        void* mark = NULL;
+        String* p = NULL;
         while(NULL != (p = iter_link_list(paths, &mark))) {
             memset(temp, 0, sizeof(temp));
             strncpy(temp, raw_string(p), sizeof(temp));
             strncat(temp, name, sizeof(temp) - strlen(temp) - strlen(name) - 1);
 
             TRACE("trying: %s", temp);
-            if(NULL != realpath(temp, tmp_buf)) {
+            if(is_file(temp)) {
+                realpath(temp, tmp_buf);
                 TRACE("found: %s", tmp_buf);
                 RETV(create_string(tmp_buf));
             }
             else {
-                // try appending the ".simp"
                 strncat(temp, ".k", sizeof(temp) - strlen(temp) - strlen(".k") - 1);
-                if(NULL != realpath(temp, tmp_buf)) {
+                TRACE("trying: %s", temp);
+                if(is_file(temp)) {
+                    realpath(temp, tmp_buf);
                     TRACE("found: %s", tmp_buf);
                     RETV(create_string(tmp_buf));
                 }
             }
         }
     }
-
-    // reach here because the name could not be located.
     fatal_error("Cannot find input file: %s", name);
-    RETV(NULL); // keep the compiler happy
+    RETV(NULL);
 }
 
 void add_path(const char* name) {

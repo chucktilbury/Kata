@@ -15,13 +15,15 @@
 #include "trace.h"
 //#include "pass.h"
 #include "command_line.h"
+#include "sympass.h"
 
 void pre_test_pass(ast_node* node);
 void post_test_pass(ast_node* node);
 
 int main(int argc, char** argv) {
 
-    PUSH_TRACE_STATE(true);
+    INIT_TRACE;
+    SET_TRACE_STATE(false);
     ENTER;
 
     CmdLine cmd = create_cmd_line("The Kata programming language");
@@ -32,6 +34,7 @@ int main(int argc, char** argv) {
 
     init_parser(get_cmd_raw(cmd, "file"));
 
+    SET_TRACE_STATE(false);
     TRACE("--------------------------------------------");
     TRACE("Begin Parse");
     ast_module* node = parse();
@@ -39,11 +42,15 @@ int main(int argc, char** argv) {
     TRACE("--------------------------------------------");
 
     SET_TRACE_STATE(true);
-    TRACE("Begin Traverse");
-    traverse_ast(node, pre_test_pass, post_test_pass);
-    TRACE("End Traverse");
     TRACE("--------------------------------------------");
-    POP_TRACE_STATE();
+    TRACE("Begin Symbol Traverse");
+    traverse_ast(node, pre_sym_pass, post_sym_pass);
+    TRACE("End Symbol Traverse");
+    TRACE("--------------------------------------------");
+    
+    SET_TRACE_STATE(false);
+
+    dump_symtab();
 
     RETV(0);
 }

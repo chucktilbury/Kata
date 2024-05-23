@@ -93,10 +93,11 @@ typedef struct _ast_node_ {
 } ast_node;
 
 #include "scanner.h"
-// #include "trace.h"
 #include "parse_state.h"
-#include "pass.h"
-// #include "link_list.h"
+#include "context.h"
+
+// function proto of the pass function
+typedef void (*PassFunc)(ast_node* node);
 
 #include "compound.h"
 #include "except.h"

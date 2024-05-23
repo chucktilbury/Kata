@@ -156,6 +156,8 @@ void traverse_namespace_definition(ast_namespace_definition* node, PassFunc pre,
 
     TRACE("NAME: %s", raw_string(node->name->str));
     TRACE("SCOPE: %s", scope_name(node->scope));
+    const char* s = get_sym_context(node->context);
+    TRACE("CONTEXT: %s", s);
     ast_node* nterm;
 
     void* mark = NULL;
@@ -232,6 +234,8 @@ void traverse_class_definition(ast_class_definition* node, PassFunc pre, PassFun
 
     TRACE("NAME: %s", raw_string(node->name->str));
     TRACE("SCOPE: %s", scope_name(node->scope));
+    const char* s = get_sym_context(node->context);
+    TRACE("CONTEXT: %s", s);
     if(node->parent)
         traverse_type_name(node->parent, pre, post);
 

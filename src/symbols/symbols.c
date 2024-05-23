@@ -12,6 +12,7 @@
 #include "memory.h"
 #include "hash.h"
 #include "symbols.h"
+#include "trace.h"
 
 static HashTable* _local_table;
 
@@ -21,8 +22,9 @@ static HashTable* _local_table;
  */
 SymtabResult init_symbol_table() {
 
+    ENTER;
     _local_table = create_hashtable();
-    return ST_OK;
+    RETV(ST_OK);
 }
 
 /**
@@ -36,7 +38,9 @@ SymtabResult init_symbol_table() {
  */
 SymtabResult create_symtab_node(const char* key, void* node) {
 
-    return (SymtabResult)insert_hashtable(_local_table, key, node);
+    ENTER;
+    SymtabResult retv = (SymtabResult)insert_hashtable(_local_table, key, node);
+    RETV(retv);
 }
 
 /**
@@ -50,7 +54,9 @@ SymtabResult create_symtab_node(const char* key, void* node) {
  */
 void* find_symtab_node(const char* key) {
 
-    return find_hashtable(_local_table, key);
+    ENTER;
+    void* retv = find_hashtable(_local_table, key);
+    RETV(retv);
 }
 
 /**
@@ -61,7 +67,9 @@ void* find_symtab_node(const char* key) {
  */
 SymtabResult delete_symtab_node(const char* key) {
 
-    return (SymtabResult)remove_hashtable(_local_table, key);
+    ENTER;
+    SymtabResult retv = (SymtabResult)remove_hashtable(_local_table, key);
+    RETV(retv);
 }
 
 void dump_hash_table(HashTable*);
@@ -71,6 +79,8 @@ void dump_hash_table(HashTable*);
  */
 void dump_symtab() {
 
+    ENTER;
     dump_hash_table(_local_table);
+    RET;
 }
 

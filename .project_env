@@ -2,9 +2,10 @@
 
 # Source the basic configuration for this shell
 source $HOME/.bashrc
+export HISTCONTROL=ignoreboth:erasedups
 
 # Set up the project location and name
-export _PROJECT_NAME=simple
+export _PROJECT_NAME=kata
 #export _PROJECT_LOC=$HOME/src/$_PROJECT_NAME
 export _PROJECT_LOC=`pwd`
 

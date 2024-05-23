@@ -8,8 +8,8 @@
  * @date 02-03-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef __TRACE_H__
-#define __TRACE_H__
+#ifndef _TRACE_H_
+#define _TRACE_H_
 
 #ifdef USE_TRACE
 #include <stdbool.h>
@@ -103,6 +103,8 @@ void print_terminal(void* ptr);
         TRACE("pop trace state"); \
     } while(false)
 
+#define INIT_TRACE PUSH_TRACE_STATE(false)
+
 #define TRACE_TERM(t)                         \
     do {                                      \
         if(peek_trace_state()) {              \
@@ -130,6 +132,7 @@ void print_terminal(void* ptr);
 #define EXIT(n) exit(n)
 #define RET return
 #define RETV(v) return (v)
+#define INIT_TRACE
 #define PUSH_TRACE_STATE(s)
 #define POP_TRACE_STATE()
 #define SET_TRACE_STATE(s)
@@ -139,4 +142,4 @@ void print_terminal(void* ptr);
 
 #endif
 
-#endif /* __TRACE_H__ */
+#endif  /* _TRACE_H_ */
