@@ -8,8 +8,8 @@
  * @date 03-28-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef __MEMORY_H__
-#define __MEMORY_H__
+#ifndef _MEMORY_H_
+#define _MEMORY_H_
 
 #include <stdlib.h>
 
@@ -33,4 +33,4 @@ char* mem_dup_str(const char* str);
 char* mem_fdup_str(const char* str, ...);
 void mem_free(void* ptr);
 
-#endif /* __MEMORY_H__ */
+#endif  /* _MEMORY_H_ */
