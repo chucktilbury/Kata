@@ -12,7 +12,6 @@
 #include "parse.h"
 #include "scanner.h"
 #include "paths.h"
-#include "exception.h"
 #include "symbols.h"
 
 // this is a temporary path for development otherwise, this would be received

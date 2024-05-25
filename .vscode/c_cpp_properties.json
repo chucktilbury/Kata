@@ -14,7 +14,8 @@
                 "${workspaceFolder}/src/pass",
                 "${workspaceFolder}/src/gc/include",
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/src/symbols"
+                "${workspaceFolder}/src/symbols",
+                "${workspaceFolder}/build/src/tokens"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc"
