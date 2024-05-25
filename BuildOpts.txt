@@ -23,7 +23,6 @@ add_definitions(
     -Wall
     -Wextra
     -Wpedantic
-    -DUSE_GC
 )
 
 if(CMAKE_BUILD_TYPE STREQUAL "debug")

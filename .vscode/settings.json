@@ -12,6 +12,7 @@
         "CSBRACE",
         "defc",
         "Demers",
+        "DMEMORY",
         "dname",
         "dquote",
         "DSTR",
@@ -34,6 +35,7 @@
         "newdir",
         "ntok",
         "OCBRACE",
+        "Ofast",
         "oname",
         "OPAREN",
         "OPBRACE",
@@ -50,6 +52,7 @@
         "SSTRG",
         "sstrings",
         "stdbool",
+        "STREQUAL",
         "strg",
         "struct",
         "symb",
@@ -61,7 +64,8 @@
         "varname",
         "verbo",
         "Weiser",
-        "Wextra"
+        "Wextra",
+        "Wpedantic"
     ],
     "cmake.configureOnOpen": false,
     "files.associations": {

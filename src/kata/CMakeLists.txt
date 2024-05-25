@@ -8,7 +8,6 @@ add_executable(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME}
-    pthread
     parse
     tokens
     scan
@@ -16,7 +15,6 @@ target_link_libraries(${PROJECT_NAME}
     pass
     symbols
     common
-    gc
 )
 
 
