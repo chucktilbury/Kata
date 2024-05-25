@@ -1,0 +1,45 @@
+cmake_minimum_required(VERSION 3.5)
+
+include_directories(
+    "${PROJECT_SOURCE_DIR}/../../src"
+    "${PROJECT_SOURCE_DIR}/../../src/gc"
+    "${PROJECT_SOURCE_DIR}/../../src/gc/include"
+    "${PROJECT_SOURCE_DIR}/../../src/ast"
+    "${PROJECT_SOURCE_DIR}/../../src/common"
+    "${PROJECT_SOURCE_DIR}/../../src/scanner"
+    "${PROJECT_SOURCE_DIR}/../../src/symbols"
+    "${PROJECT_SOURCE_DIR}/../../src/parse"
+    "${PROJECT_SOURCE_DIR}/../../src/pass"
+    "${PROJECT_SOURCE_DIR}/../../build/src/ast"
+    "${PROJECT_SOURCE_DIR}/../../build/src/tokens"
+    "${PROJECT_SOURCE_DIR}/../../build/src/common"
+    "${PROJECT_SOURCE_DIR}/../../build/src/scanner"
+    "${PROJECT_SOURCE_DIR}/../../build/src/symbols"
+    "${PROJECT_SOURCE_DIR}/../../build/src/parse"
+    "${PROJECT_SOURCE_DIR}/../../build/src/pass"
+)
+
+add_definitions(
+    -Wall
+    -Wextra
+    -Wpedantic
+    -DUSE_GC
+)
+
+if(CMAKE_BUILD_TYPE STREQUAL "debug")
+    add_definitions(
+        -g
+        -DMEMORY_DEBUG
+        -DUSE_TRACE
+    )
+elseif(CMAKE_BUILD_TYPE STREQUAL "release")
+    add_definitions(
+        -Ofast
+    )
+elseif(CMAKE_BUILD_TYPE STREQUAL "profile")
+    add_definitions(
+        -O0
+        -pg
+    )
+endif()
+
