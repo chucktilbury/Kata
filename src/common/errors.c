@@ -24,15 +24,15 @@ static int num_warnings = 0;
 #pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
 #pragma GCC diagnostic ignored "-Wimplicit-fallthrough="
 /*
- * Recover from a syntax error. This discards tokens until it's reasonably 
- * possible to resume parsing. 
- * 
+ * Recover from a syntax error. This discards tokens until it's reasonably
+ * possible to resume parsing.
+ *
  */
 static void recover_error() {
 
     ENTER;
 
-    //dump_token_queue();
+    // dump_token_queue();
 
     bool finished = false;
     while(!finished) {
@@ -72,8 +72,8 @@ static void recover_error() {
 
     kill_token_queue();
     set_recovery_state(true);
-    
-    //dump_token_queue();
+
+    // dump_token_queue();
 
     RET;
 }

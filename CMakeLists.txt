@@ -10,12 +10,13 @@ set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 #set(CMAKE_BUILD_TYPE debug)
 
-set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/bin")
+set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/lib")
 set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/bin")
 #set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${LIBRARY_OUTPUT_PATH}")
 #set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${EXECUTABLE_OUTPUT_PATH}")
 
 add_subdirectory(src)
+add_subdirectory(gc EXCLUDE_FROM_ALL)
 add_subdirectory(test EXCLUDE_FROM_ALL)
 add_subdirectory(docs EXCLUDE_FROM_ALL)
 
@@ -41,8 +42,9 @@ add_custom_target(format
     COMMAND clang-format --verbose -i ${format_xxfiles}
 )
 
-add_custom_target(test
+add_custom_target(testing
     COMMENT "Build the test programs"
     COMMAND echo ${PROJECT_SOURCE_DIR}/test
     COMMAND make -C test
 )
+

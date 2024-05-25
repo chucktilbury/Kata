@@ -38,7 +38,7 @@
 typedef struct _ast_expression_ {
     ast_node node;
     LinkList* list;
-    int expr_type;  // the type of the expression result
+    int expr_type;    // the type of the expression result
     int operand_type; // the type of operand that is being operated upon
 } ast_expression;
 

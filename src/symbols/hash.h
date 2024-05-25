@@ -1,13 +1,13 @@
 /**
  * @file hash.h
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Chuck Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 2024-05-14
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 #ifndef _HASH_H_
 #define _HASH_H_
@@ -45,4 +45,4 @@ HashResult insert_hashtable(HashTable* table, const char* key, void* data);
 void* find_hashtable(HashTable* tab, const char* key);
 HashResult remove_hashtable(HashTable* tab, const char* key);
 
-#endif  /* _HASH_H_ */
+#endif /* _HASH_H_ */

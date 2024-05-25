@@ -102,4 +102,4 @@ void traverse_class_item(ast_class_item* node, PassFunc pre, PassFunc post);
 void traverse_class_definition(ast_class_definition* node, PassFunc pre, PassFunc post);
 void traverse_class_var_declaration(ast_class_var_declaration* node, PassFunc pre, PassFunc post);
 
-#endif  /* _MODULE_H_ */
+#endif /* _MODULE_H_ */

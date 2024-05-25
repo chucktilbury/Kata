@@ -47,11 +47,10 @@ int main(int argc, char** argv) {
     traverse_ast(node, pre_sym_pass, post_sym_pass);
     TRACE("End Symbol Traverse");
     TRACE("--------------------------------------------");
-    
+
     SET_TRACE_STATE(false);
 
     dump_symtab();
 
     RETV(0);
 }
-

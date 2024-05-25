@@ -93,5 +93,3 @@ void traverse_elif_clause(ast_elif_clause* node, PassFunc pre, PassFunc post) {
     AST_CALLBACK(post, node);
     RET;
 }
-
-

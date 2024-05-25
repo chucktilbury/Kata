@@ -30,16 +30,16 @@ static inline bool is_file(const char* name) {
 }
 
 /**
- * @brief Find a real file to open using stat(). Returns the full path of 
+ * @brief Find a real file to open using stat(). Returns the full path of
  * the file.
- * 
- * @param name 
- * @return String* 
+ *
+ * @param name
+ * @return String*
  */
 String* find_file(const char* name) {
 
     ENTER;
-    
+
     char tmp_buf[PATH_MAX];
     char temp[PATH_MAX];
 
@@ -51,7 +51,7 @@ String* find_file(const char* name) {
     }
     else {
         void* mark = NULL;
-        String* p = NULL;
+        String* p  = NULL;
         while(NULL != (p = iter_link_list(paths, &mark))) {
             memset(temp, 0, sizeof(temp));
             strncpy(temp, raw_string(p), sizeof(temp));

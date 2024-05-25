@@ -93,4 +93,3 @@ void traverse_final_clause(ast_final_clause* node, PassFunc pre, PassFunc post) 
     AST_CALLBACK(post, node);
     RET;
 }
-

@@ -1,13 +1,13 @@
 /**
  * @file context.h
- * 
+ *
  * @brief Public interface for managing symbolic context of symbols.
- * 
+ *
  * @author Chuck Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 2024-05-18
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 #ifndef _CONTEXT_H_
 #define _CONTEXT_H_
@@ -32,4 +32,4 @@ const char* get_sym_context(SymContext* ptr);
 void add_sym_context(SymContext* ptr, const char* str);
 const char* iterate_sym_context(SymContext* ptr, int* post);
 
-#endif  /* _CONTEXT_H_ */
+#endif /* _CONTEXT_H_ */

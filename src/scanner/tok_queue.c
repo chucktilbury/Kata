@@ -17,9 +17,9 @@
 #include "fileio.h"
 #include "link_list.h"
 #include "memory.h"
+#include "parse_state.h"
 #include "scanner.h"
 #include "trace.h"
-#include "parse_state.h"
 
 extern Token* scan_token();
 static unsigned serial = 0;
@@ -209,9 +209,9 @@ void kill_token_queue() {
     ENTER;
 
     TokQueue* tqueue = peek_link_list(tqueue_stack);
-    tqueue->head = NULL;
-    tqueue->crnt = NULL;
-    tqueue->tail = NULL;
+    tqueue->head     = NULL;
+    tqueue->crnt     = NULL;
+    tqueue->tail     = NULL;
     append_token(scan_token());
 
     RET;

@@ -1,24 +1,24 @@
 /**
  * @file symbols.c
- * 
- * @brief 
- * 
+ *
+ * @brief
+ *
  * @author Chuck Tilbury (chucktilbury@gmail.com)
  * @version 0.0
  * @date 2024-05-14
  * @copyright Copyright (c) 2024
- * 
+ *
  */
-#include "memory.h"
-#include "hash.h"
 #include "symbols.h"
+#include "hash.h"
+#include "memory.h"
 #include "trace.h"
 
 static HashTable* _local_table;
 
 /**
  * @brief Initialize the hash table.
- * 
+ *
  */
 SymtabResult init_symbol_table() {
 
@@ -29,12 +29,12 @@ SymtabResult init_symbol_table() {
 
 /**
  * @brief Create a symbol table node object
- * 
- * @param key 
- * @param type 
- * @param scope 
- * @param ast_node 
- * @return Node* 
+ *
+ * @param key
+ * @param type
+ * @param scope
+ * @param ast_node
+ * @return Node*
  */
 SymtabResult create_symtab_node(const char* key, void* node) {
 
@@ -44,13 +44,13 @@ SymtabResult create_symtab_node(const char* key, void* node) {
 }
 
 /**
- * @brief Find the node based on the provided key. If the result pointer 
+ * @brief Find the node based on the provided key. If the result pointer
  * is not NULL, then the result of the hash table find will be placed there.
  * If the symbol is not found, then the return value is NULL.
- * 
- * @param key 
- * @param result 
- * @return SymtabNode* 
+ *
+ * @param key
+ * @param result
+ * @return SymtabNode*
  */
 void* find_symtab_node(const char* key) {
 
@@ -60,10 +60,10 @@ void* find_symtab_node(const char* key) {
 }
 
 /**
- * @brief Delete a symbol table entry that 
- * 
- * @param key 
- * @return SymtabResult 
+ * @brief Delete a symbol table entry that
+ *
+ * @param key
+ * @return SymtabResult
  */
 SymtabResult delete_symtab_node(const char* key) {
 
@@ -75,7 +75,7 @@ SymtabResult delete_symtab_node(const char* key) {
 void dump_hash_table(HashTable*);
 /**
  * @brief Dump the symbol table for debugging.
- * 
+ *
  */
 void dump_symtab() {
 
@@ -83,4 +83,3 @@ void dump_symtab() {
     dump_hash_table(_local_table);
     RET;
 }
-

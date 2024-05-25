@@ -19,9 +19,9 @@
 #ifndef __EXCEPTION_H__
 #define __EXCEPTION_H__
 
+#include "memory.h"
 #include <setjmp.h>
 #include <string.h>
-#include "memory.h"
 
 typedef struct _exception_stack_ {
     jmp_buf jmp;

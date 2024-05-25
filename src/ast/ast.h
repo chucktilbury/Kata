@@ -92,9 +92,9 @@ typedef struct _ast_node_ {
     bool seen; // used to detect infinite recursion.
 } ast_node;
 
-#include "scanner.h"
-#include "parse_state.h"
 #include "context.h"
+#include "parse_state.h"
+#include "scanner.h"
 
 // function proto of the pass function
 typedef void (*PassFunc)(ast_node* node);
@@ -128,4 +128,4 @@ ast_node* create_ast_node(AstType type, size_t size);
 #define CREATE_AST_NODE(t, n) (n*)create_ast_node((t), sizeof(n))
 #define TRAVERSE_ERROR AST_FIRST
 
-#endif  /* _AST_H_ */
+#endif /* _AST_H_ */

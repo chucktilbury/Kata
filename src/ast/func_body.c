@@ -269,14 +269,14 @@ void traverse_raise_statement(ast_raise_statement* node, PassFunc pre, PassFunc 
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  trace_statement
  *      = 'trace' '(' string_literal ')'
- * 
- * @param node 
- * @param pre 
- * @param post 
+ *
+ * @param node
+ * @param pre
+ * @param post
  */
 void traverse_trace_statement(ast_trace_statement* node, PassFunc pre, PassFunc post) {
 
@@ -292,14 +292,14 @@ void traverse_trace_statement(ast_trace_statement* node, PassFunc pre, PassFunc 
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  *  print_statement
  *      = 'print' ( expression_list )?
- * 
- * @param node 
- * @param pre 
- * @param post 
+ *
+ * @param node
+ * @param pre
+ * @param post
  */
 void traverse_print_statement(ast_print_statement* node, PassFunc pre, PassFunc post) {
 
@@ -336,4 +336,3 @@ void traverse_exit_statement(ast_exit_statement* node, PassFunc pre, PassFunc po
     AST_CALLBACK(post, node);
     RET;
 }
-

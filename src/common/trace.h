@@ -142,4 +142,4 @@ void print_terminal(void* ptr);
 
 #endif
 
-#endif  /* _TRACE_H_ */
+#endif /* _TRACE_H_ */

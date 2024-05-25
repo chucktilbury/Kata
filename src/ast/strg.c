@@ -61,4 +61,3 @@ void traverse_string_literal(ast_string_literal* node, PassFunc pre, PassFunc po
     AST_CALLBACK(post, node);
     RET;
 }
-
