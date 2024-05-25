@@ -1,4 +1,3 @@
-cmake_minimum_required(VERSION 3.10)
 project(tokens)
 
 include(${PROJECT_SOURCE_DIR}/../../BuildOpts.txt)
