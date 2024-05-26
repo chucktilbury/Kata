@@ -1,3 +1,14 @@
+/**
+ * @file uuid.c
+ * 
+ * @brief Very simple UUID generator for symbol tables.
+ * 
+ * @author Chuck Tilbury (chucktilbury@gmail.com)
+ * @version 0.0
+ * @date 2024-05-25
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
@@ -7,6 +18,12 @@
 static bool seeded = false;
 static char buf[33];
 
+/**
+ * @brief Convert a buffer of bytes to a string.
+ * 
+ * @param buffer 
+ * @return const char* 
+ */
 static const char* conv_strg(unsigned char buffer[16]) {
 
     char hexes[] = "0123456789ABCDEF";
@@ -20,6 +37,12 @@ static const char* conv_strg(unsigned char buffer[16]) {
     return (const char*)buf;
 }
 
+/**
+ * @brief Generate a simple (and not compliant) UUID and return it as a 
+ * string.
+ * 
+ * @return const char* 
+ */
 const char* generate_uuid() {
 
     unsigned char buffer[16];
@@ -36,12 +59,6 @@ const char* generate_uuid() {
             buffer[i * 4 + j] = (0xff & rnd >> (8 * j));
         }
     }
-
-    // set the version to 4
-    buffer[6] = (buffer[6] & 0x0f) | 0x40;
-
-    // set the variant to 1 (a)
-    buffer[8] = (buffer[8] & 0x0f) | 0xa0;
 
     return (const char*)conv_strg(buffer);
 }
