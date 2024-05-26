@@ -48,4 +48,4 @@ void traverse_var_decl(ast_var_decl* node, PassFunc pre, PassFunc post);
 void traverse_var_decl_list(ast_var_decl_list* node, PassFunc pre, PassFunc post);
 void traverse_var_definition(ast_var_definition* node, PassFunc pre, PassFunc post);
 
-#endif /* _VARS_H_ */
+#endif  /* _VARS_H_ */

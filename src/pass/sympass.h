@@ -1,5 +1,5 @@
 /**
- * @file pass.h
+ * @file sympass.h
  * 
  * @brief 
  * 

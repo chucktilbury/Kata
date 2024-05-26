@@ -34,6 +34,7 @@ void pre_sym_pass(ast_node* node) {
     ENTER;
     TRACE("node type: %s", nterm_to_str(node));
 
+    // Define the name context for the namespace.
     switch(ast_node_type(node)) {
         case AST_namespace_definition: {  
             ast_namespace_definition* n = (ast_namespace_definition*)node;
@@ -45,6 +46,7 @@ void pre_sym_pass(ast_node* node) {
         }
         break;
         
+        // Define the name context for the class.
         case AST_class_definition: {
             ast_class_definition* n = (ast_class_definition*)node;
             push_sym_context(raw_string(n->name->str)); 
@@ -55,6 +57,36 @@ void pre_sym_pass(ast_node* node) {
         }
         break;
 
+        // A var declaration may be part of a definition with an initializer,
+        // but this will define the name in the symbol table.
+        case AST_var_decl:
+            break;
+
+        // Function declarations are only valid in a class.
+        case AST_function_declaration:
+            break;
+
+        // Create the unique create name. Can only be declared in a class.
+        case AST_create_declaration:
+            break;
+
+        // Create the unique destroy name. Can only be declared in a class.
+        case AST_destroy_declaration:
+            break;
+
+        // Create the name if it has not been declared in a class. Creates a 
+        // unique context for the variables that are referenced in the 
+        // function, but the names in a class of which the function was 
+        // declared are local to this context. Input and output parameters are
+        // local to the function, 
+        case AST_function_definition:
+            break;
+
+        // Create an anonymous name context scope.
+        case AST_function_body:
+            break;
+
+        // None of these productions define a new name.
         case AST_module:
         case AST_module_item:
         case AST_namespace_item:
@@ -68,7 +100,6 @@ void pre_sym_pass(ast_node* node) {
         case AST_type_name:
         case AST_formatted_strg:
         case AST_string_literal:
-        case AST_var_decl:
         case AST_var_decl_list:
         case AST_var_definition:
         case AST_list_init:
@@ -79,15 +110,10 @@ void pre_sym_pass(ast_node* node) {
         case AST_function_reference:
         case AST_create_reference:
         case AST_destroy_reference:
-        case AST_function_declaration:
-        case AST_create_declaration:
-        case AST_destroy_declaration:
-        case AST_function_definition:
         case AST_create_name:
         case AST_destroy_name:
         case AST_create_definition:
         case AST_destroy_definition:
-        case AST_function_body:
         case AST_function_body_element:
         case AST_expression:
         case AST_expr_primary:

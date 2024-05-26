@@ -47,5 +47,6 @@
 * String expressions such as ``strg == strg``, ``strg != strg``, ``strg = strg + strg``, and ``strg += strg``
 * String expressions and other expressions cannot mix??
   * If this is a semantic question then strgs need to be added to the ``primary_expression`` productions.
+  * Removed garbage collection and exceptions from the compiler.
 
 
