@@ -36,6 +36,8 @@
         "ntok",
         "OCBRACE",
         "Ofast",
+        "oldcap",
+        "oldtab",
         "oname",
         "OPAREN",
         "OPBRACE",

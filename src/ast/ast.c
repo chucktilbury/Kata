@@ -51,7 +51,7 @@ const char* nterm_to_str(ast_node* node) {
                     (type == AST_module_item)    ? "module_item" :
                     (type == AST_namespace_item) ? "namespace_item" :
                     (type == AST_namespace_definition) ?
-                                                   "namespace_definition" :
+                                                       "namespace_definition" :
                     (type == AST_class_item)         ? "class_item" :
                     (type == AST_class_definition)   ? "class_definition" :
                     (type == AST_compound_name)      ? "compound_name" :
@@ -75,7 +75,7 @@ const char* nterm_to_str(ast_node* node) {
                     (type == AST_create_reference)   ? "create_reference" :
                     (type == AST_destroy_reference)  ? "destroy_reference" :
                     (type == AST_function_declaration) ?
-                                                      "function_declaration" :
+                                                        "function_declaration" :
                     (type == AST_create_declaration)  ? "create_declaration" :
                     (type == AST_destroy_declaration) ? "destroy_declaration" :
                     (type == AST_function_definition) ? "function_definition" :
@@ -85,7 +85,7 @@ const char* nterm_to_str(ast_node* node) {
                     (type == AST_destroy_definition)  ? "destroy_definition" :
                     (type == AST_function_body)       ? "function_body" :
                     (type == AST_function_body_element) ?
-                                                  "function_body_element" :
+                                                        "function_body_element" :
                     (type == AST_expression)          ? "expression" :
                     (type == AST_expr_primary)        ? "expr_primary" :
                     (type == AST_expression_list)     ? "expression_list" :

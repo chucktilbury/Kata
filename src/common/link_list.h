@@ -40,4 +40,4 @@ int len_link_list(LinkList* ll);
 #define LLFOR(l, v, p) \
     for((v) = iter_link_list((l), &(p)); (v) != NULL; (v) = iter_link_list((l), &(p)))
 
-#endif  /* _LINK_LIST_H_ */
+#endif /* _LINK_LIST_H_ */

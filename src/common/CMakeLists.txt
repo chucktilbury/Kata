@@ -10,6 +10,7 @@ add_library(${PROJECT_NAME} STATIC
     sstrings.c
     paths.c
     uuid.c
+    hash.c
 )
 
 

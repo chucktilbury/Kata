@@ -33,4 +33,4 @@ char* mem_dup_str(const char* str);
 char* mem_fdup_str(const char* str, ...);
 void mem_free(void* ptr);
 
-#endif  /* _MEMORY_H_ */
+#endif /* _MEMORY_H_ */
