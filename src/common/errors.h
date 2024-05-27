@@ -8,8 +8,8 @@
  * @date 01-13-2024
  * @copyright Copyright (c) 2024
  */
-#ifndef __ERRORS_H__
-#define __ERRORS_H__
+#ifndef _ERRORS_H_
+#define _ERRORS_H_
 
 void show_syntax(const char* fmt, ...);
 void show_warning(const char* fmt, ...);
@@ -37,4 +37,4 @@ int get_num_warnings();
         fatal_error((s)__VA_OPT__(, ) __VA_ARGS__); \
     } while(false)
 
-#endif /* __ERRORS_H__ */
+#endif  /* _ERRORS_H_ */

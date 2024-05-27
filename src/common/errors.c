@@ -48,7 +48,7 @@ static void recover_error() {
             case TOK_OPAREN:
             case TOK_OCBRACE:
             case TOK_OSBRACE:
-                // continue parsing from where the error occoured
+                // continue parsing from where the error occurred
                 finished = true;
                 break;
             case TOK_FUNC:
