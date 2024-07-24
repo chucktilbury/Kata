@@ -127,7 +127,7 @@ void dump_hash_table(HashTable* tab) {
  *
  * @return HashTable*
  */
-HashTable* create_hashtable() {
+HashTable* create_hashtable(void) {
 
     HashTable* tab = _ALLOC_T(HashTable);
 

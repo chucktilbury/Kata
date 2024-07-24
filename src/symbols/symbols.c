@@ -20,7 +20,7 @@ static HashTable* _local_table;
  * @brief Initialize the hash table.
  *
  */
-SymtabResult init_symbol_table() {
+SymtabResult init_symbol_table(void) {
 
     ENTER;
     _local_table = create_hashtable();
@@ -77,7 +77,7 @@ void dump_hash_table(HashTable*);
  * @brief Dump the symbol table for debugging.
  *
  */
-void dump_symtab() {
+void dump_symtab(void) {
 
     ENTER;
     dump_hash_table(_local_table);

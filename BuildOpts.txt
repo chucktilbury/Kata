@@ -21,6 +21,7 @@ add_definitions(
     -Wall
     -Wextra
     -Wpedantic
+	-Wno-gnu-zero-variadic-macro-arguments
 )
 
 if(CMAKE_BUILD_TYPE STREQUAL "debug")

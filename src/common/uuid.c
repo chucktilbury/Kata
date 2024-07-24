@@ -44,7 +44,7 @@ static inline const char* conv_strg(unsigned char buffer[16]) {
  *
  * @return const char*
  */
-const char* generate_uuid() {
+const char* generate_uuid(void) {
 
     unsigned char buffer[16];
 

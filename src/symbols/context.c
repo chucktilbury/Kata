@@ -116,7 +116,7 @@ static inline void _append_sym_context(SymContext* ptr, const char* str) {
  * context of definitions.
  *
  */
-void init_global_context() {
+void init_global_context(void) {
 
     ENTER;
     if(_local_context == NULL)
@@ -165,7 +165,7 @@ void push_sym_context(const char* name) {
  *
  * @return SymContextNode*
  */
-const char* pop_sym_context() {
+const char* pop_sym_context(void) {
 
     ENTER;
     if(_local_context->len > 0) {
@@ -181,7 +181,7 @@ const char* pop_sym_context() {
  *
  * @return SymContextNode*
  */
-const char* peek_sym_context() {
+const char* peek_sym_context(void) {
 
     ENTER;
     if(_local_context->len > 0)
@@ -195,7 +195,7 @@ const char* peek_sym_context() {
  *
  * @return SymContext*
  */
-SymContext* root_sym_context() {
+SymContext* root_sym_context(void) {
 
     ENTER;
     RETV(_local_context);
@@ -226,7 +226,7 @@ SymContext* copy_sym_context(SymContext* ptr) {
  *
  * @return SymContext*
  */
-SymContext* copy_root_context() {
+SymContext* copy_root_context(void) {
 
     ENTER;
     SymContext* ctx = copy_sym_context(_local_context);

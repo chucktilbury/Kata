@@ -24,7 +24,7 @@
  * @return ast_list_init*
  *
  */
-ast_list_init* parse_list_init() {
+ast_list_init* parse_list_init(void) {
 
     ENTER;
     ast_list_init* node = NULL;
@@ -178,7 +178,7 @@ ast_list_init* parse_list_init() {
  * @return ast_dict_init_element*
  *
  */
-ast_dict_init_element* parse_dict_init_element() {
+ast_dict_init_element* parse_dict_init_element(void) {
 
     ENTER;
     ast_dict_init_element* node = NULL;
@@ -268,7 +268,7 @@ ast_dict_init_element* parse_dict_init_element() {
  * @return ast_array_param*
  *
  */
-ast_array_param* parse_array_param() {
+ast_array_param* parse_array_param(void) {
 
     ENTER;
     ast_array_param* node = NULL;
@@ -358,7 +358,7 @@ ast_array_param* parse_array_param() {
  * @return ast_array_param_list*
  *
  */
-ast_array_param_list* parse_array_param_list() {
+ast_array_param_list* parse_array_param_list(void) {
 
     ENTER;
     ast_array_param_list* node = NULL;
@@ -434,7 +434,7 @@ ast_array_param_list* parse_array_param_list() {
  * @return ast_array_reference*
  *
  */
-ast_array_reference* parse_array_reference() {
+ast_array_reference* parse_array_reference(void) {
 
     ENTER;
     ast_array_reference* node = NULL;

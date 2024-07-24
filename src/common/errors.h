@@ -14,8 +14,8 @@
 void show_syntax(const char* fmt, ...);
 void show_warning(const char* fmt, ...);
 void fatal_error(const char* fmt, ...);
-int get_num_errors();
-int get_num_warnings();
+int get_num_errors(void);
+int get_num_warnings(void);
 
 #define EXPECTED(s)                                                          \
     do {                                                                     \

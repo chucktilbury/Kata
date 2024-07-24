@@ -21,7 +21,7 @@
  * @return ast_try_clause*
  *
  */
-ast_try_clause* parse_try_clause() {
+ast_try_clause* parse_try_clause(void) {
 
     ENTER;
     ast_try_clause* node = NULL;
@@ -112,7 +112,7 @@ ast_try_clause* parse_try_clause() {
  * @return ast_except_clause_mid*
  *
  */
-ast_except_clause* parse_except_clause() {
+ast_except_clause* parse_except_clause(void) {
 
     ENTER;
     ast_except_clause* node = NULL;
@@ -259,7 +259,7 @@ ast_except_clause* parse_except_clause() {
  * @return ast_final_clause*
  *
  */
-ast_final_clause* parse_final_clause() {
+ast_final_clause* parse_final_clause(void) {
 
     ENTER;
     ast_final_clause* node = NULL;

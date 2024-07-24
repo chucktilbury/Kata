@@ -21,7 +21,7 @@
  * @return ast_function_reference*
  *
  */
-ast_function_reference* parse_function_reference() {
+ast_function_reference* parse_function_reference(void) {
 
     ENTER;
     ast_function_reference* node = NULL;
@@ -109,7 +109,7 @@ ast_function_reference* parse_function_reference() {
  * @return ast_create_reference*
  *
  */
-ast_create_reference* parse_create_reference() {
+ast_create_reference* parse_create_reference(void) {
 
     ENTER;
     ast_create_reference* node = NULL;
@@ -185,7 +185,7 @@ ast_create_reference* parse_create_reference() {
  * @return ast_destroy_reference*
  *
  */
-ast_destroy_reference* parse_destroy_reference() {
+ast_destroy_reference* parse_destroy_reference(void) {
 
     ENTER;
     ast_destroy_reference* node = NULL;
@@ -241,7 +241,7 @@ ast_destroy_reference* parse_destroy_reference() {
  * @return ast_function_declaration*
  *
  */
-ast_function_declaration* parse_function_declaration() {
+ast_function_declaration* parse_function_declaration(void) {
 
     ENTER;
     ast_function_declaration* node = NULL;
@@ -368,7 +368,7 @@ ast_function_declaration* parse_function_declaration() {
  * @return ast_create_declaration*
  *
  */
-ast_create_declaration* parse_create_declaration() {
+ast_create_declaration* parse_create_declaration(void) {
 
     ENTER;
     ast_create_declaration* node = NULL;
@@ -473,7 +473,7 @@ ast_create_declaration* parse_create_declaration() {
  * @return ast_destroy_declaration*
  *
  */
-ast_destroy_declaration* parse_destroy_declaration() {
+ast_destroy_declaration* parse_destroy_declaration(void) {
 
     ENTER;
     ast_destroy_declaration* node = NULL;
@@ -565,7 +565,7 @@ ast_destroy_declaration* parse_destroy_declaration() {
  * @return ast_function_definition*
  *
  */
-ast_function_definition* parse_function_definition() {
+ast_function_definition* parse_function_definition(void) {
 
     ENTER;
     ast_function_definition* node = NULL;
@@ -693,7 +693,7 @@ ast_function_definition* parse_function_definition() {
  * @return ast_create_name*
  *
  */
-ast_create_name* parse_create_name() {
+ast_create_name* parse_create_name(void) {
 
     ENTER;
     ast_create_name* node = NULL;
@@ -790,7 +790,7 @@ ast_create_name* parse_create_name() {
  * @return ast_destroy_name*
  *
  */
-ast_destroy_name* parse_destroy_name() {
+ast_destroy_name* parse_destroy_name(void) {
 
     ENTER;
     ast_destroy_name* node = NULL;
@@ -888,7 +888,7 @@ ast_destroy_name* parse_destroy_name() {
  * @return ast_create_definition*
  *
  */
-ast_create_definition* parse_create_definition() {
+ast_create_definition* parse_create_definition(void) {
 
     ENTER;
     ast_create_definition* node = NULL;
@@ -1003,7 +1003,7 @@ ast_create_definition* parse_create_definition() {
  * @return ast_destroy_definition*
  *
  */
-ast_destroy_definition* parse_destroy_definition() {
+ast_destroy_definition* parse_destroy_definition(void) {
 
     ENTER;
     ast_destroy_definition* node = NULL;
@@ -1105,7 +1105,7 @@ ast_destroy_definition* parse_destroy_definition() {
  * @return ast_function_body*
  *
  */
-ast_function_body* parse_function_body() {
+ast_function_body* parse_function_body(void) {
 
     ENTER;
     ast_function_body* node = NULL;
@@ -1186,7 +1186,7 @@ ast_function_body* parse_function_body() {
  * @return ast_start_function*
  *
  */
-ast_start_function* parse_start_function() {
+ast_start_function* parse_start_function(void) {
 
     ENTER;
     ast_start_function* node = NULL;
@@ -1272,7 +1272,7 @@ ast_start_function* parse_start_function() {
  * @return ast_function_assignment*
  *
  */
-ast_function_assignment* parse_function_assignment() {
+ast_function_assignment* parse_function_assignment(void) {
 
 
     ENTER;

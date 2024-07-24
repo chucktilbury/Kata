@@ -32,7 +32,7 @@ void push_trace_state(bool state) {
     push_link_list(trace_state_stack, node);
 }
 
-bool pop_trace_state() {
+bool pop_trace_state(void) {
 
     bool* state = pop_link_list(trace_state_stack);
 
@@ -42,7 +42,7 @@ bool pop_trace_state() {
         return false;
 }
 
-bool peek_trace_state() {
+bool peek_trace_state(void) {
 
     bool* state = peek_link_list(trace_state_stack);
 

@@ -35,7 +35,7 @@ void open_file(const char* fname);
 /**
  * @brief Close the current file and pop it off of the file stack.
  */
-void close_file();
+void close_file(void);
 
 /**
  * @brief Get the token object. This returns the current token, which is a
@@ -44,7 +44,7 @@ void close_file();
  *
  * @return Token*
  */
-Token* get_token();
+Token* get_token(void);
 
 /**
  * @brief Return the token type.
@@ -71,7 +71,7 @@ Token* copy_token(const Token* tok);
  *
  * @return Token*
  */
-Token* advance_token();
+Token* advance_token(void);
 
 /**
  * @brief Mark this token as having been used to compose a rule.
@@ -84,7 +84,7 @@ Token* advance_token();
  * have been consumed. This is called when a valid non-terminal is
  * recognized by the parser.
  */
-void finalize_token_queue();
+void finalize_token_queue(void);
 
 /**
  * @brief Reset the token queue to the state that it was in before this parser
@@ -105,7 +105,7 @@ void reset_token_queue(void* crnt);
  *
  * @return void*
  */
-void* post_token_queue();
+void* post_token_queue(void);
 
 /**
  * @brief Iterate the token queue. This is used by consumers that require
@@ -118,7 +118,7 @@ void* post_token_queue();
  * @param mark
  * @return Token*
  */
-// Token* iterate_token_queue(void** mark);
+// Token* iterate_token_queue(void** mark);void
 
 /**
  * @brief Initialize the scanner data structures. This must be called
@@ -143,9 +143,9 @@ void init_scanner(const char* fname);
 // void discard_token_queue();
 
 // void print_token(Token* tok);
-void dump_token_queue();
+void dump_token_queue(void);
 void append_token(Token* tok);
-void push_token_queue();
-void pop_token_queue();
+void push_token_queue(void);
+void pop_token_queue(void);
 
 #endif /* __SCANNER_H__ */

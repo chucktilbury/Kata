@@ -21,7 +21,7 @@
  * @return ast_compound_name*
  *
  */
-ast_compound_name* parse_compound_name() {
+ast_compound_name* parse_compound_name(void) {
 
     ENTER;
     ast_compound_name* node = NULL;
@@ -124,7 +124,7 @@ ast_compound_name* parse_compound_name() {
  * @return ast_compound_name_list*
  *
  */
-ast_compound_name_list* parse_compound_name_list() {
+ast_compound_name_list* parse_compound_name_list(void) {
 
     ENTER;
     ast_compound_name_list* node = NULL;
@@ -237,7 +237,7 @@ ast_compound_name_list* parse_compound_name_list() {
  * @return ast_compound_ref_item*
  *
  */
-ast_compound_ref_item* parse_compound_ref_item() {
+ast_compound_ref_item* parse_compound_ref_item(void) {
 
     ENTER;
     ast_compound_ref_item* node = NULL;
@@ -336,7 +336,7 @@ ast_compound_ref_item* parse_compound_ref_item() {
  * @return ast_compound_reference*
  *
  */
-ast_compound_reference* parse_compound_reference() {
+ast_compound_reference* parse_compound_reference(void) {
 
     ENTER;
     ast_compound_reference* node = NULL;

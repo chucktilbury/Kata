@@ -22,7 +22,7 @@
  * @return ast_module*
  *
  */
-ast_module* parse_module() {
+ast_module* parse_module(void) {
 
     ENTER;
     ast_module* node = NULL;
@@ -62,7 +62,7 @@ ast_module* parse_module() {
  * @return ast_module_item*
  *
  */
-ast_module_item* parse_module_item() {
+ast_module_item* parse_module_item(void) {
 
     ENTER;
     ast_module_item* node = NULL;
@@ -100,7 +100,7 @@ ast_module_item* parse_module_item() {
  * @return ast_namespace_item*
  *
  */
-ast_namespace_item* parse_namespace_item() {
+ast_namespace_item* parse_namespace_item(void) {
 
     ENTER;
     ast_namespace_item* node = NULL;
@@ -136,7 +136,7 @@ ast_namespace_item* parse_namespace_item() {
  * @return ast_namespace_definition*
  *
  */
-ast_namespace_definition* parse_namespace_definition() {
+ast_namespace_definition* parse_namespace_definition(void) {
 
     ENTER;
     ast_namespace_definition* node = NULL;
@@ -202,7 +202,7 @@ ast_namespace_definition* parse_namespace_definition() {
  * @return ast_class_item*
  *
  */
-ast_class_item* parse_class_item() {
+ast_class_item* parse_class_item(void) {
 
     ENTER;
     ast_class_item* node = NULL;
@@ -239,7 +239,7 @@ ast_class_item* parse_class_item() {
  * @return ast_class_definition*
  *
  */
-ast_class_definition* parse_class_definition() {
+ast_class_definition* parse_class_definition(void) {
 
     ENTER;
     ast_class_definition* node = NULL;
@@ -323,7 +323,7 @@ ast_class_definition* parse_class_definition() {
  * @return ast_class_var_declaration*
  *
  */
-ast_class_var_declaration* parse_class_var_declaration() {
+ast_class_var_declaration* parse_class_var_declaration(void) {
 
     ENTER;
     ast_class_var_declaration* node = NULL;

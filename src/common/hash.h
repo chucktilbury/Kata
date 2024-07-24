@@ -39,7 +39,7 @@ typedef enum {
     HASH_NF,
 } HashResult;
 
-HashTable* create_hashtable();
+HashTable* create_hashtable(void);
 void destroy_hashtable(HashTable* table);
 HashResult insert_hashtable(HashTable* table, const char* key, void* data);
 void* find_hashtable(HashTable* tab, const char* key);

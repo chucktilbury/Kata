@@ -62,11 +62,11 @@ static ast_module* handle_import(Token* mod, Token* name) {
  * @return ast_import_statement*
  *
  */
-ast_import_statement* parse_import_statement() {
+ast_import_statement* parse_import_statement(void) {
 
     ENTER;
     ast_import_statement* node = NULL;
-    Token* name; // optional alternative name
+    Token* name = NULL; // optional alternative name
     Token* mod; // module to import
 
     if(TOK_IMPORT == TTYPE) {

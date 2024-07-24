@@ -42,7 +42,7 @@ static struct _file_ptr_* file_stack = NULL;
  * making the previous file current.
  *
  */
-void pop_input_file() {
+void pop_input_file(void) {
 
     ENTER;
     if(file_stack != NULL) {
@@ -89,7 +89,7 @@ void push_input_file(const char* fname) {
  *
  * @return int
  */
-int get_char() {
+int get_char(void) {
 
     if(file_stack != NULL)
         return file_stack->ch;
@@ -103,7 +103,7 @@ int get_char() {
  *
  * @return int
  */
-int consume_char() {
+int consume_char(void) {
 
     if(file_stack != NULL) {
         if(file_stack->ch == END_OF_FILE)
@@ -129,7 +129,7 @@ int consume_char() {
  *
  * @return int
  */
-int get_line_no() {
+int get_line_no(void) {
 
     if(file_stack != NULL)
         return file_stack->line_no;
@@ -143,7 +143,7 @@ int get_line_no() {
  *
  * @return int
  */
-int get_col_no() {
+int get_col_no(void) {
 
     if(file_stack != NULL)
         return file_stack->col_no;
@@ -156,7 +156,7 @@ int get_col_no() {
  *
  * @return STR
  */
-const char* get_fname() {
+const char* get_fname(void) {
 
     if(file_stack != NULL)
         return raw_string(file_stack->fname);

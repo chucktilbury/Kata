@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(kata_compiler)
 
-set(CMAKE_VERBOSE_MAKEFILE OFF)
+set(CMAKE_VERBOSE_MAKEFILE OFF )
 #set(CMAKE_C_COMPILER "/usr/bin/clang")
 #set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
 #set(CMAKE_C_COMPILER /usr/bin/gcc)

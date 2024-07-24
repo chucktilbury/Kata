@@ -21,7 +21,7 @@
  * @return ast_if_clause*
  *
  */
-ast_if_clause* parse_if_clause() {
+ast_if_clause* parse_if_clause(void) {
 
     ENTER;
     ast_if_clause* node = NULL;
@@ -153,7 +153,7 @@ ast_if_clause* parse_if_clause() {
  * @return ast_elif_clause*
  *
  */
-ast_elif_clause* parse_elif_clause() {
+ast_elif_clause* parse_elif_clause(void) {
 
     ENTER;
     ast_elif_clause* node = NULL;
@@ -266,7 +266,7 @@ ast_elif_clause* parse_elif_clause() {
  * @return ast_else_clause*
  *
  */
-ast_else_clause* parse_else_clause() {
+ast_else_clause* parse_else_clause(void) {
 
     ENTER;
     ast_else_clause* node = NULL;

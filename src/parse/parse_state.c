@@ -70,7 +70,7 @@ void push_scope(ScopeType scope) {
  * @return ScopeType
  *
  */
-ScopeType pop_scope() {
+ScopeType pop_scope(void) {
 
     ENTER;
     ScopeType* node = pop_link_list(parser_state->scope_stack);
@@ -85,7 +85,7 @@ ScopeType pop_scope() {
  * @return ScopeType
  *
  */
-ScopeType get_scope() {
+ScopeType get_scope(void) {
 
     ENTER;
     ScopeType* node = peek_link_list(parser_state->scope_stack);
@@ -100,7 +100,7 @@ ScopeType get_scope() {
  * @return ParserState*
  *
  */
-ParserState* create_parser_state() {
+ParserState* create_parser_state(void) {
 
     ENTER;
     parser_state = _ALLOC_T(ParserState);
@@ -124,19 +124,19 @@ void push_name(String* name) {
     RET;
 }
 
-String* pop_name() {
+String* pop_name(void) {
 
     ENTER;
     RETV(pop_link_list(parser_state->name_stack));
 }
 
-String* get_name() {
+String* get_name(void) {
 
     ENTER;
     RETV(peek_link_list(parser_state->name_stack));
 }
 
-String* get_compound_name() {
+String* get_compound_name(void) {
 
     String* str = create_string(NULL);
     String* sptr;
@@ -162,7 +162,7 @@ void set_import_state(bool val) {
     RET;
 }
 
-bool get_import_state() {
+bool get_import_state(void) {
 
     ENTER;
     RETV(parser_state->is_import);
@@ -175,7 +175,7 @@ void set_recovery_state(bool state) {
     RET;
 }
 
-bool get_recovery_state() {
+bool get_recovery_state(void) {
 
     ENTER;
     RETV(parser_state->in_recovery);

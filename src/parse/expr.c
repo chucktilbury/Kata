@@ -136,7 +136,7 @@ static bool get_assoc(TokenType type) {
  * @return ast_operator*
  *
  */
-ast_operator* parse_operator() {
+ast_operator* parse_operator(void) {
 
     ENTER;
     ast_operator* node = NULL;
@@ -225,7 +225,7 @@ ast_operator* parse_operator() {
  * @return ast_cast_statement*
  *
  */
-ast_cast_statement* parse_cast_statement() {
+ast_cast_statement* parse_cast_statement(void) {
 
     ENTER;
     ast_cast_statement* node = NULL;
@@ -265,7 +265,7 @@ ast_cast_statement* parse_cast_statement() {
  * @return ast_expr_primary*
  *
  */
-ast_expr_primary* parse_expr_primary() {
+ast_expr_primary* parse_expr_primary(void) {
 
     ENTER;
     ast_expr_primary* node = NULL;
@@ -301,7 +301,7 @@ ast_expr_primary* parse_expr_primary() {
  * @return ast_expression_list*
  *
  */
-ast_expression_list* parse_expression_list() {
+ast_expression_list* parse_expression_list(void) {
 
     ENTER;
     ast_expression_list* node = NULL;
@@ -416,7 +416,7 @@ ast_expression_list* parse_expression_list() {
  * @return ast_assignment_item*
  *
  */
-ast_assignment_item* parse_assignment_item() {
+ast_assignment_item* parse_assignment_item(void) {
 
     ENTER;
     ast_assignment_item* node = NULL;
@@ -453,7 +453,7 @@ ast_assignment_item* parse_assignment_item() {
  * @return ast_assignment*
  *
  */
-ast_assignment* parse_assignment() {
+ast_assignment* parse_assignment(void) {
 
     ENTER;
     ast_assignment* node = NULL;
@@ -583,7 +583,7 @@ ast_assignment* parse_assignment() {
  * @return ast_expression*
  *
  */
-ast_expression* parse_expression() {
+ast_expression* parse_expression(void) {
 
     ENTER;
     ast_expression* node = NULL;

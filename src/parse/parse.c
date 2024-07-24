@@ -57,7 +57,7 @@ void init_parser(const char* fname) {
  * @return ast_module*
  *
  */
-ast_module* parse() {
+ast_module* parse(void) {
 
     ENTER;
     ast_module* node = NULL;

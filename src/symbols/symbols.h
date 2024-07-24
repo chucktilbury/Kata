@@ -28,10 +28,10 @@ typedef struct _symtab_node_ {
     SymContext* context; // full context of this table entry
 } SymtabNode;
 
-SymtabResult init_symbol_table();
+SymtabResult init_symbol_table(void);
 SymtabResult create_symtab_node(const char* key, void* node);
 void* find_symtab_node(const char* key);
 SymtabResult delete_symtab_node(const char* key);
-void dump_symtab();
+void dump_symtab(void);
 
 #endif /* _SYMBOLS_H_ */

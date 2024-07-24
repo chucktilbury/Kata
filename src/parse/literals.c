@@ -25,7 +25,7 @@
  * @return ast_scope_operator*
  *
  */
-ast_scope_operator* parse_scope_operator() {
+ast_scope_operator* parse_scope_operator(void) {
 
     ENTER;
     ast_scope_operator* node = NULL;
@@ -65,7 +65,7 @@ ast_scope_operator* parse_scope_operator() {
  * @return ast_literal_type_name*
  *
  */
-ast_literal_type_name* parse_literal_type_name() {
+ast_literal_type_name* parse_literal_type_name(void) {
 
     ENTER;
     ast_literal_type_name* node = NULL;
@@ -104,7 +104,7 @@ ast_literal_type_name* parse_literal_type_name() {
  * @return ast_literal_value*
  *
  */
-ast_literal_value* parse_literal_value() {
+ast_literal_value* parse_literal_value(void) {
 
     ENTER;
     ast_literal_value* node = NULL;
@@ -169,7 +169,7 @@ ast_literal_value* parse_literal_value() {
  * @return ast_type_name*
  *
  */
-ast_type_name* parse_type_name() {
+ast_type_name* parse_type_name(void) {
 
     ENTER;
     ast_type_name* node = NULL;
@@ -196,7 +196,7 @@ ast_type_name* parse_type_name() {
  * @return ast_type_name_list*
  *
  */
-ast_type_name_list* parse_type_name_list() {
+ast_type_name_list* parse_type_name_list(void) {
 
     ENTER;
     ast_type_name_list* node = NULL;

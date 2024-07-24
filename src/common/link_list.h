@@ -26,7 +26,7 @@ typedef struct {
     int length;
 } LinkList;
 
-LinkList* create_link_list();
+LinkList* create_link_list(void);
 void destroy_link_list(LinkList* lst);
 void append_link_list(LinkList* ll, void* data);
 void prepend_link_list(LinkList* ll, void* data);

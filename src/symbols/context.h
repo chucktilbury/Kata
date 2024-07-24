@@ -20,14 +20,14 @@ typedef struct {
 
 #include "ast.h"
 
-void init_global_context();
+void init_global_context(void);
 SymContext* create_sym_context(const char* name);
 void push_sym_context(const char* name);
-const char* pop_sym_context();
-const char* peek_sym_context();
-SymContext* root_sym_context();
+const char* pop_sym_context(void);
+const char* peek_sym_context(void);
+SymContext* root_sym_context(void);
 SymContext* copy_sym_context(SymContext* ptr);
-SymContext* copy_root_context();
+SymContext* copy_root_context(void);
 const char* get_sym_context(SymContext* ptr);
 void add_sym_context(SymContext* ptr, const char* str);
 const char* iterate_sym_context(SymContext* ptr, int* post);

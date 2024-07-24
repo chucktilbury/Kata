@@ -51,7 +51,7 @@ String* downcase_string(String* str);
 void print_string(FILE* fp, String* str);
 void printf_string(FILE* fp, String* str, ...);
 
-StrList* create_string_list();
+StrList* create_string_list(void);
 void destroy_string_list(StrList* lst);
 void add_string_list(StrList* lst, String* str);
 String* iterate_string_list(StrList* ptr, void** mark);

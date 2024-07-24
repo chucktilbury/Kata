@@ -21,7 +21,7 @@
 #include "scanner.h"
 #include "trace.h"
 
-extern Token* scan_token();
+extern Token* scan_token(void);
 static unsigned serial = 0;
 
 typedef struct _tok_queue_item_ {
@@ -45,7 +45,7 @@ static LinkList* tqueue_stack = NULL;
  *
  *
  */
-void push_token_queue() {
+void push_token_queue(void) {
 
     TokQueue* queue = _ALLOC_T(TokQueue);
     push_link_list(tqueue_stack, queue);
@@ -57,7 +57,7 @@ void push_token_queue() {
  *
  *
  */
-void pop_token_queue() {
+void pop_token_queue(void) {
 
     pop_link_list(tqueue_stack);
 }
@@ -113,7 +113,7 @@ void open_file(const char* fname) {
 /**
  * @brief Close the current file and pop it off of the file stack.
  */
-void close_file() {
+void close_file(void) {
 
     ENTER;
     pop_input_file();
@@ -128,7 +128,7 @@ void close_file() {
  *
  * @return Token*
  */
-Token* get_token() {
+Token* get_token(void) {
 
     TokQueue* tqueue = peek_link_list(tqueue_stack);
     assert(tqueue != NULL);
@@ -171,7 +171,7 @@ Token* copy_token(const Token* tok) {
  *
  * @return Token*
  */
-Token* advance_token() {
+Token* advance_token(void) {
 
     ENTER;
     // avoid stupid programmer tricks
@@ -194,7 +194,7 @@ Token* advance_token() {
  * queue to the first unused token. All of the tokens that have been used
  * are discarded and collected by the garbage collector.
  */
-void finalize_token_queue() {
+void finalize_token_queue(void) {
 
     ENTER;
 
@@ -204,7 +204,7 @@ void finalize_token_queue() {
     RET;
 }
 
-void kill_token_queue() {
+void kill_token_queue(void) {
 
     ENTER;
 
@@ -226,7 +226,7 @@ void kill_token_queue() {
  * @return void*
  *
  */
-void* post_token_queue() {
+void* post_token_queue(void) {
 
     ENTER;
     TokQueue* tqueue = peek_link_list(tqueue_stack);
@@ -256,7 +256,7 @@ void reset_token_queue(void* post) {
     RET;
 }
 
-void dump_token_queue() {
+void dump_token_queue(void) {
 
     TokQueue* tqueue = peek_link_list(tqueue_stack);
     assert(tqueue != NULL);

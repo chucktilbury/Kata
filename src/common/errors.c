@@ -22,13 +22,13 @@ static int num_warnings = 0;
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
-#pragma GCC diagnostic ignored "-Wimplicit-fallthrough="
+//#pragma GCC diagnostic ignored "-Wimplicit-fallthrough="
 /*
  * Recover from a syntax error. This discards tokens until it's reasonably
  * possible to resume parsing.
  *
  */
-static void recover_error() {
+static void recover_error(void) {
 
     ENTER;
 
@@ -148,7 +148,7 @@ void show_warning(const char* fmt, ...) {
  * @return int
  *
  */
-int get_num_errors() {
+int get_num_errors(void) {
 
     return num_errors;
 }
@@ -159,7 +159,7 @@ int get_num_errors() {
  * @return int
  *
  */
-int get_num_warnings() {
+int get_num_warnings(void) {
 
     return num_warnings;
 }

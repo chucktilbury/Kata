@@ -39,7 +39,7 @@ void post_test_pass_func(ast_node* node, int number) {
  * @brief This function specifically does nothing. It is called when none of
  * the nodes are a match in the pre_test_pass().
  */
-void dummy_function() {
+void dummy_function(void) {
 
     ENTER;
     TRACE("dummy function");

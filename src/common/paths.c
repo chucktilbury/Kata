@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2024
  */
 #include <errno.h>
-#include <linux/limits.h>
+//#include <linux/limits.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,6 +19,10 @@
 #include "link_list.h"
 #include "sstrings.h"
 #include "trace.h"
+
+#ifndef PATH_MAX
+#define PATH_MAX FILENAME_MAX
+#endif 
 
 static LinkList* paths;
 

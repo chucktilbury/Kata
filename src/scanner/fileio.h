@@ -15,13 +15,13 @@
 #define END_OF_INPUT -2
 
 void push_input_file(const char* fname);
-void pop_input_file();
-int get_char();
-int consume_char();
+void pop_input_file(void);
+int get_char(void);
+int consume_char(void);
 
-int get_line_no();
-int get_col_no();
-const char* get_fname();
+int get_line_no(void);
+int get_col_no(void);
+const char* get_fname(void);
 
 // Since multiple output files can be open in a moment, then it is accessed
 // using an opaque handle.

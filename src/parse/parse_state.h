@@ -34,23 +34,23 @@ typedef struct {
     bool in_recovery;
 } ParserState;
 
-ParserState* create_parser_state();
+ParserState* create_parser_state(void);
 
 void set_scope(ScopeType scope);
 void push_scope(ScopeType scope);
-ScopeType pop_scope();
-ScopeType get_scope();
+ScopeType pop_scope(void);
+ScopeType get_scope(void);
 const char* scope_name(ScopeType type);
 
 void push_name(String* name);
-String* pop_name();
-String* get_name();
-String* get_compound_name();
+String* pop_name(void);
+String* get_name(void);
+String* get_compound_name(void);
 
 void set_import_state(bool val);
-bool get_import_state();
+bool get_import_state(void);
 
 void set_recovery_state(bool state);
-bool get_recovery_state();
+bool get_recovery_state(void);
 
 #endif  /* _PARSE_STATE_H_ */

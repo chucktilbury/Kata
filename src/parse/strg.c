@@ -22,7 +22,7 @@
  * @return ast_string_literal*
  *
  */
-ast_string_literal* parse_string_literal() {
+ast_string_literal* parse_string_literal(void) {
 
     ENTER;
     ast_string_literal* node = NULL;
@@ -58,7 +58,7 @@ ast_string_literal* parse_string_literal() {
  * @return ast_formatted_strg*
  *
  */
-ast_formatted_strg* parse_formatted_strg() {
+ast_formatted_strg* parse_formatted_strg(void) {
 
     ENTER;
     ast_formatted_strg* node = NULL;

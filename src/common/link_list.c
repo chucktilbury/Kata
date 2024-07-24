@@ -22,7 +22,7 @@
  * @return LinkList*
  *
  */
-LinkList* create_link_list() {
+LinkList* create_link_list(void) {
 
     LinkList* lst   = _ALLOC_T(LinkList);
     lst->first      = NULL;

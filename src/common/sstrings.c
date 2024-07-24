@@ -360,7 +360,7 @@ String* downcase_string(String* str) {
  * @return StrList*
  *
  */
-StrList* create_string_list() {
+StrList* create_string_list(void) {
     return create_link_list();
 }
 

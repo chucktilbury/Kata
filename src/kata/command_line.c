@@ -60,7 +60,7 @@ static CmdItem* iterate_ci_list(CmdItemList* ptr, void** mark) {
     return iter_link_list(ptr, mark);
 }
 
-static CmdItemList* create_ci_list() {
+static CmdItemList* create_ci_list(void) {
     return (CmdItemList*)create_link_list();
 }
 
