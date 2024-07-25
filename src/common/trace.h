@@ -29,10 +29,6 @@ void print_terminal(void* ptr);
 
 #define CAP fputc('\n', stdout);
 
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu-zero-variadic-macro-arguments"
-#endif
 #define TRACE(f, ...)                              \
     do {                                           \
         if(peek_trace_state()) {                   \
@@ -42,9 +38,6 @@ void print_terminal(void* ptr);
             CAP;                                   \
         }                                          \
     } while(false)
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
 
 #define ENTER                                  \
     do {                                       \
